@@ -1,5 +1,5 @@
-<center>  ttamna </center>       
-=================
+<p align='center'># ttamna</p>        
+
                           
 ### 팀명 : 땀나.ttamna(책상에 앉아서 열심히 코드 짰더니 땀나)
 
