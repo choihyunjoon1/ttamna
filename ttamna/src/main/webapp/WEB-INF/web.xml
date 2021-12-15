@@ -1,23 +1,106 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<web-app version="2.5" xmlns="http://java.sun.com/xml/ns/javaee"
+<!-- 
+	이 프로젝트가 WAS에서 어떻게 운영되어야 하는지를 설정하는 파일
+	- 스프링은 자바를 기반으로 한 확장팩이다
+	- 과거에 만든 Java EE프로젝트에 스프링 관연 도구들을 추가하여 운영하는 형태이다
+	- 스프링과 관련된 설정 또는 도구 등을 여기에 추가한다
+	- web-app version 4.0으로 수정
+ -->
+<web-app version="4.0" xmlns="http://java.sun.com/xml/ns/javaee"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee https://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
 
-	<!-- The definition of the Root Spring Container shared by all Servlets and Filters -->
+	<!-- 한글(유니코드)변환을 위한 필터 등록 설정
+		- 스프링에서 제공하는 필터를 사용
+		- <filter-name>encodingFilter</filter-name> filter와 filter-mapping이 같은 일을 위한 것을 알리기 위해 공통으로 name을 작성 
+		- org.springframework.web.filter.CharacterEncodingFilter 
+		-<url-pattern>/*</url-pattern> url경로 전부 다 인코딩 설정 하겠다!
+		
+	 -->
+	<filter>
+		<filter-name>encodingFilter</filter-name> 
+		<filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+		
+		<!-- 부가 설정 
+			1. 인코딩 방식 지정
+			 - <param-name>encoding</param-name>
+			 - <param-value>UTF-8</param-value>
+			2. 요청뿐만 아니라 응답까지도 강제로 인코딩변환 처리 하도록 설정
+			 - <param-name>forceEncoding</param-name>
+			 - <param-value>true</param-value>
+		-->
+		<init-param>
+			<param-name>encoding</param-name>
+			<param-value>UTF-8</param-value>
+		</init-param>
+		<init-param>
+			<param-name>forceEncoding</param-name>
+			<param-value>true</param-value>
+		</init-param>
+	</filter>
+	<filter-mapping>
+		<filter-name>encodingFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+
+	<!-- 
+		- 서블릿은 개발자가 직접 모든 설정을 해서 사용자의 요청을 처리하는 방식을 사용
+		- 대신 서블릿은 직접 설정해야 하는 어려움만 이겨내면 말도 안되는 작업들을 할 수 있다(=자유도가 높다)
+		스프링은 요런 것을 싫어해서
+		- 서블릿을 생성할 수 없게 만들어져 있다
+		- 모든걸 통제하는 서블릿을 스프링에서 자체적으로 제공(Dispatcher Servlet)
+		- 필요하다면 여러 개의 Dispatcher Servlet을 만들 수 있다
+		- 각각의 Dispatcher Servlet에서 알아야 할 내용들에 대한 설정파일과 모든 Dispatcher Servlet이 공유하는 설정이 각각 존재
+		
+		The definition of the Root Spring Container shared by all Servlets and Filters 
+		모든 서블릿, 필터가 공유하는 Root 정의. 모든 스프링에 공유되는 전역(Global) 설정 파일
+		- 설정파일을 등록할 때의 이름은 '무조건' contextConfigLocation이라고 지어야 함
+		- 설정파일의 위치를 context(=wabapp) 이후 부터의 절대경로로 작성(/WEB-INF/spring/root-context.xml)
+	-->
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
 		<param-value>/WEB-INF/spring/root-context.xml</param-value>
 	</context-param>
 	
-	<!-- Creates the Spring Container shared by all Servlets and Filters -->
+	<!-- Creates the Spring Container shared by all Servlets and Filters 
+		- 전역 설정 파일(root-context.xml)과 지역 설정 파일(servlet-context.xml)을 연결하는 도구 등록
+		- 전역 설정 파일의 내용을 서블릿 설정파일에서 사용할 수 있다(전역 설정 파일이 상위 설정 파일임) 	
+	-->
 	<listener>
 		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
 	</listener>
+	
+	<!-- Spring proxy filter 등록하고 싶다면
+		- root-context.xml에 등록한 필터(springFilter)의 bean을 이곳에 필터로 등록 
+		- <filter-name>은 등록된 spring bean의 id를 작성해야 한다
+		- <filter-class>는 지정된 클래스(DelegatingFilterProxy)를 등록해야 한다 
+		
+	 <filter>
+		<filter-name>springFilter</filter-name>
+		<filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+	 </filter>
+	<filter-mapping>
+		<filter-name>springFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+	 -->
 
-	<!-- Processes application requests -->
+	<!--Processes application requests
+		Dispatcher Servlet 등록 설정(지역 설정 파일)
+		- 스프링에서 제공해주는 모든 요청을 처리하는 서블릿
+		- 스프링에서는 사용자가 직접 서블릿을 만드는 것이 아니다 Dispatcher Serlvet에 부탁하는 구조
+		- 이름은 appServlet 으로 고정(건들기 않으면 됨), 스프링 내부에 같은 이름의 폴더가 반드시 존재해야 한다
+		- Dispatcher Servlet은 스프링 관련 의존성에 존재한다(Maven -> spring-webmvc)
+		- 이 서블릿을 등록하면서 '서블릿 설정 파일'도 같이 등록한다  
+		- <servlet> :이클립스 서블릿의 @WebServlet과 동일한 역할임
+	 	- <servlet-mapping>: 이클립스 서블릿의 urlPatterns=""와 동일
+	 	- <load-on-startup> 설정을 통해 실행 우선 순위를 지정(1순위)
+	 	- <url- pattern>에 / 로 설정하여 '설정을 제외한 나머지'를 처리하도록 지정한다
+	 -->
 	<servlet>
 		<servlet-name>appServlet</servlet-name>
 		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+		
 		<init-param>
 			<param-name>contextConfigLocation</param-name>
 			<param-value>/WEB-INF/spring/appServlet/servlet-context.xml</param-value>
