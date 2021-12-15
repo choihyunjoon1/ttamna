@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!-- mybatis 중앙 제어 설정 파일
+	- 마이바티스 중앙 제어 장치인 SqlSessionFactory 가 구동하기 위해 알아야할 정보들 을 작성 
+ -->
+
+<!DOCTYPE configuration
+	PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	
+	<!-- property : 변수 설정 영역 -->
+	
+	<!-- settings : 운영 규칙 설정 영역 -->
+	<settings>
+		<!-- cache(캐시)를 사용할 것인지 여부를 설정. 기본값이 true -->
+		<setting name="cacheEnabled" value="true"/>
+		<!-- 필수 설정 : DBMS의 스네이크 케이스(snake_case)를 Java의 카멜 케이스(camel_case)로 자동변환 해주는 설정. 기본값이 false -->
+		<setting name="mapUnderscoreToCamelCase" value="true"/>	
+	</settings>
+
+	<!-- typeAliases : 별칭을 부여하는 영역 
+		- mybatis는 기본적으로 DTO등을 풀 패키지 경로로 지정해야 한다
+		- ex)MemberDto가 아니고 com.kh.spring10.entity.MemberDto로 불러야 한다
+		- 풀 패키지 경로를 대신할 별칭을 부여할 수 있다
+		- <typeAlias>는 하나의 클래스에 대한 별칭 부여가 가능하다
+			ex) <typeAlias type="com.kh.spring10.entity.MemberDto" alias="MemberDto"/>
+		- <package>는 해당 패키지의 모든 경로를 생략할 수 있도록 설정 가능하다
+			 해당 패키지의 모든 클래스는 경로없이 이름을 직접 작성할 수 있다
+			ex) <package name="com.kh.spring10.entity"/>
+	-->
+	<typeAliases>
+		<package name="패키지"/>
+	</typeAliases>
+
+</configuration>
