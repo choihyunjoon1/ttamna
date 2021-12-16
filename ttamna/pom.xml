@@ -108,8 +108,9 @@
 		<dependency>
 		    <groupId>org.apache.logging.log4j</groupId>
 		    <artifactId>log4j-core</artifactId>
-		    <version>2.15.0</version>
+		    <version>2.16.0</version>
 		</dependency>
+
 
 		<!-- @Inject -->
 		<dependency>
@@ -279,6 +280,17 @@
 		    <groupId>com.fasterxml.jackson.core</groupId>
 		    <artifactId>jackson-databind</artifactId>
 		    <version>2.13.0</version>
+		</dependency>
+		
+		<!-- 웹소켓 의존성 
+			- spring-websocket : 스프링 웹소켓 모듈 
+			- jackson-databind : 웹소켓에서 주고 받는 데이터 변환 객체
+		-->
+		<!-- https://mvnrepository.com/artifact/org.springframework/spring-websocket -->
+		<dependency>
+		    <groupId>org.springframework</groupId>
+		    <artifactId>spring-websocket</artifactId>
+		    <version>${org.springframework-version}</version>
 		</dependency>
 		
 	</dependencies>
