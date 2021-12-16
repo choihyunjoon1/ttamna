@@ -9,7 +9,7 @@ create table member(
                                             AND
                                         REGEXP_LIKE(member_id, '.*?[a-z]+')),
     member_pw varchar2(60) CONSTRAINT member_pw_not_null NOT NULL
-                                        CONSTRAINT member_pw_check CHECK(REGEXP_LIKE(member_pw, '.*?[a-zA-Z0-9/$]+')), -- 비밀번호 암호화 관련
+                                        CONSTRAINT member_pw_check CHECK(REGEXP_LIKE(member_pw, '.*?[a-zA-Z0-9./$]+')), -- 비밀번호 암호화 관련
     member_nick varchar2(15) CONSTRAINT member_nick_not_null NOT NULL
                                          CONSTRAINT member_nick_unique UNIQUE
                                           CONSTRAINT member_nick_check CHECK(REGEXP_LIKE(member_nick, '^[a-z가-힣]{2, 15}$')), --영어소문자15글자 or 한글5글자
