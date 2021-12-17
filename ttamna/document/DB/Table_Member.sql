@@ -23,7 +23,10 @@ create table member(
     member_grade varchar2(12) DEFAULT '일반회원' CONSTRAINT member_grade_not_null  NOT NULL
                                             CONSTRAINT member_grade_check_in  CHECK(member_grade IN('일반회원', '보호소', '관리자')),
     member_last_log date DEFAULT sysdate CONSTRAINT member_lat_log_not_null   NOT NULL,
-    member_join date DEFAULT sysdate CONSTRAINT member_join_not_null   NOT NULL
+    member_join date DEFAULT sysdate CONSTRAINT member_join_not_null   NOT NULL,
+    postcode varchar2(7),
+    address varchar2(256),
+    detail_address varchar2(256)
 );
 
 commit;
@@ -36,5 +39,4 @@ commit;
 -- member_grade : not null / 기본값 일반회원 / 등급은 일반회원, 보호소, 관리자 세가지로 나눔
 -- member_last_log : 마지막 접속일, 기본값 sysdate
 -- member_join : 가입일, 기본값 sysdate
-
 
