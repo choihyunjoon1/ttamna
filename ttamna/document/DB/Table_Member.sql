@@ -21,7 +21,7 @@ create table member(
                                            CONSTRAINT member_email_unique UNIQUE
                                            CONSTRAINT member_email_check CHECK(REGEXP_LIKE(member_email, '^[a-zA-Z0-9]([-_.]?[a-zA-Z0-9])*@[a-zA-Z0-9]([-_.]?[a-zA-Z0-9])*\.([a-zA-Z])+$')),
     member_grade varchar2(12) DEFAULT '일반회원' CONSTRAINT member_grade_not_null  NOT NULL
-                                            CONSTRAINT member_grade_check_in  CHECK(member_grade IN('일반회원', '보호소', '관리자')),
+                                            CONSTRAINT member_grade_check_in  CHECK(member_grade IN('일반회원', '보호소', '관리자', '휴면')),
     member_last_log date DEFAULT sysdate CONSTRAINT member_lat_log_not_null   NOT NULL,
     member_join date DEFAULT sysdate CONSTRAINT member_join_not_null   NOT NULL,
     postcode varchar2(7),
@@ -36,7 +36,7 @@ commit;
 -- member_name : not null / 정규식 한글 2~7글자
 -- member_phone : not null / 숫자, 특수문자 - 포함 13글자 고정
 -- member_email : not null / unique / 정규식
--- member_grade : not null / 기본값 일반회원 / 등급은 일반회원, 보호소, 관리자 세가지로 나눔
+-- member_grade : not null / 기본값 일반회원 / 등급은 일반회원, 보호소, 관리자, 휴면 네 가지로 나눔
 -- member_last_log : 마지막 접속일, 기본값 sysdate
 -- member_join : 가입일, 기본값 sysdate
 
