@@ -33,16 +33,16 @@ DROP SEQUENCE payment_seq;
 
 COMMIT;
 
----------------- order --------------------------
+---------------- history --------------------------
 
--- 테이블 데이터 삭제 (order)
-TRUNCATE TABLE order;
+-- 테이블 데이터 삭제 (history)
+TRUNCATE TABLE history;
 
--- 테이블 삭제 (order)
-DROP TABLE order CASCADE CONSTRAINTS;
+-- 테이블 삭제 (history)
+DROP TABLE history CASCADE CONSTRAINTS;
 
--- 시퀀스 삭제 (order)
-DROP SEQUENCE order_seq;
+-- 시퀀스 삭제 (history)
+DROP SEQUENCE history_seq;
 
 COMMIT;
 
