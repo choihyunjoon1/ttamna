@@ -82,14 +82,199 @@ COMMIT;
 -- adopt_img_no : 시퀀스. 기본키
 -- adopt_no : 입양 공고 게시물 기본키 참조 외래키
 
+-------------------------------------------------------------------------------------------------------------
+
+--내새끼 게시판 테이블 생성 구문
+create table mybaby(
+mybaby_no number primary key,--게시판 번호,PK
+mybaby_writer references member(member_id) on delete set null,--멤버테이블 참조키
+mybaby_title varchar2(150) not null,--제목
+mybaby_content varchar2(4000) not null,--내용
+mybaby_time date default sysdate not null,--작성시간
+mybaby_read number default 0 not null,--조회수
+mybaby_reply number default 0 not null--댓글수
+);
+create sequence mybaby_seq;
+--내새끼 이미지 테이블 생성 구문
+create table mybaby_img(
+mybaby_img_no number primary key, --이미지 번호
+mybaby_no references mybaby(mybaby_no) on delete set null, -- 내새끼 게시글 번호 참조키
+mybaby_img_upload varchar2(256) not null, -- 이미지 업로드 이름
+mybaby_img_size number not null, -- 이미지 크기
+mybaby_img_type varchar2(256) not null -- 이미지 유형
+);
+create sequence mybaby_img_seq;
+--내새끼 댓글 테이블 생성 구문
+create table mybaby_reply(
+mybaby_reply_no number primary key, -- 댓글 번호
+mybaby_no references mybaby(mybaby_no) on delete cascade, -- 내새끼 게시글 번호 참조키
+mybaby_reply_content varchar2(1500) not null, -- 댓글 내용
+mybaby_reply_time date default sysdate not null, -- 댓글 작성 시간
+mybaby_reply_superno references mybaby_reply(mybaby_reply_no) on delete set null, -- 댓글 상위 그룹 번호
+mybaby_reply_groupno number default 0 not null, -- 댓글 그룹 번호
+mybaby_reply_depth number default 0 not null -- 댓글 차수
+);
+create sequence mybaby_reply_seq;
+
+
+
+
+commit;
+-------------------------------------------------------------------------------------------------------------
+--상품 이미지
+create table shop_img( 
+shop_img_no number primary key, -- 이미지 번호
+shop_img_upload varchar2(256) not null, -- 상품 업로드
+shop_img_size number not null, -- 상품 사진 크기
+shop_img_type varchar2(256) -- 상품 사진 유형
+);
+-- 상품 게시판
+create table shop(
+shop_no number primary key, -- 상품 번호
+shop_img_no references shop_img(shop_img_no), -- 이미지 번호
+member_id references member(member_id) on delete set null, -- 아이디
+shop_goods varchar2(150) not null, -- 상품이름
+shop_price number not null, -- 상품가격
+shop_count number not null, -- 상품 재고 수량
+shop_content varchar2(3000) not null, -- 상품 설명
+shop_time date default sysdate not null, -- 작성일
+shop_read number default 0 not null -- 조회수
+);
+
+
+
+-- 상품게시판 댓글
+create table shop_reply(
+shop_reply_no number primary key, -- 댓글번호
+member_id references member(member_id) on delete set null, -- 댓글 작성자
+shop_no references shop(shop_no) on delete cascade, -- 상품번호
+shop_reply_content varchar2(1500) not null, --댓글 내용
+shop_reply_time date default sysdate not null, -- 댓글 작성일
+shop_reply_superno references shop_reply(shop_reply_no) on delete set null, --댓글 상위번호
+shop_reply_groupno number not null, --댓글 그룹번호
+shop_reply_depth number not null --댓글차수
+);
+
+
+
+-- 상품재고
+create table inventory(
+inventory_no number primary key, -- 재고번호
+shop_no references shop(shop_no) on delete set null, -- 상품이름
+inventory_time date default sysdate not null, -- 증감일시
+inventory_stock number check(inventory_stock>=0) --총 재고량 , 나중에 입고되면 + 숫자 입력, 출고되면 - 숫자 입력
+);
+
+-- 장바구니
+create table cart(
+cart_no number primary key, -- 장바구니 번호
+shop_no references shop(shop_no) on delete cascade, -- 상품번호
+member_id references member(member_id) on delete cascade, -- 아이디
+shop_img_no references shop_img(shop_img_no) on delete cascade,
+cart_time date default sysdate not null, -- 담은시간
+cart_count number default 0 check(cart_count >= 0) not null --담은개수
+);
+
+-- 주문내역
+create table history(
+history_no number primary key, -- 주문내역번호
+member_id references member(member_id), -- 아이디
+cart_no references cart(cart_no), -- 장바구니번호
+shop_no references shop(shop_no) on delete cascade, -- 상품번호
+history_time date default sysdate not null -- 주문일자
+);
+
+create sequence shop_seq; 
+create sequence shop_reply_seq;
+create sequence shop_img_seq;
+create sequence inventory_seq;
+create sequence cart_seq;
+create sequence history_seq;
+
+
+commit;
+
+
+-------------------------------------------------------------------------------------------------------------
+
+
+--결제 테이블
+create table payment(
+pay_no number primary key, -- 결제번호
+tid varchar2(20) not null unique, -- 고유번호
+member_id varchar2(20) not null, -- 회원아이디
+item_name varchar2(300) not null, -- 거래명(상품명 외 몇건)
+total_amount number not null check(total_amount >= 0), -- 거래금액
+pay_time date default sysdate not null, -- 거래시각
+status varchar2(12) not null check(status in ('결제완료', '부분취소', '전체취소')) -- 거래상태
+);
+create sequence payment_seq; -- 시퀀스
+
+-- 결제 상세 테이블
+create table pay_detail(
+pay_no REFERENCES payment(pay_no) on delete cascade, -- 고유번호
+shop_no number not null, -- 상품번호
+shop_goods varchar2(30) not null, -- 상품명
+quantity number default 1 not null check(quantity > 0), -- 수량
+price number not null check(price >= 0), -- 가격
+status varchar2(6) not null check(status in ('결제', '취소')) -- 상태
+);
+
+commit;
+
+-------------------------------------------------------------------------------------------------------------
+
+--기부 이미지
+create table donation_img(
+donation_img_no number primary key,
+donation_img_upload varchar2(256) not null,
+donation_img_size number not null,
+donation_img_type varchar2(256)
+);
+create sequence donation_img_seq;
+drop table donation_img;
+--기부 게시판
+
+create table donation(
+donation_no number primary key,
+donation_img_no references donation_img(donation_img_no) on delete set null,
+donation_writer references member(member_id) on delete set null,
+donation_price number not null,
+donation_content varchar2(3000) not null,
+donation_time date default sysdate not null,
+donation_read number default 0 not null,
+donation_title varchar2(150) not null
+);
+create sequence donation_seq;
+--기부 댓글
+create table donation_reply(
+donation_reply_no number primary key,
+member_id references member(member_id) on delete set null,
+donation_no references donation(donation_no) on delete set null,
+donation_reply_content varchar2(1500) not null,
+donation_reply_time date default sysdate not null,
+donation_reply_superno references donation_reply(donation_reply_no) on delete set null,
+donation_reply_groupno number not null,
+donation_reply_depth number not null
+);
+create sequence donation_reply_seq;
 
 
 
 
 
+commit;
 
+-------------------------------------------------------------------------------------------------------------
 
+--인증 테이블
+create table certification(
+    cert_email varchar2(40) primary key,
+    cert_serial char(6) not null,
+    cert_time date default sysdate not null
+);
 
+commit;
 
 
 
