@@ -12,3 +12,8 @@ select username from dba_users;
 -- 접속 이름 : ttamna
 -- 사용자 이름 : ttamna
 -- 비밀번호 : ttamna
+
+-- DB 공용
+-- 호스트이름 : 125.191.92.229 
+-- 포트 : 1521 
+-- SID : orcl
