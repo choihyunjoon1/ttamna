@@ -1,0 +1,36 @@
+/* 
+    웹폰트 설정 
+    = 사용자의 PC에 설치된 글꼴이 아니라 내가 문서에 글꼴을 첨부시키는 방법
+    = 장점 : 모든 사용자의 PC에서 동일한 글꼴이 표시된다.
+    = 단점 : 용량 증가로인한 깜빡임, 로딩 증가 현상이 발생
+*/
+@font-face {
+    font-family: nanumgothic;
+    src: url("./font/NanumGothic.ttf");
+}
+
+/* 레이아웃 배치 */
+html {
+    font-size: 16px;
+    font-family: nanumgothic;
+}
+main {
+    width:1000px;
+    margin:2rem auto;
+}
+main > header {
+    padding:1rem;
+    overflow: hidden;
+}
+main > nav {
+    overflow: hidden;
+}
+main > section {
+    padding:1rem;
+    min-height: 300px;
+    overflow: hidden;
+}
+main > footer {
+    padding:1rem;
+    overflow: hidden;
+}
