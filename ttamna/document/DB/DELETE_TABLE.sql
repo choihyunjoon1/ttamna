@@ -33,16 +33,16 @@ DROP SEQUENCE payment_seq;
 
 COMMIT;
 
----------------- order --------------------------
+---------------- history --------------------------
 
--- 테이블 데이터 삭제 (order)
-TRUNCATE TABLE order;
+-- 테이블 데이터 삭제 (history)
+TRUNCATE TABLE history;
 
--- 테이블 삭제 (order)
-DROP TABLE order CASCADE CONSTRAINTS;
+-- 테이블 삭제 (history)
+DROP TABLE history CASCADE CONSTRAINTS;
 
--- 시퀀스 삭제 (order)
-DROP SEQUENCE order_seq;
+-- 시퀀스 삭제 (history)
+DROP SEQUENCE history_seq;
 
 COMMIT;
 
@@ -73,26 +73,13 @@ DROP SEQUENCE inventory_seq;
 
 COMMIT;
 
----------------- shop_img --------------------------
-
--- 테이블 데이터 삭제 (shop_img)
-TRUNCATE TABLE shop_img;
-
--- 테이블 삭제 (shop_img)
-DROP TABLE shop_img CASCADE CONSTRAINTS;
-
--- 시퀀스 삭제 (shop_img)
-DROP SEQUENCE shop_img_seq;
-
-COMMIT;
-
 ---------------- shop_reply --------------------------
 
 -- 테이블 데이터 삭제 (shop_reply)
 TRUNCATE TABLE shop_reply;
 
 -- 테이블 삭제 (shop_reply)
-DROP TABLE shop CASCADE CONSTRAINTS;
+DROP TABLE shop_reply CASCADE CONSTRAINTS;
 
 -- 시퀀스 삭제 (shop_reply)
 DROP SEQUENCE shop_reply_seq;
@@ -112,16 +99,16 @@ DROP SEQUENCE shop_seq;
 
 COMMIT;
 
----------------- donation_img --------------------------
+---------------- shop_img --------------------------
 
--- 테이블 데이터 삭제 (donation_img)
-TRUNCATE TABLE donation_img;
+-- 테이블 데이터 삭제 (shop_img)
+TRUNCATE TABLE shop_img;
 
--- 테이블 삭제 (donation_img)
-DROP TABLE  donation_img CASCADE CONSTRAINTS;
+-- 테이블 삭제 (shop_img)
+DROP TABLE shop_img CASCADE CONSTRAINTS;
 
--- 시퀀스 삭제 (donation_img)
-DROP SEQUENCE donation_img_seq;
+-- 시퀀스 삭제 (shop_img)
+DROP SEQUENCE shop_img_seq;
 
 COMMIT;
 
@@ -148,6 +135,19 @@ DROP TABLE  donation CASCADE CONSTRAINTS;
 
 -- 시퀀스 삭제 (donation)
 DROP SEQUENCE donation_seq;
+
+COMMIT;
+
+---------------- donation_img --------------------------
+
+-- 테이블 데이터 삭제 (donation_img)
+TRUNCATE TABLE donation_img;
+
+-- 테이블 삭제 (donation_img)
+DROP TABLE  donation_img CASCADE CONSTRAINTS;
+
+-- 시퀀스 삭제 (donation_img)
+DROP SEQUENCE donation_img_seq;
 
 COMMIT;
 
