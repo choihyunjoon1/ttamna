@@ -1,4 +1,43 @@
 <?xml version="1.0" encoding="UTF-8"?>
+
+<!-- 
+	로깅(Logging)
+	- 메세지를 남기는 행위
+	- log4j는 로깅을 수행하는 도구 중 하나
+	
+	로깅 메세지 수준(Level)
+	- 중요한 메세지와 덜 중요한 메세지를 구분해서 출력 및 저장하도록 설계되어 있다.
+	- 총 6개의 단계가 존재 : (↑)FATAL - ERROR - WARN - INFO - DEBUG - TRACE(↓)
+	
+	사용 가능한 도구
+	- appender : 로깅의 대상을 지정하는 도구(ex : 콘솔, 파일(용량,날짜별,...), 등)
+		- ConsoleAppender : 콘솔에 로그를 출력하는 도구
+			- target : 출력 대상
+			- layout : 출력 형식
+		- FileAppender : 파일에 로그를 출력하는 도구
+			- file : 출력 파일
+			- layout : 출력 형식
+			- append : 이어쓰기 여부
+		- DailyRollingFileAppender : 일자별로 파일을 생성하여 출력하는 도구
+			- file : 출력 파일
+			- layout : 출력 형식
+			- append : 이어쓰기 여부
+			- DatePattern : 일자가 파일명에 표시되는 방식
+			
+	출력 형식
+	- %p : 메세지 우선순위(priority) 출력 영역 지정 
+		- %p 사이에 숫자를 집어넣어 기본 크기를 설정할 수 있다
+		- %p 사이에 숫자를 넣을 때 양수면 오른쪽 정렬, 음수면 왼쪽 정렬을 한다
+	- %c : 카테고리 정보(category), 로깅이 실행된 대상 정보
+		- 설정에 따라서 패키지나 클래스 등을 확인할 수 있다
+		- %c{4} 라고 쓰면 경로를 4계층까지 출력하라는 의미이다(ex : com.kh.spring18.Test02)
+		- 안쓰면 모든 경로가 출력
+	- %m : 실제 출력할 로깅 메세지
+	- %n : new line. 개행 문자(줄바꿈)
+	- %d : 시간 정보(date)
+		- %d{형식} 으로 작성하면 시간 형식을 임의로 설정할 수 있다(SimpleDateFormat과 동일)
+ -->
+
 <!DOCTYPE log4j:configuration PUBLIC "-//APACHE//DTD LOG4J 1.2//EN" "log4j.dtd">
 <log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/">
 
@@ -6,36 +45,44 @@
 	<appender name="console" class="org.apache.log4j.ConsoleAppender">
 		<param name="Target" value="System.out" />
 		<layout class="org.apache.log4j.PatternLayout">
-			<param name="ConversionPattern" value="%-5p: %c - %m%n" />
+			<param name="ConversionPattern" value="%-5p: %m - %c (%d{yyyy-MM-dd HH:mm:ss})%n" />
 		</layout>
 	</appender>
 	
-	<!-- Application Loggers -->
-	<logger name="com.kh.ttamna">
-		<level value="info" />
-	</logger>
+	<appender name="file" class="org.apache.log4j.FileAppender">
 	
-	<!-- 3rdparty Loggers -->
-	<logger name="org.springframework.core">
-		<level value="info" />
-	</logger>
+		<!-- 상대경로는 프로젝트부터 시작한다(폴더가 없으면 생성한다) -->
+		<param name="file" value="log/out.log"></param>
+		
+		<!-- 절대경로로 지정할 수도 있다 -->
+		<!-- <param name="file" value="D:/out.log"></param> -->
+		
+		<!-- 덮어쓰기 / 이어쓰기 설정 -->
+		<param name="append" value="true"></param>
+		
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%-5p: %m - %c (%d{yyyy-MM-dd HH:mm:ss})%n" />
+		</layout>
+	</appender>
 	
-	<logger name="org.springframework.beans">
-		<level value="info" />
-	</logger>
+	<appender name="daily" class="org.apache.log4j.DailyRollingFileAppender">
+		<param name="file" value="log/daily"></param>
+		<param name="append" value="true"></param>
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%-5p: %m - %c (%d{yyyy-MM-dd HH:mm:ss})%n" />
+		</layout>
+		
+		<param name="DatePattern" value="'-'yyyy-MM-dd'.log'"></param>
+	</appender>
 	
-	<logger name="org.springframework.context">
-		<level value="info" />
-	</logger>
-
-	<logger name="org.springframework.web">
-		<level value="info" />
-	</logger>
-
-	<!-- Root Logger -->
+	<!-- 기본 로깅 설정(세부 설정이 있을 경우 세부 설정이 우선 적용) -->
 	<root>
-		<priority value="warn" />
+		<!-- 기본 출력 수준 정의 -->
+		<priority value="debug" />
+		
+		<!-- 기본 출력 대상 정의 -->
 		<appender-ref ref="console" />
+		<appender-ref ref="daily" />
 	</root>
 	
 </log4j:configuration>
