@@ -1,13 +1,12 @@
 package com.kh.ttamna.repository.member;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.kh.ttamna.entity.member.MemberDto;
+
+import lombok.extern.slf4j.Slf4j;
 
 @Repository
 public class MemberDaoImpl  implements MemberDao{
@@ -20,12 +19,14 @@ public class MemberDaoImpl  implements MemberDao{
 	}
 
 	@Override
-	public boolean login(String memberId, String memberPw) {
-		Map<String,Object> param= new HashMap<>();
-		param.put("memberId",memberId);
-		param.put("memberPw",memberPw);
-		int result = sqlSession.selectOne("member.login",param);
-		return result>0;
+	public MemberDto login(MemberDto memberDto) {
+		MemberDto findDto = sqlSession.selectOne("member.get",memberDto.getMemberId());
+		
+		if(findDto != null && memberDto.getMemberPw().equals(findDto.getMemberPw())) {
+			return findDto;
+		}else {
+			return null;
+		}
 	}
 
 }

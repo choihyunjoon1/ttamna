@@ -16,14 +16,13 @@
 <mapper namespace="member">
 	<!-- 회원가입 -->
 	<insert id="join" parameterType="MemberDto">
-		insert into member 
-		values(#{memberId},#{memberPw},#{memberNick},#{memberPhone},#{memberEmail}
-		,'일반회원',sysdate,sysdate,#{postcode},#{address},#{detailAddress})
+		insert into member(member_id,member_pw,member_nick,member_name,member_phone,member_email) 
+		values(#{memberId},#{memberPw},#{memberNick},#{memberName},#{memberPhone},#{memberEmail})
 	</insert>
 	
 	<!-- 로그인(대충한거) -->
-	<select id = "login" parameterType="map" resultType="int">
-		select * from member where member_id=#{memberId} and member_pw = #{memberPw}
+	<select id = "get" parameterType="String" resultType="MemberDto">
+		select * from member where member_id=#{memberId}
 	</select>
 
 	
