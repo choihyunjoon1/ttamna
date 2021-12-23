@@ -128,30 +128,30 @@ commit;
 
 -------------------------------------------------------------------------------------------------------------
 
---기부 이미지
-create sequence donation_img_seq;
-create table donation_img(
-donation_img_no number primary key,
-donation_img_upload varchar2(256) not null,
-donation_img_size number not null,
-donation_img_type varchar2(256)
-);
-
-commit;
-
--------------------------------------------------------------------------------------------------------------
-
 --기부 게시판
 create sequence donation_seq;
 create table donation(
 donation_no number primary key,
-donation_img_no references donation_img(donation_img_no) on delete set null,
 donation_writer references member(member_id) on delete set null,
 donation_price number not null,
 donation_content varchar2(3000) not null,
 donation_time date default sysdate not null,
 donation_read number default 0 not null,
 donation_title varchar2(150) not null
+);
+
+commit;
+
+-------------------------------------------------------------------------------------------------------------
+
+--기부 이미지
+create sequence donation_img_seq;
+create table donation_img(
+donation_img_no number primary key,
+donation_no references donation(donation_no) on delete cascade,
+donation_img_upload varchar2(256) not null,
+donation_img_size number not null,
+donation_img_type varchar2(256)
 );
 
 commit;
@@ -175,24 +175,10 @@ commit;
 
 -------------------------------------------------------------------------------------------------------------
 
---상품 이미지
-create sequence shop_img_seq;
-create table shop_img( 
-shop_img_no number primary key, -- 이미지 번호
-shop_img_upload varchar2(256) not null, -- 상품 업로드
-shop_img_size number not null, -- 상품 사진 크기
-shop_img_type varchar2(256) -- 상품 사진 유형
-);
-
-commit;
-
--------------------------------------------------------------------------------------------------------------
-
 -- 상품 게시판
 create sequence shop_seq; 
 create table shop(
 shop_no number primary key, -- 상품 번호
-shop_img_no references shop_img(shop_img_no), -- 이미지 번호
 member_id references member(member_id) on delete set null, -- 아이디
 shop_goods varchar2(150) not null, -- 상품이름
 shop_price number not null, -- 상품가격
@@ -200,6 +186,20 @@ shop_count number not null, -- 상품 재고 수량
 shop_content varchar2(3000) not null, -- 상품 설명
 shop_time date default sysdate not null, -- 작성일
 shop_read number default 0 not null -- 조회수
+);
+
+commit;
+
+-------------------------------------------------------------------------------------------------------------
+
+--상품 이미지
+create sequence shop_img_seq;
+create table shop_img( 
+shop_img_no number primary key, -- 이미지 번호
+shop_no references shop(shop_no) on delete cascade,
+shop_img_upload varchar2(256) not null, -- 상품 업로드
+shop_img_size number not null, -- 상품 사진 크기
+shop_img_type varchar2(256) -- 상품 사진 유형
 );
 
 commit;
