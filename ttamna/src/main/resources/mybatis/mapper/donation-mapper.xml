@@ -98,5 +98,15 @@
 		</set>
 		where donation_no = #{donationNo}
 	</update>
+	
+	<!-- 더보기 페이지네이션 -->
+	<select id="listByPage" parameterType="map" resultType="DonationDto">
+		select * from(
+		    select rownum rn, tmp.* from(
+		        select * from donation
+		        order by donation_no desc
+		        )tmp
+		)where rn between ${startRow} and ${endRow}
+	</select>
 </mapper>
 

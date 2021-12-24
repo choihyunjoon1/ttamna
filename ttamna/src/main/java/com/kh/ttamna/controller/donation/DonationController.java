@@ -1,6 +1,7 @@
 package com.kh.ttamna.controller.donation;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.kh.ttamna.entity.donation.DonationDto;
 import com.kh.ttamna.repository.donation.DonationDao;
@@ -80,5 +82,18 @@ public class DonationController {
 		int donationNo = donationDao.insert(donationDto);
 		
 		return "redirect:/donation/detail?donationNo=" + donationNo;
+	}
+	
+	//더보기 페이지네이션 기능 처리
+	@GetMapping("/more")
+	@ResponseBody
+	public List<DonationDto> more(
+				@RequestParam(required =false, defaultValue = "1") int page,
+				@RequestParam(required =false, defaultValue = "12") int size
+			){
+		int endRow = page* size;
+		int startRow = endRow - (size - 1);
+		
+		return donationDao.listByPage(startRow, endRow);
 	}
 }

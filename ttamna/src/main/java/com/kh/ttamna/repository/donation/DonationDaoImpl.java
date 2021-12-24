@@ -61,5 +61,13 @@ public class DonationDaoImpl implements DonationDao{
 		return sqlSession.delete("donation.delete", donationNo) > 0;
 	}
 
+	@Override//더보기 페이지네이션
+	public List<DonationDto> listByPage(int startRow, int endRow) {
+		Map<String, Object> map = new HashMap<>();
+		map.put("startRow", startRow);
+		map.put("endRow", endRow);
+		
+		return sqlSession.selectList("donation.listByPage", map);
+	}
 	
 }
