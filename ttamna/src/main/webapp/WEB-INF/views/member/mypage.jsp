@@ -1,40 +1,40 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
-<style>
-	.float-item-right{
-		border : 1px dotted black;
-	}
-	.float-item-left{
-		border : 1px dotted black;
-	}
-	.float-item-center>.float-item-center{
-		float:center;
-	}
-</style>    
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<c:set var="root" value="${pageContext.request.contextPath }"></c:set>
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
+<link ref="stylesheet" type="text/css" href="${root }/resources/css/commons.css">
 
 
-<div class="container-1000 container-center float-container">		
+<div class="container-1000 container-center container-side-menu">		
 <h1 align="center">마이페이지</h1>
-	<div class="container-200 float-item-left">
+	<div class="container-side-left">
 		<div class="row">
-			<a href = "#">내 정보</a>
-			<a href = "#">정보 수정</a>
-			<a href = "#">비밀번호 변경</a>
-			<a href = "#">내 게시글 보기</a>
-			<a href = "#">기부 목록</a>
-			<a href = "#">주문 내역</a>
-			<a href = "#">장바구니</a>
-			<a href = "#">로그아웃</a>
+			<ul>
+				<li><a href = "${root }/member/mypage">내 정보</a></li>
+				<li><a href = "${root }/member/edit">정보 수정</a></li>
+				<li><a href = "${root }/member/changePw">비밀번호 변경</a></li>
+				<li><a href = "${root }/member/myBoard">내 게시글 보기</a></li>
+				<li><a href = "${root }/member/myDonation">기부 목록</a></li>
+				<li><a href = "${root }/member/myOrder">주문 내역</a></li>
+				<li><a href = "${root }/member/myBasket">장바구니</a></li>
+				<li><a href = "${root }/member/logout">로그아웃</a></li>
+			</ul>
 		</div>
 	</div>
-	<div class="container-600 float-item-center">
-		<c:forEach begin="1" end="10" var="i">
+	<div class="container-side-center">
 		<div class="row">
 			<div>센터메뉴${i}:부가적인메뉴</div>
+			<div>센터메뉴${i}:부가적인메뉴</div>
+			<div>센터메뉴${i}:부가적인메뉴</div>
+			<div>센터메뉴${i}:부가적인메뉴</div>
+			<div>센터메뉴${i}:부가적인메뉴</div>
+			<div>센터메뉴${i}:부가적인메뉴</div>
+			<div>센터메뉴${i}:부가적인메뉴</div>
+			<div>센터메뉴${i}:부가적인메뉴</div>
+			<div>센터메뉴${i}:부가적인메뉴</div>
 		</div>
-		</c:forEach>
+		<a href="${root }/member/logout">로그아웃</a>
 	</div>
 </div>
 

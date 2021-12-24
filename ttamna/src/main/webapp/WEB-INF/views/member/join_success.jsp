@@ -2,13 +2,18 @@
     pageEncoding="UTF-8"%>
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 
-<div class="container-400 container-center">
+<div class="container-400 container-center ">
 	<div class="row">
 		<h3>회원가입 성공</h3>
 	</div>
 	<div class="row">
-		<a href="${pageContext.request.contextPath }" >메인으로</a>
-		<a href = "${pageContext.request.contextPath }/member/login">로그인하러가기</a>
+		<div class="col">
+			<a href="${pageContext.request.contextPath}" class="btn btn-lg btn-primary" tabindex="-1" role="button" aria-disabled="true">메인으로</a>
+		</div>
+		<div class="col">
+			<a href="${pageContext.request.contextPath}/member/login" class="btn btn-lg btn-primary" tabindex="-1" role="button" aria-disabled="true">로그인하러가기</a>
+			
+		</div>
 	</div>
 </div>
 

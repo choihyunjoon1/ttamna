@@ -7,24 +7,32 @@
 	}
 </style>  
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
-<h1>로그인 페이지</h1>
+    
 <form method="post">
-<div class="container-400 container-center">
-	<div class="row">
-		<label>아이디</label>	
-		<input type="text" name="memberId" required class="form-input">
-	</div>
-	<div class="row">
-		<label>비밀번호</label>
-		<input type="password" name = "memberPw" required class="form-input">
-	</div>
-	<div class="row">
-		<input type="submit" value="로그인" class="form-btn">
-	</div>
-	<div class="row">
-		<c:if test="${param.error != null }">
-			<span class="errorMsg">아이디 또는 비밀번호가 틀렸습니다.</span>
-		</c:if>
+<div class="container-1000 bg-white" >
+	<div class="container-400 container-center">
+	<h1>로그인 페이지</h1>
+		<div class="input-group mb-3 col">
+			<div class="col">
+				<input type="text" name="memberId" required class="form-control" placeholder="아이디 입력" aria-label="아이디 입력" aria-describedby="button-addon2" autocomplete="off">
+			</div>
+		</div>
+		<div class="input-group mb-3 col">
+			<div class="col">
+				<input type="password" name="memberPw" required class="form-control" placeholder="비밀번호 입력" aria-label="비밀번호 입력" aria-describedby="button-addon2"  autocomplete="off">
+			</div>
+		</div>
+		<div class="row mt-3">
+			<div class="col">
+				<button type="submit" class="btn btn-outline-primary">로그인</button>
+				<a href="${pageContext.request.contextPath}" type="button" class="btn btn-outline-secondary">취소</a>
+			</div>
+		</div>
+		<div class="row">
+			<c:if test="${param.error != null }">
+				<span class="errorMsg">아이디 또는 비밀번호가 틀렸습니다.</span>
+			</c:if>
+		</div>
 	</div>
 </div>
 </form>
