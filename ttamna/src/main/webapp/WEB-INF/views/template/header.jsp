@@ -13,7 +13,19 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>땀나홈페이지</title>
+    <title>Tierheim</title>
+    <!-- Bootstrap CSS CDN-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+
+ 	<!-- Bootswatch Skin Minty CDN적용하기-->
+    <link rel="stylesheet" type="text/css" href="https://bootswatch.com/5/minty/bootstrap.css">
+    
+    <!-- JQeury CDN -->
+    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+   
+    <!-- Bootstrap JavaScript CDN 번들 -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+
     <link rel="stylesheet" type="text/css" href="${root }/resources/css/reset.css">
     <link rel="stylesheet" type="text/css" href="${root }/resources/css/commons.css">
     <link rel="stylesheet" type="text/css" href="${root }/resources/css/layout.css">
@@ -44,7 +56,7 @@
                    <!-- 이미지로고자리 -->
                 </div>
                 <div class="title-wrapper center">
-                    <h1>땀부홈페이지</h1>
+                    <h1>Tierheim(동물의 집)</h1>
                     <!-- 세션,등급 알아내기 위함 나중에 삭제 -->
                     <h5>uid=${uid}</h5><h5>grade=${grade }</h5>
                 </div>
@@ -52,43 +64,43 @@
 
         </header>
 
-        <!-- 메뉴 영역 -->
-        <nav>
-        	 <ul class="slide-menu">
-            	<c:choose>
-            		<c:when test="${login}">
-            			<li><a href="${root}">홈으로</a></li>
-		            	<li><a href="${root}/board/list">게시판</a></li>
-		            	<li class="flex-right">
-		            		<a href="#">회원메뉴</a>
-		            		<!-- 슬라이드안되서 잠시 주석처리 -->
-<!-- 		            		<ul> -->
-		            			<c:choose>
-		            				<c:when test="${admin}">
-		            					<li><a href="${root}/admin/home">관리메뉴</a></li>
-		            				</c:when>
-		            				<c:otherwise>
-		            					<li><a href="${root}/point/charge">포인트 충전</a></li>
-				            			<li><a href="${root}/member/mypage">내정보</a></li>
-		            				</c:otherwise>
-		            			</c:choose>
-				            	<li><a href="${root}/member/logout">로그아웃</a></li>
-<!-- 		            		</ul> -->
-		            	</li>
-            		</c:when>
-            		<c:otherwise>
-	            		<li><a href="${root}">홈으로</a></li>
-		            	<li><a href="${root}/?">게시판</a></li>
-		            	<li class="flex-right">
-		            		<li><a href="${root}/member/login">로그인</a></li>
-		            		<li><a href="${root}/member/join">회원가입</a></li>
-		            	</li>
-            		</c:otherwise>
-            	</c:choose>
-            
-            </ul>
-        </nav>
-
+<!-- 메뉴 영역 -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+  <div class="container-fluid">
+    <div class="collapse navbar-collapse" id="navbarColor01">
+      <ul class="navbar-nav me-auto">
+        <li class="nav-item">
+          <a class="nav-link active docs-creator" href="#">Home
+            <span class="visually-hidden">(current)</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link docs-creator" href="#">기부</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link docs-creator" href="#">입양</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link docs-creator" href="#">내새끼사랑</a>
+        </li>
+         <li class="nav-item">
+          <a class="nav-link docs-creator" href="#">상품구매</a>
+        </li>
+<!--         <li class="nav-item dropdown"> -->
+<!--           <a class="nav-link dropdown-toggle docs-creator" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Dropdown</a> -->
+<!--           <div class="dropdown-menu"> -->
+<!--             <a class="dropdown-item docs-creator" href="#">Action</a> -->
+<!--             <a class="dropdown-item docs-creator" href="#">Another action</a> -->
+<!--             <a class="dropdown-item docs-creator" href="#">Something else here</a> -->
+<!--             <div class="dropdown-divider"></div> -->
+<!--             <a class="dropdown-item docs-creator" href="#">Separated link</a> -->
+<!--           </div> -->
+<!--         </li> -->
+      </ul>
+     
+    </div>
+  </div>
+</nav>
         <!-- 섹션(컨텐츠) 영역 -->
         <section>
 
