@@ -4,7 +4,7 @@
 
 <div class="container-400 container-center">
 	<div class="row">
-		<h1>회원가입 성공</h1>
+		<h1>마이페이지</h1>
 	</div>
 	<div class="row">
 		<a href="${pageContext.request.contextPath }">메인으로</a>

@@ -10,28 +10,40 @@
     <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
     <script src = "https://code.jquery.com/jquery-3.6.0.js"></script>
     <script src="${root }/resources/js/address.js"></script>
-<h1>회원가입 페이지</h1>
+<div class="container-center">
+	<h1>회원가입 페이지</h1>
+</div>
 
 <form method="post">
-<div>
-	아이디 : <input type="text" name="memberId" required>
-	<br><br>
-	비밀번호 : <input type="password" name="memberPw" required>
-	<br><br>
-	닉네임 : <input type="text" name="memberNick" required>
-	<br><br>
-	이름 : <input type="text" name="memberName" required>
-	<br><br>
-	이메일 : <input type="email" name="memberEmail" required>
-	<br><br>
-	휴대전화 : <input type="tel" name="memberPhone" required>
-	<br><br>
-	<input type="button"  value="우편번호 찾기" class="address-btn"><br>
-	우편번호 : <input type="text" name="postcode">
-	기본주소 : <input type="text" name="address">
-	상세주소 : <input type="text" name="detailAddress">
+<div class="container-400 container-center">
+	<div class="row">
+		<label>아이디</label>
+		<input type="text" name="memberId" required class="form-input">
+	</div>
+	<div class="row">
+		<label>비밀번호</label>
+		<input type="password" name="memberPw" required class="form-input">
+	</div>
+	<div class="row">
+		<label>닉네임</label>
+		<input type="text" name="memberNick" required class="form-input">
+	</div>
+	<div class="row"></div>
+	이름 : <input type="text" name="memberName" required class="form-input">
+	<div class="row"></div>
+	이메일 : <input type="email" name="memberEmail" required class="form-input">
+	<div class="row"></div>
+	휴대전화 : <input type="tel" name="memberPhone" required class="form-input">
+	<div class="row">
+		<input type="button"  value="우편번호 찾기" class="address-btn form-input">
+		<input type="text" name="postcode" placeholder="우편번호" class="form-input">
+		<input type="text" name="address" placeholder="기본주소" class="form-input">
+		<input type="text" name="detailAddress" placeholder="상세주소" class="form-input">
+	</div>
+	<div class="row">
+		<input type="submit" value="회원가입" class="input-btn form-btn">
+	</div>
 </div>	
-	<input type="submit" value="회원가입">
 </form>
 
 

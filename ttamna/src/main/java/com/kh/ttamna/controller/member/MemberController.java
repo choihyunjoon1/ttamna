@@ -43,9 +43,11 @@ public class MemberController {
 		if(findDto != null) {
 			session.setAttribute("uid", findDto.getMemberId());
 			session.setAttribute("grade", findDto.getMemberGrade());
-		}
 		
-		return "redirect:/";
+			return "redirect:/";
+		}else {
+			return "redirect:login?error";
+		}
 		
 	}
 	//로그아웃
