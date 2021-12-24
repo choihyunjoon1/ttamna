@@ -8,10 +8,13 @@
 </style>  
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
     
-<form method="post">
-<div class="container-1000 bg-white" >
-	<div class="container-400 container-center">
-	<h1>로그인 페이지</h1>
+<div class="container-500 bg-white container-center" >
+	<div class='container'>
+		<div class="align-self-center">
+			<h1>LOGIN</h1>
+		</div>
+	</div>
+	<form method="post" id="login-form">
 		<div class="input-group mb-3 col">
 			<div class="col">
 				<input type="text" name="memberId" required class="form-control" placeholder="아이디 입력" aria-label="아이디 입력" aria-describedby="button-addon2" autocomplete="off">
@@ -33,9 +36,8 @@
 				<span class="errorMsg">아이디 또는 비밀번호가 틀렸습니다.</span>
 			</c:if>
 		</div>
-	</div>
-</div>
 </form>
+</div>
 
 
 
