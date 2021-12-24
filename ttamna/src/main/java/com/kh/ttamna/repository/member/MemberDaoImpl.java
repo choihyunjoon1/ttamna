@@ -63,5 +63,12 @@ public class MemberDaoImpl  implements MemberDao{
 		return memberDto;
 	}
 	
+	//아이디 중복 검사
+	@Override
+	public int ajaxId(String memberId) {
+		int result = sqlSession.selectOne("member.ajaxId", memberId);
+		return result;
+	}
+	
 
 }

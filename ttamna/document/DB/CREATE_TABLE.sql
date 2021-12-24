@@ -28,7 +28,7 @@ create table member(
     detail_address varchar2(256)
 );
 -- 닉네임 제약조건 변경
-ALTER TABLE member MODIFY member_nick varchar2(30); 
+ALTER TABLE member MODIFY member_nick varchar2(45); 
 ALTER TABLE member DROP CONSTRAINT member_nick_check;
 ALTER TABLE member ADD CONSTRAINT member_nick_check CHECK(REGEXP_LIKE(member_nick, '^[가-힣]{2,15}$'));
 
@@ -308,3 +308,18 @@ create table certification(
 commit;
 
 -------------------------------------------------------------------------------------------------------------
+
+-- 정기결제 테이블
+
+create sequence autopayment_seq;
+create table autopayment(
+auto_no number primary key,
+partner_user_id REFERENCES member(member_id),
+auto_sid varchar2(20) not null,
+auto_quantity number default 1 not null,
+auto_total_amount number not null,
+first_payment_date date default sysdate not null,
+pay_times number default 1 not null
+);
+
+commit;

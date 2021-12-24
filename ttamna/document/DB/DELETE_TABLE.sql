@@ -1,3 +1,18 @@
+
+
+---------------- autopayment --------------------------
+
+-- 테이블 데이터 삭제 (autopayment)
+TRUNCATE TABLE autopayment;
+
+-- 테이블 삭제 (autopayment)
+DROP TABLE autopayment CASCADE CONSTRAINTS;
+
+-- 시퀀스 삭제 (autopayment)
+DROP SEQUENCE autopayment_seq;
+
+COMMIT;
+
 ---------------- certification --------------------------
 
 -- 테이블 데이터 삭제 (certification)
