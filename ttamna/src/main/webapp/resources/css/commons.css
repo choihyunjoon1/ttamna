@@ -103,19 +103,17 @@
     .left = 왼쪽 정렬(기본값)
     .center = 가운데 정렬
     .right = 오른쪽 정렬
-    
-    다른 어떠한 스타일보다 우선순위가 높아야 하므로 important 처리를 수행한다.
 */
 .left {
-    text-align: left !important;
+    text-align: left;
 }
 
 .center {
-    text-align: center !important;
+    text-align: center;
 }
 
 .right {
-    text-align: right !important;
+    text-align: right;
 }
 
 /*
@@ -347,7 +345,7 @@ textarea.vertical {
 }
 .slide-menu ul {/*(5)*/
     position: absolute;
-    top:100%;
+    top:45px;
     left:0;
 }
 .slide-menu li > a {/*(6) */
@@ -368,9 +366,9 @@ textarea.vertical {
 }
 
 /*(8)*/
-.slide-menu > li > ul ul {`
+.slide-menu > li > ul ul {
     top:0;
-    left:100%;
+    left:120px;
 }
 
 .slide-menu > li.flex-right {
@@ -384,9 +382,4 @@ textarea.vertical {
 }
 .slide-menu li:hover > ul {
     display:block;
-}
-/*오류 메세지는 빨간 글씨로... */
-.error{
-	color : red;
-	
 }
