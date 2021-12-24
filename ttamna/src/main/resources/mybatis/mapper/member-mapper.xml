@@ -17,9 +17,12 @@
 	<!-- 회원가입 -->
 	<insert id="join" parameterType="MemberDto">
 		insert into member
-		values(#{memberId},#{memberPw},#{memberNick},#{memberName},#{memberPhone},#{memberEmail},
-		'일반회원',sysdate,sysdate,
-		#{postcode},#{address},#{detailAddress})
+				values(
+					#{memberId}, #{memberPw}, #{memberNick}, 
+					#{memberName}, #{memberPhone}, #{memberEmail},
+					'일반회원', sysdate, sysdate,
+					#{postcode},#{address},#{detailAddress}
+					)
 	</insert>
 	
 	<!-- 로그인(대충한거) -->
