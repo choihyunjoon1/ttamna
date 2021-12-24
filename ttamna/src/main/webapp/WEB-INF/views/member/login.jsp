@@ -9,11 +9,9 @@
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
     
 <div class="container-500 bg-white container-center" >
-	<div class='container'>
 		<div class="align-self-center">
 			<h1>LOGIN</h1>
 		</div>
-	</div>
 	<form method="post" id="login-form">
 		<div class="input-group mb-3 col">
 			<div class="col">
