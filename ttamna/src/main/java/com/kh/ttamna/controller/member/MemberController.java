@@ -57,6 +57,11 @@ public class MemberController {
 		session.removeAttribute("grade");
 		return "redirect:/";
 	}
+	//마이페이지
+	@RequestMapping("/mypage")
+	public String mypage() {
+		return "member/mypage";
+	}
 	
 
 }
