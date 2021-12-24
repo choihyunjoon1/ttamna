@@ -62,6 +62,11 @@ public class MemberController {
 	public String mypage() {
 		return "member/mypage";
 	}
+	//정보수정페이지
+	@RequestMapping("/edit")
+	public String edit() {
+		return "member/edit";
+	}
 	
 
 }
