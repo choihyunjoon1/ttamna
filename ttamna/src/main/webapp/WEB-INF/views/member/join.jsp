@@ -85,6 +85,5 @@
 	</div>
 	</form>
 </div>
->>>>>>> branch 'main' of https://github.com/choihyunjoon1/ttamna
 
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>

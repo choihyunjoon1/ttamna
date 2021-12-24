@@ -107,7 +107,7 @@
         </c:if>
         <c:if test="${login}">
 		 <li class="nav-item">
-          <a class="nav-link docs-creator" href="#">로그아웃</a>
+          <a class="nav-link docs-creator" href="${root }/member/logout">로그아웃</a>
          </li>
          <li class="nav-item">
           <a class="nav-link docs-creator" href="#">마이페이지</a>
