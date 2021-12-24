@@ -13,5 +13,6 @@ public interface DonationDao {
 	List<DonationDto> detailOrSearch(Map<String, Object> data);//상세, 검색
 	boolean edit(DonationDto donationDto);//수정
 	boolean delete(int donationNo);//삭제
+	List<DonationDto> listByPage(int startRow, int endRow);//더보기 페이지네이션
 	
 }
