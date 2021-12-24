@@ -70,7 +70,7 @@
     <div class="collapse navbar-collapse" id="navbarColor01">
       <ul class="navbar-nav me-auto">
         <li class="nav-item">
-          <a class="nav-link active docs-creator" href="#">Home
+          <a class="nav-link active docs-creator" href="${root }">Home
             <span class="visually-hidden">(current)</span>
           </a>
         </li>
@@ -96,6 +96,22 @@
 <!--             <a class="dropdown-item docs-creator" href="#">Separated link</a> -->
 <!--           </div> -->
 <!--         </li> -->
+		<c:if test="${!login}">
+		 <li class="nav-item">
+          <a class="nav-link docs-creator" href="${root}/member/login">로그인</a>
+         </li>
+         <li class="nav-item">
+          <a class="nav-link docs-creator" href="${root}/member/join">회원가입</a>
+         </li>
+        </c:if>
+        <c:if test="${login}">
+		 <li class="nav-item">
+          <a class="nav-link docs-creator" href="#">로그아웃</a>
+         </li>
+         <li class="nav-item">
+          <a class="nav-link docs-creator" href="#">마이페이지</a>
+         </li>
+        </c:if>
       </ul>
      
     </div>
