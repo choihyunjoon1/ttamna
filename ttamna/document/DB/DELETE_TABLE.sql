@@ -1,4 +1,3 @@
-
 ---------------- certification --------------------------
 
 -- 테이블 데이터 삭제 (certification)
@@ -85,19 +84,6 @@ DROP SEQUENCE shop_reply_seq;
 
 COMMIT;
 
----------------- shop --------------------------
-
--- 테이블 데이터 삭제 (shop)
-TRUNCATE TABLE shop;
-
--- 테이블 삭제 (shop)
-DROP TABLE shop CASCADE CONSTRAINTS;
-
--- 시퀀스 삭제 (shop)
-DROP SEQUENCE shop_seq;
-
-COMMIT;
-
 ---------------- shop_img --------------------------
 
 -- 테이블 데이터 삭제 (shop_img)
@@ -108,6 +94,19 @@ DROP TABLE shop_img CASCADE CONSTRAINTS;
 
 -- 시퀀스 삭제 (shop_img)
 DROP SEQUENCE shop_img_seq;
+
+COMMIT;
+
+---------------- shop --------------------------
+
+-- 테이블 데이터 삭제 (shop)
+TRUNCATE TABLE shop;
+
+-- 테이블 삭제 (shop)
+DROP TABLE shop CASCADE CONSTRAINTS;
+
+-- 시퀀스 삭제 (shop)
+DROP SEQUENCE shop_seq;
 
 COMMIT;
 
@@ -124,6 +123,19 @@ DROP SEQUENCE donation_reply_seq;
 
 COMMIT;
 
+---------------- donation_img --------------------------
+
+-- 테이블 데이터 삭제 (donation_img)
+TRUNCATE TABLE donation_img;
+
+-- 테이블 삭제 (donation_img)
+DROP TABLE  donation_img CASCADE CONSTRAINTS;
+
+-- 시퀀스 삭제 (donation_img)
+DROP SEQUENCE donation_img_seq;
+
+COMMIT;
+
 ---------------- donation --------------------------
 
 -- 테이블 데이터 삭제 (donation)
@@ -137,18 +149,6 @@ DROP SEQUENCE donation_seq;
 
 COMMIT;
 
----------------- donation_img --------------------------
-
--- 테이블 데이터 삭제 (donation_img)
-TRUNCATE TABLE donation_img;
-
--- 테이블 삭제 (donation_img)
-DROP TABLE  donation_img CASCADE CONSTRAINTS;
-
--- 시퀀스 삭제 (donation_img)
-DROP SEQUENCE donation_img_seq;
-
-COMMIT;
 
 ---------------- mybaby_reply --------------------------
 
@@ -224,6 +224,3 @@ TRUNCATE TABLE member;
 DROP TABLE member CASCADE CONSTRAINTS;
 
 COMMIT;
-
-
-

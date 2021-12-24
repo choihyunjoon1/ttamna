@@ -1,4 +1,3 @@
-
 -- ttamna
 
 -- member(회원) 테이블 생성 구문
@@ -12,9 +11,9 @@ create table member(
                                         CONSTRAINT member_pw_check CHECK(REGEXP_LIKE(member_pw, '.*?[a-zA-Z0-9./$]+')), -- 비밀번호 암호화 관련
     member_nick varchar2(15) CONSTRAINT member_nick_not_null NOT NULL
                                          CONSTRAINT member_nick_unique UNIQUE
-                                          CONSTRAINT member_nick_check CHECK(REGEXP_LIKE(member_nick, '^[a-z가-힣]{2, 15}$')), --영어소문자15글자 or 한글5글자
+                                          CONSTRAINT member_nick_check CHECK(REGEXP_LIKE(member_nick, '^[a-z가-힣]{2,15}$')), --영어소문자15글자 or 한글5글자
     member_name varchar2(21) CONSTRAINT member_name_not_null NOT NULL
-                                             CONSTRAINT member_name_check CHECK(REGEXP_LIKE(member_name, '^[가-힣]{2, 7}$')),
+                                             CONSTRAINT member_name_check CHECK(REGEXP_LIKE(member_name, '^[가-힣]{2,7}$')),
     member_phone char(13) CONSTRAINT member_phone_not_null NOT NULL
                                       CONSTRAINT member_phone_check CHECK(REGEXP_LIKE(member_phone, '^010-[0-9]{4}-[0-9]{4}$')),
     member_email varchar2(40) CONSTRAINT member_email_not_null NOT NULL
@@ -305,4 +304,3 @@ create table certification(
 commit;
 
 -------------------------------------------------------------------------------------------------------------
-

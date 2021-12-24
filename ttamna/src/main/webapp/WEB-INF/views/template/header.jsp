@@ -14,9 +14,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>땀나홈페이지</title>
-    <link rel="stylesheet" type="text/css" href="${root}/resources/css/reset.css">
-    <link rel="stylesheet" type="text/css" href="${root}/resources/css/commons.css">
-    <link rel="stylesheet" type="text/css" href="${root}/resources/css/layout.css">
+    <link rel="stylesheet" type="text/css" href="${root }/resources/css/reset.css">
+    <link rel="stylesheet" type="text/css" href="${root }/resources/css/commons.css">
+    <link rel="stylesheet" type="text/css" href="${root }/resources/css/layout.css">
     <style>
     	.logo-wrapper {
             width:130px;
