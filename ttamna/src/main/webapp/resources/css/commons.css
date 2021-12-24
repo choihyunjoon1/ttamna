@@ -400,3 +400,15 @@ textarea.vertical {
 		float:right;
 		box-sizing: border-box;
 	}
+/*링크를 버튼으로 만들어주는 디자인*/
+.link-btn:hover{
+    border-color:black;
+    color:black;
+}
+.link-btn {
+    display:inline-block;
+    padding:0.5rem;
+    border:2px solid gray;
+    text-decoration:none;
+    color:gray;
+}

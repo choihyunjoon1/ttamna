@@ -1,16 +1,21 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 
 <div class="container">
 	<div class="row mt-3">
+	<div class="col">
+		<a href="insert" class="btn btn-primary">ê¸°ë¶€ì‹ ì²­</a>
+	</div>
+	</div>
+	<div class="row mt-3">
 		<c:forEach var="donationDto" items="${list}">
-			<div class="col-3">
-				<span>${donationDto.donationNo}¹ø±Û</span>
+			<div class="col-3 mt-3">
+				<span>${donationDto.donationNo}ë²ˆê¸€</span>
 				<br>
-				ÀÌ¹ÌÁö
+				ì´ë¯¸ì§€
 				<br>
 				<span>${donationDto.donationWriter}</span>
 				<br>

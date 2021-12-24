@@ -18,12 +18,12 @@ public class DonationDaoImpl implements DonationDao{
 	
 	@Override//등록
 	public int insert(DonationDto donationDto) {
-		int donationNo = sqlSession.selectOne("donation.seq");
-		donationDto.setDonationNo(donationNo);
+//		int donationNo = sqlSession.selectOne("donation.seq");
+		donationDto.setDonationNo(109);
 		sqlSession.insert("donation.insert", donationDto);
 		
 		//작성 후 상세로 가기 위해 게시글 번호 반환
-		return donationNo;
+		return 109;
 	}
 
 	@Override//목록
@@ -52,9 +52,8 @@ public class DonationDaoImpl implements DonationDao{
 	}
 
 	@Override//수정
-	public boolean edit(int donationNo) {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean edit(DonationDto donationDto) {
+		return sqlSession.update("donation.edit", donationDto) > 0;
 	}
 
 	@Override//삭제
