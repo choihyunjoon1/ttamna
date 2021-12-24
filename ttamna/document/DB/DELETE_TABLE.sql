@@ -1,4 +1,3 @@
-
 ---------------- certification --------------------------
 
 -- 테이블 데이터 삭제 (certification)
@@ -225,6 +224,3 @@ TRUNCATE TABLE member;
 DROP TABLE member CASCADE CONSTRAINTS;
 
 COMMIT;
-
-
-
