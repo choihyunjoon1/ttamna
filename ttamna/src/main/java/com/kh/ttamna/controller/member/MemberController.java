@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.kh.ttamna.entity.member.MemberDto;
 import com.kh.ttamna.repository.member.MemberDao;
@@ -56,6 +57,24 @@ public class MemberController {
 		session.removeAttribute("uid");
 		session.removeAttribute("grade");
 		return "redirect:/";
+	}
+	
+	
+	//아이디 중복검사
+	@GetMapping("/ajaxId")
+	public String ajaxId() {
+		return "member/ajaxId";
+	}
+	
+	@PostMapping("/ajaxId")
+	public String ajaxId(@RequestParam String memberId) {
+		//전달받은 아이디로 조회한 결과가 0보다 크다면  사용중인 아이디 = 중복아이디 NNNN전달
+		int result = memberDao.ajaxId(memberId); 
+		if(result > 0) {
+			return "redirect:member/join?NNNN";
+		}else {
+			return "redirect:member/join?YYYY"; 
+		}
 	}
 	
 
