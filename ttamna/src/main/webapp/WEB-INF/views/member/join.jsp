@@ -32,11 +32,7 @@ window.addEventListener("load", function(){
 
 </style>
 <div class="container-500 container-center">
-	<div class="container">
-  	   <div class="row mt-3">
-   		 <div class="col-6 offset-3"><h1>JOIN</h1></div>
-      </div>
-   </div>
+   	<div align="center" class="mt-5"><h1>JOIN</h1></div>
 	<form method="post" class="form-check">
 	<div class='input-group mt-5 mb-2'>
 		<input type="text" class="form-control input-id" name="memberId" required placeholder="아이디 입력" aria-label="아이디 입력">
@@ -77,7 +73,7 @@ window.addEventListener("load", function(){
 	<div class='input-group mb-3'>
 		<input type="text" class="form-control" name="detailAddress" placeholder='상세주소' aria-label="상세주소">
 	</div>
-	<div class="d-grid gap-2">
+	<div class="d-grid gap-2 mb-5">
     	<input class="btn btn-lg btn-primary" type="submit" value="Join">
 	</div>
 	</form>
