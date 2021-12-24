@@ -26,11 +26,11 @@ public class MemberController {
 	@PostMapping("/join")
 	public String join(@ModelAttribute MemberDto memberDto) {
 		memberDao.join(memberDto);
-		return "redirect:member/join_success";
+		return "redirect:join_success";
 	}
 	@RequestMapping("/join_success")
 	public String joinSuccess() {
-		return "redirect:/join_success";
+		return "member/join_success";
 	}
 	//로그인
 	@GetMapping("/login")
