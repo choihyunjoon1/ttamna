@@ -4,10 +4,10 @@
     = 장점 : 모든 사용자의 PC에서 동일한 글꼴이 표시된다.
     = 단점 : 용량 증가로인한 깜빡임, 로딩 증가 현상이 발생
 */
-@font-face {
-    font-family: nanumgothic;
-    src: url("./font/NanumGothic.ttf");
-}
+/* @font-face { */
+/*     font-family: nanumgothic; */
+/*     src: url("./font/NanumGothic.ttf"); */
+/* } */
 
 /* 레이아웃 배치 */
 html {
