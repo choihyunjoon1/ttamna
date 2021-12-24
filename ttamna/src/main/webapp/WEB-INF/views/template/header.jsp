@@ -85,7 +85,7 @@
           <a class="nav-link docs-creator" href="#">내새끼사랑</a>
         </li>
          <li class="nav-item">
-          <a class="nav-link docs-creator" href="#">상품구매</a>
+          <a class="nav-link docs-creator" href="${pageContext.request.contextPath}/shop/">상품구매</a>
         </li>
 <!--         <li class="nav-item dropdown"> -->
 <!--           <a class="nav-link dropdown-toggle docs-creator" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Dropdown</a> -->
