@@ -75,7 +75,7 @@
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link docs-creator" href="#">기부</a>
+          <a class="nav-link docs-creator" href="../donation/list">기부</a>
         </li>
         <li class="nav-item">
           <a class="nav-link docs-creator" href="#">입양</a>
