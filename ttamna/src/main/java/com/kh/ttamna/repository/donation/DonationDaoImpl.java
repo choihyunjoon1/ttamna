@@ -52,9 +52,8 @@ public class DonationDaoImpl implements DonationDao{
 	}
 
 	@Override//수정
-	public boolean edit(int donationNo) {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean edit(DonationDto donationDto) {
+		return sqlSession.update("donation.edit", donationDto) > 0;
 	}
 
 	@Override//삭제
