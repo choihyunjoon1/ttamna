@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+
+<!-- mybatis mapper 파일
+	- DBMS에서 실행할 SQL구문을 저장하는 XML파일 
+	- namespace를 통해서 여러개의 매퍼를 구분한다
+	- 테이블 당 한 개씩 만드는 것이 일반적이면 따라서 namespace를 테이블명으로 작성하면 구분이 용이하다
+ 	- <insert>, <select>, <update>, <delete>를 이용해서 CRUD 구문을 작성한다
+ 	- 각 구문은 외부에서 호출이 가능하도록 반드시 ID를 겹치지 않게 부여해야 한다
+ 	- parameterType : 구문을 실행하기 위해 필요한 데이터의 형태 
+ 	- resultType : 구문을 실행한 결과를 어떤 형태로 변환해야 하는지를 말한다
+ -->
+
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="donation">
+	
+	<!-- 시퀀스 번호 뽑기 -->
+	<select id="seq" resultType="int">
+		select donation_seq.nextval from dual
+	</select>
+
+	<!-- 등록 -->
+	<insert id="insert" parameterType="DonationDto">
+		insert into donation(
+			donation_no, 
+			donation_writer, donation_title, 
+			donation_price, donation_content
+		) 
+		values(
+			${donationNo}, 
+			#{donationWriter}, #{donationTitle}, 
+			${donationPrice}, #{donationContent} 
+		)
+	</insert>
+	
+	<!-- 목록 -->
+	<select id="list" resultType="DonationDto">
+		select * from donation order by donation_no desc
+	</select>
+	
+	<!-- 단일조회 -->
+	<select id="detail" parameterType="int" resultType="DonationDto">
+		select * from donation where donation_no = ${donationNo}
+	</select>
+	
+	<delete id="delete" parameterType="int">
+		delete donation where donation_no = ${donationNo}
+	</delete>
+	
+	<!-- 최종 = complexSearch4 + complexSearch6 -->
+	<select id="search" parameterType="map" resultType="DonationDto">
+		select * from donation 
+		
+		<where>
+			<if test="donationNo != null">
+			and donation_no = ${donationNo}
+			</if>
+			
+			<if test="column != null and keyword != null">			
+			and instr(${column}, #{keyword}) > 0
+			</if>
+			
+			<!-- choose 구문은 switch 처럼 when이 case 역할, otherwise가 default 역할 -->
+			<choose>
+				<when test="minPrice != null and maxPrice != null">					
+				and donation_price between #{minPrice} and #{maxPrice}
+				</when>			
+				<when test="minPrice != null">					
+				and donation_price >= #{minPrice}
+				</when>
+				<when test="maxPrice != null">
+				<!-- CDATA 구문을 작성하면 해당 영역은 XML로 해석되지 않으므로 특수문자를 작성할 수 있다. -->
+				<![CDATA[
+					and donation_price <= #{maxPrice}
+				]]>
+				</when>
+			</choose>
+			
+			<if test="minPrice != null and maxPrice != null">
+		 	and donation_price between #{minPrice} and #{maxPrice}
+			</if>
+		</where>
+		 
+		 order by donation_time desc
+	</select>
+	
+	<update id="edit" parameterType="DonationDto">
+		update donation 
+		<set>
+			<if test=""></if>
+		</set>
+	</update>
+</mapper>
+

@@ -27,6 +27,10 @@ create table member(
     address varchar2(256),
     detail_address varchar2(256)
 );
+-- 닉네임 제약조건 변경
+ALTER TABLE member MODIFY member_nick varchar2(30); 
+ALTER TABLE member DROP CONSTRAINT member_nick_check;
+ALTER TABLE member ADD CONSTRAINT member_nick_check CHECK(REGEXP_LIKE(member_nick, '^[가-힣]{2,15}$'));
 
 COMMIT;
 -- member_id : 기본키 / 정규식 영어소문자, 0~9, _ 합쳐서 4~20글자이고 영어소문자가 들어가 있는지 체크

@@ -38,22 +38,22 @@
 		- JdbcTemplate : 명령 실행 도구
 	 -->
 	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
-		<property name="driverClassName" value="${database.driver}"></property>
-		<property name="url" value="${database.url}"></property>
-		<property name="username" value="${database.username}"></property>
-		<property name="password" value="${database.password}"></property>
+		<property name="driverClassName" value="oracle.jdbc.OracleDriver"></property>
+		<property name="url" value="jdbc:oracle:thin:@125.191.92.229:1521:orcl"></property>
+		<property name="username" value="ttamna"></property>
+		<property name="password" value="ttamna"></property>
 	</bean>
 	
 	<bean id="dbcpSource" class="org.apache.commons.dbcp2.BasicDataSource">
-		<property name="driverClassName" value="${database.driver}"></property>
-		<property name="url" value="${database.url}"></property>
-		<property name="username" value="${database.username}"></property>
-		<property name="password" value="${database.password}"></property>
+		<property name="driverClassName" value="oracle.jdbc.OracleDriver"></property>
+		<property name="url" value="jdbc:oracle:thin:@125.191.92.229:1521:orcl"></property>
+		<property name="username" value="ttamna"></property>
+		<property name="password" value="ttamna"></property>
 		
-		<property name="maxTotal" value="${database.maxTotal}"></property>
-		<property name="maxIdle" value="${database.maxIdle}"></property>
-		<property name="minIdle" value="${database.minIdle}"></property>
-		<property name="maxWaitMillis" value="${database.maxWaitMillis}"></property>
+		<property name="maxTotal" value="20"></property>
+		<property name="maxIdle" value="5"></property>
+		<property name="minIdle" value="0"></property>
+		<property name="maxWaitMillis" value="3000"></property>
 	</bean>
 	
 	<bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
