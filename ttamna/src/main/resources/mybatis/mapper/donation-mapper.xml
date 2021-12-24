@@ -48,7 +48,7 @@
 		delete donation where donation_no = ${donationNo}
 	</delete>
 	
-	<!-- 최종 = complexSearch4 + complexSearch6 -->
+	<!-- 최종 = 단일조회와 검색이 모두 되는 -->
 	<select id="search" parameterType="map" resultType="DonationDto">
 		select * from donation 
 		
@@ -85,11 +85,18 @@
 		 order by donation_time desc
 	</select>
 	
+	<!--  수정 -->
 	<update id="edit" parameterType="DonationDto">
 		update donation 
 		<set>
-			<if test=""></if>
+			<if test="donationContent != null">
+				donation_content = #{donationContent},
+			</if>
+			<if test="donationTitle != null">
+				donation_title = #{donationTitle},
+			</if>
 		</set>
+		where donation_no = #{donationNo}
 	</update>
 </mapper>
 
