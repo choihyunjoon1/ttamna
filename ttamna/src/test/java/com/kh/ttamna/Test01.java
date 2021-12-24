@@ -4,6 +4,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
@@ -27,17 +28,19 @@ public class Test01 {
 	@Autowired
 	private MemberDao memberDao;
 	
+	@Autowired
+	private PasswordEncoder encoder;
+	
 	@Test
-	public void joinTest() {
-		MemberDto memberDto = new MemberDto();
-		memberDto.setMemberId("testmember1");
-		memberDto.setMemberPw("testmember1");
-		memberDto.setMemberNick("테스터1");
-		memberDto.setMemberName("테스트");
-		memberDto.setMemberPhone("010-2222-2222");
-		memberDto.setMemberEmail("testmember@kh.com");
-		
-		log.debug("memberDto = {}",memberDto);
+	public void loginTest() {
+		String inputId = "testmember5";
+		String inputPw = "testmember5";
+		//입력한 ID로 단일조회 
+		MemberDto findDto = sqlSession.selectOne("member.get",inputId);
+		String savePw = findDto.getMemberPw();
+		log.debug("savepw = {}",savePw);
+		boolean samePw = encoder.matches(inputPw, savePw);
+		log.debug("samePw = {}",samePw);
 		
 	}
 

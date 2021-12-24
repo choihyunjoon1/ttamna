@@ -4,6 +4,8 @@ import com.kh.ttamna.entity.member.MemberDto;
 
 public interface MemberDao {
 	void join(MemberDto memberDto);
+	//아이디 단일조회
+	MemberDto get(String memberId);
 	
 	MemberDto login(MemberDto memberDto);
 }
