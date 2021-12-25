@@ -4,28 +4,35 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
 <%-- 페이지에서 사용할 JSTL 변수 --%>
 <c:set var="root" value="${pageContext.request.contextPath}"></c:set>    
-    <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-    <script src = "https://code.jquery.com/jquery-3.6.0.js"></script>
-    <script src="${root}/resources/js/address.js"></script>
-    <!-- 비밀번호 토글 스크립트 -->
-	<script type='text/javascript' src="${root}/resources/js/togglePw.js"></script>
-	<!-- 입력값 정규표현식 검사 -->
-	<script type='text/javascript' src="${root}/resources/js/input-regex-check.js"></script>
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<script src = "https://code.jquery.com/jquery-3.6.0.js"></script>
+<script src="${root}/resources/js/address.js"></script>
+<!-- 비밀번호 토글 스크립트 -->
+<script type='text/javascript' src="${root}/resources/js/togglePw.js"></script>
+<!-- 입력값 정규표현식 검사 -->
+<script type='text/javascript' src="${root}/resources/js/input-regex-check.js"></script>
+<!-- 아이디 중복검사 스크립트 -->
+<%-- 	<script type='text/javascript' src="${root}/resources/js/ajax-id.js"></script> --%>
 	
-    <script>
+<script>
+window.addEventListener("load", function(){
+    var form  = document.querySelector('.form-check');
+    form.querySelector("input[name=memberId]").addEventListener("blur", function(e){
+       var inputId = form.querySelector("input[name=memberId]").value;	
+       var message = form.querySelector("#id-message");
+	   //아이디 입력값이 있을 경우에만 중복검사 요청
+       if(inputId != ""){
+			
+		}
+          	
+       });
+    });
+</script>
+<style>
 
-    </script>
-    <style>
-	.btn{
-		padding: 0.15em 0.3rem;
-	}
-    </style>
+</style>
 <div class="container-500 container-center">
-	<div class='container'>
-	<div class="align-self-center">
-		<h1>JOIN</h1>
-    </div>
-    </div>
+   	<div align="center" class="mt-5"><h1>JOIN</h1></div>
 	<form method="post" class="form-check">
 	<div class='input-group mt-5 mb-2'>
 		<input type="text" class="form-control input-id" name="memberId" required placeholder="아이디 입력" aria-label="아이디 입력">
@@ -66,7 +73,7 @@
 	<div class='input-group mb-3'>
 		<input type="text" class="form-control" name="detailAddress" placeholder='상세주소' aria-label="상세주소">
 	</div>
-	<div class="d-grid gap-2">
+	<div class="d-grid gap-2 mb-5">
     	<input class="btn btn-lg btn-primary" type="submit" value="Join">
 	</div>
 	</form>

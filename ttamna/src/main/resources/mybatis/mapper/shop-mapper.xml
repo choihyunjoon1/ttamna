@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+
+<!-- mybatis mapper 파일
+	- DBMS에서 실행할 SQL구문을 저장하는 XML파일 
+	- namespace를 통해서 여러개의 매퍼를 구분한다
+	- 테이블 당 한 개씩 만드는 것이 일반적이면 따라서 namespace를 테이블명으로 작성하면 구분이 용이하다
+ 	- <insert>, <select>, <update>, <delete>를 이용해서 CRUD 구문을 작성한다
+ 	- 각 구문은 외부에서 호출이 가능하도록 반드시 ID를 겹치지 않게 부여해야 한다
+ 	- parameterType : 구문을 실행하기 위해 필요한 데이터의 형태 
+ 	- resultType : 구문을 실행한 결과를 어떤 형태로 변환해야 하는지를 말한다
+ -->
+
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="shop">
+	
+	<!-- 게시글 목록 -->
+	<select id="list" resultType="ShopDto">
+		select * from shop order by shop_no desc
+	</select>
+
+	<!-- 시퀀스 -->
+	<select id="seq" resultType="int">
+		select shop_seq.nextval from dual
+	</select>
+	
+	<!-- 게시물 등록 -->
+	<insert id="insert" parameterType="ShopDto">
+		insert into shop values(
+			#{shopNo}, #{memberId}, #{shopTitle}, #{shopGoods}, #{shopPrice}, #{shopCount}, #{shopContent}, sysdate, 0
+		)
+	</insert>
+	
+	<!-- 상세보기 -->
+	<select id="get" parameterType="int"  resultType="ShopDto">
+		select * from shop where  shop_no = #{shopNo}
+	</select>
+	
+	<!-- 더보기 -->
+	<select id="listByPage" parameterType="map" resultType="ShopDto">
+		select * from (
+		    select rownum rn, TMP.* from (
+		        select * from shop order by shop_no desc
+		    )TMP
+		) where rn between ${startRow} and ${endRow}
+	</select>
+	
+	<!-- 삭제 -->
+	<delete id="delete" parameterType="int">
+		delete shop where shop_no = #{shopNo}
+	</delete>
+	
+	<!-- 수정 -->
+	<update id="update" parameterType="map">
+		update shop
+		<set>
+			<if test="shopContent != null">
+				shop_content = #{shopContent},
+			</if>
+			<if test="shopTitle != null">
+				shop_title = #{shopTitle},
+			</if>
+		</set>
+		where shop_no = #{shopNo}
+	</update>
+</mapper>
+
