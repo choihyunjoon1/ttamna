@@ -59,6 +59,10 @@
 		select * from member where member_email=#{memberEmail}
 	</select>
 
+	<!-- 비밀번호 찾기 인증 완료 후 비밀번호 재설정 -->
+	<update id="resetPw" parameterType="map">
+		update member set member_pw = #{memberPw} where member_id = #{memberId}
+	</update>
 	
 </mapper>
 
