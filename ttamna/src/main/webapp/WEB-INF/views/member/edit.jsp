@@ -5,6 +5,8 @@
 <c:set var="root" value="${pageContext.request.contextPath }"></c:set>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script src="${root}/resources/js/address.js"></script>
+<!-- 정보수정 정규표현식 검사 -->
+<script src="${root}/resources/js/input-regex-check-edit.js"></script>
 <link ref="stylesheet" type="text/css" href="${root }/resources/css/commons.css">
 
 <form method="post" class="form-check">
@@ -38,7 +40,7 @@
 				<div class="p-3 border bg-light">
 					<input type="text" class="form-control input-nick" name='memberNick' required value="${memberDto.memberNick }">
 				</div>
-				<div id='nick-message'></div>
+				<div class='nick-message'></div>
 				<div class="p-3 border bg-light">
 					<input type="password" class="form-control input-pw" name="memberPw" required placeholder="비밀번호 입력" aria-label="비밀번호 입력" aria-describedby="button-addon-pw">
 				</div>
@@ -46,11 +48,11 @@
 				<div class="p-3 border bg-light">
 					<input type="text" class="form-control input-phone" name='memberPhone' required value="${memberDto.memberPhone }">
 				</div>
-				<div id='phone-message'></div>
+				<div class='phone-message'></div>
 				<div class="p-3 border bg-light">
 					<input type="email" class="form-control input-email" name='memberEmail' required value="${memberDto.memberEmail }">
 				</div>
-				<div id='email-message'></div>
+				<div class='email-message'></div>
 				<div class="p-3 border bg-light">
 				<div class="row">
 					<div class="col-5">

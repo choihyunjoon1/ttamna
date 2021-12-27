@@ -37,6 +37,13 @@
 			where member_id=#{memberId} 
 	</update>
 	
+	<!-- 비밀번호 변경 -->
+	<update id="changePw" parameterType="map">
+		update member
+			set member_pw = #{memberNewPw}
+		where member_id=#{memberId}
+	</update>
+	
 	<!-- 로그인(대충한거) -->
 	<select id = "get" parameterType="String" resultType="MemberDto">
 		select * from member where member_id=#{memberId}

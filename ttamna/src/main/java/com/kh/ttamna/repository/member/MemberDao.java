@@ -16,8 +16,10 @@ public interface MemberDao {
 	
 	MemberDto login(MemberDto memberDto);
 	
+	//정보 변경(비번,정보)
+	boolean changeInfo(MemberDto memberDto);
+	boolean changePw(String memberId, String memberPw, String memberNewPw);
 	//아이디 중복검사
 	public int ajaxId(String memberId);
-	boolean changeInfo(MemberDto memberDto);
 	
 }

@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.kh.ttamna.entity.member.MemberDto;
 import com.kh.ttamna.repository.member.MemberDao;
@@ -96,9 +95,23 @@ public class MemberController {
 		return "member/edit_success";
 	}
 	//비밀번호 변경 페이지
-	@RequestMapping("/change_pw")
+	@GetMapping("/change_pw")
 	public String changePw() {
 		return "member/change_pw";
+	}
+	@PostMapping("/change_pw")
+	public String changePw(@RequestParam String memberPw, @RequestParam String memberNewPw,HttpSession session) {
+		String memberId = (String)session.getAttribute("uid");
+		boolean result = memberDao.changePw(memberId,memberPw,memberNewPw);
+		if(result) {
+			return "redirect:change_pw_success";
+		}else {
+			return "redirect:change_pw?error";
+		}
+	}
+	@RequestMapping("/change_pw_success")
+	public String changePwSuccess() {
+		return "member/change_pw_success";
 	}
 	//내 게시글 보기
 	@RequestMapping("/my_board")

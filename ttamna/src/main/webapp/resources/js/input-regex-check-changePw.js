@@ -41,9 +41,9 @@
       
 		
   		//비밀번호 정규표현식 검사
-  		form.querySelector("input[name=memberPw]").addEventListener("input", function(e){
+  		form.querySelector(".input-pw").addEventListener("input", function(e){
   	        var regex = /^(?=[a-z].*)[a-z0-9_?!@#$%]{4,20}$/;
-  	        var inputPw = form.querySelector("input[name=memberPw]").value;	
+  	        var inputPw = form.querySelector(".input-pw").value;	
   	        var message = form.querySelector(".pw-message");
   	        if(inputPw != ""){
   	           if(regex.test(inputPw)){
