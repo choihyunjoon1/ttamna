@@ -148,7 +148,7 @@ public class KakaoPayServiceImpl implements KakaoPayService{
 		body.add("sid", requestVo.getSid());
 		body.add("partner_order_id", "티어하임");
 		body.add("partner_user_id", requestVo.getPartner_user_id());
-		body.add("quantity", requestVo.getQuantity_string());
+		body.add("quantity", "1");
 		body.add("total_amount", requestVo.getTotal_amount_string());
 		body.add("tax_free_amount", "0");
 		
