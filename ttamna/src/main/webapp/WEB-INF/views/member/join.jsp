@@ -11,12 +11,50 @@
 <script type='text/javascript' src="${root}/resources/js/togglePw.js"></script>
 <!-- 입력값 정규표현식 검사 -->
 <script type='text/javascript' src="${root}/resources/js/input-regex-check.js"></script>
-<!-- 아이디 중복검사 스크립트 -->
-<script type='text/javascript' src="${root}/resources/js/ajax-id.js"></script>
 	
 <script>
-
-
+//아이디 중복검사
+ window.addEventListener("load", function(){
+	
+	var form  = document.querySelector('.form-check');
+	var message = form.querySelector(".id-message");
+    
+	form.querySelector("input[name=memberId]").addEventListener("blur", function(){
+	    var inputId = form.querySelector("input[name=memberId]").value;	
+	    if(inputId != ""){
+			ajaxId(inputId);
+	    }
+	});
+	
+	function ajaxId(inputId){
+		$.ajax({
+			url : "${pageContext.request.contextPath}/ajax/ajaxId",
+			type : "get",
+			data : {
+				inputId : inputId,
+			},
+			dataType : "text",
+			success:function(resp){
+				console.log("중복검사 요청 성공", resp);
+		
+				if(resp == "NNNN"){
+					console.log("아이디 중복. 사용 불가능");
+					$(message).text("아이디 중복. 다시 입력해 주세요");
+					$("input[name=memberId]").focus();
+					$(form).attr('onsubmit', 'event.preventDefault();');
+					console.log("event.preventDefault()");
+				}else if(resp == "YYYY"){
+					console.log("아이디 사용 가능");
+					$(message).text("아이디 사용 가능");
+					$(form).attr('onsubmit', 'event.addEvenetListener();');
+				}
+			},
+			error:function(e){
+				console.log("중복검사 요청 실패", e);
+			}
+		});
+	}
+});
 </script>
 <style>
 
