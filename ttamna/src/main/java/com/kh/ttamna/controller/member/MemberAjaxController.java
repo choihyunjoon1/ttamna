@@ -16,6 +16,7 @@ public class MemberAjaxController {
 	@Autowired
 	private MemberDao memberDao;
 	
+	//아이디 중복 검사 ajax
 	@GetMapping("/ajaxId")
 	public String ajaxId(@RequestParam String inputId) {
 		//전달받은 아이디로 조회한 결과가 null이 아니면 사용중인 아이디 = 중복아이디 NNNN전달
@@ -25,6 +26,34 @@ public class MemberAjaxController {
 			return "YYYY";
 		}else {
 			System.out.println("아이디 중복. return NNNN");
+			return "NNNN";
+		}
+	}
+	
+	//닉네임 중복 검사 ajax
+	@GetMapping(value="/ajaxNick", produces="text/plain;charset=UTF-8")
+	public String ajaxNick(@RequestParam String inputNick) {
+		//전달받은 닉네임으로 조회한 결과가 null이 아니면 사용중인 닉네임 = 중복닉네임 NNNN전달
+		MemberDto memberDto = memberDao.getByNick(inputNick);
+		if(memberDto == null) {
+			System.out.println("닉네임 사용가능. return YYYY");
+			return "YYYY";
+		}else {
+			System.out.println("닉네임 중복. return NNNN");
+			return "NNNN";
+		}
+	}
+	
+	//이메일 중복 검사 ajax
+	@GetMapping("/ajaxEmail")
+	public String ajaxEmail(@RequestParam String inputEmail) {
+		//전달받은 이메일로 조회한 결과가 null이 아니면 사용중인 이메일 = 중복이메일 NNNN전달
+		MemberDto memberDto = memberDao.getByEmail(inputEmail);
+		if(memberDto == null) {
+			System.out.println("이메일 사용가능. return YYYY");
+			return "YYYY";
+		}else {
+			System.out.println("이메일 중복. return NNNN");
 			return "NNNN";
 		}
 	}
