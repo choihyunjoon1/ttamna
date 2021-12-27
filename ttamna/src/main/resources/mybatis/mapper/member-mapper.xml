@@ -29,7 +29,16 @@
 	<select id = "get" parameterType="String" resultType="MemberDto">
 		select * from member where member_id=#{memberId}
 	</select>
-
+	
+	<!-- 닉네임 단일조회 -->
+	<select id = "getByNick" parameterType="String" resultType="MemberDto">
+		select * from member where member_nick=#{memberNick}
+	</select>
+	
+	<!-- 이메일 단일조회 -->
+	<select id = "getByEmail" parameterType="String" resultType="MemberDto">
+		select * from member where member_email=#{memberEmail}
+	</select>
 
 	
 </mapper>
