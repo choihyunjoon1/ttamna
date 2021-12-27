@@ -17,7 +17,25 @@
 			<jsp:include page="/WEB-INF/views/template/sidebar.jsp"></jsp:include>
 			
 			<div class="col-7">
-				<h2>메인자리</h2>
+			<!-- 메인페이지 -->
+			<table class="table table-hover">
+				<thead>
+					<tr>
+						<th scope="col">번호</th>
+						<th scope="col">제목[댓글수]</th>
+						<th scope="col">작성일</th>
+					</tr>
+				</thead>
+				<tbody >
+					<c:forEach begin="1" end="10"  var="i">
+					<tr>
+						<th scope="row">${i }</th>
+						<td>제목[댓글수]</td>
+						<td>작성일</td>
+					</tr>
+					</c:forEach>
+				</tbody>
+			</table>
 			</div>
 		</div>
 	</div>
