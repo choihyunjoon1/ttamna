@@ -4,6 +4,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -60,13 +61,50 @@ public class MemberController {
 	}
 	//마이페이지
 	@RequestMapping("/mypage")
-	public String mypage() {
+	public String mypage(HttpSession session, Model model) {
+		String memberId = (String)session.getAttribute("uid");
+		MemberDto memberDto = memberDao.get(memberId);
+		
+		model.addAttribute("memberDto",memberDto);
+		
 		return "member/mypage";
 	}
 	//정보수정페이지
-	@RequestMapping("/edit")
-	public String edit() {
+	@GetMapping("/edit")
+	public String edit(HttpSession session,Model model) {
+		String memberId = (String)session.getAttribute("uid");
+		MemberDto memberDto = memberDao.get(memberId);
+		model.addAttribute("memberDto",memberDto);
 		return "member/edit";
+	}
+//	@PostMapping("/edit")
+//	public String edit() {
+//		
+//	}
+	//비밀번호 변경 페이지
+	@RequestMapping("/change_pw")
+	public String changePw() {
+		return "member/change_pw";
+	}
+	//내 게시글 보기
+	@RequestMapping("/my_board")
+	public String myBoard() {
+		return "member/my_board";
+	}
+	//주문내역
+	@RequestMapping("/my_order")
+	public String myOrder() {
+		return "member/my_order";
+	}
+	//장바구니
+	@RequestMapping("/my_basket")
+	public String myBasket() {
+		return "member/my_basket";
+	}
+	//기부내역
+	@RequestMapping("/my_donation")
+	public String myDonation() {
+		return "member/my_donation";
 	}
 	
 	

@@ -41,11 +41,11 @@
 	<!-- 클릭할 때 해당 메뉴 class에 active 붙이기 -->
 		<a href = "${root }/member/mypage" class="list-group-item list-group-item-action mypage" >내 정보</a>
 		<a href = "${root }/member/edit" class="list-group-item list-group-item-action edit">정보 수정</a>
-		<a href = "${root }/member/changePw" class="list-group-item list-group-item-action  changePw">비밀번호 변경</a>
-		<a href = "${root }/member/myBoard" class="list-group-item list-group-item-action  myBoard">내 게시글 보기</a>
-		<a href = "${root }/member/myDonation" class="list-group-item list-group-item-action  myDonation">기부 목록</a>
-		<a href = "${root }/member/myOrder" class="list-group-item list-group-item-action  myOrder">주문 내역</a>
-		<a href = "${root }/member/myBasket" class="list-group-item list-group-item-action  myBasket">장바구니</a>
+		<a href = "${root }/member/change_w" class="list-group-item list-group-item-action  changePw">비밀번호 변경</a>
+		<a href = "${root }/member/my_board" class="list-group-item list-group-item-action  myBoard">내 게시글 보기</a>
+		<a href = "${root }/member/my_donation" class="list-group-item list-group-item-action  myDonation">기부 목록</a>
+		<a href = "${root }/member/my_order" class="list-group-item list-group-item-action  myOrder">주문 내역</a>
+		<a href = "${root }/member/my_basket" class="list-group-item list-group-item-action  myBasket">장바구니</a>
 		<a href = "${root }/member/logout" class="list-group-item list-group-item-action  logout">로그아웃</a>
 	</div>
 </div>
