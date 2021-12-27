@@ -69,6 +69,19 @@ public class MemberDaoImpl  implements MemberDao{
 		int result = sqlSession.selectOne("member.ajaxId", memberId);
 		return result;
 	}
+	//정보수정
+	@Override
+	public boolean changeInfo(MemberDto memberDto) {
+		//비밀번호 입력이 올바른경우 변경처리
+		MemberDto findDto = sqlSession.selectOne("member.get",memberDto.getMemberId());
+		boolean isMatch = findDto!=null && encoder.matches(memberDto.getMemberPw(), findDto.getMemberPw());
+		if(isMatch) {
+			int result = sqlSession.update("member.changeInfo",memberDto);
+			return result>0;
+		}else {
+			return false;
+		}
+	}
 	
 
 }

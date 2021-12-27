@@ -78,10 +78,19 @@ public class MemberController {
 		model.addAttribute("memberDto",memberDto);
 		return "member/edit";
 	}
-//	@PostMapping("/edit")
-//	public String edit() {
-//		
-//	}
+	@PostMapping("/edit")
+	public String edit(HttpSession session, @ModelAttribute MemberDto memberDto) {
+		String memberId = (String)session.getAttribute("uid");
+		memberDto.setMemberId(memberId);
+		
+		boolean result = memberDao.changeInfo(memberDto);
+		if(result) {
+			return "redirect:edit_success";
+		}else {
+			return "redirect:edit?error";
+		}
+		
+	}
 	//비밀번호 변경 페이지
 	@RequestMapping("/change_pw")
 	public String changePw() {

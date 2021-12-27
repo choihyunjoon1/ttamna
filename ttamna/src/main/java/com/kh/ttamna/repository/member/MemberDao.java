@@ -11,4 +11,5 @@ public interface MemberDao {
 	
 	//아이디 중복검사
 	public int ajaxId(String memberId);
+	boolean changeInfo(MemberDto memberDto);
 }
