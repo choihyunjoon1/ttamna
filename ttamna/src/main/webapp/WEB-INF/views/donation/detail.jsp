@@ -9,10 +9,14 @@
 		<div class="container">
 		<c:forEach var="donationDto" items='${donationDto}'>
 			<div class="row">
-			${donationDto.donationWriter}
+			${donationDto.donationWriter} / ${donationDto.donationNo} 번 게시글
 			</div>
 			<div class="row">
-			이미지영역
+				<div class="col-6">
+				<c:if test="${donationImgDto ne null}">
+					<img src="donaimg?donationImgNo=${donationImgDto.donationImgNo}&donationNo=${donationDto.donationNo}" style="width:100%;">
+				</c:if>
+				</div>
 			</div>
 			<div class="row">
 			현재후원금액 : ${donationDto.donationNowFund}원
@@ -36,7 +40,10 @@
 		</form>
 	</div>
 	<div class="col-12 mt-5">
-		<form action="kakao/autofund" method="post">
+		<form action="kakao/autofund" method="post" id="auto">
+			<c:forEach var="donationDto" items="${donationDto}">
+				<input type="hidden" name="donationNo" value="${donationDto.donationNo}">
+			</c:forEach>
 			<input type="hidden" name="partner_user_id" value="${sessionScope.uid}">
 			정기 기부 신청하기<input type="number" name="total_amount" class="form-input form-inline">
 			<input type="submit" value="정기기부하기" class="form-btn form-inline">

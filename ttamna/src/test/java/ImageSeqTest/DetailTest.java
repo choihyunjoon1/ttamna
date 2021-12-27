@@ -1,4 +1,4 @@
-package com.kh.ttamna.donation;
+package ImageSeqTest;
 
 import org.apache.ibatis.session.SqlSession;
 import org.junit.Test;
@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
+
+import com.kh.ttamna.entity.donation.DonationDto;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -17,15 +19,14 @@ import lombok.extern.slf4j.Slf4j;
 })
 @WebAppConfiguration
 @Slf4j
-public class etcTest {
+public class DetailTest {
 
 	@Autowired
 	private SqlSession sqlSession;
 	@Test
 	public void test() {
+		DonationDto dona = sqlSession.selectOne("donation.detail", 3);
 		
-		int no = sqlSession.selectOne("donaImg.seqImg");
-		
-		log.debug("<<<<<<<< {} >>>>>>>", no);
+		System.out.println(dona.toString());
 	}
 }

@@ -8,6 +8,7 @@ import lombok.Data;
 public class AutoPayMentDto {
 
 	private int autoNo;
+	private int donationNo;
 	private String partnerUserId;
 	private String autoSid;
 	private int quantity;

@@ -13,27 +13,23 @@
 <!DOCTYPE mapper
 	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="apm">
+<mapper namespace="donaImg">
 
-	<!-- 정기결제 테이블에 데이터 등록 -->
-		<insert id="insert" parameterType="AutoPayMentDto">
-			insert into autopayment values(
-				auto_payment_seq.nextval, #{partnerUserId}, #{autoSid}, 1, 
-				${autoTotalAmount}, sysdate, 1, ${donationNo}
-			)
-		</insert>
-		
-		<!-- 정기결제 테이블 목록 불러오기 -->
-		<select id="list" resultType="AutoPayMentDto">
-			select * from autopayment
-		</select>
-		
-		<!-- 정기결제가 진행 될 때 마다 payTimes를 +1씩 추가 -->
-		<update id="update" parameterType="map">
-			update autopayment 
-			set
-			pay_times = pay_times+1
-			where auto_no = ${autoNo}
-		</update>
+	<!-- 시퀀스 번호 뽑기 -->
+	<select id="seq" resultType="int">
+		select donation_img_seq.nextval from dual
+	</select>
+	<!--  파일 저장 -->
+	<insert id="insert" parameterType="DonationImgDto">
+		insert into donation_img values(
+			${donaImgNo}, ${donationNo},
+			#{donaImgUpload}, ${donaImgSize},
+			#{donaImgType}
+		)
+	</insert>
+	
+	<select id="getFile" parameterType="int" resultType="DonationImgDto">
+		select * from donation_img where donation_no = ${donationNo}
+	</select>
 </mapper>
 

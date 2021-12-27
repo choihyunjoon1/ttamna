@@ -39,7 +39,9 @@ public class PayController {
 	}
 	
 	@PostMapping("/autofund")//정기결제 요청
-	public String autoConfirm(@ModelAttribute KakaoPayReadyRequestVo requestVo
+	public String autoConfirm(
+			@RequestParam int donationNo,
+			@ModelAttribute KakaoPayReadyRequestVo requestVo
 				, HttpSession session) throws URISyntaxException {
 		KakaoPayReadyResponseVo responseVo = kakaoService.autoReady(requestVo);
 		
@@ -47,6 +49,7 @@ public class PayController {
 		session.setAttribute("partner_user_id", requestVo.getPartner_user_id());
 		//정기결제인지 단건결제인지 구분하기 위한 세션 추가
 		session.setAttribute("cid", "정기결제");
+		session.setAttribute("donationNo", donationNo);
 		return "redirect:"+responseVo.getNext_redirect_pc_url();
 	}
 	@Autowired
@@ -56,12 +59,13 @@ public class PayController {
 	@GetMapping("/success")
 	public String approve(@RequestParam String pg_token,
 									HttpSession session) throws URISyntaxException {
-		System.out.println("pay컨트롤러에 success로 들어왔어요");
 		String tid = (String)session.getAttribute("tid");
 		String partner_user_id = (String)session.getAttribute("partner_user_id");
+		String donationNo = (String)session.getAttribute("donationNo");
 		
 		session.removeAttribute("tid");
 		session.removeAttribute("partner_user_id");
+		session.removeAttribute("donationNo");
 		
 		//결제 승인 요청을 보내기위한 Vo 생성
 		KakaoPayApproveRequestVo requestVo = new KakaoPayApproveRequestVo();
@@ -74,21 +78,19 @@ public class PayController {
 		session.removeAttribute("cid");
 		System.out.println("cidType = ?" + cidType);
 		if(cidType.equals("정기결제")) {
-			System.out.println("당신은 정기결제로 들어왔어요");
 			//정기결제용 cid는 TCSUBSCRIP
 			requestVo.setCid("TCSUBSCRIP");
 			KakaoPayApproveResponseVo responseVo = kakaoService.approve(requestVo);
 			
 			//정기결제승인이 된 시점에서 정기결제테이블에 데이터 등록
-			System.out.println("정기결제테이블에 데이터를 등록할거에요");
 			AutoPayMentDto apmDto = new AutoPayMentDto();
 			apmDto.setAutoSid(responseVo.getSid());
 			apmDto.setPartnerUserId(partner_user_id);
 			apmDto.setAutoTotalAmount(responseVo.getAmount().getTotal());
+			apmDto.setDonationNo(Integer.parseInt(donationNo));
 			autoDonationDao.insert(apmDto);
-			System.out.println("정기결제테이블에 데이터를 등록했어요잉");
+			
 		} else if(cidType.equals("단건결제")) {
-			System.out.println("당신은 단건결제로 들어왔어요");
 			//단건결제용 cid는 TC0ONETIME
 			requestVo.setCid("TC0ONETIME");
 			KakaoPayApproveResponseVo responseVo = kakaoService.approve(requestVo);
@@ -96,6 +98,11 @@ public class PayController {
 			throw new URISyntaxException("둘다아닌데요?", "둘다아니에요 ㅎㅎ");
 		}
 		
-		return "redirect:donation/list";
+		return "redirect:/donation/kakao/success_result";
+	}
+	
+	@GetMapping("/success_result")
+	public String success() {
+		return "donation/kakao/success_result";
 	}
 }
