@@ -27,7 +27,7 @@
 		</label>
 		</div>
 		<div class="row">
-		후원금액 : ${donationDto.donationPrice}원
+		목표 후원금액 : ${donationDto.donationTotalFund}원
 		</div>
 		<div class="row">
 		<a href="edit?donationNo=${donationDto.donationNo}">수정</a>

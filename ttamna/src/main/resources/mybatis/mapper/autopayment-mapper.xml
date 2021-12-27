@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+
+<!-- mybatis mapper 파일
+	- DBMS에서 실행할 SQL구문을 저장하는 XML파일 
+	- namespace를 통해서 여러개의 매퍼를 구분한다
+	- 테이블 당 한 개씩 만드는 것이 일반적이면 따라서 namespace를 테이블명으로 작성하면 구분이 용이하다
+ 	- <insert>, <select>, <update>, <delete>를 이용해서 CRUD 구문을 작성한다
+ 	- 각 구문은 외부에서 호출이 가능하도록 반드시 ID를 겹치지 않게 부여해야 한다
+ 	- parameterType : 구문을 실행하기 위해 필요한 데이터의 형태 
+ 	- resultType : 구문을 실행한 결과를 어떤 형태로 변환해야 하는지를 말한다
+ -->
+
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="apm">
+
+	<!-- 정기결제 테이블에 데이터 등록 -->
+		<insert id="insert" parameterType="AutoPayMentDto">
+			insert into autopayment values(
+				auto_payment_seq.nextval, #{partnerUserId}, #{autoSid}, 1, 
+				${autoTotalAmount}, sysdate, 1, ${donationNo}
+			)
+		</insert>
+		
+		<!-- 정기결제 테이블 목록 불러오기 -->
+		<select id="list" resultType="AutoPayMentDto">
+			select * from autopayment
+		</select>
+		
+		<!-- 정기결제가 진행 될 때 마다 payTimes를 +1씩 추가 -->
+		<update id="update" parameterType="map">
+			update autopayment 
+			set
+			pay_times = pay_times+1
+			where auto_no = ${autoNo}
+		</update>
+</mapper>
+

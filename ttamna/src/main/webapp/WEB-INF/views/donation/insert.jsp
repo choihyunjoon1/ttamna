@@ -5,7 +5,7 @@
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 
 <div class="container">
-<form method="post">
+<form method="post" enctype="multipart/form-data">
 	<div class="row">
 	<input type="hidden" name="donationWriter" value="${sessionScope.uid}">
 		<label>
@@ -14,7 +14,12 @@
 	</div>
 	<div class="row">
 		<label>
-			후원금액<input type="text" name="donationPrice" required class="form-input">
+			파일<input type="file" name="attach" class="form-input" accept="image/*">
+		</label>
+	</div>
+	<div class="row">
+		<label>
+			목표금액<input type="text" name="donationTotalFund" required class="form-input">
 		</label>
 	</div>
 	<div class="row">
