@@ -1,4 +1,6 @@
-package com.kh.ttamna.donation;
+package ImageSeqTest;
+
+import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
 import org.junit.Test;
@@ -7,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
+
+import com.kh.ttamna.entity.donation.DonationDto;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -17,15 +21,14 @@ import lombok.extern.slf4j.Slf4j;
 })
 @WebAppConfiguration
 @Slf4j
-public class etcTest {
+public class ListTest {
 
 	@Autowired
 	private SqlSession sqlSession;
 	@Test
 	public void test() {
+		List<DonationDto> list = sqlSession.selectList("donation.list");
 		
-		int no = sqlSession.selectOne("donaImg.seqImg");
-		
-		log.debug("<<<<<<<< {} >>>>>>>", no);
+		System.out.println(list.toString());
 	}
 }

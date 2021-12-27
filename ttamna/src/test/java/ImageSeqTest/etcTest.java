@@ -1,9 +1,10 @@
-package com.kh.ttamna.donation;
+package ImageSeqTest;
 
-import org.apache.ibatis.session.SqlSession;
+import java.util.HashMap;
+import java.util.Map;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
@@ -19,13 +20,15 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class etcTest {
 
-	@Autowired
-	private SqlSession sqlSession;
 	@Test
 	public void test() {
+		Map<String, Object> map = new HashMap<>();
+		map.put("column", "잘나오나?");
 		
-		int no = sqlSession.selectOne("donaImg.seqImg");
+		Map<String, Object> searchMap = new HashMap<>();
 		
-		log.debug("<<<<<<<< {} >>>>>>>", no);
+		searchMap.put("column", map.get("column"));
+		
+		System.out.println(searchMap.get("column"));
 	}
 }
