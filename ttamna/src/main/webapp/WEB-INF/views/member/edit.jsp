@@ -6,8 +6,6 @@
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script src="${root}/resources/js/address.js"></script>
 <link ref="stylesheet" type="text/css" href="${root }/resources/css/commons.css">
-<!-- 입력값 정규표현식 검사 -->
-<script type='text/javascript' src="${root}/resources/js/input-regex-check.js"></script>
 
 <form method="post" class="form-check">
 <div class="container-1000 container-center">
@@ -30,6 +28,10 @@
 				<div class="p-4 border bg-light"><label>우편번호</label></div>
 				<div class="p-4 border bg-light"><label>기본주소</label></div>
 				<div class="p-4 border bg-light"><label>상세주소</label></div>
+				<br><br>
+				<div class="d-grid gap-2">
+					<input type="submit" class="btn btn-outline-primary" value="수정">
+				</div>
 			</div>
 			<div class="col-5 position-relative">
 				<div class="p-3 border bg-light">${memberDto.memberId }</div>
@@ -65,9 +67,9 @@
 				<div class="p-3 border bg-light">
 					<input type="text" class="form-control" name="detailAddress"  value="${memberDto.detailAddress}">
 				</div>
-				<div class="col-auto">
-					<button class="btn btn-lg btn-outline-primary" type="submit" ><span>Edit</span></button>
-				</div>
+				<c:if test="${param.error !=null }">
+					<span>정보가 올바르지 않습니다. 다시 확인해주세요!</span>
+				</c:if>
 				<div class="position-absolute bottom-0 end-0">
 					<a href ="${pageContext.request.contextPath}/member/mypage" type="button" class="btn btn-outline-danger">취소</a>
 				</div>

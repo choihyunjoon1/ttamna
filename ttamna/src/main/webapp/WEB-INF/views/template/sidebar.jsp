@@ -7,6 +7,7 @@
     var pathName=location.pathname;
 	var index = 15;//ttamna/member/고정
     var locaMenu = pathName.substring(index);
+	console.log(locaMenu);
 	
     $(function(){
         if(locaMenu=="mypage"){
@@ -15,16 +16,16 @@
         }else if(locaMenu=="edit"){
         	$(".list-group > a").removeClass("active");
         	$(".edit").addClass("active");
-        }else if(locaMenu=="changePw"){
+        }else if(locaMenu=="change_pw"){
         	$(".list-group > a").removeClass("active");
-        	$(".changepw").addClass("active");
-        }else if(locaMenu=="myBoard"){
+        	$(".changePw").addClass("active");
+        }else if(locaMenu=="my_board"){
         	$(".list-group > a").removeClass("active");
         	$(".myBoard").addClass("active");
-        }else if(locaMenu=="myDonation"){
+        }else if(locaMenu=="my_donation"){
         	$(".list-group > a").removeClass("active");
         	$(".myDonation").addClass("active");
-        }else if(locaMenu=="myOrder"){
+        }else if(locaMenu=="my_order"){
         	$(".list-group > a").removeClass("active");
         	$(".myOrder").addClass("active");
         }else{
@@ -41,7 +42,7 @@
 	<!-- 클릭할 때 해당 메뉴 class에 active 붙이기 -->
 		<a href = "${root }/member/mypage" class="list-group-item list-group-item-action mypage" >내 정보</a>
 		<a href = "${root }/member/edit" class="list-group-item list-group-item-action edit">정보 수정</a>
-		<a href = "${root }/member/change_w" class="list-group-item list-group-item-action  changePw">비밀번호 변경</a>
+		<a href = "${root }/member/change_pw" class="list-group-item list-group-item-action  changePw">비밀번호 변경</a>
 		<a href = "${root }/member/my_board" class="list-group-item list-group-item-action  myBoard">내 게시글 보기</a>
 		<a href = "${root }/member/my_donation" class="list-group-item list-group-item-action  myDonation">기부 목록</a>
 		<a href = "${root }/member/my_order" class="list-group-item list-group-item-action  myOrder">주문 내역</a>

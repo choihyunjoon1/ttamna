@@ -75,7 +75,7 @@ public class MemberDaoImpl  implements MemberDao{
 		//비밀번호 입력이 올바른경우 변경처리
 		MemberDto findDto = sqlSession.selectOne("member.get",memberDto.getMemberId());
 		boolean isMatch = findDto!=null && encoder.matches(memberDto.getMemberPw(), findDto.getMemberPw());
-		if(isMatch) {
+		if(isMatch) {//입력한 비번과 아이디에 저장된 비번이 같은 경우 업데이트
 			int result = sqlSession.update("member.changeInfo",memberDto);
 			return result>0;
 		}else {

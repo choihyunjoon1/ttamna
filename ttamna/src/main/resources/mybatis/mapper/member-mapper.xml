@@ -35,7 +35,6 @@
 				address=#{address},
 				detail_address=#{detailAddress}
 			where member_id=#{memberId} 
-				and member_pw = #{memberPw}	
 	</update>
 	
 	<!-- 로그인(대충한거) -->

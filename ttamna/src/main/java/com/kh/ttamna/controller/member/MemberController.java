@@ -91,6 +91,10 @@ public class MemberController {
 		}
 		
 	}
+	@RequestMapping("/edit_success")
+	public String editSuccess() {
+		return "member/edit_success";
+	}
 	//비밀번호 변경 페이지
 	@RequestMapping("/change_pw")
 	public String changePw() {

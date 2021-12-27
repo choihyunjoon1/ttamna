@@ -11,6 +11,30 @@
  * 폰번호 정규표현식 검사
  */
 
+//ex
+//function regexCheck(inputList){
+//	var total = inputList.length;
+//	var success = 0, fail = 0;
+//	for(var i=0; i < inputList.length; i++){
+//		console.log(inputList[i].dataset.regex);
+//		var regex = new RegExp(inputList[i].dataset.regex);
+//		var value = inputList[i].value;
+//		
+//		if(regex.test(value)){
+//			console.log("성공");
+//			success++;
+//		}
+//		else{
+//			console.log("실패");
+//			fail++;
+//		}
+//	}
+//	console.log("총", total, "성공", success, "실패", fail);
+//	
+//	return total === success;
+//}
+
+
     window.addEventListener("load", function(){
       var form  = document.querySelector('.form-check');
 		
