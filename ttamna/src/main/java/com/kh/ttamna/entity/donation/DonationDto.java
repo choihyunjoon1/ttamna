@@ -10,7 +10,8 @@ public class DonationDto {
 	private int donationNo;
 	private int donationImgNo;
 	private String donationWriter;
-	private int donationPrice;
+	private int donationNowFund;
+	private int donationTotalFund;
 	private String donationTitle;
 	private String donationContent;
 	private Date donationTime;
