@@ -304,7 +304,7 @@ create table certification(
     cert_serial char(6) not null,
     cert_time date default sysdate not null
 );
-
+ALTER TABLE certification MODIFY cert_serial varchar2(60); 
 commit;
 
 -------------------------------------------------------------------------------------------------------------
