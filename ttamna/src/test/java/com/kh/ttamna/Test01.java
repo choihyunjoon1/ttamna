@@ -33,15 +33,21 @@ public class Test01 {
 	
 	@Test
 	public void loginTest() {
+		MemberDto memberDto = new MemberDto();
 		String inputId = "testmember5";
 		String inputPw = "testmember5";
+		String inputNick = "테스터오육";
+		
 		//입력한 ID로 단일조회 
 		MemberDto findDto = sqlSession.selectOne("member.get",inputId);
 		String savePw = findDto.getMemberPw();
-		log.debug("savepw = {}",savePw);
 		boolean samePw = encoder.matches(inputPw, savePw);
-		log.debug("samePw = {}",samePw);
-		
+		if(samePw) {
+			findDto.setMemberNick(inputNick);
+			boolean changeInfo = memberDao.changeInfo(findDto);
+			log.debug("changeInfo = {}",changeInfo);
+		}
+			
 	}
 
 }

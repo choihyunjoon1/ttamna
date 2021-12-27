@@ -1,5 +1,8 @@
 package com.kh.ttamna.repository.member;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -79,6 +82,46 @@ public class MemberDaoImpl  implements MemberDao{
 		return memberDto;
 	}
 	
+	//아이디 중복 검사
+	@Override
+	public int ajaxId(String memberId) {
+		int result = sqlSession.selectOne("member.ajaxId", memberId);
+		return result;
+	}
+	//정보수정
+	@Override
+	public boolean changeInfo(MemberDto memberDto) {
+		//비밀번호 입력이 올바른경우 변경처리
+		MemberDto findDto = sqlSession.selectOne("member.get",memberDto.getMemberId());
+		boolean isMatch = findDto!=null && encoder.matches(memberDto.getMemberPw(), findDto.getMemberPw());
+		if(isMatch) {//입력한 비번과 아이디에 저장된 비번이 같은 경우 업데이트
+			int result = sqlSession.update("member.changeInfo",memberDto);
+			return result>0;
+		}else {
+			return false;
+		}
+	}
+
+	@Override
+	public boolean changePw(String memberId, String memberPw, String memberNewPw) {
+		//현재 비밀번호와 새로입력한 비밀번호가 다른것과 정규표현식은 프론트에서 검사.
+		//여기서는 입력한 현재 비밀번호가 아이디에 있는 비밀번호와 같은 값인지 확인.
+		//(1) 입력한 현재 비밀번호 == 저장된 현재 비밀번호
+		MemberDto findDto = sqlSession.selectOne("member.get",memberId);
+		boolean isMatch = findDto != null && encoder.matches(memberPw, findDto.getMemberPw());
+		if(isMatch) {//만약 입력한 현재 비밀번호 == 저장된 현재 비밀번호라면
+			//(2) 매퍼로 입력한 새 비밀번호로 변경하기(암호화 설정 후)
+			String memberNewPwEncrypt = encoder.encode(memberNewPw);
+			Map<String, Object> param = new HashMap<>();
+			param.put("memberNewPw",memberNewPwEncrypt);
+			param.put("memberId",memberId);
+			
+			int result = sqlSession.update("member.changePw",param);
+			return result>0;
+		}else {
+			return false;
+		}
+	}
 
 	
 
