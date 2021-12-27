@@ -1,4 +1,6 @@
-package com.kh.ttamna.donation;
+package com.kh.ttamna;
+
+import static org.junit.Assert.assertTrue;
 
 import org.apache.ibatis.session.SqlSession;
 import org.junit.Test;
@@ -7,6 +9,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
+
+import com.kh.ttamna.entity.member.CertificationDto;
+import com.kh.ttamna.repository.member.CertificationDao;
+import com.kh.ttamna.util.RandomCertificationUtil;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -17,15 +23,18 @@ import lombok.extern.slf4j.Slf4j;
 })
 @WebAppConfiguration
 @Slf4j
-public class etcTest {
-
+public class CertificationCheckTest {
+	//인증확인 테스트
+	
 	@Autowired
-	private SqlSession sqlSession;
+	private CertificationDao certDao;
+
 	@Test
 	public void test() {
+		CertificationDto certDto = new CertificationDto();
+		certDto.setCertEmail("testmin88@gmail.com");
+		certDto.setCertSerial("632121");
 		
-		int no = sqlSession.selectOne("donaImg.seqImg");
-		
-		log.debug("<<<<<<<< {} >>>>>>>", no);
+		assertTrue(certDao.checkByCert(certDto));
 	}
 }

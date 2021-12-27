@@ -5,9 +5,9 @@ import lombok.Data;
 @Data
 public class DonationImgDto {
 
-	private int donaImgNo;
+	private int donationImgNo;
 	private int donationNo;
-	private String donaImgUpload;
-	private int donaImgSize;
-	private String donaImgType;
+	private String donationImgUpload;
+	private long donationImgSize;
+	private String donationImgType;
 }

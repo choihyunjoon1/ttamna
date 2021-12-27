@@ -5,16 +5,11 @@
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 
 <div class="container">
-<form method="post" enctype="multipart/form-data">
+<form method="post">
 	<div class="row">
 	<input type="hidden" name="donationWriter" value="${sessionScope.uid}">
 		<label>
 			제목<input type="text" name="donationTitle" required class="form-input">
-		</label>
-	</div>
-	<div class="row">
-		<label>
-			파일<input type="file" name="attach" class="form-input" accept="image/*">
 		</label>
 	</div>
 	<div class="row">

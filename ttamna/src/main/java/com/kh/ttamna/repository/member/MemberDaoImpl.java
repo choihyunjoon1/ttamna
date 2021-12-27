@@ -81,6 +81,21 @@ public class MemberDaoImpl  implements MemberDao{
 		MemberDto memberDto = sqlSession.selectOne("member.getByEmail", memberEmail);
 		return memberDto;
 	}
+
+	//비밀번호 찾기 인증 성공 후 비밀번호 재설정
+	@Override
+	public boolean resetPw(String memberId, String resetPw) {
+		//비밀번호 암호화 저장
+		//입력한 값을 인코더로 암호화
+		String encryptPw = encoder.encode(resetPw);
+		Map<String, Object> param = new HashMap<>();
+		param.put("memberId", memberId);
+		param.put("memberPw", encryptPw);
+		//mapper로 보내 update 처리
+		int result = sqlSession.update("member.resetPw", param);
+		return result>0;
+		
+	}
 	
 	//아이디 중복 검사
 	@Override

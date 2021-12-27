@@ -1,4 +1,4 @@
-package com.kh.ttamna.donation;
+package ImageSeqTest;
 
 import org.apache.ibatis.session.SqlSession;
 import org.junit.Test;
@@ -17,15 +17,14 @@ import lombok.extern.slf4j.Slf4j;
 })
 @WebAppConfiguration
 @Slf4j
-public class etcTest {
+public class DeleteTest {
 
 	@Autowired
 	private SqlSession sqlSession;
 	@Test
 	public void test() {
+		int result = sqlSession.delete("donation.delete", 4);
 		
-		int no = sqlSession.selectOne("donaImg.seqImg");
-		
-		log.debug("<<<<<<<< {} >>>>>>>", no);
+		System.out.println(result);
 	}
 }
