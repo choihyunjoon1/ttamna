@@ -22,8 +22,8 @@
 	var url = "${pageContext.request.contextPath}";
     
 	//아이디 중복검사
-	form.querySelector("input[name=memberId]").addEventListener("blur", function(){
-	    var inputId = form.querySelector("input[name=memberId]").value;	
+	form.querySelector(".input-id").addEventListener("blur", function(){
+	    var inputId = form.querySelector(".input-id").value;	
 	    if(inputId != ""){
 			ajaxId(inputId);
 	    }
@@ -38,11 +38,10 @@
 			dataType : "text",
 			success:function(resp){
 				console.log("중복검사 요청 성공", resp);
-				console.log(url);
 				if(resp == "NNNN"){
 					console.log("아이디 중복. 사용 불가능");
-					$(idMessage).app("아이디 중복. 다시 입력해 주세요");
-					$("input[name=memberId]").focus();
+					$(idMessage).text("아이디 중복. 다시 입력해 주세요");
+					$(".input-id").focus();
 					$(form).attr('onsubmit', 'event.preventDefault();');
 					console.log("event.preventDefault()");
 				}else if(resp == "YYYY"){
@@ -59,8 +58,8 @@
 		
 	//닉네임 중복검사
 	var nickMessage = form.querySelector(".nick-message");
-	form.querySelector("input[name=memberNick]").addEventListener("blur", function(){
-	    var inputNick = form.querySelector("input[name=memberNick]").value;	
+	form.querySelector(".input-nick").addEventListener("blur", function(){
+	    var inputNick = form.querySelector(".input-nick").value;	
 	    if(inputNick != ""){
 			ajaxNick(inputNick);
 	    }
@@ -78,8 +77,8 @@
 			
 				if(resp == "NNNN"){
 					console.log("닉네임 중복. 사용 불가능");
-					$(nickMessage).text("닉네임 중복. 다시 입력해 주세요");
-					$("input[name=memberNick]").focus();
+					$(nickMessage).append("닉네임 중복. 다시 입력해 주세요");
+					$(".input-nick").focus();
 					$(form).attr('onsubmit', 'event.preventDefault();');
 					console.log("event.preventDefault()");
 				}else if(resp == "YYYY"){
@@ -96,8 +95,8 @@
 	
 	//이메일 중복검사
 	var emailMessage = form.querySelector(".email-message");
-	form.querySelector("input[name=memberEmail]").addEventListener("blur", function(){
-	    var inputEmail = form.querySelector("input[name=memberEmail]").value;	
+	form.querySelector(".input-email").addEventListener("blur", function(){
+	    var inputEmail = form.querySelector(".input-email").value;	
 	    if(inputEmail != ""){
 			ajaxEmail(inputEmail);
 	    }
@@ -116,7 +115,7 @@
 				if(resp == "NNNN"){
 					console.log("이메일 중복. 사용 불가능");
 					$(emailMessage).text("이메일 중복. 다시 입력해 주세요");
-					$("input[name=memberEmail]").focus();
+					$(".input-email").focus();
 					$(form).attr('onsubmit', 'event.preventDefault();');
 					console.log("event.preventDefault()");
 				}else if(resp == "YYYY"){

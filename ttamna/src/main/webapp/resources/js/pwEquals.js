@@ -1,5 +1,8 @@
 /**비밀번호 입력값, 재입력값이 일치하는지 검사하는 스크립트
- * 
+ * 비밀번호 입력창 선택자 : .input-pw
+ * 비밀번호 재입력창 선택자 : .reInput-pw
+ * 메세지를 보여주기 위한 선택자 : .rePw-message
+ * 일치하지 않을 경우 서브밋 이벤트 방지
  */
 
  window.addEventListener("load", function(){
