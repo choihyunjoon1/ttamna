@@ -18,9 +18,22 @@
 	<!-- 정기결제 테이블에 데이터 등록 -->
 		<insert id="insert" parameterType="AutoPayMentDto">
 			insert into autopayment values(
-				auto_payment_seq.nextval, #{partner_user_id}, #{autoSid}, 1, 
-				${auto_total_amount}, sysdate, 1
+				auto_payment_seq.nextval, #{partnerUserId}, #{autoSid}, 1, 
+				${autoTotalAmount}, sysdate, 1
 			)
 		</insert>
+		
+		<!-- 정기결제 테이블 목록 불러오기 -->
+		<select id="list" resultType="AutoPayMentDto">
+			select * from autopayment
+		</select>
+		
+		<!-- 정기결제가 진행 될 때 마다 payTimes를 +1씩 추가 -->
+		<update id="update" parameterType="map">
+			update autopayment 
+			set
+			pay_times = pay_times+1
+			where auto_no = ${autoNo}
+		</update>
 </mapper>
 

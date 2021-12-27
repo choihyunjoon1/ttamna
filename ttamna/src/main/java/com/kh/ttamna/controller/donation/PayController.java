@@ -30,32 +30,23 @@ public class PayController {
 	@PostMapping("/fund")//단건결제 요청
 	public String confirm(@ModelAttribute KakaoPayReadyRequestVo requestVo
 					, HttpSession session) throws URISyntaxException {
-		System.out.println("단건결제 요청으로 들어왔습니다.");
 		KakaoPayReadyResponseVo responseVo = kakaoService.ready(requestVo);
 		session.setAttribute("tid", responseVo.getTid());
 		session.setAttribute("partner_user_id", requestVo.getPartner_user_id());
 		//정기결제인지 단건결제인지 구분하기 위한 세션 추가
 		session.setAttribute("cid", "단건결제");
-		System.out.println("단건결제 요청에서 나갑니다");
 		return "redirect:"+responseVo.getNext_redirect_pc_url();
 	}
 	
 	@PostMapping("/autofund")//정기결제 요청
 	public String autoConfirm(@ModelAttribute KakaoPayReadyRequestVo requestVo
 				, HttpSession session) throws URISyntaxException {
-		System.out.println("정기결제 요청으로 들어왔습니다.");
 		KakaoPayReadyResponseVo responseVo = kakaoService.autoReady(requestVo);
 		
-//		KakaoPayApproveRequestVo apRequestVo = new KakaoPayApproveRequestVo();
-//		apRequestVo.setCid("TCSUBSCRIP");
-//		apRequestvo.set
-//		KakaoPayApproveResponseVo apResponseVo = kakaoService.approve(requestVo);
-//		
 		session.setAttribute("tid", responseVo.getTid());
 		session.setAttribute("partner_user_id", requestVo.getPartner_user_id());
 		//정기결제인지 단건결제인지 구분하기 위한 세션 추가
 		session.setAttribute("cid", "정기결제");
-		System.out.println("정기결제 요청에서 나갑니다");
 		return "redirect:"+responseVo.getNext_redirect_pc_url();
 	}
 	@Autowired
@@ -92,8 +83,8 @@ public class PayController {
 			System.out.println("정기결제테이블에 데이터를 등록할거에요");
 			AutoPayMentDto apmDto = new AutoPayMentDto();
 			apmDto.setAutoSid(responseVo.getSid());
-			apmDto.setPartner_user_id(partner_user_id);
-			apmDto.setAuto_total_amount(responseVo.getAmount().getTotal());
+			apmDto.setPartnerUserId(partner_user_id);
+			apmDto.setAutoTotalAmount(responseVo.getAmount().getTotal());
 			autoDonationDao.insert(apmDto);
 			System.out.println("정기결제테이블에 데이터를 등록했어요잉");
 		} else if(cidType.equals("단건결제")) {

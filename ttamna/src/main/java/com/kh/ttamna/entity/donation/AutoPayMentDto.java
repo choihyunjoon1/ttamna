@@ -8,10 +8,10 @@ import lombok.Data;
 public class AutoPayMentDto {
 
 	private int autoNo;
-	private String partner_user_id;
+	private String partnerUserId;
 	private String autoSid;
 	private int quantity;
-	private long auto_total_amount;
+	private long autoTotalAmount;
 	private Date firstPaymentDate;
 	private int payTimes;
 }

@@ -1,5 +1,9 @@
 package com.kh.ttamna.repository.donation;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -15,5 +19,15 @@ public class AutoDonationDaoImpl implements AutoDonationDao{
 	@Override
 	public void insert(AutoPayMentDto apmDto) {
 		sqlSession.insert("apm.insert", apmDto);
+	}
+	
+	@Override
+	public List<AutoPayMentDto> list() {
+		return sqlSession.selectList("apm.list");
+	}
+	
+	@Override
+	public void payTimesUpdate(int autoNo) {
+		sqlSession.update("apm.update", autoNo);
 	}
 }
