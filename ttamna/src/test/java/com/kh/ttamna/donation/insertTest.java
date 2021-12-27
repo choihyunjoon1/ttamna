@@ -31,7 +31,6 @@ public class insertTest {
 		donationDto.setDonationNo(donationNo);
 		donationDto.setDonationWriter("testuser1");
 		donationDto.setDonationTitle("테스트기부게시글3");
-		donationDto.setDonationPrice(10000);
 		donationDto.setDonationContent("테스트기부게시글3");
 		int result = sqlSession.insert("donation.insert", donationDto);
 		

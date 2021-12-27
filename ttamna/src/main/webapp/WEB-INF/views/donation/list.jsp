@@ -45,7 +45,9 @@ $(function(){
 						"<br>"+
 						"<span>"+resp[i].donationContent+"</span>" +
 						"<br>"+
-						"<span>"+resp[i].donationPrice+"</span>" +
+						"<span>"+resp[i].donationNowFund+"원</span>" +
+						"<br>"+
+						"<span>"+resp[i].donationTotalFund+"원</span>" +
 					+"</div>";
 					$(".result").append(divCol);
 					$(".page").addClass("col-3 mt-3");
