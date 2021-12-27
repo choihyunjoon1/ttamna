@@ -11,6 +11,9 @@
 <script type='text/javascript' src="${root}/resources/js/togglePw.js"></script>
 <!-- 입력값 정규표현식 검사 -->
 <script type='text/javascript' src="${root}/resources/js/input-regex-check.js"></script>
+<!-- 비밀번호 일치여부 판별 스크립트 -->
+<script type='text/javascript' src="${root}/resources/js/pwEquals.js"></script>
+
 <script>
  window.addEventListener("load", function(){
 	
@@ -38,7 +41,7 @@
 				console.log(url);
 				if(resp == "NNNN"){
 					console.log("아이디 중복. 사용 불가능");
-					$(idMessage).text("아이디 중복. 다시 입력해 주세요");
+					$(idMessage).app("아이디 중복. 다시 입력해 주세요");
 					$("input[name=memberId]").focus();
 					$(form).attr('onsubmit', 'event.preventDefault();');
 					console.log("event.preventDefault()");
@@ -128,6 +131,8 @@
 		});
 	}
 });
+ 
+ 
 </script>
 <style>
 
@@ -148,6 +153,7 @@
 		<input type="password" class="form-control reInput-pw" required placeholder="비밀번호 재입력" aria-label="비밀번호 재입력" aria-describedby="button-addon-rePw">
   		<button class="toggleReInputPw btn btn-outline-primary" type="button" id="button-addon-rePw">보기</button>
 	</div>
+	<div class='row rePw-message'></div>
 	<div class='input-group mb-3'>
 		<input type="text" class="form-control input-nick" name='memberNick' required placeholder="닉네임 입력" aria-label="닉네임 입력">
 	</div>
