@@ -56,10 +56,26 @@ public class MemberDaoImpl  implements MemberDao{
 			return null;
 		}
 	}
-
+	
+	//아이디 단일조회
 	@Override
 	public MemberDto get(String memberId) {
 		MemberDto memberDto = sqlSession.selectOne("member.get",memberId);
+		System.out.println("memberId : " + memberId);
+		return memberDto;
+	}
+
+	//닉네임 단일조회
+	@Override
+	public MemberDto getByNick(String memberNick) {
+		MemberDto memberDto = sqlSession.selectOne("member.getByNick", memberNick);
+		return memberDto;
+	}
+
+	//이메일 단일조회
+	@Override
+	public MemberDto getByEmail(String memberEmail) {
+		MemberDto memberDto = sqlSession.selectOne("member.getByEmail", memberEmail);
 		return memberDto;
 	}
 	
@@ -82,6 +98,7 @@ public class MemberDaoImpl  implements MemberDao{
 			return false;
 		}
 	}
+
 	
 
 }

@@ -121,17 +121,8 @@ public class MemberController {
 		return "member/my_donation";
 	}
 	
-	@GetMapping("/ajaxId")
-	@ResponseBody
-	public String ajaxId(@RequestParam String memberId) {
-		//전달받은 아이디로 조회한 결과가 0보다 크다면  사용중인 아이디 = 중복아이디 NNNN전달
-		int result = memberDao.ajaxId(memberId); 
-		if(result > 0) {
-			return "redirect:member/join?NNNN";
-		}else {
-			return "redirect:member/join?YYYY"; 
-		}
-	}
+	
+
 	
 
 }

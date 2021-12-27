@@ -41,11 +41,17 @@
 	<select id = "get" parameterType="String" resultType="MemberDto">
 		select * from member where member_id=#{memberId}
 	</select>
-
-	<!-- 아이디 중복검사. 존재하는 아이디=1반환. 존재하지 않는 아이디=0반환 -->
-	<select id='ajaxId' parameterType="String" resultType="int">
-		select count(*) from member where member_id = #{memberId}
+	
+	<!-- 닉네임 단일조회 -->
+	<select id = "getByNick" parameterType="String" resultType="MemberDto">
+		select * from member where member_nick=#{memberNick}
 	</select>
+	
+	<!-- 이메일 단일조회 -->
+	<select id = "getByEmail" parameterType="String" resultType="MemberDto">
+		select * from member where member_email=#{memberEmail}
+	</select>
+
 	
 </mapper>
 
