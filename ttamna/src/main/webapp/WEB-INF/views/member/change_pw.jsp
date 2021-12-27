@@ -7,19 +7,21 @@
 <script src="${root}/resources/js/address.js"></script>
 <link ref="stylesheet" type="text/css" href="${root }/resources/css/commons.css">
 <script src= "http://code.jquery.com/jquery-3.6.0.js"></script>
-<!-- 입력값 정규표현식 검사 -->
-<script type='text/javascript' src="${root}/resources/js/input-regex-check.js"></script>
 <script>
 	$(function(){
 		$("input[type=submit]").click(function(e){
 			e.preventDefault();
-			var defaultPw = $(".memberPw").val();
-			var newPw = $(".memberNewPw").val();
-			var newRePw = $(".memberNewPwCheck").val();
+			var defaultPw = $(".input-pw").val();
+			var newPw = $(".input-newPw").val();
+			var newRePw = $(".input-newRePw").val();
+			console.log(defaultPw);
+			console.log(newPw);
+			console.log(newRePw);
 			
 			//defaultPw != newPw && newPw == newRePw;이어야 한다.
-			boolean isCheckPw = defaultPw != newPw && newPw == newRePw;
-			if(isCheckpw){
+			var isCheckPw = defaultPw != newPw && newPw == newRePw;
+			console.log(isCheckPw);
+			if(isCheckPw){
 				$(".form-check").submit();
 			}else{
 				$(".checkPwMessage").text("비밀번호가 다릅니다. 확인해주세요");
@@ -51,13 +53,13 @@
 			</div>
 			<div class="col-5 position-relative">
 				<div class="p-3 border bg-light">
-					<input type="password" class="form-control input-nick" name='memberPw' required  placeholder="현재비밀번호 입력" aria-label="현재비밀번호 입력" aria-describedby="button-addon-pw" data-regex="^[a-z]{8,15}$">
+					<input type="password" class="form-control input-pw" name='memberPw' required  placeholder="현재비밀번호 입력" aria-label="현재비밀번호 입력" aria-describedby="button-addon-pw" data-regex="^[a-z]{8,15}$">
 				</div>
 				<div class="p-3 border bg-light">
-					<input type="password" class="form-control input-pw" name="memberNewPw" required placeholder="새비밀번호 입력" aria-label="새비밀번호 입력" aria-describedby="button-addon-pw" data-regex="^[a-z]{8,15}$">
+					<input type="password" class="form-control input-newPw" name="memberNewPw" required placeholder="새비밀번호 입력" aria-label="새비밀번호 입력" aria-describedby="button-addon-pw" data-regex="^[a-z]{8,15}$">
 				</div>
 				<div class="p-3 border bg-light">
-					<input type="password" class="form-control input-pw" name="memberNewPwCheck" required placeholder="새비밀번호 확인 입력" aria-label="새비밀번호 확인 입력" aria-describedby="button-addon-pw" data-regex="^[a-z]{8,15}$">
+					<input type="password" class="form-control input-newRePw" name="memberNewPwCheck" required placeholder="새비밀번호 확인 입력" aria-label="새비밀번호 확인 입력" aria-describedby="button-addon-pw" data-regex="^[a-z]{8,15}$">
 				</div>
 				<span class="checkPwMessage"></span>
 				<c:if test="${param.error !=null }">
