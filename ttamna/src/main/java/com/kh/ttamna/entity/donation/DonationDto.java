@@ -18,5 +18,7 @@ public class DonationDto {
 	private int donationRead;
 	
 	
-	
+	public String getStringDonationNo() {
+		return String.valueOf(donationNo);
+	}
 }

@@ -38,22 +38,22 @@
 		- JdbcTemplate : 명령 실행 도구
 	 -->
 	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
-		<property name="driverClassName" value="oracle.jdbc.OracleDriver"></property>
-		<property name="url" value="jdbc:oracle:thin:@125.191.92.229:1521:orcl"></property>
-		<property name="username" value="ttamna"></property>
-		<property name="password" value="ttamna"></property>
+		<property name="driverClassName" value="${database.driver}"></property>
+		<property name="url" value="${database.url}"></property>
+		<property name="username" value="${database.username}"></property>
+		<property name="password" value="${database.password}"></property>
 	</bean>
 	
 	<bean id="dbcpSource" class="org.apache.commons.dbcp2.BasicDataSource">
-		<property name="driverClassName" value="oracle.jdbc.OracleDriver"></property>
-		<property name="url" value="jdbc:oracle:thin:@125.191.92.229:1521:orcl"></property>
-		<property name="username" value="ttamna"></property>
-		<property name="password" value="ttamna"></property>
+		<property name="driverClassName" value="${database.driver}"></property>
+		<property name="url" value="${database.url}"></property>
+		<property name="username" value="${database.username}"></property>
+		<property name="password" value="${database.password}"></property>
 		
-		<property name="maxTotal" value="20"></property>
-		<property name="maxIdle" value="5"></property>
-		<property name="minIdle" value="0"></property>
-		<property name="maxWaitMillis" value="3000"></property>
+		<property name="maxTotal" value="${database.maxTotal}"></property>
+		<property name="maxIdle" value="${database.maxIdle}"></property>
+		<property name="minIdle" value="${database.minIdle}"></property>
+		<property name="maxWaitMillis" value="${database.maxWaitMillis}"></property>
 	</bean>
 	
 	<bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
@@ -96,8 +96,7 @@
 		<bean id="springFilter" class="com.kh.spring15.filter.SpringFilter"></bean>	
 	-->
 	
-	<!-- 
-	이메일 전송 도구(필요할 경우 아래의 구문을 등록 해제하여 사용)
+	<!-- 이메일 전송 도구(필요할 경우 아래의 구문을 등록 해제하여 사용)-->
 		
 	<bean id="sender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
 		<property name="host" value="${email.host}"></property>
@@ -115,7 +114,6 @@
 			</props>
 		</property>
 	</bean> 
-	-->
 	
 	
 	<!-- 
@@ -124,5 +122,9 @@
 		- annotation-driven 태그를 작성하여 관련 어노테이션을 활성화
 	-->
 	<task:annotation-driven/>	
+	
+	<!-- JSON 파싱 도구 등록 -->
+	<bean id="objectMapper" class="com.fasterxml.jackson.databind.ObjectMapper"></bean> 
+	
 		
 </beans>

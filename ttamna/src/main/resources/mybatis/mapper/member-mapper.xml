@@ -25,6 +25,25 @@
 					)
 	</insert>
 	
+	<!-- 정보수정 -->
+	<update id="changeInfo" parameterType="MemberDto">
+		update member
+			set member_nick=#{memberNick}, 
+				member_email = #{memberEmail},
+				member_phone=#{memberPhone},
+				postcode=#{postcode},
+				address=#{address},
+				detail_address=#{detailAddress}
+			where member_id=#{memberId} 
+	</update>
+	
+	<!-- 비밀번호 변경 -->
+	<update id="changePw" parameterType="map">
+		update member
+			set member_pw = #{memberNewPw}
+		where member_id=#{memberId}
+	</update>
+	
 	<!-- 로그인(대충한거) -->
 	<select id = "get" parameterType="String" resultType="MemberDto">
 		select * from member where member_id=#{memberId}

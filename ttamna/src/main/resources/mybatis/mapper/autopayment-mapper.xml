@@ -19,7 +19,7 @@
 		<insert id="insert" parameterType="AutoPayMentDto">
 			insert into autopayment values(
 				auto_payment_seq.nextval, #{partnerUserId}, #{autoSid}, 1, 
-				${autoTotalAmount}, sysdate, 1
+				${autoTotalAmount}, sysdate, 1, ${donationNo}
 			)
 		</insert>
 		
