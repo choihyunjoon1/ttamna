@@ -14,7 +14,7 @@
 	</div>
 	<div class="row">
 		<label>
-			후원금액<input type="text" name="donationPrice" required class="form-input">
+			목표금액<input type="text" name="donationTotalFund" required class="form-input">
 		</label>
 	</div>
 	<div class="row">
