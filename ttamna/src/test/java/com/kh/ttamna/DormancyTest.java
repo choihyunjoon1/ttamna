@@ -29,8 +29,6 @@ public class DormancyTest {
 	@Autowired
 	private SqlSession sqlSession;
 	
-	@Autowired
-	private EmailService sendEmail;
 	
 	@Autowired
 	private MemberDao memberDao;
@@ -38,7 +36,7 @@ public class DormancyTest {
 	@Test
 	public void findDormancy() {
 		String memberId = "testmember9";
-		MemberDto findDto = memberDao.get(memberId);
+		MemberDto findDto = sqlSession.selectOne("member.get",memberId);
 		log.debug("memberDto = {}",findDto);
 		
 		
