@@ -96,8 +96,7 @@
 		<bean id="springFilter" class="com.kh.spring15.filter.SpringFilter"></bean>	
 	-->
 	
-	<!-- 
-	이메일 전송 도구(필요할 경우 아래의 구문을 등록 해제하여 사용)
+	<!-- 이메일 전송 도구(필요할 경우 아래의 구문을 등록 해제하여 사용)-->
 		
 	<bean id="sender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
 		<property name="host" value="${email.host}"></property>
@@ -115,7 +114,6 @@
 			</props>
 		</property>
 	</bean> 
-	-->
 	
 	
 	<!-- 
@@ -124,5 +122,9 @@
 		- annotation-driven 태그를 작성하여 관련 어노테이션을 활성화
 	-->
 	<task:annotation-driven/>	
+	
+	<!-- JSON 파싱 도구 등록 -->
+	<bean id="objectMapper" class="com.fasterxml.jackson.databind.ObjectMapper"></bean> 
+	
 		
 </beans>

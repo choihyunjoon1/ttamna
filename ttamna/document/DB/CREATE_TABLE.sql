@@ -304,7 +304,7 @@ create table certification(
     cert_serial char(6) not null,
     cert_time date default sysdate not null
 );
-
+ALTER TABLE certification MODIFY cert_serial varchar2(60); 
 commit;
 
 -------------------------------------------------------------------------------------------------------------
@@ -319,7 +319,36 @@ auto_sid varchar2(20) not null,
 auto_quantity number default 1 not null,
 auto_total_amount number not null,
 first_payment_date date default sysdate not null,
-pay_times number default 1 not null
+pay_times number default 1 not null,
+donation_no references donation(donation_no)
 );
 
 commit;
+-------------------------------------------------------------------------------------------------------------
+
+--휴면회원 테이블
+create table dormancy(
+dor_member_id varchar2(20) primary key,
+dor_member_pw varchar2(60) not null,
+dor_member_nick varchar2(45) not null,
+dor_member_phone char(13) not null,
+dor_member_email varchar2(40) not null,
+dor_member_name varchar2(21) not null,
+dor_member_grade varchar2(12) not null,
+dor_member_join date not null
+);
+commit;
+
+-------------------------------------------------------------------------------------------------------------
+
+-- 접속 기록 테이블
+create sequence visit_seq;
+create table visit(
+    visit_idx number CONSTRAINT visit_pk PRIMARY KEY,--기본키 , 시퀀스
+    visit_id varchar2(100) CONSTRAINT visit_id_not_null NOT NULL, --접속자 아이디
+    visit_time date DEFAULT sysdate CONSTRAINT visit_time_not_null NOT NULL--접속자 접속시간
+);
+
+commit;
+
+-------------------------------------------------------------------------------------------------------------

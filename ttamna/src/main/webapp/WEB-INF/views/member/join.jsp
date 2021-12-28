@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
 <%-- 페이지에서 사용할 JSTL 변수 --%>
 <c:set var="root" value="${pageContext.request.contextPath}"></c:set>    
@@ -11,12 +10,128 @@
 <script type='text/javascript' src="${root}/resources/js/togglePw.js"></script>
 <!-- 입력값 정규표현식 검사 -->
 <script type='text/javascript' src="${root}/resources/js/input-regex-check.js"></script>
-<!-- 아이디 중복검사 스크립트 -->
-<script type='text/javascript' src="${root}/resources/js/ajax-id.js"></script>
-	
+<!-- 비밀번호 일치여부 판별 스크립트 -->
+<script type='text/javascript' src="${root}/resources/js/pwEquals.js"></script>
+<jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
+
 <script>
-
-
+ window.addEventListener("load", function(){
+	
+	var form  = document.querySelector('.form-check');
+	var idMessage = form.querySelector(".id-message");
+	var url = "${pageContext.request.contextPath}";
+    
+	//아이디 중복검사
+	form.querySelector(".input-id").addEventListener("blur", function(){
+	    var inputId = form.querySelector(".input-id").value;	
+	    if(inputId != ""){
+			ajaxId(inputId);
+	    }
+	});
+	function ajaxId(inputId){
+		$.ajax({
+			url : url + "/ajax/ajaxId",
+			type : "get",
+			data : {
+				inputId : inputId,
+			},
+			dataType : "text",
+			success:function(resp){
+				console.log("중복검사 요청 성공", resp);
+				if(resp == "NNNN"){
+					console.log("아이디 중복. 사용 불가능");
+					$(idMessage).text("아이디 중복. 다시 입력해 주세요");
+					$(".input-id").focus();
+					$(form).attr('onsubmit', 'event.preventDefault();');
+					console.log("event.preventDefault()");
+				}else if(resp == "YYYY"){
+					console.log("아이디 사용 가능");
+					$(idMessage).text("아이디 사용 가능");
+					$(form).attr('onsubmit', 'event.addEvenetListener();');
+				}
+			},
+			error:function(e){
+				console.log("중복검사 요청 실패", e);
+			}
+		});
+	}
+		
+	//닉네임 중복검사
+	var nickMessage = form.querySelector(".nick-message");
+	form.querySelector(".input-nick").addEventListener("blur", function(){
+	    var inputNick = form.querySelector(".input-nick").value;	
+	    if(inputNick != ""){
+			ajaxNick(inputNick);
+	    }
+	});
+	function ajaxNick(inputNick){
+		$.ajax({
+			url : url + "/ajax/ajaxNick",
+			type : "get",
+			data : {
+				inputNick : inputNick,
+			},
+			dataType : "text",
+			success:function(resp){
+				console.log("중복검사 요청 성공", resp);
+			
+				if(resp == "NNNN"){
+					console.log("닉네임 중복. 사용 불가능");
+					$(nickMessage).append("닉네임 중복. 다시 입력해 주세요");
+					$(".input-nick").focus();
+					$(form).attr('onsubmit', 'event.preventDefault();');
+					console.log("event.preventDefault()");
+				}else if(resp == "YYYY"){
+					console.log("닉네임 사용 가능");
+					$(nickMessage).text("닉네임 사용 가능");
+					$(form).attr('onsubmit', 'event.addEvenetListener();');
+				}
+			},
+			error:function(e){
+				console.log("중복검사 요청 실패", e);
+			}
+		});
+	}
+	
+	//이메일 중복검사
+	var emailMessage = form.querySelector(".email-message");
+	form.querySelector(".input-email").addEventListener("blur", function(){
+	    var inputEmail = form.querySelector(".input-email").value;	
+	    if(inputEmail != ""){
+			ajaxEmail(inputEmail);
+	    }
+	});
+	function ajaxEmail(inputEmail){
+		$.ajax({
+			url : url + "/ajax/ajaxEmail",
+			type : "get",
+			data : {
+				inputEmail : inputEmail,
+			},
+			dataType : "text",
+			success:function(resp){
+				console.log("중복검사 요청 성공", resp);
+			
+				if(resp == "NNNN"){
+					console.log("이메일 중복. 사용 불가능");
+					$(emailMessage).text("이메일 중복. 다시 입력해 주세요");
+					$(".input-email").focus();
+					$(form).attr('onsubmit', 'event.preventDefault();');
+					console.log("event.preventDefault()");
+				}else if(resp == "YYYY"){
+					console.log("이메일 사용 가능");
+					$(emailMessage).text("이메일 사용 가능");
+					$(form).attr('onsubmit', 'event.addEvenetListener();');
+				}
+			},
+			error:function(e){
+				console.log("중복검사 요청 실패", e);
+			}
+		});
+	}
+});
+ 
+ 
 </script>
 <style>
 
@@ -37,6 +152,7 @@
 		<input type="password" class="form-control reInput-pw" required placeholder="비밀번호 재입력" aria-label="비밀번호 재입력" aria-describedby="button-addon-rePw">
   		<button class="toggleReInputPw btn btn-outline-primary" type="button" id="button-addon-rePw">보기</button>
 	</div>
+	<div class='row rePw-message'></div>
 	<div class='input-group mb-3'>
 		<input type="text" class="form-control input-nick" name='memberNick' required placeholder="닉네임 입력" aria-label="닉네임 입력">
 	</div>
