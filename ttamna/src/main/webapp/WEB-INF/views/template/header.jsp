@@ -91,51 +91,51 @@
 
 <!-- 메뉴 영역 -->
 <div class="container-1000 centainer-center">
-<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary fw-bold">
   <div class="container">
     <div class="collapse navbar-collapse" id="navbarColor01">
-      <ul class="navbar-nav me-auto">
+      <ul class="navbar-nav me-auto navbar-right">
         <li class="nav-item">
           <a class="nav-link active docs-creator" href="${root }">Home
             <span class="visually-hidden">(current)</span>
           </a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link docs-creator" href="${pageContext.request.contextPath}/donation/">기부</a>
+     </ul>
+     <ul class="navbar-nav me-auto navbar-center fs-6">
+        <li class="nav-item ms-1">
+          <a class="nav-link active docs-creator" href="${root}/shop/">후원상품</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link docs-creator" href="#">입양</a>
+        <li class="nav-item ms-5">
+          <a class="nav-link active docs-creator" href="${root}/donation/">기부</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link docs-creator" href="#">내새끼사랑</a>
+        <li class="nav-item ms-5">
+          <a class="nav-link active docs-creator" href="#">입양공고</a>
         </li>
-         <li class="nav-item">
-          <a class="nav-link docs-creator" href="${pageContext.request.contextPath}/shop/">상품구매</a>
+         <li class="nav-item ms-5">
+          <a class="nav-link active docs-creator" href="#">내새끼자랑</a>
         </li>
-<!--         <li class="nav-item dropdown"> -->
-<!--           <a class="nav-link dropdown-toggle docs-creator" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Dropdown</a> -->
-<!--           <div class="dropdown-menu"> -->
-<!--             <a class="dropdown-item docs-creator" href="#">Action</a> -->
-<!--             <a class="dropdown-item docs-creator" href="#">Another action</a> -->
-<!--             <a class="dropdown-item docs-creator" href="#">Something else here</a> -->
-<!--             <div class="dropdown-divider"></div> -->
-<!--             <a class="dropdown-item docs-creator" href="#">Separated link</a> -->
-<!--           </div> -->
-<!--         </li> -->
+	 </ul>
+	 <ul class="navbar-nav navbar-left">
 		<c:if test="${!login}">
 		 <li class="nav-item">
-          <a class="nav-link docs-creator" href="${root}/member/login">로그인</a>
+          <a class="nav-link active docs-creator" href="${root}/member/login">LOGIN</a>
          </li>
-         <li class="nav-item">
-          <a class="nav-link docs-creator" href="${root}/member/join">회원가입</a>
-         </li>
+         <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle docs-creator" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">메뉴</a>
+          <div class="dropdown-menu">
+            <a class="dropdown-item docs-creator" href="${root}/member/join">회원가입</a>
+            <a class="dropdown-item docs-creator" href="${root}/find/findId">아이디 찾기</a>
+            <a class="dropdown-item docs-creator" href="${root}/find/findPw">비밀번호 찾기</a>
+          </div>
+        </li>
         </c:if>
         <c:if test="${login}">
-		 <li class="nav-item">
-          <a class="nav-link docs-creator" href="${root }/member/logout">로그아웃</a>
-         </li>
          <li class="nav-item">
-          <a class="nav-link docs-creator" href="${root}/member/mypage">마이페이지</a>
+          <a class="nav-link active docs-creator" href="${root}/member/mypage">MY PAGE</a>
+         </li>
+		 <li class="nav-item ms-3">
+          <a class="nav-link active docs-creator" href="${root }/member/logout">LOGOUT</a>
          </li>
         </c:if>
       </ul>
@@ -143,6 +143,7 @@
     </div>
   </div>
 </nav>
+
 </div>
         <!-- 섹션(컨텐츠) 영역 -->
         <section>
