@@ -98,18 +98,18 @@
 <!--           </div> -->
 <!--         </li> -->
 		<c:if test="${!login}">
-		 <li class="nav-item">
+		 <li class="nav-item right">
           <a class="nav-link docs-creator" href="${root}/member/login">로그인</a>
          </li>
-         <li class="nav-item">
+         <li class="nav-item right">
           <a class="nav-link docs-creator" href="${root}/member/join">회원가입</a>
          </li>
         </c:if>
         <c:if test="${login}">
-		 <li class="nav-item">
+		 <li class="nav-item right">
           <a class="nav-link docs-creator" href="${root }/member/logout">로그아웃</a>
          </li>
-         <li class="nav-item">
+         <li class="nav-item right">
           <a class="nav-link docs-creator" href="${root}/member/mypage">마이페이지</a>
          </li>
         </c:if>

@@ -4,13 +4,14 @@ import org.apache.ibatis.session.SqlSession;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 
 import com.kh.ttamna.entity.member.MemberDto;
 import com.kh.ttamna.repository.member.MemberDao;
+import com.kh.ttamna.service.member.EmailService;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -21,33 +22,29 @@ import lombok.extern.slf4j.Slf4j;
 })
 @WebAppConfiguration
 @Slf4j
-public class Test01 {
+public class DormancyTest {
+	//스케쥴러 사용으로 오늘(sysdate) - 마지막접속일자  > 335 일 경우 이메일 전송
+	//매일 정각에 멤버테이블에서 조회하여 마지막접속일 후 335일이 지났는지 확인
+//	@Scheduled(cron="0 0 0 * * *")//매일 자정
 	@Autowired
 	private SqlSession sqlSession;
 	
 	@Autowired
-	private MemberDao memberDao;
+	private EmailService sendEmail;
 	
 	@Autowired
-	private PasswordEncoder encoder;
+	private MemberDao memberDao;
 	
 	@Test
-	public void loginTest() {
-		MemberDto memberDto = new MemberDto();
-		String inputId = "testmember5";
-		String inputPw = "testmember5";
-		String inputNick = "테스터오육";
+	public void findDormancy() {
+		String memberId = "testmember9";
+		MemberDto findDto = memberDao.get(memberId);
+		log.debug("memberDto = {}",findDto);
 		
-		//입력한 ID로 단일조회 
-		MemberDto findDto = sqlSession.selectOne("member.get",inputId);
-		String savePw = findDto.getMemberPw();
-		boolean samePw = encoder.matches(inputPw, savePw);
-		if(samePw) {
-			findDto.setMemberNick(inputNick);
-			boolean changeInfo = memberDao.changeInfo(findDto);
-			log.debug("changeInfo = {}",changeInfo);
-		}
-			
+		
+		
 	}
+	
+	
 
 }
