@@ -34,6 +34,13 @@ public class VistiDaoImpl implements VisitDao{
 		sqlSession.insert("visit.allInOneLog", visitDto);
 	}
 
+	//오늘 하루의 방문자 수를 계산하는 메소드
+	@Override
+	public int countByDay() {
+		int count = sqlSession.selectOne("visit.countByDay");
+		return count;
+	}
+
 	
 	
 
