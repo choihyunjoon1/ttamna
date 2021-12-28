@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.kh.ttamna.entity.donation.DonationDto;
 import com.kh.ttamna.entity.donation.DonationImgDto;
@@ -56,11 +57,10 @@ public class DonationController {
 	public String detail(@RequestParam int donationNo, Model model) {
 		Map<String, Object> data = new HashMap<>();
 		data.put("donationNo", donationNo);
-		System.out.println("donationNo = "+ donationNo);
-		DonationImgDto donationImgDto = donationImgDao.get(donationNo);
 		model.addAttribute("donationDto", donationDao.detailOrSearch(data));
-		System.out.println("donationImgDto = " + donationImgDto);
-		model.addAttribute("donationImgDto", donationImgDto);
+		
+		model.addAttribute("donationImgDtoList", donationImgDao.getList(donationNo));
+		
 		return "donation/detail";
 	}
 	
@@ -121,27 +121,22 @@ public class DonationController {
 	//파일 다운로드처리
 	@GetMapping("/donaimg")
 	@ResponseBody
-	public  ResponseEntity<ByteArrayResource> imgFile(@RequestParam int donationNo,
+	public  ResponseEntity<ByteArrayResource> imgFile(
 														@RequestParam int donationImgNo) throws IOException{
-		//donationNo로 파일을 불러온다
-		DonationImgDto donationImgDto = donationImgDao.get(donationNo);
+
+		DonationImgDto donationImgDto = donationImgDao.getFile(donationImgNo);
 		
-		//donationImgNo로 실제 파일을 불러온다.
 		byte[] data = donationImgDao.load(donationImgNo);
 		ByteArrayResource resource = new ByteArrayResource(data);
 		
-		String encodeName = URLEncoder.encode(String.valueOf(donationImgDto.getDonationImgNo()), "UTF-8");
+		String encodeName = URLEncoder.encode(String.valueOf(donationImgNo), "UTF-8");
 		encodeName = encodeName.replace("+", "%20");
 		
 		return ResponseEntity.ok()
-					//.header("Content-Type", "application/octet-stream")
-					.contentType(MediaType.APPLICATION_OCTET_STREAM)
-					//.header("Content-Disposition", "attachment; filename=\""+이름+"\"")
-					.header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\""+encodeName+"\"")
-					//.header("Content-Encoding", "UTF-8")
-					.header(HttpHeaders.CONTENT_ENCODING, "UTF-8")
-					//.header("Content-Length", String.valueOf(memberProfileDto.getMemberFileSize()))
-					.contentLength(donationImgDto.getDonationImgSize())
+				.contentType(MediaType.APPLICATION_OCTET_STREAM)
+				.header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\""+encodeName+"\"")
+				.header(HttpHeaders.CONTENT_ENCODING, "UTF-8")
+				.contentLength(donationImgDto.getDonationImgSize())
 				.body(resource);
 	}
 }
