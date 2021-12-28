@@ -24,6 +24,10 @@
 					#{postcode},#{address},#{detailAddress}
 					)
 	</insert>
+	<!-- 회원 탈퇴 -->
+	<delete id="quit" parameterType="String">
+		delete member where member_id=#{memberId}
+	</delete>
 	
 	<!-- 정보수정 -->
 	<update id="changeInfo" parameterType="MemberDto">
