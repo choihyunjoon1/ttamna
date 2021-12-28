@@ -54,6 +54,8 @@ public class MemberDaoImpl  implements MemberDao{
 		//불러온 PW와 입력한 PW가 맞는지 검사. 단, 불러온PW에는 암호화이므로 encoder.matches를 사용
 		boolean isMatch = findDto != null && encoder.matches(memberDto.getMemberPw(),findDto.getMemberPw());
 		if(isMatch) {//저장된 Pw와 입력한Pw가 일치할 때 = 로그인 성공
+			//로그인 성공시 접속시간(member_last_log) 업데이트 처리
+			sqlSession.update("member.lastLog", memberDto.getMemberId());
 			return findDto;
 		}else {//일치 하지 않을 때 = 로그인 실패
 			return null;

@@ -64,5 +64,10 @@
 		update member set member_pw = #{memberPw} where member_id = #{memberId}
 	</update>
 	
+	<!-- 접속시간 저장을 위한 구문 -->
+	<update id="lastLog" parameterType="String">
+		update member set member_last_log = sysdate where member_id = #{memberId}
+	</update>	
+	
 </mapper>
 
