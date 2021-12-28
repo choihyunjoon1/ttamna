@@ -12,13 +12,18 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.kh.ttamna.entity.member.MemberDto;
+import com.kh.ttamna.entity.member.VisitDto;
 import com.kh.ttamna.repository.member.MemberDao;
+import com.kh.ttamna.repository.member.VisitDao;
 
 @Controller
 @RequestMapping("/member")
 public class MemberController {
 	@Autowired
 	private MemberDao memberDao;
+	
+	@Autowired
+	private VisitDao visitDao;
 	
 	//회원가입
 	@GetMapping("/join")
@@ -40,12 +45,22 @@ public class MemberController {
 		return "member/login";
 	}
 	@PostMapping("/login")
-	public String login(@ModelAttribute MemberDto memberDto,HttpSession session) {
+	public String login(@ModelAttribute MemberDto memberDto, HttpSession session) {
 		MemberDto findDto = memberDao.login(memberDto);
 		if(findDto != null) {
 			session.setAttribute("uid", findDto.getMemberId());
 			session.setAttribute("grade", findDto.getMemberGrade());
-		
+			
+			//로그인 처리 후에 접속기록을 남기기 위해 객체를 생성하고 저장하는 구문을 불러옴
+			//시퀀스를 미리 받아서 visitDto의 visitIdx에 넣는다
+			int visitIdx = visitDao.sequence();
+			VisitDto visitDto = new VisitDto();
+			visitDto.setVisitIdx(visitIdx);
+			visitDto.setVisitId(memberDto.getMemberId());
+			//접속한지 하루가 지나지 않은 사용자에 대해서는 접속시간을 업데이트하고
+			//하루동안 접속한 기록이 없는 사용자는 등록처리하는 메소드를 사용
+			visitDao.allInOneLog(visitDto);
+			
 			return "redirect:/";
 		}else {
 			return "redirect:login?error";
