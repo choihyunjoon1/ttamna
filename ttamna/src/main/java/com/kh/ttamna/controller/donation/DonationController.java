@@ -64,6 +64,19 @@ public class DonationController {
 		return "donation/detail";
 	}
 	
+	@PostMapping("/search")//검색
+	public String search(@RequestParam String column, @RequestParam String keyword,
+								Model model) {
+		Map<String, Object> data = new HashMap<>();
+		data.put("column", column);
+		data.put("keyword", keyword);
+		
+		model.addAttribute("list", donationDao.detailOrSearch(data));
+		
+		return "donation/list";
+	}
+	
+	
 	@GetMapping("/delete")//삭제요청
 	public String delete(@RequestParam int donationNo) {
 		donationDao.delete(donationNo);

@@ -79,6 +79,21 @@ $(function(){
 			<button type="button" class="btn btn-primary more-btn">더보기</button>
 		</div>
 	</div>
+	
+	<div class="row mt-3">
+		<div class="col mt-3">
+			<form method="post" action="search">
+				<select name="column" class="form-input form-inline" required>
+					<option value="">선택안함</option>
+					<option value="donation_title">제목</option>
+					<option value="donation_writer">작성자</option>
+					<option value="donation_content">내용</option>
+				</select>
+				<input type="text" name="keyword" required class="form-input form-inline">
+				<input type="submit" value="검색">
+			</form>
+		</div>
+	</div>
 </div>
 
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>
