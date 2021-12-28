@@ -340,3 +340,15 @@ dor_member_join date not null
 commit;
 
 -------------------------------------------------------------------------------------------------------------
+
+-- 접속 기록 테이블
+create sequence visit_seq;
+create table visit(
+    visit_idx number CONSTRAINT visit_pk PRIMARY KEY,--기본키 , 시퀀스
+    visit_id varchar2(100) CONSTRAINT visit_id_not_null NOT NULL, --접속자 아이디
+    visit_time date DEFAULT sysdate CONSTRAINT visit_time_not_null NOT NULL--접속자 접속시간
+);
+
+commit;
+
+-------------------------------------------------------------------------------------------------------------

@@ -1,4 +1,15 @@
+---------------- visit --------------------------
 
+-- 테이블 데이터 삭제 (visit)
+TRUNCATE TABLE visit;
+
+-- 테이블 삭제 (visit)
+DROP TABLE visit CASCADE CONSTRAINTS;
+
+-- 시퀀스 삭제 (visit)
+DROP SEQUENCE visit_seq;
+
+COMMIT;
 
 ---------------- autopayment --------------------------
 
@@ -249,3 +260,4 @@ TRUNCATE TABLE dormancy;
 DROP TABLE dormancy CASCADE CONSTRAINTS;
 
 COMMIT:
+
