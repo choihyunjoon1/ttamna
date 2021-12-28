@@ -39,8 +39,6 @@ public class DormancyTest {
 		MemberDto findDto = sqlSession.selectOne("member.get",memberId);
 		log.debug("memberDto = {}",findDto);
 		
-		
-		
 	}
 	
 	
