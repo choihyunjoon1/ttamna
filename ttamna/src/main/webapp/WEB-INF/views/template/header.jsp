@@ -124,7 +124,7 @@
          <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle active docs-creator" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">𓃑𓃑𓃑ʕ •ᴥ•ʔ</a>
           <div class="dropdown-menu">
-            <a class="dropdown-item docs-creator" href="${root}/member/join">회원가입</a>
+            <a class="dropdown-item docs-creator" href="${root}/member/join">회원가입ฅ ̳͒•ˑ̫• ̳͒ฅ♡</a>
             <a class="dropdown-item docs-creator" href="${root}/find/findId">아이디 찾기</a>
             <a class="dropdown-item docs-creator" href="${root}/find/findPw">비밀번호 찾기</a>
           </div>
