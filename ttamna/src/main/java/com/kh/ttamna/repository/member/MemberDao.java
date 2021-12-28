@@ -26,5 +26,8 @@ public interface MemberDao {
 	//비밀번호 찾기 인증 성공 후 비밀번호 재설정
 	boolean resetPw(String memberId, String resetPw);
 	
+	//회원탈퇴
+	boolean quit(String memberId, String memberPw);
+	
 	
 }

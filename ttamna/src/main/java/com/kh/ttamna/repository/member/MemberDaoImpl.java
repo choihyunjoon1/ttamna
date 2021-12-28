@@ -138,6 +138,26 @@ public class MemberDaoImpl  implements MemberDao{
 		}
 	}
 
+	@Override
+	public boolean quit(String memberId, String memberPw) {
+		//회원탈퇴 : 
+		//(1) 입력한 아이디 or 세션아이디를 단일조회하여 비밀번호 가져와서 입력한 비밀번호와 일치하는지 검사
+		//(2) 둘다 일치 한다면 매퍼로 가서 회원데이터 삭제 진행.
+		
+		//(1) DB에서 비밀번호 가져오기
+		MemberDto memberDto = sqlSession.selectOne("member.get",memberId);
+		String findPw = memberDto.getMemberPw();
+		//(2) DB의 비밀번호와 입력한 비밀번호 일치 검사
+		boolean pwMatch = encoder.matches(memberPw, findPw);
+		if(pwMatch) {//일치한다면
+			//(3) 탈퇴 진행
+			int result = sqlSession.delete("member.quit",memberId);
+			return result>0;
+		}else {//비밀번호 일치 안할 때
+			return false;
+		}
+	}
+
 	
 
 }

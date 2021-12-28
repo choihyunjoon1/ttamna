@@ -22,7 +22,7 @@
 				<thead>
 					<tr>
 						<th scope="col">번호</th>
-						<th scope="col">제목[댓글수]</th>
+						<th scope="col">제목</th>
 						<th scope="col">작성일</th>
 					</tr>
 				</thead>
