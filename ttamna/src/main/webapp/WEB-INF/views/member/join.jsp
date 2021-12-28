@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
 <%-- 페이지에서 사용할 JSTL 변수 --%>
 <c:set var="root" value="${pageContext.request.contextPath}"></c:set>    
@@ -13,6 +12,7 @@
 <script type='text/javascript' src="${root}/resources/js/input-regex-check.js"></script>
 <!-- 비밀번호 일치여부 판별 스크립트 -->
 <script type='text/javascript' src="${root}/resources/js/pwEquals.js"></script>
+<jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 
 <script>
  window.addEventListener("load", function(){
