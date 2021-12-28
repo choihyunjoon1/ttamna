@@ -133,6 +133,31 @@ public class MemberController {
 	public String myDonation() {
 		return "member/my_donation";
 	}
+	//회원탈퇴
+	@GetMapping("/quit")
+	public String quit(HttpSession session,Model model) {
+		String memberId = (String)session.getAttribute("uid");
+		model.addAttribute("memberId",memberId);
+		return "member/quit";
+	}
+	@PostMapping("/quit")
+	public String quit(@RequestParam String memberPw,HttpSession session) {
+		String memberId = (String)session.getAttribute("uid");
+		
+		boolean result = memberDao.quit(memberId,memberPw);
+		if(result) {
+			//회원탈퇴 진행하면 세션,등급 삭제 후 회원탈퇴 성공 페이지로
+			session.removeAttribute("uid");
+			session.removeAttribute("grade");
+			return "redirect:quit_success";
+		}else {
+			return "redirect:quit?error";
+		}
+	}
+	@RequestMapping("/quit_success")
+	public String quitSuccess() {
+		return "member/quit_success";
+	}
 	
 	
 
