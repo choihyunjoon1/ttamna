@@ -319,7 +319,8 @@ auto_sid varchar2(20) not null,
 auto_quantity number default 1 not null,
 auto_total_amount number not null,
 first_payment_date date default sysdate not null,
-pay_times number default 1 not null
+pay_times number default 1 not null,
+donation_no references donation(donation_no)
 );
 
 commit;

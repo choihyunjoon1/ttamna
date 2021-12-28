@@ -23,7 +23,7 @@
 			</div>
 		</div>
 		<div class="row mt-3">
-			<div class="col">
+			<div class="d-grid gap-2 d-md-flex justify-content-md-end mb-5">
 				<button type="submit" class="btn btn-outline-secondary">인증하기</button>
 			</div>
 		</div>
