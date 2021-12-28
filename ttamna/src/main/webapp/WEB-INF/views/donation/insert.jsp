@@ -14,7 +14,7 @@
 	</div>
 	<div class="row">
 		<label>
-			파일<input type="file" name="attach" class="form-input" accept="image/*">
+			파일<input type="file" multiple name="attach" class="form-input" accept="image/*">
 		</label>
 	</div>
 	<div class="row">

@@ -13,8 +13,10 @@
 			</div>
 			<div class="row">
 				<div class="col-6">
-				<c:if test="${donationImgDto ne null}">
-					<img src="donaimg?donationImgNo=${donationImgDto.donationImgNo}&donationNo=${donationDto.donationNo}" style="width:100%;">
+				<c:if test="${donationImgDtoList ne null}">
+					<c:forEach var="donationImgDto" items="${donationImgDtoList}">
+						<img src="donaimg?donationImgNo=${donationImgDto.donationImgNo}&donationNo=${donationDto.donationNo}" style="width:100%;">
+					</c:forEach>
 				</c:if>
 				</div>
 			</div>
