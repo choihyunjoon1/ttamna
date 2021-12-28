@@ -104,16 +104,16 @@
      </ul>
      <ul class="navbar-nav me-auto navbar-center fs-6">
         <li class="nav-item ms-1">
-          <a class="nav-link active docs-creator" href="${root}/shop/">후원상품</a>
+          <a class="nav-link active docs-creator" href="${root}/shop/">후원상품🐾</a>
         </li>
         <li class="nav-item ms-5">
-          <a class="nav-link active docs-creator" href="${root}/donation/">기부</a>
+          <a class="nav-link active docs-creator" href="${root}/donation/">기부🐾</a>
         </li>
         <li class="nav-item ms-5">
-          <a class="nav-link active docs-creator" href="#">입양공고</a>
+          <a class="nav-link active docs-creator" href="#">입양공고🐾</a>
         </li>
          <li class="nav-item ms-5">
-          <a class="nav-link active docs-creator" href="#">내새끼자랑</a>
+          <a class="nav-link active docs-creator" href="#">내새끼자랑🐾</a>
         </li>
 	 </ul>
 	 <ul class="navbar-nav navbar-left">
@@ -122,7 +122,7 @@
           <a class="nav-link active docs-creator" href="${root}/member/login">LOGIN</a>
          </li>
          <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle docs-creator" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">메뉴</a>
+          <a class="nav-link dropdown-toggle active docs-creator" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">𓃑𓃑𓃑ʕ •ᴥ•ʔ</a>
           <div class="dropdown-menu">
             <a class="dropdown-item docs-creator" href="${root}/member/join">회원가입</a>
             <a class="dropdown-item docs-creator" href="${root}/find/findId">아이디 찾기</a>
