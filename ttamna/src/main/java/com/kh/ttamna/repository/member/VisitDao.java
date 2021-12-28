@@ -15,4 +15,7 @@ public interface VisitDao {
 	//중복아이디가 아니라면 정보를 등록
 	void allInOneLog(VisitDto visitDto);
 	
+	//오늘 하루의 방문자 수를 계산하는 메소드
+	int countByDay();
+	
 }
