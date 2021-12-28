@@ -2,6 +2,7 @@ package com.kh.ttamna.repository.donation;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.ibatis.session.SqlSession;
@@ -36,11 +37,20 @@ public class DonationImgDaoImpl implements DonationImgDao{
 	public DonationImgDto get(int donationNo) {
 		return sqlSession.selectOne("donaImg.getFile", donationNo);
 	}
+	@Override//파일 여러개 가져오기
+	public List<DonationImgDto> getList(int donationNo) {
+		return sqlSession.selectList("donaImg.getFiles", donationNo);
+	}
 	
 	@Override
 	public byte[] load(int donaImgNo) throws IOException {
 		File target = new File(directory, String.valueOf(donaImgNo));
 		byte[] data = FileUtils.readFileToByteArray(target);
 		return data;
+	}
+	
+	@Override
+	public DonationImgDto getFile(int donationImgNo) {
+		return sqlSession.selectOne("donaImg.getImgDto", donationImgNo);
 	}
 }

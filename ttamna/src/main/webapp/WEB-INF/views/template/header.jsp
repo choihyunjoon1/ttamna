@@ -42,7 +42,23 @@
         }
     </style>
     <script>
-    
+    //오늘 방문자수를 찍기 위한 ajax. 페이지가 load 되자마자 실행되야 한다
+    window.addEventListener("load", function(){
+    		
+    	$.ajax({
+    		url : "${root}/ajax/dayLog",
+    		type : "get",
+    		dataType : "text",
+    		success:function(resp){
+    			console.log("방문자수 조회 성공", resp);
+    			//dayLog 클래스가 부여된 창에 조회된 방문자 수를 찍어준다
+    			$(".dayLog").text(resp+"명");
+    		},
+    		error:function(e){
+    			console.log("실패", e);
+    		}
+    	});
+    }); 
     </script>
 </head>
 <body>
@@ -60,6 +76,15 @@
                     <!-- 세션,등급 알아내기 위함 나중에 삭제 -->
                     <h5>uid=${uid}</h5><h5>grade=${grade }</h5>
                 </div>
+            
+	            <!-- 오늘 방문자 수를 찍어 주는 영역 -->
+	           <div class="card" style="width:10rem; height:4.5rem;" align="center">
+				  <div class="card-body">
+				    <h6 class="card-title mb-1">오늘의 방문자</h6>
+				    <div class="card-text dayLog mb-2"></div>
+				  </div>
+				</div>
+				
             </div>
 
         </header>

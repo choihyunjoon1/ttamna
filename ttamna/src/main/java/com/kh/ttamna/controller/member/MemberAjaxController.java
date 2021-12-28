@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.kh.ttamna.entity.member.MemberDto;
 import com.kh.ttamna.repository.member.MemberDao;
+import com.kh.ttamna.repository.member.VisitDao;
 
 @RestController
 @RequestMapping("/ajax")
@@ -15,6 +16,9 @@ public class MemberAjaxController {
 	
 	@Autowired
 	private MemberDao memberDao;
+	
+	@Autowired
+	private VisitDao visitDao;
 	
 	//아이디 중복 검사 ajax
 	@GetMapping("/ajaxId")
@@ -57,4 +61,16 @@ public class MemberAjaxController {
 			return "NNNN";
 		}
 	}
+	
+	//방문자수 조회 전달 ajax
+	@GetMapping("/dayLog")
+	public String dayLog() {
+		int count = visitDao.countByDay();
+		return String.valueOf(count);
+	}
+	
 }
+
+
+
+
