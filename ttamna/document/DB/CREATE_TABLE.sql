@@ -322,4 +322,21 @@ first_payment_date date default sysdate not null,
 pay_times number default 1 not null,
 donation_no references donation(donation_no)
 );
+
 commit;
+-------------------------------------------------------------------------------------------------------------
+
+--휴면회원 테이블
+create table dormancy(
+dor_member_id varchar2(20) primary key,
+dor_member_pw varchar2(60) not null,
+dor_member_nick varchar2(45) not null,
+dor_member_phone char(13) not null,
+dor_member_email varchar2(40) not null,
+dor_member_name varchar2(21) not null,
+dor_member_grade varchar2(12) not null,
+dor_member_join date not null
+);
+commit;
+
+-------------------------------------------------------------------------------------------------------------

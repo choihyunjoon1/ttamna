@@ -239,3 +239,13 @@ TRUNCATE TABLE member;
 DROP TABLE member CASCADE CONSTRAINTS;
 
 COMMIT;
+
+------------------dormancy------------------------
+
+--테이블 데이터 삭제
+TRUNCATE TABLE dormancy;
+
+--테이블 삭제
+DROP TABLE dormancy CASCADE CONSTRAINTS;
+
+COMMIT:
