@@ -49,8 +49,7 @@ COMMIT;
 create sequence adopt_seq;
 create table adopt(
     adopt_no number CONSTRAINT adopt_no_pk PRIMARY KEY,
-    adopt_writer varchar2(20) CONSTRAINT adopt_writer_fk REFERENCES member(member_id) ON DELETE SET NULL
-                                        CONSTRAINT adopt_writer_not_null NOT NULL,
+    adopt_writer varchar2(20) CONSTRAINT adopt_writer_fk REFERENCES member(member_id) ON DELETE SET NULL,
     adopt_title varchar2(150) CONSTRAINT adopt_title_not_null NOT NULL,
     adopt_content varchar2(4000) CONSTRAINT adopt_content_not_null NOT NULL,
     adopt_time date DEFAULT sysdate CONSTRAINT adopt_time_not_null NOT NULL,
