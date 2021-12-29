@@ -34,6 +34,10 @@
 	   			<th>Phone</th>
 	   			<td>${memberDto.memberPhone}</td>
 			  </tr>
+			   <tr>
+	   			<th>Grade</th>
+	   			<td>${memberDto.memberGrade}</td>
+			  </tr>
 			  <tr>
 	   			<th>Join Date</th>
 	   			<td>${memberDto.memberJoin}</td>
