@@ -27,22 +27,12 @@ import lombok.extern.slf4j.Slf4j;
 @Service
 @Slf4j
 public class DormancySchedulerDaoImpl implements DormancySchedulerDao{
-
-	
-	@Autowired
-	private MemberDao memberDao;
 	
 	@Autowired
 	private SqlSession sqlSession;
 	
 	@Autowired
-	private CertificationDao certDao;
-	
-	@Autowired
 	private EmailService service;
-	
-	@Autowired
-	private DormancyDao dorDao;
 	
 	@Override
 	//매일 정각에 멤버테이블에서 조회하여 마지막접속일 후 335일이 지났는지 확인
@@ -101,20 +91,24 @@ public class DormancySchedulerDaoImpl implements DormancySchedulerDao{
 				
 				//dormancyDao를 불러와서 휴면계정 데이터 이동 처리하기.
 				
-				MemberDto findDto = sqlSession.selectOne("member.get",memberDto.getMemberId());
-				String memberId = findDto.getMemberId();
+//				MemberDto findDto = sqlSession.selectOne("member.get",memberDto.getMemberId());
+//				String memberId = findDto.getMemberId();
 				DormancyDto dorDto = new DormancyDto();
-				dorDto.setDorMemberId(findDto.getMemberId());
-				dorDto.setDorMemberNick(findDto.getMemberNick());
-				dorDto.setDorMemberName(findDto.getMemberName());
-				dorDto.setDorMemberEmail(findDto.getMemberEmail());
-				dorDto.setDorMemberPhone(findDto.getMemberPhone());
-				dorDto.setDorMemberJoin(findDto.getMemberJoin());
+				dorDto.setDorMemberId(memberDto.getMemberId());
+				dorDto.setDorMemberNick(memberDto.getMemberNick());
+				dorDto.setDorMemberName(memberDto.getMemberName());
+				dorDto.setDorMemberEmail(memberDto.getMemberEmail());
+				dorDto.setDorMemberPhone(memberDto.getMemberPhone());
+				dorDto.setDorMemberJoin(memberDto.getMemberJoin());
 				dorDto.setDorMemberGrade("휴면");
+				dorDto.setDorPostcode(memberDto.getPostcode());
+				dorDto.setDorAddress(memberDto.getAddress());
+				dorDto.setDorDetailAddress(memberDto.getDetailAddress());
 				//dorDto에 데이터 입력
-				dorDao.insert(dorDto);
+				log.debug("dorDto = {}",dorDto);
+				sqlSession.insert("dormancy.change",dorDto);
 				//기본 멤버테이블에서 데이터 삭제
-				sqlSession.delete("member.quit",memberId);
+				sqlSession.delete("member.quit",memberDto.getMemberId());
 				
 				
 			}

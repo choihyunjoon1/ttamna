@@ -18,6 +18,15 @@ public class DormancyDaoImpl  implements DormancyDao{
 		
 		sqlSession.insert("dormancy.change",dormancyDto);
 	}
+
+	@Override
+	public DormancyDto get(String memberId) {
+		
+		DormancyDto dorDto = sqlSession.selectOne("dormancy.searchDor",memberId);
+		
+		return dorDto;
+	}
+	
 	
 	
 

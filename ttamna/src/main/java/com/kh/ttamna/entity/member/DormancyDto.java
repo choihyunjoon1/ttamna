@@ -14,6 +14,9 @@ public class DormancyDto {
 	private String dorMemberName;
 	private String dorMemberGrade;
 	private Date dorMemberJoin;
+	private String dorPostcode;
+	private String dorAddress;
+	private String dorDetailAddress;
 	
 
 }

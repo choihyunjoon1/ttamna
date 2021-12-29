@@ -11,8 +11,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.kh.ttamna.entity.member.DormancyDto;
 import com.kh.ttamna.entity.member.MemberDto;
 import com.kh.ttamna.entity.member.VisitDto;
+import com.kh.ttamna.repository.member.DormancyDao;
 import com.kh.ttamna.repository.member.MemberDao;
 import com.kh.ttamna.repository.member.VisitDao;
 
@@ -24,6 +26,9 @@ public class MemberController {
 	
 	@Autowired
 	private VisitDao visitDao;
+	
+	@Autowired
+	private DormancyDao dorDao;
 	
 	//회원가입
 	@GetMapping("/join")
@@ -62,8 +67,14 @@ public class MemberController {
 			visitDao.allInOneLog(visitDto);
 			
 			return "redirect:/";
-		}else {
-			return "redirect:login?error";
+		}else {//멤버에서 데이터 못 찾을 때 = 휴면계정에서도 찾는다.
+			DormancyDto findDor = dorDao.get(memberDto.getMemberId());
+			if(findDor != null) {//휴면테이블에서 찾을 때 = 아이디 이메일 받는 페이지 이동
+				return "redirect:login_dor";
+				
+			}else {//휴면에서도 못찾을 때
+				return "redirect:login?error";
+			}
 		}
 		
 	}
