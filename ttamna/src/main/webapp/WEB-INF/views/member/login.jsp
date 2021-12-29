@@ -27,17 +27,23 @@
 				<input type="password" name="memberPw" required class="form-control" placeholder="비밀번호 입력" aria-label="비밀번호 입력" aria-describedby="button-addon2"  autocomplete="off">
 			</div>
 		</div>
-		<div class="row mt-3 mb-5">
+		<div class="row mt-3 mb-1">
 			<div class="d-grid gap-2">
 				<button type="submit" class="btn btn-primary">로그인</button>
 			</div>
 		</div>
+</form>
+		<div class="row mt-1 mb-5">
+			<div class="d-grid gap-2">
+				<a type="button" href="${root}/member/join" class="btn btn-outline-primary">회원가입</a>
+			</div>
+		</div>
+				
 			<div class="d-grid gap-2 d-md-flex justify-content-md-end mt-5 mb-5">
 				<a href="${root}" type="button" class="btn btn-outline-secondary me-md-1">취소</a>
   				<a type="button" href="${root}/find/findId" class="btn btn-outline-primary">아이디 찾기</a>
   				<a type="button" href="${root}/find/findPw" class="btn btn-outline-primary">비밀번호 찾기</a>
 			</div>
-</form>
 		<div class="row">
 			<c:if test="${param.error != null }">
 				<span class="errorMsg">아이디 또는 비밀번호가 틀렸습니다.</span>
