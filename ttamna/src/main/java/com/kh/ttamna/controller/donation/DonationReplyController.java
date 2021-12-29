@@ -40,17 +40,17 @@ public class DonationReplyController {
 
 	@GetMapping("/edit") // 수정페이지로 이동
 	public String edit(@RequestParam int donationReplyNo, Model model) {
-		Map<String, Object> data = new HashMap<>();
-		data.put("donationNo", donationReplyNo);
-		model.addAttribute("donationDto", donationReplyDao);
+		DonationReplyDto donationReplyDto = donationReplyDao.get(donationReplyNo);
+		model.addAttribute("donationReplyDto", donationReplyDto);
 
 		return "donation/reply/edit";
 	}
 
 	@PostMapping("/edit") // 수정요청
-	public String edit(@ModelAttribute DonationReplyDto donationReplyDto) {
-		donationReplyDao.edit2(donationReplyDto);
-		return "redirect:/donation/reply/detail?donationReplyNo=" + donationReplyDto.getDonationReplyNo();
+	public String edit(@RequestParam String memberId, @RequestParam String donationReplyContent,
+						@RequestParam int donationNo) {
+		donationReplyDao.edit(donationReplyContent, memberId);
+		return "redirect:/donation/detail?donationNo=" + donationNo;
 	}
 	// 데이터를 jsp로 보낼때 쓰는 객체는 Model
 	// 앞에 @(어노테이션) 이 붙은 애들은 컨트롤러로 데이터를 받아올 때 쓰는 객체
@@ -63,7 +63,7 @@ public class DonationReplyController {
 	@PostMapping("/insert")//등록요청
 	public String insert(@ModelAttribute DonationReplyDto donationReplyDto) {
 		int donationReplyNo = donationReplyDao.insert(donationReplyDto);
-		return "redirect:/donation/reply/detail?donationReplyNo=" + donationReplyNo;
+		return "redirect:/donation/detail?donationNo=" + donationReplyDto.getDonationNo();
 	}
 	@GetMapping("/list")
 	public String list(Model model) {

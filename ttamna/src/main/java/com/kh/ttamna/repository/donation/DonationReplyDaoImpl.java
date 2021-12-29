@@ -1,6 +1,8 @@
 package com.kh.ttamna.repository.donation;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,7 +33,11 @@ public class DonationReplyDaoImpl implements DonationReplyDao{
 
 	@Override
 	public void edit(String donationReplyContent, String memberId) {
+		Map<String, Object> map = new HashMap<>();
+		map.put("content", donationReplyContent);
+		map.put("memberId", memberId);
 		
+		sqlSession.update("donationReply.update", map);
 		
 	}
 
@@ -50,5 +56,8 @@ public class DonationReplyDaoImpl implements DonationReplyDao{
 		
 	}
 
-	
+	@Override
+	public DonationReplyDto get(int donationReplyNo) {
+		return sqlSession.selectOne("donationReply.get", donationReplyNo);
+	}
 }

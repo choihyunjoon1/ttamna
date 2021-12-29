@@ -38,7 +38,7 @@
 	
 	<!-- 댓글 수정 -->
 	<update id="update" parameterType="map">
-		update donation_reply set donation_reply_content = #{donationReplyContent}
+		update donation_reply set donation_reply_content = #{content}
 		where member_id = #{memberId}
 	</update>
 	
@@ -47,6 +47,10 @@
 		delete from donation_reply where donation_reply_no = ${donationReplyNo}
 	</delete>
 		
+		<!--  수정을 위한 단일조회 -->
+		<select id="get"  parameterType="int" resultType="DonationReplyDto">
+			select * from donation_reply where donation_reply_no = ${donationReplyNo}
+		</select>
 
 </mapper>
 

@@ -14,6 +14,9 @@ public interface DonationReplyDao {
 	public void edit2(DonationReplyDto donationReplyDto);//댓글 수정 Dto로 받아오는 경우
 	
 	public List<DonationReplyDto> list();//댓글리스트
+
+	public DonationReplyDto get(int donationReplyNo);//댓글 단일조회
+	
 	
 
 	
