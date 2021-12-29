@@ -19,6 +19,7 @@ public class LoginInterceptor implements HandlerInterceptor{
 		String memberId = (String) request.getSession().getAttribute("uid");
 		boolean isLogin = memberId != null;
 		if(isLogin) {
+			System.out.println("[Login Interceptor] 회원 확인. 접속 허용");
 			return true;
 		}else {
 			System.out.println("[Login Interceptor] 비회원 접속 차단");

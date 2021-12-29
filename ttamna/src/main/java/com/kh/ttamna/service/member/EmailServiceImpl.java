@@ -62,12 +62,14 @@ public class EmailServiceImpl implements EmailService{
 		
 		//전송(message)
 		sender.send(message);
+		System.out.println("[ 인증 ] 인증번호 이메일 전송 완료");
 		
 		//전송완료 후에 인증 정보를 DB에 저장시킨다
 		CertificationDto certDto = new CertificationDto();
 		certDto.setCertEmail(to);
 		certDto.setCertSerial(randomNumber);
 		certDao.insertOrUpdate(certDto);
+		System.out.println("[ 인증 ] 인증정보 저장 완료");
 	}
 
 }
