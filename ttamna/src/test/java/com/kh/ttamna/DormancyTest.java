@@ -27,22 +27,9 @@ public class DormancyTest {
 	
 	@Test
 	public void findDormancy() {
-		//ID로 단일조회하여 
-		String memberId = "testmember5";
-		
-		MemberDto findDto = sqlSession.selectOne("member.get",memberId);
-		log.debug("findDto = {}",findDto);
-		if(findDto != null) {//멤버 테이블에서 찾았을 때 로그인 진행
-			log.debug("로그인진행");
-			
-		}else {
-			DormancyDto findDorDto = sqlSession.selectOne("dormancy.searchDor",memberId);
-			log.debug("여기서 찾음!");
-			log.debug("findDorDto = {}",findDorDto);
-		}
-
-
-	
+		String dorEmail = "ssuramtest1234@gmail.com";
+		DormancyDto dorDto = sqlSession.selectOne("dormancy.getByEmail",dorEmail);
+		log.debug("dorDto = {}",dorDto);
 	
 
 	}

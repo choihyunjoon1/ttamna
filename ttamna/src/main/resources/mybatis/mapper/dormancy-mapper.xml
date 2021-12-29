@@ -23,5 +23,15 @@
 		select * from dormancy where dor_member_id = #{memberId}
 	</select>
 	
+	<!-- 휴면계정 이메일로 단일조회 -->
+	<select id="getByEmail" parameterType="String" resultType="DormancyDto">
+		select * from dormancy where dor_member_email=#{dorEmail}
+	</select>
+	
+	<!-- 휴면계정 전환 시 삭제 -->
+	<delete id="deleteDor" parameterType="String">
+		delete dormancy where dor_member_id=#{dorMemberId}
+	</delete>
+	
 </mapper>
 

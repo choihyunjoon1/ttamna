@@ -70,7 +70,7 @@ public class MemberController {
 		}else {//멤버에서 데이터 못 찾을 때 = 휴면계정에서도 찾는다.
 			DormancyDto findDor = dorDao.get(memberDto.getMemberId());
 			if(findDor != null) {//휴면테이블에서 찾을 때 = 아이디 이메일 받는 페이지 이동
-				return "redirect:login_dor";
+				return "redirect:/dormancy/login_dor";
 				
 			}else {//휴면에서도 못찾을 때
 				return "redirect:login?error";
@@ -184,7 +184,7 @@ public class MemberController {
 	public String quitSuccess() {
 		return "member/quit_success";
 	}
-	
+
 	
 
 	
