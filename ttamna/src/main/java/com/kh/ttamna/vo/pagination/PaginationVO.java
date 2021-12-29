@@ -14,7 +14,7 @@ public class PaginationVO {
 	private String column;
 	private String keyword;
 	private int count;
-	private int pageSize = 10;
+	private int pageSize = 15;
 	private int blockSize = 10;
 	private int startRow;
 	private int endRow;
