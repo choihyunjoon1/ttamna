@@ -26,6 +26,22 @@ public class DormancyDaoImpl  implements DormancyDao{
 		
 		return dorDto;
 	}
+
+	@Override
+	public DormancyDto getByEmail(String dorEmail) {
+		
+		DormancyDto dorDto = sqlSession.selectOne("dormancy.getByEmail",dorEmail);
+		
+		return dorDto;
+	}
+	//휴면->회원 이동시 데이터 삭제
+
+	@Override
+	public void delete(String dorMemberId) {
+		sqlSession.delete("dormancy.deleteDor",dorMemberId);
+		
+	}
+	
 	
 	
 	

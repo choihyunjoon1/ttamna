@@ -157,6 +157,12 @@ public class MemberDaoImpl  implements MemberDao{
 		}
 	}
 
+	@Override
+	public void changeDor(MemberDto memberDto) {
+		sqlSession.insert("member.insertDor",memberDto);
+		
+	}
+
 
 	
 
