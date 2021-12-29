@@ -56,8 +56,10 @@ public class MemberDaoImpl  implements MemberDao{
 		if(isMatch) {//저장된 Pw와 입력한Pw가 일치할 때 = 로그인 성공
 			//로그인 성공시 접속시간(member_last_log) 업데이트 처리
 			sqlSession.update("member.lastLog", memberDto.getMemberId());
+			System.out.println("[ 로그인 ] 성공.. memberId : " + findDto.getMemberId());
 			return findDto;
 		}else {//일치 하지 않을 때 = 로그인 실패
+			System.out.println("[ 로그인 ] 실패 ");
 			return null;
 		}
 	}
@@ -73,6 +75,7 @@ public class MemberDaoImpl  implements MemberDao{
 	@Override
 	public MemberDto getByNick(String memberNick) {
 		MemberDto memberDto = sqlSession.selectOne("member.getByNick", memberNick);
+		System.out.println("[회원 조회] memberNcik : " + memberNick);
 		return memberDto;
 	}
 
@@ -80,6 +83,7 @@ public class MemberDaoImpl  implements MemberDao{
 	@Override
 	public MemberDto getByEmail(String memberEmail) {
 		MemberDto memberDto = sqlSession.selectOne("member.getByEmail", memberEmail);
+		System.out.println("[회원 조회] memberEmail : " + memberEmail);
 		return memberDto;
 	}
 
@@ -98,12 +102,6 @@ public class MemberDaoImpl  implements MemberDao{
 		
 	}
 	
-	//아이디 중복 검사
-	@Override
-	public int ajaxId(String memberId) {
-		int result = sqlSession.selectOne("member.ajaxId", memberId);
-		return result;
-	}
 	//정보수정
 	@Override
 	public boolean changeInfo(MemberDto memberDto) {
@@ -158,6 +156,7 @@ public class MemberDaoImpl  implements MemberDao{
 			return false;
 		}
 	}
+
 
 	
 

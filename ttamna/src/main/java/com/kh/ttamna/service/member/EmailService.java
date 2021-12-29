@@ -7,7 +7,7 @@ import javax.mail.MessagingException;
 
 public interface EmailService {
 
-	//인증번호 전송 메소트
+	//인증번호 전송 메소드
 	void sendCertification(String to) throws MessagingException, FileNotFoundException, IOException;
 	
 	//휴면알림 메세지 전송 메소드
