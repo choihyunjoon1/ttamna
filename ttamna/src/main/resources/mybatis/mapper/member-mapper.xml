@@ -99,15 +99,29 @@
 		select * from member order by member_id asc
 	</select>
 	
-	<!-- 회원목록 + 페이지네이션 -->
+	<!-- 회원목록 + 검색 + 페이지네이션 -->
 	<select id="listPaging" parameterType="map" resultType="MemberDto">
 		select * from (
 			select rownum rn, TMP.* from (
-				select * from member order by member_id asc
+				select * from member 
+				<where>
+					<if test="column != null and keyword != null">	
+					 and instr(${column},#{keyword}) > 0
+					</if>
+				</where>
+				order by member_id asc
 			)TMP
 		) where rn between #{startRow} and #{endRow}		
 	</select>
 	
+	<select id="count" parameterType="map" resultType="int">
+		select count(*) from member
+		<where>
+			<if test="column != null and keyword != null">	
+			 and instr(${column},#{keyword}) > 0
+			</if>
+		</where>
+	</select>	
 	
 </mapper>
 

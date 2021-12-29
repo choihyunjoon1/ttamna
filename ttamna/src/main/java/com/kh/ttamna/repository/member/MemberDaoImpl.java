@@ -172,16 +172,26 @@ public class MemberDaoImpl  implements MemberDao{
 		return list;
 	}
 	
-	//회원목록+페이지네이션
+	//회원목록 + 검색목록 + 페이지네이션
 	@Override
-	public List<MemberDto> listPaging(int startRow, int endRow) {
-		Map<String, Object> param = new HashMap<>();
+	public List<MemberDto> listPaging(String column, String keyword, int startRow, int endRow) {
+		Map<String,Object> param = new HashMap<>();
+		param.put("column", column);
+		param.put("keyword", keyword);
 		param.put("startRow", startRow);
 		param.put("endRow", endRow);
-		return sqlSession.selectList("'member.listPaging", param);
+		
+		return sqlSession.selectList("member.listPaging", param);
 	}
-
-
+	
+	//페이징에서 마지막 블록을 구하기 위하여 게시글 개수를 구하는 기능
+	@Override
+	public int count(String column, String keyword) {
+		Map<String,Object> param = new HashMap<>();
+		param.put("column",column);
+		param.put("keyword",keyword);
+		return sqlSession.selectOne("member.count",param);
+	}
 	
 
 }
