@@ -15,7 +15,8 @@ public class DormancyDaoImpl  implements DormancyDao{
 	//휴면계정 옮길 때 데이터 추가
 	@Override
 	public void insert(DormancyDto dormancyDto) {
-		sqlSession.insert("member.insert",dormancyDto);
+		
+		sqlSession.insert("dormancy.change",dormancyDto);
 	}
 	
 	

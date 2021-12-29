@@ -15,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
+import com.kh.ttamna.entity.member.DormancyDto;
 import com.kh.ttamna.entity.member.MemberDto;
 import com.kh.ttamna.repository.member.CertificationDao;
 import com.kh.ttamna.repository.member.DormancyDao;
@@ -78,7 +79,7 @@ public class DormancySchedulerDaoImpl implements DormancySchedulerDao{
 	@Scheduled(cron = "0 * * * * *")//테스트용 1분 추기
 	public void changeDormancy() throws FileNotFoundException, IOException, MessagingException {
 		log.debug("휴면계정 회원 찾기 실행");
-		List<MemberDto> findDormancy = sqlSession.selectList("member.findDormancy");
+		List<MemberDto> findDormancy = sqlSession.selectList("member.processDormancy");
 		
 		//있다면 for문으로 돌려서 이메일 전송하기.
 		
@@ -96,10 +97,24 @@ public class DormancySchedulerDaoImpl implements DormancySchedulerDao{
 				String lastTime = df.format(cal.getTime());
 				
 				//이메일 전송하기
-				service.sendDormancy(certEmail, lastTime);
+				service.processDormancy(certEmail, lastTime);
 				
 				//dormancyDao를 불러와서 휴면계정 데이터 이동 처리하기.
 				
+				MemberDto findDto = sqlSession.selectOne("member.get",memberDto.getMemberId());
+				String memberId = findDto.getMemberId();
+				DormancyDto dorDto = new DormancyDto();
+				dorDto.setDorMemberId(findDto.getMemberId());
+				dorDto.setDorMemberNick(findDto.getMemberNick());
+				dorDto.setDorMemberName(findDto.getMemberName());
+				dorDto.setDorMemberEmail(findDto.getMemberEmail());
+				dorDto.setDorMemberPhone(findDto.getMemberPhone());
+				dorDto.setDorMemberJoin(findDto.getMemberJoin());
+				dorDto.setDorMemberGrade(findDto.getMemberGrade());
+				//dorDto에 데이터 입력
+				dorDao.insert(dorDto);
+				//기본 멤버테이블에서 데이터 삭제
+				sqlSession.delete("member.quit",memberId);
 				
 				
 			}

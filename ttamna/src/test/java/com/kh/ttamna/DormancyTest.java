@@ -4,14 +4,13 @@ import org.apache.ibatis.session.SqlSession;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 
+import com.kh.ttamna.entity.member.DormancyDto;
 import com.kh.ttamna.entity.member.MemberDto;
 import com.kh.ttamna.repository.member.MemberDao;
-import com.kh.ttamna.service.member.EmailService;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -38,6 +37,19 @@ public class DormancyTest {
 		String memberId = "testmember9";
 		MemberDto findDto = sqlSession.selectOne("member.get",memberId);
 		log.debug("memberDto = {}",findDto);
+		DormancyDto dorDto = new DormancyDto();
+		dorDto.setDorMemberId(findDto.getMemberId());
+		dorDto.setDorMemberNick(findDto.getMemberNick());
+		dorDto.setDorMemberName(findDto.getMemberName());
+		dorDto.setDorMemberEmail(findDto.getMemberEmail());
+		dorDto.setDorMemberPhone(findDto.getMemberPhone());
+		dorDto.setDorMemberJoin(findDto.getMemberJoin());
+		dorDto.setDorMemberGrade("휴면");
+		log.debug("dorDto = {}",dorDto);
+		sqlSession.insert("dormancy.change",dorDto);
+		//기본 멤버테이블에서 데이터 삭제
+		sqlSession.delete("member.quit",memberId);
+		
 		
 	}
 	
