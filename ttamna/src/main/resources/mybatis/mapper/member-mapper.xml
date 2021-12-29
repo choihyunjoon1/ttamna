@@ -83,6 +83,17 @@
 		select * from member where to_date(sysdate,'yyyy-mm-dd')-to_date(member_last_log,'yyyy-mm-dd')>=3
 	</select>
 	
+	<!-- 휴면 -> 회원테이블로 이동 -->
+	<insert id="insertDor" parameterType="MemberDto">
+		insert into member values(
+					#{memberId}, #{memberPw}, #{memberNick}, 
+					#{memberName}, #{memberPhone}, #{memberEmail},
+					#{memberGrade}, #{memberJoin}, sysdate,
+					#{postcode},#{address},#{detailAddress}
+					)
+	</insert>
+	
+	
 	<!-- 회원 전체 조회 -->
 	<select id="list" resultType="MemberDto">
 		select * from member order by member_id asc

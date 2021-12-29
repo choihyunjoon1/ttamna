@@ -5,12 +5,12 @@
     
     <script>
     var pathName=location.pathname;
-	var index = 15;//ttamna/member/고정
+	var index = 22;//ttamna/member/mypage고정
     var locaMenu = pathName.substring(index);
 	console.log(locaMenu);
 	
     $(function(){
-        if(locaMenu=="mypage"){
+        if(locaMenu=="my_info"){
         	$(".list-group > a").removeClass("active");
         	$(".myInfo").addClass("active");
         }else if(locaMenu=="edit"){

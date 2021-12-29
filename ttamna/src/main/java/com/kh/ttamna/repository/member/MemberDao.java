@@ -29,6 +29,9 @@ public interface MemberDao {
 	//회원탈퇴
 	boolean quit(String memberId, String memberPw);
 	
+	//휴면 -> 멤버 테이블로 데이터 이동
+	void changeDor(MemberDto memberDto);
+		
 	//회원 전체 조회
 	List<MemberDto> list();
 	

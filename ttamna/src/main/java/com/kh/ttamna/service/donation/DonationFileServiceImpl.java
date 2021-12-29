@@ -1,5 +1,6 @@
 package com.kh.ttamna.service.donation;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
@@ -9,10 +10,11 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.kh.ttamna.entity.donation.DonationImgDto;
+import com.kh.ttamna.repository.donation.DonationDao;
 import com.kh.ttamna.repository.donation.DonationImgDao;
 import com.kh.ttamna.vo.donation.DonationUploadVo;
 @Service
-public class DonationUploadServiceImpl implements DonationUploadService{
+public class DonationFileServiceImpl implements DonationFileService{
 
 	@Autowired
 	private SqlSession sqlSession;
@@ -53,4 +55,16 @@ public class DonationUploadServiceImpl implements DonationUploadService{
 		
 		return donationNo;
 	}
+	//저장된 폴더의 위치
+	private File directory = new File("D:/dev/ttamna/donation");
+	@Override
+	public void delete(int donationNo) {
+		List<DonationImgDto> donationImgDtoList = donationImgDao.getList(donationNo);
+		
+		for(DonationImgDto donationImgDto : donationImgDtoList) {
+			File target = new File(directory, String.valueOf(donationImgDto.getDonationImgNo()));
+			target.delete();
+		}
+	}
+	
 }

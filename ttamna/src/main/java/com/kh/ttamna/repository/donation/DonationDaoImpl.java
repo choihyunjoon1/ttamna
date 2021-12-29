@@ -70,4 +70,22 @@ public class DonationDaoImpl implements DonationDao{
 		return sqlSession.selectList("donation.listByPage", map);
 	}
 	
+	@Override//더보기 페이지네이션 검색버전
+	public List<DonationDto> listBySearchPage(int startRow, int endRow, String column, String keyword) {
+		Map<String, Object> map = new HashMap<>();
+		map.put("startRow", startRow);
+		map.put("endRow", endRow);
+		map.put("column", column);
+		map.put("keyword", keyword);
+		
+		return sqlSession.selectList("donation.listByPage", map);
+	}
+	
+	@Override//기부 후 금액 업데이트
+	public boolean funding(int donationNo, int price) {
+		Map<String, Object> map = new HashMap<>();
+		map.put("donationNo", donationNo);
+		map.put("price", price);
+		return sqlSession.update("donation.funding", map) > 0;
+	}
 }
