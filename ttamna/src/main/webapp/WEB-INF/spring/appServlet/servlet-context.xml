@@ -85,7 +85,7 @@
 	 	
 	 	<!--  AdminInterceptor : '관리자' 등급만 접근 가능 -->
 	 	<mvc:interceptor>
-	 		<mvc:mapping path=""/>
+	 		<mvc:mapping path="/admin/**"/>
 	 		<bean class="com.kh.ttamna.interceptor.AdminInterceptor"></bean>
 	 	</mvc:interceptor>
 	 	
