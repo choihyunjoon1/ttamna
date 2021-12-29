@@ -110,7 +110,7 @@ public class DormancySchedulerDaoImpl implements DormancySchedulerDao{
 				dorDto.setDorMemberEmail(findDto.getMemberEmail());
 				dorDto.setDorMemberPhone(findDto.getMemberPhone());
 				dorDto.setDorMemberJoin(findDto.getMemberJoin());
-				dorDto.setDorMemberGrade(findDto.getMemberGrade());
+				dorDto.setDorMemberGrade("휴면");
 				//dorDto에 데이터 입력
 				dorDao.insert(dorDto);
 				//기본 멤버테이블에서 데이터 삭제
