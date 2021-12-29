@@ -1,5 +1,7 @@
 package com.kh.ttamna.repository.member;
 
+import java.util.List;
+
 import com.kh.ttamna.entity.member.MemberDto;
 
 public interface MemberDao {
@@ -26,6 +28,14 @@ public interface MemberDao {
 	
 	//회원탈퇴
 	boolean quit(String memberId, String memberPw);
+	
+	//회원 전체 조회
+	List<MemberDto> list();
+	
+	//회원목록 페이지네이션
+	List<MemberDto> listPaging(int startRow, int endRow);
+	
+	
 	
 	
 }
