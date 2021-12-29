@@ -66,14 +66,29 @@
 	 
 	 <!-- 인터셉터 등록 -->
 	 <mvc:interceptors>
-	 	<mvc:interceptor>
 	 	
-	 		<!-- LoginInterceptor : 비회원 차단 -->
+	 	<!-- LoginInterceptor : 비회원 차단 -->
+	 	<mvc:interceptor>
 	 		<mvc:mapping path="/member/logout"/>
 	 		<mvc:mapping path="/member/mypage/**"/>
 	  		<bean class="com.kh.ttamna.interceptor.LoginInterceptor"></bean>
-	 	
 	 	</mvc:interceptor>
+	 	
+	 	
+	 	<!--  GradeInterceptor : 등급이 '보호소' 또는 '관리자'만 접근 가능 
+	 		예: 기부 게시글 등록/수정/삭제....									-->
+	 	<mvc:interceptor>
+	 		<mvc:mapping path=""/>
+	 		<bean class="com.kh.ttamna.interceptor.GradeInterceptor"></bean>
+	 	</mvc:interceptor>
+	 	
+	 	
+	 	<!--  AdminInterceptor : '관리자' 등급만 접근 가능 -->
+	 	<mvc:interceptor>
+	 		<mvc:mapping path=""/>
+	 		<bean class="com.kh.ttamna.interceptor.AdminInterceptor"></bean>
+	 	</mvc:interceptor>
+	 	
 	 </mvc:interceptors>
 	 
 	 

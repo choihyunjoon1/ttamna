@@ -134,6 +134,11 @@
          <li class="nav-item">
           <a class="nav-link active docs-creator" href="${root}/member/mypage/my_info">MY PAGE</a>
          </li>
+         	<c:if test="${admin}">
+         	  <li class="nav-item">
+	           <a class="nav-link active docs-creator" href="${root}/admin/main">ADMIN</a>
+	          </li>
+         	</c:if>
 		 <li class="nav-item ms-3">
           <a class="nav-link active docs-creator" href="${root }/member/logout">LOGOUT</a>
          </li>

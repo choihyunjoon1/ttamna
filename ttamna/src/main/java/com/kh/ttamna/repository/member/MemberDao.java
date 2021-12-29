@@ -1,5 +1,7 @@
 package com.kh.ttamna.repository.member;
 
+import java.util.List;
+
 import com.kh.ttamna.entity.member.MemberDto;
 
 public interface MemberDao {
@@ -29,6 +31,14 @@ public interface MemberDao {
 	
 	//휴면 -> 멤버 테이블로 데이터 이동
 	void changeDor(MemberDto memberDto);
+		
+	//회원 전체 조회
+	List<MemberDto> list();
+	
+	//회원목록 페이지네이션
+	List<MemberDto> listPaging(int startRow, int endRow);
+	
+	
 	
 	
 }

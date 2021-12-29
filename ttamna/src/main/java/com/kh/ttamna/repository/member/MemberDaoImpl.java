@@ -1,6 +1,7 @@
 package com.kh.ttamna.repository.member;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
@@ -157,10 +158,27 @@ public class MemberDaoImpl  implements MemberDao{
 		}
 	}
 
+
 	@Override
 	public void changeDor(MemberDto memberDto) {
 		sqlSession.insert("member.insertDor",memberDto);
 		
+	}
+
+	//회원 전체 조회
+	@Override
+	public List<MemberDto> list() {
+		List<MemberDto> list = sqlSession.selectList("member.list");
+		return list;
+	}
+	
+	//회원목록+페이지네이션
+	@Override
+	public List<MemberDto> listPaging(int startRow, int endRow) {
+		Map<String, Object> param = new HashMap<>();
+		param.put("startRow", startRow);
+		param.put("endRow", endRow);
+		return sqlSession.selectList("'member.listPaging", param);
 	}
 
 
