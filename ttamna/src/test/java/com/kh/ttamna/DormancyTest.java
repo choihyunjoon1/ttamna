@@ -4,13 +4,12 @@ import org.apache.ibatis.session.SqlSession;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 
+import com.kh.ttamna.entity.member.DormancyDto;
 import com.kh.ttamna.entity.member.MemberDto;
-import com.kh.ttamna.repository.member.MemberDao;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -21,33 +20,30 @@ import lombok.extern.slf4j.Slf4j;
 })
 @WebAppConfiguration
 @Slf4j
-public class Test01 {
+public class DormancyTest {
 	@Autowired
 	private SqlSession sqlSession;
-	
-	@Autowired
-	private MemberDao memberDao;
-	
-	@Autowired
-	private PasswordEncoder encoder;
+
 	
 	@Test
-	public void loginTest() {
-		MemberDto memberDto = new MemberDto();
-		String inputId = "testmember5";
-		String inputPw = "testmember5";
-		String inputNick = "테스터오육";
+	public void findDormancy() {
+		//ID로 단일조회하여 
+		String memberId = "testmember5";
 		
-		//입력한 ID로 단일조회 
-		MemberDto findDto = sqlSession.selectOne("member.get",inputId);
-		String savePw = findDto.getMemberPw();
-		boolean samePw = encoder.matches(inputPw, savePw);
-		if(samePw) {
-			findDto.setMemberNick(inputNick);
-			boolean changeInfo = memberDao.changeInfo(findDto);
-			log.debug("changeInfo = {}",changeInfo);
-		}
+		MemberDto findDto = sqlSession.selectOne("member.get",memberId);
+		log.debug("findDto = {}",findDto);
+		if(findDto != null) {//멤버 테이블에서 찾았을 때 로그인 진행
+			log.debug("로그인진행");
 			
-	}
+		}else {
+			DormancyDto findDorDto = sqlSession.selectOne("dormancy.searchDor",memberId);
+			log.debug("여기서 찾음!");
+			log.debug("findDorDto = {}",findDorDto);
+		}
 
+
+	
+	
+
+	}
 }

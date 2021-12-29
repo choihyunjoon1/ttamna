@@ -69,7 +69,6 @@ public class MemberDaoImpl  implements MemberDao{
 	@Override
 	public MemberDto get(String memberId) {
 		MemberDto memberDto = sqlSession.selectOne("member.get",memberId);
-		System.out.println("[회원 조회] memberId : " + memberId);
 		return memberDto;
 	}
 
