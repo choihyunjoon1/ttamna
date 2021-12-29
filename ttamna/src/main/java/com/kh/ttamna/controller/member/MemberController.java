@@ -11,8 +11,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.kh.ttamna.entity.member.DormancyDto;
 import com.kh.ttamna.entity.member.MemberDto;
 import com.kh.ttamna.entity.member.VisitDto;
+import com.kh.ttamna.repository.member.DormancyDao;
 import com.kh.ttamna.repository.member.MemberDao;
 import com.kh.ttamna.repository.member.VisitDao;
 
@@ -24,6 +26,9 @@ public class MemberController {
 	
 	@Autowired
 	private VisitDao visitDao;
+	
+	@Autowired
+	private DormancyDao dorDao;
 	
 	//회원가입
 	@GetMapping("/join")
@@ -62,8 +67,14 @@ public class MemberController {
 			visitDao.allInOneLog(visitDto);
 			
 			return "redirect:/";
-		}else {
-			return "redirect:login?error";
+		}else {//멤버에서 데이터 못 찾을 때 = 휴면계정에서도 찾는다.
+			DormancyDto findDor = dorDao.get(memberDto.getMemberId());
+			if(findDor != null) {//휴면테이블에서 찾을 때 = 아이디 이메일 받는 페이지 이동
+				return "redirect:/dormancy/login_dor";
+				
+			}else {//휴면에서도 못찾을 때
+				return "redirect:login?error";
+			}
 		}
 		
 	}
@@ -75,87 +86,87 @@ public class MemberController {
 		return "redirect:/";
 	}
 	//마이페이지
-	@RequestMapping("/mypage")
+	@RequestMapping("/mypage/my_info")
 	public String mypage(HttpSession session, Model model) {
 		String memberId = (String)session.getAttribute("uid");
 		MemberDto memberDto = memberDao.get(memberId);
 		
 		model.addAttribute("memberDto",memberDto);
 		
-		return "member/mypage";
+		return "member/mypage/my_info";
 	}
 	//정보수정페이지
-	@GetMapping("/edit")
+	@GetMapping("/mypage/edit")
 	public String edit(HttpSession session,Model model) {
 		String memberId = (String)session.getAttribute("uid");
 		MemberDto memberDto = memberDao.get(memberId);
 		model.addAttribute("memberDto",memberDto);
-		return "member/edit";
+		return "member/mypage/edit";
 	}
-	@PostMapping("/edit")
+	@PostMapping("/mypage/edit")
 	public String edit(HttpSession session, @ModelAttribute MemberDto memberDto) {
 		String memberId = (String)session.getAttribute("uid");
 		memberDto.setMemberId(memberId);
 		
 		boolean result = memberDao.changeInfo(memberDto);
 		if(result) {
-			return "redirect:edit_success";
+			return "redirect:/member/mypage/edit_success";
 		}else {
-			return "redirect:edit?error";
+			return "redirect:/member/mypage/edit?error";
 		}
 		
 	}
-	@RequestMapping("/edit_success")
+	@RequestMapping("/mypage/edit_success")
 	public String editSuccess() {
-		return "member/edit_success";
+		return "member/mypage/edit_success";
 	}
 	//비밀번호 변경 페이지
-	@GetMapping("/change_pw")
+	@GetMapping("/mypage/change_pw")
 	public String changePw() {
-		return "member/change_pw";
+		return "member/mypage/change_pw";
 	}
-	@PostMapping("/change_pw")
+	@PostMapping("/mypage/change_pw")
 	public String changePw(@RequestParam String memberPw, @RequestParam String memberNewPw,HttpSession session) {
 		String memberId = (String)session.getAttribute("uid");
 		boolean result = memberDao.changePw(memberId,memberPw,memberNewPw);
 		if(result) {
-			return "redirect:change_pw_success";
+			return "redirect:/member/mypage/change_pw_success";
 		}else {
-			return "redirect:change_pw?error";
+			return "redirect:/member/mypage/change_pw?error";
 		}
 	}
-	@RequestMapping("/change_pw_success")
+	@RequestMapping("/mypage/change_pw_success")
 	public String changePwSuccess() {
-		return "member/change_pw_success";
+		return "member/mypage/change_pw_success";
 	}
 	//내 게시글 보기
-	@RequestMapping("/my_board")
+	@RequestMapping("/mypage/my_board")
 	public String myBoard() {
-		return "member/my_board";
+		return "member/mypage/my_board";
 	}
 	//주문내역
-	@RequestMapping("/my_order")
+	@RequestMapping("/mypage/my_order")
 	public String myOrder() {
-		return "member/my_order";
+		return "member/mypage/my_order";
 	}
 	//장바구니
-	@RequestMapping("/my_basket")
+	@RequestMapping("/mypage/my_basket")
 	public String myBasket() {
-		return "member/my_basket";
+		return "member/mypage/my_basket";
 	}
 	//기부내역
-	@RequestMapping("/my_donation")
+	@RequestMapping("/mypage/my_donation")
 	public String myDonation() {
-		return "member/my_donation";
+		return "member/mypage/my_donation";
 	}
 	//회원탈퇴
-	@GetMapping("/quit")
+	@GetMapping("/mypage/quit")
 	public String quit(HttpSession session,Model model) {
 		String memberId = (String)session.getAttribute("uid");
 		model.addAttribute("memberId",memberId);
-		return "member/quit";
+		return "member/mypage/quit";
 	}
-	@PostMapping("/quit")
+	@PostMapping("/mypage/quit")
 	public String quit(@RequestParam String memberPw,HttpSession session) {
 		String memberId = (String)session.getAttribute("uid");
 		
@@ -164,16 +175,16 @@ public class MemberController {
 			//회원탈퇴 진행하면 세션,등급 삭제 후 회원탈퇴 성공 페이지로
 			session.removeAttribute("uid");
 			session.removeAttribute("grade");
-			return "redirect:quit_success";
+			return "redirect:/member/quit_success";
 		}else {
-			return "redirect:quit?error";
+			return "redirect:/member/mypage/quit?error";
 		}
 	}
 	@RequestMapping("/quit_success")
 	public String quitSuccess() {
 		return "member/quit_success";
 	}
-	
+
 	
 
 	

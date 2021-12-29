@@ -49,8 +49,7 @@ COMMIT;
 create sequence adopt_seq;
 create table adopt(
     adopt_no number CONSTRAINT adopt_no_pk PRIMARY KEY,
-    adopt_writer varchar2(20) CONSTRAINT adopt_writer_fk REFERENCES member(member_id) ON DELETE SET NULL
-                                        CONSTRAINT adopt_writer_not_null NOT NULL,
+    adopt_writer varchar2(20) CONSTRAINT adopt_writer_fk REFERENCES member(member_id) ON DELETE SET NULL,
     adopt_title varchar2(150) CONSTRAINT adopt_title_not_null NOT NULL,
     adopt_content varchar2(4000) CONSTRAINT adopt_content_not_null NOT NULL,
     adopt_time date DEFAULT sysdate CONSTRAINT adopt_time_not_null NOT NULL,
@@ -60,8 +59,10 @@ create table adopt(
     adopt_kind varchar2(30) CONSTRAINT adopt_kind_not_null NOT NULL,
     adopt_place varchar2(60) CONSTRAINT adopt_place_not_null NOT NULL
 );
-
+--adopt_writer 외래키 on delete set null 인데 not null조건을 넣어버림... 그래서 제약조건 삭제
+ALTER TABLE adopt DROP CONSTRAINT adopt_writer_not_null;
 COMMIT;
+
 -- adopt_no : 시퀀스. 기본키
 -- adopt_writer : 작성자, 회원 기본키 참조 외래키
 -- adopt_start : 공고 시작일. 기본값 sysdate
@@ -263,6 +264,21 @@ cart_no references cart(cart_no), -- 장바구니번호
 shop_no references shop(shop_no) on delete cascade, -- 상품번호
 history_time date default sysdate not null -- 주문일자
 );
+-- member_id의 외래키 제약조건 날리기
+ALTER TABLE history DROP CONSTRAINT member_id_fk;
+
+-- member_id 외래키 제약조건 추가
+ALTER TABLE history 
+ADD CONSTRAINT member_id_fk FOREIGN KEY (member_id) 
+REFERENCES member(member_id) on delete cascade;
+
+-- shop_no의 외래키 제약조건 날리기
+ALTER TABLE history DROP CONSTRAINT shop_no_fk;
+
+-- shop_no의 외래키 제약조건 추가
+ALTER TABLE history 
+ADD CONSTRAINT shop_no_fk FOREIGN KEY (shop_no) 
+REFERENCES shop(shop_no) on delete cascade;
 
 commit;
 

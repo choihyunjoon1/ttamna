@@ -132,7 +132,7 @@
         </c:if>
         <c:if test="${login}">
          <li class="nav-item">
-          <a class="nav-link active docs-creator" href="${root}/member/mypage">MY PAGE</a>
+          <a class="nav-link active docs-creator" href="${root}/member/mypage/my_info">MY PAGE</a>
          </li>
 		 <li class="nav-item ms-3">
           <a class="nav-link active docs-creator" href="${root }/member/logout">LOGOUT</a>

@@ -5,14 +5,14 @@
     
     <script>
     var pathName=location.pathname;
-	var index = 15;//ttamna/member/고정
+	var index = 22;//ttamna/member/mypage고정
     var locaMenu = pathName.substring(index);
 	console.log(locaMenu);
 	
     $(function(){
-        if(locaMenu=="mypage"){
+        if(locaMenu=="my_info"){
         	$(".list-group > a").removeClass("active");
-        	$(".mypage").addClass("active");
+        	$(".myInfo").addClass("active");
         }else if(locaMenu=="edit"){
         	$(".list-group > a").removeClass("active");
         	$(".edit").addClass("active");
@@ -43,14 +43,14 @@
 <div class="col-3">
 	<div class="list-group">
 	<!-- 클릭할 때 해당 메뉴 class에 active 붙이기 -->
-		<a href = "${root }/member/mypage" class="list-group-item list-group-item-action mypage" >내 정보</a>
-		<a href = "${root }/member/edit" class="list-group-item list-group-item-action edit">정보 수정</a>
-		<a href = "${root }/member/change_pw" class="list-group-item list-group-item-action  changePw">비밀번호 변경</a>
-		<a href = "${root }/member/my_board" class="list-group-item list-group-item-action  myBoard">내 게시글 보기</a>
-		<a href = "${root }/member/my_donation" class="list-group-item list-group-item-action  myDonation">기부 목록</a>
-		<a href = "${root }/member/my_order" class="list-group-item list-group-item-action  myOrder">주문 내역</a>
-		<a href = "${root }/member/my_basket" class="list-group-item list-group-item-action  myBasket">장바구니</a>
-		<a href = "${root }/member/quit" class="list-group-item list-group-item-action  quit">회원탈퇴</a>
+		<a href = "${root }/member/mypage/my_info" class="list-group-item list-group-item-action myInfo" >내 정보</a>
+		<a href = "${root }/member/mypage/edit" class="list-group-item list-group-item-action edit">정보 수정</a>
+		<a href = "${root }/member/mypage/change_pw" class="list-group-item list-group-item-action  changePw">비밀번호 변경</a>
+		<a href = "${root }/member/mypage/my_board" class="list-group-item list-group-item-action  myBoard">내 게시글 보기</a>
+		<a href = "${root }/member/mypage/my_donation" class="list-group-item list-group-item-action  myDonation">기부 목록</a>
+		<a href = "${root }/member/mypage/my_order" class="list-group-item list-group-item-action  myOrder">주문 내역</a>
+		<a href = "${root }/member/mypage/my_basket" class="list-group-item list-group-item-action  myBasket">장바구니</a>
+		<a href = "${root }/member/mypage/quit" class="list-group-item list-group-item-action  quit">회원탈퇴</a>
 	</div>
 </div>
 	

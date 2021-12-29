@@ -12,7 +12,7 @@ import com.kh.ttamna.repository.member.VisitDao;
 
 @RestController
 @RequestMapping("/ajax")
-public class MemberAjaxController {
+public class AjaxController {
 	
 	@Autowired
 	private MemberDao memberDao;
@@ -26,10 +26,10 @@ public class MemberAjaxController {
 		//전달받은 아이디로 조회한 결과가 null이 아니면 사용중인 아이디 = 중복아이디 NNNN전달
 		MemberDto memberDto = memberDao.get(inputId);
 		if(memberDto == null) {
-			System.out.println("아이디 사용가능. return YYYY");
+			System.out.println("[ 중복검사 ] 아이디 사용가능. return YYYY");
 			return "YYYY";
 		}else {
-			System.out.println("아이디 중복. return NNNN");
+			System.out.println("[ 중복검사 ] 아이디 중복. return NNNN");
 			return "NNNN";
 		}
 	}
@@ -40,10 +40,10 @@ public class MemberAjaxController {
 		//전달받은 닉네임으로 조회한 결과가 null이 아니면 사용중인 닉네임 = 중복닉네임 NNNN전달
 		MemberDto memberDto = memberDao.getByNick(inputNick);
 		if(memberDto == null) {
-			System.out.println("닉네임 사용가능. return YYYY");
+			System.out.println("[ 중복검사 ] 닉네임 사용가능. return YYYY");
 			return "YYYY";
 		}else {
-			System.out.println("닉네임 중복. return NNNN");
+			System.out.println("[ 중복검사 ] 닉네임 중복. return NNNN");
 			return "NNNN";
 		}
 	}
@@ -54,10 +54,10 @@ public class MemberAjaxController {
 		//전달받은 이메일로 조회한 결과가 null이 아니면 사용중인 이메일 = 중복이메일 NNNN전달
 		MemberDto memberDto = memberDao.getByEmail(inputEmail);
 		if(memberDto == null) {
-			System.out.println("이메일 사용가능. return YYYY");
+			System.out.println("[ 중복검사 ] 이메일 사용가능. return YYYY");
 			return "YYYY";
 		}else {
-			System.out.println("이메일 중복. return NNNN");
+			System.out.println("[ 중복검사 ] 이메일 중복. return NNNN");
 			return "NNNN";
 		}
 	}

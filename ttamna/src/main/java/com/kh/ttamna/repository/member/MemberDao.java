@@ -20,14 +20,15 @@ public interface MemberDao {
 	//정보 변경(비번,정보)
 	boolean changeInfo(MemberDto memberDto);
 	boolean changePw(String memberId, String memberPw, String memberNewPw);
-	//아이디 중복검사
-	public int ajaxId(String memberId);
-	
+
 	//비밀번호 찾기 인증 성공 후 비밀번호 재설정
 	boolean resetPw(String memberId, String resetPw);
 	
 	//회원탈퇴
 	boolean quit(String memberId, String memberPw);
+	
+	//휴면 -> 멤버 테이블로 데이터 이동
+	void changeDor(MemberDto memberDto);
 	
 	
 }
