@@ -25,7 +25,7 @@ import com.kh.ttamna.entity.donation.DonationDto;
 import com.kh.ttamna.entity.donation.DonationImgDto;
 import com.kh.ttamna.repository.donation.DonationDao;
 import com.kh.ttamna.repository.donation.DonationImgDao;
-import com.kh.ttamna.service.donation.DonationUploadService;
+import com.kh.ttamna.service.donation.DonationFileService;
 import com.kh.ttamna.vo.donation.DonationUploadVo;
 
 @Controller
@@ -39,16 +39,42 @@ public class DonationController {
 	@Autowired
 	private DonationImgDao donationImgDao;
 	
+	@Autowired
+	private DonationFileService donationService;
 	
 	@RequestMapping("/")//목록페이지
-	public String defaultList(Model model) {
-		model.addAttribute("list", donationDao.list());
+	public String defaultList(@RequestParam(required = false) String column,
+										@RequestParam(required = false) String keyword,
+			Model model) {
+		
+		if(column != null && keyword != null) {
+			Map<String, Object> data = new HashMap<>();
+			data.put("column", column);
+			data.put("keyword", keyword);
+			
+			model.addAttribute("list", donationDao.detailOrSearch(data));
+			model.addAttribute("column", column);
+			model.addAttribute("keyword", keyword);
+		} else {
+			model.addAttribute("list", donationDao.list());
+		}
 		
 		return "donation/list";
 	}
 	@RequestMapping("/list")//목록페이지
-	public String list(Model model) {
-		model.addAttribute("list", donationDao.list());
+	public String list(@RequestParam(required = false) String column,
+							@RequestParam(required = false) String keyword,
+			Model model) {
+		
+		if(column != null && keyword != null) {
+			Map<String, Object> data = new HashMap<>();
+			data.put("column", column);
+			data.put("keyword", keyword);
+			
+			model.addAttribute("list", donationDao.detailOrSearch(data));
+		} else {
+			model.addAttribute("list", donationDao.list());
+		}
 		
 		return "donation/list";
 	}
@@ -64,21 +90,9 @@ public class DonationController {
 		return "donation/detail";
 	}
 	
-	@PostMapping("/search")//검색
-	public String search(@RequestParam String column, @RequestParam String keyword,
-								Model model) {
-		Map<String, Object> data = new HashMap<>();
-		data.put("column", column);
-		data.put("keyword", keyword);
-		
-		model.addAttribute("list", donationDao.detailOrSearch(data));
-		
-		return "donation/list";
-	}
-	
-	
 	@GetMapping("/delete")//삭제요청
 	public String delete(@RequestParam int donationNo) {
+		donationService.delete(donationNo);
 		donationDao.delete(donationNo);
 		
 		return "redirect:/donation/list";
@@ -110,8 +124,7 @@ public class DonationController {
 //		
 //		return "redirect:/donation/detail?donationNo=" + donationNo;
 //	}
-	@Autowired
-	private DonationUploadService donationService;
+	
 	@PostMapping("/insert")//등록요청 - 단일파일업로드
 	public String insert(@ModelAttribute DonationUploadVo donationUploadVo) throws IllegalStateException, IOException {
 		int donationNo = donationService.insert(donationUploadVo);
@@ -123,12 +136,18 @@ public class DonationController {
 	@ResponseBody
 	public List<DonationDto> more(
 				@RequestParam(required =false, defaultValue = "1") int page,
-				@RequestParam(required =false, defaultValue = "12") int size
+				@RequestParam(required =false, defaultValue = "12") int size,
+				@RequestParam(required =false, defaultValue = "") String column,
+				@RequestParam(required =false, defaultValue = "") String keyword
 			){
 		int endRow = page* size;
 		int startRow = endRow - (size - 1);
+		if(column != null && keyword != null && !column.equals("") && !keyword.equals("")) {
+			return donationDao.listBySearchPage(startRow, endRow, column, keyword);
+		} else {
+			return donationDao.listByPage(startRow, endRow);
+		}
 		
-		return donationDao.listByPage(startRow, endRow);
 	}
 	
 	//파일 다운로드처리

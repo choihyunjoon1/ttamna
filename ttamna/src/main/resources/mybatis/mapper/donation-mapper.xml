@@ -106,9 +106,16 @@
 		select * from(
 		    select rownum rn, tmp.* from(
 		        select * from donation
+		        <if test="column != null and keyword != null">
+		        	where instr(${column}, #{keyword}) > 0
+		        </if>
 		        order by donation_no desc
 		        )tmp
 		)where rn between ${startRow} and ${endRow}
 	</select>
+	
+	<update id="funding" parameterType="map">
+		update donation set donation_now_fund = donation_now_fund + ${price} where donation_no = ${donationNo}
+	</update>
 </mapper>
 
