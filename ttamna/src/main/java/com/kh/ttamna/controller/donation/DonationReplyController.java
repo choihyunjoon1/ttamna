@@ -1,5 +1,6 @@
 package com.kh.ttamna.controller.donation;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.kh.ttamna.entity.donation.DonationReplyDto;
 import com.kh.ttamna.repository.donation.DonationReplyDao;
@@ -26,9 +28,11 @@ public class DonationReplyController {
 	private DonationReplyDao donationReplyDao;
 	
 	@GetMapping("/delete")
-	public String home() {
+	public String home(@RequestParam int donationReplyNo,
+					@RequestParam int donationNo) {
+		donationReplyDao.delete(donationReplyNo);
 		
-		return "donation/reply/delete";
+		return "redirect:/donation/detail?donationNo="+donationNo;
 	}
 	
 	@PostMapping("/delete")
@@ -38,19 +42,17 @@ public class DonationReplyController {
 		return "donation/";
 	}
 
-	@GetMapping("/edit") // 수정페이지로 이동
-	public String edit(@RequestParam int donationReplyNo, Model model) {
-		DonationReplyDto donationReplyDto = donationReplyDao.get(donationReplyNo);
-		model.addAttribute("donationReplyDto", donationReplyDto);
-
-		return "donation/reply/edit";
-	}
+	
 
 	@PostMapping("/edit") // 수정요청
-	public String edit(@RequestParam String memberId, @RequestParam String donationReplyContent,
+	@ResponseBody
+	public List<String> edit(@RequestParam String replyContent,
+						@RequestParam int replyNo,
 						@RequestParam int donationNo) {
-		donationReplyDao.edit(donationReplyContent, memberId);
-		return "redirect:/donation/detail?donationNo=" + donationNo;
+		donationReplyDao.edit3(replyNo, replyContent);
+		List<String> returnCotent = new ArrayList<String>();
+		returnCotent.add(replyContent);
+		return returnCotent;
 	}
 	// 데이터를 jsp로 보낼때 쓰는 객체는 Model
 	// 앞에 @(어노테이션) 이 붙은 애들은 컨트롤러로 데이터를 받아올 때 쓰는 객체
@@ -62,7 +64,7 @@ public class DonationReplyController {
 	
 	@PostMapping("/insert")//등록요청
 	public String insert(@ModelAttribute DonationReplyDto donationReplyDto) {
-		int donationReplyNo = donationReplyDao.insert(donationReplyDto);
+		donationReplyDao.insert(donationReplyDto);
 		return "redirect:/donation/detail?donationNo=" + donationReplyDto.getDonationNo();
 	}
 	@GetMapping("/list")

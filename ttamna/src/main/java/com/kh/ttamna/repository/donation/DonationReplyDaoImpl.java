@@ -19,7 +19,7 @@ public class DonationReplyDaoImpl implements DonationReplyDao{
 	@Override
 	public int insert(DonationReplyDto donationReplyDto) {
 		int donationReplyNo = sqlSession.selectOne("donationReply.seq");
-		donationReplyDto.setDonationNo(donationReplyNo);
+		donationReplyDto.setDonationReplyNo(donationReplyNo);
 		sqlSession.insert("donationReply.insert", donationReplyDto);
 		
 		return donationReplyNo;
@@ -59,5 +59,19 @@ public class DonationReplyDaoImpl implements DonationReplyDao{
 	@Override
 	public DonationReplyDto get(int donationReplyNo) {
 		return sqlSession.selectOne("donationReply.get", donationReplyNo);
+	}
+	
+	@Override//해당 게시판의 댓글만 내용 조회
+	public List<DonationReplyDto> list(int donationNo) {
+		return sqlSession.selectList("donationReply.listByDetail", donationNo);
+	}
+	
+	@Override//댓글 수정
+	public void edit3(int replyNo, String replyContent) {
+		Map<String, Object> map = new HashMap<>();
+		map.put("replyNo", replyNo);
+		map.put("replyContent", replyContent);
+		
+		sqlSession.update("donationReply.edit3", map);
 	}
 }

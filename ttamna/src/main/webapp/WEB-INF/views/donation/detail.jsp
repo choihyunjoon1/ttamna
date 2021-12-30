@@ -118,7 +118,7 @@
                 <div class="replyDto"><h4>
                 ${replyDto.donationReplyNo}
                     | ${replyDto.memberId} | <span id="content${replyDto.donationReplyNo}">${replyDto.donationReplyContent}</span>
-                    ${replyDto.donationReplyTime}
+                   | ${replyDto.donationReplyTime}
                 </h4>
                 </div>
                     <c:if test="${sessionScope.uid == replyDto.memberId}">
