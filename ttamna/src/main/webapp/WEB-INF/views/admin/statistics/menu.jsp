@@ -8,7 +8,7 @@
 
 <div class="container-700 container-center">
 	 
-	 <div class="mt-4 mb-5"><h3>STATISTICS MENU</h3></div>
+	 <div class="mt-5 mb-3"><h3>STATISTICS MENU</h3></div>
 		
 		<div class="list-group">
 		  <a href="#" class="list-group-item list-group-item-action p-3" aria-current="true">
