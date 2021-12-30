@@ -2,6 +2,61 @@
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+<script>
+	
+	$(function(){
+		$(".edit").hide();
+		$(".change-cancel").hide();
+		$(".content-change-real").hide();
+		$(".content-change").click(function(e){
+			e.preventDefault();
+			$(this).prev().show();
+			$(this).next().next().show();
+			$(this).prev().prev().hide();
+			$(this).next().show();
+			$(this).hide();
+		});
+		$(".change-cancel").click(function(e){
+			e.preventDefault();
+			$(".content-change").show();
+			$(".edit").hide();
+			$(".replyDto").show();
+			$(".change-cancel").hide();
+			$(".content-change-real").hide();
+		});
+		
+		$(".content-change-real").click(function(e){
+			e.preventDefault();
+			var number = $(this).attr("data-data")
+			
+			var replyNo = $("#replyNo"+number).val();
+			var replyContent = $("#replyContent"+number).val();
+			var donationNo = $("#donationNo"+number).val();
+			
+			$.ajax({
+				url : "${pageContext.request.contextPath}/donation/reply/edit", 
+				type : "post",
+				data : {
+					replyNo : replyNo ,
+					replyContent : replyContent,
+					donationNo : donationNo
+				},
+				success:function(resp){
+					$("#content"+replyNo).text("");
+					$("#content"+replyNo).text(resp[0]);
+					$(".change-cancel").click();
+				},
+				error:function(e){
+					console.log("실패했어용");
+				}
+			});
+		});
+	});
+</script>
+<style>
+
+</style>
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 
 <div class="container">
@@ -55,7 +110,49 @@
 				</c:forEach>
 			</form>
 		</div>
+		
+
+<div class="col-12">
+        <form action="reply/edit" method="post">
+            <c:forEach var="replyDto" items="${replyDto}">
+                <div class="replyDto"><h4>
+                ${replyDto.donationReplyNo}
+                    | ${replyDto.memberId} | <span id="content${replyDto.donationReplyNo}">${replyDto.donationReplyContent}</span>
+                    ${replyDto.donationReplyTime}
+                </h4>
+                </div>
+                    <c:if test="${sessionScope.uid == replyDto.memberId}">
+					<div class="edit">
+						<input type="hidden" value="${replyDto.donationNo}" id="donationNo${replyDto.donationReplyNo}">
+						<input type="hidden" value="${replyDto.donationReplyNo}" id="replyNo${replyDto.donationReplyNo}">
+						<textarea id="replyContent${replyDto.donationReplyNo}">${replyDto.donationReplyContent}</textarea>
+					</div>
+                            <a href="#" class="content-change btn btn-primary">수정</a>
+                            <a href="#" class="content-change-real btn btn-primary" data-data="${replyDto.donationReplyNo}">수정하기</a>
+                            <a href="#" class="change-cancel btn btn-primary">취소</a> 
+                            <a href="reply/delete?donationReplyNo=${replyDto.donationReplyNo}&donationNo=${replyDto.donationNo}" class="btn btn-primary">삭제하기</a>
+
+                    </c:if>
+               
+            </c:forEach>
+        </form>
+    </div>
+
+    <div class="col-12">
+        <form action="reply/insert" method="post">
+            <c:forEach var="donationDto" items="${donationDto}">
+                <input type="hidden" name="donationNo"
+                    value="${donationDto.donationNo}">
+           <input type="hidden" name="memberId" value="${sessionScope.uid}">
+            </c:forEach>
+            댓글 쓰기<input type="text" name="donationReplyContent"> <input
+                type="submit" value="등록">
+        </form>
+    </div>
+    
 	</div>
 </div>
+
+
 
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>
