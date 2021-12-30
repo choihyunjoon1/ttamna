@@ -12,4 +12,6 @@ public interface AutoDonationDao {
 	
 	//정기결제가 진행될 때 마다 payTimes를 +1씩 증가시키는 메소드
 	void payTimesUpdate(int autoNo);
+	
+	List<AutoPayMentDto> listByMember(String memberId);//특정 회원의 정기결제 목록 불러오기
 }

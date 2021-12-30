@@ -2,6 +2,7 @@ package com.kh.ttamna.service.kakaopay;
 
 import java.net.URISyntaxException;
 
+import com.kh.ttamna.vo.kakaopay.KaKaoPayAutoPayMentSearchResponseVo;
 import com.kh.ttamna.vo.kakaopay.KakaoPayApproveRequestVo;
 import com.kh.ttamna.vo.kakaopay.KakaoPayApproveResponseVo;
 import com.kh.ttamna.vo.kakaopay.KakaoPayAutoApproveRequestVo;
@@ -29,4 +30,7 @@ public interface KakaoPayService {
 	
 	//정기결제 요청
 	KakaoPayApproveResponseVo autoApprove(KakaoPayAutoApproveRequestVo requestVo) throws URISyntaxException;
+	
+	//정기결제 조회
+	KaKaoPayAutoPayMentSearchResponseVo autoSearch(String sid) throws URISyntaxException;
 }

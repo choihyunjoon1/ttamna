@@ -6,6 +6,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -16,6 +17,7 @@ import com.kh.ttamna.entity.donation.AutoPayMentDto;
 import com.kh.ttamna.repository.donation.AutoDonationDao;
 import com.kh.ttamna.repository.donation.DonationDao;
 import com.kh.ttamna.service.kakaopay.KakaoPayService;
+import com.kh.ttamna.vo.kakaopay.KaKaoPayAutoPayMentSearchResponseVo;
 import com.kh.ttamna.vo.kakaopay.KakaoPayApproveRequestVo;
 import com.kh.ttamna.vo.kakaopay.KakaoPayApproveResponseVo;
 import com.kh.ttamna.vo.kakaopay.KakaoPayReadyRequestVo;
@@ -117,4 +119,14 @@ public class PayController {
 	public String success() {
 		return "donation/kakao/success_result";
 	}
+	
+	@GetMapping("/auto/search")
+	public String autoSearch(@RequestParam String sid, Model model) throws URISyntaxException {
+		System.out.println("입ㄱ");
+		KaKaoPayAutoPayMentSearchResponseVo responseVo = kakaoService.autoSearch(sid);
+		model.addAttribute("searchList", responseVo);
+		System.out.println("퇴갤직전");
+		return "donation/kakao/auto_search";
+	}
+	
 }
