@@ -6,6 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -57,6 +58,14 @@ public class AdminController {
 		MemberDto memberDto = memberDao.get(memberId);
 		m.addAttribute("memberDto", memberDto);
 		return "admin/member/detail";
+	}
+	
+	
+	//회원 등급 변경
+	@PostMapping("/member/edit_grade")
+	public String editGrade(@RequestParam String memberId, @RequestParam String memberGrade) {
+		memberDao.editGrade(memberId, memberGrade);
+		return "redirect:/admin/member/detail?memberId="+memberId+"&success";
 	}
 }
 

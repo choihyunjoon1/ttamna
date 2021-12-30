@@ -123,5 +123,9 @@
 		</where>
 	</select>	
 	
+	<!-- 관리자 페이지 - 회원등급 수정 -->
+	<update id="editGrade" parameterType="map">
+		update member set member_grade = #{memberGrade} where member_id = #{memberId}
+	</update>
 </mapper>
 

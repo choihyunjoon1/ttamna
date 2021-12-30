@@ -192,6 +192,15 @@ public class MemberDaoImpl  implements MemberDao{
 		param.put("keyword",keyword);
 		return sqlSession.selectOne("member.count",param);
 	}
+
+	//관리자 페이지 - 회원등급 수정
+	@Override
+	public void editGrade(String memberId, String memberGrade) {
+		Map<String, String> param = new HashMap<>();
+		param.put("memberId", memberId);
+		param.put("memberGrade", memberGrade);
+		sqlSession.update("member.editGrade", param);
+	}
 	
 
 }

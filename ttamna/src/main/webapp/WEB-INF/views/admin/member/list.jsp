@@ -128,8 +128,8 @@
 				</c:otherwise>
 			</c:choose>
 		 </ul>
+		<a type="button" class="btn btn-outline-primary" href="${root}/admin/main">Back to Admin Menu</a>
 	</nav>
-
 </div>
 
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>
