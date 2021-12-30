@@ -7,10 +7,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.kh.ttamna.entity.member.VisitDto;
-import com.kh.ttamna.vo.chart.VisitorChartVO;
+import com.kh.ttamna.vo.chart.VisitChartVO;
 
 @Repository
-public class VistiDaoImpl implements VisitDao{
+public class VisitDaoImpl implements VisitDao{
 
 	@Autowired
 	private SqlSession sqlSession;
@@ -45,10 +45,10 @@ public class VistiDaoImpl implements VisitDao{
 	}
 
 	//7일간 일별 방문자 수 통계를 위한 메소드
-//	@Override
-//	public List<VisitorChartVO> countDaily() {
-//		return sqlSession.selectList("visit.countDaily");
-//	}
+    @Override
+	public List<VisitChartVO> countDaily() {
+		return sqlSession.selectList("visit.countDaily");
+	}
 
 	
 	

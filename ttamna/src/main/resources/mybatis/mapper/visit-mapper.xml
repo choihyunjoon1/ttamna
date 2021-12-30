@@ -43,11 +43,27 @@
     	select count(*) from visit where <![CDATA[sysdate - visit_time < 1 ]]>
     </select>
     
-    <!-- 7일간 일별 방문자수 카운트 구문 
-    <select id="countDaily" resultType="VisitorChartVO">
-    	
+    <!-- 7일간 일별 방문자수 카운트 구문 -->
+    <select id="countDaily" resultType="VisitChartVO">
+		select
+		 d.dt "date",
+		 nvl(v.cnt, 0) "count"
+		from
+		    (select 
+		        to_char((sysdate-7) + level - 1, 'YY/MM/DD') dt ,
+		        to_char(to_date(sysdate-7, 'YY/MM/DD') + rownum - 1, 'day') dow
+		    from dual <![CDATA[connect by level <= ((sysdate-1) - (sysdate-7) +1 )]]>)d
+		left outer join 
+		    (select 
+		        to_char(visit_time, 'YY/MM/DD') dt, 
+		        to_char(visit_time, 'DAY') dow, 
+		        count(*) cnt 
+		    from visit where <![CDATA[ sysdate - visit_time <= 7]]>
+		    group by to_char(visit_time, 'YY/MM/DD'), to_char(visit_time, 'DAY'))v
+		on v.dt = d.dt 
+		order by d.dt asc
     </select>
-    -->
+     
     
 </mapper>
 
