@@ -19,7 +19,7 @@ $(function(){
 	//이렇게 캡슐화를 하는데 이걸 중첩클래스라고한다
 	function loadData(page, size){
 		$.ajax({
-			url : "${pageContext.request.contextPath}/donation/more",
+			url : "${pageContext.request.contextPath}/mybaby/more",
 			type : "get",
 			data : {
 				page : page,
@@ -37,17 +37,14 @@ $(function(){
 				//데이터 출력
 				for(var i=0; i < resp.length; i++){
 					var divCol = "<div class=page>"+
-						"<span>"+resp[i].donationNo+"</span>" +
+						"<span>"+resp[i].mybabyNo+"</span>" +
 						"<br>"+
-						"<span>"+resp[i].donationWriter+"</span>" +
+						"<span>"+resp[i].mybabyWriter+"</span>" +
 						"<br>"+
-						"<span><a href=detail?donationNo="+resp[i].donationNo+">"+resp[i].donationTitle+"</a></span>" +
+						"<span><a href=detail?mybabyNo="+resp[i].mybabyNo+">"+resp[i].mybabyTitle+"</a></span>" +
 						"<br>"+
-						"<span>"+resp[i].donationContent+"</span>" +
-						"<br>"+
-						"<span>"+resp[i].donationNowFund+"원</span>" +
-						"<br>"+
-						"<span>"+resp[i].donationTotalFund+"원</span>" +
+						"<span>"+resp[i].mybabyContent+"</span>" +
+						"<br>"
 					+"</div>";
 					$(".result").append(divCol);
 					$(".page").addClass("col-3 mt-3");
@@ -60,7 +57,6 @@ $(function(){
 	}
 });
 </script>
-
 
 
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>

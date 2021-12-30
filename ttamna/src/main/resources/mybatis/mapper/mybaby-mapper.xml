@@ -16,7 +16,7 @@
 <mapper namespace="mybaby">
 	<!-- 목록(더보기,검색없이) -->
 	<select id="list" resultType="MybabyDto">
-		select * from mybaby order by mybaby_no asc
+		select * from mybaby order by mybaby_no desc
 	</select>
 	
 	<!-- 게시글번호 시퀀스 미리 조회 -->
@@ -26,8 +26,39 @@
 	
 	<!-- 게시글등록 -->
 	<insert id = "write" parameterType="MybabyDto">
-		insert into mybaby values(#{mybabyNo},#{mybabyWriter},#{mybabyTitle},#{mybabyContent},#{mybabyTime},0,0)
+		insert into mybaby values(#{mybabyNo},#{mybabyWriter},#{mybabyTitle},#{mybabyContent},sysdate,0,0)
 	</insert>
+	
+	<!-- 상세조회 -->
+	<select id="search" parameterType="int" resultType="MybabyDto">
+		select * from mybaby where mybaby_no=#{mybabyNo}
+	</select>
+	
+	<!-- 더보기 페이지네이션 -->
+	<select id="listByPage" parameterType="map" resultType="MybabyDto">
+		select * from(
+		    select rownum rn, tmp.* from(
+		        select * from mybaby
+		        <if test="column != null and keyword != null">
+		        	where instr(${column}, #{keyword}) > 0
+		        </if>
+		        order by mybaby_no desc
+		        )tmp
+		)where rn between ${startRow} and ${endRow}
+	</select>
+	
+	<!-- 게시글 삭제 -->
+	<delete id="delete" parameterType="int">
+		delete mybaby where mybaby_no=#{mybabyNo}
+	</delete>
+	
+	<!-- 게시글 수정 -->
+	<update id="edit" parameterType="MybabyDto">
+		update mybaby set
+			mybaby_title=#{mybabyTitle},
+			mybaby_content=#{mybabyContent}
+		where mybaby_no=#{mybabyNo}
+	</update>
 	
 </mapper>
 

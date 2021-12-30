@@ -12,5 +12,9 @@ public class MybabyDto {
 	private int mybabyRead;
 	private int mybabyReply;
 	
+	public String mybabyTimeString() {
+		return mybabyTime.substring(0,10);
+	}
+	
 
 }
