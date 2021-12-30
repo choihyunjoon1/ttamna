@@ -10,45 +10,66 @@
 		<table class="table border mt-5">
 		  <thead class="table">
 		  	<tr>
-		  	  <th colspan="2"><h3>Member Info</h3></th>
+		  	  <th colspan="3"><h3>Member Info</h3></th>
 		  	</tr>
+		  	<c:if test="${param.success != null}">
+		  	<tr>
+		  		<th colspan="3">
+		  			<h5>등급이 ${memberDto.memberGrade}(으)로 수정되었습니다</h5>			
+		  		</th>
+		  	</tr>
+		  	</c:if>
 		  </thead>
 		  <tbody>
 			  <tr>
 	   			<th>ID</th>
-	   			<td>${memberDto.memberId}</td>
+	   			<td colspan="2">${memberDto.memberId}</td>
 			  </tr>
 			  <tr>
 	   			<th>Nick</th>
-	   			<td>${memberDto.memberNick}</td>
+	   			<td colspan="2">${memberDto.memberNick}</td>
 			  </tr>
 			  <tr>
 	   			<th>Name</th>
-	   			<td>${memberDto.memberName}</td>
+	   			<td colspan="2">${memberDto.memberName}</td>
 			  </tr>
 			  <tr>
 	   			<th>E-mail</th>
-	   			<td>${memberDto.memberEmail}</td>
+	   			<td colspan="2">${memberDto.memberEmail}</td>
 			  </tr>
 			  <tr>
 	   			<th>Phone</th>
-	   			<td>${memberDto.memberPhone}</td>
+	   			<td colspan="2">${memberDto.memberPhone}</td>
 			  </tr>
 			   <tr>
 	   			<th>Grade</th>
-	   			<td>${memberDto.memberGrade}</td>
+	   			<td colspan="2">${memberDto.memberGrade}
+		   			<form method="post" action="${root}/admin/member/edit_grade?memberId=${memberDto.memberId}">
+					   	<div class="input-group justify-content-end ms-5" style="width:20rem">
+							<select name="memberGrade" class="form-select form-select-sm ms-5" required>
+								<option value="">등급선택</option>
+								<option value="일반회원">일반회원</option>
+								<option value="보호소">보호소</option>
+								<option value="관리자">관리자</option>
+							</select>
+							<div class="input-group input-group-sm" style="width:30%">
+								<input type="submit" value="edit" class="btn btn-dark btn-sm">
+							</div>
+						</div>			
+		   			</form>
+	   			</td>
 			  </tr>
 			  <tr>
 	   			<th>Join Date</th>
-	   			<td>${memberDto.memberJoin}</td>
+	   			<td colspan="2">${memberDto.memberJoin}</td>
 			  </tr>
 			  <tr>
 	   			<th>Last Log</th>
-	   			<td>${memberDto.memberLastLog}</td>
+	   			<td colspan="2">${memberDto.memberLastLog}</td>
 			  </tr>
 			  <tr>
 	   			<th>Address</th>
-	   			<td>${memberDto.postcode} ${memberDto.address} ${memberDto.detailAddress}</td>
+	   			<td colspan="2">${memberDto.postcode} ${memberDto.address} ${memberDto.detailAddress}</td>
 			  </tr>
 		  </tbody>
 		</table>
