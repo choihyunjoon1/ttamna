@@ -12,7 +12,7 @@
  $(function(){// 화면이 시작될때 통계자료를 불러오도록 해야 한다
 
 	 $.ajax({
- 		url : "${root}/admin/statistics/visitor_daily",
+ 		url : "${root}/ajax/visitor_daily",
  		type : "get",
  		dataType : "json",
 		success:function(resp){
