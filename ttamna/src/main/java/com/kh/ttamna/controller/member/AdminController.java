@@ -67,7 +67,32 @@ public class AdminController {
 		memberDao.editGrade(memberId, memberGrade);
 		return "redirect:/admin/member/detail?memberId="+memberId+"&success";
 	}
+
+//////////////////////////////////////통계/////////////////////////////////////	
+
+
+
+	@GetMapping("/statistics/menu")
+	public String menu() {
+		return "admin/statistics/menu";
+	}
+
+
+
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
