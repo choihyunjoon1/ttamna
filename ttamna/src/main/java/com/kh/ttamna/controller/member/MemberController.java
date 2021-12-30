@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.kh.ttamna.entity.member.DormancyDto;
 import com.kh.ttamna.entity.member.MemberDto;
 import com.kh.ttamna.entity.member.VisitDto;
+import com.kh.ttamna.repository.donation.AutoDonationDao;
 import com.kh.ttamna.repository.member.DormancyDao;
 import com.kh.ttamna.repository.member.MemberDao;
 import com.kh.ttamna.repository.member.VisitDao;
@@ -155,8 +156,12 @@ public class MemberController {
 		return "member/mypage/my_basket";
 	}
 	//기부내역
+	@Autowired
+	private AutoDonationDao autoDonationDao;
 	@RequestMapping("/mypage/my_donation")
-	public String myDonation() {
+	public String myDonation(HttpSession session, Model model) {
+		String memberId = (String)session.getAttribute("uid");
+		model.addAttribute("autoDonationList", autoDonationDao.listByMember(memberId));
 		return "member/mypage/my_donation";
 	}
 	//회원탈퇴

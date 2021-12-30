@@ -17,7 +17,30 @@
 			<jsp:include page="/WEB-INF/views/member/mypage/sidebar.jsp"></jsp:include>
 			
 			<div class="col-7">
-				<h2>메인자리</h2>
+				<table class="table">
+					<thead>
+						<tr>
+							<th>기부유형</th>
+							<th>기부중인게시판번호</th>
+							<th>기부금액</th>
+							<th>최초기부일</th>
+							<th>기부회차</th>
+							<th>비고</th>
+						</tr>
+					</thead>
+					<tbody>
+						<c:forEach var="autopayDto" items="${autoDonationList}">
+						<tr>
+							<td>정기기부</td>
+							<td>${autopayDto.donationNo}</td>
+							<td>${autopayDto.autoTotalAmount}원</td>
+							<td>${autopayDto.firstPaymentDate}</td>
+							<td>${autopayDto.payTimes}회차</td>
+							<td><a href="${pageContext.request.contextPath}/donation/kakao/auto/search?sid=${autopayDto.autoSid}">조회</a></td>
+						</tr>
+						</c:forEach>
+					</tbody>
+				</table>
 			</div>
 		</div>
 	</div>
