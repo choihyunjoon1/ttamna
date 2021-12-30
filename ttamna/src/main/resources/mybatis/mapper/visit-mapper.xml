@@ -43,11 +43,20 @@
     	select count(*) from visit where <![CDATA[sysdate - visit_time < 1 ]]>
     </select>
     
-    <!-- 7일간 일별 방문자수 카운트 구문 
-    <select id="countDaily" resultType="VisitorChartVO">
-    	
+    <!-- 7일간 일별 방문자수 카운트 구문 -->
+    <select id="countDaily" resultType="VisitChartVO">
+    	select
+ 		d."date" "time",
+ 		d."day" "day",
+ 		nvl(v."cnt", 0) "visitor"
+		from
+    		(select * from day )d
+		left outer join 
+  		    (select * from visitor)v
+		on v."date" = d."date" 
+		order by d."date" asc
     </select>
-    -->
+     
     
 </mapper>
 
