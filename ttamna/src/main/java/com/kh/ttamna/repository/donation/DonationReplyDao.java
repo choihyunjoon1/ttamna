@@ -16,6 +16,10 @@ public interface DonationReplyDao {
 	public List<DonationReplyDto> list();//댓글리스트
 
 	public DonationReplyDto get(int donationReplyNo);//댓글 단일조회
+
+	public List<DonationReplyDto> list(int donationNo);//해당 게시판의 댓글 조회
+
+	public void edit3(int replyNo, String replyContent);//댓글수정 에이잭스~
 	
 	
 
