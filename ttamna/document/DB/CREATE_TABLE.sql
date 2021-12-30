@@ -59,8 +59,7 @@ create table adopt(
     adopt_kind varchar2(30) CONSTRAINT adopt_kind_not_null NOT NULL,
     adopt_place varchar2(60) CONSTRAINT adopt_place_not_null NOT NULL
 );
---adopt_writer 외래키 on delete set null 인데 not null조건을 넣어버림... 그래서 제약조건 삭제
-ALTER TABLE adopt DROP CONSTRAINT adopt_writer_not_null;
+
 COMMIT;
 
 -- adopt_no : 시퀀스. 기본키
@@ -127,6 +126,8 @@ mybaby_reply_superno references mybaby_reply(mybaby_reply_no) on delete set null
 mybaby_reply_groupno number default 0 not null, -- 댓글 그룹 번호
 mybaby_reply_depth number default 0 not null -- 댓글 차수
 );
+--내새끼 댓글 작성자 추가
+ALTER TABLE MYBABY_reply add member_id references member(member_id) on delete set null;
 
 commit;
 
@@ -259,26 +260,11 @@ commit;
 create sequence history_seq;
 create table history(
 history_no number primary key, -- 주문내역번호
-member_id references member(member_id), -- 아이디
-cart_no references cart(cart_no), -- 장바구니번호
-shop_no references shop(shop_no) on delete cascade, -- 상품번호
+member_id CONSTRAINT member_id_fk references member(member_id) on delete cascade, -- 아이디
+cart_no CONSTRAINT cart_no_fk REFERENCES cart(cart_no) on delete cascade, -- 장바구니번호
+shop_no CONSTRAINT shop_no_fk REFERENCES shop(shop_no) on delete cascade, -- 상품번호
 history_time date default sysdate not null -- 주문일자
 );
--- member_id의 외래키 제약조건 날리기
-ALTER TABLE history DROP CONSTRAINT member_id_fk;
-
--- member_id 외래키 제약조건 추가
-ALTER TABLE history 
-ADD CONSTRAINT member_id_fk FOREIGN KEY (member_id) 
-REFERENCES member(member_id) on delete cascade;
-
--- shop_no의 외래키 제약조건 날리기
-ALTER TABLE history DROP CONSTRAINT shop_no_fk;
-
--- shop_no의 외래키 제약조건 추가
-ALTER TABLE history 
-ADD CONSTRAINT shop_no_fk FOREIGN KEY (shop_no) 
-REFERENCES shop(shop_no) on delete cascade;
 
 commit;
 

@@ -1,6 +1,7 @@
 package com.kh.ttamna.repository.member;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
@@ -157,13 +158,49 @@ public class MemberDaoImpl  implements MemberDao{
 		}
 	}
 
+
 	@Override
 	public void changeDor(MemberDto memberDto) {
 		sqlSession.insert("member.insertDor",memberDto);
 		
 	}
 
+	//회원 전체 조회
+	@Override
+	public List<MemberDto> list() {
+		List<MemberDto> list = sqlSession.selectList("member.list");
+		return list;
+	}
+	
+	//회원목록 + 검색목록 + 페이지네이션
+	@Override
+	public List<MemberDto> listPaging(String column, String keyword, int startRow, int endRow) {
+		Map<String,Object> param = new HashMap<>();
+		param.put("column", column);
+		param.put("keyword", keyword);
+		param.put("startRow", startRow);
+		param.put("endRow", endRow);
+		
+		return sqlSession.selectList("member.listPaging", param);
+	}
+	
+	//페이징에서 마지막 블록을 구하기 위하여 게시글 개수를 구하는 기능
+	@Override
+	public int count(String column, String keyword) {
+		Map<String,Object> param = new HashMap<>();
+		param.put("column",column);
+		param.put("keyword",keyword);
+		return sqlSession.selectOne("member.count",param);
+	}
 
+	//관리자 페이지 - 회원등급 수정
+	@Override
+	public void editGrade(String memberId, String memberGrade) {
+		Map<String, String> param = new HashMap<>();
+		param.put("memberId", memberId);
+		param.put("memberGrade", memberGrade);
+		sqlSession.update("member.editGrade", param);
+	}
 	
 
 }

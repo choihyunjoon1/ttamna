@@ -75,12 +75,12 @@
 	
 	<!-- 오늘날-접속일 = 335일 이상인 회원 찾기(테스트->3일) -->
 	<select id="findDormancy" resultType="MemberDto">
-		select * from member where to_date(sysdate,'yyyy-mm-dd')-to_date(member_last_log,'yyyy-mm-dd')>=3
+		select * from member where to_date(sysdate,'yyyy-mm-dd')-to_date(member_last_log,'yyyy-mm-dd')>=335
 	</select>
 	
 	<!-- 오늘날-접속일 = 365일인 회원 찾기(테스트->3일) -->
 	<select id="processDormancy" resultType="MemberDto">
-		select * from member where to_date(sysdate,'yyyy-mm-dd')-to_date(member_last_log,'yyyy-mm-dd')>=3
+		select * from member where to_date(sysdate,'yyyy-mm-dd')-to_date(member_last_log,'yyyy-mm-dd')>=365
 	</select>
 	
 	<!-- 휴면 -> 회원테이블로 이동 -->
@@ -94,5 +94,38 @@
 	</insert>
 	
 	
+	<!-- 회원 전체 조회 -->
+	<select id="list" resultType="MemberDto">
+		select * from member order by member_id asc
+	</select>
+	
+	<!-- 회원목록 + 검색 + 페이지네이션 -->
+	<select id="listPaging" parameterType="map" resultType="MemberDto">
+		select * from (
+			select rownum rn, TMP.* from (
+				select * from member 
+				<where>
+					<if test="column != null and keyword != null">	
+					 and instr(${column},#{keyword}) > 0
+					</if>
+				</where>
+				order by member_id asc
+			)TMP
+		) where rn between #{startRow} and #{endRow}		
+	</select>
+	
+	<select id="count" parameterType="map" resultType="int">
+		select count(*) from member
+		<where>
+			<if test="column != null and keyword != null">	
+			 and instr(${column},#{keyword}) > 0
+			</if>
+		</where>
+	</select>	
+	
+	<!-- 관리자 페이지 - 회원등급 수정 -->
+	<update id="editGrade" parameterType="map">
+		update member set member_grade = #{memberGrade} where member_id = #{memberId}
+	</update>
 </mapper>
 
