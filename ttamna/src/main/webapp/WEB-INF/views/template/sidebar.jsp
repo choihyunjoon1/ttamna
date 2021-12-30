@@ -28,9 +28,6 @@
         }else if(locaMenu=="my_order"){
         	$(".list-group > a").removeClass("active");
         	$(".myOrder").addClass("active");
-        }else if(locaMenu=="quit"){
-        	$(".list-group > a").removeClass("active");
-        	$(".quit").addClass("active");
         }else{
         	$(".list-group > a").removeClass("active");
         	$(".myBasket").addClass("active");
@@ -50,7 +47,7 @@
 		<a href = "${root }/member/mypage/my_donation" class="list-group-item list-group-item-action  myDonation">기부 목록</a>
 		<a href = "${root }/member/mypage/my_order" class="list-group-item list-group-item-action  myOrder">주문 내역</a>
 		<a href = "${root }/member/mypage/my_basket" class="list-group-item list-group-item-action  myBasket">장바구니</a>
-		<a href = "${root }/member/mypage/quit" class="list-group-item list-group-item-action  quit">회원탈퇴</a>
+		<a href = "${root }/member/logout" class="list-group-item list-group-item-action">로그아웃</a>
 	</div>
 </div>
 	

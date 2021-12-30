@@ -68,7 +68,7 @@ $(function(){
 <div class="container">
 	<div class="row mt-3">
 	<div class="col">
-		<a href="insert" class="btn btn-primary">작성하기</a>
+		<a href="write" class="btn btn-primary">작성하기</a>
 	</div>
 	</div>
 	<div class="row mt-3 result">

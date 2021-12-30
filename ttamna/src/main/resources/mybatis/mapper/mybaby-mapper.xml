@@ -19,5 +19,15 @@
 		select * from mybaby order by mybaby_no asc
 	</select>
 	
+	<!-- 게시글번호 시퀀스 미리 조회 -->
+	<select id="seq" resultType="int">
+		select mybaby_seq.nextval from dual
+	</select>
+	
+	<!-- 게시글등록 -->
+	<insert id = "write" parameterType="MybabyDto">
+		insert into mybaby values(#{mybabyNo},#{mybabyWriter},#{mybabyTitle},#{mybabyContent},#{mybabyTime},0,0)
+	</insert>
+	
 </mapper>
 
