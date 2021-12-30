@@ -43,6 +43,8 @@ public interface MemberDao {
 	//페이징에서 마지막 블록을 구하기 위하여 게시글 개수를 구하는 기능
 	int count(String column, String keyword);
 	
+	//관리자 페이지 - 회원 등급 수정
+	void editGrade(String memberId, String memberGrade);
 	
 	
 	
