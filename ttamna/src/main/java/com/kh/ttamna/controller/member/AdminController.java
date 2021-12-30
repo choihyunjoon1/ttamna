@@ -76,8 +76,11 @@ public class AdminController {
 	public String menu() {
 		return "admin/statistics/menu";
 	}
-
-
+	
+	/*
+	 * @GetMapping("/statistics/visitor_daily") public String visitorDaily() {
+	 * return "admin/statistics/visitor_daily"; }
+	 */
 
 }
 

@@ -43,5 +43,11 @@
     	select count(*) from visit where <![CDATA[sysdate - visit_time < 1 ]]>
     </select>
     
+    <!-- 7일간 일별 방문자수 카운트 구문 
+    <select id="countDaily" resultType="VisitorChartVO">
+    	
+    </select>
+    -->
+    
 </mapper>
 
