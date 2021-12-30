@@ -3,9 +3,9 @@ package com.kh.ttamna.vo.chart;
 import lombok.Data;
 
 @Data
-public class VisitorChartVO {
+public class VisitChartVO {
 	
-	private String text;
-	private int coun;
+	private String date;
+	private int count;
 	
 }
