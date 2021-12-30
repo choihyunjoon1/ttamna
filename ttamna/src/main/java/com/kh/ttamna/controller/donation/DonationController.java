@@ -19,12 +19,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.multipart.MultipartFile;
 
 import com.kh.ttamna.entity.donation.DonationDto;
 import com.kh.ttamna.entity.donation.DonationImgDto;
 import com.kh.ttamna.repository.donation.DonationDao;
 import com.kh.ttamna.repository.donation.DonationImgDao;
+import com.kh.ttamna.repository.donation.DonationReplyDao;
 import com.kh.ttamna.service.donation.DonationFileService;
 import com.kh.ttamna.vo.donation.DonationUploadVo;
 
@@ -41,6 +41,9 @@ public class DonationController {
 	
 	@Autowired
 	private DonationFileService donationService;
+	
+	@Autowired
+	private DonationReplyDao donationReplyDao;
 	
 	@RequestMapping("/")//목록페이지
 	public String defaultList(@RequestParam(required = false) String column,
@@ -86,7 +89,7 @@ public class DonationController {
 		model.addAttribute("donationDto", donationDao.detailOrSearch(data));
 		
 		model.addAttribute("donationImgDtoList", donationImgDao.getList(donationNo));
-		
+		model.addAttribute("replyDto", donationReplyDao.list(donationNo));
 		return "donation/detail";
 	}
 	
