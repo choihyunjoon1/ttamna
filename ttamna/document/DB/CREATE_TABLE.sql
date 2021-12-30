@@ -126,6 +126,8 @@ mybaby_reply_superno references mybaby_reply(mybaby_reply_no) on delete set null
 mybaby_reply_groupno number default 0 not null, -- 댓글 그룹 번호
 mybaby_reply_depth number default 0 not null -- 댓글 차수
 );
+--내새끼 댓글 작성자 추가
+ALTER TABLE MYBABY_reply add member_id references member(member_id) on delete set null;
 
 commit;
 

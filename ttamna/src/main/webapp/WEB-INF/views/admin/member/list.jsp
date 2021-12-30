@@ -10,48 +10,53 @@
 
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 
-
-<div class="container-700 bg-white container-center" align="center">
+<div class="container-1000 bg-white container-center" align="center">
 	<div class="mt-4 mb-5"><h3>Member List</h3></div>
 	<div class="mt-4 mb-5"><h6>라인 클릭시 해당 회원의 정보 조회</h6></div>
-	
-	<!-- 검색창 -->
-	<form method="get">
-		<div class="input-group justify-content-end">
-			<div class="col-2">
-				<select name="column" class="form-select form-select-sm" required id="column">
-				<c:choose>
-					<c:when test="${paginationVO.columnIs('member_id')}">
-						<option value="member_id" selected>아이디</option>
-						<option value="member_email">이메일</option>
-						<option value="member_grade">등급</option>
-					</c:when>
-					
-					<c:when test="${paginationVO.columnIs('member_email')}">
-						<option value="member_id">아이디</option>
-						<option value="member_email" selected>이메일</option>
-						<option value="member_grade">등급</option>
-					</c:when>
-					<c:when test="${paginationVO.columnIs('member_grade')}">
-						<option value="member_id">아이디</option>
-						<option value="member_email">이메일</option>
-						<option value="member_grade" selected>등급</option>
-					</c:when>
-					<c:otherwise>
-						<option value="">select</option>
-						<option value="member_id">아이디</option>
-						<option value="member_email">이메일</option>
-						<option value="member_grade">등급</option>
-					</c:otherwise>
-				</c:choose>
-				</select>
-			</div>
-			<div class="input-group input-group-sm mb-3" style="width:30%">
-				<input type="text" name="keyword" required class="form-control" value="${keyword}">
-				<input type="submit" value="search" id="search" class="btn btn-dark btn-sm">
-			</div>
-		</div>			
-	</form>
+	<div class="container">
+		<div class="row">
+		<!-- 사이드바 -->
+		<jsp:include page="/WEB-INF/views/admin/sidebar.jsp"></jsp:include>
+		<!-- 검색창 -->
+		<div class="col-9 ms-1 mb-5">
+			<form method="get">
+				<div class="input-group justify-content-end">
+					<div class="col-2">
+						<select name="column" class="form-select form-select-sm" required id="column">
+						<c:choose>
+							<c:when test="${paginationVO.columnIs('member_id')}">
+								<option value="member_id" selected>아이디</option>
+								<option value="member_email">이메일</option>
+								<option value="member_grade">등급</option>
+							</c:when>
+							
+							<c:when test="${paginationVO.columnIs('member_email')}">
+								<option value="member_id">아이디</option>
+								<option value="member_email" selected>이메일</option>
+								<option value="member_grade">등급</option>
+							</c:when>
+							<c:when test="${paginationVO.columnIs('member_grade')}">
+								<option value="member_id">아이디</option>
+								<option value="member_email">이메일</option>
+								<option value="member_grade" selected>등급</option>
+							</c:when>
+							<c:otherwise>
+								<option value="">select</option>
+								<option value="member_id">아이디</option>
+								<option value="member_email">이메일</option>
+								<option value="member_grade">등급</option>
+							</c:otherwise>
+						</c:choose>
+						</select>
+					</div>
+					<div class="input-group input-group-sm mb-3" style="width:30%">
+						<input type="text" name="keyword" required class="form-control" value="${keyword}">
+						<input type="submit" value="search" id="search" class="btn btn-dark btn-sm">
+					</div>
+				</div>			
+			</form>
+			
+		
 	
 	<!-- 회원 목록 -->
 	<table class="table table-hover border">
@@ -130,6 +135,9 @@
 		 </ul>
 		<a type="button" class="btn btn-outline-primary" href="${root}/admin/main">Back to Admin Menu</a>
 	</nav>
+</div>
+</div>
+</div>
 </div>
 
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>
