@@ -49,8 +49,7 @@ COMMIT;
 create sequence adopt_seq;
 create table adopt(
     adopt_no number CONSTRAINT adopt_no_pk PRIMARY KEY,
-    adopt_writer varchar2(20) CONSTRAINT adopt_writer_fk REFERENCES member(member_id) ON DELETE SET NULL
-                                        CONSTRAINT adopt_writer_not_null NOT NULL,
+    adopt_writer varchar2(20) CONSTRAINT adopt_writer_fk REFERENCES member(member_id) ON DELETE SET NULL,
     adopt_title varchar2(150) CONSTRAINT adopt_title_not_null NOT NULL,
     adopt_content varchar2(4000) CONSTRAINT adopt_content_not_null NOT NULL,
     adopt_time date DEFAULT sysdate CONSTRAINT adopt_time_not_null NOT NULL,
@@ -62,6 +61,7 @@ create table adopt(
 );
 
 COMMIT;
+
 -- adopt_no : 시퀀스. 기본키
 -- adopt_writer : 작성자, 회원 기본키 참조 외래키
 -- adopt_start : 공고 시작일. 기본값 sysdate
@@ -258,9 +258,9 @@ commit;
 create sequence history_seq;
 create table history(
 history_no number primary key, -- 주문내역번호
-member_id references member(member_id), -- 아이디
-cart_no references cart(cart_no), -- 장바구니번호
-shop_no references shop(shop_no) on delete cascade, -- 상품번호
+member_id CONSTRAINT member_id_fk references member(member_id) on delete cascade, -- 아이디
+cart_no CONSTRAINT cart_no_fk REFERENCES cart(cart_no) on delete cascade, -- 장바구니번호
+shop_no CONSTRAINT shop_no_fk REFERENCES shop(shop_no) on delete cascade, -- 상품번호
 history_time date default sysdate not null -- 주문일자
 );
 
@@ -319,7 +319,36 @@ auto_sid varchar2(20) not null,
 auto_quantity number default 1 not null,
 auto_total_amount number not null,
 first_payment_date date default sysdate not null,
-pay_times number default 1 not null
+pay_times number default 1 not null,
+donation_no references donation(donation_no)
 );
 
 commit;
+-------------------------------------------------------------------------------------------------------------
+
+--휴면회원 테이블
+create table dormancy(
+dor_member_id varchar2(20) primary key,
+dor_member_pw varchar2(60) not null,
+dor_member_nick varchar2(45) not null,
+dor_member_phone char(13) not null,
+dor_member_email varchar2(40) not null,
+dor_member_name varchar2(21) not null,
+dor_member_grade varchar2(12) not null,
+dor_member_join date not null
+);
+commit;
+
+-------------------------------------------------------------------------------------------------------------
+
+-- 접속 기록 테이블
+create sequence visit_seq;
+create table visit(
+    visit_idx number CONSTRAINT visit_pk PRIMARY KEY,--기본키 , 시퀀스
+    visit_id varchar2(100) CONSTRAINT visit_id_not_null NOT NULL, --접속자 아이디
+    visit_time date DEFAULT sysdate CONSTRAINT visit_time_not_null NOT NULL--접속자 접속시간
+);
+
+commit;
+
+-------------------------------------------------------------------------------------------------------------

@@ -15,7 +15,7 @@
 	<div class="container">
 		<div class="row">
 			<!-- 사이드바 자리 -->
-			<jsp:include page="/WEB-INF/views/template/sidebar.jsp"></jsp:include>
+			<jsp:include page="/WEB-INF/views/member/mypage/sidebar.jsp"></jsp:include>
 			<div class="col-2 center">
 				<div class="p-3 border bg-light"><label>아이디</label></div>
 				<div class="p-3 border bg-light"><label>닉네임</label></div>
@@ -30,7 +30,7 @@
 				<div class="p-3 border bg-light"><label>상세주소</label></div>
 				<br><br>
 				<div class="d-grid gap-2">
-					<a class="btn btn-outline-primary" href="${pageContext.request.contextPath}/member/edit" role="button">정보수정</a>
+					<a class="btn btn-outline-primary" href="${root}/member/mypage/edit" role="button">정보수정</a>
 				</div>
 			</div>
 			<div class="col-5 position-relative">
@@ -46,7 +46,7 @@
 				<div class="p-3 border bg-light">${memberDto.address }</div>
 				<div class="p-3 border bg-light">${memberDto.detailAddress }</div>
 				<div class="position-absolute bottom-0 end-0">
-					<a href ="${pageContext.request.contextPath}/member/quit" type="button" class="btn btn-outline-danger right">회원탈퇴</a>
+					<a href ="${pageContext.request.contextPath}/member/mypage/quit" type="button" class="btn btn-outline-danger right">회원탈퇴</a>
 				</div>
 			</div>
 			

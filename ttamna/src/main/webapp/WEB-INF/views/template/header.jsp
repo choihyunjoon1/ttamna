@@ -42,7 +42,23 @@
         }
     </style>
     <script>
-    
+    //오늘 방문자수를 찍기 위한 ajax. 페이지가 load 되자마자 실행되야 한다
+    window.addEventListener("load", function(){
+    		
+    	$.ajax({
+    		url : "${root}/ajax/dayLog",
+    		type : "get",
+    		dataType : "text",
+    		success:function(resp){
+    			console.log("방문자수 조회 성공", resp);
+    			//dayLog 클래스가 부여된 창에 조회된 방문자 수를 찍어준다
+    			$(".dayLog").text(resp+"명");
+    		},
+    		error:function(e){
+    			console.log("실패", e);
+    		}
+    	});
+    }); 
     </script>
 </head>
 <body>
@@ -60,57 +76,71 @@
                     <!-- 세션,등급 알아내기 위함 나중에 삭제 -->
                     <h5>uid=${uid}</h5><h5>grade=${grade }</h5>
                 </div>
+            
+	            <!-- 오늘 방문자 수를 찍어 주는 영역 -->
+	           <div class="card" style="width:10rem; height:4.5rem;" align="center">
+				  <div class="card-body">
+				    <h6 class="card-title mb-1">오늘의 방문자</h6>
+				    <div class="card-text dayLog mb-2"></div>
+				  </div>
+				</div>
+				
             </div>
 
         </header>
 
 <!-- 메뉴 영역 -->
 <div class="container-1000 centainer-center">
-<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary fw-bold">
   <div class="container">
     <div class="collapse navbar-collapse" id="navbarColor01">
-      <ul class="navbar-nav me-auto">
+      <ul class="navbar-nav me-auto navbar-right">
         <li class="nav-item">
           <a class="nav-link active docs-creator" href="${root }">Home
             <span class="visually-hidden">(current)</span>
           </a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link docs-creator" href="${pageContext.request.contextPath}/donation/">기부</a>
+     </ul>
+     <ul class="navbar-nav me-auto navbar-center fs-6">
+        <li class="nav-item ms-1">
+          <a class="nav-link active docs-creator" href="${root}/shop/">후원상품🐾</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link docs-creator" href="#">입양</a>
+        <li class="nav-item ms-5">
+          <a class="nav-link active docs-creator" href="${root}/donation/">기부🐾</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link docs-creator" href="#">내새끼사랑</a>
+        <li class="nav-item ms-5">
+          <a class="nav-link active docs-creator" href="#">입양공고🐾</a>
         </li>
-         <li class="nav-item">
-          <a class="nav-link docs-creator" href="${pageContext.request.contextPath}/shop/">상품구매</a>
+         <li class="nav-item ms-5">
+          <a class="nav-link active docs-creator" href="#">내새끼자랑🐾</a>
         </li>
-<!--         <li class="nav-item dropdown"> -->
-<!--           <a class="nav-link dropdown-toggle docs-creator" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Dropdown</a> -->
-<!--           <div class="dropdown-menu"> -->
-<!--             <a class="dropdown-item docs-creator" href="#">Action</a> -->
-<!--             <a class="dropdown-item docs-creator" href="#">Another action</a> -->
-<!--             <a class="dropdown-item docs-creator" href="#">Something else here</a> -->
-<!--             <div class="dropdown-divider"></div> -->
-<!--             <a class="dropdown-item docs-creator" href="#">Separated link</a> -->
-<!--           </div> -->
-<!--         </li> -->
+	 </ul>
+	 <ul class="navbar-nav navbar-left">
 		<c:if test="${!login}">
 		 <li class="nav-item">
-          <a class="nav-link docs-creator" href="${root}/member/login">로그인</a>
+          <a class="nav-link active docs-creator" href="${root}/member/login">LOGIN</a>
          </li>
-         <li class="nav-item">
-          <a class="nav-link docs-creator" href="${root}/member/join">회원가입</a>
-         </li>
+         <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle active docs-creator" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">𓃑𓃑𓃑ʕ •ᴥ•ʔ</a>
+          <div class="dropdown-menu">
+            <a class="dropdown-item docs-creator" href="${root}/member/join">회원가입ฅ ̳͒•ˑ̫• ̳͒ฅ♡</a>
+            <a class="dropdown-item docs-creator" href="${root}/find/findId">아이디 찾기</a>
+            <a class="dropdown-item docs-creator" href="${root}/find/findPw">비밀번호 찾기</a>
+          </div>
+        </li>
         </c:if>
         <c:if test="${login}">
-		 <li class="nav-item">
-          <a class="nav-link docs-creator" href="${root }/member/logout">로그아웃</a>
-         </li>
          <li class="nav-item">
-          <a class="nav-link docs-creator" href="${root}/member/mypage">마이페이지</a>
+          <a class="nav-link active docs-creator" href="${root}/member/mypage/my_info">MY PAGE</a>
+         </li>
+         	<c:if test="${admin}">
+         	  <li class="nav-item">
+	           <a class="nav-link active docs-creator" href="${root}/admin/main">ADMIN</a>
+	          </li>
+         	</c:if>
+		 <li class="nav-item ms-3">
+          <a class="nav-link active docs-creator" href="${root }/member/logout">LOGOUT</a>
          </li>
         </c:if>
       </ul>
@@ -118,6 +148,7 @@
     </div>
   </div>
 </nav>
+
 </div>
         <!-- 섹션(컨텐츠) 영역 -->
         <section>

@@ -16,7 +16,7 @@
 	<div class="container">
 		<div class="row">
 			<!-- 사이드바 자리 -->
-			<jsp:include page="/WEB-INF/views/template/sidebar.jsp"></jsp:include>
+			<jsp:include page="/WEB-INF/views/member/mypage/sidebar.jsp"></jsp:include>
 			<div class="col-3 center">
 				<div class="p-4 border bg-light"><label>아이디</label></div>
 				<div class="p-4 border bg-light"><label>비밀번호 입력</label></div>

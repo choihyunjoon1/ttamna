@@ -2,8 +2,8 @@ package com.kh.ttamna.service.kakaopay;
 
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.util.Map;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.stereotype.Service;
@@ -22,8 +22,10 @@ import com.kh.ttamna.vo.kakaopay.KakaoPaySearchResponseVo;
 @Service
 public class KakaoPayServiceImpl implements KakaoPayService{
 
-	public static final String Auth = "KakaoAK fc05c651ed7d2aca12da712b52a76c3c";
-	public static final String ContentType = "application/x-www-form-urlencoded;charset=utf-8";
+	@Value("${user.kakaopay.key}")
+	public String Auth;
+	@Value("${user.kakaopay.contenttype}")
+	public String ContentType;
 	
 	@Override//정기결제용
 	public KakaoPayReadyResponseVo autoReady(KakaoPayReadyRequestVo requestVo) throws URISyntaxException {
@@ -31,7 +33,7 @@ public class KakaoPayServiceImpl implements KakaoPayService{
 		RestTemplate template = new RestTemplate();
 				
 		HttpHeaders headers = new HttpHeaders();
-		headers.add("Authorization", Auth);
+		headers.add("Authorization", "KakaoAK "+Auth);
 		headers.add("Content-type", ContentType);
 		
 		MultiValueMap<String, String> body = new LinkedMultiValueMap<>();
@@ -64,7 +66,7 @@ public class KakaoPayServiceImpl implements KakaoPayService{
 		RestTemplate template = new RestTemplate();
 		
 		HttpHeaders headers = new HttpHeaders();
-		headers.add("Authorization", Auth);
+		headers.add("Authorization", "KakaoAK "+Auth);
 		headers.add("Content-type", ContentType);
 		
 		MultiValueMap<String, String> body = new LinkedMultiValueMap<>();
@@ -97,7 +99,7 @@ public class KakaoPayServiceImpl implements KakaoPayService{
 		RestTemplate template = new RestTemplate();
 		
 		HttpHeaders headers = new HttpHeaders();
-		headers.add("Authorization", Auth);
+		headers.add("Authorization",  "KakaoAK "+Auth);
 		headers.add("Content-type", ContentType);
 		
 		
@@ -140,7 +142,7 @@ public class KakaoPayServiceImpl implements KakaoPayService{
 		RestTemplate template = new RestTemplate();
 				
 		HttpHeaders headers = new HttpHeaders();
-		headers.add("Authorization", Auth);
+		headers.add("Authorization",  "KakaoAK "+Auth);
 		headers.add("Content-type", ContentType);
 		
 		MultiValueMap<String, String> body = new LinkedMultiValueMap<>();

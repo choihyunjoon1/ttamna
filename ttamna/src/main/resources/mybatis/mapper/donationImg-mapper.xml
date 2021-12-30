@@ -22,14 +22,25 @@
 	<!--  파일 저장 -->
 	<insert id="insert" parameterType="DonationImgDto">
 		insert into donation_img values(
-			${donaImgNo}, ${donationNo},
-			#{donaImgUpload}, ${donaImgSize},
-			#{donaImgType}
+			${donationImgNo}, ${donationNo},
+			#{donationImgUpload}, ${donationImgSize},
+			#{donationImgType}
 		)
 	</insert>
 	
+	<!--  파일 가져오기(단일) -->
 	<select id="getFile" parameterType="int" resultType="DonationImgDto">
 		select * from donation_img where donation_no = ${donationNo}
+	</select>
+	
+	<!-- 파일 가져오기(다중) -->
+	<select id="getFiles" parameterType="int" resultType="DonationImgDto">
+		select * from donation_Img where donation_no = ${donationNo} order by donation_img_no asc
+	</select>
+	
+	<!-- 파일 가져오기(단일 - 이미지번호) -->
+	<select id="getImgDto" parameterType="int" resultType="DonationImgDto"> 
+		select * from donation_img where donation_img_no = ${donationImgNo}
 	</select>
 </mapper>
 

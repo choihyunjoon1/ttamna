@@ -9,7 +9,9 @@ import org.springframework.stereotype.Service;
 
 import com.kh.ttamna.entity.donation.AutoPayMentDto;
 import com.kh.ttamna.repository.donation.AutoDonationDao;
+import com.kh.ttamna.repository.donation.DonationDao;
 import com.kh.ttamna.service.kakaopay.KakaoPayService;
+import com.kh.ttamna.vo.kakaopay.KakaoPayApproveResponseVo;
 import com.kh.ttamna.vo.kakaopay.KakaoPayAutoApproveRequestVo;
 
 @Service
@@ -21,9 +23,11 @@ public class AutoPayMentScheduler implements KakaoPayAutoPayMentScheDule{
 	@Autowired
 	private KakaoPayService kakaoService;
 	
+	@Autowired
+	private DonationDao donationDao;
 //	@Override
 //	@Scheduled(cron = "0 0 0 10 * ?")//매월 10일 정각
-//	@Scheduled(cron = "*/10 * * * * *")//테스트용 10초마다
+//	@Scheduled(cron = "*/30 * * * * *")//테스트용 30초마다
 	public void excute() throws URISyntaxException {
 		List<AutoPayMentDto> list = autoDao.list();
 		KakaoPayAutoApproveRequestVo requestVo = new KakaoPayAutoApproveRequestVo();
@@ -32,8 +36,9 @@ public class AutoPayMentScheduler implements KakaoPayAutoPayMentScheDule{
 			requestVo.setPartner_user_id(dto.getPartnerUserId());
 			requestVo.setSid(dto.getAutoSid());
 			requestVo.setTotal_amount(dto.getAutoTotalAmount());
-			kakaoService.autoApprove(requestVo);
+			KakaoPayApproveResponseVo responseVo = kakaoService.autoApprove(requestVo);
 			autoDao.payTimesUpdate(dto.getAutoNo());
+			donationDao.funding(dto.getDonationNo(), responseVo.getAmount().getTotal());
 			System.out.println("정기결제 성공!");
 		}
 	}

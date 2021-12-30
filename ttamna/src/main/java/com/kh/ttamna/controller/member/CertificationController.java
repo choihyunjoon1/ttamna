@@ -4,6 +4,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 
 import javax.mail.MessagingException;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -137,4 +138,17 @@ public class CertificationController {
 		}
 		
 	}
+/////////////////////////////////////////////////비밀번호 찾기(휴면)///////////////////////////////////////////////////////
+	@GetMapping("/resetPwDor")
+	public String resetPwDor() {
+		return "find/resetPwDor";
+	}
+	@PostMapping("/resetPwDor")
+	public String resetPwDor(@RequestParam String resetPw,HttpSession session) {
+		String memberId = (String)session.getAttribute("uid");
+		memberDao.resetPw(memberId, resetPw);
+		return "redirect:/member/login?resetPw_complete";
+		
+	}
+	
 }
