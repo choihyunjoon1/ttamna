@@ -113,7 +113,7 @@
           <a class="nav-link active docs-creator" href="#">입양공고🐾</a>
         </li>
          <li class="nav-item ms-5">
-          <a class="nav-link active docs-creator" href="#">내새끼자랑🐾</a>
+          <a class="nav-link active docs-creator" href="${root }/mybaby/">내새끼자랑🐾</a>
         </li>
 	 </ul>
 	 <ul class="navbar-nav navbar-left">
