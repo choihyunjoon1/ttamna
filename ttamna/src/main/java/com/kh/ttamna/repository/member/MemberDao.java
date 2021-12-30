@@ -1,9 +1,13 @@
 package com.kh.ttamna.repository.member;
 
+import java.util.List;
+
 import com.kh.ttamna.entity.member.MemberDto;
 
 public interface MemberDao {
+	
 	void join(MemberDto memberDto);
+	
 	//아이디 단일조회
 	MemberDto get(String memberId);
 	
@@ -29,6 +33,17 @@ public interface MemberDao {
 	
 	//휴면 -> 멤버 테이블로 데이터 이동
 	void changeDor(MemberDto memberDto);
+		
+	//회원 전체 조회
+	List<MemberDto> list();
+	
+	//회원목록 + 검색목록 + 페이지네이션
+	List<MemberDto> listPaging(String column, String keyword, int startRow, int endRow);
+	
+	//페이징에서 마지막 블록을 구하기 위하여 게시글 개수를 구하는 기능
+	int count(String column, String keyword);
+	
+	
 	
 	
 }
