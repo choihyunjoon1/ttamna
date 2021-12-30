@@ -76,7 +76,6 @@
     <main>
         <!-- 헤더 -->
         <header>
-
             <div class="flex-container">
                 <div class="logo-wrapper">
                    <!-- 이미지로고자리 -->
@@ -96,12 +95,9 @@
 				</div>
 				
             </div>
-
         </header>
-
 <!-- 메뉴 영역 -->
 <div class="container-1000 centainer-center">
-
 <nav class="navbar navbar-expand-lg navbar-dark bg-primary fw-bold">
   <div class="container">
     <div class="collapse navbar-collapse" id="navbarColor01">
@@ -158,8 +154,6 @@
     </div>
   </div>
 </nav>
-
 </div>
         <!-- 섹션(컨텐츠) 영역 -->
         <section>
-
