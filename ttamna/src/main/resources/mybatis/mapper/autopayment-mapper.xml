@@ -35,5 +35,10 @@
 			pay_times = pay_times+1
 			where auto_no = ${autoNo}
 		</update>
+		
+		<!-- 특정 회원의 정기결제 목록을 불러오기 -->
+		<select id="listByMember" parameterType="String" resultType="AutoPayMentDto">
+			select * from autopayment where partner_user_id = #{memberId}
+		</select>
 </mapper>
 

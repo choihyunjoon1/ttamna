@@ -20,4 +20,6 @@ public interface DonationImgDao {
 	byte[] load(int donationNo) throws IOException;//실제 경로에 있는 파일 정보 받아오기
 
 	DonationImgDto getFile(int donationImgNo);//파일 다운로드에서 쓸 파일 하나 다운받는 메소드
+	
+	void fileOneDelete(int donationImgNo);//파일 한개 삭제
 }

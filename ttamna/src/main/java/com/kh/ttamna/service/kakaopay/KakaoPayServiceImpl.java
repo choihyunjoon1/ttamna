@@ -11,6 +11,7 @@ import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
 
+import com.kh.ttamna.vo.kakaopay.KaKaoPayAutoPayMentSearchResponseVo;
 import com.kh.ttamna.vo.kakaopay.KakaoPayApproveRequestVo;
 import com.kh.ttamna.vo.kakaopay.KakaoPayApproveResponseVo;
 import com.kh.ttamna.vo.kakaopay.KakaoPayAutoApproveRequestVo;
@@ -165,6 +166,28 @@ public class KakaoPayServiceImpl implements KakaoPayService{
 		URI uri = new URI("https://kapi.kakao.com/v1/payment/subscription");
 		
 		KakaoPayApproveResponseVo responseVo = template.postForObject(uri, entity, KakaoPayApproveResponseVo.class);
+		
+		return responseVo;
+	}
+	
+	@Override//정기결제 조회
+	public KaKaoPayAutoPayMentSearchResponseVo autoSearch(String sid) throws URISyntaxException {
+		RestTemplate template = new RestTemplate();
+		
+		HttpHeaders headers = new HttpHeaders();
+		headers.add("Authorization",  "KakaoAK "+Auth);
+		headers.add("Content-type", ContentType);
+		
+		MultiValueMap<String, String> body = new LinkedMultiValueMap<>();
+		body.add("cid", "TCSUBSCRIP");
+		body.add("sid", sid);
+		
+		HttpEntity<MultiValueMap<String, String>> entity = new HttpEntity<>(body, headers);
+		
+		
+		URI uri = new URI("https://kapi.kakao.com/v1/payment/manage/subscription/status");
+		
+		KaKaoPayAutoPayMentSearchResponseVo responseVo = template.postForObject(uri, entity, KaKaoPayAutoPayMentSearchResponseVo.class);
 		
 		return responseVo;
 	}

@@ -101,11 +101,19 @@ public class DonationController {
 		return "redirect:/donation/list";
 	}
 	
+	@GetMapping("/file/delete")//수정페이지에서 이미지 삭제를 요청했을 때
+	public String fileDelete(@RequestParam int imgNo) {
+		donationImgDao.fileOneDelete(imgNo);
+		donationService.fileOneDelete(imgNo);
+		return "donation/list";
+	}
+	
 	@GetMapping("/edit")//수정페이지로이동
 	public String edit(@RequestParam int donationNo, Model model) {
 		Map<String, Object> data = new HashMap<>();
 		data.put("donationNo", donationNo);
 		model.addAttribute("donationDto", donationDao.detailOrSearch(data));
+		model.addAttribute("imgDtoList", donationImgDao.getList(donationNo));
 		return "donation/edit";
 	}
 	
