@@ -89,6 +89,12 @@ public class AdminController {
 		 return "admin/statistics/visitor_daily";
 	 }
 	 
+	//월별 방문자수 통계 페이지
+	 @GetMapping("/statistics/visitor_monthly") 
+	 public String visitorMonthly() {
+		 return "admin/statistics/visitor_monthly";
+	 }
+	 
 
 }
 
