@@ -82,10 +82,11 @@ public class DonationDaoImpl implements DonationDao{
 	}
 	
 	@Override//기부 후 금액 업데이트
-	public boolean funding(int donationNo, int price) {
+	public boolean funding(int donationNo, long price) {
 		Map<String, Object> map = new HashMap<>();
 		map.put("donationNo", donationNo);
 		map.put("price", price);
 		return sqlSession.update("donation.funding", map) > 0;
 	}
+	
 }

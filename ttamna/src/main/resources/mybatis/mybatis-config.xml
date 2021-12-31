@@ -30,8 +30,20 @@
 			ex) <package name="com.kh.spring10.entity"/>
 	-->
 	<typeAliases>
-		<package name="com.kh.ttamna.entity"/>
+	<package name="com.kh.ttamna.entity"/>
+		<package name="com.kh.ttamna.entity.donation"/>
+		<package name="com.kh.ttamna.entity.member"/>
+		<package name="com.kh.ttamna.entity.mybaby"/>
+		<package name="com.kh.ttamna.entity.payment"/>
+		<package name="com.kh.ttamna.entity.cart"/>
 		<package name="com.kh.ttamna.vo"/>
+		<package name="com.kh.ttamna.vo.chart"/>
+		<package name="com.kh.ttamna.vo.donation"/>
+		<package name="com.kh.ttamna.vo.kakaopay"/>
+		<package name="com.kh.ttamna.vo.mybaby"/>
+		<package name="com.kh.ttamna.vo.pagination"/>
+		<package name="com.kh.ttamna.vo.shop"/>
 	</typeAliases>
 
 </configuration>
+

@@ -2,6 +2,9 @@ package com.kh.ttamna.service.donation;
 
 import java.io.IOException;
 
+import org.springframework.web.multipart.MultipartFile;
+
+import com.kh.ttamna.entity.donation.DonationImgDto;
 import com.kh.ttamna.vo.donation.DonationUploadVo;
 
 public interface DonationFileService {
@@ -10,4 +13,5 @@ public interface DonationFileService {
 	void updateAddFile(DonationUploadVo donationUploadVo) throws IllegalStateException, IOException;
 	void delete(int donationNo);//실제경로에 있는 파일 삭제(게시글 삭제 시)
 	void fileOneDelete(int donationImgNo);//실제경로에 있는 파일 한 개 삭제(수정에서 파일 삭제 시)
+	void updateAddFile(DonationImgDto donationImgDto, MultipartFile file) throws IllegalStateException, IOException;
 }

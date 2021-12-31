@@ -167,7 +167,6 @@ public class MemberController {
 	@GetMapping("/mypage/my_donation")
 	public String myDonation(HttpSession session, @ModelAttribute PaginationVO paginationVO,Model model) throws Exception {
 		String memberId = (String)session.getAttribute("uid");
-//		model.addAttribute("autoDonationList", autoDonationDao.listByMember(memberId));
 		PaginationVO listPaging = paginationService.apmListPaging(paginationVO, memberId);
 		model.addAttribute("paginationVO", listPaging);
 		return "member/mypage/my_donation";

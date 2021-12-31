@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.kh.ttamna.entity.donation.AutoPayMentDto;
 import com.kh.ttamna.repository.donation.AutoDonationDao;
 import com.kh.ttamna.repository.donation.DonationDao;
+import com.kh.ttamna.service.donation.DonationService;
 import com.kh.ttamna.service.kakaopay.KakaoPayService;
 import com.kh.ttamna.vo.kakaopay.KaKaoPayAutoPayMentSearchResponseVo;
 import com.kh.ttamna.vo.kakaopay.KakaoPayApproveRequestVo;
@@ -31,6 +32,15 @@ public class PayController {
 	
 	@Autowired
 	private KakaoPayService kakaoService;
+	
+	@Autowired
+	private DonationService donationService;
+	
+	@Autowired
+	private AutoDonationDao autoDonationDao;
+	
+	@Autowired
+	private DonationDao donationDao;
 	
 	@PostMapping("/fund")//단건결제 요청
 	public String confirm(
@@ -60,11 +70,7 @@ public class PayController {
 		session.setAttribute("donationNo", donationNo);
 		return "redirect:"+responseVo.getNext_redirect_pc_url();
 	}
-	@Autowired
-	private AutoDonationDao autoDonationDao;
 	
-	@Autowired
-	private DonationDao donationDao;
 	
 	//결제 요청이 성공하면 주소에 pg토큰이 담겨서 온다.
 	@GetMapping("/success")
@@ -132,8 +138,9 @@ public class PayController {
 	@GetMapping("/auto/inactive")//정기기부 비활성화 요청
 	public String autoInactive(@RequestParam String sid, Model model) throws URISyntaxException {
 		KakaoPayAutoPayMentInactiveResponseVo responsevo = kakaoService.autoInactive(sid);
-		model.addAttribute("inactiveList", responsevo);
-		return "donation/kakao/auto_inactive";
+		donationService.updatePrice(sid);//sid를 넣으면 그걸로 아이디를 찾고 금액을 -로 업데이트 해주는 서비스
+		autoDonationDao.autoPayDelete(sid);
+		return "redirect:/member/mypage/my_donation";
 	}
 	
 	@GetMapping("/cancel")//결제 취소 요청
