@@ -146,7 +146,7 @@
           <a class="nav-link docs-creator headDonation" href="${root}/donation/">기부🐾</a>
         </li>
         <li class="nav-item ms-5">
-          <a class="nav-link docs-creator headAdopt" href="#">입양공고🐾</a>
+          <a class="nav-link docs-creator headAdopt" href="${root}/adopt/">입양공고🐾</a>
         </li>
          <li class="nav-item ms-5">
           <a class="nav-link docs-creator headMybaby" href="${root }/mybaby/">내새끼자랑🐾</a>
