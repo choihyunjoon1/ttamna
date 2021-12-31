@@ -26,7 +26,7 @@
 	</insert>
 	
 	<select id="list" resultType="PaymentDto">
-		select * from payment order by no asc
+		select * from payment order by pay_no asc
 	</select>
 	
 	<select id="get" parameterType="int" resultType="PaymentDto">

@@ -152,12 +152,6 @@ public class ShopPayController {
 			return "shop/order/success_result";
 		}
 		
-		// 주문내역
-		@GetMapping("/history")
-		public String history(Model model) {
-			model.addAttribute("list", paymentDao.list());
-			return "pay/history";
-		}
 		
 		
 		

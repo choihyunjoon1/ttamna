@@ -16,11 +16,10 @@
 		<a href="${pageContext.request.contextPath}/shop/detail?shopNo=${cartDto.shopNo}">
 		<img src="${pageContext.request.contextPath}/shop/img?shopImgNo=${cartDto.shopImgNo}">	${cartDto.shopGoods}</a>	
 	</div>
-
-	<button class="btn btn-primary">구매하기</button>
 </c:forEach>
 	</c:otherwise>
 </c:choose>
+	<button class="btn btn-primary">구매하기</button>
 
 
 
