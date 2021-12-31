@@ -122,31 +122,8 @@ public class DonationController {
 	public String edit(@ModelAttribute DonationUploadVo donationUploadVo) throws IllegalStateException, IOException {
 		
 		System.out.println("정보 : " + donationUploadVo);
+		donationService.updateAddFile(donationUploadVo);
 		
-		for(MultipartFile file : donationUploadVo.getAttach()) {
-			if(file.isEmpty()) {
-				System.out.println("파일요청없음");
-				DonationDto donationDto = new DonationDto();
-				donationDto.setDonationNo(donationUploadVo.getDonationNo());
-				donationDto.setDonationContent(donationUploadVo.getDonationContent());
-				System.out.println("내용 "+donationDto.getDonationContent());
-				donationDto.setDonationTitle(donationUploadVo.getDonationTitle());
-				System.out.println("제목~ "+donationDto.getDonationTitle());
-				//내용과 제목만 수정시킨다.
-				donationDao.edit(donationDto);
-			} else {//파일 추가 요청이 있을 경우
-				DonationDto donationDto = new DonationDto();
-				donationDto.setDonationContent(donationUploadVo.getDonationContent());
-				donationDto.setDonationTitle(donationUploadVo.getDonationTitle());
-				donationDto.setDonationNo(donationUploadVo.getDonationNo());
-				//내용과 제목을 수정시키고
-				donationDao.edit(donationDto);
-				
-				//파일 등록 처리를 한다.
-				donationService.updateAddFile(donationUploadVo);
-			}
-		}
-		//파일 추가 요청이 없을 경우
 		
 		return "redirect:/donation/detail?donationNo="+donationUploadVo.getDonationNo();
 	}

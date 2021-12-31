@@ -114,8 +114,9 @@
 		)where rn between ${startRow} and ${endRow}
 	</select>
 	
+	<!-- 금액 업데이트 -->
 	<update id="funding" parameterType="map">
-		update donation set donation_now_fund = donation_now_fund + ${price} where donation_no = ${donationNo}
+		update donation set donation_now_fund = ${price} + donation_now_fund where donation_no = ${donationNo}
 	</update>
 </mapper>
 

@@ -42,9 +42,6 @@
 	<c:forEach var="donationDto" items='${donationDto}'>
 		<div class="row">
 		<input type="hidden" name="donationNo" value="${donationDto.donationNo}" >
-		<input type="hidden" name="donationTotalFund" value="${donationDto.donationTotalFund}" >
-		<input type="hidden" name="donationNowFund" value="${donationDto.donationNowFund}" >
-		<input type="hidden" name="donationWriter" value="${donationDto.donationWriter}" >
 		</div>
 		<div class="row">
 		${donationDto.donationWriter}
@@ -72,7 +69,7 @@
 		</div>
 		<div class="row">
 			<label>
-			파일<input type="file" name="attach" class="form-input" >
+			파일<input type="file" multiple name="attach" class="form-input" >
 			</label>
 		</div>
 		<div class="row">

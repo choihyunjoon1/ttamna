@@ -3,6 +3,7 @@ package com.kh.ttamna.repository.donation;
 import java.util.List;
 import java.util.Map;
 
+import com.kh.ttamna.entity.donation.AutoPayMentDto;
 import com.kh.ttamna.entity.donation.DonationDto;
 
 public interface DonationDao {
@@ -15,5 +16,5 @@ public interface DonationDao {
 	boolean delete(int donationNo);//삭제
 	List<DonationDto> listByPage(int startRow, int endRow);//더보기 페이지네이션
 	List<DonationDto> listBySearchPage(int startRow, int endRow, String column, String keyword);//페이지네이션 검색
-	boolean funding(int donationNo, int price);
+	boolean funding(int donationNo, long price);
 }

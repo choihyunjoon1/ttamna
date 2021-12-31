@@ -1,4 +1,4 @@
-package com.kh.ttamna.payment;
+package com.kh.ttamna.entity.payment;
 
 import java.sql.Date;
 
