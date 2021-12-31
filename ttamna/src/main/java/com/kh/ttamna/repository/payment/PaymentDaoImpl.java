@@ -6,6 +6,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.kh.ttamna.entity.payment.PaymentDto;
 import com.kh.ttamna.entity.shop.ShopDto;
 
 @Repository
@@ -20,7 +21,7 @@ public class PaymentDaoImpl implements PaymentDao{
 	}
 
 	@Override
-	public void insert(ShopDto paymentDto) {
+	public void insert(PaymentDto paymentDto) {
 		sqlSession.insert("pay.insert", paymentDto);	
 	}
 
@@ -30,8 +31,8 @@ public class PaymentDaoImpl implements PaymentDao{
 	}
 
 	@Override
-	public ShopDto get(int shopNo) {
-		return sqlSession.selectOne("pay.get", shopNo);
+	public PaymentDto get(int payNo) {
+		return sqlSession.selectOne("pay.get", payNo);
 	}
 
 	@Override

@@ -20,6 +20,7 @@ $(function(){
 			var memberId = $("input[name=memberId]").val();
 			var shopGoods = $("input[name=shopGoods]").val();
 			var shopPrice = $("input[name=shopPrice]").val();
+			var shopImgNo = $("input[name=shopImgNo]").val();
 			
 			$.ajax({
 				url : "${pageContext.request.contextPath}/shop/detail/addcart",
@@ -28,7 +29,8 @@ $(function(){
 					shopNo : shopNo,
 					memberId : memberId,
 					shopGoods : shopGoods,
-					shopPrice : shopPrice
+					shopPrice : shopPrice,
+					shopImgNo : shopImgNo
 				},
 				success:function(resp){
 					console.log("성공");
@@ -62,10 +64,10 @@ $(function(){
 	<span>조회수 : ${detail.shopRead}</span>
 </div>
 
-<form action="order/buy" method="post">
+<form action="order/multibuy" method="post">
 	<div class="row mt-3">
 		<input type="hidden" name="shopNo" value="${detail.shopNo}">
-		<input type="hidden" name="partner_user_id" value="${sessionScope.uid}">
+<!-- 	<input type="hidden" name="partner_user_id" value="${sessionScope.uid}"> -->	
 		<input type="hidden" name="item_name" value="${detail.shopGoods}">
 		<input type="hidden" name="total_amount" value="${detail.shopPrice}">
 		<input type="submit" value="구매하기" class="btn btn-primary">
@@ -77,6 +79,7 @@ $(function(){
 		<input type="hidden" name="memberId" value="${sessionScope.uid}">
 		<input type="hidden" name="shopGoods" value="${detail.shopGoods}">
 		<input type="hidden" name="shopPrice" value="${detail.shopPrice}">
+		<input type="hidden" name="shopImgNo" value="${shopImgDto.shopImgNo}">
 		<input type="submit" value="장바구니에 담기" class="btn btn-secondary"  id="add-cart">
 	</div>
 </form>
