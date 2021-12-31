@@ -11,24 +11,28 @@
 			$(this).prev().attr("data-delete", "true");
 		});
 		
-		$(".delete").click(function(e){
-			if(confirm("삭제하시겠습니까?")){
-				if($(this).prev().attr("data-delete")){
-					var imgNo = $(this).attr("data-data");
-					$.ajax({
-						url : "${pageContext.request.contextPath}/donation/file/delete?imgNo="+imgNo,
-						type : "get", 
-						data : {
-							imgNo : imgNo
-						},
-						success:function(resp){
-							console.log("파일삭제성공")
-						},
-						error:function(e){
-							console.log("에러")
-						}
-					});
-				}
+		$("input[type=submit]").click(function(e){
+			if(confirm("수정하시겠습니까?")){
+				$("img").each(function(index, item){
+					console.log($(item).attr("data-delete"));
+					if($(item).attr("data-delete")){
+						var imgNo = $(item).next().attr("data-data");
+						
+						$.ajax({
+							url : "${pageContext.request.contextPath}/donation/file/delete?imgNo="+imgNo,
+							type : "get", 
+							data : {
+								imgNo : imgNo
+							},
+							success:function(resp){
+								console.log("파일삭제성공")
+							},
+							error:function(e){
+								console.log("에러")
+							}
+						});
+					}
+				});
 			} else {
 				return false;
 			}
@@ -38,13 +42,10 @@
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 
 <div class="container">
-<form method="post" enctype="multipart/form-data">
+<form method="post">
 	<c:forEach var="donationDto" items='${donationDto}'>
 		<div class="row">
 		<input type="hidden" name="donationNo" value="${donationDto.donationNo}" >
-		<input type="hidden" name="donationTotalFund" value="${donationDto.donationTotalFund}" >
-		<input type="hidden" name="donationNowFund" value="${donationDto.donationNowFund}" >
-		<input type="hidden" name="donationWriter" value="${donationDto.donationWriter}" >
 		</div>
 		<div class="row">
 		${donationDto.donationWriter}
@@ -72,7 +73,7 @@
 		</div>
 		<div class="row">
 			<label>
-			파일<input type="file" name="attach" class="form-input" >
+			파일<input type="file" multiple name="attach" class="form-input" accept="image/*">
 			</label>
 		</div>
 		<div class="row">

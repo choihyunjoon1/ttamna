@@ -19,7 +19,9 @@
 		</label>
 		</div>
 		<div class="row">
-		이미지영역
+			<label>
+			파일<input type="file" multiple name="attach" class="form-input" accept="image/*">
+			</label>
 		</div>
 		<div class="row">
 		<label>

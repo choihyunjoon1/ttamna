@@ -4,6 +4,12 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+<style>
+	.icon{
+		width: 230px;
+		height: 200px;
+	}
+</style>
 <script>
 $(function(){
 	var page = 1;
@@ -38,17 +44,20 @@ $(function(){
 				
 				//데이터 출력
 				for(var i=0; i < resp.length; i++){
+					var memberId = resp[i].memberId;
+					if(memberId == null){
+						memberId = "탈퇴한 회원입니다";
+					}
+					
 					var divCol = "<div class=page>"+
-						"<span>"+resp[i].shopTitle+"</span>" +
-						"<br>"+
-						"<span>"+resp[i].memberId+"</span>" +
+						"<span><a href=detail?shopNo="+resp[i].shopNo+"><img src=img?shopImgNo="+resp[i].shopImgNo+"+ class=icon></a></span>" +
 						"<br>"+
 						"<span><a href=detail?shopNo="+resp[i].shopNo+">"+resp[i].shopTitle+"</a></span>" +
 						"<br>"+
-						"<span>"+resp[i].shopContent+"</span>" +
+						"<span>"+resp[i].memberId+"</span>" +
 						"<br>"+
-						"<span>"+resp[i].shopPrice+"</span>" +
-					+"</div>";
+						"<span>"+resp[i].shopPrice+"원</span>" +
+					"</div>";
 					$(".result").append(divCol);
 					$(".page").addClass("col-3 mt-3");
 				}
