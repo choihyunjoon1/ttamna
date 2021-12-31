@@ -99,6 +99,8 @@ public class ShopController {
 		ShopDto shopDto = shopDao.get(shopNo);
 		ShopImgDto shopImgDto = shopImgDao.getBy(shopNo);
 		
+		shopDao.readUp(shopDto);
+		
 		model.addAttribute("detail", shopDto);
 		model.addAttribute("shopImgDto", shopImgDto);
 		

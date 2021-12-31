@@ -48,7 +48,6 @@ $(function(){
 
 <div class="row form">
 	<span>${detail.shopTitle}</span>
-	<span>${detail.shopRead}</span>
 </div>
 <div class="row">
 	<span>상품명 : ${detail.shopGoods}</span>
@@ -58,6 +57,9 @@ $(function(){
 </div>
 <div class="row">
 	<span>남은 수량 : ${detail.shopCount}</span>
+</div>
+<div class="row">
+	<span>조회수 : ${detail.shopRead}</span>
 </div>
 
 <form action="order/buy" method="post">
