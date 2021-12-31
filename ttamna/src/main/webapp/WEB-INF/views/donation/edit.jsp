@@ -42,6 +42,7 @@
 	<c:forEach var="donationDto" items='${donationDto}'>
 		<div class="row">
 		<input type="hidden" name="donationNo" value="${donationDto.donationNo}" >
+		<input type="hidden" name="donationWriter" value="${uid}" >
 		</div>
 		<div class="row">
 		${donationDto.donationWriter}

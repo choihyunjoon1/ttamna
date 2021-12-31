@@ -57,8 +57,8 @@ public class DonationDaoImpl implements DonationDao{
 	}
 
 	@Override//삭제
-	public boolean delete(int donationNo) {
-		return sqlSession.delete("donation.delete", donationNo) > 0;
+	public boolean delete(String donationWriter) {
+		return sqlSession.delete("donation.delete", donationWriter) > 0;
 	}
 
 	@Override//더보기 페이지네이션
