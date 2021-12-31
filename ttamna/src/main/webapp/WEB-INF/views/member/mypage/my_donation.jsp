@@ -37,7 +37,10 @@
 							<td>${autopayDto.autoTotalAmount}원</td>
 							<td>${autopayDto.firstPaymentDate}</td>
 							<td>${autopayDto.payTimes}회차</td>
-							<td><a href="${pageContext.request.contextPath}/donation/kakao/auto/search?sid=${autopayDto.autoSid}">조회</a></td>
+							<td>
+								<a href="${pageContext.request.contextPath}/donation/kakao/auto/search?sid=${autopayDto.autoSid}">조회</a>
+								<a href="${pageContext.request.contextPath}/donation/kakao/auto/inactive?sid=${autopayDto.autoSid}">중지</a>
+							</td>
 						</tr>
 						</c:forEach>
 					</tbody>
