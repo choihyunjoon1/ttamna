@@ -15,6 +15,7 @@ import com.kh.ttamna.vo.kakaopay.KaKaoPayAutoPayMentSearchResponseVo;
 import com.kh.ttamna.vo.kakaopay.KakaoPayApproveRequestVo;
 import com.kh.ttamna.vo.kakaopay.KakaoPayApproveResponseVo;
 import com.kh.ttamna.vo.kakaopay.KakaoPayAutoApproveRequestVo;
+import com.kh.ttamna.vo.kakaopay.KakaoPayAutoPayMentInactiveResponseVo;
 import com.kh.ttamna.vo.kakaopay.KakaoPayCancelResponseVo;
 import com.kh.ttamna.vo.kakaopay.KakaoPayReadyRequestVo;
 import com.kh.ttamna.vo.kakaopay.KakaoPayReadyResponseVo;
@@ -125,16 +126,49 @@ public class KakaoPayServiceImpl implements KakaoPayService{
 		return responseVo;
 	}
 
-	@Override
+	@Override//단건 결제 조회
 	public KakaoPaySearchResponseVo search(String tid) throws URISyntaxException {
-		// TODO Auto-generated method stub
-		return null;
+		RestTemplate template = new RestTemplate();
+		
+		HttpHeaders headers = new HttpHeaders();
+		headers.add("Authorization",  "KakaoAK "+Auth);
+		headers.add("Content-type", ContentType);
+		
+		MultiValueMap<String, String> body = new LinkedMultiValueMap<>();
+		body.add("cid", "TC0ONETIME");
+		body.add("tid", tid);
+		
+		HttpEntity<MultiValueMap<String, String>> entity = new HttpEntity<>(body, headers);
+		
+		URI uri = new URI("https://kapi.kakao.com/v1/payment/cancel");
+		
+		KakaoPaySearchResponseVo responseVo = template.postForObject(uri, entity, KakaoPaySearchResponseVo.class);
+		
+		return responseVo;
 	}
 
-	@Override
+	@Override//단건 결제 취소
 	public KakaoPayCancelResponseVo cancel(String tid, long amount) throws URISyntaxException {
-		// TODO Auto-generated method stub
-		return null;
+		RestTemplate template = new RestTemplate();
+		
+		HttpHeaders headers = new HttpHeaders();
+		headers.add("Authorization",  "KakaoAK "+Auth);
+		headers.add("Content-type", ContentType);
+		
+		MultiValueMap<String, String> body = new LinkedMultiValueMap<>();
+		body.add("cid", "TC0ONETIME");
+		body.add("tid", tid);
+		body.add("cancel_amount", String.valueOf(amount));
+		body.add("cancel_tax_free_amount", "0");
+		
+		HttpEntity<MultiValueMap<String, String>> entity = new HttpEntity<>(body, headers);
+		
+		
+		URI uri = new URI("https://kapi.kakao.com/v1/payment/cancel");
+		
+		KakaoPayCancelResponseVo responseVo = template.postForObject(uri, entity, KakaoPayCancelResponseVo.class);
+		
+		return responseVo;
 	}
 
 	@Override//정기결제 요청
@@ -188,6 +222,28 @@ public class KakaoPayServiceImpl implements KakaoPayService{
 		URI uri = new URI("https://kapi.kakao.com/v1/payment/manage/subscription/status");
 		
 		KaKaoPayAutoPayMentSearchResponseVo responseVo = template.postForObject(uri, entity, KaKaoPayAutoPayMentSearchResponseVo.class);
+		
+		return responseVo;
+	}
+	
+	@Override//정기결제 비활성화
+	public KakaoPayAutoPayMentInactiveResponseVo autoInactive(String sid) throws URISyntaxException {
+		RestTemplate template = new RestTemplate();
+		
+		HttpHeaders headers = new HttpHeaders();
+		headers.add("Authorization",  "KakaoAK "+Auth);
+		headers.add("Content-type", ContentType);
+		
+		MultiValueMap<String, String> body = new LinkedMultiValueMap<>();
+		body.add("cid", "TCSUBSCRIP");
+		body.add("sid", sid);
+		
+		HttpEntity<MultiValueMap<String, String>> entity = new HttpEntity<>(body, headers);
+		
+		
+		URI uri = new URI("https://kapi.kakao.com/v1/payment/manage/subscription/inactive");
+		
+		KakaoPayAutoPayMentInactiveResponseVo responseVo = template.postForObject(uri, entity, KakaoPayAutoPayMentInactiveResponseVo.class);
 		
 		return responseVo;
 	}
