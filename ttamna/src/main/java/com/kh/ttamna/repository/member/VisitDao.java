@@ -23,5 +23,11 @@ public interface VisitDao {
 	
 	//7일간 일별 방문자 수 통계를 위한 메소드
 	List<VisitChartVO> countDaily();
+
+	//이번달 일별 방문자 수 통계를 위한 메소드
+	List<VisitChartVO> countThisMonthDaily();
+	
+	//이번달 누적 방문자 수
+	List<VisitChartVO> thisMonth();
 	
 }

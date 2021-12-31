@@ -15,16 +15,16 @@ public class PaginationVO {
 	private String column;
 	private String keyword;
 	private int count;
-	private int pageSize = 15;
-	private int blockSize = 10;
-	private int startRow;
-	private int endRow;
+	private int pageSize;
+	private int blockSize;
+	private Integer startRow;
+	private Integer endRow;
 	private int startBlock, finishBlock, lastBlock;
 	private List<MemberDto> listOfMember = new ArrayList<>(); //Member
 	private List<AutoPayMentDto> listOfAutopay = new ArrayList<>();//mypage/autoDonation
 
 	
-	public void calculater() throws Exception {
+	public void calculator() throws Exception {
 		//rownum 계산
 		if(this.page <= 0) this.page = 1;
 		

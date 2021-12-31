@@ -74,12 +74,32 @@ public class AjaxController {
 	 @GetMapping("/visitor_daily") 
 	 public VisitTotalChartVO visitorDaily() {
 		 VisitTotalChartVO chartVO = new VisitTotalChartVO();
-		 chartVO.setTitle("최근 7일간 일별 방문자 수");
+		 chartVO.setTitle("[ 최근 7일간 일별 방문자 수 ]");
 		 chartVO.setLabel("방문자 수");
 		 chartVO.setDataset(visitDao.countDaily());
 		 return chartVO;
 	 }
 
+	//이번달 일별 방문자 수
+	 @GetMapping("/this_month_daily") 
+	 public VisitTotalChartVO thisMonthDaily() {
+		 VisitTotalChartVO chartVO = new VisitTotalChartVO();
+		 chartVO.setTitle("[ 이번 달 일별 방문자 수 ]");
+		 chartVO.setLabel("방문자 수");
+		 chartVO.setDataset(visitDao.countThisMonthDaily());
+		 return chartVO;
+	 }
+	 
+	//이번달 일별 방문자 수
+	 @GetMapping("/thisMonth") 
+	 public VisitTotalChartVO thisMonth() {
+		 VisitTotalChartVO chartVO = new VisitTotalChartVO();
+		 chartVO.setTitle("[ 이번 달 누적 방문자 수 ]");
+		 chartVO.setLabel("방문자 수");
+		 chartVO.setDataset(visitDao.thisMonth());
+		 return chartVO;
+	 }
+	 
 }
 
 

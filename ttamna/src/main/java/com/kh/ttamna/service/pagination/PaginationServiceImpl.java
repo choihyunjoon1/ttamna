@@ -17,11 +17,13 @@ public class PaginationServiceImpl implements PaginationService{
 	
 	//전체 목록 + 검색 목록 + 페이지네이션 처리
 	@Override
-	public PaginationVO listPaging(PaginationVO paginationVO) throws Exception {
+	public PaginationVO memberListPaging(PaginationVO paginationVO) throws Exception {
 		
 		int count = memberDao.count(paginationVO.getColumn(), paginationVO.getKeyword());
+		paginationVO.setPageSize(15);
+		paginationVO.setBlockSize(10);
 		paginationVO.setCount(count);
-		paginationVO.calculater();
+		paginationVO.calculator();
 		List<MemberDto> list = memberDao.listPaging(paginationVO.getColumn(), paginationVO.getKeyword() ,paginationVO.getStartRow(), paginationVO.getEndRow());
 		paginationVO.setListOfMember(list);
 	

@@ -50,6 +50,18 @@ public class VisitDaoImpl implements VisitDao{
 		return sqlSession.selectList("visit.countDaily");
 	}
 
+   //이번달 일별 방문자 수 통계를 위한 메소드
+	@Override
+	public List<VisitChartVO> countThisMonthDaily() {
+		return sqlSession.selectList("visit.countThisMonthDaily");
+	}
+
+	//이번달 누적 방문자
+	@Override
+	public List<VisitChartVO> thisMonth() {
+		return sqlSession.selectList("visit.thisMonth");
+	}
+
 	
 	
 
