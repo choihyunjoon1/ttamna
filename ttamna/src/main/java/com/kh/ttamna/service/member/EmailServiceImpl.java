@@ -45,7 +45,7 @@ public class EmailServiceImpl implements EmailService{
 		
 		//작성한 HTML을 불러오기. 파일을 읽어서 내용을 설정
 		//ClassPathResource 객체를 이용하여 src이후의 경로 부터 작성
-		ClassPathResource resource = new ClassPathResource("email/template.html");
+		ClassPathResource resource = new ClassPathResource("email/find.html");
 		
 		StringBuffer buffer = new StringBuffer();
 		try(Scanner sc = new Scanner(resource.getFile());){
