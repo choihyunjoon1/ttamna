@@ -4,7 +4,7 @@
 <%-- 페이지에서 사용할 JSTL 변수 --%>
 <c:set var="root" value="${pageContext.request.contextPath}"></c:set>   
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.6.0/chart.js" integrity="sha512-CWVDkca3f3uAWgDNVzW+W4XJbiC3CH84P2aWZXj+DqI6PNbTzXbl1dIzEHeNJpYSn4B6U8miSZb/hCws7FnUZA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.6.2/chart.js" integrity="sha512-7Fh4YXugCSzbfLXgGvD/4mUJQty68IFFwB65VQwdAf1vnJSG02RjjSCslDPK0TnGRthFI8/bSecJl6vlUHklaw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
  <script> 
 
@@ -34,6 +34,7 @@
  	//고정 변수인 ctx는 canvas에 그림을 그리기 위한 펜 객체
  	var ctx = $(selector)[0].getContext("2d");
  	var dateArray = [];//날짜(문자열)만 모아둘 배열
+ 	var dowArray = [];//요일(문자열)만 모아둘 배열
 	var countArray = [];//방문자수만 모아둘 배열
 	
 	//VisitChartVO에서 가져온 데이터를 각 배열에 넣어준다
@@ -91,9 +92,9 @@
 
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 
-<div class="container-700 container-center">
+<div class="container-700 container-center mt-5 mb-5">
 	 
-	 <div class="mt-5 mb-3"><h3>VISITOR DAILY</h3></div>
+	 <div class="mt-5 mb-5"><h3>VISITOR DAILY</h3></div>
 
 	<canvas id="daily" width="400" height="400"></canvas>
 
