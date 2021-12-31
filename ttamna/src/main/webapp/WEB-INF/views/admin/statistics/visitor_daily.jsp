@@ -98,6 +98,10 @@
 
 	<canvas id="daily" width="400" height="400"></canvas>
 
+	<div class="d-grid gap-2 d-md-flex justify-content-md-end mt-5 mb-5">
+		<a type="button" class="btn btn-outline-primary" href="${root}/admin/statistics/menu">Back to Statistics Menu</a>
+		<a type="button" class="btn btn-outline-primary" href="${root}/admin/main">Back to Admin Menu</a>
+	</div>
 </div>
 
 
