@@ -1,3 +1,13 @@
+---------------- dormancy --------------------------
+
+-- 테이블 데이터 삭제 (dormancy)
+TRUNCATE TABLE dormancy;
+
+-- 테이블 삭제 (dormancy)
+DROP TABLE dormancy CASCADE CONSTRAINTS;
+
+COMMIT;
+
 ---------------- visit --------------------------
 
 -- 테이블 데이터 삭제 (visit)
@@ -251,13 +261,9 @@ DROP TABLE member CASCADE CONSTRAINTS;
 
 COMMIT;
 
-------------------dormancy------------------------
+------------------------------------------------------
 
---테이블 데이터 삭제
-TRUNCATE TABLE dormancy;
+--휴면회원 테이블삭제
+drop table dormancy;
 
---테이블 삭제
-DROP TABLE dormancy CASCADE CONSTRAINTS;
-
-COMMIT:
-
+commit;
