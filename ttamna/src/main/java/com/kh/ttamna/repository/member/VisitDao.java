@@ -30,4 +30,11 @@ public interface VisitDao {
 	//이번달 누적 방문자 수
 	List<VisitChartVO> thisMonth();
 	
+	//이번달부터 6개월 전까지의 월별 누적 방문자수
+	List<VisitChartVO> monthly();
+
+	////최근 12개월 간 월별 누적 방문자수
+	List<VisitChartVO> moy();
+		
+	
 }
