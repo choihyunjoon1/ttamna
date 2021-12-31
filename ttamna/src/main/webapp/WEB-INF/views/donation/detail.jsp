@@ -84,9 +84,10 @@
 				목표후원금액 : ${donationDto.donationTotalFund}원
 				</div>
 				<div class="col-8 mt-3">
-				<a href="edit?donationNo=${donationDto.donationNo}" class="btn btn-primary">수정</a>
-				<!-- 추후에 얼럿 창을 한번 띄워서 확인을 누르면 삭제가 되게끔 코드 -->
-				<a href="delete?donationNo=${donationDto.donationNo}" class="btn btn-primary">삭제</a>
+				<c:if test="${sessionScope.uid eq donationDto.donationWriter}">
+					<a href="edit?donationNo=${donationDto.donationNo}" class="btn btn-primary">수정</a>
+					<a href="delete?donationNo=${donationDto.donationNo}&donationWriter=${sessionScope.uid}" class="btn btn-primary">삭제</a>
+				</c:if>
 				</div>
 			</c:forEach>
 		</div>

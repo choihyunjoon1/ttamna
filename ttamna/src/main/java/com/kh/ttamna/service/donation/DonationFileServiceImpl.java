@@ -89,7 +89,7 @@ public class DonationFileServiceImpl implements DonationFileService{
 		donationDto.setDonationContent(donationUploadVo.getDonationContent());
 		donationDto.setDonationTitle(donationUploadVo.getDonationTitle());
 		donationDto.setDonationNo(donationUploadVo.getDonationNo());
-		
+		donationDto.setDonationWriter(donationUploadVo.getDonationWriter());
 		donationDao.edit(donationDto);
 		int i = 0;
 		

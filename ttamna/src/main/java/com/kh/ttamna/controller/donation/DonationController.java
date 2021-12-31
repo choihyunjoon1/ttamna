@@ -6,6 +6,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ByteArrayResource;
 import org.springframework.http.HttpHeaders;
@@ -19,7 +21,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.multipart.MultipartFile;
 
 import com.kh.ttamna.entity.donation.DonationDto;
 import com.kh.ttamna.entity.donation.DonationImgDto;
@@ -95,9 +96,10 @@ public class DonationController {
 	}
 	
 	@GetMapping("/delete")//삭제요청
-	public String delete(@RequestParam int donationNo) {
+	public String delete(@RequestParam int donationNo,
+							HttpSession session) {
 		donationService.delete(donationNo);
-		donationDao.delete(donationNo);
+		donationDao.delete((String)session.getAttribute("uid"));
 		
 		return "redirect:/donation/list";
 	}
