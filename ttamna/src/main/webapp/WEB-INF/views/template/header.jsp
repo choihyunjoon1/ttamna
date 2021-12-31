@@ -29,6 +29,7 @@
     <!-- Bootstrap JavaScript CDN 번들 -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 
+	<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
     <style>
     	.logo-wrapper {
             width:130px;
@@ -59,6 +60,8 @@
     		}
     	});
     }); 
+    
+    $()
     </script>
 </head>
 <body>
@@ -102,18 +105,18 @@
           </a>
         </li>
      </ul>
-     <ul class="navbar-nav me-auto navbar-center fs-6">
+     <ul class="navbar-nav me-auto navbar-center fs-6" >
         <li class="nav-item ms-1">
-          <a class="nav-link active docs-creator" href="${root}/shop/">후원상품🐾</a>
+          <a class="nav-link docs-creator active" href="${root}/shop/"  aria-current="page">후원상품🐾</a>
         </li>
         <li class="nav-item ms-5">
-          <a class="nav-link active docs-creator" href="${root}/donation/">기부🐾</a>
+          <a class="nav-link docs-creator" href="${root}/donation/">기부🐾</a>
         </li>
         <li class="nav-item ms-5">
-          <a class="nav-link active docs-creator" href="#">입양공고🐾</a>
+          <a class="nav-link docs-creator" href="#">입양공고🐾</a>
         </li>
          <li class="nav-item ms-5">
-          <a class="nav-link active docs-creator" href="${root }/mybaby/">내새끼자랑🐾</a>
+          <a class="nav-link docs-creator" href="${root }/mybaby/">내새끼자랑🐾</a>
         </li>
 	 </ul>
 	 <ul class="navbar-nav navbar-left">
