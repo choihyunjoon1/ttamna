@@ -6,7 +6,7 @@ import com.kh.ttamna.entity.shop.ShopDto;
 
 public interface ShopDao {
 	
-	int insert(ShopDto shopDto);
+	void insert(ShopDto shopDto);
 	
 	ShopDto get(int shopNo);
 	
@@ -17,4 +17,7 @@ public interface ShopDao {
 	boolean delete(int shopNo);
 	
 	boolean update(ShopDto shopDto);
+
+	List<ShopDto> search(List<Integer> shopNo);
+
 }

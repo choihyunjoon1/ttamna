@@ -37,7 +37,7 @@ public class DormancySchedulerDaoImpl implements DormancySchedulerDao{
 	@Override
 	//매일 정각에 멤버테이블에서 조회하여 마지막접속일 후 335일이 지났는지 확인
 	//	@Scheduled(cron="0 0 0 * * *")//매일 자정
-	@Scheduled(cron = "0 * * * * *")//테스트용 1분 추기
+//	@Scheduled(cron = "0 * * * * *")//테스트용 1분 추기
 	public void findDormancy() throws FileNotFoundException, MessagingException, IOException {
 		log.debug("휴면계정 회원 찾기 실행");
 		List<MemberDto> findDormancy = sqlSession.selectList("member.findDormancy");

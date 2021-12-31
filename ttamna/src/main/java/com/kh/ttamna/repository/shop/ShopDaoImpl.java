@@ -16,25 +16,26 @@ public class ShopDaoImpl implements ShopDao{
 		@Autowired
 		private SqlSession sqlSession;
 		
+	// 등록	
 	@Override
-	public int insert(ShopDto shopDto) {
-		int shopNo = sqlSession.selectOne("shop.seq");
-		shopDto.setShopNo(shopNo);
+	public void insert(ShopDto shopDto) {
 		sqlSession.insert("shop.insert", shopDto);
-		
-		return shopNo;
+
 	}
 
+	// 상세조회
 	@Override
 	public ShopDto get(int shopNo) {
 		return sqlSession.selectOne("shop.get", shopNo);
 	}
 
+	// 글 목록
 	@Override
 	public List<ShopDto> list() {
-		return sqlSession.selectList("shop.list");
+		return sqlSession.selectList("shop.listByImgNo");
 	}
 
+	// 목록 더보기
 	@Override
 	public List<ShopDto> listByPage(int startRow, int endRow) {
 		Map<String, Object> map = new HashMap<>();
@@ -44,17 +45,26 @@ public class ShopDaoImpl implements ShopDao{
 		return sqlSession.selectList("shop.listByPage", map);
 	}
 
+	// 삭제
 	@Override
 	public boolean delete(int shopNo) {
 		
 		return sqlSession.delete("shop.delete", shopNo) > 0;
 	}
-
+	
+	// 수정
 	@Override
 	public boolean update(ShopDto shopDto) {
 	
 		return sqlSession.update("shop.update", shopDto) > 0;
 		
+	}
+
+	@Override
+	public List<ShopDto> search(List<Integer> shopNo) {
+		Map<String, Object> param = new HashMap<>();
+		param.put("list", shopNo);
+		return sqlSession.selectList("shop.search", param);
 	}
 
 }
