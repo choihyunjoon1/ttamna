@@ -14,4 +14,10 @@ public interface AutoDonationDao {
 	void payTimesUpdate(int autoNo);
 	
 	List<AutoPayMentDto> listByMember(String memberId);//특정 회원의 정기결제 목록 불러오기
+	
+	//정기결제 목록+페이지네이션
+	List<AutoPayMentDto> listPaging(String memberId,int startRow,int endRow);
+	
+	//블록 구하기 위해 게시글 개수 구하기
+	int count(String memberId);
 }

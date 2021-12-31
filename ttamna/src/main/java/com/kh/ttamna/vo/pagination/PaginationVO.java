@@ -3,6 +3,7 @@ package com.kh.ttamna.vo.pagination;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.kh.ttamna.entity.donation.AutoPayMentDto;
 import com.kh.ttamna.entity.member.MemberDto;
 
 import lombok.Data;
@@ -20,6 +21,7 @@ public class PaginationVO {
 	private int endRow;
 	private int startBlock, finishBlock, lastBlock;
 	private List<MemberDto> listOfMember = new ArrayList<>(); //Member
+	private List<AutoPayMentDto> listOfAutopay = new ArrayList<>();//mypage/autoDonation
 
 	
 	public void calculater() throws Exception {
