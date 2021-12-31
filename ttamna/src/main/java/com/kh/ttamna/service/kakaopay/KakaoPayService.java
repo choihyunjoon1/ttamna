@@ -6,6 +6,7 @@ import com.kh.ttamna.vo.kakaopay.KaKaoPayAutoPayMentSearchResponseVo;
 import com.kh.ttamna.vo.kakaopay.KakaoPayApproveRequestVo;
 import com.kh.ttamna.vo.kakaopay.KakaoPayApproveResponseVo;
 import com.kh.ttamna.vo.kakaopay.KakaoPayAutoApproveRequestVo;
+import com.kh.ttamna.vo.kakaopay.KakaoPayAutoPayMentInactiveResponseVo;
 import com.kh.ttamna.vo.kakaopay.KakaoPayCancelResponseVo;
 import com.kh.ttamna.vo.kakaopay.KakaoPayReadyRequestVo;
 import com.kh.ttamna.vo.kakaopay.KakaoPayReadyResponseVo;
@@ -33,4 +34,7 @@ public interface KakaoPayService {
 	
 	//정기결제 조회
 	KaKaoPayAutoPayMentSearchResponseVo autoSearch(String sid) throws URISyntaxException;
+	
+	//정기결제 비활성화
+	KakaoPayAutoPayMentInactiveResponseVo autoInactive(String sid) throws URISyntaxException;
 }

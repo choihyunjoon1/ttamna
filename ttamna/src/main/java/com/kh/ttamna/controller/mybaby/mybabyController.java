@@ -1,10 +1,7 @@
 package com.kh.ttamna.controller.mybaby;
 
-import java.util.HashMap;
+import java.io.IOException;
 import java.util.List;
-import java.util.Map;
-
-import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -18,6 +15,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.kh.ttamna.entity.mybaby.MybabyDto;
 import com.kh.ttamna.repository.mybaby.MybabyDao;
+import com.kh.ttamna.repository.mybaby.MybabyImgDao;
+import com.kh.ttamna.service.mybaby.MybabyFileService;
+import com.kh.ttamna.vo.mybaby.MybabyFileVO;
 
 
 @Controller
@@ -28,20 +28,26 @@ public class mybabyController {
 	@Autowired
 	private MybabyDao mybabyDao;
 	
-//	@Autowired
-//	private MybabyImgDao mybabyImgDao;
+	@Autowired
+	private MybabyImgDao mybabyImgDao;
 	
-//	@Autowired
-//	private MybabyFileService mybabyService;
+	@Autowired
+	private MybabyFileService mybabyService;
+	//게시글 등록
 	@GetMapping("/write")
 	public String write() {
 		return "mybaby/write";
 	}
+//	@PostMapping("/write")
+//	public String write(@ModelAttribute MybabyDto mybabyDto,HttpSession session) {
+//		String memberId = (String)session.getAttribute("uid");
+//		mybabyDto.setMybabyWriter(memberId);
+//		int mybabyNo = mybabyDao.write(mybabyDto);
+//		return "redirect:/mybaby/detail?mybabyNo="+mybabyNo;
+//	}
 	@PostMapping("/write")
-	public String write(@ModelAttribute MybabyDto mybabyDto,HttpSession session) {
-		String memberId = (String)session.getAttribute("uid");
-		mybabyDto.setMybabyWriter(memberId);
-		int mybabyNo = mybabyDao.write(mybabyDto);
+	public String write(@ModelAttribute MybabyFileVO mybabyFileVO) throws IllegalStateException, IOException {
+		int mybabyNo = mybabyService.write(mybabyFileVO);
 		return "redirect:/mybaby/detail?mybabyNo="+mybabyNo;
 	}
 	//상세페이지

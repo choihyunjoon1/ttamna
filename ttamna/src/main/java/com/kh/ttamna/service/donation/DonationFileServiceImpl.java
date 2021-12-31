@@ -68,9 +68,35 @@ public class DonationFileServiceImpl implements DonationFileService{
 	}
 	
 	
-	@Override
+	@Override//파일 한개 삭제
 	public void fileOneDelete(int donationImgNo) {
 		File target = new File(directory, String.valueOf(donationImgNo));
 		target.delete();
+	}
+	
+	@Override//게시글 수정 시 파일 추가 요청
+	public void updateAddFile(DonationUploadVo donationUploadVo) throws IllegalStateException, IOException {
+
+		List<DonationImgDto> donationList = donationUploadVo.convertToDonationImgDto(donationUploadVo.getDonationNo());
+		
+		int i = 0;
+		
+		if(!donationUploadVo.getAttach().isEmpty()){//파일이 있으면 실행
+			for(MultipartFile files : donationUploadVo.getAttach()) {
+				
+				//[2] DonationImgNo를 뽑고
+				int donationImgNo = sqlSession.selectOne("donaImg.seq");
+				//[3] N번째 donationList를 Dto에 옮긴 뒤
+				DonationImgDto donationImgDto = donationList.get(i);
+				//[4] 2번에서 뽑은 ImgNo를 저장시키고
+				donationImgDto.setDonationImgNo(donationImgNo);
+				//[5] 실제이미지를 저장하는 dao를 실행
+				donationImgDao.save(donationImgDto, 
+						files);
+				//[6] 다했으면 i를 증감시킨다.
+				i++;
+			}
+			
+		}
 	}
 }
