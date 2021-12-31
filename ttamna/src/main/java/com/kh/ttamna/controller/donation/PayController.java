@@ -20,6 +20,8 @@ import com.kh.ttamna.service.kakaopay.KakaoPayService;
 import com.kh.ttamna.vo.kakaopay.KaKaoPayAutoPayMentSearchResponseVo;
 import com.kh.ttamna.vo.kakaopay.KakaoPayApproveRequestVo;
 import com.kh.ttamna.vo.kakaopay.KakaoPayApproveResponseVo;
+import com.kh.ttamna.vo.kakaopay.KakaoPayAutoPayMentInactiveResponseVo;
+import com.kh.ttamna.vo.kakaopay.KakaoPayCancelResponseVo;
 import com.kh.ttamna.vo.kakaopay.KakaoPayReadyRequestVo;
 import com.kh.ttamna.vo.kakaopay.KakaoPayReadyResponseVo;
 
@@ -120,13 +122,26 @@ public class PayController {
 		return "donation/kakao/success_result";
 	}
 	
-	@GetMapping("/auto/search")
+	@GetMapping("/auto/search")//정기기부 조회 요청
 	public String autoSearch(@RequestParam String sid, Model model) throws URISyntaxException {
-		System.out.println("입ㄱ");
 		KaKaoPayAutoPayMentSearchResponseVo responseVo = kakaoService.autoSearch(sid);
 		model.addAttribute("searchList", responseVo);
-		System.out.println("퇴갤직전");
 		return "donation/kakao/auto_search";
 	}
 	
+	@GetMapping("/auto/inactive")//정기기부 비활성화 요청
+	public String autoInactive(@RequestParam String sid, Model model) throws URISyntaxException {
+		KakaoPayAutoPayMentInactiveResponseVo responsevo = kakaoService.autoInactive(sid);
+		model.addAttribute("inactiveList", responsevo);
+		return "donation/kakao/auto_inactive";
+	}
+	
+	@GetMapping("/cancel")//결제 취소 요청
+	public String cancel(@RequestParam String tid, @RequestParam long amount,
+								Model model) throws URISyntaxException {
+		KakaoPayCancelResponseVo responseVo = kakaoService.cancel(tid, amount);
+		model.addAttribute("cancelList", responseVo);
+		
+		return "donation/kakao/cancel";
+	}
 }
