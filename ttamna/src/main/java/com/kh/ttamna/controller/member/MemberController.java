@@ -18,6 +18,8 @@ import com.kh.ttamna.repository.donation.AutoDonationDao;
 import com.kh.ttamna.repository.member.DormancyDao;
 import com.kh.ttamna.repository.member.MemberDao;
 import com.kh.ttamna.repository.member.VisitDao;
+import com.kh.ttamna.service.pagination.PaginationService;
+import com.kh.ttamna.vo.pagination.PaginationVO;
 
 @Controller
 @RequestMapping("/member")
@@ -30,6 +32,9 @@ public class MemberController {
 	
 	@Autowired
 	private DormancyDao dorDao;
+	
+	@Autowired
+	private PaginationService paginationService;
 	
 	//회원가입
 	@GetMapping("/join")
@@ -156,12 +161,12 @@ public class MemberController {
 		return "member/mypage/my_basket";
 	}
 	//기부내역
-	@Autowired
-	private AutoDonationDao autoDonationDao;
-	@RequestMapping("/mypage/my_donation")
-	public String myDonation(HttpSession session, Model model) {
+	@GetMapping("/mypage/my_donation")
+	public String myDonation(HttpSession session, @ModelAttribute PaginationVO paginationVO,Model model) throws Exception {
 		String memberId = (String)session.getAttribute("uid");
-		model.addAttribute("autoDonationList", autoDonationDao.listByMember(memberId));
+//		model.addAttribute("autoDonationList", autoDonationDao.listByMember(memberId));
+		PaginationVO listPaging = paginationService.apmListPaging(paginationVO, memberId);
+		model.addAttribute("paginationVO", listPaging);
 		return "member/mypage/my_donation";
 	}
 	//회원탈퇴
@@ -190,7 +195,6 @@ public class MemberController {
 		return "member/quit_success";
 	}
 
-	
 
 	
 
