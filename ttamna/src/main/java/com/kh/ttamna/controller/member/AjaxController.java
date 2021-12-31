@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.kh.ttamna.entity.member.MemberDto;
 import com.kh.ttamna.repository.member.MemberDao;
 import com.kh.ttamna.repository.member.VisitDao;
+import com.kh.ttamna.vo.chart.VisitTotalChartVO;
 
 @RestController
 @RequestMapping("/ajax")
@@ -69,6 +70,16 @@ public class AjaxController {
 		return String.valueOf(count);
 	}
 	
+	//7일간 일별 방문자수 통계 데이터 전달 ajax
+	 @GetMapping("/visitor_daily") 
+	 public VisitTotalChartVO visitorDaily() {
+		 VisitTotalChartVO chartVO = new VisitTotalChartVO();
+		 chartVO.setTitle("최근 7일간 일별 방문자 수");
+		 chartVO.setLabel("방문자 수");
+		 chartVO.setDataset(visitDao.countDaily());
+		 return chartVO;
+	 }
+
 }
 
 

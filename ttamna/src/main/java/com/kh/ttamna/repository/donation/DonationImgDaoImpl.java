@@ -53,4 +53,9 @@ public class DonationImgDaoImpl implements DonationImgDao{
 	public DonationImgDto getFile(int donationImgNo) {
 		return sqlSession.selectOne("donaImg.getImgDto", donationImgNo);
 	}
+	
+	@Override//게시글 수정에서 파일 삭제 시 파일 삭제 1회 실행
+	public void fileOneDelete(int donationImgNo) {
+		sqlSession.delete("donaImg.fileOneDelete", donationImgNo);
+	}
 }

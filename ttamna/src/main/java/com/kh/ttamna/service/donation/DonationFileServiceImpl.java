@@ -67,4 +67,10 @@ public class DonationFileServiceImpl implements DonationFileService{
 		}
 	}
 	
+	
+	@Override
+	public void fileOneDelete(int donationImgNo) {
+		File target = new File(directory, String.valueOf(donationImgNo));
+		target.delete();
+	}
 }

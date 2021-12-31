@@ -12,9 +12,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.kh.ttamna.entity.member.MemberDto;
 import com.kh.ttamna.repository.member.MemberDao;
+import com.kh.ttamna.repository.member.VisitDao;
 import com.kh.ttamna.service.pagination.PaginationService;
+import com.kh.ttamna.vo.chart.VisitTotalChartVO;
 import com.kh.ttamna.vo.pagination.PaginationVO;
 
+import lombok.extern.slf4j.Slf4j;
+@Slf4j
 @Controller
 @RequestMapping("/admin")
 public class AdminController {
@@ -70,14 +74,27 @@ public class AdminController {
 
 //////////////////////////////////////통계/////////////////////////////////////	
 
+	@Autowired
+	private VisitDao visitDao;
 
-
+	//통계 메인 페이지
 	@GetMapping("/statistics/menu")
 	public String menu() {
 		return "admin/statistics/menu";
 	}
-
-
+	
+	//7일간 일별 방문자수 통계 페이지
+	 @GetMapping("/statistics/visitor_daily") 
+	 public String visitorDaily() {
+		 return "admin/statistics/visitor_daily";
+	 }
+	 
+	//월별 방문자수 통계 페이지
+	 @GetMapping("/statistics/visitor_monthly") 
+	 public String visitorMonthly() {
+		 return "admin/statistics/visitor_monthly";
+	 }
+	 
 
 }
 

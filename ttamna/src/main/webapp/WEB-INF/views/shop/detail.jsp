@@ -7,6 +7,7 @@
 
 <div class="row form">
 	<span>${detail.shopTitle}</span>
+	<span>${detail.shopRead}</span>
 </div>
 <div class="row">
 	<span>상품명 : ${detail.shopGoods}</span>

@@ -42,5 +42,10 @@
 	<select id="getImgDto" parameterType="int" resultType="DonationImgDto"> 
 		select * from donation_img where donation_img_no = ${donationImgNo}
 	</select>
+	
+	<!-- 파일 지우기(수정에서 요청 시) -->
+	<delete id="fileOneDelete" parameterType="int">
+		delete donation_img where donation_img_no = ${donationImgNo}
+	</delete>
 </mapper>
 

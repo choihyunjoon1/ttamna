@@ -1,6 +1,9 @@
 package com.kh.ttamna.repository.member;
 
+import java.util.List;
+
 import com.kh.ttamna.entity.member.VisitDto;
+import com.kh.ttamna.vo.chart.VisitChartVO;
 
 public interface VisitDao {
 
@@ -17,5 +20,8 @@ public interface VisitDao {
 	
 	//오늘 하루의 방문자 수를 계산하는 메소드
 	int countByDay();
+	
+	//7일간 일별 방문자 수 통계를 위한 메소드
+	List<VisitChartVO> countDaily();
 	
 }

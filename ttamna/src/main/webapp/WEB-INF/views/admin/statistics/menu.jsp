@@ -11,13 +11,13 @@
 	 <div class="mt-5 mb-3"><h3>STATISTICS MENU</h3></div>
 		
 		<div class="list-group">
-		  <a href="#" class="list-group-item list-group-item-action p-3" aria-current="true">
+		  <a href="${root}/admin/statistics/visitor_daily" class="list-group-item list-group-item-action p-3" aria-current="true">
 		    <div class="d-flex w-100 justify-content-between">
 		      <h5 class="mb-1">VISITOR Daily</h5>
 		      <small>방문자 일별 통계</small>
 		    </div>
 		  </a>
-		 <a href="#" class="list-group-item list-group-item-action p-3" aria-current="true">
+		 <a href="${root}/admin/statistics/visitor_monthly" class="list-group-item list-group-item-action p-3" aria-current="true">
 		    <div class="d-flex w-100 justify-content-between">
 		      <h5 class="mb-1">VISITOR Monthly</h5>
 		      <small>방문자 월별 통계</small>

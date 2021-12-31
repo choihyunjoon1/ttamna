@@ -1,13 +1,16 @@
 package com.kh.ttamna.repository.member;
 
+import java.util.List;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.kh.ttamna.entity.member.VisitDto;
+import com.kh.ttamna.vo.chart.VisitChartVO;
 
 @Repository
-public class VistiDaoImpl implements VisitDao{
+public class VisitDaoImpl implements VisitDao{
 
 	@Autowired
 	private SqlSession sqlSession;
@@ -39,6 +42,12 @@ public class VistiDaoImpl implements VisitDao{
 	public int countByDay() {
 		int count = sqlSession.selectOne("visit.countByDay");
 		return count;
+	}
+
+	//7일간 일별 방문자 수 통계를 위한 메소드
+    @Override
+	public List<VisitChartVO> countDaily() {
+		return sqlSession.selectList("visit.countDaily");
 	}
 
 	
