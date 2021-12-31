@@ -31,7 +31,7 @@
 					<tbody>
 						<c:set var="list" value="${paginationVO.listOfAutopay }"></c:set>
 						<c:forEach var="autopayDto" items="${list}">
-						<tr>
+						<tr onClick="location.href='#'">
 							<td>정기기부</td>
 							<td>${autopayDto.donationNo}</td>
 							<td>${autopayDto.autoTotalAmount}원</td>
