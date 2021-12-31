@@ -3,6 +3,8 @@ package com.kh.ttamna.service.kakaopay;
 import java.net.URI;
 import java.net.URISyntaxException;
 
+import org.apache.ibatis.session.SqlSession;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -11,6 +13,7 @@ import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
 
+import com.kh.ttamna.repository.payment.PaymentDao;
 import com.kh.ttamna.vo.kakaopay.KakaoPayApproveRequestVo;
 import com.kh.ttamna.vo.kakaopay.KakaoPayApproveResponseVo;
 import com.kh.ttamna.vo.kakaopay.KakaoPayCancelResponseVo;
@@ -21,12 +24,18 @@ import com.kh.ttamna.vo.kakaopay.KakaoPaySearchResponseVo;
 @Service
 public class ShopPayServiceImpl implements ShopPayService{
 
+	@Autowired
+	private PaymentDao paymentDao;
+	
+	@Autowired
+	private SqlSession sqlSession;
+	
 	@Value("${user.kakaopay.key}")
 	public String Auth;
 	@Value("${user.kakaopay.contenttype}")
 	public String ContentType;
 	
-	// 단건 결제
+	// 단건 결제 준비
 	@Override
 	public KakaoPayReadyResponseVo ready(KakaoPayReadyRequestVo requestVo) throws URISyntaxException {
 		RestTemplate template = new RestTemplate();
@@ -35,9 +44,11 @@ public class ShopPayServiceImpl implements ShopPayService{
 		headers.add("Authorization", "KakaoAK "+Auth);
 		headers.add("Content-type", ContentType);
 		
+
 		MultiValueMap<String, String> body = new LinkedMultiValueMap<>();
 		body.add("cid", "TC0ONETIME");
-		body.add("partner_order_id", "티어하임");
+//		body.add("partner_order_id", "티어하임");
+		body.add("partner_order_id", requestVo.getPartner_order_id());
 		body.add("partner_user_id", requestVo.getPartner_user_id());
 		
 		body.add("item_name", requestVo.getItem_name());
@@ -59,6 +70,9 @@ public class ShopPayServiceImpl implements ShopPayService{
 		
 		return responseVo;
 	}
+	
+	// 다중 결제
+
 
 	// 결제 승인
 	@Override
@@ -73,7 +87,8 @@ public class ShopPayServiceImpl implements ShopPayService{
 		MultiValueMap<String, String> body = new LinkedMultiValueMap<>();
 		body.add("cid", "TC0ONETIME");
 		body.add("tid", requestVo.getTid());
-		body.add("partner_order_id", "티어하임");
+//		body.add("partner_order_id", "티어하임");
+		body.add("partner_order_id", requestVo.getPartner_order_id());
 		body.add("partner_user_id", requestVo.getPartner_user_id());
 		body.add("pg_token", requestVo.getPg_token());
 		

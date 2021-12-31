@@ -14,10 +14,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.kh.ttamna.entity.member.DormancyDto;
 import com.kh.ttamna.entity.member.MemberDto;
 import com.kh.ttamna.entity.member.VisitDto;
-import com.kh.ttamna.repository.donation.AutoDonationDao;
 import com.kh.ttamna.repository.member.DormancyDao;
 import com.kh.ttamna.repository.member.MemberDao;
 import com.kh.ttamna.repository.member.VisitDao;
+import com.kh.ttamna.repository.payment.PaymentDao;
 import com.kh.ttamna.service.pagination.PaginationService;
 import com.kh.ttamna.vo.pagination.PaginationVO;
 
@@ -35,6 +35,9 @@ public class MemberController {
 	
 	@Autowired
 	private PaginationService paginationService;
+	
+	@Autowired
+	private PaymentDao paymentDao;
 	
 	//회원가입
 	@GetMapping("/join")
@@ -194,8 +197,6 @@ public class MemberController {
 	public String quitSuccess() {
 		return "member/quit_success";
 	}
-
-
 	
 
 }
