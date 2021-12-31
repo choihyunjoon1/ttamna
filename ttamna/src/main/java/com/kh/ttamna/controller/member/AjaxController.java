@@ -100,6 +100,26 @@ public class AjaxController {
 		 return chartVO;
 	 }
 	 
+	 //이번달부터 6개월 전까지의 월별 누적 방문자수
+	 @GetMapping("/monthly")
+	 public VisitTotalChartVO monthly() {
+		 VisitTotalChartVO chartVO = new VisitTotalChartVO();
+		 chartVO.setTitle("[ 이번 달, 최근 6개월 월별 누적 방문자 수 ]");
+		 chartVO.setLabel("방문자 수");
+		 chartVO.setDataset(visitDao.monthly());
+		 return chartVO;
+	 }
+	 
+	 //최근 12개월 간 월별 누적 방문자수
+	 @GetMapping("/moy")
+	 public VisitTotalChartVO moy() {
+		 VisitTotalChartVO chartVO = new VisitTotalChartVO();
+		 chartVO.setTitle("[ 최근 12개월 간 월별 누적 방문자수 ]");
+		 chartVO.setLabel("방문자 수");
+		 chartVO.setDataset(visitDao.moy());
+		 return chartVO;
+	 }
+	 
 }
 
 
