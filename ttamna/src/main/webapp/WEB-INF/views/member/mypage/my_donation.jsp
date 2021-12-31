@@ -48,16 +48,8 @@
 						<!-- 이전 버튼 -->
 						<c:choose>
 							<c:when test="${paginationVO.isPreviousExist()}">
-								<c:choose>
-									<c:when test="${paginationVO.isSearch()}">
-										<!-- 검색용 링크 -->
-										<li class="page-item"><a class="page-link" href="list?column=${paginationVO.column}&keyword=${paginationVO.keyword}&page=${paginationVO.getPreviousBlock()}">Prev</a></li>
-									</c:when>
-									<c:otherwise>
-										<!-- 목록용 링크 -->
-										<li class="page-item"><a class="page-link" href="my_donation?page=${paginationVO.getPreviousBlock()}">Prev</a></li>
-									</c:otherwise>
-								</c:choose>
+								<!-- 목록용 링크 -->
+								<li class="page-item"><a class="page-link" href="my_donation?page=${paginationVO.getPreviousBlock()}">Prev</a></li>
 							</c:when>
 							<c:otherwise>
 								<li class="page-item"><a class="page-link" href="#">Prev</a></li>
@@ -66,31 +58,15 @@
 						
 						<!-- 페이지 네비게이터 -->
 						<c:forEach var="i" begin="${paginationVO.getStartBlock()}" end="${paginationVO.getRealLastBlock()}" step="1">
-							<c:choose>
-								<c:when test="${paginationVO.isSearch()}">
-									<!-- 검색용 링크 -->
-									<li class="page-item"><a class="page-link" href="list?column=${paginationVO.column}&keyword=${paginationVO.keyword}&page=${i}">${i}</a></li>
-								</c:when>
-								<c:otherwise>
-									<!-- 목록용 링크 -->
-							    	<li class="page-item"><a class="page-link" href="my_donation?page=${i}">${i}</a></li>
-								</c:otherwise>
-							</c:choose>
+							<!-- 목록용 링크 -->
+					    	<li class="page-item"><a class="page-link" href="my_donation?page=${i}">${i}</a></li>
 						</c:forEach>
 				
 						<!-- 다음 -->
 						<c:choose>
 							<c:when test="${paginationVO.isNextExist()}">
-								<c:choose>
-									<c:when test="${paginationVO.isSearch()}">
-										<!-- 검색용 링크 -->
-										<li class="page-item"><a class="page-link" href="list?column=${paginationVO.column}&keyword=${paginationVO.keyword}&page=${paginationVO.getNextBlock()}">Next</a></li>
-									</c:when>
-									<c:otherwise>
-										<!-- 목록용 링크 -->
-										<li class="page-item"><a class="page-link" href="my_donation?page=${paginationVO.getNextBlock()}">Next</a></li>
-									</c:otherwise>
-								</c:choose>
+								<!-- 목록용 링크 -->
+								<li class="page-item"><a class="page-link" href="my_donation?page=${paginationVO.getNextBlock()}">Next</a></li>
 							</c:when>
 							<c:otherwise>
 								<li class="page-item"><a class="page-link" href="#">Next</a></li>
