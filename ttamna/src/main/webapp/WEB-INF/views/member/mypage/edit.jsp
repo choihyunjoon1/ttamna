@@ -20,7 +20,7 @@
 		<div class="row">
 			<!-- 사이드바 자리 -->
 			<jsp:include page="/WEB-INF/views/member/mypage/sidebar.jsp"></jsp:include>
-			<div class="col-2 center">
+			<div class="col-2 center" style="width:20%;">
 				<div class="p-3 border bg-light"><label>아이디</label></div>
 				<div class="p-4 border bg-light"><label>닉네임</label></div>
 				<div class="p-4 border bg-light"><label>비밀번호</label></div>
@@ -35,7 +35,7 @@
 					<input type="submit" class="btn btn-outline-primary" value="수정">
 				</div>
 			</div>
-			<div class="col-5 position-relative">
+			<div class="col-6 position-relative" style="width:55%;">
 				<div class="p-3 border bg-light">${memberDto.memberId }</div>
 				<div class="p-3 border bg-light">
 					<input type="text" class="form-control input-nick" name='memberNick' required value="${memberDto.memberNick }">
