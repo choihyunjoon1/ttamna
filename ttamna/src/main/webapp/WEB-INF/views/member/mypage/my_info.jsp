@@ -16,7 +16,7 @@
 		<div class="row">
 			<!-- 사이드바 자리 -->
 			<jsp:include page="/WEB-INF/views/member/mypage/sidebar.jsp"></jsp:include>
-			<div class="col-2 center">
+			<div class="col-2 center"  style="width:20%;">
 				<div class="p-3 border bg-light"><label>아이디</label></div>
 				<div class="p-3 border bg-light"><label>닉네임</label></div>
 				<div class="p-3 border bg-light"><label>이름</label></div>
@@ -33,7 +33,7 @@
 					<a class="btn btn-outline-primary" href="${root}/member/mypage/edit" role="button">정보수정</a>
 				</div>
 			</div>
-			<div class="col-5 position-relative">
+			<div class="col-6 position-relative"  style="width:60%;">
 				<div class="p-3 border bg-light">${memberDto.memberId}</div>
 				<div class="p-3 border bg-light">${memberDto.memberNick }</div>
 				<div class="p-3 border bg-light">${memberDto.memberName }</div>

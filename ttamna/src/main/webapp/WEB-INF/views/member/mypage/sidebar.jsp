@@ -40,8 +40,8 @@
 </script>
 
 
-<div class="col-3">
-	<div class="list-group">
+<div class="col-2">
+	<div class="list-group" style="text-align:center;">
 	<!-- 클릭할 때 해당 메뉴 class에 active 붙이기 -->
 		<a href = "${root }/member/mypage/my_info" class="list-group-item list-group-item-action myInfo" >내 정보</a>
 		<a href = "${root }/member/mypage/edit" class="list-group-item list-group-item-action edit">정보 수정</a>

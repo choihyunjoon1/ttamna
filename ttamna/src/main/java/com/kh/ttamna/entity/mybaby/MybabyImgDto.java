@@ -7,7 +7,7 @@ public class MybabyImgDto {
 	private int mybabyImgNo;
 	private int mybabyNo;
 	private String mybabyImgUpload;
-	private int mybabyImgSize;
+	private long mybabyImgSize;
 	private String mybabyImgType;
 
 }

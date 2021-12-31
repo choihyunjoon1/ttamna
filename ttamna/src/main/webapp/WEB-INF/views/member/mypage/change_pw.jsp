@@ -22,7 +22,7 @@
 		<div class="row">
 			<!-- 사이드바 자리 -->
 			<jsp:include page="/WEB-INF/views/member/mypage/sidebar.jsp"></jsp:include>
-			<div class="col-3 center">
+			<div class="col-3 center" style="width:25%;">
 				<div class="p-4 border bg-light"><label>현재 비밀번호</label></div>
 				<div class="p-4 border bg-light"><label>새 비밀번호</label></div>
 				<div class="p-4 border bg-light"><label>새 비밀번호 확인</label></div>
@@ -31,7 +31,7 @@
 					<input type="submit" class="btn btn-outline-primary" value="수정">
 				</div>
 			</div>
-			<div class="col-5 position-relative">
+			<div class="col-5 position-relative"  style="width:50%;">
 				<div class="p-3 border bg-light">
 					<input type="password" class="form-control" name="memberPw" required  placeholder="현재비밀번호 입력" aria-label="현재비밀번호 입력" aria-describedby="button-addon-pw" data-regex="^[a-z]{8,15}$">
 				</div>

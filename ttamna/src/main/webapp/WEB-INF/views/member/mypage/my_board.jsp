@@ -16,7 +16,7 @@
 			<!-- 사이드바 자리 -->
 			<jsp:include page="/WEB-INF/views/member/mypage/sidebar.jsp"></jsp:include>
 			
-			<div class="col-7">
+			<div class="col-9"  style="width:80%;">
 			<!-- 메인페이지 -->
 			<table class="table table-hover">
 				<thead>
