@@ -87,8 +87,8 @@
     </select>
     
     <!-- 이번 달 누적 방문자 수 -->
-    <select id="thisMonth" resultType="VisitChartVO">
-    select to_char((TO_DATE(sysdate,'YYYY-MM-DD')), 'month') "thisMonth", sum("count") "thisMonthCount" from (
+    <select id="countThisMonth" resultType="VisitChartVO">
+      select to_char((TO_DATE(sysdate,'YYYY-MM-DD')), 'month') "thisMonth", sum("count") "thisMonthCount" from (
 		select
 		 d.dt "date",
 		 nvl(v.cnt, 0) "count"
@@ -106,6 +106,44 @@
 		on v.dt = d.dt 
 		order by d.dt asc)
 	</select>	 
+	
+	<!-- 최근 6개월간 월별 누적 방문자 수 -->
+	<select id="countMonthly" resultType="VisitChartVO">
+	  select
+		d.mth "monthly",
+		nvl(v.cnt, 0) "monthlyCount"
+	   from
+		    (select 
+		        to_char(add_months(to_date(sysdate, 'YY/MM/DD'), - (level-1)), 'month') mth 
+		      from dual
+		        <![CDATA[connect by add_months(to_date(sysdate, 'YY/MM/DD'), - (level-1)) >= add_months(to_date(sysdate, 'YY/MM/DD'), -6)]]> )d
+		left outer join
+		    (select 
+		        to_char(visit_time, 'month') mth,
+		        count(*) cnt 
+		    from visit group by to_char(visit_time, 'month'))v
+		on v.mth = d.mth 
+		order by lpad(d.mth, 2, '0')
+	</select>
+	
+	<!-- 12개월간 월별 누적 방문자 수 -->
+	<select id="countMOY" resultType="VisitChartVO">
+	  select
+		d.mth "moy",
+		nvl(v.cnt, 0) "moyCount"
+	   from
+		    (select 
+		        to_char(add_months(to_date(sysdate, 'YY/MM/DD'), - (level-1)), 'month') mth 
+		      from dual
+		        <![CDATA[connect by add_months(to_date(sysdate, 'YY/MM/DD'), - (level-1)) >= add_months(to_date(sysdate, 'YY/MM/DD'), -11)]]> )d
+		left outer join
+		    (select 
+		        to_char(visit_time, 'month') mth,
+		        count(*) cnt 
+		    from visit group by to_char(visit_time, 'month'))v
+		on v.mth = d.mth 
+		order by lpad(d.mth, 2, '0')
+	</select>
     
 </mapper>
 
