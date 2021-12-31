@@ -217,7 +217,12 @@
 
 <div class="container-700 container-center mt-5 mb-5">
 	 
-	 <div class="mt-5 mb-5"><h3>VISITOR MONTHLY</h3></div>
+	 <div class="mt-5 mb-2"><h3>VISITOR MONTHLY</h3></div>
+
+	<div class="d-grid gap-2 d-md-flex justify-content-md-end mt-2 mb-5">
+		<a type="button" class="btn btn-sm btn-outline-dark" href="${root}/admin/statistics/menu">Back to Statistics Menu</a>
+		<a type="button" class="btn btn-sm btn-outline-dark" href="${root}/admin/main">Back to Admin Menu</a>
+	</div>
 
 	<div class="mt-5 mb-5">
 		<canvas id="this-month" width="30%"></canvas>
@@ -232,10 +237,6 @@
 	</div>
 	
 	
-	<div class="d-grid gap-2 d-md-flex justify-content-md-end mt-5 mb-5">
-		<a type="button" class="btn btn-outline-primary" href="${root}/admin/statistics/menu">Back to Statistics Menu</a>
-		<a type="button" class="btn btn-outline-primary" href="${root}/admin/main">Back to Admin Menu</a>
-	</div>
 
 </div>
 
