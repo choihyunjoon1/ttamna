@@ -64,7 +64,9 @@ $(function(){
 <div class="container">
 	<div class="row mt-3">
 	<div class="col">
+		<c:if test="${uid != null }">
 		<a href="write" class="btn btn-primary">작성하기</a>
+		</c:if>
 	</div>
 	</div>
 	<div class="row mt-3 result">

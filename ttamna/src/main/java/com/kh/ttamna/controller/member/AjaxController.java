@@ -74,12 +74,52 @@ public class AjaxController {
 	 @GetMapping("/visitor_daily") 
 	 public VisitTotalChartVO visitorDaily() {
 		 VisitTotalChartVO chartVO = new VisitTotalChartVO();
-		 chartVO.setTitle("최근 7일간 일별 방문자 수");
+		 chartVO.setTitle("[ 최근 7일간 일별 방문자 수 ]");
 		 chartVO.setLabel("방문자 수");
 		 chartVO.setDataset(visitDao.countDaily());
 		 return chartVO;
 	 }
 
+	//이번달 일별 방문자 수
+	 @GetMapping("/this_month_daily") 
+	 public VisitTotalChartVO thisMonthDaily() {
+		 VisitTotalChartVO chartVO = new VisitTotalChartVO();
+		 chartVO.setTitle("[ 이번 달 일별 방문자 수 ]");
+		 chartVO.setLabel("방문자 수");
+		 chartVO.setDataset(visitDao.countThisMonthDaily());
+		 return chartVO;
+	 }
+	 
+	//이번달 일별 방문자 수
+	 @GetMapping("/thisMonth") 
+	 public VisitTotalChartVO thisMonth() {
+		 VisitTotalChartVO chartVO = new VisitTotalChartVO();
+		 chartVO.setTitle("[ 이번 달 누적 방문자 수 ]");
+		 chartVO.setLabel("방문자 수");
+		 chartVO.setDataset(visitDao.thisMonth());
+		 return chartVO;
+	 }
+	 
+	 //이번달부터 6개월 전까지의 월별 누적 방문자수
+	 @GetMapping("/monthly")
+	 public VisitTotalChartVO monthly() {
+		 VisitTotalChartVO chartVO = new VisitTotalChartVO();
+		 chartVO.setTitle("[ 이번 달, 최근 6개월 월별 누적 방문자 수 ]");
+		 chartVO.setLabel("방문자 수");
+		 chartVO.setDataset(visitDao.monthly());
+		 return chartVO;
+	 }
+	 
+	 //최근 12개월 간 월별 누적 방문자수
+	 @GetMapping("/moy")
+	 public VisitTotalChartVO moy() {
+		 VisitTotalChartVO chartVO = new VisitTotalChartVO();
+		 chartVO.setTitle("[ 최근 12개월 간 월별 누적 방문자수 ]");
+		 chartVO.setLabel("방문자 수");
+		 chartVO.setDataset(visitDao.moy());
+		 return chartVO;
+	 }
+	 
 }
 
 

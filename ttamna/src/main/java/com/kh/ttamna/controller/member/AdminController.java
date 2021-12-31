@@ -49,7 +49,7 @@ public class AdminController {
 	@GetMapping("/member/list")
 	public String list(@ModelAttribute PaginationVO paginationVO, Model m) throws Exception {
 		//페이징 처리하는 회원목록을 PaginationService에서 받아온다.
-		PaginationVO listPaging = paginationService.listPaging(paginationVO);
+		PaginationVO listPaging = paginationService.memberListPaging(paginationVO);
 		m.addAttribute("paginationVO", listPaging);
 		return "admin/member/list";
 	}

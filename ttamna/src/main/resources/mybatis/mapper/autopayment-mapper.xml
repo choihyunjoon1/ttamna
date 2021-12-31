@@ -40,4 +40,26 @@
 		<select id="listByMember" parameterType="String" resultType="AutoPayMentDto">
 			select * from autopayment where partner_user_id = #{memberId}
 		</select>
+		
+		<!-- 회원목록 + 검색 + 페이지네이션 -->
+		<select id="listPaging" parameterType="map" resultType="AutoPayMentDto">
+			select * from (
+				select rownum rn, TMP.* from (
+					select * from autopayment 
+						where partner_user_id=#{memberId}
+					order by auto_no asc
+				)TMP
+			) where rn between #{startRow} and #{endRow}		
+		</select>
+		<!-- 블록구하기 -->
+		<select id="count"  parameterType="String" resultType="int">
+			select count(*) from autopayment where partner_user_id=#{memberId}
+		</select>
+	
+	
+		
+		
+		
+		
+		
 </mapper>
