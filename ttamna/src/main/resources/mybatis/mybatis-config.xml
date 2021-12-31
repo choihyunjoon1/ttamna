@@ -31,7 +31,7 @@
 	-->
 	<typeAliases>
 		<package name="com.kh.ttamna.entity"/>
-		<package name="com.kh.ttamna.vo.chart"/>
+		<package name="com.kh.ttamna.vo"/>
 	</typeAliases>
 
 </configuration>

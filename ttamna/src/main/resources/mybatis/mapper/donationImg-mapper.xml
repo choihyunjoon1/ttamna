@@ -48,4 +48,3 @@
 		delete donation_img where donation_img_no = ${donationImgNo}
 	</delete>
 </mapper>
-
