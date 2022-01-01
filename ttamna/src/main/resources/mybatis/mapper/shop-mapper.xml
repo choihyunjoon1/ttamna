@@ -38,7 +38,7 @@
 	</select>
 	
 	<!-- 더보기 -->
-	<select id="listByPage" parameterType="map" resultType="ShopJoinVo">
+	<select id="listByPage" parameterType="map" resultType="ShopJoinVO">
 		select * from (
 		    select rownum rn, TMP.* from (
 		        select * from shop H left outer join shop_img P on H.shop_no = P.shop_no
