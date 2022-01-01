@@ -144,6 +144,7 @@ public class DonationController {
 	
 	@PostMapping("/insert")//등록요청 - 단일파일업로드
 	public String insert(@ModelAttribute DonationUploadVo donationUploadVo) throws IllegalStateException, IOException {
+//		int donationNo = donationDao.insert(donationDto);
 		int donationNo = donationService.insert(donationUploadVo);
 		return "redirect:/donation/detail?donationNo=" + donationNo;
 	}

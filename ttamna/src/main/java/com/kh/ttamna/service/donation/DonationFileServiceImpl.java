@@ -39,22 +39,23 @@ public class DonationFileServiceImpl implements DonationFileService{
 		List<DonationImgDto> donationList = donationUploadVo.convertToDonationImgDto(donationNo);
 		
 		int i = 0;
+		System.out.println("게시글 등록 중 파일이 없네요?");
 		
-		if(!donationUploadVo.getAttach().isEmpty()){//파일이 있으면 실행
-			for(MultipartFile files : donationUploadVo.getAttach()) {
-				
-				//[2] DonationImgNo를 뽑고
-				int donationImgNo = sqlSession.selectOne("donaImg.seq");
-				//[3] N번째 donationList를 Dto에 옮긴 뒤
-				DonationImgDto donationImgDto = donationList.get(i);
-				//[4] 2번에서 뽑은 ImgNo를 저장시키고
-				donationImgDto.setDonationImgNo(donationImgNo);
-				//[5] 실제이미지를 저장하는 dao를 실행
-				donationImgDao.save(donationImgDto, 
-						files);
-				//[6] 다했으면 i를 증감시킨다.
-				i++;
-			}
+		for(MultipartFile files : donationUploadVo.getAttach()) {
+			if(!files.isEmpty()){//파일이 있으면 실행
+			System.out.println("게시글 등록 중 파일이 있다네요?");
+			//[2] DonationImgNo를 뽑고
+			int donationImgNo = sqlSession.selectOne("donaImg.seq");
+			//[3] N번째 donationList를 Dto에 옮긴 뒤
+			DonationImgDto donationImgDto = donationList.get(i);
+			//[4] 2번에서 뽑은 ImgNo를 저장시키고
+			donationImgDto.setDonationImgNo(donationImgNo);
+			//[5] 실제이미지를 저장하는 dao를 실행
+			donationImgDao.save(donationImgDto, 
+					files);
+			//[6] 다했으면 i를 증감시킨다.
+			i++;
+		}
 			
 		}
 		
