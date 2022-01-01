@@ -41,4 +41,3 @@
 			select * from autopayment where partner_user_id = #{memberId}
 		</select>
 </mapper>
-

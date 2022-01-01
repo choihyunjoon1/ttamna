@@ -38,10 +38,11 @@
 	</select>
 	
 	<!-- 더보기 -->
-	<select id="listByPage" parameterType="map" resultType="ShopDto">
+	<select id="listByPage" parameterType="map" resultType="ShopJoinVo">
 		select * from (
 		    select rownum rn, TMP.* from (
-		        select * from shop order by shop_no desc
+		        select * from shop H left outer join shop_img P on H.shop_no = P.shop_no
+		        order by H.shop_no desc
 		    )TMP
 		) where rn between ${startRow} and ${endRow}
 	</select>
@@ -64,6 +65,22 @@
 		</set>
 		where shop_no = #{shopNo}
 	</update>
+	
+	<!-- 이미지번호와 같이 뽑기 위해서 inner 조인 -->
+	<select id="listByImgNo" resultType="ShopJoinVO">
+		select * from shop inner join shop_img on shop.shop_no = shop_img.shop_no
+	</select>
+	
+	<!-- 상품 리스트 -->
+	<select id="search" parameterType="map" resultType="ShopDto">
+		select * from shop 
+		<if test="list.size() > 0">
+		where shop_no in 
+		<foreach collection="list" open="(" close=")" separator="," item="shopNo">
+			#{shopNo}
+		</foreach>
+		</if>
+	</select>
 	
 	<!-- 조회수 증가, 자신이든 남이든 구분하지 않고 증가 -->
 	<update id="read" parameterType="int">
