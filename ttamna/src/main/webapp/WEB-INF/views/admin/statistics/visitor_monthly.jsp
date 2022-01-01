@@ -8,20 +8,20 @@
 
  <script> 
 
-//방문자 일별 통계 - 7일 단위(일/요일표시하기)
+//방문자 월별 통계 - 7일 단위(일/요일표시하기)
  $(function(){// 화면이 시작될때 통계자료를 불러오도록 해야 한다
 
 	 $.ajax({
- 		url : "${root}/ajax/visitor_daily",
+ 		//url : "${root}/ajax/visitor_monthly",
  		type : "get",
  		dataType : "json",
 		success:function(resp){
-			console.log("방문자 일별 통계 불러오기 성공");
+			console.log("방문자 월별 통계 불러오기 성공");
 			//데이터를 가져오는데 성공하면 차트를 생성하는 함수부르기
- 			dailyOfvisitor("#daily", resp);
+ 			dailyOfvisitor("#monthly", resp);
  		},
  		eroor:function(e){
- 			console.log("방문자 일별 통계 불러오기 실패", e);
+ 			console.log("방문자 월별 통계 불러오기 실패", e);
  		}
 		
  	});
@@ -29,7 +29,7 @@
  });
 
  //selector : 선택자, data : JSON(ChartVO)
- function dailyOfvisitor(selector, data){
+ function monthlyOfvisitor(selector, data){
 	
  	//고정 변수인 ctx는 canvas에 그림을 그리기 위한 펜 객체
  	var ctx = $(selector)[0].getContext("2d");
@@ -94,14 +94,10 @@
 
 <div class="container-700 container-center mt-5 mb-5">
 	 
-	 <div class="mt-5 mb-5"><h3>VISITOR DAILY</h3></div>
+	 <div class="mt-5 mb-5"><h3>VISITOR MONTHLY</h3></div>
 
-	<canvas id="daily" width="400" height="400"></canvas>
+	<canvas id="monthly" width="400" height="400"></canvas>
 
-	<div class="d-grid gap-2 d-md-flex justify-content-md-end mt-5 mb-5">
-		<a type="button" class="btn btn-outline-primary" href="${root}/admin/statistics/menu">Back to Statistics Menu</a>
-		<a type="button" class="btn btn-outline-primary" href="${root}/admin/main">Back to Admin Menu</a>
-	</div>
 </div>
 
 

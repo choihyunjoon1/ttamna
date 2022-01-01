@@ -77,20 +77,22 @@ public class AdminController {
 	@Autowired
 	private VisitDao visitDao;
 
+	//통계 메인 페이지
 	@GetMapping("/statistics/menu")
 	public String menu() {
 		return "admin/statistics/menu";
 	}
 	
-	
+	//7일간 일별 방문자수 통계 페이지
 	 @GetMapping("/statistics/visitor_daily") 
-	 public VisitTotalChartVO visitorDaily() {
-		 VisitTotalChartVO chartVO = new VisitTotalChartVO();
-		 chartVO.setTitle("최근 7일간 일별 방문자 수");
-		 chartVO.setLabel("방문자 수");
-		 chartVO.setDataset(visitDao.countDaily());
-		 log.debug("통계 데이터 준비 chart = {}", chartVO);
-		 return chartVO;
+	 public String visitorDaily() {
+		 return "admin/statistics/visitor_daily";
+	 }
+	 
+	//월별 방문자수 통계 페이지
+	 @GetMapping("/statistics/visitor_monthly") 
+	 public String visitorMonthly() {
+		 return "admin/statistics/visitor_monthly";
 	 }
 	 
 

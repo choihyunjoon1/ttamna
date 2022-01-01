@@ -69,6 +69,16 @@ public class AjaxController {
 		int count = visitDao.countByDay();
 		return String.valueOf(count);
 	}
+	
+	//7일간 일별 방문자수 통계 데이터 전달 ajax
+	 @GetMapping("/visitor_daily") 
+	 public VisitTotalChartVO visitorDaily() {
+		 VisitTotalChartVO chartVO = new VisitTotalChartVO();
+		 chartVO.setTitle("최근 7일간 일별 방문자 수");
+		 chartVO.setLabel("방문자 수");
+		 chartVO.setDataset(visitDao.countDaily());
+		 return chartVO;
+	 }
 
 }
 

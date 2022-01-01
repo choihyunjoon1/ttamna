@@ -29,6 +29,7 @@
     <!-- Bootstrap JavaScript CDN 번들 -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 
+	<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
     <style>
      <!-- 메뉴 사이즈 줄어들어어어 ********-->
     	@media(min-width: 992px)
@@ -69,6 +70,35 @@
     		}
     	});
     }); 
+    var pathname = window.location.pathname.split( '/' );
+    var pathlocation=pathname[2];//   /member/ .. 로 나옴
+    console.log(pathlocation);
+	
+    $(function(){
+        if(pathlocation=="shop"){
+        	$(".nav-item > a").removeClass("active");
+        	$(".headShop").addClass("active");
+        }else if(pathlocation=="donation"){
+        	$(".nav-item > a").removeClass("active");
+        	$(".headDonation").addClass("active");
+        }else if(pathlocation=="mybaby"){
+        	$(".nav-item > a").removeClass("active");
+        	$(".headMybaby").addClass("active");
+        }else if(pathlocation=="adopt"){
+        	$(".nav-item > a").removeClass("active");
+        	$(".headAdopt").addClass("active");
+        }else if(pathlocation=="member"||pathlocation=="find"){
+        	$(".nav-item > a").removeClass("active");
+        	$(".headMember").addClass("active");
+        }else if(pathlocation=="admin"){
+        	$(".nav-item > a").removeClass("active");
+        	$(".headAdmin").addClass("active");
+        }else{
+        	$(".list-group > a").removeClass("active");
+        	$(".headHome").addClass("active");
+        }
+    });
+
     </script>
 </head>
 <body>
@@ -103,46 +133,46 @@
     <div class="collapse navbar-collapse" id="navbarColor01">
       <ul class="navbar-nav me-auto navbar-right">
         <li class="nav-item">
-          <a class="nav-link active docs-creator" href="${root }">Home
+          <a class="nav-link docs-creator headHome" href="${root }">Home
             <span class="visually-hidden">(current)</span>
           </a>
         </li>
      </ul>
-     <ul class="navbar-nav me-auto navbar-center fs-6">
+     <ul class="navbar-nav me-auto navbar-center fs-6" >
         <li class="nav-item ms-1">
-          <a class="nav-link active docs-creator" href="${root}/shop/">후원상품🐾</a>
+          <a class="nav-link docs-creator headShop" href="${root}/shop/"  aria-current="page">후원상품🐾</a>
         </li>
         <li class="nav-item ms-5">
-          <a class="nav-link active docs-creator" href="${root}/donation/">기부🐾</a>
+          <a class="nav-link docs-creator headDonation" href="${root}/donation/">기부🐾</a>
         </li>
         <li class="nav-item ms-5">
-          <a class="nav-link active docs-creator" href="#">입양공고🐾</a>
+          <a class="nav-link docs-creator headAdopt" href="#">입양공고🐾</a>
         </li>
          <li class="nav-item ms-5">
-          <a class="nav-link active docs-creator" href="${root }/mybaby/">내새끼자랑🐾</a>
+          <a class="nav-link docs-creator headMybaby" href="${root }/mybaby/">내새끼자랑🐾</a>
         </li>
 	 </ul>
 	 <ul class="navbar-nav navbar-left">
 		<c:if test="${!login}">
 		 <li class="nav-item">
-          <a class="nav-link active docs-creator" href="${root}/member/login">LOGIN</a>
+          <a class="nav-link docs-creator headMember" href="${root}/member/login">LOGIN</a>
          </li>
          <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle active docs-creator" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">𓃑𓃑𓃑ʕ •ᴥ•ʔ</a>
+          <a class="nav-link dropdown-toggle docs-creator headMember" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">𓃑𓃑𓃑ʕ •ᴥ•ʔ</a>
           <div class="dropdown-menu">
-            <a class="dropdown-item docs-creator" href="${root}/member/join">회원가입ฅ ̳͒•ˑ̫• ̳͒ฅ♡</a>
-            <a class="dropdown-item docs-creator" href="${root}/find/findId">아이디 찾기</a>
-            <a class="dropdown-item docs-creator" href="${root}/find/findPw">비밀번호 찾기</a>
+            <a class="dropdown-item docs-creator headMember" href="${root}/member/join">회원가입ฅ ̳͒•ˑ̫• ̳͒ฅ♡</a>
+            <a class="dropdown-item docs-creator headMember" href="${root}/find/findId">아이디 찾기</a>
+            <a class="dropdown-item docs-creator headMember" href="${root}/find/findPw">비밀번호 찾기</a>
           </div>
         </li>
         </c:if>
         <c:if test="${login}">
          <li class="nav-item">
-          <a class="nav-link active docs-creator" href="${root}/member/mypage/my_info">MY PAGE</a>
+          <a class="nav-link active docs-creator headMember" href="${root}/member/mypage/my_info">MY PAGE</a>
          </li>
          	<c:if test="${admin}">
          	  <li class="nav-item">
-	           <a class="nav-link active docs-creator" href="${root}/admin/main">ADMIN</a>
+	           <a class="nav-link active docs-creator headAdmin" href="${root}/admin/main">ADMIN</a>
 	          </li>
          	</c:if>
 		 <li class="nav-item ms-3">
