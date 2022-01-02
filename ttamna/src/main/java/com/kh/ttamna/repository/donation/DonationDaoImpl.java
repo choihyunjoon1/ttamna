@@ -57,8 +57,8 @@ public class DonationDaoImpl implements DonationDao{
 	}
 
 	@Override//삭제
-	public boolean delete(int donationNo) {
-		return sqlSession.delete("donation.delete", donationNo) > 0;
+	public boolean delete(String donationWriter) {
+		return sqlSession.delete("donation.delete", donationWriter) > 0;
 	}
 
 	@Override//더보기 페이지네이션
@@ -82,10 +82,11 @@ public class DonationDaoImpl implements DonationDao{
 	}
 	
 	@Override//기부 후 금액 업데이트
-	public boolean funding(int donationNo, int price) {
+	public boolean funding(int donationNo, long price) {
 		Map<String, Object> map = new HashMap<>();
 		map.put("donationNo", donationNo);
 		map.put("price", price);
 		return sqlSession.update("donation.funding", map) > 0;
 	}
+	
 }

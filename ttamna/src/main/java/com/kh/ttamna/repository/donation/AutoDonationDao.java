@@ -20,4 +20,10 @@ public interface AutoDonationDao {
 	
 	//블록 구하기 위해 게시글 개수 구하기
 	int count(String memberId);
+	
+	//정기결제 비활성화 요청 시 테이블에서 삭제하는 메소드
+	void autoPayDelete(String sid);
+	
+	//정기결제 정보 1개를 가져오는 메소드
+	AutoPayMentDto get(String sid);
 }

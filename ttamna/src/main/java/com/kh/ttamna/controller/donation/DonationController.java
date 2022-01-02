@@ -6,6 +6,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ByteArrayResource;
 import org.springframework.http.HttpHeaders;
@@ -19,7 +21,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.multipart.MultipartFile;
 
 import com.kh.ttamna.entity.donation.DonationDto;
 import com.kh.ttamna.entity.donation.DonationImgDto;
@@ -95,9 +96,10 @@ public class DonationController {
 	}
 	
 	@GetMapping("/delete")//삭제요청
-	public String delete(@RequestParam int donationNo) {
+	public String delete(@RequestParam int donationNo,
+							HttpSession session) {
 		donationService.delete(donationNo);
-		donationDao.delete(donationNo);
+		donationDao.delete((String)session.getAttribute("uid"));
 		
 		return "redirect:/donation/list";
 	}
@@ -122,31 +124,8 @@ public class DonationController {
 	public String edit(@ModelAttribute DonationUploadVo donationUploadVo) throws IllegalStateException, IOException {
 		
 		System.out.println("정보 : " + donationUploadVo);
+		donationService.updateAddFile(donationUploadVo);
 		
-		for(MultipartFile file : donationUploadVo.getAttach()) {
-			if(file.isEmpty()) {
-				System.out.println("파일요청없음");
-				DonationDto donationDto = new DonationDto();
-				donationDto.setDonationNo(donationUploadVo.getDonationNo());
-				donationDto.setDonationContent(donationUploadVo.getDonationContent());
-				System.out.println("내용 "+donationDto.getDonationContent());
-				donationDto.setDonationTitle(donationUploadVo.getDonationTitle());
-				System.out.println("제목~ "+donationDto.getDonationTitle());
-				//내용과 제목만 수정시킨다.
-				donationDao.edit(donationDto);
-			} else {//파일 추가 요청이 있을 경우
-				DonationDto donationDto = new DonationDto();
-				donationDto.setDonationContent(donationUploadVo.getDonationContent());
-				donationDto.setDonationTitle(donationUploadVo.getDonationTitle());
-				donationDto.setDonationNo(donationUploadVo.getDonationNo());
-				//내용과 제목을 수정시키고
-				donationDao.edit(donationDto);
-				
-				//파일 등록 처리를 한다.
-				donationService.updateAddFile(donationUploadVo);
-			}
-		}
-		//파일 추가 요청이 없을 경우
 		
 		return "redirect:/donation/detail?donationNo="+donationUploadVo.getDonationNo();
 	}
@@ -165,6 +144,7 @@ public class DonationController {
 	
 	@PostMapping("/insert")//등록요청 - 단일파일업로드
 	public String insert(@ModelAttribute DonationUploadVo donationUploadVo) throws IllegalStateException, IOException {
+//		int donationNo = donationDao.insert(donationDto);
 		int donationNo = donationService.insert(donationUploadVo);
 		return "redirect:/donation/detail?donationNo=" + donationNo;
 	}

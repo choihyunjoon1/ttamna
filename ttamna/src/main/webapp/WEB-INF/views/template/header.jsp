@@ -23,6 +23,11 @@
  	<!-- Bootswatch Skin Minty CDN적용하기-->
     <link rel="stylesheet" type="text/css" href="https://bootswatch.com/5/minty/bootstrap.css">
     
+    <!-- three.js -->
+    <link rel="stylesheet" href="${root}/resources/css/three.css">
+    
+    <script type="module" src="${root}/resources/js/three.js" defer></script>
+    
     <!-- JQeury CDN -->
     <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
    
@@ -108,7 +113,7 @@
         <header>
             <div class="flex-container">
                 <div class="logo-wrapper">
-                   <!-- 이미지로고자리 -->
+                    <div id="webgl-container" style="width:100px; height:100px"></div>
                 </div>
                 <div class="title-wrapper center">
                     <h1>Tierheim(동물의 집)</h1>
@@ -146,7 +151,7 @@
           <a class="nav-link docs-creator headDonation" href="${root}/donation/">기부🐾</a>
         </li>
         <li class="nav-item ms-5">
-          <a class="nav-link docs-creator headAdopt" href="#">입양공고🐾</a>
+          <a class="nav-link docs-creator headAdopt" href="${root}/adopt/">입양공고🐾</a>
         </li>
          <li class="nav-item ms-5">
           <a class="nav-link docs-creator headMybaby" href="${root }/mybaby/">내새끼자랑🐾</a>

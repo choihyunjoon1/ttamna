@@ -185,6 +185,7 @@ create sequence shop_seq;
 create table shop(
 shop_no number primary key, -- 상품 번호
 member_id references member(member_id) on delete set null, -- 아이디
+shop_title VARCHAR2(150 BYTE) NOT NULL, -- 글 제목
 shop_goods varchar2(150) not null, -- 상품이름
 shop_price number not null, -- 상품가격
 shop_count number not null, -- 상품 재고 수량
@@ -202,7 +203,8 @@ create sequence shop_img_seq;
 create table shop_img( 
 shop_img_no number primary key, -- 이미지 번호
 shop_no references shop(shop_no) on delete cascade,
-shop_img_upload varchar2(256) not null, -- 상품 업로드
+shop_img_upload varchar2(256) not null, -- 상품 업로드명
+shop_img_save varchar2(256)not null, -- 이미지 저장명
 shop_img_size number not null, -- 상품 사진 크기
 shop_img_type varchar2(256) -- 상품 사진 유형
 );

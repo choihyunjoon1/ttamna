@@ -40,6 +40,10 @@
 		<select id="listByMember" parameterType="String" resultType="AutoPayMentDto">
 			select * from autopayment where partner_user_id = #{memberId}
 		</select>
+		<!-- 특정 회원의 정기결제 정보 1개 가져오기 -->
+		<select id="get" parameterType="String" resultType="AutoPayMentDto">
+			select * from autopayment where auto_sid = #{sid}
+		</select>
 		
 		<!-- 회원목록 + 검색 + 페이지네이션 -->
 		<select id="listPaging" parameterType="map" resultType="AutoPayMentDto">
@@ -56,10 +60,9 @@
 			select count(*) from autopayment where partner_user_id=#{memberId}
 		</select>
 	
-	
-		
-		
-		
-		
+		<!-- 정기결제 해지 -->
+		<delete id="autoPayDelete" parameterType="String">
+			delete autopayment where auto_sid = #{sid}
+		</delete>
 		
 </mapper>

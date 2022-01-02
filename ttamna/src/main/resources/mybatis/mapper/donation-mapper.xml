@@ -46,8 +46,8 @@
 		select * from donation where donation_no = ${donationNo}
 	</select>
 	
-	<delete id="delete" parameterType="int">
-		delete donation where donation_no = ${donationNo}
+	<delete id="delete" parameterType="String">
+		delete donation where donation_writer = #{donationWriter}
 	</delete>
 	
 	<!-- 최종 = 단일조회와 검색이 모두 되는 -->
@@ -98,7 +98,7 @@
 				donation_title = #{donationTitle},
 			</if>
 		</set>
-		where donation_no = #{donationNo}
+		where donation_writer = #{donationWriter}
 	</update>
 	
 	<!-- 더보기 페이지네이션 -->
@@ -114,8 +114,9 @@
 		)where rn between ${startRow} and ${endRow}
 	</select>
 	
+	<!-- 금액 업데이트 -->
 	<update id="funding" parameterType="map">
-		update donation set donation_now_fund = donation_now_fund + ${price} where donation_no = ${donationNo}
+		update donation set donation_now_fund = ${price} + donation_now_fund where donation_no = ${donationNo}
 	</update>
 </mapper>
 

@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.kh.ttamna.entity.donation.DonationDto;
 import com.kh.ttamna.entity.donation.DonationImgDto;
 import com.kh.ttamna.repository.donation.DonationDao;
 import com.kh.ttamna.repository.donation.DonationImgDao;
@@ -21,6 +22,10 @@ public class DonationFileServiceImpl implements DonationFileService{
 	
 	@Autowired
 	private DonationImgDao donationImgDao;
+	
+	@Autowired
+	private DonationDao donationDao;
+	
 	@Override
 	public int insert(DonationUploadVo donationUploadVo) throws IllegalStateException, IOException {
 		//현재 게시판에 등록이 될 정보와 파일배열이 들어있다.
@@ -34,22 +39,23 @@ public class DonationFileServiceImpl implements DonationFileService{
 		List<DonationImgDto> donationList = donationUploadVo.convertToDonationImgDto(donationNo);
 		
 		int i = 0;
+		System.out.println("게시글 등록 중 파일이 없네요?");
 		
-		if(!donationUploadVo.getAttach().isEmpty()){//파일이 있으면 실행
-			for(MultipartFile files : donationUploadVo.getAttach()) {
-				
-				//[2] DonationImgNo를 뽑고
-				int donationImgNo = sqlSession.selectOne("donaImg.seq");
-				//[3] N번째 donationList를 Dto에 옮긴 뒤
-				DonationImgDto donationImgDto = donationList.get(i);
-				//[4] 2번에서 뽑은 ImgNo를 저장시키고
-				donationImgDto.setDonationImgNo(donationImgNo);
-				//[5] 실제이미지를 저장하는 dao를 실행
-				donationImgDao.save(donationImgDto, 
-						files);
-				//[6] 다했으면 i를 증감시킨다.
-				i++;
-			}
+		for(MultipartFile files : donationUploadVo.getAttach()) {
+			if(!files.isEmpty()){//파일이 있으면 실행
+			System.out.println("게시글 등록 중 파일이 있다네요?");
+			//[2] DonationImgNo를 뽑고
+			int donationImgNo = sqlSession.selectOne("donaImg.seq");
+			//[3] N번째 donationList를 Dto에 옮긴 뒤
+			DonationImgDto donationImgDto = donationList.get(i);
+			//[4] 2번에서 뽑은 ImgNo를 저장시키고
+			donationImgDto.setDonationImgNo(donationImgNo);
+			//[5] 실제이미지를 저장하는 dao를 실행
+			donationImgDao.save(donationImgDto, 
+					files);
+			//[6] 다했으면 i를 증감시킨다.
+			i++;
+		}
 			
 		}
 		
@@ -79,24 +85,36 @@ public class DonationFileServiceImpl implements DonationFileService{
 
 		List<DonationImgDto> donationList = donationUploadVo.convertToDonationImgDto(donationUploadVo.getDonationNo());
 		
+		//게시글 수정
+		DonationDto donationDto = new DonationDto();
+		donationDto.setDonationContent(donationUploadVo.getDonationContent());
+		donationDto.setDonationTitle(donationUploadVo.getDonationTitle());
+		donationDto.setDonationNo(donationUploadVo.getDonationNo());
+		donationDto.setDonationWriter(donationUploadVo.getDonationWriter());
+		donationDao.edit(donationDto);
 		int i = 0;
 		
-		if(!donationUploadVo.getAttach().isEmpty()){//파일이 있으면 실행
-			for(MultipartFile files : donationUploadVo.getAttach()) {
-				
-				//[2] DonationImgNo를 뽑고
+		System.out.println("파일이있다네요?");
+		for(MultipartFile files : donationUploadVo.getAttach()) {
+			if(!files.isEmpty()) {//파일이 있으면 실행
+				//파일 추가과정
 				int donationImgNo = sqlSession.selectOne("donaImg.seq");
-				//[3] N번째 donationList를 Dto에 옮긴 뒤
 				DonationImgDto donationImgDto = donationList.get(i);
-				//[4] 2번에서 뽑은 ImgNo를 저장시키고
 				donationImgDto.setDonationImgNo(donationImgNo);
-				//[5] 실제이미지를 저장하는 dao를 실행
 				donationImgDao.save(donationImgDto, 
 						files);
-				//[6] 다했으면 i를 증감시킨다.
 				i++;
 			}
-			
+		
 		}
+	}
+	
+	@Override
+	public void updateAddFile(DonationImgDto donationImgDto, MultipartFile file)
+			throws IllegalStateException, IOException {
+		int donationImgNo = sqlSession.selectOne("donaImg.seq");
+		donationImgDto.setDonationImgNo(donationImgNo);
+		donationImgDao.save(donationImgDto, 
+				file);
 	}
 }

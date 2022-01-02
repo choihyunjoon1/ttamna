@@ -51,7 +51,15 @@ public class AutoDonationDaoImpl implements AutoDonationDao{
 		return sqlSession.selectOne("apm.count",memberId);
 	}
 	
+	@Override//정기기부 해지
+	public void autoPayDelete(String sid) {
+		sqlSession.delete("apm.autoPayDelete", sid);
+	}
 	
+	@Override//sid로 정기결제 1개 정보를 가져오는 메소드
+	public AutoPayMentDto get(String sid) {
+		return sqlSession.selectOne("apm.get", sid);
+	}
 	
 	
 	

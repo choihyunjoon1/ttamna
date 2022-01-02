@@ -29,7 +29,7 @@
 <!-- 장바구니에 추가 -->
 <insert id="insert" parameterType="CartDto">
 	insert into cart values(
-		#{cartNo}, #{memberId}, #{shopNo}, #{shopImgNo}, sysdate, #{cartCount}
+		#{cartNo}, #{shopNo}, #{memberId}, #{shopImgNo}, sysdate, 1, #{shopGoods}
 	)
 </insert>	
 
@@ -38,9 +38,9 @@
 	delete cart where cart_no = #{cartNo}
 </delete> 	
 
-<!-- 장바구니 개수 변경 -->
-<update id="update" parameterType="map">
-	update cart set cart_count = #{cartCount} where cart_no = #{cartCount}
+<!-- 장바구니에 중복으로 담았을 경우 -->
+<update id="add" parameterType="int">
+	update cart set cart_count = cart_count + 1 where cart_no = #{cartNo}
 </update>
 </mapper>
 
