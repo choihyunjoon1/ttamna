@@ -60,5 +60,10 @@
 		where mybaby_no=#{mybabyNo}
 	</update>
 	
+	<!-- 이미지뽑는 리스트 -->
+	<select id="listPlusImg" resultType="MybabyDownVO">
+		select * from mybaby B left outer join mybaby_img BI on B.mybaby_no = BI.mybaby_no
+	</select>
+	
 </mapper>
 

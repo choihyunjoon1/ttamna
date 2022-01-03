@@ -1,5 +1,6 @@
 package com.kh.ttamna.service.mybaby;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
@@ -8,7 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.kh.ttamna.entity.mybaby.MybabyDto;
 import com.kh.ttamna.entity.mybaby.MybabyImgDto;
+import com.kh.ttamna.repository.mybaby.MybabyDao;
 import com.kh.ttamna.repository.mybaby.MybabyImgDao;
 import com.kh.ttamna.vo.mybaby.MybabyFileVO;
 
@@ -19,7 +22,12 @@ public class MybabyFileServiceImpl implements MybabyFileService{
 	private SqlSession sqlSession;
 	
 	@Autowired
+	private MybabyDao mybabyDao;
+	
+	@Autowired
 	private MybabyImgDao mybabyImgDao;
+	
+	private File dir = new File("D:/dev/ttamna/mybaby");
 
 	@Override
 	public int write(MybabyFileVO mybabyFileVO) throws IllegalStateException, IOException {
@@ -47,6 +55,41 @@ public class MybabyFileServiceImpl implements MybabyFileService{
 		}
 		return mybabyNo;
 	}
+	//삭제
+	@Override
+	public void delete(int mybabyNo) {
+		List<MybabyImgDto> list = mybabyImgDao.getList(mybabyNo);
+		
+		for(MybabyImgDto dto : list) {
+			File target = new File(dir,String.valueOf(dto.getMybabyImgNo()));
+			target.delete();
+		}
+		
+	}
+	@Override
+	public void update(MybabyFileVO mybabyFileVO) throws IllegalStateException, IOException {
+		List<MybabyImgDto> list = mybabyFileVO.convertToMybabyImgDto(mybabyFileVO.getMybabyNo());
+		
+		MybabyDto mybabyDto = new MybabyDto();
+		mybabyDto.setMybabyNo(mybabyFileVO.getMybabyNo());
+		mybabyDto.setMybabyTitle(mybabyFileVO.getMybabyTitle());
+		mybabyDto.setMybabyContent(mybabyFileVO.getMybabyContent());
+		mybabyDto.setMybabyWriter(mybabyFileVO.getMybabyWriter());
+		mybabyDao.edit(mybabyDto);
+		
+		int i=0;
+		for(MultipartFile files : mybabyFileVO.getAttach()) {
+			if(!files.isEmpty()) {
+				int mybabyImgNo = sqlSession.selectOne("mybabyImg.seq");
+				MybabyImgDto mybabyImgDto = list.get(i);
+				mybabyImgDto.setMybabyImgNo(mybabyImgNo);
+				mybabyImgDao.save(mybabyImgDto, files);
+				i++;
+			}
+		}
+		
+	}
+	
 	
 	
 

@@ -25,6 +25,10 @@
 			${mybabyImgSize},#{mybabyImgType}
 		)
 	</insert>
+	<!-- 파일 가져오기(다중) -->
+	<select id="getFiles" parameterType="int" resultType="MybabyImgDto">
+		select * from mybaby_Img where mybaby_no = ${mybabyNo} order by mybaby_img_no asc
+	</select>
 	
 </mapper>
 

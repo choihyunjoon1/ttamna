@@ -77,6 +77,7 @@ public class mybabyController {
 	//게시글 삭제
 	@GetMapping("/delete")
 	public String delete(@RequestParam int mybabyNo) {
+		mybabyService.delete(mybabyNo);
 		mybabyDao.delete(mybabyNo);
 		return "redirect:/mybaby/list";
 	}
@@ -85,12 +86,15 @@ public class mybabyController {
 	public String edit(@RequestParam int mybabyNo,Model model) {
 		MybabyDto mybabyDto = mybabyDao.detail(mybabyNo);
 		model.addAttribute("mybaby",mybabyDto);
+		model.addAttribute("mybabyDtoList",mybabyImgDao.getList(mybabyNo));
+		
 		return "mybaby/edit";
 	}
 	@PostMapping("/edit")
-	public String edit(@ModelAttribute MybabyDto mybabyDto) {
-		mybabyDao.edit(mybabyDto);
-		return "redirect:/mybaby/detail?mybabyNo="+mybabyDto.getMybabyNo();
+	public String edit(@ModelAttribute MybabyFileVO mybabyFileVO) throws IllegalStateException, IOException {
+//		mybabyDao.edit(mybabyDto);
+		mybabyService.update(mybabyFileVO);
+		return "redirect:/mybaby/detail?mybabyNo="+mybabyFileVO.getMybabyNo();
 	}
 	
 	

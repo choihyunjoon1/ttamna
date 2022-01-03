@@ -2,6 +2,7 @@ package com.kh.ttamna.repository.mybaby;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +31,12 @@ public class MybabyImgDaoImpl implements MybabyImgDao{
 		
 		sqlSession.insert("mybabyImg.insert",mybabyImgDto);
 	}
+
+	@Override
+	public List<MybabyImgDto> getList(int mybabyNo) {
+		return sqlSession.selectList("mybabyImg.getFile",mybabyNo);
+	}
+	
 	
 
 }

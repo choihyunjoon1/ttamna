@@ -1,6 +1,7 @@
 package com.kh.ttamna.repository.mybaby;
 
 import java.io.IOException;
+import java.util.List;
 
 import org.springframework.web.multipart.MultipartFile;
 
@@ -12,6 +13,8 @@ public interface MybabyImgDao {
 	void insert(MybabyImgDto mybabyImgDto);
 
 	void save(MybabyImgDto mybabyImgDto, MultipartFile files) throws IllegalStateException, IOException;
+
+	List<MybabyImgDto> getList(int mybabyNo);
 	
 	
 }

@@ -31,7 +31,7 @@ public class MybabyDaoImpl implements MybabyDao{
 
 	@Override
 	public List<MybabyDto> list() {
-		return sqlSession.selectList("mybaby.list");
+		return sqlSession.selectList("mybaby.listPlusImg");
 	}
 
 	//상세보기or검색
@@ -51,8 +51,13 @@ public class MybabyDaoImpl implements MybabyDao{
 	//더보기기능+검색조회
 	@Override
 	public List<MybabyDto> listBySearchPage(int startRow, int endRow, String column, String keyword) {
-		// TODO Auto-generated method stub
-		return null;
+		Map<String, Object> map = new HashMap<>();
+		map.put("startRow",startRow);
+		map.put("endRow",endRow);
+		map.put("column", column);
+		map.put("keyword",keyword);
+		
+		return sqlSession.selectList("mybaby.listByPage",map);
 	}
 
 	//더보기기능+목록조회
