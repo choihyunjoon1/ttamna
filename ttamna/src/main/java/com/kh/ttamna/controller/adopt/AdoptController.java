@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,6 +19,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.kh.ttamna.entity.adopt.AdoptDto;
 import com.kh.ttamna.repository.adopt.AdoptDao;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 @Controller
 @RequestMapping("/adopt")
 public class AdoptController {
@@ -26,16 +31,40 @@ public class AdoptController {
 	
 	//입양공고 root페이지(전체 목록)
 	@GetMapping("/")
+	public String adopt() {
+		return "adopt/list";
+	}
+	
+	//더보기 페이지네이션 목록 ajax
+	@GetMapping("/more")
+	@ResponseBody
+	public List<AdoptDto> more(
+			@RequestParam(required =false, defaultValue = "1") int page,
+			@RequestParam(required =false, defaultValue = "12") int size,
+			@RequestParam(required =false, defaultValue = "") String column,
+			@RequestParam(required =false, defaultValue = "") String keyword
+			){
+		int endRow = page* size;
+		int startRow = endRow - (size - 1);
+		if(column != null && keyword != null && !column.equals("") && !keyword.equals("")) {
+			return adoptDao.searchAndListByPage(startRow, endRow, column, keyword);
+		} else {
+			return adoptDao.listByPage(startRow, endRow);
+		}
+	}
+	
+	@RequestMapping("/list")//목록페이지
 	public String list(
 			@RequestParam(required = false) String column,
 			@RequestParam(required = false) String keyword,
 			Model m) {
-		//검색 목록일 경우
+		
 		if(column != null && keyword != null) {
-			m.addAttribute("column", column);
-			m.addAttribute("keyword", keyword);
-			m.addAttribute("list", adoptDao.searchList(column, keyword));
-		}else{
+			Map<String, Object> param = new HashMap<>();
+			param.put("column", column);
+			param.put("keyword", keyword);
+			m.addAttribute("list", adoptDao.detailOrSearch(param));
+		} else {
 			m.addAttribute("list", adoptDao.list());
 		}
 		return "adopt/list";
@@ -63,23 +92,24 @@ public class AdoptController {
 		return "adopt/detail";
 	}
 	
-	//더보기 페이지네이션 목록
-	@GetMapping("/more")
-	@ResponseBody
-	public List<AdoptDto> more(
-				@RequestParam(required =false, defaultValue = "1") int page,
-				@RequestParam(required =false, defaultValue = "12") int size,
-				@RequestParam(required =false, defaultValue = "") String column,
-				@RequestParam(required =false, defaultValue = "") String keyword
-			){
-		int endRow = page* size;
-		int startRow = endRow - (size - 1);
-		if(column != null && keyword != null && !column.equals("") && !keyword.equals("")) {
-			return adoptDao.searchAndListByPage(startRow, endRow, column, keyword);
-		} else {
-			return adoptDao.listByPage(startRow, endRow);
-		}
-		
+	//입양공고 수정 페이지
+	@GetMapping("/edit")
+	public String edit(@RequestParam int adoptNo, Model m, HttpSession session) {
+		AdoptDto adoptDto = adoptDao.detail(adoptNo);
+		String uid = (String) session.getAttribute("uid");
+		String grade = (String) session.getAttribute("grade");
+		if(adoptDto.getAdoptWriter().contentEquals(uid) || grade.contentEquals("관리자")) {
+			m.addAttribute("adoptDto", adoptDto);
+			return "adopt/edit";
+		}else return "adopt/detail?adoptNo="+adoptNo;
 	}
+	
+	//입양공고 수정 처리
+	@PostMapping("/edit")
+	public String edit(@ModelAttribute AdoptDto adoptDto, Model m) {
+		return "redirect:/adopt/detail?adoptNo="+adoptDto.getAdoptNo()+"&success";
+	}
+	
+	//입양공고 삭제
 
 }
