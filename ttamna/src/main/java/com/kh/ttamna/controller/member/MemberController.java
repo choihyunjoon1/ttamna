@@ -197,5 +197,7 @@ public class MemberController {
 		return "member/quit_success";
 	}
 	
+	
+
 
 }

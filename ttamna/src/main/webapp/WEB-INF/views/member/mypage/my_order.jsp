@@ -16,8 +16,25 @@
 			<!-- 사이드바 자리 -->
 			<jsp:include page="/WEB-INF/views/member/mypage/sidebar.jsp"></jsp:include>
 			
-			<div class="col-7">
-				<h2>메인자리</h2>
+			<div class="col-9" style="width: 80%">
+				<table class="table table-hover">
+				<thead>
+					<tr>
+						<th scope="col">주문번호</th>
+						<th scope="col">상품명</th>
+						<th scope="col">구매일</th>
+					</tr>
+				</thead>
+				<tbody >
+					<c:forEach begin="1" end="10"  var="i">
+					<tr>
+						<th scope="row">${i }</th>
+						<td>제목[댓글수]</td>
+						<td>작성일</td>
+					</tr>
+					</c:forEach>
+				</tbody>
+			</table>
 			</div>
 		</div>
 	</div>

@@ -49,7 +49,7 @@ public class ShopPayController {
 		return "redirect:"+responseVo.getNext_redirect_pc_url();		
 	}
 	
-	// 다중 결제
+	// 묶음결제
 	@PostMapping("/multibuy")
 	public String multibuy(@RequestParam List<Integer> shopNo, HttpSession session) throws URISyntaxException {
 		String memberId = (String)session.getAttribute("uid"); // partner_user_id에 첨부할 구매자의 정보가 필요함
@@ -151,7 +151,6 @@ public class ShopPayController {
 		public String success() {
 			return "shop/order/success_result";
 		}
-		
 		
 		
 		
