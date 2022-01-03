@@ -1,7 +1,9 @@
 package com.kh.ttamna.controller.shop;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
-
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -11,6 +13,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.kh.ttamna.entity.shop.ShopReplyDto;
 import com.kh.ttamna.repository.shop.ShopReplyDao;
@@ -25,9 +28,11 @@ public class ShopReplyController {
 	private ShopReplyDao shopReplyDao;
 	
 	@GetMapping("/delete")
-	public String home() {
+	public String home(@RequestParam int shopReplyNo,
+					@RequestParam int shopNo) {
+		shopReplyDao.delete(shopReplyNo);
 		
-		return "shop/reply/delete";
+		return "redirect:/shop/detail?shopNo="+shopNo;
 	}
 	
 	@PostMapping("/delete")
@@ -37,19 +42,17 @@ public class ShopReplyController {
 		return "shop/";
 	}
 
-	@GetMapping("/edit") // 수정페이지로 이동
-	public String edit(@RequestParam int shopReplyNo, Model model) {
-		ShopReplyDto shopReplyDto = shopReplyDao.get(shopReplyNo);
-		model.addAttribute("shopReplyDto", shopReplyDto);
-
-		return "shop/reply/edit";
-	}
+	
 
 	@PostMapping("/edit") // 수정요청
-	public String edit(@RequestParam String memberId, @RequestParam String shopReplyContent,
+	@ResponseBody
+	public List<String> edit(@RequestParam String replyContent,
+						@RequestParam int replyNo,
 						@RequestParam int shopNo) {
-		shopReplyDao.edit(shopReplyContent, memberId);
-		return "redirect:/shop/detail?shopNo=" + shopNo;
+		shopReplyDao.edit3(replyNo, replyContent);
+		List<String> returnCotent = new ArrayList<String>();
+		returnCotent.add(replyContent);
+		return returnCotent;
 	}
 	// 데이터를 jsp로 보낼때 쓰는 객체는 Model
 	// 앞에 @(어노테이션) 이 붙은 애들은 컨트롤러로 데이터를 받아올 때 쓰는 객체
@@ -61,7 +64,7 @@ public class ShopReplyController {
 	
 	@PostMapping("/insert")//등록요청
 	public String insert(@ModelAttribute ShopReplyDto shopReplyDto) {
-		int shopReplyNo = shopReplyDao.insert(shopReplyDto);
+		shopReplyDao.insert(shopReplyDto);
 		return "redirect:/shop/detail?shopNo=" + shopReplyDto.getShopNo();
 	}
 	@GetMapping("/list")

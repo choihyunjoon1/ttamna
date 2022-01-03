@@ -26,7 +26,7 @@
 	<!-- 댓글 작성 -->
 	<insert id="insert" parameterType="ShopReplyDto">
 		insert into shop_reply values( shop_reply_seq.nextval,
-			#{memberId}, 38, #{shopReplyContent},
+			#{memberId}, ${shopNo}, #{shopReplyContent},
 			sysdate, null, 0, 0
 		)
 		
@@ -51,10 +51,17 @@
 		<select id="get"  parameterType="int" resultType="ShopReplyDto">
 			select * from shop_reply where shop_reply_no = ${shopReplyNo}
 		</select>
-
+<!-- 특정 게시글의 댓글 내용만 조회 -->
+	<select id="listByDetail" parameterType="int" resultType="ShopReplyDto">
+		select * from shop_reply where shop_no = ${shopNo}
+	</select>
+	
+	<!-- 댓글 수정 -->
+	<update id="edit3" parameterType="map">
+		update shop_reply set shop_reply_content = #{replyContent}
+		where shop_reply_no = ${replyNo}
+	</update>
 </mapper>
-
-
 
 
 

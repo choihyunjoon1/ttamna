@@ -6,11 +6,13 @@ import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Repository;
 
 import com.kh.ttamna.entity.shop.ShopReplyDto;
 
 @Repository
+@ComponentScan
 public class ShopReplyDaoImpl implements ShopReplyDao{
 
 	@Autowired
@@ -19,7 +21,7 @@ public class ShopReplyDaoImpl implements ShopReplyDao{
 	@Override
 	public int insert(ShopReplyDto shopReplyDto) {
 		int shopReplyNo = sqlSession.selectOne("shopReply.seq");
-		shopReplyDto.setShopNo(shopReplyNo);
+		shopReplyDto.setShopReplyNo(shopReplyNo);
 		sqlSession.insert("shopReply.insert", shopReplyDto);
 		
 		return shopReplyNo;
@@ -59,5 +61,19 @@ public class ShopReplyDaoImpl implements ShopReplyDao{
 	@Override
 	public ShopReplyDto get(int shopReplyNo) {
 		return sqlSession.selectOne("shopReply.get", shopReplyNo);
+	}
+	
+	@Override//해당 게시판의 댓글만 내용 조회
+	public List<ShopReplyDto> list(int shopNo) {
+		return sqlSession.selectList("shopReply.listByDetail", shopNo);
+	}
+	
+	@Override//댓글 수정
+	public void edit3(int replyNo, String replyContent) {
+		Map<String, Object> map = new HashMap<>();
+		map.put("replyNo", replyNo);
+		map.put("replyContent", replyContent);
+		
+		sqlSession.update("shopReply.edit3", map);
 	}
 }
