@@ -1,12 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <%-- 페이지에서 사용할 JSTL 변수 --%>
 <c:set var="login" value="${uid != null}"></c:set>
 <c:set var="insertGrade" value="${grade == '관리자' or '보호소'}"></c:set>
 <c:set var="root" value="${pageContext.request.contextPath}"></c:set>
-
+<!-- JQeury CDN -->
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+<!-- JavaScript 날짜 포맷 CDN -->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
 <script>
 
 $(function(){
@@ -24,24 +26,24 @@ $(function(){
 	//강제 1회 클릭
 	$(".more-btn").click();
 	
-	function loadList(page, size, column, keyword){
-		
+	function loadList(pageValue, sizeValue, column, keyword){
 		$.ajax({
-			url : "${pageContext.request.contextPath}/adopt/more?column="+column+"&keyword="+keyword,	
+			url : "${root}/adopt/more?column="+column+"&keyword="+keyword,	
 			type : "get",
-			type : {
-				page : page,
-				sizs : size
+			data : {
+				page : pageValue,
+				size : sizeValue
 			},
 			dataType : "json",
 			success:function(resp){
-				consol.log("더보기 성공");
+				console.log("더보기 성공", resp);
 				
 				//데이터가 sizeValue보다 적은 개수가 왔다면 더보기 버튼을 삭제
 				if(resp.length < size){
 					$(".more-btn").remove();
 				}
 				
+				//moment(바꾸고 싶은 값).format("YYYY-MM-DD HH:mm:ss");				
 				//데이터 출력
 				for(var i=0 ; i < resp.length ; i++){
 					//탈퇴한 회원일 경우 null대신 탈퇴한 회원 표시해주기
@@ -49,20 +51,25 @@ $(function(){
 					if(adoptWriter == null){
 						adoptWriter = "탈퇴한 회원입니다";
 					}
-
-				  var divCol = "<div class=page>"+
-					"<span>"+adoptWriter+"</span>" +
-					"<br>"+
-					"<span><a href=detail?adoptNo="+resp[i].adoptNo+">"+resp[i].adoptTitle+"</a></span>" +
-					"<br>"+
-					"<br>"+
-					"<span>"+resp[i].adoptStart+"~"+resp[i].adoptEnd+"</span>" +
-					"<span>"+resp[i].adoptKind+"</span>" +
-					"<br>"+
-					"<span>"+resp[i].adoptPlace+"</span>"
-				+"</div>";
-				$(".result").append(divCol);
-				$(".page").addClass("col-3 mt-3");
+					var divCol = "<div class='card mb-5 px-3' style='width: 25rem;'>"
+								  + "<img src='' class='card-img-top' alt=''>"
+								  + "<div class='card-body'>"
+								  + "<h5 class='card-title'>"+ resp[i].adoptNo + resp[i].adoptTitle +"</h5>"
+								  + "<div class='card-text'>"
+								  + "공고 기간 : "
+								  + moment(resp[i].adoptStart).format("YYYY-MM-DD") 
+								  + "~" 
+								  + moment(resp[i].adoptEnd).format("YYYY-MM-DD") 
+								  +"</div>"
+								  + "<div class='card-text'>"
+								  + "입양 동물 : " + resp[i].adoptKind
+								  +"</div>"
+								  + "<div class='card-text'>"
+								  + "<a href='detail?adoptNo= "+resp[i].adoptNo+"' class='btn btn-outline-primary'>" + "보기"
+								  + "</a></div>"
+								  + "</div></div>";
+						
+					$(".result").append(divCol);
 				}
 				
 			},
@@ -71,9 +78,7 @@ $(function(){
 			}
 		});
 	}
-	
 });
-
 </script>
 
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
@@ -100,35 +105,35 @@ $(function(){
 								<option value="adoptTile" selected>제목</option>
 								<option value="adoptContent">내용</option>
 								<option value="adoptWriter">작성자</option>
-								<option value="adoptType">입양동물 종류</option>
+								<option value="adoptKind">입양동물 종류</option>
 							</c:when>
 							<c:when test="${column == adoptContent}">
 								<option value="">선택안함</option>
 								<option value="adoptTile">제목</option>
 								<option value="adoptContent" selected>내용</option>
 								<option value="adoptWriter">작성자</option>
-								<option value="adoptType">입양동물 종류</option>
+								<option value="adoptKind">입양동물 종류</option>
 							</c:when>
 							<c:when test="${column == adoptWriter}">
 								<option value="">선택안함</option>
 								<option value="adoptTile">제목</option>
 								<option value="adoptContent">내용</option>
 								<option value="adoptWriter" selected>작성자</option>
-								<option value="adoptType">입양동물 종류</option>
+								<option value="adoptKind">입양동물 종류</option>
 							</c:when>
 							<c:when test="${column == adoptType}">
 								<option value="">선택안함</option>
 								<option value="adoptTile">제목</option>
 								<option value="adoptContent">내용</option>
 								<option value="adoptWriter">작성자</option>
-								<option value="adoptType" selected>입양동물 종류</option>
+								<option value="adoptKind" selected>입양동물 종류</option>
 							</c:when>
 							<c:otherwise>
 								<option value="" selected>선택안함</option>
 								<option value="adoptTile">제목</option>
 								<option value="adoptContent">내용</option>
 								<option value="adoptWriter">작성자</option>
-								<option value="adoptType">입양동물 종류</option>
+								<option value="adoptKind">입양동물 종류</option>
 							</c:otherwise>
 						</c:choose>
 						</select>
@@ -145,24 +150,10 @@ $(function(){
 	<!-- 게시물 표시 위치 -->		
 	<div class="row mt-3 mb-5 result">
 	</div>
-	<c:forEach var="adoptDto" items="${list}">
-	<div class="card" style="width: 18rem;">
-  		<img src="..." class="card-img-top" alt="...">
-	 	 <div class="card-body">
-		    <h5 class="card-title">${adoptDto.adoptTitle}</h5>
-		    <p class="card-text">
-		    	공고기간 : ${adoptDto.adoptStart}~${adoptDto.adoptEnd}
-		    	입양동물 : ${adoptDto.adoptType}
-		    	구조장소 : ${adoptDto.adoptPlace}
-		    </p>
-		    <a href="${root}/adopt/detail/adoptNo=${adoptDto.adoptNo}" class="btn btn-primary">보기</a>
-	  </div>
-	</div>
-	</c:forEach>
 	
 	<div class="row mt-3 mb-5">
 		<div class="col mt-3">
-			<button type="button" class="btn btn-primary more-btn">더보기</button>
+			<button type="button" class="justify-content-md btn btn-primary more-btn">더보기</button>
 		</div>
 	</div>
 	

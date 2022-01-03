@@ -24,5 +24,12 @@ public interface AdoptDao {
 	
 	//입양공고 더보기 페이지네이션 전체목록 + 검색목록
 	List<AdoptDto> searchAndListByPage(int startRow, int endRow, String column, String keyword);
+
+	//상세 + 검색
+	List<AdoptDto> detailOrSearch(Map<String, Object> param);
+	
+	//게시글 수정
+	boolean edit(AdoptDto adoptDto);
+	
 	
 }

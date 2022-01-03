@@ -21,6 +21,8 @@ public class AjaxController {
 	@Autowired
 	private VisitDao visitDao;
 	
+
+	
 	//아이디 중복 검사 ajax
 	@GetMapping("/ajaxId")
 	public String ajaxId(@RequestParam String inputId) {
@@ -120,6 +122,7 @@ public class AjaxController {
 		 return chartVO;
 	 }
 	 
+
 }
 
 
