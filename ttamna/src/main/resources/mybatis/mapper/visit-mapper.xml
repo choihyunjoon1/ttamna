@@ -51,7 +51,7 @@
 		    (select 
 		        to_char((sysdate-7) + level - 1, 'YY/MM/DD') dt ,
 		        to_char(to_date(sysdate-7, 'YY/MM/DD') + rownum - 1, 'day') dow
-		    from dual <![CDATA[connect by level <= ((sysdate-1) - (sysdate-7) +1 )]]>)d
+		    from dual <![CDATA[connect by level <= ((sysdate-2) - (sysdate-7) +1 )]]>)d
 		left outer join 
 		    (select 
 		        to_char(visit_time, 'YY/MM/DD') dt, 
@@ -77,10 +77,9 @@
 		left outer join 
 		    (select 
 		        to_char(visit_time, 'YY/MM/DD') dt, 
-		        to_char(visit_time, 'DAY') dow, 
 		        count(*) cnt 
-		    from visit where <![CDATA[sysdate - visit_time <= 7]]>
-		    group by to_char(visit_time, 'YY/MM/DD'), to_char(visit_time, 'DAY'))v
+		    from visit
+		    group by to_char(visit_time, 'YY/MM/DD'))v
 		on v.dt = d.dt 
 		order by d.dt asc
     </select>
@@ -113,9 +112,9 @@
 		nvl(v.cnt, 0) "monthlyCount"
 	   from
 		    (select 
-		        to_char(add_months(to_date(sysdate, 'YY/MM/DD'), - (level-1)), 'month') mth 
+		        to_char(add_months(to_date(sysdate, 'YY/MM/DD'), - (level-1)-1), 'month') mth 
 		      from dual
-		        <![CDATA[connect by add_months(to_date(sysdate, 'YY/MM/DD'), - (level-1)) >= add_months(to_date(sysdate, 'YY/MM/DD'), -6)]]> )d
+		        <![CDATA[connect by add_months(to_date(sysdate, 'YY/MM/DD'), - (level-1)-1) >= add_months(to_date(sysdate, 'YY/MM/DD'), -6)]]> )d
 		left outer join
 		    (select 
 		        to_char(visit_time, 'month') mth,
@@ -132,9 +131,9 @@
 		nvl(v.cnt, 0) "moyCount"
 	   from
 		    (select 
-		        to_char(add_months(to_date(sysdate, 'YY/MM/DD'), - (level-1)), 'month') mth 
+		        to_char(add_months(to_date(sysdate, 'YY/MM/DD'), - (level-1)-1), 'month') mth 
 		      from dual
-		        <![CDATA[connect by add_months(to_date(sysdate, 'YY/MM/DD'), - (level-1)) >= add_months(to_date(sysdate, 'YY/MM/DD'), -11)]]> )d
+		        <![CDATA[connect by add_months(to_date(sysdate, 'YY/MM/DD'), - (level-1)-1) >= add_months(to_date(sysdate, 'YY/MM/DD'), -11)]]> )d
 		left outer join
 		    (select 
 		        to_char(visit_time, 'month') mth,
@@ -143,6 +142,9 @@
 		on v.mth = d.mth 
 		order by lpad(d.mth, 2, '0')
 	</select>
+	
+	 <!-- 지난 달 일별 방문자수 카운트 구문 -->
+    
     
 </mapper>
 
