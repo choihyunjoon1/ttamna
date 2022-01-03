@@ -36,7 +36,7 @@ public class AdoptController {
 	}
 	
 	//더보기 페이지네이션 목록 ajax
-	@GetMapping("/more")
+	@PostMapping("/more")
 	@ResponseBody
 	public List<AdoptDto> more(
 			@RequestParam(required =false, defaultValue = "1") int page,

@@ -29,7 +29,7 @@ $(function(){
 	function loadList(pageValue, sizeValue, column, keyword){
 		$.ajax({
 			url : "${root}/adopt/more?column="+column+"&keyword="+keyword,	
-			type : "get",
+			type : "post",
 			data : {
 				page : pageValue,
 				size : sizeValue
