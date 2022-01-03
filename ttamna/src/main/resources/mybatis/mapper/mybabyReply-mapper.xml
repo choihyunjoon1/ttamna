@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!-- 
+	myBatis 매퍼 파일
+	- DBMS에서 실행할 SQL 구문을 저장하는 XML 파일
+	- namespace를 통해서 여러 개의 매퍼를 구분한다
+	- 테이블 당 1개씩 만드는 것이 일반적이며, 따라서 namespace를 테이블명으로 작성하면 구분이 용이하다.
+	- <insert> , <select> , <update> , <delete>를 이용해서 CRUD 구문을 작성한다.
+	- 각 구문은 외부에서 호출이 가능하도록 반드시 ID를 겹치지 않게 부여해야 한다.
+	- parameterType 은 구문을 실행하기 위해 필요한 데이터의 형태를 말한다.
+	- resultType은 구문을 실행한 결과를 어떤 형태로 변환해야 하는지를 말한다.
+ -->
+
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mybabyReply">
+	
+	<!-- 시퀀스 -->
+	<select id="seq" resultType="int">
+		select mybaby_reply_seq.nextval from dual
+	</select>
+
+	<!-- mybaby_reply_no, member_id, mybaby_no, mybaby_reply_content, mybaby_reply_time,
+			mybaby_reply_superno, mybaby_reply_groupno, mybaby_reply_depth -->
+	<!-- 댓글 작성 -->
+	<insert id="insert" parameterType="MybabyReplyDto">
+		insert into mybaby_reply values( mybaby_reply_seq.nextval,
+			#{memberId}, ${mybabyNo}, #{mybabyReplyContent},
+			sysdate, null, 0, 0
+		)
+		
+	</insert>	
+	
+	<select id="list" resultType="MybabyReplyDto">
+		select * from mybaby_reply
+	</select>
+	
+	<!-- 댓글 수정 -->
+	<update id="update" parameterType="map">
+		update mybaby_reply set mybaby_reply_content = #{content}
+		where member_id = #{memberId}
+	</update>
+	
+	<!-- 댓글 삭제 -->	
+	<delete id="delete" parameterType="int">
+		delete from mybaby_reply where mybaby_reply_no = ${mybabyReplyNo}
+	</delete>
+		
+		<!--  수정을 위한 단일조회 -->
+		<select id="get"  parameterType="int" resultType="MybabyReplyDto">
+			select * from mybaby_reply where mybaby_reply_no = ${mybabyReplyNo}
+		</select>
+<!-- 특정 게시글의 댓글 내용만 조회 -->
+	<select id="listByDetail" parameterType="int" resultType="MybabyReplyDto">
+		select * from mybaby_reply where mybaby_no = ${mybabyNo}
+	</select>
+	
+	<!-- 댓글 수정 -->
+	<update id="edit3" parameterType="map">
+		update mybaby_reply set mybaby_reply_content = #{replyContent}
+		where mybaby_reply_no = ${replyNo}
+	</update>
+</mapper>
+
+
+
+
+
+
+
