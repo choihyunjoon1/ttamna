@@ -92,6 +92,12 @@ public class AdoptDaoImpl implements AdoptDao {
 		return result > 0;
 	}
 
+	@Override
+	public boolean delete(int adoptNo) {
+		int result = sqlSession.delete("adopt.delete", adoptNo);
+		return result > 0;
+	}
+
 	
 	
 }
