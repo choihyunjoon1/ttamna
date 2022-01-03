@@ -30,12 +30,11 @@
 		   visit_idx에 시퀀스는 미리 받음	   
 	-->
     <insert id="allInOneLog" parameterType="VisitDto">
-    	merge into visit V using dual on (V.visit_id = #{visitId})
+    	merge into visit V using dual on (V.visit_id = #{visitId}) 
     		when matched then
-    		update set visit_time = sysdate where <![CDATA[sysdate - visit_time < 1 ]]>
+    			update set visit_time = sysdate where <![CDATA[sysdate - 1 <= visit_time]]> and visit_id = #{visitId} 
     		when not matched then
-    		insert(visit_idx, visit_id, visit_time)
-    			values(#{visitIdx}, #{visitId}, sysdate)
+    			insert(visit_idx, visit_id, visit_time) values(#{visitIdx}, #{visitId}, sysdate)
     </insert>
     
     <!-- 하루 방문자 수 카운트. 현재 날짜에서 접속시간을 뺀 값이 1(하루)보다 작으면 당일 접속 -->
