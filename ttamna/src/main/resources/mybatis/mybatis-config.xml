@@ -36,6 +36,7 @@
 		<package name="com.kh.ttamna.entity.mybaby"/>
 		<package name="com.kh.ttamna.entity.payment"/>
 		<package name="com.kh.ttamna.entity.cart"/>
+		<package name="com.kh.ttamna.entity.adopt"/>
 		<package name="com.kh.ttamna.vo"/>
 		<package name="com.kh.ttamna.vo.chart"/>
 		<package name="com.kh.ttamna.vo.donation"/>
