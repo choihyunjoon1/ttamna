@@ -48,7 +48,7 @@ class App {
         var geometry = new THREE.BoxGeometry(1.5, 1.5, 1.5);
 
         var textureLoader = new THREE.TextureLoader();
-        var map = textureLoader.load("./resources/img/ruby.png");
+        var map = textureLoader.load("../resources/img/ruby.png");
         var material = new THREE.MeshPhongMaterial({color: 0xffffff, map : map});
 
         var cube = new THREE.Mesh(geometry, material);
