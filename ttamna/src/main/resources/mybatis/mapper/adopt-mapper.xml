@@ -103,5 +103,10 @@
 			</set>
 		where adopt_no = #{adoptNo}
 	</update>
+	
+	<!-- 입양공고 삭제 -->
+	<delete id="delete" parameterType="int">
+		delete adopt where adopt_no = #{adoptNo}
+	</delete>
 </mapper>
 

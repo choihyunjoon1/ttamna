@@ -13,7 +13,7 @@
 
 $(function(){
 	var page = 1;	
-	var size = 12;
+	var size = 10;
 	
 	//더보기 버튼 클릭시 이벤트 발생
 	$(".more-btn").click(function(){
@@ -86,6 +86,9 @@ $(function(){
 <div class="container-800 container-center mt-5 mb-5">
 	
 	<div class="mt-5 mb-5"><h3>입양공고</h3>
+	<c:if test="${param.deleteSuccess != null}">
+		<div class=" mb-3"><h6>입양공고 삭제 완료</h6></div>
+	</c:if>
 	<c:if test="${insertGrade}">
 		<div class="d-grid gap-2 d-md-flex justify-content-md-end">
 			<a href="${root}/adopt/write" class="btn btn-outline-primary">입양공고 등록</a>

@@ -29,8 +29,8 @@ public class AdoptController {
 	@Autowired
 	private AdoptDao adoptDao;
 	
-	//입양공고 root페이지(전체 목록)
-	@GetMapping("/")
+	//입양공고 전체 목록
+	@GetMapping("/list")
 	public String adopt() {
 		return "adopt/list";
 	}
@@ -40,7 +40,7 @@ public class AdoptController {
 	@ResponseBody
 	public List<AdoptDto> more(
 			@RequestParam(required =false, defaultValue = "1") int page,
-			@RequestParam(required =false, defaultValue = "12") int size,
+			@RequestParam(required =false, defaultValue = "10") int size,
 			@RequestParam(required =false, defaultValue = "") String column,
 			@RequestParam(required =false, defaultValue = "") String keyword
 			){
@@ -53,7 +53,7 @@ public class AdoptController {
 		}
 	}
 	
-	@RequestMapping("/list")//목록페이지
+	//@RequestMapping("/list")//목록페이지
 	public String list(
 			@RequestParam(required = false) String column,
 			@RequestParam(required = false) String keyword,
@@ -98,10 +98,11 @@ public class AdoptController {
 		AdoptDto adoptDto = adoptDao.detail(adoptNo);
 		String uid = (String) session.getAttribute("uid");
 		String grade = (String) session.getAttribute("grade");
-		if(adoptDto.getAdoptWriter().contentEquals(uid) || grade.contentEquals("관리자")) {
+		//권한 확인 : 작성자와 세션의 아이디가 일치하거나 관리자일 경우 수정 가능
+		if(adoptDto.getAdoptWriter().equals(uid) || grade.equals("관리자")) {
 			m.addAttribute("adoptDto", adoptDto);
 			return "adopt/edit";
-		}else return "adopt/detail?adoptNo="+adoptNo;
+		}else return "adopt/detail?adoptNo="+adoptNo+"&invalid";
 	}
 	
 	//입양공고 수정 처리
@@ -110,6 +111,19 @@ public class AdoptController {
 		return "redirect:/adopt/detail?adoptNo="+adoptDto.getAdoptNo()+"&success";
 	}
 	
-	//입양공고 삭제
+	//입양공고 삭제 처리
+	@GetMapping("/delete")
+	public String delete(@RequestParam int adoptNo, HttpSession session) {
+		String uid = (String) session.getAttribute("uid");
+		String grade = (String) session.getAttribute("grade");
+		AdoptDto adoptDto = adoptDao.detail(adoptNo);
+		//권한 확인 : 작성자와 세션의 아이디가 일치하거나 관리자일 경우 삭제 가능
+		if(adoptDto.getAdoptWriter().equals(uid) || grade.equals("관리자")) {
+			adoptDao.delete(adoptNo);
+			//권한이 있으면 삭제처리하고 전체 목록으로 deleteSuccess 파라미터를 붙여서 리다이렉트
+			return "redirect: list?deleteSuccess";
+			//권한이 없다면 invalid파라미터를 붙여서 상세페이지로 돌려보낸다
+		}else return "adopt/detail?adoptNo="+adoptNo+"&invalid";
+	}
 
 }

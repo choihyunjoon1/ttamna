@@ -30,6 +30,9 @@ public interface AdoptDao {
 	
 	//게시글 수정
 	boolean edit(AdoptDto adoptDto);
+
+	//게시글 삭제
+	boolean delete(int adoptNo);
 	
 	
 }
