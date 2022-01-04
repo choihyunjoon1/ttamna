@@ -62,6 +62,17 @@
 		update donation_reply set donation_reply_content = #{replyContent}
 		where donation_reply_no = ${replyNo}
 	</update>
+	
+	<!-- 더보기 페이지네이션 -->
+	<select id="listByPage" parameterType="map" resultType="DonationReplyDto">
+		select * from(
+		    select rownum rn, tmp.* from(
+		        select * from donation_reply
+		        where donation_no = ${donationNo}
+		        order by donation_reply_no desc
+		        )tmp
+		)where rn between ${startRow} and ${endRow}
+	</select>
 </mapper>
 
 
