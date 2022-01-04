@@ -27,7 +27,7 @@ public class AutoPayMentScheduler implements KakaoPayAutoPayMentScheDule{
 	private DonationDao donationDao;
 //	@Override
 //	@Scheduled(cron = "0 0 0 10 * ?")//매월 10일 정각
-	@Scheduled(cron = "*/10 * * * * *")//테스트용 30초마다
+//	@Scheduled(cron = "*/10 * * * * *")//테스트용 30초마다
 	public void excute() throws URISyntaxException {
 		List<AutoPayMentDto> list = autoDao.list();
 		KakaoPayAutoApproveRequestVo requestVo = new KakaoPayAutoApproveRequestVo();

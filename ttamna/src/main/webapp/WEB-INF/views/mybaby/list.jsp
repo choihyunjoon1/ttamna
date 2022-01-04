@@ -36,10 +36,22 @@ $(function(){
 				
 				//데이터 출력
 				for(var i=0; i < resp.length; i++){
+					var memberId = resp[i].mybabyWriter;
+					var imglocation = "";
+					if(!resp[i].mybabyImgNo){
+						imglocation = "<img src=${pageContext.request.contextPath}/resources/img/nonimage.png class=icon style=width:50%></a></span>";
+					}else{
+						imglocation = "<img src=mybabyImg?mybabyImgNo="+resp[i].mybabyImgNo+" class=icon style=width:50%></a></span>";
+					}
+					
+					if(memberId == null){
+						memberId = "탈퇴한 회원";
+					}
+					console.log("람깐만", resp.mybabyImgNo);
 					var divCol = "<div class=page>"+
-						"<span>"+resp[i].mybabyNo+"</span>" +
+					"<span><a href=detail?mybabyNo="+resp[i].mybabyNo+">"+imglocation+
 						"<br>"+
-						"<span>"+resp[i].mybabyWriter+"</span>" +
+						"<span>"+memberId+"</span>" +
 						"<br>"+
 						"<span><a href=detail?mybabyNo="+resp[i].mybabyNo+">"+resp[i].mybabyTitle+"</a></span>" +
 						"<br>"+
@@ -77,6 +89,49 @@ $(function(){
 			<button type="button" class="btn btn-primary more-btn">더보기</button>
 		</div>
 	</div>
+	<!-- 검색창 -->
+	<form method="post" >
+		<div class="input-group">
+			<div class="col-3 offset-2">
+				<select name="column" class="form-select" required id="column">
+				<c:choose>
+					<c:when test="${column eq 'mybaby_title'}">
+						<option value="">선택안함</option>
+						<option value="mybaby_title" selected>제목</option>
+						<option value="mybaby_writer">작성자</option>
+						<option value="mybaby_content">내용</option>
+					</c:when>
+					<c:when test="${column eq 'mybaby_writer'}">
+						<option value="">선택안함</option>
+						<option value="mybaby_title">제목</option>
+						<option value="mybaby_writer" selected>작성자</option>
+						<option value="mybaby_content">내용</option>
+					</c:when>
+					<c:when test="${column eq 'mybaby_content'}">
+						<option value="">선택안함</option>
+						<option value="mybaby_title">제목</option>
+						<option value="mybaby_writer">작성자</option>
+						<option value="mybaby_content" selected>내용</option>
+					</c:when>
+					<c:otherwise>
+						<option value="">선택안함</option>
+						<option value="mybaby_title">제목</option>
+						<option value="mybaby_writer">작성자</option>
+						<option value="mybaby_content">내용</option>
+					</c:otherwise>
+				</c:choose>
+				</select>
+			</div>
+			<div class="col-3">
+				<input type="text" name="keyword" required class="form-control" value="${keyword}">
+			</div>
+			<div class="col-2">
+				<input type="submit" value="검색" id="search" class="btn btn-primary">
+			</div>
+		</div>
+	</form>
+	
+	
 </div>
 
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>
