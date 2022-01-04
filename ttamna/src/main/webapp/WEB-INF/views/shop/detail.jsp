@@ -43,7 +43,67 @@ $(function(){
 		}
 	});
 });
-</script>    
+</script>
+<script>
+	
+	$(function(){
+		$(".edit").hide();
+		$(".change-cancel").hide();
+		$(".content-change-real").hide();
+		$(".content-change").click(function(e){
+			e.preventDefault();
+			$(this).prev().show();
+			$(this).next().next().show();
+			$(this).prev().prev().hide();
+			$(this).next().show();
+			$(this).hide();
+		});
+		$(".change-cancel").click(function(e){
+			e.preventDefault();
+			$(".content-change").show();
+			$(".edit").hide();
+			$(".replyDto").show();
+			$(".change-cancel").hide();
+			$(".content-change-real").hide();
+		});
+		
+		$(".content-change-real").click(function(e){
+			e.preventDefault();
+			var number = $(this).attr("data-data")
+			
+			var replyNo = $("#replyNo"+number).val();
+			var replyContent = $("#replyContent"+number).val();
+			var shopNo = $("#shopNo"+number).val();
+			
+			$.ajax({
+				url : "${pageContext.request.contextPath}/shop/reply/edit", 
+				type : "post",
+				data : {
+					replyNo : replyNo ,
+					replyContent : replyContent,
+					shopNo : shopNo
+				},
+				success:function(resp){
+					$("#content"+replyNo).text("");
+					$("#content"+replyNo).text(resp[0]);
+					$(".change-cancel").click();
+				},
+				error:function(e){
+					console.log("실패했어용");
+				}
+			});
+		});
+	});
+	
+
+	
+</script>
+<style>
+		.reply{
+		margin-top:10px;
+		margin-bottom:5px;
+		}
+</style>
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 
 
@@ -103,6 +163,56 @@ $(function(){
 <a href="edit?shopNo=${detail.shopNo}" class="btn btn-info">수정</a>
 <a href="delete?shopNo=${detail.shopNo}"  class="btn btn-danger">삭제</a>
 <a href="list" class="btn btn-outline-dark">목록으로</a>
+
+
+<div class="col-12">
+        <form action="reply/edit" method="post">
+            <c:forEach var="replyDto" items="${replyDto}">
+                <div class="replyDto"><h4>
+                ${replyDto.shopReplyNo}
+                    | ${replyDto.memberId} | <span id="content${replyDto.shopReplyNo}">${replyDto.shopReplyContent}</span>
+                   | ${replyDto.shopReplyTime}
+                </h4>
+                </div>
+                    <c:if test="${sessionScope.uid == replyDto.memberId}">
+					<div class="edit" style="margin-top:15px;">
+						<input type="hidden" value="${replyDto.shopNo}" id="shopNo${replyDto.shopReplyNo}">
+						<input type="hidden" value="${replyDto.shopReplyNo}" id="replyNo${replyDto.shopReplyNo}">
+						<textarea class="form-control" " row="3" name="shopReplyContent"id="replyContent${replyDto.shopReplyNo}">${replyDto.shopReplyContent}</textarea> 
+            
+					</div>
+                            <a href="#" class="reply content-change btn btn-primary">수정</a>
+                            <a href="#" class="reply content-change-real btn btn-primary" data-data="${replyDto.shopReplyNo}">수정하기</a>
+                            <a href="#" class="reply change-cancel btn btn-primary">취소</a> 
+                            <a href="reply/delete?shopReplyNo=${replyDto.shopReplyNo}&shopNo=${replyDto.shopNo}" class="reply btn btn-secondary">삭제하기</a>
+
+                    </c:if>
+               
+            </c:forEach>
+        </form>
+    </div>
+
+    <div class="col-12">
+        <form action="reply/insert" method="post">
+            <c:forEach var="shopDto" items="${shopDto}">
+                <input type="hidden" name="shopNo"
+                    value="${shopDto.shopNo}">
+           <input type="hidden" name="memberId" value="${sessionScope.uid}">
+            </c:forEach>
+            
+            댓글 쓰기
+            <textarea class="form-control" " row="3" name="shopReplyContent"></textarea> 
+            
+            <div class="right">
+            <input type="submit" class="reply btn btn-primary" value="등록">
+        </div>
+</form>
+</div>
+<div class="row mt-3">
+		<div class="col mt-3">
+			<button type="button" class="btn btn-link disabled">더보기</button>
+		</div>
+	</div>
 
 
 

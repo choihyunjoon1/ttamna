@@ -21,7 +21,7 @@ public interface DonationReplyDao {
 
 	public void edit3(int replyNo, String replyContent);//댓글수정 에이잭스~
 	
-	
+	List<DonationReplyDto> listByPage(int startRow, int endRow, int donationNo);//더보기 페이지네이션
 
 	
 }

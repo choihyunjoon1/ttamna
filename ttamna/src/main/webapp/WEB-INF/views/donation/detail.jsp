@@ -6,6 +6,8 @@
 <script>
 	
 	$(function(){
+		
+		
 		$(".edit").hide();
 		$(".change-cancel").hide();
 		$(".content-change-real").hide();
@@ -100,7 +102,7 @@
 		<div class="col-12 mt-5">
 			<form action="kakao/fund" method="post">
 				<c:forEach var="donationDto" items="${donationDto}">
-				<input type="hidden" name="donationNo" value="${donationDto.donationNo}">
+				<input type="hidden" name="donationNo" value="${donationDto.donationNo}"  id="donationNo">
 				<input type="hidden" name="partner_user_id" value="${sessionScope.uid}">
 				<input type="number" name="total_amount" class="form-control" min="1000" max="${donationDto.donationTotalFund - donationDto.donationNowFund}">
 				<input type="submit" value="기부하기" class="btn btn-primary">
@@ -132,7 +134,7 @@
 					<div class="edit" style="margin-top:15px;">
 						<input type="hidden" value="${replyDto.donationNo}" id="donationNo${replyDto.donationReplyNo}">
 						<input type="hidden" value="${replyDto.donationReplyNo}" id="replyNo${replyDto.donationReplyNo}">
-						<textarea class="form-control" " row="3" name="donationReplyContent"id="replyContent${replyDto.donationReplyNo}">${replyDto.donationReplyContent}</textarea> 
+						<textarea class="form-control"  row="3" name="donationReplyContent"id="replyContent${replyDto.donationReplyNo}">${replyDto.donationReplyContent}</textarea> 
             
 					</div>
                             <a href="#" class="reply content-change btn btn-primary">수정</a>
@@ -161,6 +163,13 @@
             <input type="submit" class="reply btn btn-primary" value="등록">
         </div>
 </form>
+</div>
+<div class="row mt-3">
+		<div class="col mt-3">
+			<button type="button" class="btn btn-link disabled">더보기</button>
+		</div>
+	</div>
+</div>
 </div>
 
 
