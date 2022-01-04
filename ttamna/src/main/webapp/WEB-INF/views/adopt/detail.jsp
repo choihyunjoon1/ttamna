@@ -12,11 +12,9 @@
 
 <script>
 //삭제 버튼을 누르면 알림창 띄우기
-window.addEventListener("load", function(){
-	//게시글 작성자이거나 관리자일 경우에만 이벤트 발생
-	var isValid = ${adoptDto.adoptWriter eq uid or admin}
-	if(isValid){ 
-	document.querySelector(".delete-btn").addEventListener("click", function(){
+$(function(){
+	
+	$(".delete-btn").click(function(){
 		var choice = window.confirm("${adoptDto.adoptNo}번 ${adoptDto.adoptTitle}. 게시글을 삭제 하시겠습니까?");
 		if(choice){
 			//확인을 누르면 삭제 처리
@@ -25,8 +23,7 @@ window.addEventListener("load", function(){
 			//취소를 누르면 현재페이지 리로드
 			location.reload();
 		}
-	 });
-	}
+	});
 });
 </script>
 
@@ -42,6 +39,8 @@ window.addEventListener("load", function(){
 		<div class=" mb-3"><h6>수정 권한이 없습니다</h6></div>
 	</c:if>	
 	
+<c:forEach var="adoptDto" items="${adoptDto}">
+<c:set var="valid" value="${grade == '관리자' or uid == adoptDto.adoptWriter}"></c:set>
 	<div class="mt-5 mb-5">
 		<div>제목 :  ${adoptDto.adoptTitle}</div>
 		<div>조회수 :  ${adoptDto.adoptRead}</div>
@@ -62,13 +61,14 @@ window.addEventListener("load", function(){
 	
 	<!-- 작성자 또는 관리자에게만 수정 삭제 버튼 보여주기 -->
 	<div class="d-grid gap-2 d-md-flex justify-content-md-end mb-5">
-	<a type="button" href="${root}/adopt/list" class="btn btn-outline-primary">목록</a>
-	<c:if test="${uid eq adoptDto.adoptWriter or admin }">
+	<a type="button" href="${root}/adopt/" class="btn btn-outline-primary">목록</a>
+	<c:if test="${valid}">
 		<a href="${root}/adopt/edit?adoptNo=${adoptDto.adoptNo}" type="button" class="btn btn-outline-primary">수정</a>
 		<button type="button" class="btn btn-outline-secondary delete-btn">삭제</button>
 	</c:if>	
 	</div>
-	
+</c:forEach>
+
 </div>
 
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>

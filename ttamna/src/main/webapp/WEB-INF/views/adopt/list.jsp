@@ -46,13 +46,22 @@ $(function(){
 				//moment(바꾸고 싶은 값).format("YYYY-MM-DD HH:mm:ss");				
 				//데이터 출력
 				for(var i=0 ; i < resp.length ; i++){
+					
+					//이미지 파일 없는 경우 undefined 꼴보기 시르미 
+					var imgLocation = "";
+					if(!resp[i].adoptImgNo){
+						imgLocation =  "<img src=${pageContext.request.contextPath}/resources/img/nonimage.png class=icon></a></span>";
+					}else{
+						imgLocation =  "<img src='adoptImg?adoptImgNo="+ resp[i].adoptImgNo +"' class='card-img-top' alt=' "+resp[i].adoptImgUploade+"'>";
+					}
+					
 					//탈퇴한 회원일 경우 null대신 탈퇴한 회원 표시해주기
 					var adoptWriter = resp[i].adoptWriter;
 					if(adoptWriter == null){
 						adoptWriter = "탈퇴한 회원입니다";
 					}
-					var divCol = "<div class='card mb-5 px-3' style='width: 25rem;'>"
-								  + "<img src='adoptImg?adoptImgNo="+ resp[i].adoptImgNo +"' class='card-img-top' alt=' "+resp[i].adoptImgUploade+"'>"
+					var divCol = "<div class='card text-gray bg-light mb-5 ms-2 ' style='width: 18rem;'>"
+								  + imgLocation
 								  + "<div class='card-body'>"
 								  + "<h5 class='card-title'>"+ resp[i].adoptNo + resp[i].adoptTitle +"</h5>"
 								  + "<div class='card-text'>"
@@ -83,7 +92,7 @@ $(function(){
 
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 
-<div class="container-800 container-center mt-5 mb-5">
+<div class="container-900 container-center mt-5 mb-5">
 	
 	<div class="mt-5 mb-3"><h3>입양공고</h3>
 	<c:if test="${param.deleteSuccess != null}">
@@ -97,33 +106,33 @@ $(function(){
 	</div>
 	<div class="container">
 	<!-- 입양공고 등록버튼은 관리자와 보호소 등급만 사용할 수 있다 -->
-			<form method="get">
+			<form method="post">
 				<div class="input-group justify-content-end">
 					<div class="col-2">
 						<select name="column" class="form-select form-select-sm" required id="column">
 						<c:choose>
-							<c:when test="${column == adopt_title}">
+							<c:when test="${column == 'adopt_title'}">
 								<option value="">선택안함</option>
 								<option value="adopt_title" selected>제목</option>
 								<option value="adopt_content">내용</option>
 								<option value="adopt_writer">작성자</option>
 								<option value="adopt_kind">입양동물 종류</option>
 							</c:when>
-							<c:when test="${column == adopt_content}">
+							<c:when test="${column == 'adopt_content'}">
 								<option value="">선택안함</option>
 								<option value="adopt_title">제목</option>
 								<option value="adopt_content" selected>내용</option>
 								<option value="adopt_writer">작성자</option>
 								<option value="adopt_kind">입양동물 종류</option>
 							</c:when>
-							<c:when test="${column == adopt_writer}">
+							<c:when test="${column == 'adopt_writer'}">
 								<option value="">선택안함</option>
 								<option value="adopt_title">제목</option>
 								<option value="adopt_content">내용</option>
 								<option value="adopt_writer" selected>작성자</option>
 								<option value="adopt_kind">입양동물 종류</option>
 							</c:when>
-							<c:when test="${column == adopt_kind}">
+							<c:when test="${column == 'adopt_kind'}">
 								<option value="">선택안함</option>
 								<option value="adopt_title">제목</option>
 								<option value="adopt_content">내용</option>

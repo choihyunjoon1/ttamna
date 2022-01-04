@@ -43,13 +43,39 @@ public class AdoptController {
 	@Autowired
 	private AdoptFileService adoptFileService;
 	
-	@Autowired
-	private SqlSession sqlSession;
+	//입양공고 전체 목록 페이지
+	@RequestMapping("/")
+	public String defaultList(
+			@RequestParam(required = false) String column,
+			@RequestParam(required = false) String keyword, Model m) {
+		if(column != null && keyword != null) {
+			Map<String, Object> param = new HashMap<>();
+			param.put("column", column);
+			param.put("keyword", keyword);
+			
+			m.addAttribute("list", adoptDao.detailOrSearch(param));
+			m.addAttribute("column", column);
+			m.addAttribute("keyword", keyword);
+		}else {
+			m.addAttribute("list", adoptDao.list());
+		}
+		return "adopt/list";
+	}
 	
 	//입양공고 전체 목록
 	@RequestMapping("/list")
-	public String adopt(Model m) {
-		m.addAttribute("list", sqlSession.selectList("adopt.imgList"));
+	public String adopt(			
+			@RequestParam(required = false) String column,
+			@RequestParam(required = false) String keyword, Model m) {
+		if(column != null && keyword != null) {
+			Map<String, Object> param = new HashMap<>();
+			param.put("column", column);
+			param.put("keyword", keyword);
+			
+			m.addAttribute("list", adoptDao.detailOrSearch(param));
+		}else {
+			m.addAttribute("list", adoptDao.list());
+		}
 		return "adopt/list";
 	}
 	
@@ -93,8 +119,9 @@ public class AdoptController {
 	//상세페이지 + 파일
 	@GetMapping("/detail")
 	public String detail(@RequestParam int adoptNo, Model m) {
-		AdoptDto adoptDto = adoptDao.detail(adoptNo);
-		m.addAttribute("adoptDto", adoptDto);
+		Map<String, Object> param = new HashMap<>();
+		param.put("adoptNo", adoptNo);
+		m.addAttribute("adoptDto", adoptDao.detail(adoptNo));
 		m.addAttribute("adoptImgList", adoptImgDao.getList(adoptNo));
 		return "adopt/detail";
 	}
@@ -122,22 +149,22 @@ public class AdoptController {
 	
 	
 	//입양공고 수정 페이지
-	@GetMapping("/edit")
-	public String edit(@RequestParam int adoptNo, Model m, HttpSession session) {
-		AdoptDto adoptDto = adoptDao.detail(adoptNo);
-		String uid = (String) session.getAttribute("uid");
-		String grade = (String) session.getAttribute("grade");
-		//권한 확인 : 작성자와 세션의 아이디가 일치하거나 관리자일 경우 수정 가능
-		if(adoptDto.getAdoptWriter().equals(uid) || grade.equals("관리자")) {
-			m.addAttribute("adoptDto", adoptDto);
-			return "adopt/edit";
-		}else return "adopt/detail?adoptNo="+adoptNo+"&invalid";
+	//@GetMapping("/edit")
+	public String edit(@RequestParam int adoptNo, Model m) {
+		Map<String, Object> param = new HashMap<>();
+		param.put("adoptNo", adoptNo);
+		
+		List<AdoptDto> adoptDto = adoptDao.detailOrSearch(param);
+		m.addAttribute("adoptDto", adoptDto);
+		m.addAttribute("adoptImgList", adoptImgDao.getList(adoptNo));
+		return "adopt/edit";
 	}
 	
 	//입양공고 수정 처리
-	@PostMapping("/edit")
-	public String edit(@ModelAttribute AdoptDto adoptDto, Model m) {
-		return "redirect:/adopt/detail?adoptNo="+adoptDto.getAdoptNo()+"&success";
+	//@PostMapping("/edit")
+	public String edit(@ModelAttribute AdoptFileVO adoptFileVO, @RequestParam int adoptNo) throws IllegalStateException, IOException {
+		adoptFileService.updateWithFile(adoptFileVO);
+		return "redirect: detail?adoptNo="+adoptFileVO.getAdoptNo()+"&success";
 	}
 	
 	//입양공고 삭제 처리
