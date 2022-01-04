@@ -3,6 +3,11 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:set var="login" value="${uid != null}"></c:set>
 <c:set var="root" value="${pageContext.request.contextPath}"></c:set>
+<!-- JQeury CDN -->
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+
+<script>
+</script>
 
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 
@@ -10,7 +15,7 @@
 
 	<div class="mt-5 mb-5"><h3>입양공고 등록</h3></div>
 
-	<form method=post>
+	<form method="post" enctype="multipart/form-data">
 		<div class="input-group mb-3">
 		  <span class="input-group-text" id="basic-addon1">작성자</span>
 		  <input type="text" name="adoptWriter" value="${uid}" disabled aria-label="end" class="form-control">
@@ -33,20 +38,20 @@
 		  <input type="text" name="adoptPlace" class="form-control" required aria-describedby="basic-addon5">
 		</div>
 		<div class="input-group mb-3">
+		  <input type="file" name="attach"  accept="image/*" class="form-control" id="inputGroupFile04" aria-describedby="inputGroupFileAddon04" aria-label="Upload">
+		  <button class="btn btn-outline-info upload" type="button" id="inputGroupFileAddon04">업로드</button>
+		</div>
+		<div class="input-group mb-3">
 		  <span class="input-group-text">내용</span>
 		  <textarea name="adoptContent" class="form-control" aria-label="With textarea" placeholder="임시보호자와 연락할 수 있는 방법을 꼭 기재해 주세요"></textarea>
 		</div>
 		<div class="d-grid gap-2 d-md-flex justify-content-md-end mb-5">
 			<button type="submit" class="btn btn-primary">등록</button>
-			<a type="button" href="${root}/adopt/" class="btn btn-outline-primary">목록</a>
+			<a type="button" href="${root}/adopt/list" class="btn btn-outline-primary">목록</a>
 			<button type="reset" class="btn btn-outline-secondary">초기화</button>
 		</div>
 	</form>
 
 </div>
 
-		<div class="input-group mb-3">
-		  <input type="file" class="form-control" id="inputGroupFile04" aria-describedby="inputGroupFileAddon04" aria-label="Upload">
-		  <button class="btn btn-outline-info" type="button" id="inputGroupFileAddon04">Button</button>
-		</div>
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>

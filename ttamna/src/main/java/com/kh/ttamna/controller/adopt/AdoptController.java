@@ -1,5 +1,6 @@
 package com.kh.ttamna.controller.adopt;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -18,16 +19,23 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.kh.ttamna.entity.adopt.AdoptDto;
 import com.kh.ttamna.repository.adopt.AdoptDao;
+import com.kh.ttamna.repository.adopt.AdoptImgDao;
+import com.kh.ttamna.service.adopt.AdoptFileService;
+import com.kh.ttamna.vo.adopt.AdoptFileVO;
 
-import lombok.extern.slf4j.Slf4j;
-
-@Slf4j
 @Controller
 @RequestMapping("/adopt")
 public class AdoptController {
 
 	@Autowired
 	private AdoptDao adoptDao;
+	
+	@Autowired
+	private AdoptImgDao adoptImgDao;
+	
+	@Autowired
+	private AdoptFileService adoptFileService;
+	
 	
 	//입양공고 전체 목록
 	@GetMapping("/list")
@@ -76,19 +84,24 @@ public class AdoptController {
 		return "adopt/write";
 	}
 	
-	//입양공고 게시글 등록 처리
+	//입양공고 게시글 등록 처리 + 파일 저장
 	@PostMapping("/write")
-	public String write(@ModelAttribute AdoptDto adoptDto) {
-		int adoptNo = adoptDao.write(adoptDto);
+	public String write(@ModelAttribute AdoptFileVO adoptFileVO, HttpSession session) throws IllegalStateException, IOException {
+		String adoptWriter = (String) session.getAttribute("uid");
+		System.out.println("adoptController 작성자 : " + adoptWriter);
+		adoptFileVO.setAdoptWriter(adoptWriter);
+		int adoptNo = adoptFileService.insert(adoptFileVO);
+		adoptDao.readUp(adoptNo);
 		//등록처리 완료 후 상세 페이지로 이동
 		return "redirect:/adopt/detail?adoptNo=" + adoptNo;
 	}
 	
-	//상세페이지
+	//상세페이지 + 파일
 	@GetMapping("/detail")
 	public String detail(@RequestParam int adoptNo, Model m) {
 		AdoptDto adoptDto = adoptDao.detail(adoptNo);
 		m.addAttribute("adoptDto", adoptDto);
+		m.addAttribute("adoptImgList", adoptImgDao.getList(adoptNo));
 		return "adopt/detail";
 	}
 	
@@ -133,4 +146,6 @@ public class AdoptController {
 		return "redirect: detail?adoptNo="+adoptNo;
 	}
 	
+	
+
 }

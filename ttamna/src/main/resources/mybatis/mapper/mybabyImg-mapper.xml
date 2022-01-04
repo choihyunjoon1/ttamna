@@ -25,6 +25,28 @@
 			${mybabyImgSize},#{mybabyImgType}
 		)
 	</insert>
+	<!-- 파일 가져오기(다중) -->
+	<select id="getFiles" parameterType="int" resultType="MybabyImgDto">
+		select * from mybaby_Img where mybaby_no = #{mybabyNo} order by mybaby_img_no asc
+	</select>
+	<!-- 파일 한개만 가져오기-->
+	<select id="getFileOne" parameterType="int" resultType="MybabyImgDto">
+		select * from(
+			select rownum rn,TMP.* from (
+				select * from mybaby_Img where mybaby_no = #{mybabyNo} order by mybaby_img_no asc
+				) 
+			TMP) 
+		where rn = 1
+	</select>
+	<!-- 파일 가져오기 -->
+	<select id="getFile" parameterType="int" resultType="MybabyImgDto">
+		select * from mybaby_Img where mybaby_img_no = #{mybabyImgNo}
+	</select>
+	
+	<!-- 게시글 번호로 이미지 디비 삭제 -->
+	<delete id="delete" parameterType="int">
+		delete mybaby_img where mybaby_no = #{mybabyNo}
+	</delete>
 	
 </mapper>
 

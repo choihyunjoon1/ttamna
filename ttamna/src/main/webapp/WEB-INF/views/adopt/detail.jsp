@@ -48,6 +48,13 @@ window.addEventListener("load", function(){
 		<div>작성자 :  ${adoptDto.adoptWriter}</div>
 		<div>작성시간 :  ${adoptDto.adoptTime}</div>
 		<div>공고기간 :  ${adoptDto.adoptStart} ~ ${adoptDto.adoptEnd}</div>
+		<c:if test="${adoptImgList != null}">
+		<div>파일 : ${adoptImgDto.adoptImgNo}. ${adoptImgDto.adoptImgUpload}
+			<c:forEach var="adoptImgDto" items="${adoptImgList}">
+				<img src="adoptImg?adoptImgNo=${adoptImgDto.adoptImgNo}&adoptNo=${adoptImgDto.adoptNo}" style="width:30%;">
+			</c:forEach>
+		</div>
+		</c:if>
 		<div>품종 :  ${adoptDto.adoptKind}</div>
 		<div>구조장소 :  ${adoptDto.adoptPlace}</div>
 		<div>내용 :  ${adoptDto.adoptContent}</div>
