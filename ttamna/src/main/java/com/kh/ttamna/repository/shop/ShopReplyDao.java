@@ -16,6 +16,10 @@ public interface ShopReplyDao {
 	public List<ShopReplyDto> list();//댓글리스트
 
 	public ShopReplyDto get(int shopReplyNo);//댓글 단일조회
+
+	public List<ShopReplyDto> list(int shopNo);//해당 게시판의 댓글 조회
+
+	public void edit3(int replyNo, String replyContent);//댓글수정 에이잭스~
 	
 	
 
