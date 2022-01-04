@@ -45,42 +45,35 @@
 	</select>
 	
 	<!-- 입양공고 더보기 페이지네이션 전체목록 -->
-		<select id="listByPage" parameterType="map" resultType="AdoptDto">
+		<select id="listByPage" parameterType="map" resultType="AdoptListFileVO">
 		select * from (
 			select rownum rn, TMP.* from (
-				select * from adopt order by adopt_no desc
+				select * from adopt A
+				 left outer join 
+				 adopt_img I on A.adopt_no = I.adopt_no  
+                order by A.adopt_no desc
 			)TMP
 		) where rn between #{startRow} and #{endRow}
 	</select>
 	
 	<!-- 입양공고 더보기 페이지네이션 전체목록, 검색 목록-->
-	<select id="searchAndListByPage" parameterType="map" resultType="AdoptDto">
+	<select id="searchListByPage" parameterType="map" resultType="AdoptListFileVO">
 		select * from (
 			select rownum rn, TMP.* from (
-				select * from adopt 
-				<if test="column != null and keyword != null">
-					where instr(${column}, #{keyword}) > 0
-		        </if>
-				order by adopt_no desc
+				select * from adopt A
+			    left outer join 
+				adopt_img I on A.adopt_no = I.adopt_no  
+				<where>
+					<if test="column != null and keyword != null">
+						instr(${column}, #{keyword}) > 0
+			        </if>
+		        </where>
+				order by A.adopt_no desc
 			)TMP
 		) where rn between #{startRow} and #{endRow}
 	</select>
 	
-	
-	<!-- 최종 = 단일조회와 검색이 모두 되는 -->
-	<select id="detailOrSearch" parameterType="map" resultType="AdoptDto">
-		select * from adopt
-		<where>
-			<if test="adoptNo != null">
-			and adopt_no = ${adoptNo}
-			</if>
-			<if test="column != null and keyword != null">			
-			and instr(${column}, #{keyword}) > 0
-			</if>
-		</where>
-		 order by adopt_no desc
-	</select>
-	
+
 	<!-- 입양공고 수정 -->
 	<update id="edit" parameterType="AdoptDto" >
 		update adopt
@@ -116,6 +109,10 @@
 	</update>
 	
 	
+	<!-- 목록에서 이미지파일을 보여주기 위한 구문 -->
+	<select id="imgList" resultType="AdoptListFileVO">
+		select * from adopt inner join adopt_img on adopt.adopt_no = adopt_img.adopt_no
+	</select>
 	
 </mapper>
 

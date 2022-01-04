@@ -52,19 +52,19 @@ $(function(){
 						adoptWriter = "탈퇴한 회원입니다";
 					}
 					var divCol = "<div class='card mb-5 px-3' style='width: 25rem;'>"
-								  + "<img src='' class='card-img-top' alt=''>"
+								  + "<img src='adoptImg?adoptImgNo="+ resp[i].adoptImgNo +"' class='card-img-top' alt=' "+resp[i].adoptImgUploade+"'>"
 								  + "<div class='card-body'>"
 								  + "<h5 class='card-title'>"+ resp[i].adoptNo + resp[i].adoptTitle +"</h5>"
 								  + "<div class='card-text'>"
 								  + "공고 기간 : "
 								  + moment(resp[i].adoptStart).format("YYYY-MM-DD") 
-								  + "~" 
+								  + " ~ " 
 								  + moment(resp[i].adoptEnd).format("YYYY-MM-DD") 
 								  +"</div>"
 								  + "<div class='card-text'>"
 								  + "입양 동물 : " + resp[i].adoptKind
 								  +"</div>"
-								  + "<div class='card-text'>"
+								  + "<div class='card-text d-grid gap-1 d-md-flex justify-content-md-end'>"
 								  + "<a href='readUp?adoptNo= "+resp[i].adoptNo+"' class='btn btn-outline-primary'>" + "보기"
 								  + "</a></div>"
 								  + "</div></div>";
@@ -85,58 +85,57 @@ $(function(){
 
 <div class="container-800 container-center mt-5 mb-5">
 	
-	<div class="mt-5 mb-5"><h3>입양공고</h3>
+	<div class="mt-5 mb-3"><h3>입양공고</h3>
 	<c:if test="${param.deleteSuccess != null}">
 		<div class=" mb-3"><h6>입양공고 삭제 완료</h6></div>
 	</c:if>
 	<c:if test="${insertGrade}">
-		<div class="d-grid gap-2 d-md-flex justify-content-md-end">
+		<div class="d-grid gap-1 d-md-flex justify-content-md-end">
 			<a href="${root}/adopt/write" class="btn btn-outline-primary">입양공고 등록</a>
 		</div>
 	</c:if>
 	</div>
 	<div class="container">
-	
 	<!-- 입양공고 등록버튼은 관리자와 보호소 등급만 사용할 수 있다 -->
 			<form method="get">
 				<div class="input-group justify-content-end">
 					<div class="col-2">
 						<select name="column" class="form-select form-select-sm" required id="column">
 						<c:choose>
-							<c:when test="${column == adoptTitle}">
+							<c:when test="${column == adopt_title}">
 								<option value="">선택안함</option>
-								<option value="adoptTile" selected>제목</option>
-								<option value="adoptContent">내용</option>
-								<option value="adoptWriter">작성자</option>
-								<option value="adoptKind">입양동물 종류</option>
+								<option value="adopt_title" selected>제목</option>
+								<option value="adopt_content">내용</option>
+								<option value="adopt_writer">작성자</option>
+								<option value="adopt_kind">입양동물 종류</option>
 							</c:when>
-							<c:when test="${column == adoptContent}">
+							<c:when test="${column == adopt_content}">
 								<option value="">선택안함</option>
-								<option value="adoptTile">제목</option>
-								<option value="adoptContent" selected>내용</option>
-								<option value="adoptWriter">작성자</option>
-								<option value="adoptKind">입양동물 종류</option>
+								<option value="adopt_title">제목</option>
+								<option value="adopt_content" selected>내용</option>
+								<option value="adopt_writer">작성자</option>
+								<option value="adopt_kind">입양동물 종류</option>
 							</c:when>
-							<c:when test="${column == adoptWriter}">
+							<c:when test="${column == adopt_writer}">
 								<option value="">선택안함</option>
-								<option value="adoptTile">제목</option>
-								<option value="adoptContent">내용</option>
-								<option value="adoptWriter" selected>작성자</option>
-								<option value="adoptKind">입양동물 종류</option>
+								<option value="adopt_title">제목</option>
+								<option value="adopt_content">내용</option>
+								<option value="adopt_writer" selected>작성자</option>
+								<option value="adopt_kind">입양동물 종류</option>
 							</c:when>
-							<c:when test="${column == adoptType}">
+							<c:when test="${column == adopt_kind}">
 								<option value="">선택안함</option>
-								<option value="adoptTile">제목</option>
-								<option value="adoptContent">내용</option>
-								<option value="adoptWriter">작성자</option>
-								<option value="adoptKind" selected>입양동물 종류</option>
+								<option value="adopt_title">제목</option>
+								<option value="adopt_content">내용</option>
+								<option value="adopt_writer">작성자</option>
+								<option value="adopt_kind" selected>입양동물 종류</option>
 							</c:when>
 							<c:otherwise>
-								<option value="" selected>선택안함</option>
-								<option value="adoptTile">제목</option>
-								<option value="adoptContent">내용</option>
-								<option value="adoptWriter">작성자</option>
-								<option value="adoptKind">입양동물 종류</option>
+								<option value="">선택안함</option>
+								<option value="adopt_title">제목</option>
+								<option value="adopt_content">내용</option>
+								<option value="adopt_writer">작성자</option>
+								<option value="adopt_kind">입양동물 종류</option>
 							</c:otherwise>
 						</c:choose>
 						</select>
@@ -147,7 +146,6 @@ $(function(){
 					</div>
 				</div>			
 			</form>
-	
 	</div>
 	
 	<!-- 게시물 표시 위치 -->		
@@ -160,6 +158,7 @@ $(function(){
 		</div>
 	</div>
 	
+	</div>	
 </div>
 
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>

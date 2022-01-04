@@ -28,16 +28,21 @@
 		)
 	</insert>
 	
-	<!--  파일 단일 조회 -->
+	<!--  파일 정보 단일 조회 -->
 	<select id="get" parameterType="int" resultType="AdoptImgDto">
-		select * from adopt_img where adopt_img_no=#{adoptImgNo}
+		select * from adopt_img where adopt_no=#{adoptNo}
 	</select>
 	
-	<!-- 파일 리스트 조회 -->
+	<!-- 파일 정보 리스트 조회 -->
 	<select id="getList" parameterType="int" resultType="AdoptImgDto">
-		select * from adopt_img where adopt_img_no=#{adoptImgNo} 
+		select * from adopt_img where adopt_no=#{adoptNo} 
 			order by adopt_img_no asc
 	</select>	
+	
+	<!-- 파일 다운로드용 조회 -->
+		<select id="getFile" parameterType="int" resultType="AdoptImgDto">
+		select * from adopt_img where adopt_img_no=#{adoptImgNo}
+	</select>
 
 </mapper>
 

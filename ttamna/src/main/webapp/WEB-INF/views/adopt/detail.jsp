@@ -49,9 +49,9 @@ window.addEventListener("load", function(){
 		<div>작성시간 :  ${adoptDto.adoptTime}</div>
 		<div>공고기간 :  ${adoptDto.adoptStart} ~ ${adoptDto.adoptEnd}</div>
 		<c:if test="${adoptImgList != null}">
-		<div>파일 : ${adoptImgDto.adoptImgNo}. ${adoptImgDto.adoptImgUpload}
+		<div>파일
 			<c:forEach var="adoptImgDto" items="${adoptImgList}">
-				<img src="adoptImg?adoptImgNo=${adoptImgDto.adoptImgNo}&adoptNo=${adoptImgDto.adoptNo}" style="width:30%;">
+				<img src="adoptImg?adoptImgNo=${adoptImgDto.adoptImgNo}&adoptNo=${adoptDto.adoptNo}" style="width:30%;">
 			</c:forEach>
 		</div>
 		</c:if>
@@ -61,12 +61,14 @@ window.addEventListener("load", function(){
 	</div>
 	
 	<!-- 작성자 또는 관리자에게만 수정 삭제 버튼 보여주기 -->
-	<c:if test="${uid eq adoptDto.adoptWriter or admin }">
 	<div class="d-grid gap-2 d-md-flex justify-content-md-end mb-5">
+	<a type="button" href="${root}/adopt/list" class="btn btn-outline-primary">목록</a>
+	<c:if test="${uid eq adoptDto.adoptWriter or admin }">
 		<a href="${root}/adopt/edit?adoptNo=${adoptDto.adoptNo}" type="button" class="btn btn-outline-primary">수정</a>
 		<button type="button" class="btn btn-outline-secondary delete-btn">삭제</button>
-	</div>
 	</c:if>	
+	</div>
+	
 </div>
 
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>
