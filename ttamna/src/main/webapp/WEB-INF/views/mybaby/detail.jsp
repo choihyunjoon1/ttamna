@@ -5,7 +5,6 @@
 
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 
-
 <div class="container-600 bg-white container-center" align="center">
 	<div class="row">
 		<div class="col">
@@ -25,9 +24,10 @@
 	</div>
 	<div class="row">
 		<div class="col-8 container-center">
-			<span class="row">이미지자리</span>
-			<c:if test="">
-				<img alt="" src="">
+			<c:if test="${mybabyImgDtoList != null}">
+				<c:forEach var="mybabyImgDto" items="${mybabyImgDtoList}">
+					<img src="mybabyImg?mybabyImgNo=${mybabyImgDto.mybabyImgNo}&mybabyNo=${mybaby.mybabyNo}" style="width:100%;">
+				</c:forEach>
 			</c:if>
 			<span class="row">${mybaby.mybabyContent}</span>
 		</div>

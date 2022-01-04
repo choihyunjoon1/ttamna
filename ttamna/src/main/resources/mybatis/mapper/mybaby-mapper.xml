@@ -35,14 +35,14 @@
 	</select>
 	
 	<!-- 더보기 페이지네이션 -->
-	<select id="listByPage" parameterType="map" resultType="MybabyDto">
+	<select id="listByPage" parameterType="map" resultType="MybabyDownVO">
 		select * from(
 		    select rownum rn, tmp.* from(
-		        select * from mybaby
+		        select * from mybaby B left outer join mybaby_img BI on B.mybaby_no = BI.mybaby_no
 		        <if test="column != null and keyword != null">
 		        	where instr(${column}, #{keyword}) > 0
 		        </if>
-		        order by mybaby_no desc
+		        order by B.mybaby_no desc
 		        )tmp
 		)where rn between ${startRow} and ${endRow}
 	</select>
@@ -59,6 +59,11 @@
 			mybaby_content=#{mybabyContent}
 		where mybaby_no=#{mybabyNo}
 	</update>
+	
+	<!-- 이미지뽑는 리스트 -->
+	<select id="listPlusImg" resultType="MybabyDownVO">
+		select * from mybaby B left outer join mybaby_img BI on B.mybaby_no = BI.mybaby_no
+	</select>
 	
 </mapper>
 
