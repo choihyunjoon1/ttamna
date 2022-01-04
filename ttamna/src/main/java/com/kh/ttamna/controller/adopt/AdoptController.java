@@ -126,4 +126,11 @@ public class AdoptController {
 		}else return "adopt/detail?adoptNo="+adoptNo+"&invalid";
 	}
 
+	//조회수 증가 : 게시글 상세보기를 클릭하면 먼저 readUp으로 들어왔다가 상세로 리다이렉트
+	@GetMapping("/readUp")
+	public String readUp(@RequestParam int adoptNo) {
+		adoptDao.readUp(adoptNo);
+		return "redirect: detail?adoptNo="+adoptNo;
+	}
+	
 }
