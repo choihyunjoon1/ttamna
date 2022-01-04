@@ -14,7 +14,7 @@
 //삭제 버튼을 누르면 알림창 띄우기
 window.addEventListener("load", function(){
 	//게시글 작성자이거나 관리자일 경우에만 이벤트 발생
-	var isValid = ${adoptDto.adoptWriter eq uid or admin};
+	var isValid = ${adoptDto.adoptWriter eq uid or admin}
 	if(isValid){ 
 	document.querySelector(".delete-btn").addEventListener("click", function(){
 		var choice = window.confirm("${adoptDto.adoptNo}번 ${adoptDto.adoptTitle}. 게시글을 삭제 하시겠습니까?");
@@ -43,14 +43,14 @@ window.addEventListener("load", function(){
 	</c:if>	
 	
 	<div class="mt-5 mb-5">
-		<div>${adoptDto.adoptTitle}</div>
-		<div>${adoptDto.adoptRead}</div>
-		<div>${adoptDto.adoptWriter}</div>
-		<div>${adoptDto.adoptTime}</div>
-		<div>${adoptDto.adoptStart} ~ ${adoptDto.adoptEnd}</div>
-		<div>${adoptDto.adoptKind}</div>
-		<div>${adoptDto.adoptPlace}</div>
-		<div>${adoptDto.adoptContent}</div>
+		<div>제목 :  ${adoptDto.adoptTitle}</div>
+		<div>조회수 :  ${adoptDto.adoptRead}</div>
+		<div>작성자 :  ${adoptDto.adoptWriter}</div>
+		<div>작성시간 :  ${adoptDto.adoptTime}</div>
+		<div>공고기간 :  ${adoptDto.adoptStart} ~ ${adoptDto.adoptEnd}</div>
+		<div>품종 :  ${adoptDto.adoptKind}</div>
+		<div>구조장소 :  ${adoptDto.adoptPlace}</div>
+		<div>내용 :  ${adoptDto.adoptContent}</div>
 	</div>
 	
 	<!-- 작성자 또는 관리자에게만 수정 삭제 버튼 보여주기 -->

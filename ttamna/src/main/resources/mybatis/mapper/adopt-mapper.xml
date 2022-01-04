@@ -108,5 +108,14 @@
 	<delete id="delete" parameterType="int">
 		delete adopt where adopt_no = #{adoptNo}
 	</delete>
+	
+	
+	<!-- 조회수 -->
+	<update id="readUp" parameterType="map">
+		update adopt set adopt_read = adopt_read +1 where adopt_no = #{adoptNo}
+	</update>
+	
+	
+	
 </mapper>
 

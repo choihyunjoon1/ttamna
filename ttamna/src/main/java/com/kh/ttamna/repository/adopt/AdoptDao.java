@@ -28,11 +28,13 @@ public interface AdoptDao {
 	//상세 + 검색
 	List<AdoptDto> detailOrSearch(Map<String, Object> param);
 	
-	//게시글 수정
+	//수정
 	boolean edit(AdoptDto adoptDto);
 
-	//게시글 삭제
+	//삭제
 	boolean delete(int adoptNo);
 	
+	//조회수
+	boolean readUp(int adoptNo);
 	
 }
