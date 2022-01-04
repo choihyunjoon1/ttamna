@@ -72,7 +72,19 @@ public class AdoptDaoImpl implements AdoptDao {
 		param.put("endRow", endRow);
 		param.put("column", column);
 		param.put("keyword", keyword);
-		return sqlSession.selectList("adopt.searchListByPage", param);
+		return sqlSession.selectList("adopt.listByPage", param);
+	}
+	
+	//입양공고 상세 + 검색
+	@Override
+	public List<AdoptDto> detailOrSearch(Map<String, Object> param) {
+		Map<String, Object> searchParam = new HashMap<>();
+		searchParam.put("adoptNo", param.get("adoptNo"));
+		searchParam.put("column", param.get("column"));
+		searchParam.put("keyword", param.get("keyword"));
+		
+		List<AdoptDto> adoptList = sqlSession.selectList("adopt.detailOrSearch", searchParam); 
+		return adoptList;
 	}
 
 	//입양공고 수정

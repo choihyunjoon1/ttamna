@@ -10,7 +10,7 @@
 
 	<div class="mt-5 mb-5"><h3>입양공고 등록</h3></div>
 
-	<form method=post>
+	<form method="post">
 	<input type="hidden" name="adoptNo" value="${adoptDto.adoptNo}">
 		<div class="input-group mb-3">
 		  <span class="input-group-text" id="basic-addon1">작성자</span>
@@ -35,6 +35,15 @@
 		  <input type="text" name="adoptPlace" value="${adoptDto.adoptPlace}" required class="form-control" aria-describedby="basic-addon5">
 		</div>
 		<div class="input-group mb-3">
+		  <input type="file" name="attach" accept="image/*" class="form-control" id="inputGroupFile04" aria-describedby="inputGroupFileAddon04" aria-label="Upload">
+		  <button class="btn btn-outline-info upload" type="button" id="inputGroupFileAddon04">업로드</button>
+		<c:if test="${adoptImgList != null}">
+			<c:forEach var="adoptImgDto" items="${adoptImgList}">
+				<img src="adoptImg?adoptImgNo=${adoptImgDto.adoptImgNo}&adoptNo=${adoptDto.adoptNo}" style="width:30%;">
+			</c:forEach>
+		 </c:if>
+		</div>
+		<div class="input-group mb-3">
 		  <span class="input-group-text">내용</span>
 		  <textarea name="adoptContent" required class="form-control" aria-label="With textarea">${adoptDto.adoptContent}</textarea>
 		</div>
@@ -47,8 +56,5 @@
 
 </div>
 
-		<div class="input-group mb-3">
-		  <input type="file" class="form-control" id="inputGroupFile04" aria-describedby="inputGroupFileAddon04" aria-label="Upload">
-		  <button class="btn btn-outline-info" type="button" id="inputGroupFileAddon04">Button</button>
-		</div>
+
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>

@@ -47,7 +47,7 @@
 		</div>
 		<div class="d-grid gap-2 d-md-flex justify-content-md-end mb-5">
 			<button type="submit" class="btn btn-primary">등록</button>
-			<a type="button" href="${root}/adopt/list" class="btn btn-outline-primary">목록</a>
+			<a type="button" href="${root}/adopt/" class="btn btn-outline-primary">목록</a>
 			<button type="reset" class="btn btn-outline-secondary">초기화</button>
 		</div>
 	</form>

@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.kh.ttamna.entity.adopt.AdoptDto;
+import com.kh.ttamna.entity.donation.DonationDto;
 
 public interface AdoptDao {
 
@@ -24,6 +25,9 @@ public interface AdoptDao {
 	
 	//입양공고 더보기 페이지네이션 검색목록
 	List<AdoptDto> searchListByPage(int startRow, int endRow, String column, String keyword);
+	
+	//입양공고 상세 + 검색
+	List<AdoptDto> detailOrSearch(Map<String, Object> data);
 	
 	//수정
 	boolean edit(AdoptDto adoptDto);

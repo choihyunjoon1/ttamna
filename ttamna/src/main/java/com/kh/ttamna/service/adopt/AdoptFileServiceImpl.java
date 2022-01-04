@@ -13,6 +13,7 @@ import com.kh.ttamna.entity.adopt.AdoptImgDto;
 import com.kh.ttamna.repository.adopt.AdoptDao;
 import com.kh.ttamna.repository.adopt.AdoptImgDao;
 import com.kh.ttamna.vo.adopt.AdoptFileVO;
+import com.kh.ttamna.vo.adopt.AdoptListFileVO;
 
 @Service
 public class AdoptFileServiceImpl implements AdoptFileService{
@@ -56,5 +57,41 @@ public class AdoptFileServiceImpl implements AdoptFileService{
 		}
 		return adoptNo;
 	}
+
+	//파일 + 게시글 수정처리
+	@Override
+	public void updateWithFile(AdoptFileVO adoptFileVO) throws IllegalStateException, IOException {
+		
+		int adoptNo = adoptFileVO.getAdoptNo();
+		List<AdoptImgDto> adoptImgList = adoptFileVO.adoptImgDtoConverter(adoptNo);
+		//파일 제외한 일반 게시글 정보 수정 : 제목, 내용, 공고종료일, 품종, 구조장소
+		AdoptDto adoptDto = new AdoptDto();
+		adoptDto.setAdoptTitle(adoptFileVO.getAdoptTitle());
+		adoptDto.setAdoptEnd(adoptFileVO.getAdoptEnd());
+		adoptDto.setAdoptKind(adoptFileVO.getAdoptKind());
+		adoptDto.setAdoptPlace(adoptFileVO.getAdoptPlace());
+		adoptDto.setAdoptContent(adoptFileVO.getAdoptContent());
+		adoptDao.edit(adoptDto);
+		
+		int i = 0;
+		for(MultipartFile file : adoptFileVO.getAttach()) {
+			if(!file.isEmpty()) {
+				int adoptImgNo = sqlSession.selectOne("adoptImg.sequence");
+				AdoptImgDto adoptImgDto = adoptImgList.get(i);
+				adoptImgDto.setAdoptImgNo(adoptImgNo);
+				adoptImgDao.save(adoptImgDto, file);
+				i++;
+			}
+		}
+	}
+
+	//수정 처리
+	@Override
+	public void updateWithFile(AdoptImgDto adoptImgDto, MultipartFile file) throws IllegalStateException, IOException {
+		int adoptImgNo = sqlSession.selectOne("adoptImg.sequence");
+		adoptImgDto.setAdoptImgNo(adoptImgNo);
+		adoptImgDao.save(adoptImgDto, file);
+	}
+
 
 }
