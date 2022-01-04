@@ -2,6 +2,7 @@ package com.kh.ttamna.service.mybaby;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
@@ -41,8 +42,8 @@ public class MybabyFileServiceImpl implements MybabyFileService{
 		List<MybabyImgDto> list = mybabyFileVO.convertToMybabyImgDto(mybabyNo);
 		
 		int i=0;
-		if(!mybabyFileVO.getAttach().isEmpty()) {//파일이 있을 때
-			for(MultipartFile files:mybabyFileVO.getAttach()) {
+		for(MultipartFile files:mybabyFileVO.getAttach()) {
+			if(!files.isEmpty()) {//파일이 있을 때
 				//이미지 번호 뽑기
 				int mybabyImgNo = sqlSession.selectOne("mybabyImg.seq");
 				//i번째 mybabyList를 Dto에 옮기기
@@ -64,6 +65,7 @@ public class MybabyFileServiceImpl implements MybabyFileService{
 			File target = new File(dir,String.valueOf(dto.getMybabyImgNo()));
 			target.delete();
 		}
+		sqlSession.delete("mybabyImg.delete",mybabyNo);
 		
 	}
 	@Override
@@ -77,15 +79,30 @@ public class MybabyFileServiceImpl implements MybabyFileService{
 		mybabyDto.setMybabyWriter(mybabyFileVO.getMybabyWriter());
 		mybabyDao.edit(mybabyDto);
 		
+		//파일이 추가되엇을 때
 		int i=0;
 		for(MultipartFile files : mybabyFileVO.getAttach()) {
 			if(!files.isEmpty()) {
-				int mybabyImgNo = sqlSession.selectOne("mybabyImg.seq");
-				MybabyImgDto mybabyImgDto = list.get(i);
-				mybabyImgDto.setMybabyImgNo(mybabyImgNo);
-				mybabyImgDao.save(mybabyImgDto, files);
-				i++;
+				//파일 먼저 삭제하기
+				List<MybabyImgDto> fileList = mybabyImgDao.getList(mybabyDto.getMybabyNo());
+				
+				for(MybabyImgDto dto : fileList) {
+					File target = new File(dir,String.valueOf(dto.getMybabyImgNo()));
+					target.delete();
+				}
+				//디비에서도 삭제
+				sqlSession.delete("mybabyImg.delete",mybabyDto.getMybabyNo());
+				
 			}
+		}
+		//삭제 후 추가
+		for(MultipartFile newFiles : mybabyFileVO.getAttach()) {
+			int mybabyImgNo = sqlSession.selectOne("mybabyImg.seq");
+			MybabyImgDto mybabyImgDto = list.get(i);
+			mybabyImgDto.setMybabyImgNo(mybabyImgNo);
+			mybabyImgDao.save(mybabyImgDto, newFiles);
+			System.out.println("파일추가됨"+i);
+			i++;
 		}
 		
 	}

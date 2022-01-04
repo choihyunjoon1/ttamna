@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
+import org.apache.commons.io.FileUtils;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -34,9 +35,37 @@ public class MybabyImgDaoImpl implements MybabyImgDao{
 
 	@Override
 	public List<MybabyImgDto> getList(int mybabyNo) {
-		return sqlSession.selectList("mybabyImg.getFile",mybabyNo);
+		return sqlSession.selectList("mybabyImg.getFiles",mybabyNo);
 	}
-	
+
+	@Override
+	public MybabyImgDto get(int mybabyImgNo) {
+		return sqlSession.selectOne("mybabyImg.getFile",mybabyImgNo);
+	}
+
+	@Override
+	public byte[] load(int mybabyImgNo) throws IOException {
+		File target = new File(dir, String.valueOf(mybabyImgNo));
+		byte[] data = FileUtils.readFileToByteArray(target);
+		return data;
+	}
+
+	@Override
+	public int getImg(int mybabyNo) {
+		return sqlSession.selectOne("mybabyImg.getFileOne",mybabyNo);
+	}
+	@Override
+	public boolean delete(int mybabyNo) {
+		return sqlSession.delete("mybabyImg.delete",mybabyNo)>0;
+	}
+
+	@Override
+	public boolean deleteSave(int mybabyNo) throws IllegalStateException, IOException {
+		File target = new File(dir,String.valueOf(mybabyNo));
+		target.delete();
+		
+		return sqlSession.delete("mybabyImg",mybabyNo)>0;
+	}
 	
 
 }

@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 
 import com.kh.ttamna.entity.donation.DonationDto;
 import com.kh.ttamna.entity.mybaby.MybabyDto;
+import com.kh.ttamna.vo.mybaby.MybabyDownVO;
 
 @Repository
 public class MybabyDaoImpl implements MybabyDao{
@@ -87,6 +88,11 @@ public class MybabyDaoImpl implements MybabyDao{
 	public boolean edit(MybabyDto mybabyDto) {
 		int result = sqlSession.update("mybaby.edit",mybabyDto);
 		return result>0;
+	}
+
+	@Override
+	public List<MybabyDownVO> listByImg() {
+		return sqlSession.selectList("mybaby.listPlusImg");
 	}
 	
 

@@ -37,18 +37,19 @@ $(function(){
 				//데이터 출력
 				for(var i=0; i < resp.length; i++){
 					var memberId = resp[i].mybabyWriter;
-					var imgNo = resp[i].mybabyImgNo;
+					var imglocation = "";
+					if(!resp[i].mybabyImgNo){
+						imglocation = "<img src=${pageContext.request.contextPath}/resources/img/nonimage.png class=icon style=width:50%></a></span>";
+					}else{
+						imglocation = "<img src=mybabyImg?mybabyImgNo="+resp[i].mybabyImgNo+" class=icon style=width:50%></a></span>";
+					}
+					
 					if(memberId == null){
 						memberId = "탈퇴한 회원";
 					}
+					console.log("람깐만", resp.mybabyImgNo);
 					var divCol = "<div class=page>"+
-					"<span><a href=detail?mybabyNo="+resp[i].mybabyNo+">"
-							if(imgNo==null){
-								"<img src="noimg.jpg" onerror="this.src='https://s.pstatic.net/static/www/img/uit/2019/sp_search.svg';"/>
-							}else{
-								"<img src=img?mybabyImgNo="+resp[i].mybabyImgNo+"+ class=icon></a>
-							}
-					"</span>" +
+					"<span><a href=detail?mybabyNo="+resp[i].mybabyNo+">"+imglocation+
 						"<br>"+
 						"<span>"+memberId+"</span>" +
 						"<br>"+
