@@ -1,13 +1,19 @@
 package com.kh.ttamna.controller.adopt;
 
 import java.io.IOException;
+import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
+import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ByteArrayResource;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,6 +24,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.kh.ttamna.entity.adopt.AdoptDto;
+import com.kh.ttamna.entity.adopt.AdoptImgDto;
 import com.kh.ttamna.repository.adopt.AdoptDao;
 import com.kh.ttamna.repository.adopt.AdoptImgDao;
 import com.kh.ttamna.service.adopt.AdoptFileService;
@@ -36,10 +43,13 @@ public class AdoptController {
 	@Autowired
 	private AdoptFileService adoptFileService;
 	
+	@Autowired
+	private SqlSession sqlSession;
 	
 	//입양공고 전체 목록
-	@GetMapping("/list")
-	public String adopt() {
+	@RequestMapping("/list")
+	public String adopt(Model m) {
+		m.addAttribute("list", sqlSession.selectList("adopt.imgList"));
 		return "adopt/list";
 	}
 	
@@ -55,29 +65,13 @@ public class AdoptController {
 		int endRow = page* size;
 		int startRow = endRow - (size - 1);
 		if(column != null && keyword != null && !column.equals("") && !keyword.equals("")) {
-			return adoptDao.searchAndListByPage(startRow, endRow, column, keyword);
-		} else {
+			return adoptDao.searchListByPage(startRow, endRow, column, keyword);
+		}else {
 			return adoptDao.listByPage(startRow, endRow);
 		}
 	}
 	
-	//@RequestMapping("/list")//목록페이지
-	public String list(
-			@RequestParam(required = false) String column,
-			@RequestParam(required = false) String keyword,
-			Model m) {
-		
-		if(column != null && keyword != null) {
-			Map<String, Object> param = new HashMap<>();
-			param.put("column", column);
-			param.put("keyword", keyword);
-			m.addAttribute("list", adoptDao.detailOrSearch(param));
-		} else {
-			m.addAttribute("list", adoptDao.list());
-		}
-		return "adopt/list";
-	}
-	
+
 	//입양공고 게시글 등록 페이지
 	@GetMapping("/write")
 	public String write() {
@@ -104,6 +98,28 @@ public class AdoptController {
 		m.addAttribute("adoptImgList", adoptImgDao.getList(adoptNo));
 		return "adopt/detail";
 	}
+	
+	//파일 다운로드 처리(화면에 보여주기)
+	@GetMapping("/adoptImg")
+	@ResponseBody
+	public ResponseEntity<ByteArrayResource> file(@RequestParam int adoptImgNo) throws IOException{
+		//이미지 파일 다운로드용 단일 조회
+		AdoptImgDto adoptImgDto = adoptImgDao.getFile(adoptImgNo);
+		//바이트 형태로 파일 불러오기
+		byte[] file = adoptImgDao.load(adoptImgNo);
+		//바이트 형태의 파일을 다시 인코딩 처리 
+		ByteArrayResource resource = new ByteArrayResource(file);
+		String encoding = URLEncoder.encode(String.valueOf(adoptImgNo), "UTF-8");
+		encoding = encoding.replace("+", "%20");
+		
+		return ResponseEntity.ok()
+				.contentType(MediaType.APPLICATION_OCTET_STREAM)
+				.header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\""+encoding+"\"")
+				.header(HttpHeaders.CONTENT_ENCODING, "UTF-8")
+				.contentLength(adoptImgDto.getAdoptImgSize())
+				.body(resource);
+	}
+	
 	
 	//입양공고 수정 페이지
 	@GetMapping("/edit")
