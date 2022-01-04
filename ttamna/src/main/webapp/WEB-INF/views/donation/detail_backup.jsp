@@ -7,10 +7,6 @@
 	
 	$(function(){
 		
-		
-		
-		
-		
 		var page = 1;
 		var size = 12;
 		var donationNo = $("#donationNo").val();
@@ -18,7 +14,6 @@
 		$(".more-btn").click(function(){
 			loadData(page, size, donationNo);
 			page++;
-			console.log("|버튼클릭됨");
 		});
 		
 		//여러가지 방법이 있다
@@ -26,12 +21,9 @@
 		$(".more-btn").click();
 		
 		//이렇게 캡슐화를 하는데 이걸 중첩클래스라고한다
-		function loadData(page, size, donationNo){
-
-			
-			
+		function loadData(page, size){
 			$.ajax({
-				url : "${pageContext.request.contextPath}/donation/reply/more",
+				url : "${pageContext.request.contextPath}/donation/more",
 				type : "get",
 				data : {
 					donationNo : donationNo,
@@ -40,107 +32,87 @@
 				},
 				dataType : "json",
 				success:function(resp){
-					console.log("댓글에이잭스 들어오기 성공", resp);
+					console.log("성공", resp);
+		
 					//데이터가 sizeValue보다 적은 개수가 왔다면 더보기 버튼을 삭제
 					if(resp.length < size){
 						$(".more-btn").remove();
 					}
 					
-					
-					
 					//데이터 출력
 					for(var i=0; i < resp.length; i++){
+						var memberId = resp[i].mybabyWriter;
 						
-						
-						
-						
-						
-						var memberId = resp[i].memberId;
-						console.log(resp[i].memberId);
 						if(memberId == null){
 							memberId = "탈퇴한 회원";
 						}
 						
-						var divCol = "<div class='replyDto'>"+
-						"<h4>"+resp[i].memberId + "<span id='content"+resp[i].donationReplyNo+"'>"+resp[i].donationReplyContent+"</span>" 
-						+"<br>"
-						+"</h4>"+"</div>"+
-						"<c:if test='${uid == "+resp[i].memberId+"}'>"+
-						"<div class='edit' style='margin-top:15px;'>"+
-							"<input type='hidden' value='"+resp[i].donationNo+"' id='donationNo"+resp[i].donationReplyNo+"'>"+
-							"<input type='hidden' value='"+resp[i].donationReplyNo+"' id='donationNo"+resp[i].donationReplyNo+"'>"+
-							"<textarea class='form-control' row='3' name='"+resp[i].donationReplyContent+"' id='replyContent"+resp[i].donationReplyNo+"'>"+resp[i].donationReplyContent+"</textarea>"+
-						"</div>"+
-							"<a href='#' class='reply content-change btn btn-primary'>수정</a>"+
-							"<a href='#' class='reply content-change btn btn-primary data-data='"+resp[i].donationReplyNo+"'>수정하기</a>"+
-							"<a href='#' class='reply change-cancel btn btn-primary'>취소</a>"+
-							"<a href='reply/delete?donationReplyNo='"+resp[i].donationReplyNo+"&donationNo='"+resp[i].donationNo+"' class='reply btn-secondary' data-data='"+resp[i].donationReplyNo+"'>삭제하기</a>"+
-						"</c:if>"
-						;
+						var divCol = "<div class=page>"+
+						"<span><a href=detail?mybabyNo="+resp[i].mybabyNo+">"+imglocation+
+							"<br>"+
+							"<span>"+memberId+"</span>" +
+							"<br>"+
+							"<span><a href=detail?mybabyNo="+resp[i].mybabyNo+">"+resp[i].mybabyTitle+"</a></span>" +
+							"<br>"+
+							"<span>"+resp[i].mybabyContent+"</span>" +
+							"<br>"
+						+"</div>";
 						$(".result").append(divCol);
 						$(".page").addClass("col-3 mt-3");
-						
-						
-						$(".edit").hide();
-						$(".change-cancel").hide();
-						$(".content-change-real").hide();
-						$(".content-change").click(function(e){
-							e.preventDefault();
-							$(this).prev().show();
-							$(this).next().next().show();
-							$(this).prev().prev().hide();
-							$(this).next().show();
-							$(this).hide();
-						});
-						$(".change-cancel").click(function(e){
-							e.preventDefault();
-							$(".content-change").show();
-							$(".edit").hide();
-							$(".replyDto").show();
-							$(".change-cancel").hide();
-							$(".content-change-real").hide();
-						});
-						
-						$(".content-change-real").click(function(e){
-							e.preventDefault();
-							var number = $(this).attr("data-data")
-							
-							var replyNo = $("#replyNo"+number).val();
-							var replyContent = $("#replyContent"+number).val();
-							var donationNo = $("#donationNo"+number).val();
-							
-					
-							$.ajax({
-								url : "${pageContext.request.contextPath}/donation/reply/edit", 
-								type : "post",
-								data : {
-									replyNo : replyNo ,
-									replyContent : replyContent,
-									donationNo : donationNo
-								},
-								success:function(resp){
-									$("#content"+replyNo).text("");
-									$("#content"+replyNo).text(resp[0]);
-									$(".change-cancel").click();
-								},
-								error:function(e){
-									console.log("실패했어용");
-								}
-							});
-						});
-						
-						
 					}
 				},
 				error:function(e){
 					console.log("실패", e);
 				}
 			});
-			
 		}
 		
+		$(".edit").hide();
+		$(".change-cancel").hide();
+		$(".content-change-real").hide();
+		$(".content-change").click(function(e){
+			e.preventDefault();
+			$(this).prev().show();
+			$(this).next().next().show();
+			$(this).prev().prev().hide();
+			$(this).next().show();
+			$(this).hide();
+		});
+		$(".change-cancel").click(function(e){
+			e.preventDefault();
+			$(".content-change").show();
+			$(".edit").hide();
+			$(".replyDto").show();
+			$(".change-cancel").hide();
+			$(".content-change-real").hide();
+		});
 		
-		
+		$(".content-change-real").click(function(e){
+			e.preventDefault();
+			var number = $(this).attr("data-data")
+			
+			var replyNo = $("#replyNo"+number).val();
+			var replyContent = $("#replyContent"+number).val();
+			var donationNo = $("#donationNo"+number).val();
+			
+			$.ajax({
+				url : "${pageContext.request.contextPath}/donation/reply/edit", 
+				type : "post",
+				data : {
+					replyNo : replyNo ,
+					replyContent : replyContent,
+					donationNo : donationNo
+				},
+				success:function(resp){
+					$("#content"+replyNo).text("");
+					$("#content"+replyNo).text(resp[0]);
+					$(".change-cancel").click();
+				},
+				error:function(e){
+					console.log("실패했어용");
+				}
+			});
+		});
 	});
 	
 
@@ -208,11 +180,32 @@
 		</div>
 		
 
-	<form action="reply/edit" method="post">
-	<div class="result">
-        	
+<div class="col-12">
+        <form action="reply/edit" method="post">
+            <c:forEach var="replyDto" items="${replyDto}">
+                <div class="replyDto"><h4>
+                ${replyDto.donationReplyNo}
+                    | ${replyDto.memberId} | <span id="content${replyDto.donationReplyNo}">${replyDto.donationReplyContent}</span>
+                   | ${replyDto.donationReplyTime}
+                </h4>
+                </div>
+                    <c:if test="${sessionScope.uid == replyDto.memberId}">
+					<div class="edit" style="margin-top:15px;">
+						<input type="hidden" value="${replyDto.donationNo}" id="donationNo${replyDto.donationReplyNo}">
+						<input type="hidden" value="${replyDto.donationReplyNo}" id="replyNo${replyDto.donationReplyNo}">
+						<textarea class="form-control" " row="3" name="donationReplyContent"id="replyContent${replyDto.donationReplyNo}">${replyDto.donationReplyContent}</textarea> 
+            
+					</div>
+                            <a href="#" class="reply content-change btn btn-primary">수정</a>
+                            <a href="#" class="reply content-change-real btn btn-primary" data-data="${replyDto.donationReplyNo}">수정하기</a>
+                            <a href="#" class="reply change-cancel btn btn-primary">취소</a> 
+                            <a href="reply/delete?donationReplyNo=${replyDto.donationReplyNo}&donationNo=${replyDto.donationNo}" class="reply btn btn-secondary">삭제하기</a>
+
+                    </c:if>
+               
+            </c:forEach>
+        </form>
     </div>
-    </form>
 
     <div class="col-12">
         <form action="reply/insert" method="post">
@@ -232,7 +225,7 @@
 </div>
 <div class="row mt-3">
 		<div class="col mt-3">
-			<button type="button" class="btn btn-link more-btn">더보기</button>
+			<button type="button" class="btn btn-link disabled">더보기</button>
 		</div>
 	</div>
 </div>
