@@ -30,17 +30,16 @@
 		   visit_idx에 시퀀스는 미리 받음	   
 	-->
     <insert id="allInOneLog" parameterType="VisitDto">
-    	merge into visit V using dual on (V.visit_id = #{visitId})
+    	merge into visit V using dual on (V.visit_id = #{visitId}) 
     		when matched then
-    		update set visit_time = sysdate where <![CDATA[sysdate - visit_time < 1 ]]>
+    			update set visit_time = sysdate where <![CDATA[sysdate - 1 <= visit_time]]> and visit_id = #{visitId} 
     		when not matched then
-    		insert(visit_idx, visit_id, visit_time)
-    			values(#{visitIdx}, #{visitId}, sysdate)
+    			insert(visit_idx, visit_id, visit_time) values(#{visitIdx}, #{visitId}, sysdate)
     </insert>
     
     <!-- 하루 방문자 수 카운트. 현재 날짜에서 접속시간을 뺀 값이 1(하루)보다 작으면 당일 접속 -->
     <select id="countByDay" resultType="int">
-    	select count(*) from visit where <![CDATA[sysdate - visit_time < 1 ]]>
+    	select count(*) from visit where <![CDATA[sysdate - 1 <= visit_time ]]>
     </select>
     
     <!-- 7일간 일별 방문자수 카운트 구문 -->
@@ -78,10 +77,9 @@
 		left outer join 
 		    (select 
 		        to_char(visit_time, 'YY/MM/DD') dt, 
-		        to_char(visit_time, 'DAY') dow, 
 		        count(*) cnt 
-		    from visit where <![CDATA[sysdate - visit_time <= 7]]>
-		    group by to_char(visit_time, 'YY/MM/DD'), to_char(visit_time, 'DAY'))v
+		    from visit
+		    group by to_char(visit_time, 'YY/MM/DD'))v
 		on v.dt = d.dt 
 		order by d.dt asc
     </select>
@@ -114,9 +112,9 @@
 		nvl(v.cnt, 0) "monthlyCount"
 	   from
 		    (select 
-		        to_char(add_months(to_date(sysdate, 'YY/MM/DD'), - (level-1)), 'month') mth 
+		        to_char(add_months(to_date(sysdate, 'YY/MM/DD'), - (level-1)-1), 'month') mth 
 		      from dual
-		        <![CDATA[connect by add_months(to_date(sysdate, 'YY/MM/DD'), - (level-1)) >= add_months(to_date(sysdate, 'YY/MM/DD'), -6)]]> )d
+		        <![CDATA[connect by add_months(to_date(sysdate, 'YY/MM/DD'), - (level-1)-1) >= add_months(to_date(sysdate, 'YY/MM/DD'), -6)]]> )d
 		left outer join
 		    (select 
 		        to_char(visit_time, 'month') mth,
@@ -133,9 +131,9 @@
 		nvl(v.cnt, 0) "moyCount"
 	   from
 		    (select 
-		        to_char(add_months(to_date(sysdate, 'YY/MM/DD'), - (level-1)), 'month') mth 
+		        to_char(add_months(to_date(sysdate, 'YY/MM/DD'), - (level-1)-1), 'month') mth 
 		      from dual
-		        <![CDATA[connect by add_months(to_date(sysdate, 'YY/MM/DD'), - (level-1)) >= add_months(to_date(sysdate, 'YY/MM/DD'), -11)]]> )d
+		        <![CDATA[connect by add_months(to_date(sysdate, 'YY/MM/DD'), - (level-1)-1) >= add_months(to_date(sysdate, 'YY/MM/DD'), -11)]]> )d
 		left outer join
 		    (select 
 		        to_char(visit_time, 'month') mth,
@@ -144,6 +142,9 @@
 		on v.mth = d.mth 
 		order by lpad(d.mth, 2, '0')
 	</select>
+	
+	 <!-- 지난 달 일별 방문자수 카운트 구문 -->
+    
     
 </mapper>
 

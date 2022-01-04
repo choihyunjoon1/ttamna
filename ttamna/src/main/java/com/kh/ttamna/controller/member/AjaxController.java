@@ -21,6 +21,8 @@ public class AjaxController {
 	@Autowired
 	private VisitDao visitDao;
 	
+
+	
 	//아이디 중복 검사 ajax
 	@GetMapping("/ajaxId")
 	public String ajaxId(@RequestParam String inputId) {
@@ -104,7 +106,7 @@ public class AjaxController {
 	 @GetMapping("/monthly")
 	 public VisitTotalChartVO monthly() {
 		 VisitTotalChartVO chartVO = new VisitTotalChartVO();
-		 chartVO.setTitle("[ 이번 달, 최근 6개월 월별 누적 방문자 수 ]");
+		 chartVO.setTitle("[ 최근 6개월 간 월별 방문자 수 ]");
 		 chartVO.setLabel("방문자 수");
 		 chartVO.setDataset(visitDao.monthly());
 		 return chartVO;
@@ -114,12 +116,13 @@ public class AjaxController {
 	 @GetMapping("/moy")
 	 public VisitTotalChartVO moy() {
 		 VisitTotalChartVO chartVO = new VisitTotalChartVO();
-		 chartVO.setTitle("[ 최근 12개월 간 월별 누적 방문자수 ]");
+		 chartVO.setTitle("[ 최근 12개월 간 월별 방문자수 ]");
 		 chartVO.setLabel("방문자 수");
 		 chartVO.setDataset(visitDao.moy());
 		 return chartVO;
 	 }
 	 
+
 }
 
 

@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -71,6 +73,37 @@ public class AdoptDaoImpl implements AdoptDao {
 		param.put("column", column);
 		param.put("keyword", keyword);
 		return sqlSession.selectList("adopt.searchAndListByPage", param);
+	}
+
+	//상세 + 검색
+	@Override
+	public List<AdoptDto> detailOrSearch(Map<String, Object> param) {
+		Map<String, Object> search = new HashMap<>();
+		search.put("adoptNo", param.get("adoptNo"));
+		search.put("column", param.get("column"));
+		search.put("keyword", param.get("keyword"));
+		return sqlSession.selectList("adopt.detailOrSearch", search);
+	}
+
+	//입양공고 수정
+	@Override
+	public boolean edit(AdoptDto adoptDto) {
+		int result =  sqlSession.update("adopt.edit", adoptDto); 
+		return result > 0;
+	}
+
+	//입양공고 삭제
+	@Override
+	public boolean delete(int adoptNo) {
+		int result = sqlSession.delete("adopt.delete", adoptNo);
+		return result > 0;
+	}
+
+	//입양공고 조회수
+	@Override
+	public boolean readUp(int adoptNo) {
+		int result = sqlSession.update("adopt.readUp", adoptNo);
+		return result > 0;
 	}
 
 	

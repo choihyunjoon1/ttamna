@@ -34,7 +34,6 @@
     <!-- Bootstrap JavaScript CDN 번들 -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 
-	<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
     <style>
      <!-- 메뉴 사이즈 줄어들어어어 ********-->
     	@media(min-width: 992px)
@@ -75,6 +74,7 @@
     		}
     	});
     }); 
+    
     var pathname = window.location.pathname.split( '/' );
     var pathlocation=pathname[2];//   /member/ .. 로 나옴
     console.log(pathlocation);
@@ -151,7 +151,7 @@
           <a class="nav-link docs-creator headDonation" href="${root}/donation/">기부🐾</a>
         </li>
         <li class="nav-item ms-5">
-          <a class="nav-link docs-creator headAdopt" href="${root}/adopt/">입양공고🐾</a>
+          <a class="nav-link docs-creator headAdopt" href="${root}/adopt/list">입양공고🐾</a>
         </li>
          <li class="nav-item ms-5">
           <a class="nav-link docs-creator headMybaby" href="${root }/mybaby/">내새끼자랑🐾</a>

@@ -78,7 +78,9 @@
 	 	<!--  GradeInterceptor : 등급이 '보호소' 또는 '관리자'만 접근 가능 
 	 		예: 기부 게시글 등록/수정/삭제....									-->
 	 	<mvc:interceptor>
-	 		<mvc:mapping path=""/>
+	 		<mvc:mapping path="adopt/write"/>
+	 		<mvc:mapping path="adopt/edit"/>
+	 		<mvc:mapping path="adopt/delete"/>
 	 		<bean class="com.kh.ttamna.interceptor.GradeInterceptor"></bean>
 	 	</mvc:interceptor>
 	 	

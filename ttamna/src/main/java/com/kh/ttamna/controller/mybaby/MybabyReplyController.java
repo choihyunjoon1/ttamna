@@ -1,4 +1,4 @@
-package com.kh.ttamna.controller.shop;
+package com.kh.ttamna.controller.mybaby;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -15,31 +15,31 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.kh.ttamna.entity.shop.ShopReplyDto;
-import com.kh.ttamna.repository.shop.ShopReplyDao;
+import com.kh.ttamna.entity.mybaby.MybabyReplyDto;
+import com.kh.ttamna.repository.mybaby.MybabyReplyDao;
 
 @Controller
-@RequestMapping("shop/reply")
-public class ShopReplyController {
+@RequestMapping("mybaby/reply")
+public class MybabyReplyController {
 
 	//데이터 등록 요청을 하기위해서는 PostMapping을 이용하고
 	//해당 페이지로 이동 요청을 하기 위해서는 GetMapping을 이용한다
 	@Autowired
-	private ShopReplyDao shopReplyDao;
+	private MybabyReplyDao mybabyReplyDao;
 	
 	@GetMapping("/delete")
-	public String home(@RequestParam int shopReplyNo,
-					@RequestParam int shopNo) {
-		shopReplyDao.delete(shopReplyNo);
+	public String home(@RequestParam int mybabyReplyNo,
+					@RequestParam int mybabyNo) {
+		mybabyReplyDao.delete(mybabyReplyNo);
 		
-		return "redirect:/shop/detail?shopNo="+shopNo;
+		return "redirect:/mybaby/detail?mybabyNo="+mybabyNo;
 	}
 	
 	@PostMapping("/delete")
-	public String delete(@RequestParam int shopReplyNo) {
-		shopReplyDao.delete(shopReplyNo);
+	public String delete(@RequestParam int mybabyReplyNo) {
+		mybabyReplyDao.delete(mybabyReplyNo);
 		
-		return "shop/";
+		return "mybaby/";
 	}
 
 	
@@ -48,8 +48,8 @@ public class ShopReplyController {
 	@ResponseBody
 	public List<String> edit(@RequestParam String replyContent,
 						@RequestParam int replyNo,
-						@RequestParam int shopNo) {
-		shopReplyDao.edit3(replyNo, replyContent);
+						@RequestParam int mybabyNo) {
+		mybabyReplyDao.edit3(replyNo, replyContent);
 		List<String> returnCotent = new ArrayList<String>();
 		returnCotent.add(replyContent);
 		return returnCotent;
@@ -59,20 +59,20 @@ public class ShopReplyController {
 
 	@GetMapping("/insert")//등록페이지
 	public String insert() {
-		return "shop/reply/insert";
+		return "mybaby/reply/insert";
 	}
 	
 	@PostMapping("/insert")//등록요청
-	public String insert(@ModelAttribute ShopReplyDto shopReplyDto) {
-		shopReplyDao.insert(shopReplyDto);
-		return "redirect:/shop/detail?shopNo=" + shopReplyDto.getShopNo();
+	public String insert(@ModelAttribute MybabyReplyDto mybabyReplyDto) {
+		mybabyReplyDao.insert(mybabyReplyDto);
+		return "redirect:/mybaby/detail?mybabyNo=" + mybabyReplyDto.getMybabyNo();
 	}
 	@GetMapping("/list")
 	public String list(Model model) {
 //		model.addAttribute(JSP에서 부를 이름, 데이터);
-		List<ShopReplyDto> list = shopReplyDao.list();
+		List<MybabyReplyDto> list = mybabyReplyDao.list();
 		
 		model.addAttribute("list", list);
-		return "shop/reply/list";
+		return "mybaby/reply/list";
 	}
 }

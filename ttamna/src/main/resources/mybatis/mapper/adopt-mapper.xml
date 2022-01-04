@@ -25,7 +25,7 @@
 		insert into adopt values(
 					${adoptNo}, #{adoptWriter}, #{adoptTitle},  #{adoptContent},
 					sysdate, 0, 
-			        sysdate, #{adoptEnd},  #{adoptType},  #{adoptPlace}	
+			        sysdate, #{adoptEnd},  #{adoptKind},  #{adoptPlace}	
 				)
 	</insert>
 	
@@ -65,6 +65,57 @@
 			)TMP
 		) where rn between #{startRow} and #{endRow}
 	</select>
+	
+	
+	<!-- 최종 = 단일조회와 검색이 모두 되는 -->
+	<select id="detailOrSearch" parameterType="map" resultType="AdoptDto">
+		select * from adopt
+		<where>
+			<if test="adoptNo != null">
+			and adopt_no = ${adoptNo}
+			</if>
+			<if test="column != null and keyword != null">			
+			and instr(${column}, #{keyword}) > 0
+			</if>
+		</where>
+		 order by adopt_no desc
+	</select>
+	
+	<!-- 입양공고 수정 -->
+	<update id="edit" parameterType="AdoptDto" >
+		update adopt
+			<set>
+				<if test="adoptTitle != null">
+					adopt_title = #{adoptTitle},
+				</if>
+				<if test="adoptEnd != null">
+					adopt_end = #{adoptEnd},
+				</if>
+				<if test="adoptKind != null">
+					adopt_kind = #{adoptKind},
+				</if>
+				<if test="adoptPlace != null">
+					adopt_place = #{adoptPlace},
+				</if>	
+				<if test="adoptContent != null">
+					adopt_content = #{adoptContent},
+				</if>
+			</set>
+		where adopt_no = #{adoptNo}
+	</update>
+	
+	<!-- 입양공고 삭제 -->
+	<delete id="delete" parameterType="int">
+		delete adopt where adopt_no = #{adoptNo}
+	</delete>
+	
+	
+	<!-- 조회수 -->
+	<update id="readUp" parameterType="map">
+		update adopt set adopt_read = adopt_read +1 where adopt_no = #{adoptNo}
+	</update>
+	
+	
 	
 </mapper>
 
