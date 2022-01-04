@@ -28,11 +28,16 @@
 		)
 	</insert>
 	
-	<!--  파일 조회 -->
+	<!--  파일 단일 조회 -->
 	<select id="get" parameterType="int" resultType="AdoptImgDto">
 		select * from adopt_img where adopt_img_no=#{adoptImgNo}
 	</select>
-
+	
+	<!-- 파일 리스트 조회 -->
+	<select id="getList" parameterType="int" resultType="AdoptImgDto">
+		select * from adopt_img where adopt_img_no=#{adoptImgNo} 
+			order by adopt_img_no asc
+	</select>	
 
 </mapper>
 
