@@ -53,9 +53,15 @@
 			});
 		});
 	});
+	
+
+	
 </script>
 <style>
-
+		.reply{
+		margin-top:10px;
+		margin-bottom:5px;
+		}
 </style>
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 
@@ -123,15 +129,16 @@
                 </h4>
                 </div>
                     <c:if test="${sessionScope.uid == replyDto.memberId}">
-					<div class="edit">
+					<div class="edit" style="margin-top:15px;">
 						<input type="hidden" value="${replyDto.donationNo}" id="donationNo${replyDto.donationReplyNo}">
 						<input type="hidden" value="${replyDto.donationReplyNo}" id="replyNo${replyDto.donationReplyNo}">
-						<textarea id="replyContent${replyDto.donationReplyNo}">${replyDto.donationReplyContent}</textarea>
+						<textarea class="form-control" " row="3" name="donationReplyContent"id="replyContent${replyDto.donationReplyNo}">${replyDto.donationReplyContent}</textarea> 
+            
 					</div>
-                            <a href="#" class="content-change btn btn-primary">수정</a>
-                            <a href="#" class="content-change-real btn btn-primary" data-data="${replyDto.donationReplyNo}">수정하기</a>
-                            <a href="#" class="change-cancel btn btn-primary">취소</a> 
-                            <a href="reply/delete?donationReplyNo=${replyDto.donationReplyNo}&donationNo=${replyDto.donationNo}" class="btn btn-primary">삭제하기</a>
+                            <a href="#" class="reply content-change btn btn-primary">수정</a>
+                            <a href="#" class="reply content-change-real btn btn-primary" data-data="${replyDto.donationReplyNo}">수정하기</a>
+                            <a href="#" class="reply change-cancel btn btn-primary">취소</a> 
+                            <a href="reply/delete?donationReplyNo=${replyDto.donationReplyNo}&donationNo=${replyDto.donationNo}" class="reply btn btn-secondary">삭제하기</a>
 
                     </c:if>
                
@@ -146,14 +153,15 @@
                     value="${donationDto.donationNo}">
            <input type="hidden" name="memberId" value="${sessionScope.uid}">
             </c:forEach>
-            댓글 쓰기<input type="text" name="donationReplyContent"> <input
-                type="submit" value="등록">
-        </form>
-    </div>
-    
-	</div>
+            
+            댓글 쓰기
+            <textarea class="form-control" " row="3" name="donationReplyContent"></textarea> 
+            
+            <div class="right">
+            <input type="submit" class="reply btn btn-primary" value="등록">
+        </div>
+</form>
 </div>
-
 
 
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>
