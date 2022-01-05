@@ -27,7 +27,11 @@ public interface AdoptImgDao {
 	//이미지 파일 다운로드 처리
 	byte[] load(int adoptImgNo) throws IOException;
 	
-	
+	//게시글 수정페이지에서 이미지 파일만 삭제 처리
+	void dropImg(int adoptImgNo);
+
+	//게시글 삭제시 이미지 파일 삭제 처리	
+//	void deleteImg(int adoptNo);
 	
 	
 	

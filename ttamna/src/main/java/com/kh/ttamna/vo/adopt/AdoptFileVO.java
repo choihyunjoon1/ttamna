@@ -24,6 +24,7 @@ public class AdoptFileVO {
 	private Date adoptEnd; //입양공고 종료날짜
 	private String adoptKind; //동물의 품종 혹은 종류
 	private String adoptPlace; //구조장소
+	private String adoptType;
     private List<MultipartFile> attach;
 	
 	//AdoptDto로 변환
@@ -40,6 +41,7 @@ public class AdoptFileVO {
     	adoptDto.setAdoptEnd(adoptEnd);
     	adoptDto.setAdoptKind(adoptKind);
     	adoptDto.setAdoptPlace(adoptPlace);
+    	adoptDto.setAdoptType(adoptType);
     	
     	return adoptDto;
     }

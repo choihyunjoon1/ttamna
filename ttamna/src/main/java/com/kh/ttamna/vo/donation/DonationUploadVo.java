@@ -19,6 +19,7 @@ public class DonationUploadVo {
 	private int donationTotalFund;
 	private int donationNowFund;
 	private String donationContent;
+	private String donationType;
 	
 	private List<MultipartFile> attach;
 	
@@ -32,6 +33,7 @@ public class DonationUploadVo {
 		donationDto.setDonationTotalFund(donationTotalFund);
 		donationDto.setDonationNowFund(donationNowFund);
 		donationDto.setDonationContent(donationContent);
+		donationDto.setDonationType(donationType);
 		
 		return donationDto;
 	}
