@@ -16,5 +16,7 @@ public interface CartDao {
 	
 	boolean add(CartDto cartDto);
 	
-	boolean delete(int cartNo); 
+	boolean delete(int cartNo);
+
+	CartDto get(int cartNo); 
 }

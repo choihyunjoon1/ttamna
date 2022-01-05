@@ -27,7 +27,7 @@ $(function(){
 			var shopImgNo = $("input[name=shopImgNo]").val();
 			
 			$.ajax({
-				url : "${pageContext.request.contextPath}/member/mypage/my_basket",
+				url : "${pageContext.request.contextPath}/member/detail/addcart",
 				type : "post", 
 				data : {
 					shopNo : shopNo,

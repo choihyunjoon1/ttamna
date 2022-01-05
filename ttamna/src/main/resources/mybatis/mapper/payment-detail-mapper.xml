@@ -16,7 +16,7 @@
 <mapper namespace="payDetail">
 	
 	<insert id="insert" parameterType="PaymentDetailDto">
-		insert into pay_detail values(#{payNo}, #{shopNo}, #{shopGoods}, #{quantity}, #{price}, '결제')
+		insert into pay_detail values(#{payNo}, #{shopNo}, #{shopGoods}, #{quantity},  #{price}, '결제')
 	</insert>
 	
 	<select id="list" parameterType="int" resultType="PaymentDetailDto">

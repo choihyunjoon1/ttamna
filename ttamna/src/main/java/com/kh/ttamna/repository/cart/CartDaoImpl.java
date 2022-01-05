@@ -35,4 +35,8 @@ public class CartDaoImpl implements CartDao{
 		return sqlSession.delete("cart.delete", cartNo) > 0;
 	}
 
+	@Override
+	public CartDto get(int cartNo) {
+		return sqlSession.selectOne("cart.get", cartNo);
+	}
 }

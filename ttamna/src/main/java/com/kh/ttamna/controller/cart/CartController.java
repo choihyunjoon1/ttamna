@@ -1,7 +1,7 @@
 package com.kh.ttamna.controller.cart;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 import javax.servlet.http.HttpSession;
 
@@ -9,10 +9,10 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.kh.ttamna.entity.cart.CartDto;
 import com.kh.ttamna.repository.cart.CartDao;
@@ -45,7 +45,7 @@ public class CartController {
 		
 		
 		 if(session.getAttribute("cart") == null) {	// 장바구니가 비어있다면
-			 List<CartDto> cart = new ArrayList<CartDto>();		 
+			 List<CartDto> cart = new CopyOnWriteArrayList<CartDto>();		 
 			session.setAttribute("cart", cart); // 장바구니에 물품 추가해라
 			cart.add(cartDto);
 			cartDao.insert(cartDto);
@@ -59,10 +59,21 @@ public class CartController {
 	
 	// 품목 삭제
 			@RequestMapping("/mypage/my_basket/delete")
-			public String delete(int cartNo, HttpSession session) {
-				session.removeAttribute("cart");
-				cartDao.delete(cartNo);
-				return "member/mypage/my_basket";
+			public String delete(@RequestParam int cartNo, HttpSession session) {
+				System.out.println("지우러 들어옴 ");
+				List<CartDto> cart = (List<CartDto>) session.getAttribute("cart");
+				System.out.println("cart = " + cart.toString());
+				
+				for(CartDto cartDto : cart) {
+					boolean isTrue =cartDto.getCartNo() == cartNo;
+					System.out.println("isTrue = "+isTrue);
+					if(isTrue) {
+						cart.remove(cartDto);
+					}
+				}
+				System.out.println("cart = " + cart.toString());
+
+				return "redirect:/member/mypage/my_basket";
 			}
 		
 		

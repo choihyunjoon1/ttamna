@@ -3,6 +3,7 @@ package com.kh.ttamna.entity.cart;
 import java.sql.Date;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 @Data
 public class CartDto {

@@ -66,6 +66,10 @@ public class ShopDaoImpl implements ShopDao{
 		param.put("list", shopNo);
 		return sqlSession.selectList("shop.search", param);
 	}
+	@Override
+	public ShopDto search(int shopNo) {
+		return sqlSession.selectOne("shop.searchOne", shopNo);
+	}
 	// 조회수 증가
 	@Override
 	public boolean readUp(ShopDto shopDto) {

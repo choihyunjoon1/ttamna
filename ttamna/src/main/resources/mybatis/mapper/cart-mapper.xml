@@ -42,5 +42,10 @@
 <update id="add" parameterType="int">
 	update cart set cart_count = cart_count + 1 where cart_no = #{cartNo}
 </update>
+
+<!-- 장바구니 정보 1개 가져오기 -->
+<select id="get" parameterType="int" resultType="CartDto">
+	select * from cart where cart_no = ${cartNo}
+</select>
 </mapper>
 

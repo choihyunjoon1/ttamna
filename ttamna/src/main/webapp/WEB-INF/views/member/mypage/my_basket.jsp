@@ -16,22 +16,27 @@
 			$("body").append(form);
 			
 			//모든 div를 돌면서 내부에 존재하는 checkbox와 수량을 조사한 뒤 체크된 항목에 대해서 번호와 수량을 별도의 form에 첨부
-//			var count = 0;
+			var count = 0;
 			$(".cart").each(function(){
 				//this == 현재 반복중인 div
 				var checkbox = $(this).find("input[name=shopNo]");
+				var number = $(this).find("input[name=quantity]");
 				console.log(checkbox);				
 				
 				if(checkbox.prop("checked")){//체크박스가 체크된 경우
 					//체크박스의 value가 상품번호이고 입력창의 숫자가 상품수량이므로 이 둘을 각각 별도의 form에 추가
 					var shopNo = checkbox.val();
+					var quantity = number.val();
 					console.log(shopNo);
 //					var quantity = number.val();
 					
-					$("<input type='hidden' name='shopNo'>").val(shopNo).appendTo(".send-form");
+//					$("<input type='hidden' name='shopNo'>").val(shopNo).appendTo(".send-form");
+//					$("<input type='hidden' name='quantity'>").val(quantity).appendTo(".send-form");
+					$("<input type='hidden' name='list["+count+"].shopNo'>").val(shopNo).appendTo(".send-form");
+					$("<input type='hidden' name='list["+count+"].quantity'>").val(quantity).appendTo(".send-form");
 					console.log(shopNo);
 //					$("<input type='hidden' name='list["+count+"].quantity'>").val(quantity).appendTo(".send-form");
-//					count++;
+					count++;
 				}
 			});
 			
@@ -65,6 +70,7 @@
 		<c:forEach var="cartDto" items="${list}">
 			<div class="cart">
 						<input type="checkbox" name="shopNo" value="${cartDto.shopNo}">	
+						<input type="number" name="quantity">
 						<img src="${pageContext.request.contextPath}/shop/img?shopImgNo=${cartDto.shopImgNo}" width="100px;" height="70px;">
 						<span>${cartDto.shopGoods}</span>
 						<a href="my_basket/delete?cartNo=${cartDto.cartNo}"><button class="btn btn-danger">삭제</button></a>		
