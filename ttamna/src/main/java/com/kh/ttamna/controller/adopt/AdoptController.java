@@ -84,7 +84,7 @@ public class AdoptController {
 	@ResponseBody
 	public List<AdoptDto> more(
 			@RequestParam(required =false, defaultValue = "1") int page,
-			@RequestParam(required =false, defaultValue = "10") int size,
+			@RequestParam(required =false, defaultValue = "9") int size,
 			@RequestParam(required =false, defaultValue = "") String column,
 			@RequestParam(required =false, defaultValue = "") String keyword
 			){
@@ -113,11 +113,11 @@ public class AdoptController {
 		int adoptNo = adoptFileService.insert(adoptFileVO);
 		adoptDao.readUp(adoptNo);
 		//등록처리 완료 후 상세 페이지로 이동
-		return "redirect:/adopt/detail?adoptNo=" + adoptNo;
+		return "redirect: detail?adoptNo=" + adoptNo;
 	}
 	
 	//상세페이지 + 파일
-	@GetMapping("/detail")
+	@RequestMapping("/detail")
 	public String detail(@RequestParam int adoptNo, Model m) {
 		Map<String, Object> param = new HashMap<>();
 		param.put("adoptNo", adoptNo);
@@ -147,21 +147,33 @@ public class AdoptController {
 				.body(resource);
 	}
 	
+	//게시글 수정시 파일만 삭제
+	@GetMapping("/dropImg")
+	public String deleteImg(
+							@RequestParam int adoptImgNo,
+							@RequestParam int adoptNo) {
+		//이미지파일 번호 전달해서 삭제
+		adoptImgDao.dropImg(adoptImgNo);
+		//삭제 완료후 adoptNo를 이용해서 수정페이지로 리다이렉트 처리
+		return "redirect: edit?adoptNo=" + adoptNo;
+	}
+	
 	
 	//입양공고 수정 페이지
-	//@GetMapping("/edit")
+	@GetMapping("/edit")
 	public String edit(@RequestParam int adoptNo, Model m) {
 		Map<String, Object> param = new HashMap<>();
 		param.put("adoptNo", adoptNo);
 		
 		List<AdoptDto> adoptDto = adoptDao.detailOrSearch(param);
-		m.addAttribute("adoptDto", adoptDto);
+		m.addAttribute("adoptNo", adoptNo);
+		m.addAttribute("list", adoptDto);
 		m.addAttribute("adoptImgList", adoptImgDao.getList(adoptNo));
 		return "adopt/edit";
 	}
 	
 	//입양공고 수정 처리
-	//@PostMapping("/edit")
+	@PostMapping("/edit")
 	public String edit(@ModelAttribute AdoptFileVO adoptFileVO, @RequestParam int adoptNo) throws IllegalStateException, IOException {
 		adoptFileService.updateWithFile(adoptFileVO);
 		return "redirect: detail?adoptNo="+adoptFileVO.getAdoptNo()+"&success";
@@ -169,12 +181,13 @@ public class AdoptController {
 	
 	//입양공고 삭제 처리
 	@GetMapping("/delete")
-	public String delete(@RequestParam int adoptNo, HttpSession session) {
+	public String delete(HttpSession session, @RequestParam int adoptNo) {
 		String uid = (String) session.getAttribute("uid");
 		String grade = (String) session.getAttribute("grade");
 		AdoptDto adoptDto = adoptDao.detail(adoptNo);
 		//권한 확인 : 작성자와 세션의 아이디가 일치하거나 관리자일 경우 삭제 가능
 		if(adoptDto.getAdoptWriter().equals(uid) || grade.equals("관리자")) {
+			adoptImgDao.deleteImg(adoptNo); //adoptNo 게시판 번호에 해당하는 이미지 파일을 전부 삭제
 			adoptDao.delete(adoptNo);
 			//권한이 있으면 삭제처리하고 전체 목록으로 deleteSuccess 파라미터를 붙여서 리다이렉트
 			return "redirect: list?deleteSuccess";
