@@ -147,6 +147,7 @@
             </c:forEach>
         </form>
     </div>
+
     <div class="col-12">
         <form action="reply/insert" method="post">
             <c:forEach var="donationDto" items="${donationDto}">
@@ -164,23 +165,9 @@
 </form>
 </div>
 <div class="row mt-3">
-	<nav aria-label="Page navigation example">
-  		<ul class="pagination justify-content-end">
-		
-	
-			<li class="page-item"><a class="page-link" href="#">Prev</a></li>
-			
-			<!-- 페이지 네비게이터 -->
-			<c:forEach var="i" begin="${paginationVO.getStartBlock()}" end="${paginationVO.getRealLastBlock()}" step="1">
-						<!-- 목록용 링크 -->
-				    	<li class="page-item"><a class="page-link" href="detail?page=${i}&donationNo=${param.donationNo}">${i}</a></li>
-			</c:forEach>
-			<!-- 다음 -->
-			<!-- 목록용 링크 -->
-			
-			<li class="page-item"><a class="page-link" href="#">Next</a></li>
-		  </ul>
-	</nav>
+		<div class="col mt-3">
+			<button type="button" class="btn btn-link disabled">더보기</button>
+		</div>
 	</div>
 </div>
 </div>

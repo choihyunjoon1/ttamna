@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.kh.ttamna.entity.donation.DonationDto;
 import com.kh.ttamna.entity.donation.DonationReplyDto;
 import com.kh.ttamna.repository.donation.DonationReplyDao;
+import com.kh.ttamna.vo.pagination.PaginationVO;
 
 @Controller
 @RequestMapping("donation/reply")
@@ -67,12 +68,20 @@ public class DonationReplyController {
 		return "redirect:/donation/detail?donationNo=" + donationReplyDto.getDonationNo();
 	}
 	@GetMapping("/list")
-	public String list(Model model) {
+	public String list(Model model,@ModelAttribute PaginationVO paginationVO,@RequestParam int donationNo) throws Exception {
 //		model.addAttribute(JSP에서 부를 이름, 데이터);
-		List<DonationReplyDto> list = donationReplyDao.list();
-		
+		int count = donationReplyDao.count(donationNo);
+		paginationVO.setCount(count);
+		System.err.println(count);
+		paginationVO.calculator();
+		List<DonationReplyDto> list = donationReplyDao.pagenation(paginationVO.getStartRow(), paginationVO.getEndRow(),donationNo);
+		paginationVO.setList(list);
+		System.err.println(list);
 		model.addAttribute("list", list);
-		return "donation/reply/list";
+		
+		
+	
+		return "donation/detail?donationNo="+donationNo;
 	}
 	//더보기 페이지네이션 기능 처리
 	@GetMapping("/more")

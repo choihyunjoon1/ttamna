@@ -24,11 +24,13 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.kh.ttamna.entity.donation.DonationDto;
 import com.kh.ttamna.entity.donation.DonationImgDto;
+import com.kh.ttamna.entity.donation.DonationReplyDto;
 import com.kh.ttamna.repository.donation.DonationDao;
 import com.kh.ttamna.repository.donation.DonationImgDao;
 import com.kh.ttamna.repository.donation.DonationReplyDao;
 import com.kh.ttamna.service.donation.DonationFileService;
 import com.kh.ttamna.vo.donation.DonationUploadVo;
+import com.kh.ttamna.vo.pagination.PaginationVO;
 
 @Controller
 @RequestMapping("/donation")
@@ -85,15 +87,23 @@ public class DonationController {
 	}
 	
 	@GetMapping("/detail")//상세보기페이지로이동
-	public String detail(@RequestParam int donationNo, Model model) {
+	public String detail(@RequestParam int donationNo, Model model) throws Exception {
 		Map<String, Object> data = new HashMap<>();
 		data.put("donationNo", donationNo);
 		model.addAttribute("donationDto", donationDao.detailOrSearch(data));
-		
 		model.addAttribute("donationImgDtoList", donationImgDao.getList(donationNo));
-		model.addAttribute("replyDto", donationReplyDao.list(donationNo));
+		PaginationVO  paginationVO = new PaginationVO() ;
+		int count = donationReplyDao.count(donationNo);
+		paginationVO.setCount(count);
+		paginationVO.calculator();
+		List<DonationReplyDto> list = donationReplyDao.pagenation(paginationVO.getStartRow(), paginationVO.getEndRow(),donationNo);
+		model.addAttribute("replyDto", list);
+		model.addAttribute("paginationVO", paginationVO);
 		return "donation/detail";
+		
 	}
+
+	
 	
 	@GetMapping("/delete")//삭제요청
 	public String delete(@RequestParam int donationNo,
