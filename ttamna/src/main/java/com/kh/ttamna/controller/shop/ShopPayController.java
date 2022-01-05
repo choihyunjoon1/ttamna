@@ -7,24 +7,26 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.kh.ttamna.entity.member.MemberDto;
+import com.kh.ttamna.entity.payment.PaymentDetailDto;
 import com.kh.ttamna.entity.payment.PaymentDto;
 import com.kh.ttamna.entity.shop.ShopDto;
-import com.kh.ttamna.repository.member.MemberDao;
 import com.kh.ttamna.repository.payment.PaymentDao;
+import com.kh.ttamna.repository.payment.PaymentDetailDao;
 import com.kh.ttamna.repository.shop.ShopDao;
 import com.kh.ttamna.service.kakaopay.ShopPayService;
 import com.kh.ttamna.vo.kakaopay.KakaoPayApproveRequestVo;
 import com.kh.ttamna.vo.kakaopay.KakaoPayApproveResponseVo;
+import com.kh.ttamna.vo.kakaopay.KakaoPayCancelResponseVo;
 import com.kh.ttamna.vo.kakaopay.KakaoPayReadyRequestVo;
 import com.kh.ttamna.vo.kakaopay.KakaoPayReadyResponseVo;
+import com.kh.ttamna.vo.shop.ShopOrderListVO;
 
 @Controller
 @RequestMapping("/shop/order")
@@ -38,6 +40,8 @@ public class ShopPayController {
 	@Autowired
 	private ShopPayService shopPayService;
 
+	@Autowired
+	private PaymentDetailDao payDetailDao;
 	
 	
 	@PostMapping("/buy")//단일결제 요청
@@ -48,6 +52,12 @@ public class ShopPayController {
 		session.setAttribute("partner_user_id", requestVo.getPartner_user_id());
 		return "redirect:"+responseVo.getNext_redirect_pc_url();		
 	}
+	
+	@GetMapping("/cart/multibuy")
+	public String multibuy(@ModelAttribute ShopOrderListVO vo) {
+		return "redirect:/shop/order/cart/list";
+	}
+	
 	
 	// 묶음결제
 	@PostMapping("/multibuy")
@@ -99,6 +109,8 @@ public class ShopPayController {
 	}
 	
 	
+	
+	
 	//결제 요청이 성공하면 주소에 pg토큰이 담겨서 온다.
 		@GetMapping("/success")
 		public String approve(@RequestParam String pg_token,
@@ -107,6 +119,7 @@ public class ShopPayController {
 			String partner_order_id = (String)session.getAttribute("partner_order_id");
 			String partner_user_id = (String)session.getAttribute("partner_user_id");
 			String shopNo = (String)session.getAttribute("shopNo");
+			List<ShopDto> list = (List<ShopDto>) session.getAttribute("list");
 			
 			System.out.println("tid = "+tid);
 			System.out.println("partner_order_id = "+partner_order_id);
@@ -141,7 +154,16 @@ public class ShopPayController {
 			
 			paymentDao.insert(paymentDto);
 			
-			
+			for(ShopDto shopDto : list) {
+				PaymentDetailDto payDetailDto = new PaymentDetailDto();
+				payDetailDto.setPayNo(paymentDto.getPayNo());
+				payDetailDto.setShopNo(shopDto.getShopNo());
+				payDetailDto.setShopGoods(shopDto.getShopGoods());
+				payDetailDto.setQuantity(1);
+				payDetailDto.setPrice(shopDto.getShopPrice() * 1);
+				
+				payDetailDao.insert(payDetailDto);
+			}
 			
 			
 			return "redirect:/shop/order/success_result";
@@ -152,8 +174,43 @@ public class ShopPayController {
 			return "shop/order/success_result";
 		}
 		
-		
-		
+//		@GetMapping("/mypage/cancel_all")
+//		public String cancelAll(@RequestParam int shopNo, RedirectAttributes attr) throws URISyntaxException {
+//			PaymentDto payDto = paymentDao.get(shopNo);
+//			if(payDto.isAllCanceled()) {
+//				throw new IllegalArgumentException("취소가 불가능한 항목입니다.");
+//			}
+//			
+//			long amount = payDetailDao.getCancelAvailableAmount(shopNo);
+//			
+//			KakaoPayCancelResponseVo respVO = shopPayService.cancel(payDto.getTid(), amount);
+//			
+//			payDetailDao.cancelAll(shopNo);
+//			
+//			paymentDao.refresh(shopNo);
+//			
+//			attr.addAttribute("shopNo", shopNo);
+//			return "redirect:/"+"member/mypage/order_detail";
+//		}
+//		
+//		@GetMapping("/cancel_part")
+//		public String cancelPart(@RequestParam int payNo, @RequestParam int shopNo) throws URISyntaxException {
+//			PaymentDetailDto payDetailDto = payDetailDao.get(payNo, shopNo);
+//			if(!payDetailDto.isCancelAvailable()) {
+//				throw new IllegalArgumentException("취소가 불가능한 항목입니다.");
+//			}
+//			
+//			PaymentDto payDto = paymentDao.get(payNo);
+//			
+//			KakaoPayCancelResponseVo respVO = shopPayService.cancel(payDto.getTid(), payDetailDto.getPrice());
+//			
+//			payDetailDao.cancel(payNo, shopNo);
+//			
+//			paymentDao.refresh(payNo);
+//			
+//			return "redirect:/"+"member/mypage/order_detail?payNo="+payNo;
+//			
+//		}
 		
 	
 }

@@ -8,8 +8,12 @@
 <!--부트JS-->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>    
     
-<script src="https://code.jquery.com/jquery-3.6.0.js">
-</script>
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+<style>
+	.center{
+		width: 60%;
+	}
+</style>
 <script>
 $(function(){
 	$("#add-cart").click(function(e){
@@ -23,7 +27,7 @@ $(function(){
 			var shopImgNo = $("input[name=shopImgNo]").val();
 			
 			$.ajax({
-				url : "${pageContext.request.contextPath}/shop/detail/addcart",
+				url : "${pageContext.request.contextPath}/member/mypage/my_basket",
 				type : "post", 
 				data : {
 					shopNo : shopNo,
@@ -48,55 +52,59 @@ $(function(){
 
 
 
-<div class="row form">
+<div class="row" align="center">
 	<span>${detail.shopTitle}</span>
 </div>
+<hr>
 <div class="row">
 	<span>상품명 : ${detail.shopGoods}</span>
 </div>
+<hr>
 <div class="row">
 	<span>판매가 : ${detail.shopPrice}원</span>
 </div>
+<hr>
 <div class="row">
 	<span>남은 수량 : ${detail.shopCount}</span>
 </div>
+<hr>
 <div class="row">
 	<span>조회수 : ${detail.shopRead}</span>
 </div>
-
+<hr>
 <form action="order/multibuy" method="post">
-	<div class="row mt-3">
+	<div class="mt-3" align="center">
 		<input type="hidden" name="shopNo" value="${detail.shopNo}">
 <!-- 	<input type="hidden" name="partner_user_id" value="${sessionScope.uid}"> -->	
 		<input type="hidden" name="item_name" value="${detail.shopGoods}">
 		<input type="hidden" name="total_amount" value="${detail.shopPrice}">
-		<input type="submit" value="구매하기" class="btn btn-primary">
-	</div>
+		<button class="btn btn-info center">구매하기</button>
+	</div>	
 </form>
-<form action="detail/addcart" method="post" >
-	<div class="row mt-3">
-	<input type="hidden" name="shopNo" value="${detail.shopNo}" id="shopNo">
+<form action="${pageContext.request.contextPath}/member/detail/addcart" method="post" >
+	<div class="mt-3" align="center">
+		<input type="hidden" name="shopNo" value="${detail.shopNo}" id="shopNo">
 		<input type="hidden" name="memberId" value="${sessionScope.uid}">
 		<input type="hidden" name="shopGoods" value="${detail.shopGoods}">
 		<input type="hidden" name="shopPrice" value="${detail.shopPrice}">
-		<input type="hidden" name="shopImgNo" value="${shopImgDto.shopImgNo}">
-		<input type="submit" value="장바구니에 담기" class="btn btn-secondary"  id="add-cart">
+		<input type="hidden" name="shopImgNo" value="${shopImgDto.shopImgNo}">	
+		<button class="btn btn-warning center" id="add-cart">장바구니에 담기</button>
 	</div>
 </form>
-<div>
-</div>
+<br><br>
 <div class="row">
 	<c:choose>
 		<c:when test="${shopImgDto == null}">
 		<div>
-			<img src="https://cdn.discordapp.com/attachments/565845740543410197/925011110959124551/211586d6bf04ce85.jpg">
+			<img src="https://cdn.discordapp.com/attachments/565845740543410197/925011110959124551/211586d6bf04ce85.jpg" align="middle">
 		</div>
 			<span>${detail.shopContent}</span>
 		</c:when>
 		<c:otherwise>
-				<img src="img?shopImgNo=${shopImgDto.shopImgNo}">
-			<br><br>
-			<span>${detail.shopContent}</span>
+				<img src="img?shopImgNo=${shopImgDto.shopImgNo}"width="80%">
+			<div class="row">
+				<span>${detail.shopContent}</span>		
+			</div>
 		</c:otherwise>
 	</c:choose>
 </div>

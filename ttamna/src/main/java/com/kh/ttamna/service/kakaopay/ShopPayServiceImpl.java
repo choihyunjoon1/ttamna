@@ -70,9 +70,6 @@ public class ShopPayServiceImpl implements ShopPayService{
 		
 		return responseVo;
 	}
-	
-	// 다중 결제
-
 
 	// 결제 승인
 	@Override
@@ -108,14 +105,53 @@ public class ShopPayServiceImpl implements ShopPayService{
 
 	@Override
 	public KakaoPaySearchResponseVo search(String tid) throws URISyntaxException {
-		// TODO Auto-generated method stub
-		return null;
+		RestTemplate template = new RestTemplate();
+		
+		HttpHeaders headers = new HttpHeaders();
+		headers.add("Authorization", "KakaoAK "+Auth);
+		headers.add("Content-type", ContentType);
+		
+		
+		MultiValueMap<String, String> body = new LinkedMultiValueMap<>();
+		body.add("cid", "TC0ONETIME");
+		body.add("tid", tid);
+		
+		HttpEntity<MultiValueMap<String, String>> entity = new HttpEntity<>(body, headers);
+		
+		
+		URI uri = new URI("https://kapi.kakao.com/v1/payment/order");
+		
+		KakaoPaySearchResponseVo responseVo = template.postForObject(uri, entity, KakaoPaySearchResponseVo.class);
+		
+		
+		return responseVo;
 	}
 
 	@Override
 	public KakaoPayCancelResponseVo cancel(String tid, long amount) throws URISyntaxException {
-		// TODO Auto-generated method stub
-		return null;
+		
+		RestTemplate template = new RestTemplate();
+		
+		HttpHeaders headers = new HttpHeaders();
+		headers.add("Authorization", "KakaoAK "+Auth);
+		headers.add("Content-type", ContentType);
+		
+		
+		MultiValueMap<String, String> body = new LinkedMultiValueMap<>();
+		body.add("cid", "TC0ONETIME");
+		body.add("tid", tid);
+		body.add("cancel_amount", String.valueOf(amount));
+		body.add("cancel_tax_free_amount", "0");
+		
+		HttpEntity<MultiValueMap<String, String>> entity = new HttpEntity<>(body, headers);
+		
+		
+		URI uri = new URI("https://kapi.kakao.com/v1/payment/cancel");
+		
+		KakaoPayCancelResponseVo responseVo = template.postForObject(uri, entity, KakaoPayCancelResponseVo.class);
+		
+		
+		return responseVo;
 	}
 
 }

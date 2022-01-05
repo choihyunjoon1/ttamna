@@ -5,10 +5,18 @@
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 <link ref="stylesheet" type="text/css" href="${root }/resources/css/commons.css">
 
+
+
+
+
+
+
+
+
 <div class="container-1000 container-center">
 	<div class="container">
 		<div class="align-self-center">
-			<h1 align="center">ORDER</h1>
+			<h1 align="center">주문내역</h1>
 		</div>
 	</div>
 	<div class="container">
@@ -17,24 +25,35 @@
 			<jsp:include page="/WEB-INF/views/member/mypage/sidebar.jsp"></jsp:include>
 			
 			<div class="col-9" style="width: 80%">
-				<table class="table table-hover">
+		
+				<table class="table">
 				<thead>
-					<tr>
-						<th scope="col">주문번호</th>
+					<tr align="center">
+						<th scope="col" >주문번호</th>
 						<th scope="col">상품명</th>
+						<th scope="col">가격</th>
 						<th scope="col">구매일</th>
+						<th scope="col">상태</th>
+						<th scope="col"></th>
 					</tr>
 				</thead>
 				<tbody >
-					<c:forEach begin="1" end="10"  var="i">
+				
+					<c:forEach begin="0" end="9"  var="list" items="${list}">
+						<c:if test="${list.memberId eq sessionScope.uid}">
 					<tr>
-						<th scope="row">${i }</th>
-						<td>제목[댓글수]</td>
-						<td>작성일</td>
+						<td>${list.tid}</td>
+						<td>${list.itemName}</td>
+						<td>${list.totalAmount}원</td>
+						<td>${list.payTime}</td>
+						<td>${list.status}</td>
+						<td><a href="${pageContext.request.contextPath}/member/mypage/order_detail?payNo=${list.payNo}"><button class="btn btn-primary">상세보기</button></a></td>
 					</tr>
+						</c:if>
 					</c:forEach>
 				</tbody>
 			</table>
+				
 			</div>
 		</div>
 	</div>

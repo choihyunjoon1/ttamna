@@ -10,7 +10,7 @@ public interface PaymentDao {
 	
 	void insert(PaymentDto paymentDto);
 	
-	List<ShopDto> list();
+	List<PaymentDto> list();
 	
 	PaymentDto get(int payNo);
 	
