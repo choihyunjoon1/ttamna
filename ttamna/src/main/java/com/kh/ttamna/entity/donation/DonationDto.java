@@ -16,6 +16,7 @@ public class DonationDto {
 	private String donationContent;
 	private Date donationTime;
 	private int donationRead;
+	private String donationType;
 	
 	
 	public String getStringDonationNo() {
