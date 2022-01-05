@@ -29,5 +29,14 @@ public class CartDaoImpl implements CartDao{
 	public boolean add(CartDto cartDto) {
 		return sqlSession.update("cart.add", cartDto) > 0;
 	}
+	// 장바구니 삭제
+	@Override
+	public boolean delete(int cartNo) {
+		return sqlSession.delete("cart.delete", cartNo) > 0;
+	}
 
+	@Override
+	public CartDto get(int cartNo) {
+		return sqlSession.selectOne("cart.get", cartNo);
+	}
 }

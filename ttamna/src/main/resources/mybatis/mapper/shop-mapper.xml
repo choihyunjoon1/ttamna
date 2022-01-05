@@ -82,6 +82,11 @@
 		</if>
 	</select>
 	
+	<!-- 상품 리스트 -->
+	<select id="searchOne" parameterType="int" resultType="ShopDto">
+		select * from shop where shop_no = ${shopNo}
+	</select>
+	
 	<!-- 조회수 증가, 자신이든 남이든 구분하지 않고 증가 -->
 	<update id="read" parameterType="int">
 		update shop set shop_read = shop_read + 1 where shop_no = #{shopNo}

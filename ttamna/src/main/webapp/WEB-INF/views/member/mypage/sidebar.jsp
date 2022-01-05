@@ -28,7 +28,10 @@
         }else if(locaMenu=="my_order"){
         	$(".list-group > a").removeClass("active");
         	$(".myOrder").addClass("active");
-        }else if(locaMenu=="quit"){
+        }else if(locaMenu=="order_detail"){
+        	$(".list-group > a").removeClass("active");
+        	$(".myOrder").addClass("active");
+        } else if(locaMenu=="quit"){
         	$(".list-group > a").removeClass("active");
         	$(".quit").addClass("active");
         }else{

@@ -26,7 +26,7 @@ public class PaymentDaoImpl implements PaymentDao{
 	}
 
 	@Override
-	public List<ShopDto> list() {
+	public List<PaymentDto> list() {
 		return sqlSession.selectList("pay.list");
 	}
 

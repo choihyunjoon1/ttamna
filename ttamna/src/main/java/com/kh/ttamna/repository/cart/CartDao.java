@@ -15,4 +15,8 @@ public interface CartDao {
 	List<ShopDto> list();
 	
 	boolean add(CartDto cartDto);
+	
+	boolean delete(int cartNo);
+
+	CartDto get(int cartNo); 
 }

@@ -1,7 +1,12 @@
 package com.kh.ttamna.controller.member;
 
+import java.net.URISyntaxException;
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
+import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -10,15 +15,24 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
 
 import com.kh.ttamna.entity.member.DormancyDto;
 import com.kh.ttamna.entity.member.MemberDto;
 import com.kh.ttamna.entity.member.VisitDto;
+import com.kh.ttamna.entity.payment.PaymentDetailDto;
+import com.kh.ttamna.entity.payment.PaymentDto;
+import com.kh.ttamna.repository.cart.CartDao;
 import com.kh.ttamna.repository.member.DormancyDao;
 import com.kh.ttamna.repository.member.MemberDao;
 import com.kh.ttamna.repository.member.VisitDao;
 import com.kh.ttamna.repository.payment.PaymentDao;
+import com.kh.ttamna.repository.payment.PaymentDetailDao;
+import com.kh.ttamna.service.kakaopay.ShopPayService;
 import com.kh.ttamna.service.pagination.PaginationService;
+import com.kh.ttamna.vo.kakaopay.KakaoPayCancelResponseVo;
+import com.kh.ttamna.vo.kakaopay.KakaoPaySearchResponseVo;
 import com.kh.ttamna.vo.pagination.PaginationVO;
 
 @Controller
@@ -38,6 +52,14 @@ public class MemberController {
 	
 	@Autowired
 	private PaymentDao paymentDao;
+	
+	@Autowired
+	private PaymentDetailDao payDetailDao;
+	
+	@Autowired
+	private ShopPayService shopPayService;
+	
+	
 	
 	//회원가입
 	@GetMapping("/join")
@@ -155,14 +177,24 @@ public class MemberController {
 	}
 	//주문내역
 	@RequestMapping("/mypage/my_order")
-	public String myOrder() {
+	public String myOrder(Model model) {
+		model.addAttribute("list", paymentDao.list());
 		return "member/mypage/my_order";
 	}
-	//장바구니
-	@RequestMapping("/mypage/my_basket")
-	public String myBasket() {
-		return "member/mypage/my_basket";
+	//주문 상세보기
+	@RequestMapping("/mypage/order_detail")
+	public String orderDetail(@RequestParam int payNo, Model model) throws URISyntaxException {
+		PaymentDto payDto = paymentDao.get(payNo);
+		List<PaymentDetailDto> list = payDetailDao.list(payNo);
+		
+		KakaoPaySearchResponseVo respVO = shopPayService.search(payDto.getTid());
+		
+		model.addAttribute("payDto", payDto);
+		model.addAttribute("payDetailList", list);
+		
+		return "member/mypage/order_detail";
 	}
+	
 	//기부내역
 	@GetMapping("/mypage/my_donation")
 	public String myDonation(HttpSession session, @ModelAttribute PaginationVO paginationVO,Model model) throws Exception {
@@ -197,7 +229,44 @@ public class MemberController {
 		return "member/quit_success";
 	}
 	
+	// 결제 취소
+	@GetMapping("/mypage/cancel_all")
+	public String cancelAll(@RequestParam int payNo, RedirectAttributes attr) throws URISyntaxException {
+		PaymentDto payDto = paymentDao.get(payNo);
+		if(payDto.isAllCanceled()) {
+			throw new IllegalArgumentException("취소가 불가능한 항목입니다.");
+		}
+		
+		long amount = payDetailDao.getCancelAvailableAmount(payNo);
+		
+		KakaoPayCancelResponseVo respVO = shopPayService.cancel(payDto.getTid(), amount);
+		
+		payDetailDao.cancelAll(payNo);
+		
+		paymentDao.refresh(payNo);
+		
+		attr.addAttribute("payNo", payNo);
+		return "redirect:/member/mypage/order_detail?payNo="+payNo;
+	}
 	
+	@GetMapping("/mypage/cancel_part")
+	public String cancelPart(@RequestParam int payNo, @RequestParam int shopNo) throws URISyntaxException {
+		PaymentDetailDto payDetailDto = payDetailDao.get(payNo, shopNo);
+		if(!payDetailDto.isCancelAvailable()) {
+			throw new IllegalArgumentException("취소가 불가능한 항목입니다.");
+		}
+		
+		PaymentDto payDto = paymentDao.get(payNo);
+		
+		KakaoPayCancelResponseVo respVO = shopPayService.cancel(payDto.getTid(), payDetailDto.getPrice());
+		
+		payDetailDao.cancel(payNo, shopNo);
+		
+		paymentDao.refresh(payNo);
+		
+		return "redirect:/member/mypage/order_detail?payNo="+payNo;
+		
+	}
 
 
 }

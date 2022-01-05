@@ -22,4 +22,6 @@ public interface ShopDao {
 	// 조회수 증가
 	boolean readUp(ShopDto shopDto);
 
+	ShopDto search(int shopNo);
+
 }
