@@ -7,8 +7,11 @@ $(function(){
 	var page = 1;
 	var size = 12;
 	
+	
 	$(".more-btn").click(function(){
-		loadData(page, size);
+		var column = $("#column option:selected").val();
+        var keyword = $("input[name=keyword]").val();
+		loadData(page, size, column, keyword);
 		page++;
 	});
 	
@@ -17,9 +20,9 @@ $(function(){
 	$(".more-btn").click();
 	
 	//이렇게 캡슐화를 하는데 이걸 중첩클래스라고한다
-	function loadData(page, size){
+	function loadData(page, size, column, keyword){
 		$.ajax({
-			url : "${pageContext.request.contextPath}/mybaby/more",
+			url : "${pageContext.request.contextPath}/mybaby/more?column="+column+"&keyword="+keyword,
 			type : "get",
 			data : {
 				page : page,
@@ -28,7 +31,6 @@ $(function(){
 			dataType : "json",
 			success:function(resp){
 				console.log("성공", resp);
-	
 				//데이터가 sizeValue보다 적은 개수가 왔다면 더보기 버튼을 삭제
 				if(resp.length < size){
 					$(".more-btn").remove();

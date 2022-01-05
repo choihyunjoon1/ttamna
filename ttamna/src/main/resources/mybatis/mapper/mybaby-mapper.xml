@@ -26,7 +26,8 @@
 	
 	<!-- 게시글등록 -->
 	<insert id = "write" parameterType="MybabyDto">
-		insert into mybaby values(#{mybabyNo},#{mybabyWriter},#{mybabyTitle},#{mybabyContent},sysdate,0,0)
+		insert into mybaby(mybaby_no, mybaby_writer, mybaby_title, mybaby_content, mybaby_time, mybaby_read, mybaby_reply, mybaby_type)
+		 values(#{mybabyNo},#{mybabyWriter},#{mybabyTitle},#{mybabyContent},sysdate,0,0,'mybaby')
 	</insert>
 	
 	<!-- 상세조회 -->
@@ -39,9 +40,16 @@
 		select * from(
 		    select rownum rn, tmp.* from(
 		        select * from mybaby B left outer join mybaby_img BI on B.mybaby_no = BI.mybaby_no
-		        <if test="column != null and keyword != null">
+		        order by B.mybaby_no desc
+		        )tmp
+		)where rn between ${startRow} and ${endRow}
+	</select>
+	<!-- 더보기 페이지네이션 -->
+	<select id="listBySearchPage" parameterType="map" resultType="MybabyDownVO">
+		select * from(
+		    select rownum rn, tmp.* from(
+		        select * from mybaby B left outer join mybaby_img BI on B.mybaby_no = BI.mybaby_no
 		        	where instr(${column}, #{keyword}) > 0
-		        </if>
 		        order by B.mybaby_no desc
 		        )tmp
 		)where rn between ${startRow} and ${endRow}
@@ -64,6 +72,17 @@
 	<select id="listPlusImg" resultType="MybabyDownVO">
 		select * from mybaby B left outer join mybaby_img BI on B.mybaby_no = BI.mybaby_no
 	</select>
+	
+	<!-- 이미지 리스트+검색용 -->
+	<select id = "searchList" parameterType = "map" resultType="MybabyDownVO">
+        select * from mybaby B left outer join mybaby_img BI on B.mybaby_no = BI.mybaby_no
+        <if test="column != null and keyword != null">
+        	where instr(${column}, #{keyword}) > 0
+        </if>
+        order by B.mybaby_no desc
+	</select>
+	
+	
 	
 </mapper>
 
