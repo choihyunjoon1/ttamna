@@ -13,7 +13,7 @@
 
 $(function(){
 	var page = 1;	
-	var size = 10;
+	var size = 9;
 	
 	//더보기 버튼 클릭시 이벤트 발생
 	$(".more-btn").click(function(){
@@ -167,7 +167,6 @@ $(function(){
 		</div>
 	</div>
 	
-	</div>	
 </div>
 
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>

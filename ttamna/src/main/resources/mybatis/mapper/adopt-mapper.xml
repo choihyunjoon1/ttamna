@@ -22,11 +22,14 @@
 	
 	<!-- 입양공고 등록 기능 -->
 	<insert id="write" parameterType="AdoptDto">
-		insert into adopt values(
-					#{adoptNo}, #{adoptWriter}, #{adoptTitle},  #{adoptContent},
-					sysdate, 0, 
-			        sysdate, #{adoptEnd},  #{adoptKind},  #{adoptPlace}	
-				)
+		insert into 
+		adopt(
+				adopt_no, adopt_writer, adopt_title, 
+				adopt_content, adopt_end, adopt_kind, adopt_place
+		) values(
+					#{adoptNo}, #{adoptWriter}, #{adoptTitle},  
+					#{adoptContent}, #{adoptEnd},  #{adoptKind},  #{adoptPlace}
+		)
 	</insert>
 	
 	<!-- 입양공고 전체 목록 조회 -->

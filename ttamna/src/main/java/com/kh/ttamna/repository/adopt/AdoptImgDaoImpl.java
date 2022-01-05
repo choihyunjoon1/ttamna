@@ -65,5 +65,17 @@ public class AdoptImgDaoImpl implements AdoptImgDao {
 		return file;
 	}
 
+	//게시글 수정페이지에서 이미지 파일만 삭제 처리
+	@Override
+	public void dropImg(int adoptImgNo) {
+		sqlSession.delete("adoptImg.dropImg", adoptImgNo);
+	}
+
+	//게시글 삭제시 이미지 파일 삭제 처리	
+	@Override
+	public void deleteImg(int adoptNo) {
+		sqlSession.delete("adoptImg.deleteImg", adoptNo);
+	}
+
 
 }

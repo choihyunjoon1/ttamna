@@ -9,9 +9,9 @@ create table member(
                                         REGEXP_LIKE(member_id, '.*?[a-z]+')),
     member_pw varchar2(60) CONSTRAINT member_pw_not_null NOT NULL
                                         CONSTRAINT member_pw_check CHECK(REGEXP_LIKE(member_pw, '.*?[a-zA-Z0-9./$]+')), -- 비밀번호 암호화 관련
-    member_nick varchar2(15) CONSTRAINT member_nick_not_null NOT NULL
+    member_nick varchar2(45) CONSTRAINT member_nick_not_null NOT NULL
                                          CONSTRAINT member_nick_unique UNIQUE
-                                          CONSTRAINT member_nick_check CHECK(REGEXP_LIKE(member_nick, '^[a-z가-힣]{2,15}$')), --영어소문자15글자 or 한글5글자
+                                          CONSTRAINT member_nick_check CHECK(REGEXP_LIKE(member_nick, '^[가-힣]{2,15}$')), 
     member_name varchar2(21) CONSTRAINT member_name_not_null NOT NULL
                                              CONSTRAINT member_name_check CHECK(REGEXP_LIKE(member_name, '^[가-힣]{2,7}$')),
     member_phone char(13) CONSTRAINT member_phone_not_null NOT NULL
@@ -27,15 +27,16 @@ create table member(
     address varchar2(256),
     detail_address varchar2(256)
 );
--- 닉네임 제약조건 변경
-ALTER TABLE member MODIFY member_nick varchar2(45); 
-ALTER TABLE member DROP CONSTRAINT member_nick_check;
-ALTER TABLE member ADD CONSTRAINT member_nick_check CHECK(REGEXP_LIKE(member_nick, '^[가-힣]{2,15}$'));
+
+-- 닉네임 제약조건 변경(12/27)
+--ALTER TABLE member MODIFY member_nick varchar2(45); 
+--ALTER TABLE member DROP CONSTRAINT member_nick_check;
+--ALTER TABLE member ADD CONSTRAINT member_nick_check CHECK(REGEXP_LIKE(member_nick, '^[가-힣]{2,15}$'));
 
 COMMIT;
 -- member_id : 기본키 / 정규식 영어소문자, 0~9, _ 합쳐서 4~20글자이고 영어소문자가 들어가 있는지 체크
 -- member_pw : not null / 암호화 돼서 저장되기 때문에 암호화 되는 글자에 맞춰서 정규식 정함
--- member_nick : not null / unique / 정규식 영어소문자, 한글 가~힣 으로 영문이면 최대 15글자 한글은 최대 5글자
+-- member_nick : not null / unique / 정규식 한글 가~힣 으로 2~15글자
 -- member_name : not null / 정규식 한글 2~7글자
 -- member_phone : not null / 숫자, 특수문자 - 포함 13글자 고정
 -- member_email : not null / unique / 정규식
@@ -57,7 +58,8 @@ create table adopt(
     adopt_start date DEFAULT sysdate CONSTRAINT adopt_start_not_null NOT NULL,
     adopt_end date CONSTRAINT adopt_end_not_null NOT NULL,
     adopt_kind varchar2(30) CONSTRAINT adopt_kind_not_null NOT NULL,
-    adopt_place varchar2(60) CONSTRAINT adopt_place_not_null NOT NULL
+    adopt_place varchar2(60) CONSTRAINT adopt_place_not_null NOT NULL,
+    adopt_type CHAR(5) DEFAULT 'adopt' NOT NULL
 );
 
 COMMIT;
@@ -96,7 +98,8 @@ mybaby_title varchar2(150) not null,--제목
 mybaby_content varchar2(4000) not null,--내용
 mybaby_time date default sysdate not null,--작성시간
 mybaby_read number default 0 not null,--조회수
-mybaby_reply number default 0 not null--댓글수
+mybaby_reply number default 0 not null,--댓글수
+mybaby_type CHAR(6) DEFAULT 'mybaby' NOT NULL
 );
 
 commit;
@@ -106,11 +109,14 @@ commit;
 create sequence mybaby_img_seq;
 create table mybaby_img(
 mybaby_img_no number primary key, --이미지 번호
-mybaby_no references mybaby(mybaby_no) on delete set null, -- 내새끼 게시글 번호 참조키
+mybaby_no references mybaby(mybaby_no) on delete cascade, -- 내새끼 게시글 번호 참조키
 mybaby_img_upload varchar2(256) not null, -- 이미지 업로드 이름
 mybaby_img_size number not null, -- 이미지 크기
 mybaby_img_type varchar2(256) not null -- 이미지 유형
 );
+
+-- 기존 게시판 번호 참조 외래키 삭제 후 외래키 옵션 수정후 다시 추가
+--ALTER TABLE mybaby_img ADD CONSTRAINT mybaby_no_fk FOREIGN KEY(mybaby_no) references mybaby(mybaby_no) on delete cascade;
 
 commit;
 -------------------------------------------------------------------------------------------------------------
@@ -120,14 +126,14 @@ create sequence mybaby_reply_seq;
 create table mybaby_reply(
 mybaby_reply_no number primary key, -- 댓글 번호
 mybaby_no references mybaby(mybaby_no) on delete cascade, -- 내새끼 게시글 번호 참조키
+member_id references member(member_id) on delete set null,
 mybaby_reply_content varchar2(1500) not null, -- 댓글 내용
 mybaby_reply_time date default sysdate not null, -- 댓글 작성 시간
 mybaby_reply_superno references mybaby_reply(mybaby_reply_no) on delete set null, -- 댓글 상위 그룹 번호
 mybaby_reply_groupno number default 0 not null, -- 댓글 그룹 번호
 mybaby_reply_depth number default 0 not null -- 댓글 차수
 );
---내새끼 댓글 작성자 추가
-ALTER TABLE MYBABY_reply add member_id references member(member_id) on delete set null;
+
 
 commit;
 
@@ -138,11 +144,13 @@ create sequence donation_seq;
 create table donation(
 donation_no number primary key,
 donation_writer references member(member_id) on delete set null,
-donation_price number not null,
+donation_now_fund number not null,
+donation_total_fund number not null,
 donation_content varchar2(3000) not null,
 donation_time date default sysdate not null,
 donation_read number default 0 not null,
-donation_title varchar2(150) not null
+donation_title varchar2(150) not null,
+donation_type CHAR(8) DEFAULT 'donation' NOT NULL
 );
 
 commit;
@@ -168,7 +176,7 @@ create sequence donation_reply_seq;
 create table donation_reply(
 donation_reply_no number primary key,
 member_id references member(member_id) on delete set null,
-donation_no references donation(donation_no) on delete set null,
+donation_no references donation(donation_no) on delete cascade,
 donation_reply_content varchar2(1500) not null,
 donation_reply_time date default sysdate not null,
 donation_reply_superno references donation_reply(donation_reply_no) on delete set null,
@@ -177,6 +185,9 @@ donation_reply_depth number not null
 );
 
 commit;
+
+-- 댓글 게시판 참조 외래키 옵션 추가
+--ALTER TABLE donation_reply ADD CONSTRAINT donation_no_fk FOREIGN KEY(donation_no) references donation(donation_no) on delete cascade;
 
 -------------------------------------------------------------------------------------------------------------
 
@@ -251,7 +262,8 @@ shop_no references shop(shop_no) on delete cascade, -- 상품번호
 member_id references member(member_id) on delete cascade, -- 아이디
 shop_img_no references shop_img(shop_img_no) on delete cascade,
 cart_time date default sysdate not null, -- 담은시간
-cart_count number default 0 check(cart_count >= 0) not null --담은개수
+cart_count number default 0 check(cart_count >= 0) not null, --담은개수
+shop_goods varchar2(150)
 );
 
 commit;
@@ -269,6 +281,7 @@ history_time date default sysdate not null -- 주문일자
 );
 
 commit;
+-- shop_img_no 참조 여부 확인해야함
 
 -------------------------------------------------------------------------------------------------------------
 
@@ -305,10 +318,10 @@ commit;
 --인증 테이블
 create table certification(
     cert_email varchar2(40) primary key,
-    cert_serial char(6) not null,
+    cert_serial varchar2(60) not null,
     cert_time date default sysdate not null
 );
-ALTER TABLE certification MODIFY cert_serial varchar2(60); 
+--ALTER TABLE certification MODIFY cert_serial varchar2(60); 
 commit;
 
 -------------------------------------------------------------------------------------------------------------
@@ -333,7 +346,6 @@ commit;
 --휴면회원 테이블
 create table dormancy(
 dor_member_id varchar2(20) primary key,
-dor_member_pw varchar2(60) not null,
 dor_member_nick varchar2(45) not null,
 dor_member_phone char(13) not null,
 dor_member_email varchar2(40) not null,
