@@ -80,7 +80,7 @@
 	 				label: data.label,
 	 				data: thisMonthCountArray,
 	 				backgroundColor: [
-	 				    'rgba(255, 99, 132, 0.2)'
+	 					  'rgba(255, 206, 86, 0.2)'
 	 				],
 	 				borderColor: [
 	 					'rgba(255, 99, 132, 1)'
@@ -121,7 +121,7 @@
 	 	
 	 	//var chart = new Chart(펜객체, 차트옵션);
 	 	var monthly = new Chart(ctx, {
-	 		type: 'bar', //차트 유형
+	 		type: 'pie', //차트 유형
 	 		data: { //차트에 들어가는 데이터
 	 			labels: monthlyArray,
 	 			datasets: [{
@@ -224,19 +224,9 @@
 		<a type="button" class="btn btn-sm btn-outline-dark" href="${root}/admin/main">Back to Admin Menu</a>
 	</div>
 
-	<div class="mt-5 mb-5">
-		<canvas id="this-month" width="30%"></canvas>
-	</div>
-	
-	<div class="mt-5 mb-5">
-		<canvas id="monthly" width="30%"></canvas>
-	</div>
-	
-	<div class="mt-5 mb-5">
-		<canvas id="moy" width="30%"></canvas>
-	</div>
-	
-	
+	<div class="mb-5 container-600 container-center"><canvas id="this-month"></canvas></div>
+	<div class="mt-5 mb-5 container-500 container-center"><canvas id="monthly"></canvas></div>
+	<div class="mt-5 mb-5 container-700 container-center"><canvas id="moy"></canvas></div>
 
 </div>
 

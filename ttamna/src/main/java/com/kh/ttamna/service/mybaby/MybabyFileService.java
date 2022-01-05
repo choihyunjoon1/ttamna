@@ -8,4 +8,10 @@ public interface MybabyFileService {
 
 	int write(MybabyFileVO mybabyFileVO) throws IllegalStateException, IOException;
 
+	void delete(int mybabyNo);//파일삭제
+
+	void update(MybabyFileVO mybabyFileVO) throws IllegalStateException, IOException;
+	
+	
+
 }

@@ -1,9 +1,7 @@
 package com.kh.ttamna.controller.donation;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.kh.ttamna.entity.donation.DonationDto;
 import com.kh.ttamna.entity.donation.DonationReplyDto;
 import com.kh.ttamna.repository.donation.DonationReplyDao;
 
@@ -74,5 +73,19 @@ public class DonationReplyController {
 		
 		model.addAttribute("list", list);
 		return "donation/reply/list";
+	}
+	//더보기 페이지네이션 기능 처리
+	@GetMapping("/more")
+	@ResponseBody
+	public List<DonationReplyDto> more(
+			@RequestParam int donationNo,
+				@RequestParam(required =false, defaultValue = "1") int page,
+				@RequestParam(required =false, defaultValue = "12") int size
+			){
+		System.out.println("모어 컨트롤러 들어옴");
+		int endRow = page* size;
+		int startRow = endRow - (size - 1);
+		return donationReplyDao.listByPage(startRow, endRow, donationNo);
+		
 	}
 }

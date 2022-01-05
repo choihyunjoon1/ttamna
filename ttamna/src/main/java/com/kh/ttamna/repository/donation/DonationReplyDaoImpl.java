@@ -74,4 +74,13 @@ public class DonationReplyDaoImpl implements DonationReplyDao{
 		
 		sqlSession.update("donationReply.edit3", map);
 	}
+	
+	@Override//댓글 페이지네이션
+	public List<DonationReplyDto> listByPage(int startRow, int endRow, int donationNo) {
+		Map<String, Object> map = new HashMap<>();
+		map.put("donationNo", donationNo);
+		map.put("startRow", startRow);
+		map.put("endRow", endRow);
+		return sqlSession.selectList("donationReply.listByPage", map);
+	}
 }

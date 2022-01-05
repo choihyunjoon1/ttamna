@@ -6,6 +6,7 @@
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <script>
 
+
 </script>
 
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>

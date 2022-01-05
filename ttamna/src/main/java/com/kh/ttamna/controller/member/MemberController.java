@@ -92,7 +92,7 @@ public class MemberController {
 			int visitIdx = visitDao.sequence();
 			VisitDto visitDto = new VisitDto();
 			visitDto.setVisitIdx(visitIdx);
-			visitDto.setVisitId(memberDto.getMemberId());
+			visitDto.setVisitId(findDto.getMemberId());
 			//접속한지 하루가 지나지 않은 사용자에 대해서는 접속시간을 업데이트하고
 			//하루동안 접속한 기록이 없는 사용자는 등록처리하는 메소드를 사용
 			visitDao.allInOneLog(visitDto);
