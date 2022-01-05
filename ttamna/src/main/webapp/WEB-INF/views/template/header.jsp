@@ -124,7 +124,7 @@
 	            <!-- 오늘 방문자 수를 찍어 주는 영역 -->
 	           <div class="card" style="width:10rem; height:4.5rem;" align="center">
 				  <div class="card-body">
-				    <h6 class="card-title mb-1">오늘의 방문자</h6>
+				    <h6 class="card-title mb-1">오늘 방문 회원</h6>
 				    <div class="card-text dayLog mb-2"></div>
 				  </div>
 				</div>
