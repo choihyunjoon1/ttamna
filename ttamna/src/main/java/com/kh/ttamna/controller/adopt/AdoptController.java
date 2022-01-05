@@ -187,7 +187,7 @@ public class AdoptController {
 		AdoptDto adoptDto = adoptDao.detail(adoptNo);
 		//권한 확인 : 작성자와 세션의 아이디가 일치하거나 관리자일 경우 삭제 가능
 		if(adoptDto.getAdoptWriter().equals(uid) || grade.equals("관리자")) {
-			adoptImgDao.deleteImg(adoptNo); //adoptNo 게시판 번호에 해당하는 이미지 파일을 전부 삭제
+			//adoptImgDao.deleteImg(adoptNo); //adoptNo 게시판 번호에 해당하는 이미지 파일을 전부 삭제
 			adoptDao.delete(adoptNo);
 			//권한이 있으면 삭제처리하고 전체 목록으로 deleteSuccess 파라미터를 붙여서 리다이렉트
 			return "redirect: list?deleteSuccess";

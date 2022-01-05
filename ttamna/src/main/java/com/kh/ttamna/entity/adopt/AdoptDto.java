@@ -17,5 +17,6 @@ public class AdoptDto {
 	private Date adoptEnd; //입양공고 종료날짜
 	private String adoptKind; //동물의 품종 혹은 종류
 	private String adoptPlace; //구조장소
+	private String adoptType; //게시판 타입
 	
 }
