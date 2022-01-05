@@ -26,13 +26,13 @@
 			donation_no, 
 			donation_writer, donation_title, 
 			donation_total_fund, donation_now_fund, 
-			donation_content
+			donation_content,donation_type
 		) 
 		values(
 			${donationNo}, 
 			#{donationWriter}, #{donationTitle}, 
 			${donationTotalFund}, 0, 
-			#{donationContent} 
+			#{donationContent} ,'donation'
 		)
 	</insert>
 	

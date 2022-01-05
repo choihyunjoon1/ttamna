@@ -32,7 +32,7 @@ public class MybabyDaoImpl implements MybabyDao{
 
 	@Override
 	public List<MybabyDto> list() {
-		return sqlSession.selectList("mybaby.listPlusImg");
+		return sqlSession.selectList("mybaby.list");
 	}
 
 	//상세보기or검색
@@ -56,9 +56,10 @@ public class MybabyDaoImpl implements MybabyDao{
 		map.put("startRow",startRow);
 		map.put("endRow",endRow);
 		map.put("column", column);
+		System.out.println("column = "+map.get("column"));
 		map.put("keyword",keyword);
 		
-		return sqlSession.selectList("mybaby.listByPage",map);
+		return sqlSession.selectList("mybaby.listBySearchPage",map);
 	}
 
 	//더보기기능+목록조회
@@ -93,6 +94,15 @@ public class MybabyDaoImpl implements MybabyDao{
 	@Override
 	public List<MybabyDownVO> listByImg() {
 		return sqlSession.selectList("mybaby.listPlusImg");
+	}
+
+	@Override
+	public List<MybabyDownVO> searchPlusImg(Map<String, Object> param) {
+		Map<String, Object> data = new HashMap<>();
+		data.put("column",param.get("column"));
+		data.put("keyword",param.get("keyword"));
+	
+		return sqlSession.selectList("mybaby.searchList",data);
 	}
 	
 
