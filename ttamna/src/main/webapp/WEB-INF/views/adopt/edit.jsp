@@ -9,8 +9,9 @@
 <div class="container-700 container-center">
 
 	<div class="mt-5 mb-5"><h3>입양공고 등록</h3></div>
-
-	<form method="post">
+	
+	<form method="post" enctype="multipart/form-data">
+	<c:forEach var="adoptDto" items="${list}">
 	<input type="hidden" name="adoptNo" value="${adoptDto.adoptNo}">
 		<div class="input-group mb-3">
 		  <span class="input-group-text" id="basic-addon1">작성자</span>
@@ -37,9 +38,12 @@
 		<div class="input-group mb-3">
 		  <input type="file" name="attach" accept="image/*" class="form-control" id="inputGroupFile04" aria-describedby="inputGroupFileAddon04" aria-label="Upload">
 		  <button class="btn btn-outline-info upload" type="button" id="inputGroupFileAddon04">업로드</button>
+		</div>
+		<div class="input-group mb-3">
 		<c:if test="${adoptImgList != null}">
 			<c:forEach var="adoptImgDto" items="${adoptImgList}">
-				<img src="adoptImg?adoptImgNo=${adoptImgDto.adoptImgNo}&adoptNo=${adoptDto.adoptNo}" style="width:30%;">
+				<img src="adoptImg?adoptImgNo=${adoptImgDto.adoptImgNo}&adoptNo=${adoptImgDto.adoptNo}" style="width:30%;">
+				<a href="dropImg?adoptImgNo=${adoptImgDto.adoptImgNo}&adoptNo=${adoptImgDto.adoptNo}" class="btn btn-outline-info" type="button">삭제</a>
 			</c:forEach>
 		 </c:if>
 		</div>
@@ -52,8 +56,9 @@
 			<a type="button" href="${root}/adopt/" class="btn btn-outline-primary">목록</a>
 			<button type="reset" class="btn btn-outline-secondary">초기화</button>
 		</div>
+	</c:forEach>
 	</form>
-
+	
 </div>
 
 

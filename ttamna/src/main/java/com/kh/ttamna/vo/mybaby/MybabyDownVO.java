@@ -12,6 +12,7 @@ public class MybabyDownVO {
 	private String mybabyWriter;
 	private String mybabyRead;
 	private String mybabyReply;
+	private String mybabyType;
 	private int mybabyImgNo;
 	private String mybabyImgUpload;
 	private long mybabyImgSize;

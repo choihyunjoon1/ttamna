@@ -40,9 +40,20 @@
 	</select>	
 	
 	<!-- 파일 다운로드용 조회 -->
-		<select id="getFile" parameterType="int" resultType="AdoptImgDto">
+	<select id="getFile" parameterType="int" resultType="AdoptImgDto">
 		select * from adopt_img where adopt_img_no=#{adoptImgNo}
 	</select>
+	
+	<!-- 게시글 수정시 파일만 삭제 -->
+	<delete id="dropImg" parameterType="int">
+		delete adopt_img where adopt_img_no = #{adoptImgNo}
+	</delete>
 
+	<!-- 게시글 삭제시 해당게시판의 모든 파일 삭제
+	<delete id="deleteImg" parameterType="int">
+		delete adopt where adopt_no = #{adoptNo}
+	</delete>
+	 -->
+	
 </mapper>
 

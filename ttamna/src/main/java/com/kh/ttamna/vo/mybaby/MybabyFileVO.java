@@ -17,6 +17,7 @@ public class MybabyFileVO {
 	private String mybabyTitle;
 	private String mybabyContent;
 	private String mybabyTime;
+	private String mybabyType;
 	private List<MultipartFile> attach;
 	
 	//MybabyDto로 바꿔주는 메소드

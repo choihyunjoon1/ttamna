@@ -2,7 +2,9 @@ package com.kh.ttamna.controller.mybaby;
 
 import java.io.IOException;
 import java.net.URLEncoder;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ByteArrayResource;
@@ -73,22 +75,43 @@ public class mybabyController {
 	
 	
 	@RequestMapping("/")//목록페이지
-	public String defaultList(Model model) {
-		model.addAttribute("list", mybabyDao.list());
+	public String defaultList(
+											@RequestParam(required = false) String column,
+											@RequestParam(required = false) String keyword,
+											Model model) {
+		if(column !=null && keyword != null) {
+			System.out.println("검색실행1");
+			Map<String, Object> param = new HashMap<>();
+			param.put("column",column);
+			param.put("keyword",keyword);
+			List<MybabyDownVO> list = mybabyDao.searchPlusImg(param);
+			model.addAttribute("list", list);
+			System.out.println("list = "+param.toString());
+			model.addAttribute("column", column);
+			model.addAttribute("keyword", keyword);
+		}else {
+			List<MybabyDto> list = mybabyDao.list();
+			model.addAttribute("list",list);
+		}
 		return "mybaby/list";
 	}
 	
-//	@RequestMapping("/list")//목록페이지
-//	public String list(Model model) {
-//		List<MybabyDto> list = mybabyDao.list();
-//		model.addAttribute("list", list);
-//		
-//		return "mybaby/list";
-//	}
 	@RequestMapping("/list")
-	public String list(Model model) {
-		List<MybabyDownVO> list = mybabyDao.listByImg();
-		model.addAttribute("list",list);
+	public String list(@RequestParam(required = false) String column,
+								@RequestParam(required = false) String keyword,
+								Model model) {
+		if(column !=null && keyword != null) {
+			Map<String, Object> param = new HashMap<>();
+			param.put("column",column);
+			param.put("keyword",keyword);
+			
+			model.addAttribute("list", mybabyDao.searchPlusImg(param));
+//			model.addAttribute("column", column);
+//			model.addAttribute("keyword", keyword);
+		}else {
+			List<MybabyDto> list = mybabyDao.list();
+			model.addAttribute("list",list);
+		}
 		return "mybaby/list";
 	}
 	//게시글 삭제
@@ -126,9 +149,11 @@ public class mybabyController {
 				@RequestParam(required =false, defaultValue = "") String column,
 				@RequestParam(required =false, defaultValue = "") String keyword
 			){
+		System.out.println("more에서의 column = " + column);
 		int endRow = page* size;
 		int startRow = endRow - (size - 1);
 		if(column != null && keyword != null && !column.equals("") && !keyword.equals("")) {
+			System.out.println("더보기검색페이지진입");
 			return mybabyDao.listBySearchPage(startRow, endRow, column, keyword);
 		} else {
 			return mybabyDao.listByPage(startRow, endRow);

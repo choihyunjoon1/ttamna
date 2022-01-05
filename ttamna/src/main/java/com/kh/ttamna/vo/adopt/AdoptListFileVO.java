@@ -18,6 +18,7 @@ public class AdoptListFileVO {
 	private Date adoptEnd; //입양공고 종료날짜
 	private String adoptKind; //동물의 품종 혹은 종류
 	private String adoptPlace; //구조장소
+	private String adoptType;
 	private int adoptImgNo; //이미지 파일 번호
     private String adoptImgUpload; //이미지 파일 업로드 이름
     private long adoptImgSize; //이미지 파일 크기

@@ -61,11 +61,10 @@ public class AdoptFileServiceImpl implements AdoptFileService{
 	//파일 + 게시글 수정처리
 	@Override
 	public void updateWithFile(AdoptFileVO adoptFileVO) throws IllegalStateException, IOException {
-		
 		int adoptNo = adoptFileVO.getAdoptNo();
 		List<AdoptImgDto> adoptImgList = adoptFileVO.adoptImgDtoConverter(adoptNo);
 		//파일 제외한 일반 게시글 정보 수정 : 제목, 내용, 공고종료일, 품종, 구조장소
-		AdoptDto adoptDto = new AdoptDto();
+		AdoptDto adoptDto = adoptDao.detail(adoptNo);
 		adoptDto.setAdoptTitle(adoptFileVO.getAdoptTitle());
 		adoptDto.setAdoptEnd(adoptFileVO.getAdoptEnd());
 		adoptDto.setAdoptKind(adoptFileVO.getAdoptKind());
