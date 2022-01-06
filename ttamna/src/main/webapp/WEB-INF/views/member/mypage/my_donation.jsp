@@ -4,7 +4,21 @@
 <c:set var="root" value="${pageContext.request.contextPath }"></c:set>
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 <link ref="stylesheet" type="text/css" href="${root }/resources/css/commons.css">
-
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+<script>
+	$(function(){
+		$(".new-browser").click(function(){
+			var tid = $(this).parent().siblings(".tid").text();
+			console.log(tid);
+			open("${pageContext.request.contextPath}/donation/kakao/search?tid="+tid, '', 'toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=no,resizable=no,copyhistory=no,width=700, height=730');
+		});
+		$(".new-browser-auto").click(function(){
+			var sid = $(this).parent().siblings(".sid").text();
+			console.log(sid);
+			open("${pageContext.request.contextPath}/donation/kakao/auto/search?sid="+sid, '', 'toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=no,resizable=no,copyhistory=no,width=700, height=730');
+		});
+	});
+</script>
 <div class="container-1000 container-center">
 	<div class="container">
 		<div class="align-self-center">
@@ -31,12 +45,12 @@
 						<c:forEach var="autopayDto" items="${payList}">
 						<c:if test="${autopayDto.memberId eq sessionScope.uid and autopayDto.payType eq '기부'}">
 						<tr onClick="location.href='#'">
-							<td>${autopayDto.tid}</td>
-							<td>${autopayDto.itemName}</td>
-							<td>${autopayDto.totalAmount}원</td>
-							<td>${autopayDto.status}</td>
+							<td class="tid">${autopayDto.tid}</td>
+							<td class="item-name">${autopayDto.itemName}</td>
+							<td class="total-amount">${autopayDto.totalAmount}원</td>
+							<td class="status">${autopayDto.status}</td>
 							<td>
-								<a href="${pageContext.request.contextPath}/donation/kakao/auto/search?tid=${autopayDto.tid}">조회</a>
+								<a class="new-browser">조회</a>
 								<c:if test="${autopayDto.status ne '전체취소'}">
 									<a href="${pageContext.request.contextPath}/donation/kakao/cancel?tid=${autopayDto.tid}&amount=${autopayDto.totalAmount}&payNo=${autopayDto.payNo}">취소</a>
 								</c:if>
@@ -51,7 +65,7 @@
 				<table class="table table-hover">
 					<thead>
 						<tr>
-							<th>기부유형</th>
+							<th>결제코드</th>
 							<th>기부중인게시판번호</th>
 							<th>기부금액</th>
 							<th>최초기부일</th>
@@ -63,13 +77,13 @@
 						<c:set var="list" value="${paginationVO.listOfAutopay }"></c:set>
 						<c:forEach var="autopayDto" items="${list}">
 						<tr onClick="location.href='#'">
-							<td>정기기부</td>
+							<td class="sid">${autopayDto.autoSid}</td>
 							<td>${autopayDto.donationNo}</td>
 							<td>${autopayDto.autoTotalAmount}원</td>
 							<td>${autopayDto.firstPaymentDate}</td>
 							<td>${autopayDto.payTimes}회차</td>
 							<td>
-								<a href="${pageContext.request.contextPath}/donation/kakao/auto/search?sid=${autopayDto.autoSid}">조회</a>
+								<a class="new-browser-auto">조회</a>
 								<a href="${pageContext.request.contextPath}/donation/kakao/auto/inactive?sid=${autopayDto.autoSid}">중지</a>
 							</td>
 						</tr>

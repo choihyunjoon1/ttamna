@@ -27,6 +27,7 @@ import com.kh.ttamna.vo.kakaopay.KakaoPayAutoPayMentInactiveResponseVo;
 import com.kh.ttamna.vo.kakaopay.KakaoPayCancelResponseVo;
 import com.kh.ttamna.vo.kakaopay.KakaoPayReadyRequestVo;
 import com.kh.ttamna.vo.kakaopay.KakaoPayReadyResponseVo;
+import com.kh.ttamna.vo.kakaopay.KakaoPaySearchResponseVo;
 
 @Controller
 @RequestMapping("/donation/kakao")
@@ -153,6 +154,13 @@ public class PayController {
 		donationService.updatePrice(sid);//sid를 넣으면 그걸로 아이디를 찾고 금액을 -로 업데이트 해주는 서비스
 		autoDonationDao.autoPayDelete(sid);
 		return "redirect:/member/mypage/my_donation";
+	}
+	
+	@GetMapping("/search")//단건결제 조회 요청
+	public String search(@RequestParam String tid, Model model) throws URISyntaxException {
+		KakaoPaySearchResponseVo responseVo = kakaoService.search(tid);
+		model.addAttribute("searchList", responseVo);
+		return "donation/kakao/search";
 	}
 	
 	@GetMapping("/cancel")//결제 취소 요청
