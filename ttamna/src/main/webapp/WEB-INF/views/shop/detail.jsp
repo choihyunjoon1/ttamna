@@ -201,7 +201,7 @@ $(function(){
     </div>
 
     <div class="col-12">
-        <form action="reply_shop/insert" method="post">
+        <form action="${pageContext.request.contextPath}/reply_shop/insert" method="post">
            <input type="hidden" name="shopNo" value="${detail.shopNo}">
            <input type="hidden" name="memberId" value="${sessionScope.uid}">
             
