@@ -24,13 +24,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.kh.ttamna.entity.donation.DonationDto;
 import com.kh.ttamna.entity.donation.DonationImgDto;
-import com.kh.ttamna.entity.donation.DonationReplyDto;
 import com.kh.ttamna.repository.donation.DonationDao;
 import com.kh.ttamna.repository.donation.DonationImgDao;
 import com.kh.ttamna.repository.donation.DonationReplyDao;
 import com.kh.ttamna.service.donation.DonationFileService;
+import com.kh.ttamna.service.pagination.PaginationService;
 import com.kh.ttamna.vo.donation.DonationUploadVo;
-import com.kh.ttamna.vo.pagination.PaginationVO;
 
 @Controller
 @RequestMapping("/donation")
@@ -48,6 +47,11 @@ public class DonationController {
 	
 	@Autowired
 	private DonationReplyDao donationReplyDao;
+	
+	@Autowired
+	private PaginationService paginationService;
+	
+	
 	
 	@RequestMapping("/")//목록페이지
 	public String defaultList(@RequestParam(required = false) String column,
@@ -92,13 +96,6 @@ public class DonationController {
 		data.put("donationNo", donationNo);
 		model.addAttribute("donationDto", donationDao.detailOrSearch(data));
 		model.addAttribute("donationImgDtoList", donationImgDao.getList(donationNo));
-		PaginationVO  paginationVO = new PaginationVO() ;
-		int count = donationReplyDao.count(donationNo);
-		paginationVO.setCount(count);
-		paginationVO.calculator();
-		List<DonationReplyDto> list = donationReplyDao.pagenation(paginationVO.getStartRow(), paginationVO.getEndRow(),donationNo);
-		model.addAttribute("replyDto", list);
-		model.addAttribute("paginationVO", paginationVO);
 		return "donation/detail";
 		
 	}

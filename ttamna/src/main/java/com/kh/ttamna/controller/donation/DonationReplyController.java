@@ -19,7 +19,7 @@ import com.kh.ttamna.repository.donation.DonationReplyDao;
 import com.kh.ttamna.vo.pagination.PaginationVO;
 
 @Controller
-//@RequestMapping("donation/reply")
+@RequestMapping("/donation_reply")
 public class DonationReplyController {
 
 	//데이터 등록 요청을 하기위해서는 PostMapping을 이용하고
@@ -35,7 +35,7 @@ public class DonationReplyController {
 		return "redirect:/donation/detail?donationNo="+donationNo;
 	}
 	
-	@PostMapping("/delete")
+	//@PostMapping("/delete")
 	public String delete(@RequestParam int donationReplyNo) {
 		donationReplyDao.delete(donationReplyNo);
 		
@@ -67,7 +67,7 @@ public class DonationReplyController {
 		donationReplyDao.insert(donationReplyDto);
 		return "redirect:/donation/detail?donationNo=" + donationReplyDto.getDonationNo();
 	}
-	@GetMapping("/list")
+	//@GetMapping("/list")
 	public String list(Model model,@ModelAttribute PaginationVO paginationVO,@RequestParam int donationNo) throws Exception {
 //		model.addAttribute(JSP에서 부를 이름, 데이터);
 		int count = donationReplyDao.count(donationNo);
@@ -83,8 +83,9 @@ public class DonationReplyController {
 	
 		return "donation/detail?donationNo="+donationNo;
 	}
+	
 	//더보기 페이지네이션 기능 처리
-	@GetMapping("/more")
+	@PostMapping("/more")
 	@ResponseBody
 	public List<DonationReplyDto> more(
 			@RequestParam int donationNo,
