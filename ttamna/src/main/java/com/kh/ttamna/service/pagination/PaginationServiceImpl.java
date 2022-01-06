@@ -8,9 +8,11 @@ import org.springframework.stereotype.Service;
 import com.kh.ttamna.entity.donation.AutoPayMentDto;
 import com.kh.ttamna.entity.donation.DonationReplyDto;
 import com.kh.ttamna.entity.member.MemberDto;
+import com.kh.ttamna.entity.payment.PaymentDto;
 import com.kh.ttamna.repository.donation.AutoDonationDao;
 import com.kh.ttamna.repository.donation.DonationReplyDao;
 import com.kh.ttamna.repository.member.MemberDao;
+import com.kh.ttamna.repository.payment.PaymentDao;
 import com.kh.ttamna.vo.pagination.PaginationVO;
 
 @Service
@@ -25,12 +27,15 @@ public class PaginationServiceImpl implements PaginationService{
 	@Autowired 
 	private DonationReplyDao donationReplyDao;
 	
+	@Autowired
+	private PaymentDao payDao;
+	
 	//전체 목록 + 검색 목록 + 페이지네이션 처리
 	@Override
 	public PaginationVO memberListPaging(PaginationVO paginationVO) throws Exception {
 		
 		int count = memberDao.count(paginationVO.getColumn(), paginationVO.getKeyword());
-		paginationVO.setPageSize(15);
+		paginationVO.setPageSize(1);
 		paginationVO.setBlockSize(10);
 		paginationVO.setCount(count);
 		paginationVO.calculator();
@@ -44,12 +49,25 @@ public class PaginationServiceImpl implements PaginationService{
 	@Override
 	public PaginationVO apmListPaging(PaginationVO paginationVO,String memberId) throws Exception {
 		int count = autoDao.count(memberId);
-		paginationVO.setPageSize(15);
+		paginationVO.setPageSize(1);
 		paginationVO.setBlockSize(10);
 		paginationVO.setCount(count);
 		paginationVO.calculator();
 		List<AutoPayMentDto> list = autoDao.listPaging(memberId ,paginationVO.getStartRow(), paginationVO.getEndRow());
 		paginationVO.setListOfAutopay(list);
+	
+		return paginationVO;
+	}
+	//단건 기부 내역 목록 + 페이지네이션
+	@Override
+	public PaginationVO shortListPaging(PaginationVO paginationVO,String memberId) throws Exception {
+		int count = payDao.count(memberId);
+		paginationVO.setPageSize(1);
+		paginationVO.setBlockSize(10);
+		paginationVO.setCount(count);
+		paginationVO.calculator();
+		List<PaymentDto> list = payDao.listPaging(memberId ,paginationVO.getStartRow(), paginationVO.getEndRow());
+		paginationVO.setListOfShortPay(list);
 	
 		return paginationVO;
 	}

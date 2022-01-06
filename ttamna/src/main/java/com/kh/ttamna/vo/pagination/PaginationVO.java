@@ -6,6 +6,7 @@ import java.util.List;
 import com.kh.ttamna.entity.donation.AutoPayMentDto;
 import com.kh.ttamna.entity.donation.DonationReplyDto;
 import com.kh.ttamna.entity.member.MemberDto;
+import com.kh.ttamna.entity.payment.PaymentDto;
 
 import lombok.Data;
 
@@ -24,6 +25,7 @@ public class PaginationVO {
 	private List<MemberDto> listOfMember = new ArrayList<>(); //Member
 	private List<AutoPayMentDto> listOfAutopay = new ArrayList<>();//mypage/autoDonation
 	private List<DonationReplyDto> listOfDonaReply = new ArrayList<>();
+	private List<PaymentDto> listOfShortPay = new ArrayList<>();//mypage/shortDonation
 	
 	public void calculator() throws Exception {
 		//rownum 계산
@@ -65,4 +67,5 @@ public class PaginationVO {
 	public boolean columnIs(String column) {
 		return this.column != null && this.column.equals(column);
 	}
+
 }

@@ -193,14 +193,23 @@ public class MemberController {
 		return "member/mypage/order_detail";
 	}
 	
-	//기부내역
+	//정기기부내역
 	@GetMapping("/mypage/my_donation")
 	public String myDonation(HttpSession session, @ModelAttribute PaginationVO paginationVO,Model model) throws Exception {
 		String memberId = (String)session.getAttribute("uid");
 		PaginationVO listPaging = paginationService.apmListPaging(paginationVO, memberId);
 		model.addAttribute("paginationVO", listPaging);
-		model.addAttribute("payList", paymentDao.list());
 		return "member/mypage/my_donation";
+	}
+	//단건기부내역
+	@GetMapping("/mypage/short_donation")
+	public String shortDonation(HttpSession session, @ModelAttribute PaginationVO paginationVO,Model model) throws Exception {
+		String memberId = (String)session.getAttribute("uid");
+		System.out.println("memberId = "+memberId);
+		PaginationVO listPaging = paginationService.shortListPaging(paginationVO, memberId);
+		System.out.println("listpaging = "+listPaging.toString());
+		model.addAttribute("paginationVO", listPaging);
+		return "member/mypage/short_donation";
 	}
 	
 	//회원탈퇴
