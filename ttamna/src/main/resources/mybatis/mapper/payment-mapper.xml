@@ -19,11 +19,21 @@
 		select payment_seq.nextval from dual
 	</select>
 
+	<!-- 상품결제 -->
 	<insert id="insert" parameterType="PaymentDto">
 		insert into payment values(
-			#{payNo}, #{tid}, #{memberId}, #{itemName}, #{totalAmount}, sysdate, '결제완료'
+			#{payNo}, #{tid}, #{memberId}, #{itemName}, #{totalAmount}, sysdate, '결제완료', '구매', null
 		)
 	</insert>
+	
+	<!-- 기부 -->
+	<insert id="insertDonation" parameterType="PaymentDto">
+		insert into payment values(
+			#{payNo}, #{tid}, #{memberId}, '1회 기부', #{totalAmount}, sysdate, '결제완료', '기부',  #{donationNo}
+		)
+	</insert>
+	
+	
 	
 	<select id="list" resultType="PaymentDto">
 		select * from payment order by pay_no desc
@@ -46,7 +56,7 @@
 	 -->
 	<update id="refresh" parameterType="int">
 		update payment
-<!-- 	set status = '결제완료' or '부분취소' or '전체취소' -->
+	<!-- 	set status = '결제완료' or '부분취소' or '전체취소' -->
 		set status = 
 		case
 			when (select count(*) from pay_detail where pay_no = #{no}) = (select count(*) from pay_detail where pay_no = #{payNo} and status = '결제') 
@@ -56,6 +66,11 @@
 			else '부분취소'
 		end
 		where pay_no = #{payNo}
+	</update>
+	
+	<!-- 기부 취소 -->
+	<update id="cancelDonation" parameterType="int">
+		update payment set status = '전체취소' where pay_no = ${payNo}
 	</update>
 	
 </mapper>
