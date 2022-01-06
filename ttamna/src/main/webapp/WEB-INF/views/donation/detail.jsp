@@ -7,30 +7,6 @@
 	
 	$(function(){
 		
-<<<<<<< HEAD
-		var uid = "${sessionScope.uid}";
-=======
-		
-		$(".edit").hide();
-		$(".change-cancel").hide();
-		$(".content-change-real").hide();
-		$(".content-change").click(function(e){
-			e.preventDefault();
-			$(this).prev().show();
-			$(this).next().next().show();
-			$(this).prev().prev().hide();
-			$(this).next().show();
-			$(this).hide();
-		});
-		$(".change-cancel").click(function(e){
-			e.preventDefault();
-			$(".content-change").show();
-			$(".edit").hide();
-			$(".replyDto").show();
-			$(".change-cancel").hide();
-			$(".content-change-real").hide();
-		});
-		
 		$(".agree").click(function(){
 			var isAgree = confirm("*정기기부 안내* 정기기부는 시작 날짜에 관계없이 매달 10일 자동결제가 진행됩니다 이점 유의하시기 바랍니다.");
 			if(isAgree){
@@ -44,35 +20,9 @@
 			}
 		});
 		
-		$(".content-change-real").click(function(e){
-			e.preventDefault();
-			var number = $(this).attr("data-data")
-			
-			var replyNo = $("#replyNo"+number).val();
-			var replyContent = $("#replyContent"+number).val();
-			var donationNo = $("#donationNo"+number).val();
-			
-			$.ajax({
-				url : "${pageContext.request.contextPath}/donation/reply/edit", 
-				type : "post",
-				data : {
-					replyNo : replyNo ,
-					replyContent : replyContent,
-					donationNo : donationNo
-				},
-				success:function(resp){
-					$("#content"+replyNo).text("");
-					$("#content"+replyNo).text(resp[0]);
-					$(".change-cancel").click();
-				},
-				error:function(e){
-					console.log("실패했어용");
-				}
-			});
-		});
-		
-
->>>>>>> branch 'main' of https://github.com/choihyunjoon1/ttamna
+	
+		//댓글 목록 더보기 ajax
+		var uid = "${sessionScope.uid}";
 		var page = 1;	
 		var size = 12;
 		var donationNo = $(".donation-no").val();
