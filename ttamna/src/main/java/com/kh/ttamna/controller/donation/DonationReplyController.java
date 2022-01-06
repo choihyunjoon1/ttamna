@@ -67,6 +67,7 @@ public class DonationReplyController {
 		donationReplyDao.insert(donationReplyDto);
 		return "redirect:/donation/detail?donationNo=" + donationReplyDto.getDonationNo();
 	}
+	
 	//@GetMapping("/list")
 	public String list(Model model,@ModelAttribute PaginationVO paginationVO,@RequestParam int donationNo) throws Exception {
 //		model.addAttribute(JSP에서 부를 이름, 데이터);
