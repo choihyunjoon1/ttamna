@@ -3,7 +3,6 @@ package com.kh.ttamna.repository.payment;
 import java.util.List;
 
 import com.kh.ttamna.entity.payment.PaymentDto;
-import com.kh.ttamna.entity.shop.ShopDto;
 
 public interface PaymentDao {
 	int seq();
@@ -19,4 +18,8 @@ public interface PaymentDao {
 	void refresh(int payNo);
 
 	void cancelDonation(int payNo);
+
+	int count(String memberId);
+
+	List<PaymentDto> listPaging(String memberId, int startRow, int endRow);
 }

@@ -1,7 +1,11 @@
 package com.kh.ttamna.controller.member;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -9,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.kh.ttamna.entity.member.MemberDto;
 import com.kh.ttamna.repository.member.MemberDao;
 import com.kh.ttamna.repository.member.VisitDao;
+import com.kh.ttamna.service.pagination.PaginationService;
 import com.kh.ttamna.vo.chart.VisitTotalChartVO;
 
 @RestController
@@ -20,8 +25,6 @@ public class AjaxController {
 	
 	@Autowired
 	private VisitDao visitDao;
-	
-
 	
 	//아이디 중복 검사 ajax
 	@GetMapping("/ajaxId")
@@ -121,6 +124,8 @@ public class AjaxController {
 		 chartVO.setDataset(visitDao.moy());
 		 return chartVO;
 	 }
+	 
+	
 	 
 
 }

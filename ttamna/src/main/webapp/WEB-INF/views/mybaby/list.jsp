@@ -57,7 +57,7 @@ $(function(){
 						"<br>"+
 						"<span><a href=detail?mybabyNo="+resp[i].mybabyNo+">"+resp[i].mybabyTitle+"</a></span>" +
 						"<br>"+
-						"<span>"+resp[i].mybabyContent+"</span>" +
+						"<span>"+resp[i].mybabyTime.substring(0,10)+"</span>" +
 						"<br>"
 					+"</div>";
 					$(".result").append(divCol);
