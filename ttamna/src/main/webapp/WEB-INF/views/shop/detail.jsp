@@ -201,21 +201,18 @@ $(function(){
     </div>
 
     <div class="col-12">
-        <form action="reply/insert" method="post">
-            <c:forEach var="shopDto" items="${shopDto}">
-                <input type="hidden" name="shopNo"
-                    value="${shopDto.shopNo}">
+        <form action="reply_shop/insert" method="post">
+           <input type="hidden" name="shopNo" value="${detail.shopNo}">
            <input type="hidden" name="memberId" value="${sessionScope.uid}">
-            </c:forEach>
             
             댓글 쓰기
-            <textarea class="form-control" " row="3" name="shopReplyContent"></textarea> 
+            <textarea class="form-control" row="3" name="shopReplyContent"></textarea> 
             
             <div class="right">
-            <input type="submit" class="reply btn btn-primary" value="등록">
-        </div>
-</form>
-</div>
+            	<input type="submit" class="reply btn btn-primary" value="등록">
+        	</div>
+		</form>
+	</div>
 <div class="row mt-3">
 		<div class="col mt-3">
 			<button type="button" class="btn btn-link disabled">더보기</button>

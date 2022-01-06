@@ -137,15 +137,12 @@
         </form>
     </div>
     <div class="col-12">
-        <form action="reply/insert" method="post">
-            <c:forEach var="mybabyDto" items="${mybabyDto}">
-                <input type="hidden" name="mybabyNo"
-                    value="${mybabyDto.mybabyNo}">
+        <form action="${root}/reply_mybaby/insert" method="post">
+           <input type="hidden" name="mybabyNo" value="${mybaby.mybabyNo}">
            <input type="hidden" name="memberId" value="${sessionScope.uid}">
-            </c:forEach>
             
             댓글 쓰기
-            <textarea class="form-control" " row="3" name="mybabyReplyContent"></textarea> 
+            <textarea class="form-control" row="3" name="mybabyReplyContent"></textarea> 
             
             <div class="right">
             <input type="submit" class="reply btn btn-primary" value="등록">
