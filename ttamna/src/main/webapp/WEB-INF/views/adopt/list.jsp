@@ -167,6 +167,16 @@ $(function(){
 		</div>
 	</div>
 	
+	<!-- 검색 목록일 경우 전체 목록으로 돌아가기 버튼 보여주기 -->
+	<c:if test="${param.column != null }">
+	<div class="row mt-3 mb-5">
+		<div class="col mt-3">
+			<a href="${root}/adopt/" type="button" class="justify-content-md btn btn-primary">Back To List</a>
+		</div>
+	</div>
+	</c:if>
+	
+	
 </div>
 
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>

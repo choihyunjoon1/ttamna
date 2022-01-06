@@ -54,6 +54,58 @@
 				}
 			});
 		});
+		
+
+		var page = 1;	
+		var size = 12;
+		var donationNo = $(".donation-no").val();
+		//더보기 버튼 클릭시 이벤트 발생
+		$(".more-btn").click(function(){
+			loadList(page, size);
+			page++;
+		});
+		
+		//강제 1회 클릭
+		$(".more-btn").click();
+		
+		function loadList(pageValue, sizeValue){
+			$.ajax({
+				url : "${pageContext.request.contextPath}/donation_reply/more",	
+				type : "post",
+				data : {
+					page : pageValue,
+					size : sizeValue,
+					donationNo : donationNo
+				},
+				dataType : "json",
+				success:function(resp){
+					console.log("댓글 더보기 성공", resp);
+					
+					//데이터가 sizeValue보다 적은 개수가 왔다면 더보기 버튼을 삭제
+					if(resp.length < size){
+						$(".more-btn").remove();
+					}
+				
+					for(var i=0 ; i < resp.length ; i++){
+						
+							var divCol = "<div>"+ resp[i].donationReplyNo+"</div>"
+											+"<div>"+ resp[i].memberId+"</div>"
+											+"<div>"+ resp[i].donationReplyTime+"</div>"
+											+"<div>"+ resp[i].donationReplyContent+"</div>"
+											+"<button class='reply content-change btn btn-primary'>수정</button>"
+				                            +"<a href='${pageContext.request.contextPath}/donation_reply/delete?donationReplyNo="+resp[i].donationReplyNo+"&donationNo="+resp[i].donationNo+"' class='reply btn btn-secondary'>삭제하기</a>"
+											+"<div> ------------------------------------------------------------------</div>";
+
+							
+						$(".result").append(divCol);
+					}
+					
+				},
+				error:function(e){
+					console.log("댓글 더보기 실패", e);
+				}
+			});
+		}
 	});
 	
 
@@ -72,6 +124,7 @@
 		<div class="col">
 			<c:forEach var="donationDto" items='${donationDto}'>
 				<div class="row">
+				<input type="hidden" class="donation-no" value="${donationDto.donationNo}">
 					<div class="col-5">
 					<c:if test="${donationImgDtoList ne null}">
 						<c:forEach var="donationImgDto" items="${donationImgDtoList}">
@@ -137,10 +190,10 @@
 						<textarea class="form-control"  row="3" name="donationReplyContent"id="replyContent${replyDto.donationReplyNo}">${replyDto.donationReplyContent}</textarea> 
             
 					</div>
-                            <a href="#" class="reply content-change btn btn-primary">수정</a>
-                            <a href="#" class="reply content-change-real btn btn-primary" data-data="${replyDto.donationReplyNo}">수정하기</a>
-                            <a href="#" class="reply change-cancel btn btn-primary">취소</a> 
-                            <a href="reply/delete?donationReplyNo=${replyDto.donationReplyNo}&donationNo=${replyDto.donationNo}" class="reply btn btn-secondary">삭제하기</a>
+<!--                             <a href="#" class="reply content-change btn btn-primary">수정</a> -->
+<%--                             <a href="#" class="reply content-change-real btn btn-primary" data-data="${replyDto.donationReplyNo}">수정하기</a> --%>
+<!--                             <a href="#" class="reply change-cancel btn btn-primary">취소</a>  -->
+<%--                             <a href="reply/delete?donationReplyNo=${replyDto.donationReplyNo}&donationNo=${replyDto.donationNo}" class="reply btn btn-secondary">삭제하기</a> --%>
 
                     </c:if>
                
@@ -162,26 +215,20 @@
             <input type="submit" class="reply btn btn-primary" value="등록">
         </div>
 </form>
-</div>
-<div class="row mt-3">
-	<nav aria-label="Page navigation example">
-  		<ul class="pagination justify-content-end">
-		
-	
-			<li class="page-item"><a class="page-link" href="#">Prev</a></li>
-			
-			<!-- 페이지 네비게이터 -->
-			<c:forEach var="i" begin="${paginationVO.getStartBlock()}" end="${paginationVO.getRealLastBlock()}" step="1">
-						<!-- 목록용 링크 -->
-				    	<li class="page-item"><a class="page-link" href="detail?Replypage=${i}&donationNo=${param.donationNo}">${i}</a></li>
-			</c:forEach>
-			<!-- 다음 -->
-			<!-- 목록용 링크 -->
-			
-			<li class="page-item"><a class="page-link" href="#">Next</a></li>
-		  </ul>
-	</nav>
+
+	<!-- 댓글목록 표시 위치 -->		
+	<div class="row mt-3 mb-5 result">
 	</div>
+	<!-- 댓글 더보기 버튼 -->
+	<div class="row mt-3 mb-5">
+		<div class="col mt-3">
+			<button type="button" class="justify-content-md btn btn-primary more-btn">더보기</button>
+		</div>
+	</div>
+	
+</div>
+
+
 </div>
 </div>
 
