@@ -39,8 +39,9 @@ public class PaginationServiceImpl implements PaginationService{
 	@Override
 	public PaginationVO apmListPaging(PaginationVO paginationVO,String memberId) throws Exception {
 		System.out.println("memberId = "+memberId);
+		System.out.println("apmListPaging들어옴");
 		int count = autoDao.count(memberId);
-		paginationVO.setPageSize(1);
+		paginationVO.setPageSize(2);
 		paginationVO.setBlockSize(10);
 		paginationVO.setCount(count);
 		paginationVO.calculator();

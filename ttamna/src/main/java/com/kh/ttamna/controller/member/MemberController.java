@@ -1,12 +1,10 @@
 package com.kh.ttamna.controller.member;
 
 import java.net.URISyntaxException;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
-import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,15 +13,15 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-
+import com.kh.ttamna.entity.donation.AutoPayMentDto;
 import com.kh.ttamna.entity.member.DormancyDto;
 import com.kh.ttamna.entity.member.MemberDto;
 import com.kh.ttamna.entity.member.VisitDto;
 import com.kh.ttamna.entity.payment.PaymentDetailDto;
 import com.kh.ttamna.entity.payment.PaymentDto;
-import com.kh.ttamna.repository.cart.CartDao;
 import com.kh.ttamna.repository.member.DormancyDao;
 import com.kh.ttamna.repository.member.MemberDao;
 import com.kh.ttamna.repository.member.VisitDao;
@@ -196,13 +194,24 @@ public class MemberController {
 	}
 	
 	//기부내역
-	@GetMapping("/mypage/my_donation")
+//	@GetMapping("/mypage/my_donation")
 	public String myDonation(HttpSession session, @ModelAttribute PaginationVO paginationVO,Model model) throws Exception {
+		System.out.println("순서2번");
+
 		String memberId = (String)session.getAttribute("uid");
 		PaginationVO listPaging = paginationService.apmListPaging(paginationVO, memberId);
+		System.out.println("순서3번");
+
 		model.addAttribute("paginationVO", listPaging);
+		System.out.println("순서4번");
+
 		return "member/mypage/my_donation";
 	}
+	@GetMapping("/mypage/my_donation")
+	public String myDonation() {
+		return "member/mypage/my_donation";
+	}
+	
 	//회원탈퇴
 	@GetMapping("/mypage/quit")
 	public String quit(HttpSession session,Model model) {
@@ -267,6 +276,18 @@ public class MemberController {
 		return "redirect:/member/mypage/order_detail?payNo="+payNo;
 		
 	}
+	 //정기결제용 ajax(마이페이지 정기결제 페이지네이션)
+	 @PostMapping("/mypage/my_donation/autopay")
+	 @ResponseBody
+	 public List<AutoPayMentDto> autoPaging(HttpSession session,@ModelAttribute PaginationVO paginationVO) throws Exception {
+		 System.out.println("requestmapping 안에 들어옴");
+		 String memberId = (String)session.getAttribute("uid");
+		 PaginationVO listPaging = paginationService.apmListPaging(paginationVO, memberId);
+		 System.out.println("paginationService 안에서나옴");
+		 System.out.println("listPaging = "+listPaging.toString());
+		 
+		 return listPaging.getListOfAutopay();
+	 }
 
 
 }

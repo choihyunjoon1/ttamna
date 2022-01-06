@@ -4,7 +4,69 @@
 <c:set var="root" value="${pageContext.request.contextPath }"></c:set>
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 <link ref="stylesheet" type="text/css" href="${root }/resources/css/commons.css">
-
+<script>
+	$(function(){
+		//정기결제용 ajax
+		autopayPaging();
+		
+		
+		function autopayPaging(page,size){
+			$.ajax({
+				url:"${pageContext.request.contextPath}/member/mypage/my_donation/autopay",
+				type:"post",
+				data:{
+					page:page,
+					size:size
+				},
+				dataType:"json",
+				success:function(resp){
+					console.log("성공",resp);
+					console.log($("table > .result"));
+					console.log(resp.length);
+					var a="";
+					//출력부분
+					for(var i=0;i<resp.length;i++){
+						a ="<tr class='apmListPaging'>"+
+							"<td>정기기부</td>"+
+							"<td>"+resp[i].donationNo+"</td>"+
+							"<td>"+resp[i].autoTotalAmount+"원</td>"+
+							"<td>"+resp[i].firstPaymentDate+"</td>"+
+							"<td>"+resp[i].payTimes+"회차</td>"+
+							"<td>"+
+								"<a href='${pageContext.request.contextPath}/donation/kakao/auto/search?sid="+resp[i].autoSid+"'>조회</a>"+
+								"<a href='${pageContext.request.contextPath}/donation/kakao/auto/inactive?sid="+resp[i].autoSid+"'>중지</a>"+
+							"</td>"+
+						"</tr>";
+					$("table > .result").append(a);
+					}
+				},
+				error:function(e){
+					console.log("실패",e);
+				}
+			});
+		}
+		//단건결제용 ajax
+		function donationPaging(page,size){
+			$.ajax({
+				url:"${pageContext.request.contextPath}/ajax/donation",
+				type:"get",
+				data:{
+					page:page,
+					size:size
+				},
+				dataType:"json",
+				success:function(resp){
+					console.log("성공",resp);
+					
+					
+				},
+				error:function(e){
+					console.log("실패",e);
+				}
+			});
+		}
+	});
+</script>
 <div class="container-1000 container-center">
 	<div class="container">
 		<div class="align-self-center">
@@ -28,21 +90,8 @@
 							<th>비고</th>
 						</tr>
 					</thead>
-					<tbody>
-						<c:set var="list" value="${paginationVO.listOfAutopay }"></c:set>
-						<c:forEach var="autopayDto" items="${list}">
-						<tr onClick="location.href='#'">
-							<td>정기기부</td>
-							<td>${autopayDto.donationNo}</td>
-							<td>${autopayDto.autoTotalAmount}원</td>
-							<td>${autopayDto.firstPaymentDate}</td>
-							<td>${autopayDto.payTimes}회차</td>
-							<td>
-								<a href="${pageContext.request.contextPath}/donation/kakao/auto/search?sid=${autopayDto.autoSid}">조회</a>
-								<a href="${pageContext.request.contextPath}/donation/kakao/auto/inactive?sid=${autopayDto.autoSid}">중지</a>
-							</td>
-						</tr>
-						</c:forEach>
+					<tbody class="result">
+						
 					</tbody>
 				</table>
 				<!-- 페이지네이션 내비게이션 -->
