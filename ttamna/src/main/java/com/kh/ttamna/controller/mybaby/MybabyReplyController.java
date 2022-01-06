@@ -19,7 +19,7 @@ import com.kh.ttamna.entity.mybaby.MybabyReplyDto;
 import com.kh.ttamna.repository.mybaby.MybabyReplyDao;
 
 @Controller
-@RequestMapping("mybaby/reply")
+@RequestMapping("/reply_mybaby")
 public class MybabyReplyController {
 
 	//데이터 등록 요청을 하기위해서는 PostMapping을 이용하고
