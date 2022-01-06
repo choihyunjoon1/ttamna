@@ -1,12 +1,10 @@
 package com.kh.ttamna.controller.member;
 
 import java.net.URISyntaxException;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
-import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,15 +13,15 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-
+import com.kh.ttamna.entity.donation.AutoPayMentDto;
 import com.kh.ttamna.entity.member.DormancyDto;
 import com.kh.ttamna.entity.member.MemberDto;
 import com.kh.ttamna.entity.member.VisitDto;
 import com.kh.ttamna.entity.payment.PaymentDetailDto;
 import com.kh.ttamna.entity.payment.PaymentDto;
-import com.kh.ttamna.repository.cart.CartDao;
 import com.kh.ttamna.repository.member.DormancyDao;
 import com.kh.ttamna.repository.member.MemberDao;
 import com.kh.ttamna.repository.member.VisitDao;
@@ -195,15 +193,25 @@ public class MemberController {
 		return "member/mypage/order_detail";
 	}
 	
-	//기부내역
+	//정기기부내역
 	@GetMapping("/mypage/my_donation")
 	public String myDonation(HttpSession session, @ModelAttribute PaginationVO paginationVO,Model model) throws Exception {
 		String memberId = (String)session.getAttribute("uid");
 		PaginationVO listPaging = paginationService.apmListPaging(paginationVO, memberId);
 		model.addAttribute("paginationVO", listPaging);
-		model.addAttribute("payList", paymentDao.list());
 		return "member/mypage/my_donation";
 	}
+	//단건기부내역
+	@GetMapping("/mypage/short_donation")
+	public String shortDonation(HttpSession session, @ModelAttribute PaginationVO paginationVO,Model model) throws Exception {
+		String memberId = (String)session.getAttribute("uid");
+		System.out.println("memberId = "+memberId);
+		PaginationVO listPaging = paginationService.shortListPaging(paginationVO, memberId);
+		System.out.println("listpaging = "+listPaging.toString());
+		model.addAttribute("paginationVO", listPaging);
+		return "member/mypage/short_donation";
+	}
+	
 	//회원탈퇴
 	@GetMapping("/mypage/quit")
 	public String quit(HttpSession session,Model model) {

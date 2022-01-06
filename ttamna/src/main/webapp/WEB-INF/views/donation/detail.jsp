@@ -7,7 +7,72 @@
 	
 	$(function(){
 		
+<<<<<<< HEAD
 		var uid = "${sessionScope.uid}";
+=======
+		
+		$(".edit").hide();
+		$(".change-cancel").hide();
+		$(".content-change-real").hide();
+		$(".content-change").click(function(e){
+			e.preventDefault();
+			$(this).prev().show();
+			$(this).next().next().show();
+			$(this).prev().prev().hide();
+			$(this).next().show();
+			$(this).hide();
+		});
+		$(".change-cancel").click(function(e){
+			e.preventDefault();
+			$(".content-change").show();
+			$(".edit").hide();
+			$(".replyDto").show();
+			$(".change-cancel").hide();
+			$(".content-change-real").hide();
+		});
+		
+		$(".agree").click(function(){
+			var isAgree = confirm("*정기기부 안내* 정기기부는 시작 날짜에 관계없이 매달 10일 자동결제가 진행됩니다 이점 유의하시기 바랍니다.");
+			if(isAgree){
+				if(!$(this).prev().val()){
+					alert("기부 금액을 입력해주세요.");
+					return false;
+				}
+				return true;
+			}else{
+				return false;
+			}
+		});
+		
+		$(".content-change-real").click(function(e){
+			e.preventDefault();
+			var number = $(this).attr("data-data")
+			
+			var replyNo = $("#replyNo"+number).val();
+			var replyContent = $("#replyContent"+number).val();
+			var donationNo = $("#donationNo"+number).val();
+			
+			$.ajax({
+				url : "${pageContext.request.contextPath}/donation/reply/edit", 
+				type : "post",
+				data : {
+					replyNo : replyNo ,
+					replyContent : replyContent,
+					donationNo : donationNo
+				},
+				success:function(resp){
+					$("#content"+replyNo).text("");
+					$("#content"+replyNo).text(resp[0]);
+					$(".change-cancel").click();
+				},
+				error:function(e){
+					console.log("실패했어용");
+				}
+			});
+		});
+		
+
+>>>>>>> branch 'main' of https://github.com/choihyunjoon1/ttamna
 		var page = 1;	
 		var size = 12;
 		var donationNo = $(".donation-no").val();
@@ -127,7 +192,7 @@
 				<input type="hidden" name="donationNo" value="${donationDto.donationNo}">
 				<input type="hidden" name="partner_user_id" value="${sessionScope.uid}">
 				<input type="number" name="total_amount" class="form-control" min="1000" max="${donationDto.donationTotalFund*0.3}">
-				<input type="submit" value="정기기부하기" class="btn btn-primary">
+				<input type="submit" value="정기기부하기" class="btn btn-primary agree">
 				</c:forEach>
 			</form>
 		</div>
