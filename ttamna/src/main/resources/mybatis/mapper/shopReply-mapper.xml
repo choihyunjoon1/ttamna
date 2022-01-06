@@ -25,8 +25,8 @@
 			shop_reply_superno, shop_reply_groupno, shop_reply_depth -->
 	<!-- 댓글 작성 -->
 	<insert id="insert" parameterType="ShopReplyDto">
-		insert into shop_reply values( shop_reply_seq.nextval,
-			#{memberId}, ${shopNo}, #{shopReplyContent},
+		insert into shop_reply values( #{shopReplyNo},
+			#{memberId}, #{shopNo}, #{shopReplyContent},
 			sysdate, null, 0, 0
 		)
 		

@@ -140,7 +140,7 @@ public class KakaoPayServiceImpl implements KakaoPayService{
 		
 		HttpEntity<MultiValueMap<String, String>> entity = new HttpEntity<>(body, headers);
 		
-		URI uri = new URI("https://kapi.kakao.com/v1/payment/cancel");
+		URI uri = new URI("https://kapi.kakao.com/v1/payment/order");
 		
 		KakaoPaySearchResponseVo responseVo = template.postForObject(uri, entity, KakaoPaySearchResponseVo.class);
 		

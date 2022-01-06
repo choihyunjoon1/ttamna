@@ -18,7 +18,7 @@ public class ShopImgDaoImpl implements ShopImgDao{
 		private SqlSession sqlSession;
 		
 		// 저장 폴더
-		private File dir = new File("D:upload/shop");
+		private File dir = new File("D:/upload/shop");
 
 		@Override
 		public void save(ShopImgDto shopImgDto, MultipartFile multipartFile) throws IllegalStateException, IOException {

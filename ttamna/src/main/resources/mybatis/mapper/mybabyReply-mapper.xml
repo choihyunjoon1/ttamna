@@ -25,12 +25,23 @@
 			mybaby_reply_superno, mybaby_reply_groupno, mybaby_reply_depth -->
 	<!-- 댓글 작성 -->
 	<insert id="insert" parameterType="MybabyReplyDto">
-		insert into mybaby_reply values( mybaby_reply_seq.nextval,
-			#{memberId}, ${mybabyNo}, #{mybabyReplyContent},
-			sysdate, null, 0, 0
+		insert into mybaby_reply values( ${mybabyReplyNo},
+			 ${mybabyNo}, #{mybabyReplyContent},
+			sysdate, null, 0, 0, #{memberId}
 		)
 		
 	</insert>	
+	<!-- 
+MYBABY_REPLY_NO
+MYBABY_NO
+MYBABY_REPLY_CONTENT
+MYBABY_REPLY_TIME
+MYBABY_REPLY_SUPERNO
+MYBABY_REPLY_GROUPNO
+MYBABY_REPLY_DEPTH
+MEMBER_ID
+	 -->
+	
 	
 	<select id="list" resultType="MybabyReplyDto">
 		select * from mybaby_reply
