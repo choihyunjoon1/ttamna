@@ -94,6 +94,7 @@ public class DonationController {
 	public String detail(@RequestParam int donationNo, Model model) throws Exception {
 		Map<String, Object> data = new HashMap<>();
 		data.put("donationNo", donationNo);
+		model.addAttribute("donationNo", donationNo);
 		model.addAttribute("donationDto", donationDao.detailOrSearch(data));
 		model.addAttribute("donationImgDtoList", donationImgDao.getList(donationNo));
 		return "donation/detail";
