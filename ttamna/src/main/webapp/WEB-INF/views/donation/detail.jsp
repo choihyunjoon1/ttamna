@@ -28,6 +28,19 @@
 			$(".content-change-real").hide();
 		});
 		
+		$(".agree").click(function(){
+			var isAgree = confirm("*정기기부 안내* 정기기부는 시작 날짜에 관계없이 매달 10일 자동결제가 진행됩니다 이점 유의하시기 바랍니다.");
+			if(isAgree){
+				if(!$(this).prev().val()){
+					alert("기부 금액을 입력해주세요.");
+					return false;
+				}
+				return true;
+			}else{
+				return false;
+			}
+		});
+		
 		$(".content-change-real").click(function(e){
 			e.preventDefault();
 			var number = $(this).attr("data-data")
@@ -168,7 +181,7 @@
 				<input type="hidden" name="donationNo" value="${donationDto.donationNo}">
 				<input type="hidden" name="partner_user_id" value="${sessionScope.uid}">
 				<input type="number" name="total_amount" class="form-control" min="1000" max="${donationDto.donationTotalFund*0.3}">
-				<input type="submit" value="정기기부하기" class="btn btn-primary">
+				<input type="submit" value="정기기부하기" class="btn btn-primary agree">
 				</c:forEach>
 			</form>
 		</div>
