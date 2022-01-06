@@ -43,7 +43,7 @@
 					<c:forEach var="payDetailDto" items="${payDetailList}">
 					<tr>
 						<td><a href="${pageContext.request.contextPath}/shop/detail?shopNo=${payDetailDto.shopNo}">${payDetailDto.shopGoods}</a></td>
-						<td>${payDetailDto.quantity}</td>
+						<td>${payDetailDto.quantity}개</td>
 						<td>${payDetailDto.price}원</td>
 						<td>
 							<c:if test="${payDetailDto.status != '취소'}">

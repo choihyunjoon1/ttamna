@@ -4,12 +4,24 @@
 <c:set var="root" value="${pageContext.request.contextPath }"></c:set>
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 
+
+<script>
+	$(function(){
+		$(".sum").on("input", function(){
+			var price = $(this).prev().text();
+			var quantity = $(this).val();
+//			$(this).next().next().next().text("");
+			$(this).next().next().next().text("합계 : " + (price * quantity));
+		});	
+	});
+</script>
+
 <script>
 	$(function(){
 		$(".btn-primary").click(function(){
 			//하나도 체크되지 않은 경우는 중지
 			if($("input[name=shopNo]:checked").length == 0) return;
-			
+
 			//form을 임시로 만들어서 body에 추가(전송용)
 			//<form action="test" method="post"></form>
 			var form = $("<form>").attr("action", "${pageContext.request.contextPath}/shop/order/multibuy").attr("method", "post").addClass("send-form");
@@ -70,16 +82,17 @@
 		<c:forEach var="cartDto" items="${list}">
 			<div class="cart">
 						<input type="checkbox" name="shopNo" value="${cartDto.shopNo}">	
-						<input type="number" name="quantity">
 						<img src="${pageContext.request.contextPath}/shop/img?shopImgNo=${cartDto.shopImgNo}" width="100px;" height="70px;">
 						<span>${cartDto.shopGoods}</span>
+						<span class="price">${cartDto.shopPrice}</span>원
+						<input type="number" name="quantity"  value="${cartDto.cartCount}" class="sum">개
 						<a href="my_basket/delete?cartNo=${cartDto.cartNo}"><button class="btn btn-danger">삭제</button></a>		
+						<br><span class="total"></span>
 			</div>
 		</c:forEach>
 		<button class="btn btn-primary">구매하기</button>
 	</c:otherwise>
 </c:choose>
-		
 			</div>
 		</div>
 	</div>
