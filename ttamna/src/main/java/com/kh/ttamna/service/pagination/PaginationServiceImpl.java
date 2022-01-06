@@ -6,8 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.kh.ttamna.entity.donation.AutoPayMentDto;
+import com.kh.ttamna.entity.donation.DonationReplyDto;
 import com.kh.ttamna.entity.member.MemberDto;
 import com.kh.ttamna.repository.donation.AutoDonationDao;
+import com.kh.ttamna.repository.donation.DonationReplyDao;
 import com.kh.ttamna.repository.member.MemberDao;
 import com.kh.ttamna.vo.pagination.PaginationVO;
 
@@ -19,6 +21,9 @@ public class PaginationServiceImpl implements PaginationService{
 	
 	@Autowired
 	private AutoDonationDao autoDao;
+	
+	@Autowired 
+	private DonationReplyDao donationReplyDao;
 	
 	//전체 목록 + 검색 목록 + 페이지네이션 처리
 	@Override
@@ -48,6 +53,22 @@ public class PaginationServiceImpl implements PaginationService{
 		paginationVO.setListOfAutopay(list);
 	
 		return paginationVO;
+	}
+
+	//기부 댓글 페이지네이션
+	@Override
+	public PaginationVO donationReplyPaging(PaginationVO paginationVO, int donationNo) throws Exception {
+
+		int count = donationReplyDao.count(donationNo);
+		paginationVO.setPageSize(1);
+		paginationVO.setBlockSize(10);
+		paginationVO.setCount(count);
+		paginationVO.calculator();
+		List<DonationReplyDto> list = donationReplyDao.listByPage(paginationVO.getStartRow(), paginationVO.getEndRow(), donationNo);
+		paginationVO.setListOfDonaReply(list);
+		
+		return paginationVO;
+		
 	}
 
 }

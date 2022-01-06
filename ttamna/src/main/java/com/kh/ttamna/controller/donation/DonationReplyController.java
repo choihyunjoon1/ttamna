@@ -19,7 +19,7 @@ import com.kh.ttamna.repository.donation.DonationReplyDao;
 import com.kh.ttamna.vo.pagination.PaginationVO;
 
 @Controller
-@RequestMapping("donation/reply")
+//@RequestMapping("donation/reply")
 public class DonationReplyController {
 
 	//데이터 등록 요청을 하기위해서는 PostMapping을 이용하고
@@ -75,7 +75,7 @@ public class DonationReplyController {
 		System.err.println(count);
 		paginationVO.calculator();
 		List<DonationReplyDto> list = donationReplyDao.pagenation(paginationVO.getStartRow(), paginationVO.getEndRow(),donationNo);
-		paginationVO.setList(list);
+		paginationVO.setListOfDonaReply(list);
 		System.err.println(list);
 		model.addAttribute("list", list);
 		
