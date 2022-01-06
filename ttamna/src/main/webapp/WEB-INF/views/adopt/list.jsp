@@ -98,14 +98,26 @@ $(function(){
 	<c:if test="${param.deleteSuccess != null}">
 		<div class=" mb-3"><h6>입양공고 삭제 완료</h6></div>
 	</c:if>
+	<!-- 입양공고 등록버튼은 관리자와 보호소 등급만 사용할 수 있다 -->
 	<c:if test="${insertGrade}">
 		<div class="d-grid gap-1 d-md-flex justify-content-md-end">
 			<a href="${root}/adopt/write" class="btn btn-outline-primary">입양공고 등록</a>
 		</div>
 	</c:if>
 	</div>
+	
+	<!-- 게시물 표시 위치 -->		
+	<div class="row mt-3 mb-5 result">
+	</div>
+	
+	<div class="row mt-3 mb-5">
+		<div class="col mt-3">
+			<button type="button" class="justify-content-md btn btn-primary more-btn">더보기</button>
+		</div>
+	</div>
+	
+	<!-- 검색창 -->
 	<div class="container">
-	<!-- 입양공고 등록버튼은 관리자와 보호소 등급만 사용할 수 있다 -->
 			<form method="post">
 				<div class="input-group justify-content-end">
 					<div class="col-2">
@@ -155,16 +167,6 @@ $(function(){
 					</div>
 				</div>			
 			</form>
-	</div>
-	
-	<!-- 게시물 표시 위치 -->		
-	<div class="row mt-3 mb-5 result">
-	</div>
-	
-	<div class="row mt-3 mb-5">
-		<div class="col mt-3">
-			<button type="button" class="justify-content-md btn btn-primary more-btn">더보기</button>
-		</div>
 	</div>
 	
 	<!-- 검색 목록일 경우 전체 목록으로 돌아가기 버튼 보여주기 -->
