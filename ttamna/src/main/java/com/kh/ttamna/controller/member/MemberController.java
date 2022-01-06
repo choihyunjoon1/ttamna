@@ -194,21 +194,12 @@ public class MemberController {
 	}
 	
 	//기부내역
-//	@GetMapping("/mypage/my_donation")
+	@GetMapping("/mypage/my_donation")
 	public String myDonation(HttpSession session, @ModelAttribute PaginationVO paginationVO,Model model) throws Exception {
-		System.out.println("순서2번");
-
 		String memberId = (String)session.getAttribute("uid");
 		PaginationVO listPaging = paginationService.apmListPaging(paginationVO, memberId);
-		System.out.println("순서3번");
-
 		model.addAttribute("paginationVO", listPaging);
-		System.out.println("순서4번");
 		model.addAttribute("payList", paymentDao.list());
-		return "member/mypage/my_donation";
-	}
-	@GetMapping("/mypage/my_donation")
-	public String myDonation() {
 		return "member/mypage/my_donation";
 	}
 	
@@ -276,18 +267,6 @@ public class MemberController {
 		return "redirect:/member/mypage/order_detail?payNo="+payNo;
 		
 	}
-	 //정기결제용 ajax(마이페이지 정기결제 페이지네이션)
-	 @PostMapping("/mypage/my_donation/autopay")
-	 @ResponseBody
-	 public List<AutoPayMentDto> autoPaging(HttpSession session,@ModelAttribute PaginationVO paginationVO) throws Exception {
-		 System.out.println("requestmapping 안에 들어옴");
-		 String memberId = (String)session.getAttribute("uid");
-		 PaginationVO listPaging = paginationService.apmListPaging(paginationVO, memberId);
-		 System.out.println("paginationService 안에서나옴");
-		 System.out.println("listPaging = "+listPaging.toString());
-		 
-		 return listPaging.getListOfAutopay();
-	 }
 
 
 }

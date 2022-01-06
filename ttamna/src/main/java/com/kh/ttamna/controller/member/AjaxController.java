@@ -15,7 +15,6 @@ import com.kh.ttamna.repository.member.MemberDao;
 import com.kh.ttamna.repository.member.VisitDao;
 import com.kh.ttamna.service.pagination.PaginationService;
 import com.kh.ttamna.vo.chart.VisitTotalChartVO;
-import com.kh.ttamna.vo.pagination.PaginationVO;
 
 @RestController
 @RequestMapping("/ajax")
@@ -26,11 +25,6 @@ public class AjaxController {
 	
 	@Autowired
 	private VisitDao visitDao;
-	
-	@Autowired
-	private PaginationService paginationService;
-	
-
 	
 	//아이디 중복 검사 ajax
 	@GetMapping("/ajaxId")
