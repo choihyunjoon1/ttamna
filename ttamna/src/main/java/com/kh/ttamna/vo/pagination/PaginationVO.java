@@ -23,7 +23,7 @@ public class PaginationVO {
 	private int startBlock, finishBlock, lastBlock;
 	private List<MemberDto> listOfMember = new ArrayList<>(); //Member
 	private List<AutoPayMentDto> listOfAutopay = new ArrayList<>();//mypage/autoDonation
-	private List<DonationReplyDto> list = new ArrayList<>();
+	private List<DonationReplyDto> listOfDonaReply = new ArrayList<>();
 	
 	public void calculator() throws Exception {
 		//rownum 계산

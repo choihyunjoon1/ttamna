@@ -204,7 +204,7 @@ public class MemberController {
 
 		model.addAttribute("paginationVO", listPaging);
 		System.out.println("순서4번");
-
+		model.addAttribute("payList", paymentDao.list());
 		return "member/mypage/my_donation";
 	}
 	@GetMapping("/mypage/my_donation")

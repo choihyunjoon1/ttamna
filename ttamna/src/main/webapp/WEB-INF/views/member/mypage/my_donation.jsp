@@ -78,6 +78,37 @@
 			<!-- 사이드바 자리 -->
 			<jsp:include page="/WEB-INF/views/member/mypage/sidebar.jsp"></jsp:include>
 			<div class="col-8" style="width:80%;">
+				<!-- 단건결제 영역 -->
+				<table class="table table-hover">
+					<thead>
+						<tr>
+							<th>결제코드</th>
+							<th>기부유형</th>
+							<th>기부금액</th>
+							<th>결제상태</th>
+							<th>비고</th>
+						</tr>
+					</thead>
+					<tbody>
+						<c:forEach var="autopayDto" items="${payList}">
+						<c:if test="${autopayDto.memberId eq sessionScope.uid and autopayDto.payType eq '기부'}">
+						<tr onClick="location.href='#'">
+							<td>${autopayDto.tid}</td>
+							<td>${autopayDto.itemName}</td>
+							<td>${autopayDto.totalAmount}원</td>
+							<td>${autopayDto.status}</td>
+							<td>
+								<a href="${pageContext.request.contextPath}/donation/kakao/auto/search?tid=${autopayDto.tid}">조회</a>
+								<c:if test="${autopayDto.status ne '전체취소'}">
+									<a href="${pageContext.request.contextPath}/donation/kakao/cancel?tid=${autopayDto.tid}&amount=${autopayDto.totalAmount}&payNo=${autopayDto.payNo}">취소</a>
+								</c:if>
+							</td>
+						</tr>
+						</c:if>
+						</c:forEach>
+					</tbody>
+				</table>
+			
 				<!-- 정기결제 영역 -->
 				<table class="table table-hover">
 					<thead>

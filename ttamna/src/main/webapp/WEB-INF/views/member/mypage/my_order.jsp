@@ -38,9 +38,8 @@
 					</tr>
 				</thead>
 				<tbody >
-				
 					<c:forEach begin="0" end="9"  var="list" items="${list}">
-						<c:if test="${list.memberId eq sessionScope.uid}">
+						<c:if test="${list.memberId eq sessionScope.uid and list.payType ne '기부'}">
 					<tr>
 						<td>${list.tid}</td>
 						<td>${list.itemName}</td>

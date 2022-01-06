@@ -173,7 +173,7 @@
 			<!-- 페이지 네비게이터 -->
 			<c:forEach var="i" begin="${paginationVO.getStartBlock()}" end="${paginationVO.getRealLastBlock()}" step="1">
 						<!-- 목록용 링크 -->
-				    	<li class="page-item"><a class="page-link" href="detail?page=${i}&donationNo=${param.donationNo}">${i}</a></li>
+				    	<li class="page-item"><a class="page-link" href="detail?Replypage=${i}&donationNo=${param.donationNo}">${i}</a></li>
 			</c:forEach>
 			<!-- 다음 -->
 			<!-- 목록용 링크 -->

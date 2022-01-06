@@ -40,4 +40,15 @@ public class PaymentDaoImpl implements PaymentDao{
 		sqlSession.update("pay.refresh", payNo);
 	}
 
+	@Override
+	public void insertDonation(PaymentDto paymentDto) {
+		sqlSession.insert("pay.insertDonation", paymentDto);		
+	}
+
+	@Override
+	public void cancelDonation(int payNo) {
+		sqlSession.update("pay.cancelDonation", payNo);
+		
+	}
+
 }
