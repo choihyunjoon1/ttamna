@@ -8,271 +8,221 @@
 <script src="${root}/resources/js/address.js"></script>
 <!-- 비밀번호 토글 스크립트 -->
 <script type='text/javascript' src="${root}/resources/js/togglePw.js"></script>
-<!-- 입력값 정규표현식 검사 -->
-<%-- <script type='text/javascript' src="${root}/resources/js/input-regex-check.js"></script> --%>
-<!-- 비밀번호 일치여부 판별 스크립트 -->
-<script type='text/javascript' src="${root}/resources/js/pwEquals.js"></script>
+
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 
 <script>
- window.addEventListener("load", function(){
+ window.addEventListener("load", function(e){
+	e.preventDefault(); //기본 이벤트 먼저 방지
 	
+	//회원가입 form에 form-check 클래스 부여
 	var form  = document.querySelector('.form-check');
-	var idMessage = form.querySelector(".id-message");
+
 	var url = "${pageContext.request.contextPath}";
-    
-	//아이디 중복검사
-	form.querySelector(".input-id").addEventListener("blur", function(){
-	    var inputId = form.querySelector(".input-id").value;	
-	    if(inputId != ""){
-			ajaxId(inputId);
-	    }
-	});
-	function ajaxId(inputId){
-		$.ajax({
-			url : url + "/ajax/ajaxId",
-			type : "get",
-			data : {
-				inputId : inputId,
-			},
-			dataType : "text",
-			success:function(resp){
-				console.log("중복검사 요청 성공", resp);
-				if(resp == "NNNN"){
-					console.log("아이디 중복. 사용 불가능");
-					$(idMessage).text("아이디 중복. 다시 입력해 주세요");
-					$(".input-id").focus();
-					$(form).attr('onsubmit', 'event.preventDefault();');
-					console.log("event.preventDefault()");
-				}else if(resp == "YYYY"){
-					console.log("아이디 사용 가능");
-					$(idMessage).text("아이디 사용 가능");
-					$(form).attr('onsubmit', 'event.addEvenetListener();');
-				}
-			},
-			error:function(e){
-				console.log("중복검사 요청 실패", e);
-			}
-		});
-	}
-		
-	//닉네임 중복검사
-	var nickMessage = form.querySelector(".nick-message");
-	form.querySelector(".input-nick").addEventListener("blur", function(){
-	    var inputNick = form.querySelector(".input-nick").value;	
-	    if(inputNick != ""){
-			ajaxNick(inputNick);
-	    }
-	});
-	function ajaxNick(inputNick){
-		$.ajax({
-			url : url + "/ajax/ajaxNick",
-			type : "get",
-			data : {
-				inputNick : inputNick,
-			},
-			dataType : "text",
-			success:function(resp){
-				console.log("중복검사 요청 성공", resp);
-			
-				if(resp == "NNNN"){
-					console.log("닉네임 중복. 사용 불가능");
-					$(nickMessage).append("닉네임 중복. 다시 입력해 주세요");
-					$(".input-nick").focus();
-					$(form).attr('onsubmit', 'event.preventDefault();');
-					console.log("event.preventDefault()");
-				}else if(resp == "YYYY"){
-					console.log("닉네임 사용 가능");
-					$(nickMessage).text("닉네임 사용 가능");
-					$(form).attr('onsubmit', 'event.addEvenetListener();');
-				}
-			},
-			error:function(e){
-				console.log("중복검사 요청 실패", e);
-			}
-		});
-	}
+
+ 	//아이디 정규표현식 검사
+	form.querySelector(".input-id").addEventListener("blur", function(e){
+	     var regex = /^(?=[a-z].*)[a-z0-9_]{4,20}$/;
+	     var inputId = form.querySelector(".input-id").value;	
+	     var message = form.querySelector(".id-message");
+	     if(inputId != ""){
+	        if(regex.test(inputId)){
+	             console.log("아이디 정규표현식 검사 통과");
+	             //정규식 검사 통과 후 중복검사 진행
+	             $.ajax({
+					url : url + "/ajax/ajaxId",
+					type : "get",
+					data : {
+						inputId : inputId,
+					},
+					dataType : "text",
+					success:function(resp){
+						console.log("아이디 중복검사 요청 성공", resp);
+						//아이디 입력값이 빈값이 아닐 경우에만 중복검사 결과를 보여주기
+						if(resp == "NNNN"){
+							console.log("아이디 중복. 사용 불가능");
+							message.textContent = "아이디 중복. 다시 입력해 주세요";
+							$(".join-btn").prop('disabled', true);
+							$(".input-id").focus();
+						}else if(resp == "YYYY"){
+							console.log("아이디 사용 가능");
+							message.textContent = "아이디 사용 가능";
+	    					$(".join-btn").prop('disabled', false);
+						}
+					},
+					error:function(e){
+						console.log("아이디 중복검사 요청 실패", e);
+					}
+				});
+	         }else{
+	             console.log("아이디 정규표현식 검사 실패");
+	             $(".input-id").focus();
+	             message.textContent = "영문 소문자, 숫자, 특수문자_ 4~20자 이내로 입력해주세요. ";
+	         }
+	     }
+	 });
+	   
+	//비밀번호 정규표현식 검사
+	form.querySelector(".input-pw").addEventListener("blur", function(e){
+	     var regex = /^(?=[a-z].*)[a-z0-9_?!@#$%]{4,20}$/;
+	     var inputPw = form.querySelector(".input-pw").value;	
+	     var message = form.querySelector(".pw-message");
+	     if(inputPw != ""){
+	        if(regex.test(inputPw)){
+	             console.log("비밀번호 정규표현식 검사 통과");
+	             message.textContent = "";
+	             $(".join-btn").prop('disabled', false);
+	        }else{
+	             console.log("비밀번호 정규표현식 검사 실패");
+	             $(".join-btn").prop('disabled', true);
+	             $(".input-pw").focus();
+	             message.textContent = "영문 소문자, 숫자, 특수문자_!?@#$% 4~20자 이내로 입력해주세요. ";
+	         }
+	     }
+	  });
 	
-	//이메일 중복검사
-	var emailMessage = form.querySelector(".email-message");
-	form.querySelector(".input-email").addEventListener("blur", function(){
-	    var inputEmail = form.querySelector(".input-email").value;	
-	    if(inputEmail != ""){
-			ajaxEmail(inputEmail);
-	    }
-	});
-	function ajaxEmail(inputEmail){
-		$.ajax({
-			url : url + "/ajax/ajaxEmail",
-			type : "get",
-			data : {
-				inputEmail : inputEmail,
-			},
-			dataType : "text",
-			success:function(resp){
-				console.log("중복검사 요청 성공", resp);
-			
-				if(resp == "NNNN"){
-					console.log("이메일 중복. 사용 불가능");
-					$(emailMessage).text("이메일 중복. 다시 입력해 주세요");
-					$(".input-email").focus();
-					$(form).attr('onsubmit', 'event.preventDefault();');
-					console.log("event.preventDefault()");
-				}else if(resp == "YYYY"){
-					console.log("이메일 사용 가능");
-					$(emailMessage).text("이메일 사용 가능");
-					$(form).attr('onsubmit', 'event.addEvenetListener();');
-				}
-			},
-			error:function(e){
-				console.log("중복검사 요청 실패", e);
-			}
-		});
-	}
+	  //닉네임 정규표현식 검사
+	  form.querySelector(".input-nick").addEventListener("blur", function(e){
+	     var regex = /^[가-힣]{2,15}$/;
+	     var inputNick = form.querySelector(".input-nick").value;	
+	     var message = form.querySelector(".nick-message");
+	     if(inputNick != ""){
+	        if(regex.test(inputNick)){
+	             console.log("닉네임 정규표현식 검사 통과");
+	             //정규식 검사 통과 후 중복검사 진행
+	         	$.ajax({
+	    			url : url + "/ajax/ajaxNick",
+	    			type : "get",
+	    			data : {
+	    				inputNick : inputNick,
+	    			},
+	    			dataType : "text",
+	    			success:function(resp){
+	    				console.log("닉네임 중복검사 요청 성공", resp);
+	    				if(resp == "NNNN"){
+	    					console.log("닉네임 중복. 사용 불가능");
+	    					message.textContent = "닉네임 중복. 다시 입력해 주세요";
+	    					$(".join-btn").prop('disabled', true);
+	    					$(".input-nick").focus();
+	    				}else if(resp == "YYYY"){
+	    					console.log("닉네임 사용 가능");
+	    					message.textContent = "닉네임 사용 가능";
+	    					$(".join-btn").prop('disabled', false);
+	    				}
+	    			},
+	    			error:function(e){
+	    				console.log("닉네임 중복검사 요청 실패", e);
+	    			}
+	    		});
+	         }else{
+	             console.log("닉네임 정규표현식 검사 실패");
+	             $(".join-btn").prop('disabled', true);
+	             $(".input-nick").focus();
+	             message.textContent = "한글 2~15자 이내로 입력해주세요. ";
+	         }
+	     }
+	  });
 	
+	  //이름 정규표현식 검사
+	  form.querySelector(".input-name").addEventListener("blur", function(e){
+	     var regex = /^[가-힣]{2,7}$/;
+	     var inputName = form.querySelector(".input-name").value;	
+	     var message = form.querySelector(".name-message");
+	     if(inputName != ""){
+	        if(regex.test(inputName)){
+	             console.log("이름 정규표현식 검사 통과");
+	             message.textContent = "";
+	             $(".join-btn").prop('disabled', false);
+	         }else{
+	             console.log("이름 정규표현식 검사 실패");
+	             $(".join-btn").prop('disabled', true);
+	             $(".input-name").focus();
+	             message.textContent = "한글 2~7자 이내로 입력해주세요. ";
+	         }
+	     }
+	  });
 	
- 
+	     
+	  //이메일 정규표현식 검사
+	  form.querySelector(".input-email").addEventListener("blur", function(e){
+	     var regex = /^[a-zA-Z0-9]([-_.]?[a-zA-Z0-9])*@[a-zA-Z0-9]([-_.]?[a-zA-Z0-9])*\.([a-zA-Z])+$/;
+	     var inputEmail = form.querySelector(".input-email").value;	
+	     var message = form.querySelector(".email-message");
+	     if(inputEmail != ""){
+	        if(regex.test(inputEmail)){
+	             console.log("이메일 정규표현식 검사 통과");
+	             //정규식 검사 통과 후 중복검사 진행
+	             $.ajax({
+	     			url : url + "/ajax/ajaxEmail",
+	     			type : "get",
+	     			data : {
+	     				inputEmail : inputEmail,
+	     			},
+	     			dataType : "text",
+	     			success:function(resp){
+	     				console.log("이메일 중복검사 요청 성공", resp);
+	     				if(resp == "NNNN"){
+	     					console.log("이메일 중복. 사용 불가능");
+	     					message.textContent = "이메일 중복. 다시 입력해 주세요";
+	     					$(".join-btn").prop('disabled', true);
+	     					$(".input-email").focus();
+	     				}else if(resp == "YYYY"){
+	     					console.log("이메일 사용 가능");
+	     					message.textContent = "이메일 사용 가능";
+	     					$(".join-btn").prop('disabled', false);
+	     				}
+	     			},
+	     			error:function(e){
+	     				console.log("이메일 중복검사 요청 실패", e);
+	     			}
+	     		});
+	         }else{
+	             $(".join-btn").prop('disabled', true);
+	             $(".input-email").focus();
+	             console.log("이메일 정규표현식 검사 실패");
+	             message.textContent = "이메일 형식에 맞지 않습니다. ";
+	         }
+	     }
+	  });
+	
+	  //폰번호 정규표현식 검사
+	  form.querySelector(".input-phone").addEventListener("blur", function(e){
+	     var regex = /^010-[0-9]{4}-[0-9]{4}$/;
+	     var inputPhone = form.querySelector(".input-phone").value;	
+	     var message = form.querySelector(".phone-message");
+	     if(inputPhone != ""){
+	        if(regex.test(inputPhone)){
+	             console.log("폰번호 정규표현식 검사 통과");
+	             message.textContent = "";
+	             $(".join-btn").prop('disabled', false);
+	         }else{
+	             console.log("폰번호 정규표현식 검사 실패");
+	             $(".join-btn").prop('disabled', true);
+	             $(".input-phone").focus();
+	             message.textContent = "010-0000-0000 형식으로 입력해 주세요. ";
+	         }
+	     }
+	  });
 
-// var form  = document.querySelector('.form-check');
-   
-
-
- var success = 0;
- var fail = 0;
-
- //아이디 정규표현식 검사
-		form.querySelector(".input-id").addEventListener("input", function(e){
-     var regex = /^(?=[a-z].*)[a-z0-9_]{4,20}$/;
-     var inputId = form.querySelector(".input-id").value;	
-     var message = form.querySelector(".id-message");
-     if(inputId != ""){
-        if(regex.test(inputId)){
-             console.log("아이디 정규표현식 검사 통과");
-             message.textContent = "";
-             success++;
-         }else{
-             console.log("아이디 정규표현식 검사 실패");
-             message.textContent = "영문 소문자, 숫자, 특수문자_ 4~20자 이내로 입력해주세요. ";
-             fail++;
-         }
-     }
- });
-
-   
- //비밀번호 정규표현식 검사
-form.querySelector(".input-pw").addEventListener("input", function(e){
-
-     var regex = /^(?=[a-z].*)[a-z0-9_?!@#$%]{4,20}$/;
-     var inputPw = form.querySelector(".input-pw").value;	
-     var message = form.querySelector(".pw-message");
-     if(inputPw != ""){
-        if(regex.test(inputPw)){
-             console.log("비밀번호 정규표현식 검사 통과");
-             message.textContent = "";
-             success++;
-         }else{
-             console.log("비밀번호 정규표현식 검사 실패");
-             message.textContent = "영문 소문자, 숫자, 특수문자_!?@#$% 4~20자 이내로 입력해주세요. ";
-             fail++;
-         }
-     }
-  });
-
-     
-  //닉네임 정규표현식 검사
-	form.querySelector(".input-nick").addEventListener("input", function(e){
-     var regex = /^[가-힣]{2,15}$/;
-     var inputNick = form.querySelector(".input-nick").value;	
-     var message = form.querySelector(".nick-message");
-     if(inputNick != ""){
-        if(regex.test(inputNick)){
-             console.log("닉네임 정규표현식 검사 통과");
-             message.textContent = "";
-             success++;
-         }else{
-             console.log("닉네임 정규표현식 검사 실패");
-             message.textContent = "한글 2~15자 이내로 입력해주세요. ";
-             fail++;
-         }
-     }
- });
-
-     
- //이름 정규표현식 검사
-		form.querySelector(".input-name").addEventListener("input", function(e){
-     var regex = /^[가-힣]{2,7}$/;
-     var inputName = form.querySelector(".input-name").value;	
-     var message = form.querySelector(".name-message");
-     if(inputName != ""){
-        if(regex.test(inputName)){
-             console.log("이름 정규표현식 검사 통과");
-             message.textContent = "";
-             success++;
-         }else{
-             console.log("이름 정규표현식 검사 실패");
-             message.textContent = "한글 2~7자 이내로 입력해주세요. ";
-             fail++;
-         }
-     }
- });
-
-     
- //이메일 정규표현식 검사
-form.querySelector(".input-email").addEventListener("input", function(e){
-     var regex = /^[a-zA-Z0-9]([-_.]?[a-zA-Z0-9])*@[a-zA-Z0-9]([-_.]?[a-zA-Z0-9])*\.([a-zA-Z])+$/;
-     var inputEmail = form.querySelector(".input-email").value;	
-     var message = form.querySelector(".email-message");
-     if(inputEmail != ""){
-        if(regex.test(inputEmail)){
-             console.log("이메일 정규표현식 검사 통과");
-             message.textContent = "";
-             success++;
-         }else{
-             $(".input-email").focus();
-             console.log("이메일 정규표현식 검사 실패");
-             message.textContent = "이메일 형식에 맞지 않습니다. ";
-            fail++;     
-         }
-     }
- });
-
-  //폰번호 정규표현식 검사
-form.querySelector(".input-phone").addEventListener("input", function(e){
-     var regex = /^010-[0-9]{4}-[0-9]{4}$/;
-     var inputPhone = form.querySelector(".input-phone").value;	
-     var message = form.querySelector(".phone-message");
-     if(inputPhone != ""){
-        if(regex.test(inputPhone)){
-             console.log("폰번호 정규표현식 검사 통과");
-             message.textContent = "";
-             success++;
-         }else{
-             console.log("폰번호 정규표현식 검사 실패");
-             message.textContent = "010-0000-0000 형식으로 입력해 주세요. ";
-             fail++;
-         }
-     }
-  });
-
-
-//회원가입용 form의 join버튼을 누르면 이벤트 발생
-form.querySelector(".join-btn").addEventListener("click", function(e){
- //일단 서브밋 방지
- e.preventDefault();
-         
-     console.log(fail);
-     console.log(success);
-	 if(fail > 0){
-		   $(form).attr('onsubmit', 'e.preventDefault();');
-		   console.log(" 검사실패 ");
-	 }else{
-	     $(form).attr('onsubmit', 'e.addEventListener();');
-		   console.log(" 검사성공 ");
-	 }
-
-});
-
-
+	  //비번 재입력값 일치여부 검사
+	  form.querySelector(".reInput-pw").addEventListener("blur", function(){
+		 var inputPw = form.querySelector(".input-pw").value;
+		 var reInputPw = form.querySelector(".reInput-pw").value;
+		 var message = form.querySelector(".rePw-message");
+			if(inputPw != "" && reInputPw != ""){
+				 if(inputPw == reInputPw){
+					 message.textContent = "비밀번호가 일치합니다";
+					 console.log("비번 & 재확인비번 일치");	
+					 $(".join-btn").prop('disabled', false);
+				}else if(inputPw != reInputPw){
+					 $(".join-btn").prop('disabled', true);
+					 $(".reInput-pw").focus();
+					 message.textContent = "비밀번호가 일치하지 않습니다";
+					 console.log("비번 & 재확인비번 불일치");	
+				 }
+			 }
+	    });
+	  
  });
 </script>
 <style>
