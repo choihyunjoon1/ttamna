@@ -35,7 +35,7 @@ public class PaginationServiceImpl implements PaginationService{
 	public PaginationVO memberListPaging(PaginationVO paginationVO) throws Exception {
 		
 		int count = memberDao.count(paginationVO.getColumn(), paginationVO.getKeyword());
-		paginationVO.setPageSize(1);
+		paginationVO.setPageSize(15);
 		paginationVO.setBlockSize(10);
 		paginationVO.setCount(count);
 		paginationVO.calculator();
