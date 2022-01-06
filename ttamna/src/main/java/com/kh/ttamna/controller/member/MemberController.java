@@ -201,6 +201,7 @@ public class MemberController {
 		String memberId = (String)session.getAttribute("uid");
 		PaginationVO listPaging = paginationService.apmListPaging(paginationVO, memberId);
 		model.addAttribute("paginationVO", listPaging);
+		model.addAttribute("payList", paymentDao.list());
 		return "member/mypage/my_donation";
 	}
 	//회원탈퇴
