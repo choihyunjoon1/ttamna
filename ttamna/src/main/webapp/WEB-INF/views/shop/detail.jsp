@@ -14,10 +14,26 @@
 		width: 60%;
 	}
 </style>
+
+<script>
+	
+</script>
+
+
 <script>
 $(function(){
+	$("input[name=quantity]").on("input", function(){
+		var cartCount = $(this).val();
+		$(this).attr("value", cartCount);
+		console.log($(this).attr("value"));
+	});
 	$("#add-cart").click(function(e){
+//		e.preventDefault();
 		if(window.confirm('장바구니로 이동하시겠습니까?')){
+			
+			
+//			 $("input[name=quantity]").val(cartCount);
+			 
 			return true;
 		} else{
 			var shopNo = $("#shopNo").val();
@@ -25,6 +41,8 @@ $(function(){
 			var shopGoods = $("input[name=shopGoods]").val();
 			var shopPrice = $("input[name=shopPrice]").val();
 			var shopImgNo = $("input[name=shopImgNo]").val();
+			var cartCount = $("input[name=quantity]").val();
+			console.log(cartCount);
 			
 			$.ajax({
 				url : "${pageContext.request.contextPath}/member/detail/addcart",
@@ -34,7 +52,8 @@ $(function(){
 					memberId : memberId,
 					shopGoods : shopGoods,
 					shopPrice : shopPrice,
-					shopImgNo : shopImgNo
+					shopImgNo : shopImgNo,
+					cartCount : cartCount
 				},
 				success:function(resp){
 					console.log("성공");
@@ -132,22 +151,15 @@ $(function(){
 	<span>조회수 : ${detail.shopRead}</span>
 </div>
 <hr>
-<form action="order/multibuy" method="post">
-	<div class="mt-3" align="center">
-		<input type="hidden" name="shopNo" value="${detail.shopNo}">
-<!-- 	<input type="hidden" name="partner_user_id" value="${sessionScope.uid}"> -->	
-		<input type="hidden" name="item_name" value="${detail.shopGoods}">
-		<input type="hidden" name="total_amount" value="${detail.shopPrice}">
-		<button class="btn btn-info center">구매하기</button>
-	</div>	
-</form>
+
 <form action="${pageContext.request.contextPath}/member/detail/addcart" method="post" >
 	<div class="mt-3" align="center">
 		<input type="hidden" name="shopNo" value="${detail.shopNo}" id="shopNo">
 		<input type="hidden" name="memberId" value="${sessionScope.uid}">
 		<input type="hidden" name="shopGoods" value="${detail.shopGoods}">
 		<input type="hidden" name="shopPrice" value="${detail.shopPrice}">
-		<input type="hidden" name="shopImgNo" value="${shopImgDto.shopImgNo}">	
+		<input type="hidden" name="shopImgNo" value="${shopImgDto.shopImgNo}">
+		<input type="number" name="cartCount" placeholder="구매수량">개
 		<button class="btn btn-warning center" id="add-cart">장바구니에 담기</button>
 	</div>
 </form>

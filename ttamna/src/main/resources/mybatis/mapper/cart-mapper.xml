@@ -29,7 +29,7 @@
 <!-- 장바구니에 추가 -->
 <insert id="insert" parameterType="CartDto">
 	insert into cart values(
-		#{cartNo}, #{shopNo}, #{memberId}, #{shopImgNo}, sysdate, 1, #{shopGoods}
+		#{cartNo}, #{shopNo}, #{memberId}, #{shopImgNo}, sysdate, 1, #{shopGoods}, ${shopPrice}
 	)
 </insert>	
 

@@ -9,33 +9,23 @@
     
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 
-
-
-<h1>결제 정보 확인</h1>
-
-
-<form method="post">
-	<input type="hidden" name="partner_user_id" value="${sessionScope.uid}">
-	<input type="hidden" name="item_name" value="${detail.shopNo}">
-	<input type="hidden" name="quantity" value="1">
-	<input type="hidden" name="total_amount" value="${detail.shopPrice}">
-	
-	<h3>상품명 : ${detail.shopGoods}</h3>
-	<h3>수량 : 1</h3>
-	<h3>결제금액 : ${detail.shopPrice}원</h3>
-	<input type="submit" value="결제하기">
-</form>
-
-
-
-
-
-
-
-
-
-
-
+<div class="container-1000 container-center">
+	<div class="container">
+		<div class="align-self-center">
+			<h1 align="center">주문내역</h1>
+		</div>
+	</div>
+	<div class="container">
+		<div class="row">
+			
+			<div class="col-9" style="width: 80%">
+		
+				
+				
+			</div>
+		</div>
+	</div>
+</div>
 
 
 
