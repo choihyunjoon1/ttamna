@@ -41,10 +41,10 @@
 	<div class="list-group">
 	<!-- 클릭할 때 해당 메뉴 class에 active 붙이기 -->
 		<a href = "${root }/admin/member/list" class="list-group-item list-group-item-action memberAdmin" >회원 목록</a>
-		<a href = "${root }/admin/shop/" class="list-group-item list-group-item-action shopAdmin">후원상품 목록</a>
-		<a href = "${root }/admin/donation/" class="list-group-item list-group-item-action  donationAdmin">기부게시판 목록</a>
-		<a href = "${root }/admin/mybaby/" class="list-group-item list-group-item-action  mybabyAdmin">내새끼자랑 목록</a>
-		<a href = "${root }/admin/adopt/" class="list-group-item list-group-item-action  adoptAdmin">입양 공고 목록</a>
+		<a href = "${root }/shop/" class="list-group-item list-group-item-action shopAdmin">후원상품 목록</a>
+		<a href = "${root }/donation/" class="list-group-item list-group-item-action  donationAdmin">기부게시판 목록</a>
+		<a href = "${root }/mybaby/" class="list-group-item list-group-item-action  mybabyAdmin">내새끼자랑 목록</a>
+		<a href = "${root }/adopt/" class="list-group-item list-group-item-action  adoptAdmin">입양 공고 목록</a>
 		<a href = "${root}/admin/statistics/menu" class="list-group-item list-group-item-action  statisticsAdmin">방문자 통계</a>
 	</div>
 </div>

@@ -31,14 +31,14 @@
 		    </div>
 		    <small>기부 게시판 목록 / 등록 / 수정 / 삭제</small>
 		  </a>		  
-		  <a href="#" class="list-group-item list-group-item-action p-3" aria-current="true">
+		  <a href="${root}/mybaby/" class="list-group-item list-group-item-action p-3" aria-current="true">
 		    <div class="d-flex w-100 justify-content-between">
 		      <h5 class="mb-1">MY BABY</h5>
 			  <small>해당 게시판의 목록으로 이동합니다</small>
 		    </div>
 		    <small>내새끼자랑 게시판 목록 / 등록 / 수정 / 삭제</small>
 		  </a>
-		  <a href="#" class="list-group-item list-group-item-action p-3" aria-current="true">
+		  <a href="${root}/adopt/" class="list-group-item list-group-item-action p-3" aria-current="true">
 		    <div class="d-flex w-100 justify-content-between">
 		      <h5 class="mb-1">ADOPT</h5>
 		      <small>해당 게시판의 목록으로 이동합니다</small>
