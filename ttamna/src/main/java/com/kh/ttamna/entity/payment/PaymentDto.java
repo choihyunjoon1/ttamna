@@ -12,6 +12,8 @@ public class PaymentDto {
 	private long totalAmount;
 	private Date payTime;
 	private String status;
+	private String payType;
+	private Integer donationNo;
 	
 	public boolean isAllCanceled() {
 		return status == null || status.equals("전체취소");

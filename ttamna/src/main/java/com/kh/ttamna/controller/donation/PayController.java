@@ -14,8 +14,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.kh.ttamna.entity.donation.AutoPayMentDto;
+import com.kh.ttamna.entity.payment.PaymentDto;
 import com.kh.ttamna.repository.donation.AutoDonationDao;
 import com.kh.ttamna.repository.donation.DonationDao;
+import com.kh.ttamna.repository.payment.PaymentDao;
 import com.kh.ttamna.service.donation.DonationService;
 import com.kh.ttamna.service.kakaopay.KakaoPayService;
 import com.kh.ttamna.vo.kakaopay.KaKaoPayAutoPayMentSearchResponseVo;
@@ -41,6 +43,9 @@ public class PayController {
 	
 	@Autowired
 	private DonationDao donationDao;
+	
+	@Autowired
+	private PaymentDao payDao;
 	
 	@PostMapping("/fund")//단건결제 요청
 	public String confirm(
@@ -113,6 +118,13 @@ public class PayController {
 			//단건결제용 cid는 TC0ONETIME
 			requestVo.setCid("TC0ONETIME");
 			responseVo = kakaoService.approve(requestVo);
+			PaymentDto paymentDto = new PaymentDto();
+			paymentDto.setPayNo(payDao.seq());
+			paymentDto.setTid(tid);
+			paymentDto.setMemberId(partner_user_id);
+			paymentDto.setTotalAmount(responseVo.getAmount().getTotal());
+			paymentDto.setDonationNo(donationNo);
+			payDao.insertDonation(paymentDto);
 		} else {
 			throw new URISyntaxException("둘다아닌데요?", "둘다아니에요 ㅎㅎ");
 		}
@@ -145,8 +157,11 @@ public class PayController {
 	
 	@GetMapping("/cancel")//결제 취소 요청
 	public String cancel(@RequestParam String tid, @RequestParam long amount,
-								Model model) throws URISyntaxException {
+								@RequestParam int payNo,Model model) throws URISyntaxException {
 		KakaoPayCancelResponseVo responseVo = kakaoService.cancel(tid, amount);
+		
+		payDao.cancelDonation(payNo);
+		donationService.updatePrice(payNo);
 		model.addAttribute("cancelList", responseVo);
 		
 		return "donation/kakao/cancel";

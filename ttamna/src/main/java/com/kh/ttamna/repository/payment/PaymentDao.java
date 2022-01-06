@@ -10,10 +10,13 @@ public interface PaymentDao {
 	
 	void insert(PaymentDto paymentDto);
 	
+	void insertDonation(PaymentDto paymentDto);
+	
 	List<PaymentDto> list();
 	
 	PaymentDto get(int payNo);
 	
 	void refresh(int payNo);
 
+	void cancelDonation(int payNo);
 }
