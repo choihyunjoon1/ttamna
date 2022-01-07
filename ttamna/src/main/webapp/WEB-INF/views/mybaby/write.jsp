@@ -5,7 +5,7 @@
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 
 <form method="post" enctype="multipart/form-data">
-  <fieldset style="width:80%;">
+  <fieldset style="width:80%;" class="mx-auto">
   	 <!-- 위에 헤더 부분 -->
     <legend>자랑글 쓰기</legend>
     <div class="form-group row">

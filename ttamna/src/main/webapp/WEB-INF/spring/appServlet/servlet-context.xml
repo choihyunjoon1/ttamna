@@ -71,6 +71,10 @@
 	 	<mvc:interceptor>
 	 		<mvc:mapping path="/member/logout"/>
 	 		<mvc:mapping path="/member/mypage/**"/>
+	 		<mvc:mapping path="/mybaby/write"/>
+	 		<mvc:mapping path="/mybaby/detail"/>
+	 		<mvc:mapping path="/mybaby/edit"/>
+	 		<mvc:mapping path="/mybaby/delete"/>
 	  		<bean class="com.kh.ttamna.interceptor.LoginInterceptor"></bean>
 	 	</mvc:interceptor>
 	 	
