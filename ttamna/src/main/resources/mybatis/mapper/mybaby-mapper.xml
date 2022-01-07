@@ -36,24 +36,47 @@
 	</select>
 	
 	<!-- 더보기 페이지네이션 -->
+<!-- 	<select id="listByPage" parameterType="map" resultType="MybabyDownVO"> -->
+<!-- 		select * from( -->
+<!-- 		    select rownum rn, tmp.* from( -->
+<!-- 		        select * from mybaby B left outer join mybaby_img BI on B.mybaby_no = BI.mybaby_no -->
+<!-- 		        order by B.mybaby_no desc -->
+<!-- 		        )tmp -->
+<!-- 		)where rn between ${startRow} and ${endRow} -->
+<!-- 	</select> -->
 	<select id="listByPage" parameterType="map" resultType="MybabyDownVO">
-		select * from(
-		    select rownum rn, tmp.* from(
-		        select * from mybaby B left outer join mybaby_img BI on B.mybaby_no = BI.mybaby_no
-		        order by B.mybaby_no desc
-		        )tmp
-		)where rn between ${startRow} and ${endRow}
+			select * from(
+			    select rownum rn2, tmp.* from(
+			        select * from (
+			        	select * from (
+			        		select BI.*, row_number() over(partition by mybaby_no order by mybaby_no asc) rn  from mybaby_img BI) where rn = 1) MBI 
+			        			left outer join mybaby B  on B.mybaby_no = MBI.mybaby_no
+			        order by B.mybaby_no desc
+			        )tmp
+			)where rn2 between ${startRow} and ${endRow}
 	</select>
 	<!-- 더보기 페이지네이션 -->
-	<select id="listBySearchPage" parameterType="map" resultType="MybabyDownVO">
-		select * from(
-		    select rownum rn, tmp.* from(
-		        select * from mybaby B left outer join mybaby_img BI on B.mybaby_no = BI.mybaby_no
-		        	where instr(${column}, #{keyword}) > 0
-		        order by B.mybaby_no desc
-		        )tmp
-		)where rn between ${startRow} and ${endRow}
-	</select>
+<!-- 	<select id="listBySearchPage" parameterType="map" resultType="MybabyDownVO"> -->
+<!-- 		select * from( -->
+<!-- 		    select rownum rn, tmp.* from( -->
+<!-- 		        select * from mybaby B left outer join mybaby_img BI on B.mybaby_no = BI.mybaby_no -->
+<!-- 		        	where instr(${column}, #{keyword}) > 0 -->
+<!-- 		        order by B.mybaby_no desc -->
+<!-- 		        )tmp -->
+<!-- 		)where rn between ${startRow} and ${endRow} -->
+<!-- 	</select> -->
+		<select id="listBySearchPage" parameterType="map" resultType="MybabyDownVO">
+			select * from(
+			    select rownum rn2, tmp.* from(
+			        select * from (
+			        	select * from (
+			        		select BI.*, row_number() over(partition by mybaby_no order by mybaby_no asc) rn  from mybaby_img BI) where rn = 1) MBI 
+			        			left outer join mybaby B  on B.mybaby_no = MBI.mybaby_no
+			        			where instr(${column}, #{keyword}) > 0
+			        order by B.mybaby_no desc
+			        )tmp
+			)where rn2 between ${startRow} and ${endRow}
+		</select>
 	
 	<!-- 게시글 삭제 -->
 	<delete id="delete" parameterType="int">
