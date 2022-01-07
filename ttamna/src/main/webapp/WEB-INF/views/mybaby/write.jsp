@@ -5,7 +5,7 @@
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 
 <form method="post" enctype="multipart/form-data">
-  <fieldset>
+  <fieldset style="width:80%;">
   	 <!-- 위에 헤더 부분 -->
     <legend>자랑글 쓰기</legend>
     <div class="form-group row">
@@ -24,7 +24,7 @@
     <!-- 파일 부분 -->
     <div class="form-group">
       <label for="attach" class="form-label mt-4">이미지 파일 선택</label>
-      <input class="form-control" type="file" id="attach" name="attach">
+      <input class="form-control" type="file" id="attach" name="attach" multiple>
     </div>
     <div class="form-group">
    		<br><br>
