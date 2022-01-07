@@ -129,7 +129,7 @@
                 </div>
             
             	<!-- 현재까지의 총 기부 누적액을 보여준다 -->
-				<div class="badge text-wrap bg-warning p-2 text-gray bg-opacity-75" style="width:10rem; height:3rem;">
+				<div class="badge text-wrap p-2 bg-primary bg-opacity-75" style="width:10rem; height:3rem;">
 				   <div><small><strong class="date"></strong></small></div>
 				   <div><small>누적 기부 금액</small></div>
 				   <div><small><strong class="total"></strong></small></div>
