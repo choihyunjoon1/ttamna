@@ -48,20 +48,22 @@
 	</select>
 	
 	<!-- 입양공고 더보기 페이지네이션 -->
-		<select id="listByPage" parameterType="map" resultType="AdoptListFileVO">
-		select * from (
-			select rownum rn, TMP.* from (
-				select * from adopt A
-				 left outer join 
-				 adopt_img I on A.adopt_no = I.adopt_no  
-				 <if test="column != null and keyword != null">
+	<select id="listByPage" parameterType="map" resultType="AdoptListFileVO">
+	        select * from(
+            select rownum rn2, tmp.* from(
+                select * from (
+                    select * from (
+                        select I.*, row_number() over(partition by adopt_no order by adopt_no asc
+                    ) rn  from adopt_img I 	
+                ) where rn = 1
+             ) AI left outer join adopt A  on A.adopt_no = AI.adopt_no
+             	<if test="column != null and keyword != null">
 				   where instr(${column}, #{keyword}) > 0
 			     </if>
-                order by A.adopt_no desc
-			)TMP
-		) where rn between #{startRow} and #{endRow}
+            order by A.adopt_no desc
+          )tmp
+        )where rn2 between #{startRow} and #{endRow}
 	</select>
-	
 	
 	<!-- 단일조회 + 검색 -->
 	<select id="detailOrSearch" parameterType="map" resultType="AdoptDto">
