@@ -88,5 +88,11 @@
 		select count(*) from payment where member_id=#{memberId}
 	</select>
 	
+	<!-- 최근 7일간 기부금액 일별 통계 -->
+	<select id="donationDaily" resultType="DonationChartVO">
+	
+	</select>
+	
+	
 </mapper>
 
