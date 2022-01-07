@@ -7,21 +7,7 @@
 <!-- 댓글 -->
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <script>
-	//삭제script
-	$(function(){
-		$(".delete-btn").click(function(){
-			var choice = window.confirm("${mybaby.mybabyNo}번 ${mybaby.mybabyTitle}. 게시글을 삭제하시겠습니까?");
-			if(choice){
-				location.href = "${root}/mybaby/delete?mybabyNo=${mybaby.mybabyNo}";
-			}else{
-				location.reload();
-			}
-		});
-	});		
-</script>
-<script>
 	
-	//댓글script
 	$(function(){
 		
 		
@@ -85,53 +71,42 @@
 <!-- 댓글 끝 -->
 
 
-<div class="container-700 container-center">
-
-	<div class="mt-5 mb-5"><h3>내새끼자랑 상세</h3></div>
-<%-- 	<c:if test="${param.success != null}"> --%>
-<!-- 		<div class=" mb-3"><h6>입양공고 수정 완료</h6></div> -->
-<%-- 	</c:if> --%>
-<%-- 	<c:if test="${param.invalid != null}"> --%>
-<!-- 		<div class=" mb-3"><h6>수정 권한이 없습니다</h6></div> -->
-<%-- 	</c:if>	 --%>
-	
-	<div class="container-500 container-center">
-		<div class="card mb-5">
-		  <div class="card-header d-grid gap-2 justify-content-center mt-2">	
-		    <h3> ${mybaby.mybabyTitle}</h3>
-		  </div>
-		  <div class="card-body d-grid gap-2 justify-content-md-end">
-		    <h6 class="card-subtitle text-muted">
-		    ${mybaby.mybabyTimeString()}  작성자 : ${mybaby.mybabyWriter}   댓글수 : ${mybaby.mybabyReply }
-		    </h6>
-		  </div>
-		 <c:if test="${mybabyImgDtoList != null}">
-			<div class="card-body d-grid gap-2">
-				<c:forEach var="mybabyImgDto" items="${mybabyImgDtoList}">
-					<img class="mx-auto" src="mybabyImg?mybabyImgNo=${mybabyImgDto.mybabyImgNo}&mybabyNo=${mybaby.mybabyNo}" style="width:60%;">
-				</c:forEach>
-			</div>
-		  </c:if>
-		  <div class="card-body">
-		    <p class="card-text">${mybaby.mybabyContent}</p>
-		  </div>
-		  <div class="card-footer text-muted">
-			<!-- 작성자 또는 관리자에게만 수정 삭제 버튼 보여주기 -->
-			<c:set var="valid" value="${grade == '관리자' or uid == mybaby.mybabyWriter}"></c:set>
-			<div class="d-grid gap-2 d-md-flex justify-content-md-end">
-			<a type="button" href="${root}/mybaby/" class="btn btn-outline-primary">목록</a>
-			<c:if test="${valid}">
-				<a href="${root}/mybaby/edit?mybabyNo=${mybaby.mybabyNo}" type="button" class="btn btn-outline-warning">수정</a>
-				<button type="button" class="btn btn-outline-secondary delete-btn">삭제</button>
-			</c:if>	
-			</div>
-		  </div>
+<div class="container-600 bg-white container-center" align="center">
+	<div class="row">
+		<div class="col">
+			<h5>제목</h5>
 		</div>
 	</div>
-
-	
-
-</div>
+	<div class="row">
+		<h5>
+			작성자 : ${mybaby.mybabyWriter}
+			|
+			작성일 : ${mybaby.mybabyTimeString()}
+			|
+			조회수 : ${mybaby.mybabyRead }
+			|
+			댓글수 : ${mybaby.mybabyReply }
+		</h5>
+	</div>
+	<div class="row">
+		<div class="col-8 container-center">
+			<c:if test="${mybabyImgDtoList != null}">
+				<c:forEach var="mybabyImgDto" items="${mybabyImgDtoList}">
+					<img src="mybabyImg?mybabyImgNo=${mybabyImgDto.mybabyImgNo}&mybabyNo=${mybaby.mybabyNo}" style="width:100%;">
+				</c:forEach>
+			</c:if>
+			<span class="row">${mybaby.mybabyContent}</span>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-5 container-right">
+			<a href="${root }/mybaby/list">목록으로</a>
+			<c:if test="${uid eq mybaby.mybabyWriter}">
+				<a href="edit?mybabyNo=${mybaby.mybabyNo }">수정</a>
+				<a href="delete?mybabyNo=${mybaby.mybabyNo}">삭제</a>
+			</c:if>
+		</div> 
+	</div>
 	
 	
 	<!-- 댓글 자리 -->

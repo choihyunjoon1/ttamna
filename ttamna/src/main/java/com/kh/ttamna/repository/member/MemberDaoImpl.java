@@ -10,6 +10,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Repository;
 
 import com.kh.ttamna.entity.member.MemberDto;
+import com.kh.ttamna.vo.board.BoardVO;
 
 @Repository
 public class MemberDaoImpl  implements MemberDao{
@@ -200,6 +201,25 @@ public class MemberDaoImpl  implements MemberDao{
 		param.put("memberId", memberId);
 		param.put("memberGrade", memberGrade);
 		sqlSession.update("member.editGrade", param);
+	}
+
+	@Override
+	public List<BoardVO> listMyBoard(String memberId) {
+		return sqlSession.selectList("member.myBoard",memberId);
+	}
+
+	@Override
+	public List<BoardVO> boardListPaging(String memberId, int startRow, int endRow) {
+		Map<String,Object> param = new HashMap<>();
+		param.put("memberId",memberId);
+		param.put("startRow", startRow);
+		param.put("endRow", endRow);
+		
+		return sqlSession.selectList("member.boardListPaging", param);
+	}
+	@Override
+	public int countBoard(String memberId) {
+		return sqlSession.selectOne("member.countBoard",memberId);
 	}
 	
 

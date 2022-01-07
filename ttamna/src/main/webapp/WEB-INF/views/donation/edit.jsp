@@ -12,6 +12,7 @@
 		});
 		
 		$(".delete").click(function(e){
+			e.preventDefault();
 			if(confirm("삭제하시겠습니까?")){
 				if($(this).prev().attr("data-delete")){
 					var imgNo = $(this).attr("data-data");
@@ -37,52 +38,43 @@
 </script>
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 
-<div class="container">
-<form method="post" enctype="multipart/form-data">
-	<c:forEach var="donationDto" items='${donationDto}'>
-		<div class="row">
-		<input type="hidden" name="donationNo" value="${donationDto.donationNo}" >
-		<input type="hidden" name="donationWriter" value="${uid}" >
+<div class="container-700 container-center">
+	<form method="post" enctype="multipart/form-data">
+		<c:forEach var="donationDto" items="${donationDto}">
+			<input type="hidden" name="donationNo" value="${donationDto.donationNo}" >
+		<div class="input-group mb-3">
+			<span class="input-group-text">작성자</span>
+			<input type="text" value="${donationDto.donationWriter}" disabled aria-label="end" class="form-control">
 		</div>
-		<div class="row">
-		${donationDto.donationWriter}
-		</div>
-		<div class="row">
-		<label>
-			제목<input type="text" name="donationTitle" value="${donationDto.donationTitle}" required class="form-input">
-		</label>
-		</div>
-		<div class="row">
+		<div class="input-group mb-3">
 			<c:forEach var="imgNo" items="${imgDtoList}">
 				<div class="col-6">
-					<img src="donaimg?donationImgNo=${imgNo.donationImgNo}">
+					<img src="donaimg?donationImgNo=${imgNo.donationImgNo}" style="width:100%">
 					<a href="#" class="delete" data-data="${imgNo.donationImgNo}">삭제</a>
 				</div>
 			</c:forEach>
 		</div>
-		<div class="row">
-		<label>
-			내용<input type="text" name="donationContent" value="${donationDto.donationContent}" required class="form-input">
-		</label>
+		<div class="input-group mb-3">
+			<span class="input-group-text">목표금액</span>
+			<input type="number" name="donationTotalFund" value="${donationDto.donationTotalFund}" disabled aria-label="end" class="form-control" autocomplete="off" required>
 		</div>
-		<div class="row">
-		목표 후원금액 : ${donationDto.donationTotalFund}원
+		<div class="input-group mb-3">
+			<span class="input-group-text">제목</span>
+			<input type="text" value="${donationDto.donationTitle}" class="form-control">
 		</div>
-		<div class="row">
-			<label>
-			파일<input type="file" multiple name="attach" class="form-input" >
-			</label>
+		<div class="input-group mb-3">
+			<span class="input-group-text">내용</span>
+			<textarea name="donationContent" class="form-control" aria-label="With textarea" 
+			 style="min-height:400px; resize:none;" required>${donationDto.donationContent}</textarea>
 		</div>
-		<div class="row">
-		<a href="edit?donationNo=${donationDto.donationNo}">수정</a>
-		<!-- 추후에 얼럿 창을 한번 띄워서 확인을 누르면 삭제가 되게끔 코드 -->
-		<a href="delete?donationNo=${donationDto.donationNo}">삭제</a>
+		<div class="input-group mb-3">
+			<input type="file" multiple name="attach" class="form-control" accept="image/*">
 		</div>
-		<div class="row">
-			<input type="submit"  value=" 수정하기" class="form-btn">
+		<div class="d-grid gap-2 d-md-flex justify-content-md-end mb-5">
+			<input type="submit" class="btn btn-primary" value="수정">
 		</div>
-	</c:forEach>
-</form>
+		</c:forEach>
+	</form>
 </div>
 
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>

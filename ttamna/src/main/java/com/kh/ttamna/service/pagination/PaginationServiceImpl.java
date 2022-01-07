@@ -13,6 +13,7 @@ import com.kh.ttamna.repository.donation.AutoDonationDao;
 import com.kh.ttamna.repository.donation.DonationReplyDao;
 import com.kh.ttamna.repository.member.MemberDao;
 import com.kh.ttamna.repository.payment.PaymentDao;
+import com.kh.ttamna.vo.board.BoardVO;
 import com.kh.ttamna.vo.pagination.PaginationVO;
 
 @Service
@@ -86,6 +87,20 @@ public class PaginationServiceImpl implements PaginationService{
 		
 		return paginationVO;
 		
+	}
+	//내게시글보기 내역 목록 + 페이지네이션
+	@Override
+	public PaginationVO myBoardPaging(PaginationVO paginationVO,String memberId) throws Exception {
+		int count = memberDao.countBoard(memberId);
+		
+		paginationVO.setPageSize(15);
+		paginationVO.setBlockSize(10);
+		paginationVO.setCount(count);
+		paginationVO.calculator();
+		List<BoardVO> list = memberDao.boardListPaging(memberId ,paginationVO.getStartRow(), paginationVO.getEndRow());
+		paginationVO.setListOfMyBoard(list);
+	
+		return paginationVO;
 	}
 
 }
