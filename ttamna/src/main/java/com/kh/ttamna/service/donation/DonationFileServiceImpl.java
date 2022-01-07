@@ -31,6 +31,7 @@ public class DonationFileServiceImpl implements DonationFileService{
 		//현재 게시판에 등록이 될 정보와 파일배열이 들어있다.
 		int donationNo = sqlSession.selectOne("donation.seq");
 		
+		System.out.println("donationWriter = " + donationUploadVo.getDonationWriter());
 		//파일이 있던 없던 게시판 등록 과정을 진행 해 주고
 		sqlSession.insert("donation.insert", donationUploadVo.convertToDonationDto(donationNo));
 		
