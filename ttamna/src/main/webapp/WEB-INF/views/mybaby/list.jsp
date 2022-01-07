@@ -43,9 +43,9 @@ $(function(){
 					var memberId = resp[i].mybabyWriter;
 					var imglocation = "";
 					if(!resp[i].mybabyImgNo){
-						imgLocation = "<img src=${pageContext.request.contextPath}/resources/img/nonimage.png class=icon style='width:200px;height:200px;'></a></span>";
+						imgLocation = "<img src=${pageContext.request.contextPath}/resources/img/nonimage.png class=icon style='width:100%;height:15rem;'></a></span>";
 					}else{
-						imgLocation = "<img src=mybabyImg?mybabyImgNo="+resp[i].mybabyImgNo+" class=icon style='width:200px;height:200px;'></a></span>";
+						imgLocation = "<img src=mybabyImg?mybabyImgNo="+resp[i].mybabyImgNo+" class=icon style='width:100%;height:15rem;'></a></span>";
 					}
 					
 					if(memberId == null){
@@ -54,9 +54,9 @@ $(function(){
 					var divCol = "<div class='card text-gray bg-light mb-5 ms-2 ' style='width: 18rem;'>"
 						  + imgLocation
 						  + "<div class='card-body'>"
-						  + "<h5 class='card-title'>"+ resp[i].mybabyNo + resp[i].mybabyTitle +"</h5>"
+						  + "<h5 class='card-title'>" + resp[i].mybabyTitle +"</h5>"
 						  + "<div class='card-text'>"
-						  +  resp[i].mybabyTime.substring(0,10)
+						  +  resp[i].mybabyTime
 						  +"</div>"
 						  + "<div class='card-text'>"
 						  +  "작성자 : "+resp[i].mybabyWriter
