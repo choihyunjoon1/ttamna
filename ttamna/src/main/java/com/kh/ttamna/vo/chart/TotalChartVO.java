@@ -10,5 +10,6 @@ public class TotalChartVO {
 	private String title;
 	private String label;
 	private List<VisitChartVO> dataset;
+	private List<DonationChartVO> donationDataset;
 	
 }

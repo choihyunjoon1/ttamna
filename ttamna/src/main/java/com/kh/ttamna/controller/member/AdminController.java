@@ -95,7 +95,17 @@ public class AdminController {
 		 return "admin/statistics/visitor_monthly";
 	 }
 	 
-
+	 //일별 기부금액 통계 페이지
+	 @GetMapping("/statistics/donation_daily")
+	 public String donationDaily() {
+		 return "admin/statistics/donation_daily";
+	 }
+	 
+	 //원별 기부금액 통계 페이지
+	 @GetMapping("/statistics/donation_monthly")
+	 public String donationMonthly() {
+		 return "admin/statistics/donation_monthly";
+	 }
 }
 
 
