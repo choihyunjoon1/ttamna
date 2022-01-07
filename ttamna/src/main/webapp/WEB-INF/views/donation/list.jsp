@@ -46,7 +46,13 @@ $(function(){
 				//데이터 출력
 				for(var i=0; i < resp.length; i++){
 					var donationWriter = resp[i].donationWriter;
-					var imgLocation= "이미지위치";
+					var imgLocation= "";
+					if(!resp[i].donationImgNo){
+						imgLocation =  "<img src=${pageContext.request.contextPath}/resources/img/nonimage.png class=icon></a></span>";
+					}else{
+						imgLocation =  "<img src='donaimg?donationImgNo="+ resp[i].donationImgNo +"' class='card-img-top'>";
+					}
+					
 					if(donationWriter == null){
 						donationWriter = "탈퇴한 회원입니다";
 					}
