@@ -5,10 +5,11 @@ import java.util.List;
 import lombok.Data;
 
 @Data
-public class VisitTotalChartVO {
+public class TotalChartVO {
 
 	private String title;
 	private String label;
 	private List<VisitChartVO> dataset;
+	private List<DonationChartVO> donationDataset;
 	
 }
