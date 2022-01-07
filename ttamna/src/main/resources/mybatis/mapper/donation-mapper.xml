@@ -104,14 +104,14 @@
 	<!-- 더보기 페이지네이션 -->
 	<select id="listByPage" parameterType="map" resultType="DonationDto">
 		select * from(
-		    select rownum rn, tmp.* from(
-		        select * from donation
+		    select rownum rm, tmp.* from(
+		        select D.*, DI.donation_img_no from donation D left outer join donation_img_first DI on D.donation_no = DI.donation_no
 		        <if test="column != null and keyword != null">
 		        	where instr(${column}, #{keyword}) > 0
 		        </if>
-		        order by donation_no desc
+		         order by D.donation_no desc
 		        )tmp
-		)where rn between ${startRow} and ${endRow}
+		)where rm between ${startRow} and ${endRow}
 	</select>
 	
 	<!-- 금액 업데이트 -->
