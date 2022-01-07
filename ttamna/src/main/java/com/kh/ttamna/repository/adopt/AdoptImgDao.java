@@ -32,7 +32,7 @@ public interface AdoptImgDao {
 
 	//게시글 삭제시 이미지 파일 삭제 처리	
 //	void deleteImg(int adoptNo);
-	
+
 	
 	
 }

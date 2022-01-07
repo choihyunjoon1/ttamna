@@ -86,8 +86,8 @@ public class AdoptController {
 			@RequestParam(required =false, defaultValue = "1") int page,
 			@RequestParam(required =false, defaultValue = "9") int size,
 			@RequestParam(required =false, defaultValue = "") String column,
-			@RequestParam(required =false, defaultValue = "") String keyword
-			){
+			@RequestParam(required =false, defaultValue = "") String keyword){
+		
 		int endRow = page* size;
 		int startRow = endRow - (size - 1);
 		if(column != null && keyword != null && !column.equals("") && !keyword.equals("")) {
@@ -159,7 +159,7 @@ public class AdoptController {
 	}
 	
 	
-	//입양공고 수정 페이지
+	//입양공고 수정 페이지 
 	@GetMapping("/edit")
 	public String edit(@RequestParam int adoptNo, Model m) {
 		Map<String, Object> param = new HashMap<>();
@@ -172,7 +172,7 @@ public class AdoptController {
 		return "adopt/edit";
 	}
 	
-	//입양공고 수정 처리
+	//입양공고 수정 처리 + 파일 추가
 	@PostMapping("/edit")
 	public String edit(@ModelAttribute AdoptFileVO adoptFileVO, @RequestParam int adoptNo) throws IllegalStateException, IOException {
 		adoptFileService.updateWithFile(adoptFileVO);

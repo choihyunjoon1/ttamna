@@ -38,34 +38,44 @@ $(function(){
 		<div class=" mb-3"><h6>수정 권한이 없습니다</h6></div>
 	</c:if>	
 	
-	<div class="mt-5 mb-5">
-		<div>제목 :  ${adoptDto.adoptTitle}</div>
-		<div>조회수 :  ${adoptDto.adoptRead}</div>
-		<div>작성자 :  ${adoptDto.adoptWriter}</div>
-		<div>작성시간 :  ${adoptDto.adoptTime}</div>
-		<div>공고기간 :  ${adoptDto.adoptStart} ~ ${adoptDto.adoptEnd}</div>
-		<c:if test="${adoptImgList != null}">
-		<div>파일
+	<div class="card mb-5">
+	  <div class="card-header d-grid gap-2 justify-content-center mt-2">	
+	    <h3> ${adoptDto.adoptTitle}</h3>
+	  </div>
+	  <div class="card-body d-grid gap-2 justify-content-md-end">
+	    <h6 class="card-subtitle text-muted">
+	    ${adoptDto.adoptTime}  작성자 : ${adoptDto.adoptWriter}   조회수 : ${adoptDto.adoptRead}
+	    </h6>
+	  </div>
+	 <c:if test="${adoptImgList != null}">
+		<div class="card-body d-grid gap-2">
 			<c:forEach var="adoptImgDto" items="${adoptImgList}">
-				<img src="adoptImg?adoptImgNo=${adoptImgDto.adoptImgNo}&adoptNo=${adoptDto.adoptNo}" style="width:30%;">
+				<img class="mx-auto" src="adoptImg?adoptImgNo=${adoptImgDto.adoptImgNo}&adoptNo=${adoptDto.adoptNo}" style="width:80%;">
 			</c:forEach>
 		</div>
-		</c:if>
-		<div>품종 :  ${adoptDto.adoptKind}</div>
-		<div>구조장소 :  ${adoptDto.adoptPlace}</div>
-		<div>내용 :  ${adoptDto.adoptContent}</div>
+	  </c:if>
+	  <ul class="list-group list-group-flush">
+	    <li class="list-group-item text-muted">공고기간 :  ${adoptDto.adoptStart} ~ ${adoptDto.adoptEnd}</li>
+	    <li class="list-group-item text-muted">구조장소 :  ${adoptDto.adoptPlace}</li>
+	    <li class="list-group-item text-muted">입양동물 :  ${adoptDto.adoptKind}</li>
+	  </ul>
+	  <div class="card-body">
+	    <p class="card-text">${adoptDto.adoptContent}</p>
+	  </div>
+	  <div class="card-footer text-muted">
+		<!-- 작성자 또는 관리자에게만 수정 삭제 버튼 보여주기 -->
+		<c:set var="valid" value="${grade == '관리자' or uid == adoptDto.adoptWriter}"></c:set>
+		<div class="d-grid gap-2 d-md-flex justify-content-md-end">
+		<a type="button" href="${root}/adopt/" class="btn btn-outline-primary">목록</a>
+		<c:if test="${valid}">
+			<a href="${root}/adopt/edit?adoptNo=${adoptDto.adoptNo}" type="button" class="btn btn-outline-warning">수정</a>
+			<button type="button" class="btn btn-outline-secondary delete-btn">삭제</button>
+		</c:if>	
+		</div>
+	  </div>
 	</div>
+
 	
-	<!-- 작성자 또는 관리자에게만 수정 삭제 버튼 보여주기 -->
-	<c:set var="valid" value="${grade == '관리자' or uid == adoptDto.adoptWriter}"></c:set>
-	
-	<div class="d-grid gap-2 d-md-flex justify-content-md-end mb-5">
-	<a type="button" href="${root}/adopt/" class="btn btn-outline-primary">목록</a>
-	<c:if test="${valid}">
-		<a href="${root}/adopt/edit?adoptNo=${adoptDto.adoptNo}" type="button" class="btn btn-outline-primary">수정</a>
-		<button type="button" class="btn btn-outline-secondary delete-btn">삭제</button>
-	</c:if>	
-	</div>
 
 </div>
 
