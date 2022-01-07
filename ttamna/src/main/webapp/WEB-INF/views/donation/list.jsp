@@ -47,6 +47,17 @@ $(function(){
 				for(var i=0; i < resp.length; i++){
 					var donationWriter = resp[i].donationWriter;
 					var imgLocation= "";
+					var progress = (resp[i].donationNowFund/resp[i].donationTotalFund) *100;
+					var graph = "";
+					var number = Math.round(progress);
+					
+					if(progress <=0){
+						progress = 1;
+					} else if(progress < 100){
+						graph= "success";
+					} else if(progress >= 100){
+						graph = "danger";
+					}
 					if(!resp[i].donationImgNo){
 						imgLocation =  "<img src=${pageContext.request.contextPath}/resources/img/nonimage.png class=icon></a></span>";
 					}else{
@@ -59,12 +70,15 @@ $(function(){
 					var divCol = "<div class='page card text-gray bg-light mb-5 ms-2' style='width:18rem;'>"+
 						imgLocation + 
 						"<div class='card-body'>" +
-						"<h5 class='card-title'>"+resp[i].donationTitle+"</h5>" +
+						"<h5 class='card-title'><a href='./detail?donationNo="+resp[i].donationNo+"'>"+resp[i].donationTitle+"</a></h5>" +
 						"<div class='card-text'>"+donationWriter+"</div>"+
 						"<div class='card-text'>"+resp[i].donationContent+"</div>"+
-						"<div class='card-text'>"+resp[i].donationNowFund+"원</div>"+
-						"<div class='card-text'>"+(resp[i].donationNowFund/resp[i].donationTotalFund)*100+"%------"+resp[i].donationTotalFund+"원</div>"+
-						"<span><a href=detail?donationNo="+resp[i].donationNo+">"+resp[i].donationTitle+"</a></span>"
+						"<div class='card-text'><span>현재 기부 금액 : </span>"+resp[i].donationNowFund+"원</div>"+
+						"<div class='card-text'><span>목표 기부 금액 : </span>"+resp[i].donationTotalFund+"원</div>"+
+						"<div class='progress'>"+
+						"<div class='progress-bar progress-bar-striped progress-bar-animated bg-"+graph+"' role='progressbar' aria-valuenow='"+resp[i].donationNowFund+"' aria-valuemin='1' aria-valuemax='"+resp[i].donationTotalFund+"' style='width:"+progress+"%;'></div></div>"+
+						"<div class='card-text'>"+number+"%</div>"
+					+"</div>"
 					+"</div>";
 					$(".result").append(divCol);
 					$(".page").addClass("col-3 mt-3");

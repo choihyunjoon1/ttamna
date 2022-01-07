@@ -5,7 +5,25 @@
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <script>
 	
-	$(function(){
+	$(function(){//목표금액에 도달하면 기부 버튼 비활성화
+		if($(".now-fund").text() == $(".total-fund").text()){
+			console.log("목표치 도달")
+			$(".payment").attr("disabled", "disabled");
+			$(".autopayment").attr("disabled", "disabled");
+		}
+// 		if(){
+// 			$(".payment").attr("disabled");
+// 			$(".autopayment").attr("disabled");
+// 		}
+		
+		$(".delete-btn").click(function(e){
+			var choice = confirm("게시글을 정말 삭제하시겠습니까?");
+			if(choice){//확인을 누르면 삭제처리
+				return true;
+			}else{//취소를 누르면 return false
+				return false;
+			}
+		});
 		
 		$(".agree").click(function(){
 			var isAgree = confirm("*정기기부 안내* 정기기부는 시작 날짜에 관계없이 매달 10일 자동결제가 진행됩니다 이점 유의하시기 바랍니다.");
@@ -118,8 +136,8 @@
 		</div>
 		<%-- 각종 정보가 줄 단위로 찍히는 영역 --%>
 		<ul class="list-group list-group-flush">
-			<li class="list-group-item text-muted">현재 기부 금액 : ${donationDto.donationNowFund}원</li>
-			<li class="list-group-item text-muted">목표 기부 금액 : ${donationDto.donationTotalFund}원</li>
+			<li class="list-group-item text-muted">현재 기부 금액 : <span class="now-fund">${donationDto.donationNowFund}</span>원</li>
+			<li class="list-group-item text-muted">목표 기부 금액 : <span class="total-fund">${donationDto.donationTotalFund}</span>원</li>
 			<li class="list-group-item text-muted">
 				<%-- 단건 기부시 정보가 필요하므로 폼태그로 감싸넣었다 --%>
 				<form action="kakao/fund" method="post">
@@ -131,7 +149,7 @@
 							<input type="number" name="total_amount" class="form-control" min="1000" max="${donationDto.donationTotalFund - donationDto.donationNowFund}">
 						</div>
 						<div class="col-4">
-							<input type="submit" value="1회 기부 하기" class="btn btn-primary">
+							<input type="submit" value="1회 기부 하기" class="btn btn-primary payment">
 						</div>
 					</div>
 				</form>
@@ -147,12 +165,22 @@
 							<input type="number" name="total_amount" class="form-control" min="1000" max="${donationDto.donationTotalFund*0.3}">
 						</div>
 						<div class="col-4">
-							<input type="submit" value="정기 기부 신청" class="btn btn-primary agree">
+							<input type="submit" value="정기 기부 신청" class="btn btn-primary agree autopayment">
 						</div>
 					</div>
 				</form>
 			</li>
 		</ul>
+		<div class="card-footer text-muted">
+			<%-- 작성자 또는 관리자만 수정 삭제 버튼 보여주기 --%>
+			<div class="d-grid gap-2 d-md-flex justify-content-md-end">
+			<a type="button" href="${root}/ttamna/donation/" class="btn btn-outline-primary">목록</a>
+			<c:if test="${uid eq donationDto.donationWriter or grade == '관리자'}">
+				<a href="${root}/ttamna/donation/edit?donationNo=${donationDto.donationNo}" type="button" class="btn btn-outline-warning">수정</a>
+				<a href="${root}/ttamna/donation/delete?donationNo=${donationDto.donationNo}" class="btn btn-outline-secondary delete-btn">삭제</a>
+			</c:if>
+			</div>
+		</div>
 	</div>
 </div>
 </c:forEach>
