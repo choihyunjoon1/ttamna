@@ -66,12 +66,14 @@ public class AdoptDaoImpl implements AdoptDao {
 
 	//입양공고 더보기 페이지네이션 검색목록
 	@Override
-	public List<AdoptDto> searchListByPage(int startRow, int endRow, String column, String keyword) {
+	public List<AdoptDto> searchListByPage
+	    (int startRow, int endRow, String column, String keyword, int adoptNo) {
 		Map<String, Object> param = new HashMap<>();
 		param.put("startRow", startRow);
 		param.put("endRow", endRow);
 		param.put("column", column);
 		param.put("keyword", keyword);
+		param.put("adoptNo", adoptNo);
 		return sqlSession.selectList("adopt.listByPage", param);
 	}
 	

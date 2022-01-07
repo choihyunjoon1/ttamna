@@ -24,7 +24,8 @@ public interface AdoptDao {
 	List<AdoptDto> listByPage(int startRow, int endRow);
 	
 	//입양공고 더보기 페이지네이션 검색목록
-	List<AdoptDto> searchListByPage(int startRow, int endRow, String column, String keyword);
+	List<AdoptDto> searchListByPage
+	(int startRow, int endRow, String column, String keyword,int adoptNo);
 	
 	//입양공고 상세 + 검색
 	List<AdoptDto> detailOrSearch(Map<String, Object> data);

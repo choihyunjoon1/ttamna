@@ -57,6 +57,8 @@
 				 <if test="column != null and keyword != null">
 				   where instr(${column}, #{keyword}) > 0
 			     </if>
+			      where adopt_img_no 
+                = (select min(adopt_img_no) from adopt_img where adopt_no=#{adoptNo})
                 order by A.adopt_no desc
 			)TMP
 		) where rn between #{startRow} and #{endRow}

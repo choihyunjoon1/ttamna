@@ -5,6 +5,8 @@
 <c:set var="login" value="${uid != null}"></c:set>
 <c:set var="insertGrade" value="${grade == '관리자' or '보호소'}"></c:set>
 <c:set var="root" value="${pageContext.request.contextPath}"></c:set>
+<c:set var="adoptDto" value="${list}"></c:set>
+
 <!-- JQeury CDN -->
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <!-- JavaScript 날짜 포맷 CDN -->
@@ -14,25 +16,27 @@
 $(function(){
 	var page = 1;	
 	var size = 9;
-	
+	var adoptDto = "${adoptDto}";
+	var adoptNo = ${adoptDto.adoptNo};
 	//더보기 버튼 클릭시 이벤트 발생
 	$(".more-btn").click(function(){
 		var column = $("#column option:selected").val();
 		var keyword = $("input[name=keyword]").val();
-		loadList(page, size, column, keyword);
+		loadList(page, size, column, keyword, adoptNo);
 		page++;
 	});
 	
 	//강제 1회 클릭
 	$(".more-btn").click();
 	
-	function loadList(pageValue, sizeValue, column, keyword){
+	function loadList(pageValue, sizeValue, column, keyword, adoptNo){
 		$.ajax({
 			url : "${root}/adopt/more?column="+column+"&keyword="+keyword,	
 			type : "post",
 			data : {
 				page : pageValue,
-				size : sizeValue
+				size : sizeValue,
+				adoptNo : adoptNo
 			},
 			dataType : "json",
 			success:function(resp){
@@ -51,8 +55,8 @@ $(function(){
 					var imgLocation = "";
 					if(!resp[i].adoptImgNo){
 						imgLocation =  "<img src=${pageContext.request.contextPath}/resources/img/nonimage.png class=icon></a></span>";
-					}else{
-						imgLocation =  "<img src='adoptImg?adoptImgNo="+ resp[i].adoptImgNo +"' class='card-img-top' alt=' "+resp[i].adoptImgUploade+"'>";
+					}else {
+						imgLocation =  "<img src='adoptImg?adoptImgNo="+ resp[i].adoptImgNo +"' class='card-img-top' alt=' "+resp[i].adoptImgUpload+"'>";
 					}
 					
 					//탈퇴한 회원일 경우 null대신 탈퇴한 회원 표시해주기
@@ -105,6 +109,7 @@ $(function(){
 		</div>
 	</c:if>
 	</div>
+
 	
 	<!-- 게시물 표시 위치 -->		
 	<div class="row mt-3 mb-5 result">
@@ -167,7 +172,7 @@ $(function(){
 					</div>
 				</div>			
 			</form>
-	</div>
+	</div>	
 	
 	<!-- 검색 목록일 경우 전체 목록으로 돌아가기 버튼 보여주기 -->
 	<c:if test="${param.column != null }">
@@ -180,5 +185,4 @@ $(function(){
 	
 	
 </div>
-
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>
