@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.kh.ttamna.entity.shop.ShopImgDto;
+import com.kh.ttamna.util.FilePath;
 
 @Repository
 public class ShopImgDaoImpl implements ShopImgDao{
@@ -17,8 +18,6 @@ public class ShopImgDaoImpl implements ShopImgDao{
 		@Autowired
 		private SqlSession sqlSession;
 		
-		// 저장 폴더
-		private File dir = new File("D:/upload/shop");
 
 		@Override
 		public void save(ShopImgDto shopImgDto, MultipartFile multipartFile) throws IllegalStateException, IOException {
@@ -27,7 +26,7 @@ public class ShopImgDaoImpl implements ShopImgDao{
 			System.out.println("이미지 시퀀스 = "+seq);
 			
 			// 파일을 시퀀스 번호로 저장
-			File target = new File(dir, String.valueOf(seq));
+			File target = new File(FilePath.SHOP_PATH, String.valueOf(seq));
 			multipartFile.transferTo(target);
 			
 			// DB에 파일정보 저장
@@ -44,7 +43,7 @@ public class ShopImgDaoImpl implements ShopImgDao{
 		// 이미지 다운로드
 		@Override
 		public byte[] load(int shopImgNo) throws IOException {
-			File target = new File(dir, String.valueOf(shopImgNo));
+			File target = new File(FilePath.SHOP_PATH, String.valueOf(shopImgNo));
 			byte[] data = FileUtils.readFileToByteArray(target);
 			
 			return data;

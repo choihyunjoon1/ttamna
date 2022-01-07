@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.kh.ttamna.entity.donation.DonationImgDto;
+import com.kh.ttamna.util.FilePath;
 
 @Repository
 public class DonationImgDaoImpl implements DonationImgDao{
@@ -18,8 +19,7 @@ public class DonationImgDaoImpl implements DonationImgDao{
 	@Autowired
 	private SqlSession sqlSession;
 	
-	//저장용 폴더 위치 지정
-	private File directory = new File("D:/dev/ttamna/donation");
+
 	@Override
 	public void insert(DonationImgDto donationImgDto) {
 		sqlSession.insert("donaImg.insert", donationImgDto);
@@ -27,7 +27,7 @@ public class DonationImgDaoImpl implements DonationImgDao{
 	
 	@Override//파일을 실제 경로에 저장
 	public void save(DonationImgDto donationImgDto, MultipartFile file) throws IllegalStateException, IOException {
-		File target = new File(directory, String.valueOf(donationImgDto.getDonationImgNo()));
+		File target = new File(FilePath.DONATION_PATH, String.valueOf(donationImgDto.getDonationImgNo()));
 		file.transferTo(target);
 		
 		sqlSession.insert("donaImg.insert", donationImgDto);
@@ -44,7 +44,7 @@ public class DonationImgDaoImpl implements DonationImgDao{
 	
 	@Override
 	public byte[] load(int donaImgNo) throws IOException {
-		File target = new File(directory, String.valueOf(donaImgNo));
+		File target = new File(FilePath.DONATION_PATH, String.valueOf(donaImgNo));
 		byte[] data = FileUtils.readFileToByteArray(target);
 		return data;
 	}

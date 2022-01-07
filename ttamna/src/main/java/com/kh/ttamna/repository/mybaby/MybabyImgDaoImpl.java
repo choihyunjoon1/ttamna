@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.kh.ttamna.entity.mybaby.MybabyImgDto;
+import com.kh.ttamna.util.FilePath;
 
 @Repository
 public class MybabyImgDaoImpl implements MybabyImgDao{
@@ -18,7 +19,6 @@ public class MybabyImgDaoImpl implements MybabyImgDao{
 	@Autowired
 	private SqlSession sqlSession;
 	
-	private File dir = new File("D:/dev/ttamna/mybaby");
 	
 	@Override
 	public void insert(MybabyImgDto mybabyImgDto) {
@@ -27,7 +27,7 @@ public class MybabyImgDaoImpl implements MybabyImgDao{
 
 	@Override
 	public void save(MybabyImgDto mybabyImgDto, MultipartFile file) throws IllegalStateException, IOException {
-		File target = new File(dir,String.valueOf(mybabyImgDto.getMybabyImgNo()));
+		File target = new File(FilePath.MYBABY_PATH,String.valueOf(mybabyImgDto.getMybabyImgNo()));
 		file.transferTo(target);
 		
 		sqlSession.insert("mybabyImg.insert",mybabyImgDto);
@@ -45,7 +45,7 @@ public class MybabyImgDaoImpl implements MybabyImgDao{
 
 	@Override
 	public byte[] load(int mybabyImgNo) throws IOException {
-		File target = new File(dir, String.valueOf(mybabyImgNo));
+		File target = new File(FilePath.MYBABY_PATH, String.valueOf(mybabyImgNo));
 		byte[] data = FileUtils.readFileToByteArray(target);
 		return data;
 	}
@@ -61,7 +61,7 @@ public class MybabyImgDaoImpl implements MybabyImgDao{
 
 	@Override
 	public boolean deleteSave(int mybabyNo) throws IllegalStateException, IOException {
-		File target = new File(dir,String.valueOf(mybabyNo));
+		File target = new File(FilePath.MYBABY_PATH,String.valueOf(mybabyNo));
 		target.delete();
 		
 		return sqlSession.delete("mybabyImg",mybabyNo)>0;
