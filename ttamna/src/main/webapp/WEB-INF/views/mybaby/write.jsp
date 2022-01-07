@@ -4,6 +4,7 @@
 <c:set var="root" value="${pageContext.request.contextPath}"></c:set>
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 
+<div class="container-700 container-center">
 <form method="post" enctype="multipart/form-data">
   <fieldset style="width:80%;" class="mx-auto">
   	 <!-- 위에 헤더 부분 -->
@@ -33,5 +34,6 @@
     </div>
   </fieldset>
 </form>
+</div>
 
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>

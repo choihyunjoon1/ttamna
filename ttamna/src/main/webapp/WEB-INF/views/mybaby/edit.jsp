@@ -1,34 +1,39 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
+<c:set var="root" value="${pageContext.request.contextPath}"></c:set>
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 
-<div class="container">
+<div class="container-700 container-center">
 <form method="post" enctype="multipart/form-data">
-	<div class="row">
-	<input type="hidden" name="mybabyWriter" value="${sessionScope.uid}">
-		<label>
-			제목<input type="text" name="mybabyTitle" required class="form-input" value="${mybaby.mybabyTitle}">
-		</label>
-	</div>
-	<div class="row">
-		<label>
-			파일<input type="file" multiple name="attach" class="form-input" accept="image/*" >
-		</label>
-	</div>
-	<div class="row">
-		<label>내용</label>
-		<textarea rows="10" cols="50" name="mybabyContent">${mybaby.mybabyContent}</textarea>
-	</div>
-	
-	
-	<div class="row">
-		<label>
-			<input type="submit" value="등록">
-			<a href="detail?mybabyNo=${mybaby.mybabyNo}">취소</a>
-		</label>
-	</div>
+  <fieldset style="width:80%;" class="mx-auto">
+  	 <!-- 위에 헤더 부분 -->
+    <legend>자랑글 쓰기</legend>
+    <div class="form-group row">
+       <input type="hidden" name="mybabyWriter" value="${sessionScope.uid}">
+    </div>
+    <!-- 제목작성부분 -->
+    <div class="form-group">
+      <label for="mybabyTitle" class="form-label mt-4">제목 입력</label>
+      <input type="text" class="form-control" id="mybabyTitle"  placeholder="제목 작성" name="mybabyTitle" autocomplete="off" value="${mybaby.mybabyTitle }">
+    </div>
+    <!-- 내용 작성부분 -->
+    <div class="form-group">
+      <label for="mybabyContent" class="form-label mt-4">내용 입력</label>
+      <textarea class="form-control" id="mybabyContent" rows="3" name="mybabyContent">${mybaby.mybabyContent }</textarea>
+    </div>
+    <!-- 파일 부분 -->
+    <div class="form-group">
+      <label for="attach" class="form-label mt-4">이미지 파일 선택 : </label>
+      <label class="form-label mt-4">파일이 추가될 경우 이전 파일이 삭제됩니다.</label>
+      <input class="form-control" type="file" id="attach" name="attach" multiple>
+    </div>
+    <div class="form-group">
+   		<br><br>
+	    <button type="submit" class="btn btn-outline-primary" value="수정하기">수정하기</button>
+	 	<a href = "${root }/mybaby/detail?mybabyNo=${mybaby.mybabyNo}"><button type="button" class="btn btn-outline-secondary">취소</button></a> 
+    </div>
+  </fieldset>
 </form>
 </div>
 

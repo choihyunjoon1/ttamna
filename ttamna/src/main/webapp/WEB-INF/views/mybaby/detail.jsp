@@ -7,7 +7,21 @@
 <!-- 댓글 -->
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <script>
+	//삭제script
+	$(function(){
+		$(".delete-btn").click(function(){
+			var choice = window.confirm("${mybaby.mybabyNo}번 ${mybaby.mybabyTitle}. 게시글을 삭제하시겠습니까?");
+			if(choice){
+				location.href = "${root}/mybaby/delete?mybabyNo=${mybaby.mybabyNo}";
+			}else{
+				location.reload();
+			}
+		});
+	});		
+</script>
+<script>
 	
+	//댓글script
 	$(function(){
 		
 		
@@ -71,46 +85,52 @@
 <!-- 댓글 끝 -->
 
 
-<div class="container-500 bg-white container-center" align="center">
-	<div class="card mb-3">
-	  <h3 class="card-header">DETAIL</h3>
-	  <div class="card-body">
-	    <h5 class="card-title">${mybaby.mybabyTitle }</h5>
-	    <h6 class="card-subtitle text-muted">
-	    	${mybaby.mybabyWriter }
-	    	|
-	    	${mybaby.mybabyTimeString() }
-	    	|
-	    	${mybaby.mybabyReply }
-	    	</h6>
-	  </div>
-	  <!-- 이미지 자리 -->
-	  <c:forEach var="mybabyImgDto" items="${mybabyImgDtoList}">
-		  <svg xmlns="http://www.w3.org/20/svg" class="d-block user-select-none" width="100%" height="50" aria-label="Placeholder: Image cap" focusable="false" role="img" preserveAspectRatio="xMidYMid slice" viewBox="0 0 318 180" style="font-size:1.125rem;text-anchor:middle">
-		    <rect width="100%" height="100%" fill="#868e96"></rect>
-		    <text x="100%" y="100%" fill="#dee2e6" dy=".3em"><img src="mybabyImg?mybabyImgNo=${mybabyImgDto.mybabyImgNo}&mybabyNo=${mybaby.mybabyNo}" style="width:100%;height:50%;"></text>
-<%-- 			<img src="mybabyImg?mybabyImgNo=${mybabyImgDto.mybabyImgNo}&mybabyNo=${mybaby.mybabyNo}" style="width:100%;"> --%>
-		  </svg>
-	  </c:forEach>
-	  <div class="card-body">
-	    <p class="card-text">${mybaby.mybabyContent}</p>
-	  </div>
-<!-- 	  <ul class="list-group list-group-flush"> -->
-<!-- 	    <li class="list-group-item">Cras justo odio</li> -->
-<!-- 	    <li class="list-group-item">Dapibus ac facilisis in</li> -->
-<!-- 	    <li class="list-group-item">Vestibulum at eros</li> -->
-<!-- 	  </ul> -->
-	  <div class="card-body">
-	    <a href="${root }/mybaby/list" class="card-link">목록으로</a>
-	    <c:if test="${uid eq mybaby.mybabyWriter}">
-			<a href="edit?mybabyNo=${mybaby.mybabyNo }" class="card-link">수정</a>
-			<a href="delete?mybabyNo=${mybaby.mybabyNo}" class="card-link">삭제</a>
-		</c:if>
-	  </div>
-<!-- 	  <div class="card-footer text-muted"> -->
-<!-- 	    2 days ago -->
-<!-- 	  </div> -->
+<div class="container-700 container-center">
+
+	<div class="mt-5 mb-5"><h3>내새끼자랑 상세</h3></div>
+<%-- 	<c:if test="${param.success != null}"> --%>
+<!-- 		<div class=" mb-3"><h6>입양공고 수정 완료</h6></div> -->
+<%-- 	</c:if> --%>
+<%-- 	<c:if test="${param.invalid != null}"> --%>
+<!-- 		<div class=" mb-3"><h6>수정 권한이 없습니다</h6></div> -->
+<%-- 	</c:if>	 --%>
+	
+	<div class="container-500 container-center">
+		<div class="card mb-5">
+		  <div class="card-header d-grid gap-2 justify-content-center mt-2">	
+		    <h3> ${mybaby.mybabyTitle}</h3>
+		  </div>
+		  <div class="card-body d-grid gap-2 justify-content-md-end">
+		    <h6 class="card-subtitle text-muted">
+		    ${mybaby.mybabyTimeString()}  작성자 : ${mybaby.mybabyWriter}   댓글수 : ${mybaby.mybabyReply }
+		    </h6>
+		  </div>
+		 <c:if test="${mybabyImgDtoList != null}">
+			<div class="card-body d-grid gap-2">
+				<c:forEach var="mybabyImgDto" items="${mybabyImgDtoList}">
+					<img class="mx-auto" src="mybabyImg?mybabyImgNo=${mybabyImgDto.mybabyImgNo}&mybabyNo=${mybaby.mybabyNo}" style="width:60%;">
+				</c:forEach>
+			</div>
+		  </c:if>
+		  <div class="card-body">
+		    <p class="card-text">${mybaby.mybabyContent}</p>
+		  </div>
+		  <div class="card-footer text-muted">
+			<!-- 작성자 또는 관리자에게만 수정 삭제 버튼 보여주기 -->
+			<c:set var="valid" value="${grade == '관리자' or uid == mybaby.mybabyWriter}"></c:set>
+			<div class="d-grid gap-2 d-md-flex justify-content-md-end">
+			<a type="button" href="${root}/mybaby/" class="btn btn-outline-primary">목록</a>
+			<c:if test="${valid}">
+				<a href="${root}/mybaby/edit?mybabyNo=${mybaby.mybabyNo}" type="button" class="btn btn-outline-warning">수정</a>
+				<button type="button" class="btn btn-outline-secondary delete-btn">삭제</button>
+			</c:if>	
+			</div>
+		  </div>
+		</div>
 	</div>
+
+	
+
 </div>
 	
 	

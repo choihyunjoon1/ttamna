@@ -127,5 +127,98 @@
 	<update id="editGrade" parameterType="map">
 		update member set member_grade = #{memberGrade} where member_id = #{memberId}
 	</update>
+	
+	<!-- 내 게시글 보기 구문 -->
+	<select id="myBoard" parameterType = "String" resultType="BoardVO">
+		select * from
+			(select 
+			    mybaby_no  "boardNo",
+			    mybaby_title "boardTitle",
+			    mybaby_writer "boardWriter",
+			    mybaby_type "boardType",
+			    mybaby_time "boardTime"
+			from mybaby
+			union
+			select 
+			    adopt_no "boardNo",
+			    adopt_title "boardTitle",
+			    adopt_writer "boardWriter",
+			    adopt_type "boardType",
+			    adopt_time "boardTime"
+			from adopt
+			union
+			select 
+			    donation_no "boardNo",
+			    donation_title "boardTitle",
+			    donation_writer "boardWriter",
+			    donation_type "boardType",
+			    donation_time "boardTime"
+			from donation)
+		where "boardWriter"=#{memberId}
+		order by "boardTime" desc
+	</select>
+	<select id="countBoard" parameterType = "string" resultType="int">
+		select count(*) from
+			(select 
+			    mybaby_no  "boardNo",
+			    mybaby_title "boardTitle",
+			    mybaby_writer "boardWriter",
+			    mybaby_type "boardType",
+			    mybaby_time "boardTime"
+			from mybaby
+			union
+			select 
+			    adopt_no "boardNo",
+			    adopt_title "boardTitle",
+			    adopt_writer "boardWriter",
+			    adopt_type "boardType",
+			    adopt_time "boardTime"
+			from adopt
+			union
+			select 
+			    donation_no "boardNo",
+			    donation_title "boardTitle",
+			    donation_writer "boardWriter",
+			    donation_type "boardType",
+			    donation_time "boardTime"
+			from donation)
+		where "boardWriter"=#{memberId}
+		order by "boardTime" desc
+	</select>
+	<select id="boardListPaging" parameterType="map" resultType="BoardVO">
+	select * from
+		(select rownum rn,TMP.* from
+			(select * from
+			    (select 
+			        mybaby_no  "boardNo",
+			        mybaby_title "boardTitle",
+			        mybaby_writer "boardWriter",
+			        mybaby_type "boardType",
+			        mybaby_time "boardTime"
+			    from mybaby
+			    union
+			    select 
+			        adopt_no "boardNo",
+			        adopt_title "boardTitle",
+			        adopt_writer "boardWriter",
+			        adopt_type "boardType",
+			        adopt_time "boardTime"
+			    from adopt
+			    union
+			    select 
+			        donation_no "boardNo",
+			        donation_title "boardTitle",
+			        donation_writer "boardWriter",
+			        donation_type "boardType",
+			        donation_time "boardTime"
+			    from donation)
+			where "boardWriter"=#{memberId}
+			order by "boardTime" desc)
+			TMP)
+		where rn between  #{startRow} and #{endRow}
+	</select>
+	
+	
+	
 </mapper>
 
