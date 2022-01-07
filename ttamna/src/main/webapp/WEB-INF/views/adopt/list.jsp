@@ -16,27 +16,26 @@
 $(function(){
 	var page = 1;	
 	var size = 9;
-	var adoptDto = "${adoptDto}";
-	var adoptNo = ${adoptDto.adoptNo};
+	
+
 	//더보기 버튼 클릭시 이벤트 발생
 	$(".more-btn").click(function(){
 		var column = $("#column option:selected").val();
 		var keyword = $("input[name=keyword]").val();
-		loadList(page, size, column, keyword, adoptNo);
+		loadList(page, size, column, keyword);
 		page++;
 	});
 	
 	//강제 1회 클릭
 	$(".more-btn").click();
 	
-	function loadList(pageValue, sizeValue, column, keyword, adoptNo){
+	function loadList(pageValue, sizeValue, column, keyword){
 		$.ajax({
 			url : "${root}/adopt/more?column="+column+"&keyword="+keyword,	
 			type : "post",
 			data : {
 				page : pageValue,
 				size : sizeValue,
-				adoptNo : adoptNo
 			},
 			dataType : "json",
 			success:function(resp){
@@ -97,7 +96,7 @@ $(function(){
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 
 <div class="container-900 container-center mt-5 mb-5">
-	
+
 	<div class="mt-5 mb-3"><h3>입양공고</h3>
 	<c:if test="${param.deleteSuccess != null}">
 		<div class=" mb-3"><h6>입양공고 삭제 완료</h6></div>

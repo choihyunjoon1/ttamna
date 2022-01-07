@@ -86,13 +86,12 @@ public class AdoptController {
 			@RequestParam(required =false, defaultValue = "1") int page,
 			@RequestParam(required =false, defaultValue = "9") int size,
 			@RequestParam(required =false, defaultValue = "") String column,
-			@RequestParam(required =false, defaultValue = "") String keyword,
-			@RequestParam(required =false, defaultValue = "") int adoptNo){
+			@RequestParam(required =false, defaultValue = "") String keyword){
 		
 		int endRow = page* size;
 		int startRow = endRow - (size - 1);
 		if(column != null && keyword != null && !column.equals("") && !keyword.equals("")) {
-			return adoptDao.searchListByPage(startRow, endRow, column, keyword, adoptNo);
+			return adoptDao.searchListByPage(startRow, endRow, column, keyword);
 		}else {
 			return adoptDao.listByPage(startRow, endRow);
 		}
