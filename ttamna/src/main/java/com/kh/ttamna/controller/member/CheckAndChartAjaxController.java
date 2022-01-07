@@ -14,11 +14,11 @@ import com.kh.ttamna.entity.member.MemberDto;
 import com.kh.ttamna.repository.member.MemberDao;
 import com.kh.ttamna.repository.member.VisitDao;
 import com.kh.ttamna.service.pagination.PaginationService;
-import com.kh.ttamna.vo.chart.VisitTotalChartVO;
+import com.kh.ttamna.vo.chart.TotalChartVO;
 
 @RestController
 @RequestMapping("/ajax")
-public class AjaxController {
+public class CheckAndChartAjaxController {
 	
 	@Autowired
 	private MemberDao memberDao;
@@ -77,8 +77,8 @@ public class AjaxController {
 	
 	//7일간 일별 방문자수 통계 데이터 전달 ajax
 	 @GetMapping("/visitor_daily") 
-	 public VisitTotalChartVO visitorDaily() {
-		 VisitTotalChartVO chartVO = new VisitTotalChartVO();
+	 public TotalChartVO visitorDaily() {
+		 TotalChartVO chartVO = new TotalChartVO();
 		 chartVO.setTitle("[ 최근 7일간 일별 방문자 수 ]");
 		 chartVO.setLabel("방문자 수");
 		 chartVO.setDataset(visitDao.countDaily());
@@ -87,8 +87,8 @@ public class AjaxController {
 
 	//이번달 일별 방문자 수
 	 @GetMapping("/this_month_daily") 
-	 public VisitTotalChartVO thisMonthDaily() {
-		 VisitTotalChartVO chartVO = new VisitTotalChartVO();
+	 public TotalChartVO thisMonthDaily() {
+		 TotalChartVO chartVO = new TotalChartVO();
 		 chartVO.setTitle("[ 이번 달 일별 방문자 수 ]");
 		 chartVO.setLabel("방문자 수");
 		 chartVO.setDataset(visitDao.countThisMonthDaily());
@@ -97,8 +97,8 @@ public class AjaxController {
 	 
 	//이번달 일별 방문자 수
 	 @GetMapping("/thisMonth") 
-	 public VisitTotalChartVO thisMonth() {
-		 VisitTotalChartVO chartVO = new VisitTotalChartVO();
+	 public TotalChartVO thisMonth() {
+		 TotalChartVO chartVO = new TotalChartVO();
 		 chartVO.setTitle("[ 이번 달 누적 방문자 수 ]");
 		 chartVO.setLabel("방문자 수");
 		 chartVO.setDataset(visitDao.thisMonth());
@@ -107,8 +107,8 @@ public class AjaxController {
 	 
 	 //이번달부터 6개월 전까지의 월별 누적 방문자수
 	 @GetMapping("/monthly")
-	 public VisitTotalChartVO monthly() {
-		 VisitTotalChartVO chartVO = new VisitTotalChartVO();
+	 public TotalChartVO monthly() {
+		 TotalChartVO chartVO = new TotalChartVO();
 		 chartVO.setTitle("[ 최근 6개월 간 월별 방문자 수 ]");
 		 chartVO.setLabel("방문자 수");
 		 chartVO.setDataset(visitDao.monthly());
@@ -117,8 +117,8 @@ public class AjaxController {
 	 
 	 //최근 12개월 간 월별 누적 방문자수
 	 @GetMapping("/moy")
-	 public VisitTotalChartVO moy() {
-		 VisitTotalChartVO chartVO = new VisitTotalChartVO();
+	 public TotalChartVO moy() {
+		 TotalChartVO chartVO = new TotalChartVO();
 		 chartVO.setTitle("[ 최근 12개월 간 월별 방문자수 ]");
 		 chartVO.setLabel("방문자 수");
 		 chartVO.setDataset(visitDao.moy());

@@ -14,7 +14,7 @@ import com.kh.ttamna.entity.member.MemberDto;
 import com.kh.ttamna.repository.member.MemberDao;
 import com.kh.ttamna.repository.member.VisitDao;
 import com.kh.ttamna.service.pagination.PaginationService;
-import com.kh.ttamna.vo.chart.VisitTotalChartVO;
+import com.kh.ttamna.vo.chart.TotalChartVO;
 import com.kh.ttamna.vo.pagination.PaginationVO;
 
 import lombok.extern.slf4j.Slf4j;
