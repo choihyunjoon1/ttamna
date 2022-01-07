@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.kh.ttamna.entity.payment.PaymentDto;
+import com.kh.ttamna.vo.chart.DonationChartVO;
 
 @Repository
 public class PaymentDaoImpl implements PaymentDao{
@@ -65,6 +66,42 @@ public class PaymentDaoImpl implements PaymentDao{
 		param.put("endRow",endRow);
 		
 		return sqlSession.selectList("pay.listPaging",param);
+	}
+
+	//7일간 일별 기부 누적금액 통계를 위한 메소드
+	@Override
+	public List<DonationChartVO> donationDaily() {
+		return sqlSession.selectList("pay.donationDaily");
+	}
+
+	//이번달 일별 기부금액
+	@Override
+	public List<DonationChartVO> thisMonthDaily() {
+		return sqlSession.selectList("pay.thisMonthDaily");
+	}
+
+	//이번달 누적 기부금액
+	@Override
+	public List<DonationChartVO> thisMonth() {
+		return sqlSession.selectList("pay.thisMonth");
+	}
+
+	//최근 6개월간 월별 기부금액
+	@Override
+	public List<DonationChartVO> monthly() {
+		return sqlSession.selectList("pay.amountMonthly");
+	}
+
+	//최근 12개월간 월별 기부금액
+	@Override
+	public List<DonationChartVO> moy() {
+		return sqlSession.selectList("pay.amountMoy");
+	}
+
+	//기부금액 총 누적액
+	@Override
+	public long totalAmount() {
+		return sqlSession.selectOne("pay.totalAmount");
 	}
 
 }

@@ -86,7 +86,10 @@
     
     <!-- 이번 달 누적 방문자 수 -->
     <select id="countThisMonth" resultType="VisitChartVO">
-      select to_char((TO_DATE(sysdate,'YYYY-MM-DD')), 'month') "thisMonth", sum("count") "thisMonthCount" from (
+      select 
+      to_char((TO_DATE(sysdate,'YYYY-MM-DD')), 'month') "thisMonth", 
+      sum("count") "thisMonthCount" 
+      from (
 		select
 		 d.dt "date",
 		 nvl(v.cnt, 0) "count"

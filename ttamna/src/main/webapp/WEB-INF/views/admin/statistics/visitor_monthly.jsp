@@ -46,12 +46,12 @@
  		type : "get",
  		dataType : "json",
 		success:function(resp){
-			console.log("최근 12개월간의 월별 방문자수 월별 누적 방문자 수 통계 불러오기 성공");
+			console.log("최근 12개월간의 월별 누적 방문자수 불러오기 성공");
 			//데이터를 가져오는데 성공하면 차트를 생성하는 함수부르기
  			moy("#moy", resp);
  		},
  		error:function(e){
- 			console.log("최근 12개월간의 월별 방문자수 월별 누적 방문자 수 통계 불러오기 실패", e);
+ 			console.log("최근 12개월간의 월별 누적 방문자 수 불러오기 실패", e);
  		}
  	});
  });
@@ -215,7 +215,7 @@
 
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 
-<div class="container-700 container-center mt-5 mb-5">
+<div class="container-800 container-center mt-5 mb-5">
 	 
 	 <div class="mt-5 mb-2"><h3>VISITOR MONTHLY</h3></div>
 
@@ -223,9 +223,11 @@
 		<a type="button" class="btn btn-sm btn-outline-dark" href="${root}/admin/statistics/menu">Back to Statistics Menu</a>
 		<a type="button" class="btn btn-sm btn-outline-dark" href="${root}/admin/main">Back to Admin Menu</a>
 	</div>
-
-	<div class="mb-5 container-600 container-center"><canvas id="this-month"></canvas></div>
-	<div class="mt-5 mb-5 container-500 container-center"><canvas id="monthly"></canvas></div>
+	
+	<div class="d-grid gap-2 d-md-flex mt-2 mb-5">
+		<div class="mt-5 container-300 container-center"><canvas id="this-month" style="width:40%; height:100%;"></canvas></div>
+		<div class="mt-5 container-400 container-center"><canvas id="monthly"></canvas></div>
+	</div>	
 	<div class="mt-5 mb-5 container-700 container-center"><canvas id="moy"></canvas></div>
 
 </div>

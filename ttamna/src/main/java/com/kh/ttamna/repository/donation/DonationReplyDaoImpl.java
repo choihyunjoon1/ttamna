@@ -85,15 +85,6 @@ public class DonationReplyDaoImpl implements DonationReplyDao{
 	}
 
 	@Override
-	public List<DonationReplyDto> pagenation(int StartRow, int endRow ,  int donationNo) {
-		Map<String,Object> param = new HashMap<>();
-		param.put("startRow",StartRow);
-		param.put("endRow",endRow);
-		param.put("donationNo", donationNo);
-		return sqlSession.selectList("donationReply.pagination",param);
-	}
-
-	@Override
 	public int count(int donationNo) {	
 		return sqlSession.selectOne("donationReply.count",donationNo);
 	}

@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.kh.ttamna.entity.member.MemberDto;
 import com.kh.ttamna.repository.member.MemberDao;
 import com.kh.ttamna.repository.member.VisitDao;
-import com.kh.ttamna.service.pagination.PaginationService;
+import com.kh.ttamna.repository.payment.PaymentDao;
 import com.kh.ttamna.vo.chart.TotalChartVO;
 
 @RestController
@@ -21,6 +21,9 @@ public class CheckAndChartAjaxController {
 	
 	@Autowired
 	private VisitDao visitDao;
+	
+	@Autowired
+	private PaymentDao paymentDao;
 	
 	//아이디 중복 검사 ajax
 	@GetMapping("/ajaxId")
@@ -122,10 +125,62 @@ public class CheckAndChartAjaxController {
 	 }
 	 
 	 //기부금액 최근 7일간 일별 통계
-	 //@GetMapping("/donation_daily")
-	
-	
+	 @GetMapping("/donation_daily")
+	 public TotalChartVO donationDaily() {
+		 TotalChartVO chartVO = new TotalChartVO();
+		 chartVO.setTitle("[ 최근 7일간 기부금액 일별 누적금액]");
+		 chartVO.setLabel("기부금액");
+		 chartVO.setDonationDataset(paymentDao.donationDaily());
+		 return chartVO;
+	 }
 	 
+	 //이번달 일별 기부금액 통계
+	 @GetMapping("/donation_thisMonth_daily")
+	 public TotalChartVO donationThisMonthDaily() {
+		 TotalChartVO chartVO = new TotalChartVO();
+		 chartVO.setTitle("[이번 달 기부금액 일별 누적금액]");
+		 chartVO.setLabel("기부금액");
+		 chartVO.setDonationDataset(paymentDao.thisMonthDaily());
+		 return chartVO;
+	 }
+	 
+	 //이번달 누적 기부금액
+	 @GetMapping("/donation_thisMonth")
+	 public TotalChartVO donationThisMonth() {
+		 TotalChartVO chartVO = new TotalChartVO();
+		 chartVO.setTitle("[이번 달 누적 기부금액]");
+		 chartVO.setLabel("기부금액");
+		 chartVO.setDonationDataset(paymentDao.thisMonth());
+		 return chartVO;
+	 }
+	 
+	 //최근 6개월간 월별 누적 기부 금액
+	 @GetMapping("/donation_monthly")
+	 public TotalChartVO donationMonthly() {
+		 TotalChartVO chartVO = new TotalChartVO();
+		 chartVO.setTitle("[최근 6개월 월별 누적 기부금액]");
+		 chartVO.setLabel("기부금액");
+		 chartVO.setDonationDataset(paymentDao.monthly());
+		 return chartVO;
+	 }
+	 
+	 //최근 12개월간 월별 누적 기부 금액
+	 @GetMapping("/donation_moy")
+	 public TotalChartVO donationMoy() {
+		 TotalChartVO chartVO = new TotalChartVO();
+		 chartVO.setTitle("[최근 12개월 월별 누적 기부금액]");
+		 chartVO.setLabel("기부금액");
+		 chartVO.setDonationDataset(paymentDao.moy());
+		 return chartVO;
+	 }
+	 
+	 //현재까지 기부금액 총 누적액
+	 @GetMapping("/donation_total")
+	 public String totalAmount() {
+		long amount = paymentDao.totalAmount();
+		return String.valueOf(amount);
+
+	 }
 
 }
 
