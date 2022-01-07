@@ -90,9 +90,118 @@
 	
 	<!-- 최근 7일간 기부금액 일별 통계 -->
 	<select id="donationDaily" resultType="DonationChartVO">
-	
+	 select
+        d.dt "date",
+        nvl(p.daily, 0) "dailyAmount"
+    from
+        (select 
+		        to_char((sysdate-7) + level - 1, 'YY/MM/DD') dt ,
+		        to_char(to_date(sysdate-7, 'YY/MM/DD') + rownum - 1, 'day') dow
+		    from dual <![CDATA[connect by level <= ((sysdate-1) - (sysdate-7) +1 )]]>)d
+        left outer join    
+        (select 
+		        to_char(pay_time, 'YY/MM/DD') dt, 
+		        to_char(pay_time, 'DAY') dow,
+                sum(total_amount) daily
+		    from payment where <![CDATA[sysdate - pay_time <= 7]]> and pay_type='기부'
+		    group by to_char(pay_time, 'YY/MM/DD'), to_char(pay_time, 'DAY'))p
+        on d.dt = p.dt
+        order by d.dt asc
 	</select>
 	
+	<!-- 이번달 일별 기부금액 -->
+	<select id="thisMonthDaily" resultType="DonationChartVO">
+	 select
+		 d.dt "thisMonthDate",
+		 nvl(p.daily, 0) "thisMonthDailyAmount"
+		from
+		    (select 
+		        to_char(trunc(sysdate, 'MM') + level - 1, 'YY/MM/DD') dt ,
+		        to_char(to_date(trunc(sysdate, 'MM'), 'YY/MM/DD') + rownum - 1, 'month')
+		    from dual <![CDATA[connect by level <= (last_day(sysdate) - trunc(sysdate, 'MM') +1 )]]>)d
+		left outer join 
+		    (select 
+		        to_char(pay_time, 'YY/MM/DD') dt, 
+		        sum(total_amount) daily,
+                pay_type
+		    from payment where pay_type='기부'
+		    group by to_char(pay_time, 'YY/MM/DD'), pay_type)p
+		on p.dt = d.dt 
+    order by d.dt asc
+	</select>
+	
+	<!-- 이번달 누적 기부금액 -->
+	<select id="thisMonth" resultType="DonationChartVO">
+	 select 
+      to_char((TO_DATE(sysdate,'YYYY-MM-DD')), 'month') "thisMonth", 
+      sum("sum") "thisMonthAmount" 
+      from (
+		select
+		 d.dt "date",
+		 nvl(p.at, 0) "sum"
+		from
+		    (select 
+		        to_char(trunc(sysdate, 'MM') + level - 1, 'YY/MM/DD') dt ,
+		        to_char(to_date(trunc(sysdate, 'MM'), 'YY/MM/DD') + rownum - 1, 'month') mth
+		    from dual <![CDATA[connect by level <= (last_day(sysdate) - trunc(sysdate, 'MM') +1 )]]>)d
+		left outer join 
+		    (select 
+		        to_char(pay_time, 'YY/MM/DD') dt, 
+		        to_char(pay_time, 'DAY') dow, 
+		        sum(total_amount) at,
+		    	pay_type pt
+		    from payment where pay_type='기부' 
+            group by to_char(pay_time, 'YY/MM/DD'), to_char(pay_time, 'DAY'), pay_type)p
+		on p.dt = d.dt 
+		order by d.dt asc)
+	</select>
+	
+	<!-- 최근 6개월간 월별 누적 기부금액 -->
+	<select id="amountMonthly" resultType="DonationChartVO">
+	select
+		d.mth "monthly",
+		nvl(p.at, 0) "monthlyAmount"
+	   from
+		    (select 
+		       to_char(add_months(to_date(sysdate, 'YY/MM/DD'), - (level-1)-1), 'month') mth 
+		     from dual
+		     <![CDATA[connect by add_months(to_date(sysdate, 'YY/MM/DD'), - (level-1)-1) >= add_months(to_date(sysdate, 'YY/MM/DD'), -6)]]>)d
+		left outer join
+		    (select 
+		        to_char(pay_time, 'month') mth,
+		        sum(total_amount) at,
+                pay_type pt
+		    from payment where pay_type='기부'  
+		    group by to_char(pay_time, 'month'), pay_type)p
+		on p.mth = d.mth 
+		order by lpad(d.mth, 2, '0')
+	</select>
+	
+	<!-- 최근 12개월간 월별 누적 기부금액 -->
+	<select id="amountMoy" resultType="DonationChartVO">
+	  select
+		d.mth "moy",
+		nvl(p.at, 0) "moyAmount"
+	   from
+		    (select 
+		        to_char(add_months(to_date(sysdate, 'YY/MM/DD'), - (level-1)-1), 'month') mth 
+		      from dual
+		        connect by add_months(to_date(sysdate, 'YY/MM/DD'), - (level-1)-1) >= add_months(to_date(sysdate, 'YY/MM/DD'), -11) )d
+		left outer join
+		    (select 
+		        to_char(pay_time, 'month') mth,
+		        sum(total_amount) at,
+                pay_type pt
+		    from payment where pay_type='기부'
+            group by to_char(pay_time, 'month'), pay_type)p
+		on p.mth = d.mth 
+		order by lpad(d.mth, 2, '0')
+	</select>
+	
+	<!-- 기부금액 총 누적액 -->
+	<select id="totalAmount" resultType="long">
+		select sum(total_amount) from payment where pay_type='기부'
+	</select>
 	
 </mapper>
 

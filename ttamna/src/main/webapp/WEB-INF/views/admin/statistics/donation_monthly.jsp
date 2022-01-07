@@ -10,126 +10,205 @@
 
  $(function(){// 화면이 시작될때 통계자료를 불러오도록 해야 한다
 
-	//기부금액 일별 통계
+	 //이번달 누적 방문자
 	 $.ajax({
- 		//url : "${root}/ajax/donation_daily",
- 		type : "get",
- 		dataType : "json",
-		success:function(resp){
-			console.log("방문자 일별 통계 불러오기 성공");
-			//데이터를 가져오는데 성공하면 차트를 생성하는 함수부르기
- 			dailyOfvisitor("#daily", resp);
- 		},
- 		error:function(e){
- 			console.log("방문자 일별 통계 불러오기 실패", e);
- 		}
-		
- 	});
-	
-	//방문자 이번달 일별 방문자
-	 $.ajax({
-	 		url : "${root}/ajax/this_month_daily",
+	 		url : "${root}/ajax/donation_thisMonth",
 	 		type : "get",
 	 		dataType : "json",
 			success:function(resp){
-				console.log("이번달 일별 방문자 수 통계 불러오기 성공");
+				console.log("이번달 누적 기부금액 불러오기 성공");
 				//데이터를 가져오는데 성공하면 차트를 생성하는 함수부르기
-	 			thisMonthDaily("#month-daily", resp);
+	 			thisMonth("#this-month", resp);
 	 		},
 	 		error:function(e){
-	 			console.log("이번달 일별 방문자 수  통계 불러오기 실패", e);
+	 			console.log("이번달 누적 기부금액 통계 불러오기 실패", e);
 	 		}
-			
 	 	});
+ 
+ 	//이번달 부터 6개월전까지의 월별 누적 기부금액
+ 	$.ajax({
+ 		url : "${root}/ajax/donation_monthly",
+ 		type : "get",
+ 		dataType : "json",
+		success:function(resp){
+			console.log("6개월전까지의 월별 누적 기부금액 불러오기 성공");
+			//데이터를 가져오는데 성공하면 차트를 생성하는 함수부르기
+ 			monthly("#monthly", resp);
+ 		},
+ 		error:function(e){
+ 			console.log("6개월전까지의 월별 누적 기부금액 불러오기 실패", e);
+ 		}
+ 	});
+
+ 	//최근 12개월간의 월별 누적 기부금액
+ 	$.ajax({
+ 		url : "${root}/ajax/donation_moy",
+ 		type : "get",
+ 		dataType : "json",
+		success:function(resp){
+			console.log("최근 12개월간의 월별 누적 기부금액 불러오기 성공");
+			//데이터를 가져오는데 성공하면 차트를 생성하는 함수부르기
+ 			moy("#moy", resp);
+ 		},
+ 		error:function(e){
+ 			console.log("최근 12개월간의 월별 누적 기부금액 불러오기 실패", e);
+ 		}
+ 	});
  });
 
- //selector : 선택자, data : JSON(ChartVO)
- //최근 7일간의 방문자 타운트를 가져오는 함수
- function dailyOfvisitor(selector, data){
-	
- 	//고정 변수인 ctx는 canvas에 그림을 그리기 위한 펜 객체
- 	var ctx = $(selector)[0].getContext("2d");
- 	var dateArray = [];//날짜(문자열)만 모아둘 배열
-	var countArray = [];//방문자수만 모아둘 배열
-	
-	//VisitChartVO에서 가져온 데이터를 각 배열에 넣어준다
-	for(var i=0; i < data.dataset.length; i++){
-		dateArray.push(data.dataset[i].date);
-		countArray.push(data.dataset[i].count);
-	}
- 	
- 	//var chart = new Chart(펜객체, 차트옵션);
- 	var daily = new Chart(ctx, {
- 		type: 'bar', //차트 유형
- 		data: { //차트에 들어가는 데이터
- 			labels: dateArray,
- 			datasets: [{
- 				label: data.label,
- 				data: countArray,
- 				backgroundColor: [
- 				    'rgba(255, 99, 132, 0.2)',
-	                'rgba(54, 162, 235, 0.2)',
-	                'rgba(255, 206, 86, 0.2)',
-	                'rgba(75, 192, 192, 0.2)',
-	                'rgba(153, 102, 255, 0.2)',
-	                'rgba(255, 159, 64, 0.2)',
- 				    'rgba(255, 99, 132, 0.2)'
- 				],
- 				borderColor: [
- 					'rgba(255, 99, 132, 1)',
- 		            'rgba(54, 162, 235, 1)',
- 		            'rgba(255, 206, 86, 1)',
- 		            'rgba(75, 192, 192, 1)',
- 		            'rgba(153, 102, 255, 1)',
- 		            'rgba(255, 159, 64, 1)',		
- 					'rgba(255, 99, 132, 1)'
- 				],
- 				borderWidth: 1
- 			}]
- 		},
-	    options: {
-	    	responsive: true,
-	  		plugins: {
-				legend: {
-					position: 'top',
-				},
-	          	title: {
-	            	display: true,
-	            	text: data.title
-	          	}
-			}
-     	 }
- 	
- 	});
- }
  
-//이번달 일별 방문자 타운트를 가져오는 함수
- function thisMonthDaily(selector, data){
+ //이번달 누적 방문자
+ function thisMonth(selector, data){
 		
 	 	//고정 변수인 ctx는 canvas에 그림을 그리기 위한 펜 객체
 	 	var ctx = $(selector)[0].getContext("2d");
-	 	var monthDateArray = [];//날짜(문자열)만 모아둘 배열
-		var monthDailyCountArray = [];//방문자수만 모아둘 배열
+	 	var thisMonthArray = [];//날짜(문자열)만 모아둘 배열
+		var thisMonthAmountArray = [];//방문자수만 모아둘 배열
 		
 		//VisitChartVO에서 가져온 데이터를 각 배열에 넣어준다
-		for(var i=0; i < data.dataset.length; i++){
-			monthDateArray.push(data.dataset[i].thisMonthDate);
-			monthDailyCountArray.push(data.dataset[i].thisMonthDailyCount);
+		for(var i=0; i < data.donationDataset.length; i++){
+			thisMonthArray.push(data.donationDataset[i].thisMonth);
+			thisMonthAmountArray.push(data.donationDataset[i].thisMonthAmount);
 		}
 	 	
 	 	//var chart = new Chart(펜객체, 차트옵션);
-	 	var thisMonthdaily = new Chart(ctx, {
-	 		type: 'line', //차트 유형
+	 	var thisMonth = new Chart(ctx, {
+	 		type: 'bar', //차트 유형
 	 		data: { //차트에 들어가는 데이터
-	 			labels: monthDateArray,
+	 			labels: thisMonthArray,
 	 			datasets: [{
 	 				label: data.label,
-	 				data: monthDailyCountArray,
+	 				data: thisMonthAmountArray,
 	 				backgroundColor: [
-		                'rgba(54, 162, 235, 0.2)'
+	 					  'rgba(255, 206, 86, 0.2)'
 	 				],
 	 				borderColor: [
-	 		            'rgba(54, 162, 235, 1)'
+	 					'rgba(255, 99, 132, 1)'
+	 				],
+	 				borderWidth: 1
+	 			}]
+	 		},
+		    options: {
+		    	responsive: true,
+		  		plugins: {
+					legend: {
+						position: 'top',
+					},
+		          	title: {
+		            	display: true,
+		            	text: data.title
+		          	}
+				}
+	     	 }
+	 	
+	 	});
+	 }
+ 
+ 
+//이번달 부터 6개월전까지의 월별 누적 방문자
+ function monthly(selector, data){
+		
+	 	//고정 변수인 ctx는 canvas에 그림을 그리기 위한 펜 객체
+	 	var ctx = $(selector)[0].getContext("2d");
+	 	var monthlyArray = [];//날짜(문자열)만 모아둘 배열
+		var monthlyAmountArray = [];//방문자수만 모아둘 배열
+		
+		//VisitChartVO에서 가져온 데이터를 각 배열에 넣어준다
+		for(var i=0; i < data.donationDataset.length; i++){
+			monthlyArray.push(data.donationDataset[i].monthly);
+			monthlyAmountArray.push(data.donationDataset[i].monthlyAmount);
+		}
+	 	
+	 	//var chart = new Chart(펜객체, 차트옵션);
+	 	var monthly = new Chart(ctx, {
+	 		type: 'bar', //차트 유형
+	 		data: { //차트에 들어가는 데이터
+	 			labels: monthlyArray,
+	 			datasets: [{
+	 				label: data.label,
+	 				data: monthlyAmountArray,
+	 				backgroundColor: [
+	 					'rgba(255, 99, 132, 0.2)',
+	 	                'rgba(54, 162, 235, 0.2)',
+	 	                'rgba(255, 206, 86, 0.2)',
+	 	                'rgba(75, 192, 192, 0.2)',
+	 	                'rgba(153, 102, 255, 0.2)',
+	 	                'rgba(255, 159, 64, 0.2)',
+	 	                'rgba(255, 206, 86, 0.2)'
+	 				],
+	 				borderColor: [
+	 					'rgba(255, 99, 132, 1)',
+	 		            'rgba(54, 162, 235, 1)',
+	 		            'rgba(255, 206, 86, 1)',
+	 		            'rgba(75, 192, 192, 1)',
+	 		            'rgba(153, 102, 255, 1)',
+	 		            'rgba(255, 159, 64, 1)',
+	 		            'rgba(255, 206, 86, 1)'
+	 				],
+	 				borderWidth: 1
+	 			}]
+	 		},
+		    options: {
+		    	responsive: true,
+		  		plugins: {
+					legend: {
+						position: 'top',
+					},
+		          	title: {
+		            	display: true,
+		            	text: data.title
+		          	}
+				}
+	     	 }
+	 	
+	 	});
+	 }
+	 
+ // 최근 12개월간의 월별 누적 기부금액
+ function moy(selector, data){
+		
+	 	//고정 변수인 ctx는 canvas에 그림을 그리기 위한 펜 객체
+	 	var ctx = $(selector)[0].getContext("2d");
+	 	var moyArray = [];//날짜(문자열)만 모아둘 배열
+		var moyAmountArray = [];//방문자수만 모아둘 배열
+		
+		//VisitChartVO에서 가져온 데이터를 각 배열에 넣어준다
+		for(var i=0; i < data.donationDataset.length; i++){
+			moyArray.push(data.donationDataset[i].moy);
+			moyAmountArray.push(data.donationDataset[i].moyAmount);
+		}
+	 	
+	 	//var chart = new Chart(펜객체, 차트옵션);
+	 	var moy = new Chart(ctx, {
+	 		type: 'bar', //차트 유형
+	 		data: { //차트에 들어가는 데이터
+	 			labels: moyArray,
+	 			datasets: [{
+	 				label: data.label,
+	 				data: moyAmountArray,
+	 				backgroundColor: [
+	 					'rgba(255, 206, 86, 0.2)',
+		 	            'rgba(75, 192, 192, 0.2)',
+		 	            'rgba(153, 102, 255, 0.2)',
+	 					'rgba(255, 99, 132, 0.2)',
+	 	                'rgba(54, 162, 235, 0.2)',
+	 	                'rgba(255, 206, 86, 0.2)',
+	 	                'rgba(75, 192, 192, 0.2)',
+	 	                'rgba(153, 102, 255, 0.2)',
+	 	                'rgba(255, 159, 64, 0.2)',
+	 	                'rgba(255, 206, 86, 0.2)'
+	 				],
+	 				borderColor: [
+	 					'rgba(255, 206, 86, 1)',
+		 		        'rgba(75, 192, 192, 1)',
+		 		        'rgba(153, 102, 255, 1)',
+	 					'rgba(255, 99, 132, 1)',
+	 		            'rgba(54, 162, 235, 1)',
+	 		            'rgba(255, 206, 86, 1)',
+	 		            'rgba(75, 192, 192, 1)',
+	 		            'rgba(153, 102, 255, 1)',
+	 		            'rgba(255, 159, 64, 1)',
+	 		            'rgba(255, 206, 86, 1)'
 	 				],
 	 				borderWidth: 1
 	 			}]
@@ -155,22 +234,20 @@
 
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 
-<div class="container-700 container-center mt-5 mb-5">
+<div class="container-800 container-center mt-5 mb-5">
 	 
-	 <div class="mt-5 mb-5"><h3>VISITOR DAILY</h3></div>
+	 <div class="mt-5 mb-5"><h3>DONATION MONTHLY</h3></div>
 	 
 	 <div class="d-grid gap-2 d-md-flex justify-content-md-end mt-2 mb-5">
 		<a type="button" class="btn btn-sm btn-outline-dark" href="${root}/admin/statistics/menu">Back to Statistics Menu</a>
 		<a type="button" class="btn btn-sm btn-outline-dark" href="${root}/admin/main">Back to Admin Menu</a>
 	</div>
 
-	<div class="mt-2 mb-5">
-		<canvas id="daily" width="30%"></canvas>
-	</div>
-	
-	<div class="mt-5 mb-5">
-		<canvas id="month-daily" width="30%"></canvas>
-	</div>
+	<div class="d-grid gap-2 d-md-flex mt-2 mb-5">
+		<div class="mt-5 container-300 container-center"><canvas id="this-month" style="width:40%; height:150px;"></canvas></div>
+		<div class="mt-5 container-300 container-center"><canvas id="monthly" style="width:40%; height:150px;"></canvas></div>
+	</div>	
+	<div class="mt-5 mb-5 container-700 container-center"><canvas id="moy"></canvas></div>
 	
 </div>
 
