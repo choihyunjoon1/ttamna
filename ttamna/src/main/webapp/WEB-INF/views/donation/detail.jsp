@@ -93,60 +93,70 @@
 </style>
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 
-<div class="container">
-	<div class="row">
-		<div class="col">
-			<c:forEach var="donationDto" items='${donationDto}'>
-				<div class="row">
-				<input type="hidden" class="donation-no" value="${donationDto.donationNo}">
-					<div class="col-5">
-					<c:if test="${donationImgDtoList ne null}">
-						<c:forEach var="donationImgDto" items="${donationImgDtoList}">
-							<img src="donaimg?donationImgNo=${donationImgDto.donationImgNo}&donationNo=${donationDto.donationNo}" style="width:100%;">
-						</c:forEach>
-					</c:if>
-					</div>
-				</div>
-				<div class="cols-12 mt-3">
-				<p>
-					${donationDto.donationContent}
-				</p>
-				</div>
-				<div class="col-12 mt-3">
-				현재후원금액 : ${donationDto.donationNowFund}원
-				</div>
-				<div class="col-12 mt-3">
-				목표후원금액 : ${donationDto.donationTotalFund}원
-				</div>
-				<div class="col-8 mt-3">
-				<c:if test="${sessionScope.uid eq donationDto.donationWriter}">
-					<a href="edit?donationNo=${donationDto.donationNo}" class="btn btn-primary">수정</a>
-					<a href="delete?donationNo=${donationDto.donationNo}&donationWriter=${sessionScope.uid}" class="btn btn-primary">삭제</a>
-				</c:if>
-				</div>
+<c:forEach var="donationDto" items="${donationDto}">
+<div class="container-500 container-center">
+	<div class="card mb-5">
+		<%-- 제목 영역 --%>
+		<div class="card-header d-grid gap-2 justify-content-center mt-2">
+			<h3>${donationDto.donationTitle}</h3>
+		</div>
+		<%-- 제목 아래 작성시간과 작성자 영역 --%>
+		<div class="card-body d-grid gap-2 justify-content-md-end">
+			<h6 class="card-subtitle text-muted">
+			${donationDto.donationTime} 작성자 : ${donationDto.donationWriter}
+			</h6>
+		</div>
+		<%-- 이미지가 찍히는 영역 --%>
+		<c:if test="${donationImgDtoList ne null}">
+			<c:forEach var="donationImgDto" items="${donationImgDtoList}">
+				<img src="donaimg?donationImgNo=${donationImgDto.donationImgNo}&donationNo=${donationDto.donationNo}" style="width:100%;">
 			</c:forEach>
+		</c:if>
+		<%-- 글 내용이 찍히는 영역 --%>
+		<div class="card-body">
+			<p class="card-text">${donationDto.donationContent}</p>
 		</div>
-		<div class="col-12 mt-5">
-			<form action="kakao/fund" method="post">
-				<c:forEach var="donationDto" items="${donationDto}">
-				<input type="hidden" name="donationNo" value="${donationDto.donationNo}"  id="donationNo">
-				<input type="hidden" name="partner_user_id" value="${sessionScope.uid}">
-				<input type="number" name="total_amount" class="form-control" min="1000" max="${donationDto.donationTotalFund - donationDto.donationNowFund}">
-				<input type="submit" value="기부하기" class="btn btn-primary">
-				</c:forEach>
-			</form>
-		</div>
-		<div class="col-12 mt-5">
-			<form action="kakao/autofund" method="post" id="auto">
-				<c:forEach var="donationDto" items="${donationDto}">
-				<input type="hidden" name="donationNo" value="${donationDto.donationNo}">
-				<input type="hidden" name="partner_user_id" value="${sessionScope.uid}">
-				<input type="number" name="total_amount" class="form-control" min="1000" max="${donationDto.donationTotalFund*0.3}">
-				<input type="submit" value="정기기부하기" class="btn btn-primary agree">
-				</c:forEach>
-			</form>
-		</div>
-		
+		<%-- 각종 정보가 줄 단위로 찍히는 영역 --%>
+		<ul class="list-group list-group-flush">
+			<li class="list-group-item text-muted">현재 기부 금액 : ${donationDto.donationNowFund}원</li>
+			<li class="list-group-item text-muted">목표 기부 금액 : ${donationDto.donationTotalFund}원</li>
+			<li class="list-group-item text-muted">
+				<%-- 단건 기부시 정보가 필요하므로 폼태그로 감싸넣었다 --%>
+				<form action="kakao/fund" method="post">
+					<input type="hidden" name="donationNo" value="${donationDto.donationNo}"  id="donationNo">
+					<input type="hidden" name="partner_user_id" value="${sessionScope.uid}">
+					<%-- 텍스트박스와 버튼을 한 줄로 나열하기 위해 div태그를 또 넣었다. --%>
+					<div class="row">
+						<div class="col-8">
+							<input type="number" name="total_amount" class="form-control" min="1000" max="${donationDto.donationTotalFund - donationDto.donationNowFund}">
+						</div>
+						<div class="col-4">
+							<input type="submit" value="1회 기부 하기" class="btn btn-primary">
+						</div>
+					</div>
+				</form>
+			</li>
+			<li class="list-group-item text-muted">
+				<%-- 정기 기부도 마찬가지 --%>
+				<form action="kakao/autofund" method="post" id="auto">
+					<input type="hidden" name="donationNo" value="${donationDto.donationNo}">
+					<input type="hidden" name="partner_user_id" value="${sessionScope.uid}">
+					<%-- 텍스트박스와 버튼을 한 줄로 나열하기 위해 div태그를 또 넣었다. --%>
+					<div class="row">
+						<div class="col-8">
+							<input type="number" name="total_amount" class="form-control" min="1000" max="${donationDto.donationTotalFund*0.3}">
+						</div>
+						<div class="col-4">
+							<input type="submit" value="정기 기부 신청" class="btn btn-primary agree">
+						</div>
+					</div>
+				</form>
+			</li>
+		</ul>
+	</div>
+</div>
+</c:forEach>
+
 
 	<!-- 댓글 입력창 -->    
     <div class="col-12">
