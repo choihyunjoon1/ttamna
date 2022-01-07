@@ -13,10 +13,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.kh.ttamna.entity.donation.AutoPayMentDto;
 import com.kh.ttamna.entity.member.DormancyDto;
 import com.kh.ttamna.entity.member.MemberDto;
 import com.kh.ttamna.entity.member.VisitDto;
@@ -29,6 +27,7 @@ import com.kh.ttamna.repository.payment.PaymentDao;
 import com.kh.ttamna.repository.payment.PaymentDetailDao;
 import com.kh.ttamna.service.kakaopay.ShopPayService;
 import com.kh.ttamna.service.pagination.PaginationService;
+import com.kh.ttamna.vo.board.BoardVO;
 import com.kh.ttamna.vo.kakaopay.KakaoPayCancelResponseVo;
 import com.kh.ttamna.vo.kakaopay.KakaoPaySearchResponseVo;
 import com.kh.ttamna.vo.pagination.PaginationVO;
@@ -168,11 +167,7 @@ public class MemberController {
 	public String changePwSuccess() {
 		return "member/mypage/change_pw_success";
 	}
-	//내 게시글 보기
-	@RequestMapping("/mypage/my_board")
-	public String myBoard() {
-		return "member/mypage/my_board";
-	}
+
 	//주문내역
 	@RequestMapping("/mypage/my_order")
 	public String myOrder(Model model) {
@@ -205,9 +200,7 @@ public class MemberController {
 	@GetMapping("/mypage/short_donation")
 	public String shortDonation(HttpSession session, @ModelAttribute PaginationVO paginationVO,Model model) throws Exception {
 		String memberId = (String)session.getAttribute("uid");
-		System.out.println("memberId = "+memberId);
 		PaginationVO listPaging = paginationService.shortListPaging(paginationVO, memberId);
-		System.out.println("listpaging = "+listPaging.toString());
 		model.addAttribute("paginationVO", listPaging);
 		return "member/mypage/short_donation";
 	}
@@ -275,6 +268,19 @@ public class MemberController {
 		
 		return "redirect:/member/mypage/order_detail?payNo="+payNo;
 		
+	}
+	
+	//내 게시글 보기
+	@GetMapping("/mypage/my_board")
+	public String myBoard(HttpSession session,Model model,@ModelAttribute PaginationVO paginationVO) throws Exception {
+		//세션에서 아이디 가져오기
+		String memberId = (String)session.getAttribute("uid");
+		System.out.println("컨트롤러memberId = "+memberId);
+		PaginationVO list = paginationService.myBoardPaging(paginationVO, memberId);
+		System.out.println("컨트롤러list = "+list.toString());
+//		List<BoardVO> list = memberDao.listMyBoard(memberId);
+		model.addAttribute("board", list);
+		return "member/mypage/my_board";
 	}
 
 

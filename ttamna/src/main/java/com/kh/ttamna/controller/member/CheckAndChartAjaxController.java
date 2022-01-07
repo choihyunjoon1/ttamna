@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.kh.ttamna.entity.member.MemberDto;
 import com.kh.ttamna.repository.member.MemberDao;
 import com.kh.ttamna.repository.member.VisitDao;
+import com.kh.ttamna.service.pagination.PaginationService;
 import com.kh.ttamna.vo.chart.TotalChartVO;
 
 @RestController
