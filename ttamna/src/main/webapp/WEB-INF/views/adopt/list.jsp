@@ -63,7 +63,7 @@ $(function(){
 					if(adoptWriter == null){
 						adoptWriter = "탈퇴한 회원입니다";
 					}
-					var divCol = "<div class='card text-dark bg-primary bg-opacity-10 mb-5 ms-2 ' style='width: 18rem;'>"
+					var divCol = "<div class='card border-primary text-dark bg-primary bg-opacity-10 mb-5 ms-2 ' style='width: 18rem;'>"
 								  + imgLocation
 								  + "<div class='card-body'>"
 								  + "<h5 class='card-title'><strong>"+ resp[i].adoptTitle +"</strong></h5>"
@@ -78,8 +78,8 @@ $(function(){
 								  + "<div class='card-text'><small>"
 								  + "입양 동물 : " + resp[i].adoptKind
 								  +"</small></div>"
-								  + "<div class='card-text d-grid gap-1 d-md-flex justify-content-md-end'>"
-								  + "<a href='readUp?adoptNo= "+resp[i].adoptNo+"' class='btn btn-outline-primary'>" + "보기"
+								  + "<div class='card-text d-grid gap-1 justify-content-md-end'>"
+								  + "<a href='readUp?adoptNo= "+resp[i].adoptNo+"' class='btn btn-primary px-2 mt-2 ms-2'>" + "Read"
 								  + "</a></div>"
 								  + "</div></div>";
 						
