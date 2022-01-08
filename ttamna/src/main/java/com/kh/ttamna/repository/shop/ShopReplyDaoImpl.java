@@ -9,7 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Repository;
 
+
 import com.kh.ttamna.entity.shop.ShopReplyDto;
+
 
 @Repository
 @ComponentScan
@@ -75,5 +77,28 @@ public class ShopReplyDaoImpl implements ShopReplyDao{
 		map.put("replyContent", replyContent);
 		
 		sqlSession.update("shopReply.edit3", map);
+	}
+	
+	@Override//댓글 페이지네이션
+	public List<ShopReplyDto> listByPage(int startRow, int endRow, int shopNo) {
+		Map<String, Object> map = new HashMap<>();
+		map.put("shopNo", shopNo);
+		map.put("startRow", startRow);
+		map.put("endRow", endRow);
+		return sqlSession.selectList("shopReply.listByPage", map);
+	}
+
+	@Override
+	public List<ShopReplyDto> pagenation(int StartRow, int endRow ,  int shopNo) {
+		Map<String,Object> param = new HashMap<>();
+		param.put("startRow",StartRow);
+		param.put("endRow",endRow);
+		param.put("shopNo", shopNo);
+		return sqlSession.selectList("shopReply.pagination",param);
+	}
+
+	@Override
+	public int count(int shopNo) {	
+		return sqlSession.selectOne("shopReply.count",shopNo);
 	}
 }

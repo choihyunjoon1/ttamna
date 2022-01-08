@@ -74,4 +74,28 @@ public class MybabyReplyDaoImpl implements MybabyReplyDao{
 		
 		sqlSession.update("mybabyReply.edit3", map);
 	}
+	
+	@Override//댓글 페이지네이션
+	public List<MybabyReplyDto> listByPage(int startRow, int endRow, int mybabyNo) {
+		Map<String, Object> map = new HashMap<>();
+		map.put("mybabyNo", mybabyNo);
+		map.put("startRow", startRow);
+		map.put("endRow", endRow);
+		return sqlSession.selectList("mybabyReply.listByPage", map);
+	}
+
+	@Override
+	public List<MybabyReplyDto> pagenation(int StartRow, int endRow ,  int mybabyNo) {
+		Map<String,Object> param = new HashMap<>();
+		param.put("startRow",StartRow);
+		param.put("endRow",endRow);
+		param.put("mybabyNo", mybabyNo);
+		return sqlSession.selectList("mybabyReply.pagination",param);
+	}
+
+	@Override
+	public int count(int mybabyNo) {	
+		return sqlSession.selectOne("mybabyReply.count",mybabyNo);
+	}
 }
+

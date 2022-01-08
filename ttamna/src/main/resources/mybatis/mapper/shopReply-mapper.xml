@@ -36,11 +36,6 @@
 		select * from shop_reply
 	</select>
 	
-	<!-- 댓글 수정 -->
-	<update id="update" parameterType="map">
-		update shop_reply set shop_reply_content = #{content}
-		where member_id = #{memberId}
-	</update>
 	
 	<!-- 댓글 삭제 -->	
 	<delete id="delete" parameterType="int">
@@ -55,12 +50,21 @@
 	<select id="listByDetail" parameterType="int" resultType="ShopReplyDto">
 		select * from shop_reply where shop_no = ${shopNo}
 	</select>
+		
+		
+	<!-- 더보기 페이지네이션 -->
+	<select id="listByPage" parameterType="map" resultType="ShopReplyDto">
+		select * from(
+		    select rownum rn, tmp.* from(
+		        	select * from shop_reply where shop_no=#{shopNo}
+		        order by shop_reply_no desc
+		        )tmp
+		)where rn between ${startRow} and ${endRow}
+	</select>
 	
-	<!-- 댓글 수정 -->
-	<update id="edit3" parameterType="map">
-		update shop_reply set shop_reply_content = #{replyContent}
-		where shop_reply_no = ${replyNo}
-	</update>
+	<select id="count"  parameterType="int" resultType="int">
+		 select count(*) from shop_reply where shop_no=#{shopNo}
+	</select>
 </mapper>
 
 

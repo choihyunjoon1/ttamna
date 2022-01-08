@@ -2,6 +2,7 @@ package com.kh.ttamna.repository.mybaby;
 
 import java.util.List;
 
+
 import com.kh.ttamna.entity.mybaby.MybabyReplyDto;
 
 public interface MybabyReplyDao {
@@ -21,6 +22,11 @@ public interface MybabyReplyDao {
 
 	public void edit3(int replyNo, String replyContent);//댓글수정 에이잭스~
 	
+	List<MybabyReplyDto> listByPage(int startRow, int endRow, int mybabyNo);//더보기 페이지네이션
+
+	List<MybabyReplyDto> pagenation(int StartRow,int endRow,  int mybabyNo);
+	
+	public int count(int mybabyNo);
 	
 
 	

@@ -46,12 +46,7 @@ MEMBER_ID
 	<select id="list" resultType="MybabyReplyDto">
 		select * from mybaby_reply
 	</select>
-	
-	<!-- 댓글 수정 -->
-	<update id="update" parameterType="map">
-		update mybaby_reply set mybaby_reply_content = #{content}
-		where member_id = #{memberId}
-	</update>
+
 	
 	<!-- 댓글 삭제 -->	
 	<delete id="delete" parameterType="int">
@@ -67,11 +62,21 @@ MEMBER_ID
 		select * from mybaby_reply where mybaby_no = ${mybabyNo}
 	</select>
 	
-	<!-- 댓글 수정 -->
-	<update id="edit3" parameterType="map">
-		update mybaby_reply set mybaby_reply_content = #{replyContent}
-		where mybaby_reply_no = ${replyNo}
-	</update>
+	
+	<!-- 더보기 페이지네이션 -->
+	<select id="listByPage" parameterType="map" resultType="MybabyReplyDto">
+		select * from(
+		    select rownum rn, tmp.* from(
+		        	select * from mybaby_reply where mybaby_no=#{mybabyNo}
+		        order by mybaby_reply_no desc
+		        )tmp
+		)where rn between ${startRow} and ${endRow}
+	</select>
+	
+	<select id="count"  parameterType="int" resultType="int">
+		 select count(*) from mybaby_reply where mybaby_no=#{mybabyNo}
+	</select>
+	
 </mapper>
 
 

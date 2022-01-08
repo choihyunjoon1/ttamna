@@ -2,6 +2,7 @@ package com.kh.ttamna.repository.shop;
 
 import java.util.List;
 
+
 import com.kh.ttamna.entity.shop.ShopReplyDto;
 
 public interface ShopReplyDao {
@@ -21,6 +22,11 @@ public interface ShopReplyDao {
 
 	public void edit3(int replyNo, String replyContent);//댓글수정 에이잭스~
 	
+	List<ShopReplyDto> listByPage(int startRow, int endRow, int shopNo);//더보기 페이지네이션
+
+	List<ShopReplyDto> pagenation(int StartRow,int endRow,  int shopNo);
+	
+	public int count(int shopNo);
 	
 
 	

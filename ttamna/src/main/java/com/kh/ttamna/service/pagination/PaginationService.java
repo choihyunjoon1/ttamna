@@ -12,6 +12,12 @@ public interface PaginationService {
 
 	//기부 댓글 목록
 	PaginationVO donationReplyPaging(PaginationVO paginationVO, int donationNo) throws Exception;
+	
+	//shop 댓글 목록
+	PaginationVO shopReplyPaging(PaginationVO paginationVO, int shopNo) throws Exception;
+	
+	//내새끼 댓글 목록
+	PaginationVO mybabyReplyPaging(PaginationVO paginationVO, int mybabyNo) throws Exception;
 
 	//단건기부 목록
 	PaginationVO shortListPaging(PaginationVO paginationVO, String memberId) throws Exception;

@@ -15,11 +15,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.kh.ttamna.entity.mybaby.MybabyReplyDto;
 import com.kh.ttamna.entity.shop.ShopReplyDto;
 import com.kh.ttamna.repository.shop.ShopReplyDao;
 
 @Controller
-@RequestMapping("/reply_shop")
+@RequestMapping("/shop_reply")
 public class ShopReplyController {
 
 	//데이터 등록 요청을 하기위해서는 PostMapping을 이용하고
@@ -44,16 +45,6 @@ public class ShopReplyController {
 
 	
 
-	@PostMapping("/edit") // 수정요청
-	@ResponseBody
-	public List<String> edit(@RequestParam String replyContent,
-						@RequestParam int replyNo,
-						@RequestParam int shopNo) {
-		shopReplyDao.edit3(replyNo, replyContent);
-		List<String> returnCotent = new ArrayList<String>();
-		returnCotent.add(replyContent);
-		return returnCotent;
-	}
 	// 데이터를 jsp로 보낼때 쓰는 객체는 Model
 	// 앞에 @(어노테이션) 이 붙은 애들은 컨트롤러로 데이터를 받아올 때 쓰는 객체
 
@@ -74,5 +65,19 @@ public class ShopReplyController {
 		
 		model.addAttribute("list", list);
 		return "shop/reply/list";
+	}
+	//더보기 페이지네이션 기능 처리
+	@PostMapping("/more")
+	@ResponseBody
+	public List<ShopReplyDto> more(
+			@RequestParam int shopNo,
+				@RequestParam(required =false, defaultValue = "1") int page,
+				@RequestParam(required =false, defaultValue = "12") int size
+			){
+		System.out.println("모어 컨트롤러 들어옴");
+		int endRow = page* size;
+		int startRow = endRow - (size - 1);
+		return shopReplyDao.listByPage(startRow, endRow, shopNo);
+		
 	}
 }

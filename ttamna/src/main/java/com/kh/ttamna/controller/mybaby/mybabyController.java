@@ -69,6 +69,7 @@ public class mybabyController {
 		model.addAttribute("mybaby",mybabyDto);
 		List<MybabyImgDto> list = mybabyImgDao.getList(mybabyNo);
 		model.addAttribute("mybabyImgDtoList",list);
+		model.addAttribute("mybabyNo", mybabyNo);
 		
 		return "mybaby/detail";
 	}
