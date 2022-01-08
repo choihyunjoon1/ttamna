@@ -57,22 +57,29 @@
         }
     </style>
     <script>
-    //오늘 방문자수를 찍기 위한 ajax. 페이지가 load 되자마자 실행되야 한다
     window.addEventListener("load", function(){
-    		
-    	$.ajax({
-    		url : "${root}/ajax/dayLog",
-    		type : "get",
-    		dataType : "text",
-    		success:function(resp){
-    			console.log("방문자수 조회 성공", resp);
-    			//dayLog 클래스가 부여된 창에 조회된 방문자 수를 찍어준다
-    			$(".dayLog").text(resp+"명");
-    		},
-    		error:function(e){
-    			console.log("실패", e);
-    		}
-    	});
+    	//현재 총 누적 기부금액
+	   	 $.ajax({
+	   		 url : "${root}/ajax/donation_total",
+	   		 type : "get",
+	   		 dataType : "json",
+	   		success:function(resp){
+	   			console.log("총 누적 기부금액 불러오기 성공");
+	   			
+	   			var amount = resp.toLocaleString('ko-KR');
+	   			var today = new Date();   
+
+	   			var year = today.getFullYear(); // 년도
+	   			var month = today.getMonth() + 1;  // 월
+	   			var date = today.getDate();  // 날짜
+
+	   			$(".date").text( year +"년 "+ month +"월 "+ date +"일" );
+	   			$(".total").text( amount +"원");
+	   		 },
+	   		 error:function(e){
+	   		 	console.log("총 누적 기부금액 불러오기 실패", e);
+	   		 }
+	   	 });
     }); 
     
     var pathname = window.location.pathname.split( '/' );
@@ -121,15 +128,15 @@
                     <h5>uid=${uid}</h5><h5>grade=${grade }</h5>
                 </div>
             
-	            <!-- 오늘 방문자 수를 찍어 주는 영역 -->
-	           <div class="card" style="width:10rem; height:4.5rem;" align="center">
-				  <div class="card-body">
-				    <h6 class="card-title mb-1">오늘 방문 회원</h6>
-				    <div class="card-text dayLog mb-2"></div>
-				  </div>
-				</div>
-				
-            </div>
+            	<!-- 현재까지의 총 기부 누적액을 보여준다 -->
+				<div class="badge text-wrap p-2 bg-primary bg-opacity-75" style="width:10rem; height:3rem;">
+				   <div><small><strong class="date"></strong></small></div>
+				   <div><small>누적 기부 금액</small></div>
+				   <div><small><strong class="total"></strong></small></div>
+            	</div>
+   
+			</div>
+            	
         </header>
 <!-- 메뉴 영역 -->
 

@@ -68,22 +68,6 @@ public class DonationReplyController {
 		return "redirect:/donation/detail?donationNo=" + donationReplyDto.getDonationNo();
 	}
 	
-	//@GetMapping("/list")
-	public String list(Model model,@ModelAttribute PaginationVO paginationVO,@RequestParam int donationNo) throws Exception {
-//		model.addAttribute(JSP에서 부를 이름, 데이터);
-		int count = donationReplyDao.count(donationNo);
-		paginationVO.setCount(count);
-		System.err.println(count);
-		paginationVO.calculator();
-		List<DonationReplyDto> list = donationReplyDao.pagenation(paginationVO.getStartRow(), paginationVO.getEndRow(),donationNo);
-		paginationVO.setListOfDonaReply(list);
-		System.err.println(list);
-		model.addAttribute("list", list);
-		
-		
-	
-		return "donation/detail?donationNo="+donationNo;
-	}
 	
 	//더보기 페이지네이션 기능 처리
 	@PostMapping("/more")

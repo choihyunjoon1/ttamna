@@ -1,6 +1,5 @@
 package com.kh.ttamna.controller.member;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,13 +11,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.kh.ttamna.entity.member.MemberDto;
 import com.kh.ttamna.repository.member.MemberDao;
-import com.kh.ttamna.repository.member.VisitDao;
 import com.kh.ttamna.service.pagination.PaginationService;
-import com.kh.ttamna.vo.chart.VisitTotalChartVO;
 import com.kh.ttamna.vo.pagination.PaginationVO;
 
-import lombok.extern.slf4j.Slf4j;
-@Slf4j
 @Controller
 @RequestMapping("/admin")
 public class AdminController {
@@ -36,15 +31,7 @@ public class AdminController {
 	}
 
 //////////////////////////////////////회원관리/////////////////////////////////////	
-	
-	//회원관리-목록페이지
-//	@GetMapping("/member/list")
-//	public String memberList(Model m) {
-//		List<MemberDto> list = memberDao.list();
-//		m.addAttribute("list", list);
-//		return "admin/member/list";
-//	}
-	
+
 	//회원 목록 + 검색 목록 + 페이지네이션	
 	@GetMapping("/member/list")
 	public String list(@ModelAttribute PaginationVO paginationVO, Model m) throws Exception {
@@ -74,9 +61,6 @@ public class AdminController {
 
 //////////////////////////////////////통계/////////////////////////////////////	
 
-	@Autowired
-	private VisitDao visitDao;
-
 	//통계 메인 페이지
 	@GetMapping("/statistics/menu")
 	public String menu() {
@@ -95,7 +79,17 @@ public class AdminController {
 		 return "admin/statistics/visitor_monthly";
 	 }
 	 
-
+	 //일별 기부금액 통계 페이지
+	 @GetMapping("/statistics/donation_daily")
+	 public String donationDaily() {
+		 return "admin/statistics/donation_daily";
+	 }
+	 
+	 //월별 기부금액 통계 페이지
+	 @GetMapping("/statistics/donation_monthly")
+	 public String donationMonthly() {
+		 return "admin/statistics/donation_monthly";
+	 }
 }
 
 

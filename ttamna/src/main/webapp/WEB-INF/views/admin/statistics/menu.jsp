@@ -23,13 +23,13 @@
 		      <small>방문자 월별 통계</small>
 		    </div>
 		  </a>
-		  <a href="#" class="list-group-item list-group-item-action p-3" aria-current="true">
+		  <a href="${root}/admin/statistics/donation_daily" class="list-group-item list-group-item-action p-3" aria-current="true">
 		    <div class="d-flex w-100 justify-content-between">
 		      <h5 class="mb-1">Donation Amount Daily</h5>
 		      <small>기부금액 일별 통계</small>
 		    </div>
 		  </a>
-		 <a href="#" class="list-group-item list-group-item-action p-3" aria-current="true">
+		 <a href="${root}/admin/statistics/donation_monthly" class="list-group-item list-group-item-action p-3" aria-current="true">
 		    <div class="d-flex w-100 justify-content-between">
 		      <h5 class="mb-1">Donation Amount Monthly</h5>
 		      <small>기부금액 월별 통계</small>

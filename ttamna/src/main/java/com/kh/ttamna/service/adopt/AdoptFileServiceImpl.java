@@ -13,7 +13,6 @@ import com.kh.ttamna.entity.adopt.AdoptImgDto;
 import com.kh.ttamna.repository.adopt.AdoptDao;
 import com.kh.ttamna.repository.adopt.AdoptImgDao;
 import com.kh.ttamna.vo.adopt.AdoptFileVO;
-import com.kh.ttamna.vo.adopt.AdoptListFileVO;
 
 @Service
 public class AdoptFileServiceImpl implements AdoptFileService{
@@ -75,8 +74,8 @@ public class AdoptFileServiceImpl implements AdoptFileService{
 		int i = 0;
 		for(MultipartFile file : adoptFileVO.getAttach()) {
 			if(!file.isEmpty()) {
-				int adoptImgNo = sqlSession.selectOne("adoptImg.sequence");
 				AdoptImgDto adoptImgDto = adoptImgList.get(i);
+				int adoptImgNo = sqlSession.selectOne("adoptImg.sequence");
 				adoptImgDto.setAdoptImgNo(adoptImgNo);
 				adoptImgDao.save(adoptImgDto, file);
 				i++;

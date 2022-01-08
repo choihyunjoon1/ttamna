@@ -37,19 +37,18 @@ $(function(){
 				//데이터 출력
 				for(var i=0; i < resp.length; i++){
 					var donationWriter = resp[i].donationWriter;
+					var imgLocation= "이미지위치";
 					if(donationWriter == null){
 						donationWriter = "탈퇴한 회원입니다";
 					}
-					var divCol = "<div class=page>"+
-						"<span>"+donationWriter+"</span>" +
-						"<br>"+
+					var divCol = "<div class='page card text-gray bg-light mb-5 ms-2' style='width:18rem;'>"+
+						imgLocation + 
+						"<div class='card-body'>" +
+						"<h5 class='card-title'>"+resp[i].donationTitle+"</h5>" +
+						"<div class='card-text'>"+resp[i].donationContent+"</div>"+
+						"<div class='card-text'>"+resp[i].donationNowFund+"원</div>"+
+						"<div class='card-text'>"+(resp[i].donationNowFund/resp[i].donationTotalFund)*100+"%------"+resp[i].donationTotalFund+"원</div>"+
 						"<span><a href=detail?donationNo="+resp[i].donationNo+">"+resp[i].donationTitle+"</a></span>" +
-						"<br>"+
-						"<span>"+resp[i].donationContent+"</span>" +
-						"<br>"+
-						"<span>"+resp[i].donationNowFund+"원</span>" +
-						"<br>"+
-						"<span>"+(resp[i].donationNowFund/resp[i].donationTotalFund)*100+"%------"+resp[i].donationTotalFund+"원</span>"
 					+"</div>";
 					$(".result").append(divCol);
 					$(".page").addClass("col-3 mt-3");

@@ -3,6 +3,8 @@ package com.kh.ttamna.repository.payment;
 import java.util.List;
 
 import com.kh.ttamna.entity.payment.PaymentDto;
+import com.kh.ttamna.vo.chart.DonationChartVO;
+import com.kh.ttamna.vo.chart.VisitChartVO;
 
 public interface PaymentDao {
 	int seq();
@@ -22,4 +24,26 @@ public interface PaymentDao {
 	int count(String memberId);
 
 	List<PaymentDto> listPaging(String memberId, int startRow, int endRow);
+	
+	//7일간 일별 기부 누적금액 통계를 위한 메소드
+	List<DonationChartVO> donationDaily();
+	
+	//이번달 일별 기부금액
+	List<DonationChartVO> thisMonthDaily();
+
+	//이번달 누적 기부금액
+	List<DonationChartVO> thisMonth();
+	
+	//최근 6개월 월별 누적 기부금액
+	List<DonationChartVO> monthly();
+	
+	//최근 12개월 월별 누적 기부금액
+	List<DonationChartVO> moy();
+
+	//기부금액 총 누적액
+	long totalAmount();
+
+
+
+
 }

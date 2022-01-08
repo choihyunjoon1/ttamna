@@ -9,49 +9,49 @@
  <script> 
 
  $(function(){// 화면이 시작될때 통계자료를 불러오도록 해야 한다
- 
- 	//이번달 누적 방문자
+
+	 //이번달 누적 방문자
 	 $.ajax({
-	 		url : "${root}/ajax/thisMonth",
+	 		url : "${root}/ajax/donation_thisMonth",
 	 		type : "get",
 	 		dataType : "json",
 			success:function(resp){
-				console.log("이번달 누적 방문자 수 통계 불러오기 성공");
+				console.log("이번달 누적 기부금액 불러오기 성공");
 				//데이터를 가져오는데 성공하면 차트를 생성하는 함수부르기
 	 			thisMonth("#this-month", resp);
 	 		},
 	 		error:function(e){
-	 			console.log("이번달 누적 방문자 수 통계 불러오기 실패", e);
+	 			console.log("이번달 누적 기부금액 통계 불러오기 실패", e);
 	 		}
 	 	});
  
- 	//이번달 부터 6개월전까지의 월별 누적 방문자
+ 	//이번달 부터 6개월전까지의 월별 누적 기부금액
  	$.ajax({
- 		url : "${root}/ajax/monthly",
+ 		url : "${root}/ajax/donation_monthly",
  		type : "get",
  		dataType : "json",
 		success:function(resp){
-			console.log("6개월전까지의 월별 누적 방문자 수 통계 불러오기 성공");
+			console.log("6개월전까지의 월별 누적 기부금액 불러오기 성공");
 			//데이터를 가져오는데 성공하면 차트를 생성하는 함수부르기
  			monthly("#monthly", resp);
  		},
  		error:function(e){
- 			console.log("6개월전까지의 월별 누적 방문자 수 통계 불러오기 실패", e);
+ 			console.log("6개월전까지의 월별 누적 기부금액 불러오기 실패", e);
  		}
  	});
 
- 	 //최근 12개월간의 월별 방문자수
+ 	//최근 12개월간의 월별 누적 기부금액
  	$.ajax({
- 		url : "${root}/ajax/moy",
+ 		url : "${root}/ajax/donation_moy",
  		type : "get",
  		dataType : "json",
 		success:function(resp){
-			console.log("최근 12개월간의 월별 누적 방문자수 불러오기 성공");
+			console.log("최근 12개월간의 월별 누적 기부금액 불러오기 성공");
 			//데이터를 가져오는데 성공하면 차트를 생성하는 함수부르기
  			moy("#moy", resp);
  		},
  		error:function(e){
- 			console.log("최근 12개월간의 월별 누적 방문자 수 불러오기 실패", e);
+ 			console.log("최근 12개월간의 월별 누적 기부금액 불러오기 실패", e);
  		}
  	});
  });
@@ -63,12 +63,12 @@
 	 	//고정 변수인 ctx는 canvas에 그림을 그리기 위한 펜 객체
 	 	var ctx = $(selector)[0].getContext("2d");
 	 	var thisMonthArray = [];//날짜(문자열)만 모아둘 배열
-		var thisMonthCountArray = [];//방문자수만 모아둘 배열
+		var thisMonthAmountArray = [];//방문자수만 모아둘 배열
 		
 		//VisitChartVO에서 가져온 데이터를 각 배열에 넣어준다
-		for(var i=0; i < data.dataset.length; i++){
-			thisMonthArray.push(data.dataset[i].thisMonth);
-			thisMonthCountArray.push(data.dataset[i].thisMonthCount);
+		for(var i=0; i < data.donationDataset.length; i++){
+			thisMonthArray.push(data.donationDataset[i].thisMonth);
+			thisMonthAmountArray.push(data.donationDataset[i].thisMonthAmount);
 		}
 	 	
 	 	//var chart = new Chart(펜객체, 차트옵션);
@@ -78,7 +78,7 @@
 	 			labels: thisMonthArray,
 	 			datasets: [{
 	 				label: data.label,
-	 				data: thisMonthCountArray,
+	 				data: thisMonthAmountArray,
 	 				backgroundColor: [
 	 					  'rgba(255, 206, 86, 0.2)'
 	 				],
@@ -111,22 +111,22 @@
 	 	//고정 변수인 ctx는 canvas에 그림을 그리기 위한 펜 객체
 	 	var ctx = $(selector)[0].getContext("2d");
 	 	var monthlyArray = [];//날짜(문자열)만 모아둘 배열
-		var monthlyCountArray = [];//방문자수만 모아둘 배열
+		var monthlyAmountArray = [];//방문자수만 모아둘 배열
 		
 		//VisitChartVO에서 가져온 데이터를 각 배열에 넣어준다
-		for(var i=0; i < data.dataset.length; i++){
-			monthlyArray.push(data.dataset[i].monthly);
-			monthlyCountArray.push(data.dataset[i].monthlyCount);
+		for(var i=0; i < data.donationDataset.length; i++){
+			monthlyArray.push(data.donationDataset[i].monthly);
+			monthlyAmountArray.push(data.donationDataset[i].monthlyAmount);
 		}
 	 	
 	 	//var chart = new Chart(펜객체, 차트옵션);
 	 	var monthly = new Chart(ctx, {
-	 		type: 'pie', //차트 유형
+	 		type: 'bar', //차트 유형
 	 		data: { //차트에 들어가는 데이터
 	 			labels: monthlyArray,
 	 			datasets: [{
 	 				label: data.label,
-	 				data: monthlyCountArray,
+	 				data: monthlyAmountArray,
 	 				backgroundColor: [
 	 					'rgba(255, 99, 132, 0.2)',
 	 	                'rgba(54, 162, 235, 0.2)',
@@ -164,33 +164,51 @@
 	 	});
 	 }
 	 
- // 최근 12개월간의 월별 방문자수
+ // 최근 12개월간의 월별 누적 기부금액
  function moy(selector, data){
 		
 	 	//고정 변수인 ctx는 canvas에 그림을 그리기 위한 펜 객체
 	 	var ctx = $(selector)[0].getContext("2d");
 	 	var moyArray = [];//날짜(문자열)만 모아둘 배열
-		var moyCountArray = [];//방문자수만 모아둘 배열
+		var moyAmountArray = [];//방문자수만 모아둘 배열
 		
 		//VisitChartVO에서 가져온 데이터를 각 배열에 넣어준다
-		for(var i=0; i < data.dataset.length; i++){
-			moyArray.push(data.dataset[i].moy);
-			moyCountArray.push(data.dataset[i].moyCount);
+		for(var i=0; i < data.donationDataset.length; i++){
+			moyArray.push(data.donationDataset[i].moy);
+			moyAmountArray.push(data.donationDataset[i].moyAmount);
 		}
 	 	
 	 	//var chart = new Chart(펜객체, 차트옵션);
 	 	var moy = new Chart(ctx, {
-	 		type: 'line', //차트 유형
+	 		type: 'bar', //차트 유형
 	 		data: { //차트에 들어가는 데이터
 	 			labels: moyArray,
 	 			datasets: [{
 	 				label: data.label,
-	 				data: moyCountArray,
+	 				data: moyAmountArray,
 	 				backgroundColor: [
-	 	                'rgba(153, 102, 255, 0.2)'
+	 					'rgba(255, 206, 86, 0.2)',
+		 	            'rgba(75, 192, 192, 0.2)',
+		 	            'rgba(153, 102, 255, 0.2)',
+	 					'rgba(255, 99, 132, 0.2)',
+	 	                'rgba(54, 162, 235, 0.2)',
+	 	                'rgba(255, 206, 86, 0.2)',
+	 	                'rgba(75, 192, 192, 0.2)',
+	 	                'rgba(153, 102, 255, 0.2)',
+	 	                'rgba(255, 159, 64, 0.2)',
+	 	                'rgba(255, 206, 86, 0.2)'
 	 				],
 	 				borderColor: [
-	 		            'rgba(75, 192, 192, 1)'
+	 					'rgba(255, 206, 86, 1)',
+		 		        'rgba(75, 192, 192, 1)',
+		 		        'rgba(153, 102, 255, 1)',
+	 					'rgba(255, 99, 132, 1)',
+	 		            'rgba(54, 162, 235, 1)',
+	 		            'rgba(255, 206, 86, 1)',
+	 		            'rgba(75, 192, 192, 1)',
+	 		            'rgba(153, 102, 255, 1)',
+	 		            'rgba(255, 159, 64, 1)',
+	 		            'rgba(255, 206, 86, 1)'
 	 				],
 	 				borderWidth: 1
 	 			}]
@@ -210,6 +228,7 @@
 	 	
 	 	});
 	 }
+
 </script>
 
 
@@ -217,19 +236,19 @@
 
 <div class="container-800 container-center mt-5 mb-5">
 	 
-	 <div class="mt-5 mb-2"><h3>VISITOR MONTHLY</h3></div>
-
-	<div class="d-grid gap-2 d-md-flex justify-content-md-end mt-2 mb-5">
+	 <div class="mt-5 mb-5"><h3>DONATION MONTHLY</h3></div>
+	 
+	 <div class="d-grid gap-2 d-md-flex justify-content-md-end mt-2 mb-5">
 		<a type="button" class="btn btn-sm btn-outline-dark" href="${root}/admin/statistics/menu">Back to Statistics Menu</a>
 		<a type="button" class="btn btn-sm btn-outline-dark" href="${root}/admin/main">Back to Admin Menu</a>
 	</div>
-	
+
 	<div class="d-grid gap-2 d-md-flex mt-2 mb-5">
-		<div class="mt-5 container-300 container-center"><canvas id="this-month" style="width:40%; height:100%;"></canvas></div>
-		<div class="mt-5 container-400 container-center"><canvas id="monthly"></canvas></div>
+		<div class="mt-5 container-300 container-center"><canvas id="this-month" style="width:40%; height:150px;"></canvas></div>
+		<div class="mt-5 container-300 container-center"><canvas id="monthly" style="width:40%; height:150px;"></canvas></div>
 	</div>	
 	<div class="mt-5 mb-5 container-700 container-center"><canvas id="moy"></canvas></div>
-
+	
 </div>
 
 

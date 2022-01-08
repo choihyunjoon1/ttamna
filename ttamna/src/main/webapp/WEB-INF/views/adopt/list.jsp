@@ -5,6 +5,8 @@
 <c:set var="login" value="${uid != null}"></c:set>
 <c:set var="insertGrade" value="${grade == '관리자' or '보호소'}"></c:set>
 <c:set var="root" value="${pageContext.request.contextPath}"></c:set>
+<c:set var="adoptDto" value="${list}"></c:set>
+
 <!-- JQeury CDN -->
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <!-- JavaScript 날짜 포맷 CDN -->
@@ -15,6 +17,7 @@ $(function(){
 	var page = 1;	
 	var size = 9;
 	
+
 	//더보기 버튼 클릭시 이벤트 발생
 	$(".more-btn").click(function(){
 		var column = $("#column option:selected").val();
@@ -32,7 +35,7 @@ $(function(){
 			type : "post",
 			data : {
 				page : pageValue,
-				size : sizeValue
+				size : sizeValue,
 			},
 			dataType : "json",
 			success:function(resp){
@@ -50,9 +53,9 @@ $(function(){
 					//이미지 파일 없는 경우 undefined 꼴보기 시르미 
 					var imgLocation = "";
 					if(!resp[i].adoptImgNo){
-						imgLocation =  "<img src=${pageContext.request.contextPath}/resources/img/nonimage.png class=icon></a></span>";
-					}else{
-						imgLocation =  "<img src='adoptImg?adoptImgNo="+ resp[i].adoptImgNo +"' class='card-img-top' alt=' "+resp[i].adoptImgUploade+"'>";
+						imgLocation =  "<a href='readUp?adoptNo= "+resp[i].adoptNo+"'><img src=${pageContext.request.contextPath}/resources/img/nonimage.png class=icon></a>";
+					}else {
+						imgLocation =  "<a href='readUp?adoptNo= "+resp[i].adoptNo+"'><img src='adoptImg?adoptImgNo="+ resp[i].adoptImgNo +"'class='card-img-top' alt=' "+resp[i].adoptImgUpload+"' style='width:100%;height:15rem;'></a>";
 					}
 					
 					//탈퇴한 회원일 경우 null대신 탈퇴한 회원 표시해주기
@@ -60,21 +63,23 @@ $(function(){
 					if(adoptWriter == null){
 						adoptWriter = "탈퇴한 회원입니다";
 					}
-					var divCol = "<div class='card text-gray bg-light mb-5 ms-2 ' style='width: 18rem;'>"
+					var divCol = "<div class='card border-primary text-dark bg-primary bg-opacity-10 mb-5 ms-2 ' style='width: 18rem;'>"
 								  + imgLocation
 								  + "<div class='card-body'>"
-								  + "<h5 class='card-title'>"+ resp[i].adoptNo + resp[i].adoptTitle +"</h5>"
+								  + "<h5 class='card-title'><strong>"+ resp[i].adoptTitle +"</strong></h5>"
 								  + "<div class='card-text'>"
-								  + "공고 기간 : "
+								  + "<small>공고 기간</small> "
+								  + "</div>"
+								  + "<div class='card-text'><small>"
 								  + moment(resp[i].adoptStart).format("YYYY-MM-DD") 
 								  + " ~ " 
 								  + moment(resp[i].adoptEnd).format("YYYY-MM-DD") 
-								  +"</div>"
-								  + "<div class='card-text'>"
+								  +"</small></div>"
+								  + "<div class='card-text'><small>"
 								  + "입양 동물 : " + resp[i].adoptKind
-								  +"</div>"
-								  + "<div class='card-text d-grid gap-1 d-md-flex justify-content-md-end'>"
-								  + "<a href='readUp?adoptNo= "+resp[i].adoptNo+"' class='btn btn-outline-primary'>" + "보기"
+								  +"</small></div>"
+								  + "<div class='card-text d-grid gap-1 justify-content-md-end'>"
+								  + "<a href='readUp?adoptNo= "+resp[i].adoptNo+"' class='btn btn-primary px-2 mt-2 ms-2'>" + "Read"
 								  + "</a></div>"
 								  + "</div></div>";
 						
@@ -93,7 +98,7 @@ $(function(){
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 
 <div class="container-900 container-center mt-5 mb-5">
-	
+
 	<div class="mt-5 mb-3"><h3>입양공고</h3>
 	<c:if test="${param.deleteSuccess != null}">
 		<div class=" mb-3"><h6>입양공고 삭제 완료</h6></div>
@@ -105,6 +110,7 @@ $(function(){
 		</div>
 	</c:if>
 	</div>
+
 	
 	<!-- 게시물 표시 위치 -->		
 	<div class="row mt-3 mb-5 result">
@@ -167,7 +173,7 @@ $(function(){
 					</div>
 				</div>			
 			</form>
-	</div>
+	</div>	
 	
 	<!-- 검색 목록일 경우 전체 목록으로 돌아가기 버튼 보여주기 -->
 	<c:if test="${param.column != null }">
@@ -180,5 +186,4 @@ $(function(){
 	
 	
 </div>
-
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>
