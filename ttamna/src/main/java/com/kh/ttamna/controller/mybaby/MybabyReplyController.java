@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.kh.ttamna.entity.mybaby.MybabyDto;
 import com.kh.ttamna.entity.mybaby.MybabyReplyDto;
 import com.kh.ttamna.repository.mybaby.MybabyReplyDao;
 import com.kh.ttamna.vo.pagination.PaginationVO;

@@ -25,7 +25,7 @@
 		var uid = "${sessionScope.uid}";
 		var page = 1;	
 		var size = 12;
-		var donationNo = $(".donation-no").val();
+		var donationNo = parseInt($(".donation-no").val());
 		//더보기 버튼 클릭시 이벤트 발생
 		$(".more-btn").click(function(){
 			loadList(page, size);
@@ -58,22 +58,27 @@
 					//삭제 버튼을 작성자만 볼 수 있도록 처리
 					var deleteBtn;
 					if(uid == resp[i].memberId){
-						deleteBtn = "<a href='${pageContext.request.contextPath}/donation_reply/delete?donationReplyNo="+resp[i].donationReplyNo+"&donationNo="+resp[i].donationNo+"' class='reply btn btn-secondary'>삭제하기</a>";
+						deleteBtn = "<div class='right'>"+"<a href='${pageContext.request.contextPath}/donation_reply/delete?donationReplyNo="+resp[i].donationReplyNo+"&donationNo="+resp[i].donationNo+"' class='delete-button reply btn btn-secondary'>삭제하기</a>"+"</div>";
 					}else{
 						deleteBtn = "";	
 					}
-							var divCol = "<div>"+ resp[i].donationReplyNo+"</div>"
-											+"<div>"+ resp[i].memberId+"</div>"
-											+"<div>"+ resp[i].donationReplyTime+"</div>"
-											+"<div>"+ resp[i].donationReplyContent+"</div>"
-											+deleteBtn
-				                            +"<div> ------------------------------------------------------------------</div>";
-
+							//시간형식 포멧 
+							var date = new Date(resp[i].donationReplyTime);
+					
+							var divCol = "<div class='card border-primary mb-3' style='width: 966px; padding: 0px;'>" 
+								+"<div class='card-header id-font'>"+ resp[i].memberId
+								+"<div class='right' style='font-size:13px;'>"+date.getFullYear()+"년"+date.getMonth()+1+"월"+date.getDate()+"일"+date.getHours()+"시"+date.getMinutes()+"분" +"</div>"
+								+"</div>"
+								+"<div class='card-body'>"
+								+"<p class='card-text'>"+ resp[i].donationReplyContent+"</p>"
+								+ "</div>"
+								+deleteBtn
+								+ "</div>";
+							
 							
 						$(".result").append(divCol);
 						
 					}
-					
 				},
 				error:function(e){
 					console.log("댓글 더보기 실패", e);
@@ -90,10 +95,23 @@
 		margin-top:10px;
 		margin-bottom:5px;
 		}
+		
+		.id-font{
+		font-size: medium;
+		font-weight: bold;
+		}
+		
+		.delete-button{
+		margin:8px;
+		width: 92px;
+		}
+		
+		
 </style>
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 
 <c:forEach var="donationDto" items="${donationDto}">
+<input type="hidden" class="donation-no" value="${donationDto.donationNo}">
 <div class="container-500 container-center">
 	<div class="card mb-5">
 		<%-- 제목 영역 --%>
@@ -158,23 +176,28 @@
 </c:forEach>
 
 
+	<!-- 댓글목록 표시 위치 -->		
+	<div class="row mt-3 mb-5 result"></div>
+
 	<!-- 댓글 입력창 -->    
     <div class="col-12">
         <form action="${pageContext.request.contextPath}/donation_reply/insert" method="post">
            <input type="hidden" name="donationNo"value="${donationNo}">
            <input type="hidden" name="memberId" value="${sessionScope.uid}">
-            
+ 
             댓글 쓰기
-            <textarea class="form-control" " row="3" name="donationReplyContent"></textarea> 
+            <textarea class="form-control" name="donationReplyContent"></textarea> 
             
         <div class="right">
             <input type="submit" class="reply btn btn-primary" value="등록">
         </div>
 	</form>
+          
+ </div>
 
-	<!-- 댓글목록 표시 위치 -->		
-	<div class="row mt-3 mb-5 result"></div>
-	
+
+
+
 	<!-- 댓글 더보기 버튼 -->
 	<div class="row mt-3 mb-5">
 		<div class="col mt-3">
@@ -182,11 +205,10 @@
 		</div>
 	</div>
 	
-</div>
 
 
-</div>
-</div>
+
+
 
 
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>
