@@ -58,7 +58,7 @@ $(function(){
 						imgLocation =  "<a href='readUp?adoptNo= "+resp[i].adoptNo+"'><img src='adoptImg?adoptImgNo="+ resp[i].adoptImgNo +"'class='card-img-top' alt=' "+resp[i].adoptImgUpload+"' style='width:100%;height:15rem;'></a>";
 					}
 					
-					//탈퇴한 회원일 경우 null대신 탈퇴한 회원 표시해주기
+					//탈퇴한 회원일 경우 null대신 탈퇴한 회원 표시해주기                                   
 					var adoptWriter = resp[i].adoptWriter;
 					if(adoptWriter == null){
 						adoptWriter = "탈퇴한 회원입니다";
