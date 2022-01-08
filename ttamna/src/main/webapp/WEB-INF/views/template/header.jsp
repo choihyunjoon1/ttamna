@@ -114,11 +114,17 @@
             <div class="flex-container">
                 <div class="logo-wrapper">
                     <div id="webgl-container" style="width:100px; height:100px"></div>
+                
                 </div>
-                <div class="title-wrapper center">
-                    <h1>Tierheim(동물의 집)</h1>
+                
+                <div class="center centerSize">
+						<div style="width:600px; float:left;">
+                        <a href="${root}">
+                            <img src="${root}/resources/img/두줄로고.png" style="width:600px;">
+                        </a>
+                        </div>
                     <!-- 세션,등급 알아내기 위함 나중에 삭제 -->
-                    <h5>uid=${uid}</h5><h5>grade=${grade }</h5>
+<%--                     <h5>uid=${uid}</h5><h5>grade=${grade }</h5> --%>
                 </div>
             
 	            <!-- 오늘 방문자 수를 찍어 주는 영역 -->
