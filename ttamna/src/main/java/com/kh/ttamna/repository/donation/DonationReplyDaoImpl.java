@@ -31,21 +31,6 @@ public class DonationReplyDaoImpl implements DonationReplyDao{
 		sqlSession.delete("donationReply.delete", donationReplyNo);
 	}
 
-	@Override
-	public void edit(String donationReplyContent, String memberId) {
-		Map<String, Object> map = new HashMap<>();
-		map.put("content", donationReplyContent);
-		map.put("memberId", memberId);
-		
-		sqlSession.update("donationReply.update", map);
-		
-	}
-
-	@Override
-	public void edit2(DonationReplyDto donationReplyDto) {
-		
-		
-	}
 
 	@Override
 	public List<DonationReplyDto> list() {
@@ -66,14 +51,7 @@ public class DonationReplyDaoImpl implements DonationReplyDao{
 		return sqlSession.selectList("donationReply.listByDetail", donationNo);
 	}
 	
-	@Override//댓글 수정
-	public void edit3(int replyNo, String replyContent) {
-		Map<String, Object> map = new HashMap<>();
-		map.put("replyNo", replyNo);
-		map.put("replyContent", replyContent);
-		
-		sqlSession.update("donationReply.edit3", map);
-	}
+
 	
 	@Override//댓글 페이지네이션
 	public List<DonationReplyDto> listByPage(int startRow, int endRow, int donationNo) {

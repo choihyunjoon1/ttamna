@@ -27,7 +27,7 @@
 	<insert id="insert" parameterType="ShopReplyDto">
 		insert into shop_reply values( #{shopReplyNo},
 			#{memberId}, #{shopNo}, #{shopReplyContent},
-			sysdate, null, 0, 0
+			sysdate
 		)
 		
 	</insert>	
@@ -42,10 +42,6 @@
 		delete from shop_reply where shop_reply_no = ${shopReplyNo}
 	</delete>
 		
-		<!--  수정을 위한 단일조회 -->
-		<select id="get"  parameterType="int" resultType="ShopReplyDto">
-			select * from shop_reply where shop_reply_no = ${shopReplyNo}
-		</select>
 <!-- 특정 게시글의 댓글 내용만 조회 -->
 	<select id="listByDetail" parameterType="int" resultType="ShopReplyDto">
 		select * from shop_reply where shop_no = ${shopNo}

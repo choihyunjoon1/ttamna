@@ -36,22 +36,6 @@ public class ShopReplyDaoImpl implements ShopReplyDao{
 	}
 
 	@Override
-	public void edit(String shopReplyContent, String memberId) {
-		Map<String, Object> map = new HashMap<>();
-		map.put("content", shopReplyContent);
-		map.put("memberId", memberId);
-		
-		sqlSession.update("shopReply.update", map);
-		
-	}
-
-	@Override
-	public void edit2(ShopReplyDto shopReplyDto) {
-		
-		
-	}
-
-	@Override
 	public List<ShopReplyDto> list() {
 		List<ShopReplyDto> list = sqlSession.selectList("shopReply.list");//1번방법
 		return list;
@@ -68,15 +52,6 @@ public class ShopReplyDaoImpl implements ShopReplyDao{
 	@Override//해당 게시판의 댓글만 내용 조회
 	public List<ShopReplyDto> list(int shopNo) {
 		return sqlSession.selectList("shopReply.listByDetail", shopNo);
-	}
-	
-	@Override//댓글 수정
-	public void edit3(int replyNo, String replyContent) {
-		Map<String, Object> map = new HashMap<>();
-		map.put("replyNo", replyNo);
-		map.put("replyContent", replyContent);
-		
-		sqlSession.update("shopReply.edit3", map);
 	}
 	
 	@Override//댓글 페이지네이션

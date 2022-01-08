@@ -11,7 +11,4 @@ public class DonationReplyDto {
 	private int donationNo;
 	private String donationReplyContent;
 	private Date donationReplyTime;
-	private int donationReplySuperno;
-	private int donationReplyGroupno;
-	private int donationReplyDepth;
 }

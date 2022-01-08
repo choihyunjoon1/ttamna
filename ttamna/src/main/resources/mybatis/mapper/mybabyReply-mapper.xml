@@ -27,7 +27,7 @@
 	<insert id="insert" parameterType="MybabyReplyDto">
 		insert into mybaby_reply values( ${mybabyReplyNo},
 			 ${mybabyNo}, #{mybabyReplyContent},
-			sysdate, null, 0, 0, #{memberId}
+			sysdate, #{memberId}
 		)
 		
 	</insert>	
@@ -53,10 +53,6 @@ MEMBER_ID
 		delete from mybaby_reply where mybaby_reply_no = ${mybabyReplyNo}
 	</delete>
 		
-		<!--  수정을 위한 단일조회 -->
-		<select id="get"  parameterType="int" resultType="MybabyReplyDto">
-			select * from mybaby_reply where mybaby_reply_no = ${mybabyReplyNo}
-		</select>
 <!-- 특정 게시글의 댓글 내용만 조회 -->
 	<select id="listByDetail" parameterType="int" resultType="MybabyReplyDto">
 		select * from mybaby_reply where mybaby_no = ${mybabyNo}
