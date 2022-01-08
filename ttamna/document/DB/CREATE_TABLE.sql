@@ -128,10 +128,7 @@ mybaby_reply_no number primary key, -- 댓글 번호
 mybaby_no references mybaby(mybaby_no) on delete cascade, -- 내새끼 게시글 번호 참조키
 member_id references member(member_id) on delete set null,
 mybaby_reply_content varchar2(1500) not null, -- 댓글 내용
-mybaby_reply_time date default sysdate not null, -- 댓글 작성 시간
-mybaby_reply_superno references mybaby_reply(mybaby_reply_no) on delete set null, -- 댓글 상위 그룹 번호
-mybaby_reply_groupno number default 0 not null, -- 댓글 그룹 번호
-mybaby_reply_depth number default 0 not null -- 댓글 차수
+mybaby_reply_time date default sysdate not null -- 댓글 작성 시간
 );
 
 
@@ -178,10 +175,7 @@ donation_reply_no number primary key,
 member_id references member(member_id) on delete set null,
 donation_no references donation(donation_no) on delete cascade,
 donation_reply_content varchar2(1500) not null,
-donation_reply_time date default sysdate not null,
-donation_reply_superno references donation_reply(donation_reply_no) on delete set null,
-donation_reply_groupno number not null,
-donation_reply_depth number not null
+donation_reply_time date default sysdate not null
 );
 
 commit;
@@ -231,10 +225,7 @@ shop_reply_no number primary key, -- 댓글번호
 member_id references member(member_id) on delete set null, -- 댓글 작성자
 shop_no references shop(shop_no) on delete cascade, -- 상품번호
 shop_reply_content varchar2(1500) not null, --댓글 내용
-shop_reply_time date default sysdate not null, -- 댓글 작성일
-shop_reply_superno references shop_reply(shop_reply_no) on delete set null, --댓글 상위번호
-shop_reply_groupno number not null, --댓글 그룹번호
-shop_reply_depth number not null --댓글차수
+shop_reply_time date default sysdate not null -- 댓글 작성일
 );
 
 commit;
