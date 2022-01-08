@@ -21,13 +21,13 @@
 
 <script>
 $(function(){
-	$("input[name=cartCount]").on("blur", function(){
-		var cartCount = $(this).val();
-		$(this).attr("value", cartCount);
-		console.log($(this).attr("value"));
-	});
-
 	$("#buy").click(function(e){	
+		var cartCount = $("input[name=cartCount]").val();
+		if($("input[name=cartCount]").val() == ''){
+			alert("수량을 입력해주세요");
+			return;
+		}
+		
 		if(window.confirm('해당 상품을 구매하시겠습니까?')){
 				var form = $("<form>").attr("action", "order/multibuy").attr("method", "post").addClass("send-form");
 				$("body").append(form);
@@ -37,7 +37,8 @@ $(function(){
 				var shopGoods = $("input[name=shopGoods]").val();
 				var shopPrice = $("input[name=shopPrice]").val();
 				var shopImgNo = $("input[name=shopImgNo]").val();
-				var cartCount = $("input[name=cartCount]").val();
+				
+				
 				
 				$("<input type='hidden' name='list[0].shopNo'>").val(shopNo).appendTo(".send-form");
 				$("<input type='hidden' name='memberId'>").val(memberId).appendTo(".send-form");
@@ -56,7 +57,13 @@ $(function(){
 	
 	$("#add-cart").click(function(e){
 //		e.preventDefault();
+		var cartCount = $("input[name=cartCount]").val();
+		if($("input[name=cartCount]").val() == ''){
+			alert("수량을 입력해주세요");
+			return;
+		}
 		if(window.confirm('장바구니로 이동하시겠습니까?')){
+			// 즉석 form
 			var form = $("<form>").attr("action", "${pageContext.request.contextPath}/member/detail/addcart").attr("method", "post").addClass("send-form");
 			$("body").append(form);
 			
@@ -65,8 +72,9 @@ $(function(){
 			var shopGoods = $("input[name=shopGoods]").val();
 			var shopPrice = $("input[name=shopPrice]").val();
 			var shopImgNo = $("input[name=shopImgNo]").val();
-			var cartCount = $("input[name=cartCount]").val();
 			
+			
+			// form에 첨부할 값
 			$("<input type='hidden' name='shopNo'>").val(shopNo).appendTo(".send-form");
 			$("<input type='hidden' name='memberId'>").val(memberId).appendTo(".send-form");
 			$("<input type='hidden' name='shopGoods'>").val(shopGoods).appendTo(".send-form");
@@ -77,12 +85,7 @@ $(function(){
 			form.submit();
 			return true;
 		} else{
-			var shopNo = $("#shopNo").val();
-			var memberId = $("input[name=memberId]").val();
-			var shopGoods = $("input[name=shopGoods]").val();
-			var shopPrice = $("input[name=shopPrice]").val();
-			var shopImgNo = $("input[name=shopImgNo]").val();
-			var cartCount = $("input[name=cartCount]").val();
+			
 			console.log(cartCount);
 			
 			$.ajax({
