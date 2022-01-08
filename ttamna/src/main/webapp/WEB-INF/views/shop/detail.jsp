@@ -13,27 +13,68 @@
 	.center{
 		width: 60%;
 	}
+	.form-control{
+		width: 60%;
+	}
 </style>
-
-<script>
-	
-</script>
 
 
 <script>
 $(function(){
-	$("input[name=quantity]").on("input", function(){
+	$("input[name=cartCount]").on("blur", function(){
 		var cartCount = $(this).val();
 		$(this).attr("value", cartCount);
 		console.log($(this).attr("value"));
 	});
+
+	$("#buy").click(function(e){	
+		if(window.confirm('해당 상품을 구매하시겠습니까?')){
+				var form = $("<form>").attr("action", "order/multibuy").attr("method", "post").addClass("send-form");
+				$("body").append(form);
+	
+				var shopNo = $("#shopNo").val();
+				var memberId = $("input[name=memberId]").val();
+				var shopGoods = $("input[name=shopGoods]").val();
+				var shopPrice = $("input[name=shopPrice]").val();
+				var shopImgNo = $("input[name=shopImgNo]").val();
+				var cartCount = $("input[name=cartCount]").val();
+				
+				$("<input type='hidden' name='list[0].shopNo'>").val(shopNo).appendTo(".send-form");
+				$("<input type='hidden' name='memberId'>").val(memberId).appendTo(".send-form");
+				$("<input type='hidden' name='shopGoods'>").val(shopGoods).appendTo(".send-form");
+				$("<input type='hidden' name='shopPrice'>").val(shopPrice).appendTo(".send-form");
+				$("<input type='hidden' name='shopImgNo'>").val(shopImgNo).appendTo(".send-form");
+				$("<input type='hidden' name='list[0].quantity'>").val(cartCount).appendTo(".send-form");
+				//전송
+				form.submit();
+				return true;
+		}else{
+			return false;
+		}
+		
+	});
+	
 	$("#add-cart").click(function(e){
 //		e.preventDefault();
 		if(window.confirm('장바구니로 이동하시겠습니까?')){
+			var form = $("<form>").attr("action", "${pageContext.request.contextPath}/member/detail/addcart").attr("method", "post").addClass("send-form");
+			$("body").append(form);
 			
+			var shopNo = $("#shopNo").val();
+			var memberId = $("input[name=memberId]").val();
+			var shopGoods = $("input[name=shopGoods]").val();
+			var shopPrice = $("input[name=shopPrice]").val();
+			var shopImgNo = $("input[name=shopImgNo]").val();
+			var cartCount = $("input[name=cartCount]").val();
 			
-//			 $("input[name=quantity]").val(cartCount);
-			 
+			$("<input type='hidden' name='shopNo'>").val(shopNo).appendTo(".send-form");
+			$("<input type='hidden' name='memberId'>").val(memberId).appendTo(".send-form");
+			$("<input type='hidden' name='shopGoods'>").val(shopGoods).appendTo(".send-form");
+			$("<input type='hidden' name='shopPrice'>").val(shopPrice).appendTo(".send-form");
+			$("<input type='hidden' name='shopImgNo'>").val(shopImgNo).appendTo(".send-form");
+			$("<input type='hidden' name='cartCount'>").val(cartCount).appendTo(".send-form");
+			//전송
+			form.submit();
 			return true;
 		} else{
 			var shopNo = $("#shopNo").val();
@@ -41,7 +82,7 @@ $(function(){
 			var shopGoods = $("input[name=shopGoods]").val();
 			var shopPrice = $("input[name=shopPrice]").val();
 			var shopImgNo = $("input[name=shopImgNo]").val();
-			var cartCount = $("input[name=quantity]").val();
+			var cartCount = $("input[name=cartCount]").val();
 			console.log(cartCount);
 			
 			$.ajax({
@@ -64,6 +105,7 @@ $(function(){
 			});
 			return false;
 		}
+		
 	});
 });
 </script>
@@ -82,7 +124,7 @@ $(function(){
 			$(this).hide();
 		});
 		$(".change-cancel").click(function(e){
-			e.preventDefault();
+//			e.preventDefault();
 			$(".content-change").show();
 			$(".edit").hide();
 			$(".replyDto").show();
@@ -151,17 +193,22 @@ $(function(){
 	<span>조회수 : ${detail.shopRead}</span>
 </div>
 <hr>
-
-<form action="${pageContext.request.contextPath}/member/detail/addcart" method="post" >
-	<div class="mt-3" align="center">
+<div class="send-data" align="center">
+		<input type="number" name="cartCount" placeholder="수량을 입력해주세요" class="center form-control" required>
 		<input type="hidden" name="shopNo" value="${detail.shopNo}" id="shopNo">
 		<input type="hidden" name="memberId" value="${sessionScope.uid}">
 		<input type="hidden" name="shopGoods" value="${detail.shopGoods}">
 		<input type="hidden" name="shopPrice" value="${detail.shopPrice}">
 		<input type="hidden" name="shopImgNo" value="${shopImgDto.shopImgNo}">
-		<input type="number" name="cartCount" placeholder="구매수량">개
-		<button class="btn btn-warning center" id="add-cart">장바구니에 담기</button>
-	</div>
+</div>
+<div class="mt-3" align="center">
+	<button class="btn btn-primary center" id="buy">구매하기</button>
+</div>
+<div class="mt-3" align="center">
+	<button class="btn btn-warning center" id="add-cart">장바구니에 담기</button>
+</div>
+
+	
 </form>
 <br><br>
 <div class="row">
@@ -230,6 +277,7 @@ $(function(){
 			<button type="button" class="btn btn-link disabled">더보기</button>
 		</div>
 	</div>
+	
 
 
 

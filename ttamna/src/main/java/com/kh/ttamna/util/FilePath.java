@@ -9,7 +9,7 @@ public class FilePath {
 	public static final String DONATION_PATH = "D:/dev/ttamna/donation";
 
 	//mybaby 이미지 파일 저장 경로
-	public static final String MYBABY_PATH = "D:/dev/ttamna/mtbaby";
+	public static final String MYBABY_PATH = "D:/dev/ttamna/mybaby";
 	
 	//shop 이미지 파일 저장 경로
 	public static final String SHOP_PATH = "D:/dev/ttamna/shop";
