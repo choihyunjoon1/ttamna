@@ -108,7 +108,6 @@ function calculateTotalPrice() {
 //			e.preventdefault();
 			//하나도 체크되지 않은 경우는 중지
 			if($("input[name=shopNo]:checked").length == 0) return;
-
 			//form을 임시로 만들어서 body에 추가(전송용)
 			//<form action="test" method="post"></form>
 			var form = $("<form>").attr("action", "${root}/shop/order/multibuy").attr("method", "post").addClass("send-form");
@@ -121,12 +120,11 @@ function calculateTotalPrice() {
 				var checkbox = $(this).find("input[name=shopNo]");
 				var number = $(this).find("input[name=quantity]");
 				console.log(checkbox);
-				
+
 				if(checkbox.prop("checked")){//체크박스가 체크된 경우
 					//체크박스의 value가 상품번호이고 입력창의 숫자가 상품수량이므로 이 둘을 각각 별도의 form에 추가
 					var shopNo = checkbox.val();
 					var quantity = number.val();
-
 					$("<input type='hidden' name='list["+count+"].shopNo'>").val(shopNo).appendTo(".send-form");
 					$("<input type='hidden' name='list["+count+"].quantity'>").val(quantity).appendTo(".send-form");
 					count++;
@@ -196,7 +194,7 @@ function calculateTotalPrice() {
 						</div>
 				</c:otherwise>
 				
-</c:choose>
+			</c:choose>
 				<div>
 					<input type="checkbox" id="checkAll">
 					<label for="checkAll" class="btn btn-outline-info">모두선택</label>

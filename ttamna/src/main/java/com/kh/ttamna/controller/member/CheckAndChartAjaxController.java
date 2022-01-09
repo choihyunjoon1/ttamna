@@ -1,12 +1,19 @@
 package com.kh.ttamna.controller.member;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.kh.ttamna.entity.member.MemberDto;
+import com.kh.ttamna.entity.payment.PaymentDto;
 import com.kh.ttamna.repository.member.MemberDao;
 import com.kh.ttamna.repository.member.VisitDao;
 import com.kh.ttamna.repository.payment.PaymentDao;
@@ -66,7 +73,8 @@ public class CheckAndChartAjaxController {
 			return "NNNN";
 		}
 	}
-	
+
+	///////////////////////////////방문 회원수//////////////////////////////////////////////////////
 	//방문자수 조회 전달 ajax
 	@GetMapping("/dayLog")
 	public String dayLog() {
@@ -124,6 +132,8 @@ public class CheckAndChartAjaxController {
 		 return chartVO;
 	 }
 	 
+		///////////////////////////////기부금액////////////////////////////////////////////////////// 
+	 
 	 //기부금액 최근 7일간 일별 통계
 	 @GetMapping("/donation_daily")
 	 public TotalChartVO donationDaily() {
@@ -179,9 +189,78 @@ public class CheckAndChartAjaxController {
 	 public String totalAmount() {
 		long amount = paymentDao.totalAmount();
 		return String.valueOf(amount);
-
 	 }
 
+		///////////////////////////////상품판매 금액//////////////////////////////////////////////////////
+	 
+	 //상품판매 금액 최근 7일간 일별 통계
+	 @GetMapping("/shop_daily")
+	 public TotalChartVO shopDaily() {
+		 TotalChartVO chartVO = new TotalChartVO();
+		 chartVO.setTitle("[ 최근 7일간 상품 판매금액 일별 누적금액]");
+		 chartVO.setLabel("판매금액");
+		 chartVO.setShopDataset(paymentDao.shopDaily());
+		 return chartVO;
+	 }
+	 
+	 //이번달 일별 상품판매 금액 통계
+	 @GetMapping("/shop_thisMonth_daily")
+	 public TotalChartVO shopThisMonthDaily() {
+		 TotalChartVO chartVO = new TotalChartVO();
+		 chartVO.setTitle("[이번 달 상품판매 금액 일별 누적금액]");
+		 chartVO.setLabel("판매금액");
+		 chartVO.setShopDataset(paymentDao.shopThisMonthDaily());
+		 return chartVO;
+	 }
+	 
+	 //이번달 누적 상품판매 금액
+	 @GetMapping("/shop_thisMonth")
+	 public TotalChartVO shopThisMonth() {
+		 TotalChartVO chartVO = new TotalChartVO();
+		 chartVO.setTitle("[이번 달 누적 상품판매 금액]");
+		 chartVO.setLabel("판매금액");
+		 chartVO.setShopDataset(paymentDao.shopThisMonth());
+		 return chartVO;
+	 }
+	 
+	 //최근 6개월간 월별 누적 상품판매 금액
+	 @GetMapping("/shop_monthly")
+	 public TotalChartVO shopMonthly() {
+		 TotalChartVO chartVO = new TotalChartVO();
+		 chartVO.setTitle("[최근 6개월 월별 누적 상품판매 금액]");
+		 chartVO.setLabel("판매금액");
+		 chartVO.setShopDataset(paymentDao.shopMonthly());
+		 return chartVO;
+	 }
+	 
+	 //최근 12개월간 월별 누적 상품판매 금액
+	 @GetMapping("/shop_moy")
+	 public TotalChartVO shopMoy() {
+		 TotalChartVO chartVO = new TotalChartVO();
+		 chartVO.setTitle("[최근 12개월 월별 누적 상품판매 금액]");
+		 chartVO.setLabel("판매금액");
+		 chartVO.setShopDataset(paymentDao.shopMoy());
+		 return chartVO;
+	 }
+	 
+	 //상품판매금액 / 기부금액 구간검색 처리 및 차트 보내기
+	 @PostMapping("search")
+	 public TotalChartVO dateSearch(
+			 			@RequestParam String payType,
+			 			@RequestParam String start,
+			 			@RequestParam String end) {
+		 Map<String, Object> param = new HashMap<>();
+		 param.put("payType", payType);
+		 param.put("start", start);
+		 param.put("end", end);
+		 
+		 TotalChartVO chartVO = new TotalChartVO();
+		 chartVO.setTitle("[ " + start + " ~ " + end + " 기간의 " +  payType + "일별 누적 금액" +" ]");
+		 chartVO.setLabel("금액(원)");
+		 chartVO.setSearchDataset(paymentDao.dateSearch(param));
+		 return chartVO;
+	 }
+	 
 }
 
 

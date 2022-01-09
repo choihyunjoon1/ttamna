@@ -90,9 +90,7 @@ public class MemberController {
 			VisitDto visitDto = new VisitDto();
 			visitDto.setVisitIdx(visitIdx);
 			visitDto.setVisitId(findDto.getMemberId());
-			//접속한지 하루가 지나지 않은 사용자에 대해서는 접속시간을 업데이트하고
-			//하루동안 접속한 기록이 없는 사용자는 등록처리하는 메소드를 사용
-			visitDao.allInOneLog(visitDto);
+			visitDao.log(visitDto);
 			
 			return "redirect:/";
 		}else {//멤버에서 데이터 못 찾을 때 = 휴면계정에서도 찾는다.

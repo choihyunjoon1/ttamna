@@ -50,10 +50,16 @@ public class CertificationController {
 	//이메일로 인증번호 보내기
 	@PostMapping("/findId")
 	public String certId(@RequestParam String certEmail, Model m) throws FileNotFoundException, MessagingException, IOException {
-		service.sendCertification(certEmail);
-		m.addAttribute("certEmail", certEmail);
-		//인증번호 메일 전송후 인증번호 확인 페이지로 이동
-		return "find/checkByCertToId";
+		MemberDto memberDto = memberDao.getByEmail(certEmail);
+		//입력한 이메일로 조회한 memberDto가 있어야 인증메일을 보내준다
+		if(memberDto != null) {
+			service.sendCertification(certEmail);
+			m.addAttribute("certEmail", certEmail);
+			//인증번호 메일 전송후 인증번호 확인 페이지로 이동
+			return "find/checkByCertToId";
+		}else {// 해당하는 memberDto.가 없다면 이메일 입력페이지로 이동
+			return "redirect: findId?notfound";
+		}
 	}
 	
 	//인증번호 확인
@@ -91,10 +97,16 @@ public class CertificationController {
 	//이메일로 인증번호 보내기
 	@PostMapping("/findPw")
 	public String certPw(@RequestParam String certEmail, Model m) throws FileNotFoundException, MessagingException, IOException {
-		service.sendCertification(certEmail);
-		m.addAttribute("certEmail", certEmail);
-		//인증번호 메일 전송후 인증번호 확인 페이지로 이동
-		return "find/checkByCertToPw";
+		MemberDto memberDto = memberDao.getByEmail(certEmail);
+		//입력한 이메일로 조회한 memberDto가 있어야 인증메일을 보내준다
+		if(memberDto != null) {
+			service.sendCertification(certEmail);
+			m.addAttribute("certEmail", certEmail);
+			//인증번호 메일 전송후 인증번호 확인 페이지로 이동
+			return "find/checkByCertToPw";
+		}else {
+			return "redirect: findPw?notfound";
+		}
 	}
 	
 	//인증번호 확인

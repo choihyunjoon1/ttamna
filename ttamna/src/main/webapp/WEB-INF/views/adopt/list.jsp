@@ -3,7 +3,6 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%-- 페이지에서 사용할 JSTL 변수 --%>
 <c:set var="login" value="${uid != null}"></c:set>
-<c:set var="insertGrade" value="${grade == '관리자' or '보호소'}"></c:set>
 <c:set var="root" value="${pageContext.request.contextPath}"></c:set>
 <c:set var="adoptDto" value="${list}"></c:set>
 
@@ -58,7 +57,7 @@ $(function(){
 						imgLocation =  "<a href='readUp?adoptNo= "+resp[i].adoptNo+"'><img src='adoptImg?adoptImgNo="+ resp[i].adoptImgNo +"'class='card-img-top' alt=' "+resp[i].adoptImgUpload+"' style='width:100%;height:15rem;'></a>";
 					}
 					
-					//탈퇴한 회원일 경우 null대신 탈퇴한 회원 표시해주기
+					//탈퇴한 회원일 경우 null대신 탈퇴한 회원 표시해주기                                   
 					var adoptWriter = resp[i].adoptWriter;
 					if(adoptWriter == null){
 						adoptWriter = "탈퇴한 회원입니다";
@@ -103,17 +102,14 @@ $(function(){
 	<c:if test="${param.deleteSuccess != null}">
 		<div class=" mb-3"><h6>입양공고 삭제 완료</h6></div>
 	</c:if>
-	<!-- 입양공고 등록버튼은 관리자와 보호소 등급만 사용할 수 있다 -->
-	<c:if test="${insertGrade}">
-		<div class="d-grid gap-1 d-md-flex justify-content-md-end">
-			<a href="${root}/adopt/write" class="btn btn-outline-primary">입양공고 등록</a>
-		</div>
-	</c:if>
+	<div class="d-grid gap-1 d-md-flex justify-content-md-end">
+		<a href="${root}/adopt/write" class="btn btn-outline-primary">입양공고 등록</a>
+	</div>
 	</div>
 
 	
 	<!-- 게시물 표시 위치 -->		
-	<div class="row mt-3 mb-5 result">
+	<div class="row mt-3 mb-3 result">
 	</div>
 	
 	<div class="row mt-3 mb-5">

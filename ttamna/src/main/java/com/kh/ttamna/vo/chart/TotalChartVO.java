@@ -11,5 +11,7 @@ public class TotalChartVO {
 	private String label;
 	private List<VisitChartVO> dataset;
 	private List<DonationChartVO> donationDataset;
+	private List<ShopChartVO> shopDataset;
+	private List<SearchChartVO> searchDataset;
 	
 }

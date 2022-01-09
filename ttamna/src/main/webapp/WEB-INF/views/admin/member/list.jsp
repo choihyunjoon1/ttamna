@@ -134,7 +134,7 @@
 				</c:otherwise>
 			</c:choose>
 		 </ul>
-		<a type="button" class="btn btn-outline-primary" href="${root}/admin/main">Back to Admin Menu</a>
+		<a type="button" class="btn btn-outline-dark" href="${root}/admin/main">Back to Admin Menu</a>
 	</nav>
 </div>
 </div>

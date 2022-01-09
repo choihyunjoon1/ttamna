@@ -10,54 +10,54 @@
 
  $(function(){// 화면이 시작될때 통계자료를 불러오도록 해야 한다
 
-	 //이번달 누적 기부금액
+	 //이번달 누적 상품판매 금액
 	 $.ajax({
-	 		url : "${root}/ajax/donation_thisMonth",
+	 		url : "${root}/ajax/shop_thisMonth",
 	 		type : "get",
 	 		dataType : "json",
 			success:function(resp){
-				console.log("이번달 누적 기부금액 불러오기 성공");
+				console.log("이번달 누적 상품판매 금액 불러오기 성공");
 				//데이터를 가져오는데 성공하면 차트를 생성하는 함수부르기
 	 			thisMonth("#this-month", resp);
 	 		},
 	 		error:function(e){
-	 			console.log("이번달 누적 기부금액 통계 불러오기 실패", e);
+	 			console.log("이번달 누적 상품판매 금액 통계 불러오기 실패", e);
 	 		}
 	 	});
  
- 	//이번달 부터 6개월전까지의 월별 누적 기부금액
+ 	//이번달 부터 6개월전까지의 월별 누적 상품판매 금액
  	$.ajax({
- 		url : "${root}/ajax/donation_monthly",
+ 		url : "${root}/ajax/shop_monthly",
  		type : "get",
  		dataType : "json",
 		success:function(resp){
-			console.log("6개월전까지의 월별 누적 기부금액 불러오기 성공");
+			console.log("6개월전까지의 월별 누적 상품판매 금액 불러오기 성공");
 			//데이터를 가져오는데 성공하면 차트를 생성하는 함수부르기
  			monthly("#monthly", resp);
  		},
  		error:function(e){
- 			console.log("6개월전까지의 월별 누적 기부금액 불러오기 실패", e);
+ 			console.log("6개월전까지의 월별 누적 상품판매 금액 불러오기 실패", e);
  		}
  	});
 
- 	//최근 12개월간의 월별 누적 기부금액
+ 	//최근 12개월간의 월별 누적 상품판매 금액
  	$.ajax({
- 		url : "${root}/ajax/donation_moy",
+ 		url : "${root}/ajax/shop_moy",
  		type : "get",
  		dataType : "json",
 		success:function(resp){
-			console.log("최근 12개월간의 월별 누적 기부금액 불러오기 성공");
+			console.log("최근 12개월간의 월별 누적 상품판매 금액 불러오기 성공");
 			//데이터를 가져오는데 성공하면 차트를 생성하는 함수부르기
  			moy("#moy", resp);
  		},
  		error:function(e){
- 			console.log("최근 12개월간의 월별 누적 기부금액 불러오기 실패", e);
+ 			console.log("최근 12개월간의 월별 누적 상품판매 금액 불러오기 실패", e);
  		}
  	});
  });
 
  
- //이번달 누적 기부금액
+ //이번달 누적 상품판매 금액
  function thisMonth(selector, data){
 		
 	 	//고정 변수인 ctx는 canvas에 그림을 그리기 위한 펜 객체
@@ -66,9 +66,9 @@
 		var thisMonthAmountArray = [];//방문자수만 모아둘 배열
 		
 		//VisitChartVO에서 가져온 데이터를 각 배열에 넣어준다
-		for(var i=0; i < data.donationDataset.length; i++){
-			thisMonthArray.push(data.donationDataset[i].thisMonth);
-			thisMonthAmountArray.push(data.donationDataset[i].thisMonthAmount);
+		for(var i=0; i < data.shopDataset.length; i++){
+			thisMonthArray.push(data.shopDataset[i].thisMonth);
+			thisMonthAmountArray.push(data.shopDataset[i].thisMonthAmount);
 		}
 	 	
 	 	//var chart = new Chart(펜객체, 차트옵션);
@@ -105,7 +105,7 @@
 	 }
  
  
-//이번달 부터 6개월전까지의 월별 누적 기부금액
+//이번달 부터 6개월전까지의 월별 상품판매 금액
  function monthly(selector, data){
 		
 	 	//고정 변수인 ctx는 canvas에 그림을 그리기 위한 펜 객체
@@ -114,9 +114,9 @@
 		var monthlyAmountArray = [];//방문자수만 모아둘 배열
 		
 		//VisitChartVO에서 가져온 데이터를 각 배열에 넣어준다
-		for(var i=0; i < data.donationDataset.length; i++){
-			monthlyArray.push(data.donationDataset[i].monthly);
-			monthlyAmountArray.push(data.donationDataset[i].monthlyAmount);
+		for(var i=0; i < data.shopDataset.length; i++){
+			monthlyArray.push(data.shopDataset[i].monthly);
+			monthlyAmountArray.push(data.shopDataset[i].monthlyAmount);
 		}
 	 	
 	 	//var chart = new Chart(펜객체, 차트옵션);
@@ -164,7 +164,7 @@
 	 	});
 	 }
 	 
- // 최근 12개월간의 월별 누적 기부금액
+ // 최근 12개월간의 월별 누적 상품판매 금액
  function moy(selector, data){
 		
 	 	//고정 변수인 ctx는 canvas에 그림을 그리기 위한 펜 객체
@@ -173,9 +173,9 @@
 		var moyAmountArray = [];//방문자수만 모아둘 배열
 		
 		//VisitChartVO에서 가져온 데이터를 각 배열에 넣어준다
-		for(var i=0; i < data.donationDataset.length; i++){
-			moyArray.push(data.donationDataset[i].moy);
-			moyAmountArray.push(data.donationDataset[i].moyAmount);
+		for(var i=0; i < data.shopDataset.length; i++){
+			moyArray.push(data.shopDataset[i].moy);
+			moyAmountArray.push(data.shopDataset[i].moyAmount);
 		}
 	 	
 	 	//var chart = new Chart(펜객체, 차트옵션);
@@ -236,7 +236,7 @@
 
 <div class="container-800 container-center mt-5 mb-5">
 	 
-	 <div class="mt-5 mb-5"><h3>DONATION MONTHLY</h3></div>
+	 <div class="mt-5 mb-5"><h3>SHOP MONTHLY</h3></div>
 	 
 	 <div class="d-grid gap-2 d-md-flex justify-content-md-end mt-2 mb-5">
 		<a type="button" class="btn btn-sm btn-outline-dark" href="${root}/admin/statistics/menu">Back to Statistics Menu</a>
