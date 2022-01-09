@@ -11,7 +11,5 @@ public class MybabyReplyDto {
 	private int mybabyNo;
 	private String mybabyReplyContent;
 	private Date mybabyReplyTime;
-	private int mybabyReplySuperno;
-	private int mybabyReplyGroupno;
-	private int mybabyReplyDepth;
+	
 }

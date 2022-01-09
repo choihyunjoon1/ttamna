@@ -29,7 +29,7 @@
 				<table class="table">
 				<thead>
 					<tr align="center">
-						<th scope="col" >주문번호</th>
+						<th scope="col" >결제코드</th>
 						<th scope="col">상품명</th>
 						<th scope="col">가격</th>
 						<th scope="col">구매일</th>

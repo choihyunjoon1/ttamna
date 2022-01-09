@@ -107,7 +107,7 @@ public class ShopController {
 		
 		model.addAttribute("detail", shopDto);
 		model.addAttribute("shopImgDto", shopImgDto);
-		
+		model.addAttribute("shopNo", shopNo);
 		return"shop/detail";
 	}
 	

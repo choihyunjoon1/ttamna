@@ -1,9 +1,6 @@
 package com.kh.ttamna.controller.mybaby;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -17,9 +14,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.kh.ttamna.entity.mybaby.MybabyReplyDto;
 import com.kh.ttamna.repository.mybaby.MybabyReplyDao;
+import com.kh.ttamna.vo.pagination.PaginationVO;
 
 @Controller
-@RequestMapping("/reply_mybaby")
+@RequestMapping("/mybaby_reply")
 public class MybabyReplyController {
 
 	//데이터 등록 요청을 하기위해서는 PostMapping을 이용하고
@@ -35,7 +33,7 @@ public class MybabyReplyController {
 		return "redirect:/mybaby/detail?mybabyNo="+mybabyNo;
 	}
 	
-	@PostMapping("/delete")
+	//@PostMapping("/delete")
 	public String delete(@RequestParam int mybabyReplyNo) {
 		mybabyReplyDao.delete(mybabyReplyNo);
 		
@@ -43,17 +41,6 @@ public class MybabyReplyController {
 	}
 
 	
-
-	@PostMapping("/edit") // 수정요청
-	@ResponseBody
-	public List<String> edit(@RequestParam String replyContent,
-						@RequestParam int replyNo,
-						@RequestParam int mybabyNo) {
-		mybabyReplyDao.edit3(replyNo, replyContent);
-		List<String> returnCotent = new ArrayList<String>();
-		returnCotent.add(replyContent);
-		return returnCotent;
-	}
 	// 데이터를 jsp로 보낼때 쓰는 객체는 Model
 	// 앞에 @(어노테이션) 이 붙은 애들은 컨트롤러로 데이터를 받아올 때 쓰는 객체
 
@@ -67,12 +54,36 @@ public class MybabyReplyController {
 		mybabyReplyDao.insert(mybabyReplyDto);
 		return "redirect:/mybaby/detail?mybabyNo=" + mybabyReplyDto.getMybabyNo();
 	}
-	@GetMapping("/list")
-	public String list(Model model) {
+	
+	//@GetMapping("/list")
+	public String list(Model model,@ModelAttribute PaginationVO paginationVO,@RequestParam int mybabyNo) throws Exception {
 //		model.addAttribute(JSP에서 부를 이름, 데이터);
-		List<MybabyReplyDto> list = mybabyReplyDao.list();
-		
+		int count = mybabyReplyDao.count(mybabyNo);
+		paginationVO.setCount(count);
+		System.err.println(count);
+		paginationVO.calculator();
+		List<MybabyReplyDto> list = mybabyReplyDao.pagenation(paginationVO.getStartRow(), paginationVO.getEndRow(),mybabyNo);
+		paginationVO.setListOfMybabyReply(list);
+		System.err.println(list);
 		model.addAttribute("list", list);
-		return "mybaby/reply/list";
+		
+		
+	
+		return "mybaby/detail?mybabyNo="+mybabyNo;
+	}
+	
+	//더보기 페이지네이션 기능 처리
+	@PostMapping("/more")
+	@ResponseBody
+	public List<MybabyReplyDto> more(
+			@RequestParam int mybabyNo,
+				@RequestParam(required =false, defaultValue = "1") int page,
+				@RequestParam(required =false, defaultValue = "12") int size
+			){
+		System.out.println("모어 컨트롤러 들어옴");
+		int endRow = page* size;
+		int startRow = endRow - (size - 1);
+		return mybabyReplyDao.listByPage(startRow, endRow, mybabyNo);
+		
 	}
 }

@@ -44,20 +44,33 @@ $(function(){
 				
 				//데이터 출력
 				for(var i=0; i < resp.length; i++){
-					var memberId = resp[i].memberId;
-					if(memberId == null){
-						memberId = "탈퇴한 회원입니다";
-					}
 					
-					var divCol = "<div class=page>"+
-						"<span><a href=detail?shopNo="+resp[i].shopNo+"><img src=img?shopImgNo="+resp[i].shopImgNo+"+ class=icon></a></span>" +
-						"<br>"+
-						"<span><a href=detail?shopNo="+resp[i].shopNo+">"+resp[i].shopTitle+"</a></span>" +
-						"<br>"+
-						"<span>"+resp[i].memberId+"</span>" +
-						"<br>"+
-						"<span>"+resp[i].shopPrice+"원</span>" +
-					"</div>";
+						var image = "";
+						if(!resp[i].shopImgNo){
+							image = "<a href=detail?shopNo="+resp[i].shopNo+"><img src=${pageContext.request.contextPath}/resources/img/mollu.jpg class=icon>";
+						}else{
+							image = "<a href=detail?shopNo="+resp[i].shopNo+"><img src=img?shopImgNo="+resp[i].shopImgNo+" class='card-img-top' alt=' "+resp[i].shopImgNo+" ' style='width:100%;height:15rem;'></a>";
+						}
+						
+					
+					var divCol = "<div class='card border-primary text-dark bg-light bg-opacity-1 mb-5 ms-2 ' style='width: 18rem;'>"
+						 + image
+						 + "<div class='card-body'>"
+						  + "<h5 class='card-title'><strong>"+ resp[i].shopGoods +"</strong></h5>"
+						  + "<div class='card-text'>"
+						  + "<small>"+resp[i].shopTitle+"</small>"
+						  + "</div>"
+						  + "<div class='card-text'>"
+						  + "<small>판매가 : "+resp[i].shopPrice+"원</small>"
+						  + "</div>"
+	
+						  +"<div class='card-text d-grid gap-1 justify-content-md-end'>"
+						  + "<a href='detail?shopNo= "+resp[i].shopNo+"' class='btn btn-primary px-2 mt-2 ms-2'>" + "보기"
+						  + "</a></div>"
+						  + "</div></div>";
+						
+						
+						
 					$(".result").append(divCol);
 					$(".page").addClass("col-3 mt-3");
 				}
@@ -77,20 +90,29 @@ $(function(){
 
  <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
     
-    <div class="container">
-	<div class="row mt-3">
-	<div class="col">
-		<a href="write" class="btn btn-primary">상품등록</a>
+<div class="container-900 container-center mt-5 mb-5">
+
+	<div class="mt-5 mb-3"><h3>상품 게시판</h3>
+	<!-- 상품등록은 관리자만 가능 -->
+	<c:if test="${sessionScope.grade eq '관리자'}">
+		<div class="d-grid gap-1 d-md-flex justify-content-md-end">
+			<a href="write" class="btn btn-outline-primary">상품등록</a>
+		</div>
+	</c:if>
 	</div>
+
+	<!-- 글 목록이 찍히는 영역 -->
+	<div class="row mt-3 mb-5 result">		
 	</div>
-	<div class="row mt-3 result">
-			
-	</div>
-	<div class="row mt-3">
+	
+	<div class="row mt-3 mb-5">
 		<div class="col mt-3">
-			<button type="button" class="btn btn-primary more-btn">더보기</button>
+			<button type="button" class="justify-content-md btn btn-primary more-btn">더보기</button>
 		</div>
 	</div>
+	
+	
+	
 </div>
     
     <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>

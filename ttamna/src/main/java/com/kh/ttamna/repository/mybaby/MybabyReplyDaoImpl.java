@@ -32,22 +32,6 @@ public class MybabyReplyDaoImpl implements MybabyReplyDao{
 	}
 
 	@Override
-	public void edit(String mybabyReplyContent, String memberId) {
-		Map<String, Object> map = new HashMap<>();
-		map.put("content", mybabyReplyContent);
-		map.put("memberId", memberId);
-		
-		sqlSession.update("mybabyReply.update", map);
-		
-	}
-
-	@Override
-	public void edit2(MybabyReplyDto mybabyReplyDto) {
-		
-		
-	}
-
-	@Override
 	public List<MybabyReplyDto> list() {
 		List<MybabyReplyDto> list = sqlSession.selectList("mybabyReply.list");//1번방법
 		return list;
@@ -66,12 +50,27 @@ public class MybabyReplyDaoImpl implements MybabyReplyDao{
 		return sqlSession.selectList("mybabyReply.listByDetail", mybabyNo);
 	}
 	
-	@Override//댓글 수정
-	public void edit3(int replyNo, String replyContent) {
+	@Override//댓글 페이지네이션
+	public List<MybabyReplyDto> listByPage(int startRow, int endRow, int mybabyNo) {
 		Map<String, Object> map = new HashMap<>();
-		map.put("replyNo", replyNo);
-		map.put("replyContent", replyContent);
-		
-		sqlSession.update("mybabyReply.edit3", map);
+		map.put("mybabyNo", mybabyNo);
+		map.put("startRow", startRow);
+		map.put("endRow", endRow);
+		return sqlSession.selectList("mybabyReply.listByPage", map);
+	}
+
+	@Override
+	public List<MybabyReplyDto> pagenation(int StartRow, int endRow ,  int mybabyNo) {
+		Map<String,Object> param = new HashMap<>();
+		param.put("startRow",StartRow);
+		param.put("endRow",endRow);
+		param.put("mybabyNo", mybabyNo);
+		return sqlSession.selectList("mybabyReply.pagination",param);
+	}
+
+	@Override
+	public int count(int mybabyNo) {	
+		return sqlSession.selectOne("mybabyReply.count",mybabyNo);
 	}
 }
+

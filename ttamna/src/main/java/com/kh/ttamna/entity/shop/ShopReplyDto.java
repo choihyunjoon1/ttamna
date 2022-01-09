@@ -11,7 +11,5 @@ public class ShopReplyDto {
 	private int shopNo;
 	private String shopReplyContent;
 	private Date shopReplyTime;
-	private int shopReplySuperno;
-	private int shopReplyGroupno;
-	private int shopReplyDepth;
+
 }

@@ -6,8 +6,13 @@ import java.util.List;
 import com.kh.ttamna.entity.donation.AutoPayMentDto;
 import com.kh.ttamna.entity.donation.DonationReplyDto;
 import com.kh.ttamna.entity.member.MemberDto;
+import com.kh.ttamna.entity.mybaby.MybabyReplyDto;
 import com.kh.ttamna.entity.payment.PaymentDto;
+
+import com.kh.ttamna.entity.shop.ShopReplyDto;
+
 import com.kh.ttamna.vo.board.BoardVO;
+
 
 import lombok.Data;
 
@@ -26,6 +31,8 @@ public class PaginationVO {
 	private List<MemberDto> listOfMember = new ArrayList<>(); //Member
 	private List<AutoPayMentDto> listOfAutopay = new ArrayList<>();//mypage/autoDonation
 	private List<DonationReplyDto> listOfDonaReply = new ArrayList<>();
+	private List<ShopReplyDto> listOfShopReply = new ArrayList<>();
+	private List<MybabyReplyDto> listOfMybabyReply = new ArrayList<>();
 	private List<PaymentDto> listOfShortPay = new ArrayList<>();//mypage/shortDonation
 	private List<BoardVO> listOfMyBoard = new ArrayList<>();//mypage/myBoard
 	
