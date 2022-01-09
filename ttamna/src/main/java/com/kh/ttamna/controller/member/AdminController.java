@@ -90,6 +90,18 @@ public class AdminController {
 	 public String donationMonthly() {
 		 return "admin/statistics/donation_monthly";
 	 }
+	 
+	 //일별 상품 판매금액 통계 페이지
+	 @GetMapping("/statistics/shop_daily")
+	 public String shopDaily() {
+		 return "admin/statistics/shop_daily";
+	 }
+	 
+	 //월별 상품 판매금액 통계 페이지
+	 @GetMapping("/statistics/shop_monthly")
+	 public String shopMonthly() {
+		 return "admin/statistics/shop_monthly";
+	 }
 }
 
 

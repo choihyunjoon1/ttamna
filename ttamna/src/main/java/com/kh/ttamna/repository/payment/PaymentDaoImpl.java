@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 
 import com.kh.ttamna.entity.payment.PaymentDto;
 import com.kh.ttamna.vo.chart.DonationChartVO;
+import com.kh.ttamna.vo.chart.ShopChartVO;
 
 @Repository
 public class PaymentDaoImpl implements PaymentDao{
@@ -102,6 +103,36 @@ public class PaymentDaoImpl implements PaymentDao{
 	@Override
 	public long totalAmount() {
 		return sqlSession.selectOne("pay.totalAmount");
+	}
+
+	//7일간 일별 상품판매 금액 통계를 위한 메소드
+	@Override
+	public List<ShopChartVO> shopDaily() {
+		return sqlSession.selectList("pay.shopDaily");
+	}
+
+	//이번달 일별 상품판매 금액
+	@Override
+	public List<ShopChartVO> shopThisMonthDaily() {
+		return sqlSession.selectList("pay.shopThisMonthDaily");
+	}
+
+	//이번달 누적 상품판매 금액
+	@Override
+	public List<ShopChartVO> shopThisMonth() {
+		return sqlSession.selectList("pay.shopThisMonth");
+	}
+
+	//최근 6개월 월별 누적 상품판매 금액
+	@Override
+	public List<ShopChartVO> shopMonthly() {
+		return sqlSession.selectList("pay.shopAmountMonthly");
+	}
+
+	//최근 12개월 월별 누적 상품판매 금액
+	@Override
+	public List<ShopChartVO> shopMoy() {
+		return sqlSession.selectList("pay.shopAmountMoy");
 	}
 
 }
