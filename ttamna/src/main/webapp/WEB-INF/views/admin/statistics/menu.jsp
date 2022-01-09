@@ -47,6 +47,12 @@
 		      <small>후원상품 판매금액 월별 통계</small>
 		    </div>
 		  </a>
+		  <a href="${root}/admin/statistics/search" class="list-group-item list-group-item-action p-3" aria-current="true">
+		    <div class="d-flex w-100 justify-content-between">
+		      <h5 class="mb-1">Search</h5>
+		      <small>기간 검색</small>
+		    </div>
+		  </a>
 	  </div>
 	  <div class="d-grid gap-2 d-md-flex justify-content-md-end mt-5 mb-5">
 		<a type="button" class="btn btn-outline-primary" href="${root}/admin/main">Back to Admin Menu</a>

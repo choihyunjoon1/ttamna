@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 
 import com.kh.ttamna.entity.payment.PaymentDto;
 import com.kh.ttamna.vo.chart.DonationChartVO;
+import com.kh.ttamna.vo.chart.SearchChartVO;
 import com.kh.ttamna.vo.chart.ShopChartVO;
 
 @Repository
@@ -133,6 +134,12 @@ public class PaymentDaoImpl implements PaymentDao{
 	@Override
 	public List<ShopChartVO> shopMoy() {
 		return sqlSession.selectList("pay.shopAmountMoy");
+	}
+
+	//기부 / 상품판매 금액 기간 검색
+	@Override
+	public List<SearchChartVO> dateSearch(Map<String, Object> param) {
+		return sqlSession.selectList("pay.dateSearch", param);
 	}
 
 }

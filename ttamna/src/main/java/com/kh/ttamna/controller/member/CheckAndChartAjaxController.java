@@ -1,12 +1,19 @@
 package com.kh.ttamna.controller.member;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.kh.ttamna.entity.member.MemberDto;
+import com.kh.ttamna.entity.payment.PaymentDto;
 import com.kh.ttamna.repository.member.MemberDao;
 import com.kh.ttamna.repository.member.VisitDao;
 import com.kh.ttamna.repository.payment.PaymentDao;
@@ -236,7 +243,24 @@ public class CheckAndChartAjaxController {
 		 return chartVO;
 	 }
 	 
-
+	 //상품판매금액 / 기부금액 구간검색 처리 및 차트 보내기
+	 @PostMapping("search")
+	 public TotalChartVO dateSearch(
+			 			@RequestParam String payType,
+			 			@RequestParam String start,
+			 			@RequestParam String end) {
+		 Map<String, Object> param = new HashMap<>();
+		 param.put("payType", payType);
+		 param.put("start", start);
+		 param.put("end", end);
+		 
+		 TotalChartVO chartVO = new TotalChartVO();
+		 chartVO.setTitle("[ " + start + " ~ " + end + " 기간의 " +  payType + "일별 누적 금액" +" ]");
+		 chartVO.setLabel("금액(원)");
+		 chartVO.setSearchDataset(paymentDao.dateSearch(param));
+		 return chartVO;
+	 }
+	 
 }
 
 
