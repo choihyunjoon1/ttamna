@@ -35,13 +35,13 @@
 		      <small>기부금액 월별 통계</small>
 		    </div>
 		  </a>
-		  <a href="#" class="list-group-item list-group-item-action p-3" aria-current="true">
+		  <a href="${root}/admin/statistics/shop_daily"class="list-group-item list-group-item-action p-3" aria-current="true">
 		    <div class="d-flex w-100 justify-content-between">
 		      <h5 class="mb-1">Shop Amount Daily</h5>
 		      <small>후원상품 판매금액 일별 통계</small>
 		    </div>
 		  </a>
-		 <a href="#" class="list-group-item list-group-item-action p-3" aria-current="true">
+		 <a href="${root}/admin/statistics/shop_monthly" class="list-group-item list-group-item-action p-3" aria-current="true">
 		    <div class="d-flex w-100 justify-content-between">
 		      <h5 class="mb-1">Shop Amount Monthly</h5>
 		      <small>후원상품 판매금액 월별 통계</small>

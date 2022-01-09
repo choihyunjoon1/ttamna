@@ -66,7 +66,8 @@ public class CheckAndChartAjaxController {
 			return "NNNN";
 		}
 	}
-	
+
+	///////////////////////////////방문 회원수//////////////////////////////////////////////////////
 	//방문자수 조회 전달 ajax
 	@GetMapping("/dayLog")
 	public String dayLog() {
@@ -124,6 +125,8 @@ public class CheckAndChartAjaxController {
 		 return chartVO;
 	 }
 	 
+		///////////////////////////////기부금액////////////////////////////////////////////////////// 
+	 
 	 //기부금액 최근 7일간 일별 통계
 	 @GetMapping("/donation_daily")
 	 public TotalChartVO donationDaily() {
@@ -179,8 +182,60 @@ public class CheckAndChartAjaxController {
 	 public String totalAmount() {
 		long amount = paymentDao.totalAmount();
 		return String.valueOf(amount);
-
 	 }
+
+		///////////////////////////////상품판매 금액//////////////////////////////////////////////////////
+	 
+	 //상품판매 금액 최근 7일간 일별 통계
+	 @GetMapping("/shop_daily")
+	 public TotalChartVO shopDaily() {
+		 TotalChartVO chartVO = new TotalChartVO();
+		 chartVO.setTitle("[ 최근 7일간 상품 판매금액 일별 누적금액]");
+		 chartVO.setLabel("판매금액");
+		 chartVO.setShopDataset(paymentDao.shopDaily());
+		 return chartVO;
+	 }
+	 
+	 //이번달 일별 상품판매 금액 통계
+	 @GetMapping("/shop_thisMonth_daily")
+	 public TotalChartVO shopThisMonthDaily() {
+		 TotalChartVO chartVO = new TotalChartVO();
+		 chartVO.setTitle("[이번 달 상품판매 금액 일별 누적금액]");
+		 chartVO.setLabel("판매금액");
+		 chartVO.setShopDataset(paymentDao.shopThisMonthDaily());
+		 return chartVO;
+	 }
+	 
+	 //이번달 누적 상품판매 금액
+	 @GetMapping("/shop_thisMonth")
+	 public TotalChartVO shopThisMonth() {
+		 TotalChartVO chartVO = new TotalChartVO();
+		 chartVO.setTitle("[이번 달 누적 상품판매 금액]");
+		 chartVO.setLabel("판매금액");
+		 chartVO.setShopDataset(paymentDao.shopThisMonth());
+		 return chartVO;
+	 }
+	 
+	 //최근 6개월간 월별 누적 상품판매 금액
+	 @GetMapping("/shop_monthly")
+	 public TotalChartVO shopMonthly() {
+		 TotalChartVO chartVO = new TotalChartVO();
+		 chartVO.setTitle("[최근 6개월 월별 누적 상품판매 금액]");
+		 chartVO.setLabel("판매금액");
+		 chartVO.setShopDataset(paymentDao.shopMonthly());
+		 return chartVO;
+	 }
+	 
+	 //최근 12개월간 월별 누적 상품판매 금액
+	 @GetMapping("/shop_moy")
+	 public TotalChartVO shopMoy() {
+		 TotalChartVO chartVO = new TotalChartVO();
+		 chartVO.setTitle("[최근 12개월 월별 누적 상품판매 금액]");
+		 chartVO.setLabel("판매금액");
+		 chartVO.setShopDataset(paymentDao.shopMoy());
+		 return chartVO;
+	 }
+	 
 
 }
 
