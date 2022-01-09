@@ -25,10 +25,19 @@
 			}
 		});
 		
+		$(".payment").click(function(){
+			if(!$(".payment-total-amount").val()){
+				alert("기부 금액을 입력해주세요.");
+				return false;
+			} else {
+				return true;
+			}
+		});
+		
 		$(".agree").click(function(){
 			var isAgree = confirm("*정기기부 안내* 정기기부는 시작 날짜에 관계없이 매달 10일 자동결제가 진행됩니다 이점 유의하시기 바랍니다.");
 			if(isAgree){
-				if(!$(this).prev().val()){
+				if(!$(".autopay-total-amount").val()){
 					alert("기부 금액을 입력해주세요.");
 					return false;
 				}
@@ -121,7 +130,7 @@
 		<%-- 제목 아래 작성시간과 작성자 영역 --%>
 		<div class="card-body d-grid gap-2 justify-content-md-end">
 			<h6 class="card-subtitle text-muted">
-			${donationDto.donationTime} 작성자 : ${donationDto.donationWriter}
+			${donationDto.donationTime} 신청자 : ${donationDto.donationWriter}
 			</h6>
 		</div>
 		<%-- 이미지가 찍히는 영역 --%>
@@ -138,38 +147,47 @@
 		<ul class="list-group list-group-flush">
 			<li class="list-group-item text-muted">현재 기부 금액 : <span class="now-fund">${donationDto.donationNowFund}</span>원</li>
 			<li class="list-group-item text-muted">목표 기부 금액 : <span class="total-fund">${donationDto.donationTotalFund}</span>원</li>
-			<li class="list-group-item text-muted">
-				<%-- 단건 기부시 정보가 필요하므로 폼태그로 감싸넣었다 --%>
-				<form action="kakao/fund" method="post">
-					<input type="hidden" name="donationNo" value="${donationDto.donationNo}"  id="donationNo">
-					<input type="hidden" name="partner_user_id" value="${sessionScope.uid}">
-					<%-- 텍스트박스와 버튼을 한 줄로 나열하기 위해 div태그를 또 넣었다. --%>
-					<div class="row">
-						<div class="col-8">
-							<input type="number" name="total_amount" class="form-control" min="1000" max="${donationDto.donationTotalFund - donationDto.donationNowFund}">
-						</div>
-						<div class="col-4">
-							<input type="submit" value="1회 기부 하기" class="btn btn-primary payment">
-						</div>
-					</div>
-				</form>
-			</li>
-			<li class="list-group-item text-muted">
-				<%-- 정기 기부도 마찬가지 --%>
-				<form action="kakao/autofund" method="post" id="auto">
-					<input type="hidden" name="donationNo" value="${donationDto.donationNo}">
-					<input type="hidden" name="partner_user_id" value="${sessionScope.uid}">
-					<%-- 텍스트박스와 버튼을 한 줄로 나열하기 위해 div태그를 또 넣었다. --%>
-					<div class="row">
-						<div class="col-8">
-							<input type="number" name="total_amount" class="form-control" min="1000" max="${donationDto.donationTotalFund*0.3}">
-						</div>
-						<div class="col-4">
-							<input type="submit" value="정기 기부 신청" class="btn btn-primary agree autopayment">
-						</div>
-					</div>
-				</form>
-			</li>
+			<c:choose>
+				<c:when test="${uid ne null}">
+					<li class="list-group-item text-muted">
+						<%-- 단건 기부시 정보가 필요하므로 폼태그로 감싸넣었다 --%>
+						<form action="kakao/fund" method="post">
+							<input type="hidden" name="donationNo" value="${donationDto.donationNo}"  id="donationNo">
+							<input type="hidden" name="partner_user_id" value="${sessionScope.uid}">
+							<%-- 텍스트박스와 버튼을 한 줄로 나열하기 위해 div태그를 또 넣었다. --%>
+							<div class="row">
+								<div class="col-8">
+									<input type="number" name="total_amount" class="form-control payment-total-amount" min="1000" max="${donationDto.donationTotalFund - donationDto.donationNowFund}">
+								</div>
+								<div class="col-4">
+									<input type="submit" value="1회 기부 하기" class="btn btn-primary payment">
+								</div>
+							</div>
+						</form>
+					</li>
+					<li class="list-group-item text-muted">
+						<%-- 정기 기부도 마찬가지 --%>
+						<form action="kakao/autofund" method="post" id="auto">
+							<input type="hidden" name="donationNo" value="${donationDto.donationNo}">
+							<input type="hidden" name="partner_user_id" value="${sessionScope.uid}">
+							<%-- 텍스트박스와 버튼을 한 줄로 나열하기 위해 div태그를 또 넣었다. --%>
+							<div class="row">
+								<div class="col-8">
+									<input type="number" name="total_amount" class="form-control autopay-total-amount" min="1000" max="${donationDto.donationTotalFund*0.3}">
+								</div>
+								<div class="col-4">
+									<input type="submit" value="정기 기부 신청" class="btn btn-primary agree autopayment">
+								</div>
+							</div>
+						</form>
+					</li>
+				</c:when>
+				<c:otherwise>
+					<li class="list-group-item text-muted">
+						<span>기부는 로그인 후 가능합니다.</span>
+					</li>
+				</c:otherwise>
+			</c:choose>
 		</ul>
 		<div class="card-footer text-muted">
 			<%-- 작성자 또는 관리자만 수정 삭제 버튼 보여주기 --%>
