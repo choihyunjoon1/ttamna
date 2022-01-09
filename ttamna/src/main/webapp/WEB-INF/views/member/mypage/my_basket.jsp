@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<c:set var="root" value="${pageContext.request.contextPath }"></c:set>
+<c:set var="root" value="${pageContext.request.contextPath}"></c:set>
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 
 
@@ -100,11 +100,11 @@
 									<th></th>
 								</tr>
 							</thead>
-							<tbody class="basket">
+							<tbody>
 							<%-- 상품들의 금액을  --%>
 							<c:set var="totalAmount" value="0"/>
 							<c:forEach var="cartDto" items="${list}">
-								<tr>
+								<tr class="basket">
 										<td><input type="checkbox" name="shopNo" value="${cartDto.shopNo}"></td>
 										<td><img src="${root}/shop/img?shopImgNo=${cartDto.shopImgNo}" width="100px;" height="70px;"></td>
 										<td><span><a href="${root}/shop/detail?shopNo=${cartDto.shopNo}">${cartDto.shopGoods}</a></span></td>
