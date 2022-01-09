@@ -6,7 +6,7 @@
 // 상품 * 수량 = 금액
 function calculateOrderPrice() {
 	// 테이블 바디와 tr 탐색
-    var tbody = document.getElementById("basket");
+    var tbody = document.getElementById("cartBody");
     var rows = tbody.getElementsByTagName("tr");
 
     for (var i=0; i<rows.length; i++) {
@@ -46,7 +46,7 @@ function calculateTotalPrice() {
     var span = document.getElementById("order-price");
 
     // tbody를 찾는다.
-    var tbody = document.getElementById("basket");
+    var tbody = document.getElementById("cartBody");
 
     // tbody안의 모든 tr을 찾는다.
     var rows = tbody.getElementsByTagName("tr");
