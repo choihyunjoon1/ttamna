@@ -27,7 +27,7 @@
 	<insert id="insert" parameterType="DonationReplyDto">
 		insert into donation_reply values( donation_reply_seq.nextval,
 			#{memberId}, ${donationNo}, #{donationReplyContent},
-			sysdate, null, 0, 0
+			sysdate
 		)
 		
 	</insert>	
@@ -36,32 +36,16 @@
 		select * from donation_reply
 	</select>
 	
-	<!-- 댓글 수정 -->
-	<update id="update" parameterType="map">
-		update donation_reply set donation_reply_content = #{content}
-		where member_id = #{memberId}
-	</update>
-	
 	<!-- 댓글 삭제 -->	
 	<delete id="delete" parameterType="int">
 		delete from donation_reply where donation_reply_no = ${donationReplyNo}
 	</delete>
 		
-	<!--  수정을 위한 단일조회 -->
-	<select id="get"  parameterType="int" resultType="DonationReplyDto">
-		select * from donation_reply where donation_reply_no = ${donationReplyNo}
-	</select>
-
 	<!-- 특정 게시글의 댓글 내용만 조회 -->
 	<select id="listByDetail" parameterType="int" resultType="DonationReplyDto">
 		select * from donation_reply where donation_no = ${donationNo}
 	</select>
-	
-	<!-- 댓글 수정 -->
-	<update id="edit3" parameterType="map">
-		update donation_reply set donation_reply_content = #{replyContent}
-		where donation_reply_no = ${replyNo}
-	</update>
+
 	
 	<!-- 더보기 페이지네이션 -->
 	<select id="listByPage" parameterType="map" resultType="DonationReplyDto">

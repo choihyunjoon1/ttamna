@@ -8,12 +8,19 @@ import org.springframework.stereotype.Service;
 import com.kh.ttamna.entity.donation.AutoPayMentDto;
 import com.kh.ttamna.entity.donation.DonationReplyDto;
 import com.kh.ttamna.entity.member.MemberDto;
+import com.kh.ttamna.entity.mybaby.MybabyReplyDto;
 import com.kh.ttamna.entity.payment.PaymentDto;
+import com.kh.ttamna.entity.shop.ShopReplyDto;
 import com.kh.ttamna.repository.donation.AutoDonationDao;
 import com.kh.ttamna.repository.donation.DonationReplyDao;
 import com.kh.ttamna.repository.member.MemberDao;
+import com.kh.ttamna.repository.mybaby.MybabyReplyDao;
 import com.kh.ttamna.repository.payment.PaymentDao;
+
+import com.kh.ttamna.repository.shop.ShopReplyDao;
+
 import com.kh.ttamna.vo.board.BoardVO;
+
 import com.kh.ttamna.vo.pagination.PaginationVO;
 
 @Service
@@ -27,6 +34,14 @@ public class PaginationServiceImpl implements PaginationService{
 	
 	@Autowired 
 	private DonationReplyDao donationReplyDao;
+	
+	@Autowired 
+	private ShopReplyDao shopReplyDao;
+	
+	@Autowired 
+	private MybabyReplyDao mybabyReplyDao;
+	
+	
 	
 	@Autowired
 	private PaymentDao payDao;
@@ -88,6 +103,39 @@ public class PaginationServiceImpl implements PaginationService{
 		return paginationVO;
 		
 	}
+
+	//shop 댓글 페이지네이션
+	@Override
+	public PaginationVO shopReplyPaging(PaginationVO paginationVO, int shopNo) throws Exception {
+
+		int count = shopReplyDao.count(shopNo);
+		paginationVO.setPageSize(1);
+		paginationVO.setBlockSize(10);
+		paginationVO.setCount(count);
+		paginationVO.calculator();
+		List<ShopReplyDto> list = shopReplyDao.listByPage(paginationVO.getStartRow(), paginationVO.getEndRow(), shopNo);
+		paginationVO.setListOfShopReply(list);
+		
+		return paginationVO;
+		
+	}
+	
+	//내새끼 댓글 페이지네이션
+		@Override
+		public PaginationVO mybabyReplyPaging(PaginationVO paginationVO, int mybabyNo) throws Exception {
+      	int count = mybabyReplyDao.count(mybabyNo);
+			paginationVO.setPageSize(1);
+			paginationVO.setBlockSize(10);
+			paginationVO.setCount(count);
+			paginationVO.calculator();
+			List<MybabyReplyDto> list = mybabyReplyDao.listByPage(paginationVO.getStartRow(), paginationVO.getEndRow(), mybabyNo);
+			paginationVO.setListOfMybabyReply(list);
+			
+			return paginationVO;
+			
+		}
+
+
 	//내게시글보기 내역 목록 + 페이지네이션
 	@Override
 	public PaginationVO myBoardPaging(PaginationVO paginationVO,String memberId) throws Exception {
@@ -102,5 +150,7 @@ public class PaginationServiceImpl implements PaginationService{
 	
 		return paginationVO;
 	}
-
 }
+
+
+		
