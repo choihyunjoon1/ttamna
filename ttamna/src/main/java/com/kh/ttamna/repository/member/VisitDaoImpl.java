@@ -29,14 +29,6 @@ public class VisitDaoImpl implements VisitDao{
 		sqlSession.insert("visit.log", visitDto);
 	}
 
-	//저장한 기록에 중복아이디가 있으면 접속시간을 업데이트
-	//단, 접속일자가 (현재날짜 - 기록날짜) < 1 보다 작다면 접속시간을 업데이트
-	//중복아이디가 아니라면 정보를 등록
-	@Override
-	public void allInOneLog(VisitDto visitDto) {
-		sqlSession.insert("visit.allInOneLog", visitDto);
-	}
-
 	//오늘 하루의 방문자 수를 계산하는 메소드
 	@Override
 	public int countByDay() {
