@@ -65,11 +65,11 @@ public class ShopPayController {
 	@PostMapping("/multibuy")
 	public String multibuy(@ModelAttribute ShopOrderListVO listVO, HttpSession session) throws URISyntaxException {
 		String memberId = (String)session.getAttribute("uid"); // partner_user_id에 첨부할 구매자의 정보가 필요함
+		System.out.println("리스트VO : " + listVO.getList());
+		System.out.println("리스트VO : " + listVO.toString());
 		
 		//결제 성공 시 수량을 등록하기 위해 세션에 데이터 저장
 		session.setAttribute("quantity", listVO.getList());
-		System.out.println("마법천자문 : " + listVO.getList());
-		System.out.println("마법천자문2 : " + listVO.getList().toString());
 		
 		
 		List<ShopDto> list = new ArrayList<>();
