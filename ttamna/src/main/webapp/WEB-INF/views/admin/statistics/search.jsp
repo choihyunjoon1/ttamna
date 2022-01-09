@@ -11,7 +11,6 @@
 	 
 	 //검색 버튼을 누르면 실행
 	 $("#search").click(function(){
-		 
 		 var payType = $("select[name=payType]").val();
 		 var start = $("input[name=start]").val();
 		 var end = $("input[name=end]").val();
@@ -35,6 +34,10 @@
 		 		}
 		  });
   	 });
+	 
+	 $("button[type=reset]").click(function(){
+		 location.reload();
+	 });
  });
 	
 	 function dateSearch(selector, data){
@@ -139,6 +142,10 @@
 		<canvas id="result" width="50%"></canvas>
 	</div>
 	
+	<div class="d-grid gap-2 d-md-flex justify-content-md-end mt-2 mb-5">
+		 <button type="reset" class="btn btn-sm btn-outline-dark">reset</button>
+	</div>
+	 
 </div>
 
 
