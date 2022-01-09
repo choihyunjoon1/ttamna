@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<c:set var="root" value="${pageContext.request.contextPath}"></c:set>
+<c:set var="root" value="${pageContext.request.contextPath }"></c:set>
 <!--부트스트랩 cdn-->
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     
@@ -9,6 +9,7 @@ pageEncoding="UTF-8"%>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>    
     
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+
 
 <style>
 	.oneline{
@@ -18,8 +19,15 @@ pageEncoding="UTF-8"%>
 </style>
 
 <script>
-// 결제 관련
 $(function(){
+	var login = $("input[name=memberId]").val();
+	if(login == ''){
+	$(".oneline").slideUp();		
+	}
+	
+	
+	
+	// 결제 관련
 	$("input[name=cartCount]").on("blur", function(){
         var cartCount = $(this).val();
         $(this).attr("value", cartCount);
@@ -62,15 +70,16 @@ $(function(){
 	$("#add-cart").click(function(e){
 //		e.preventDefault();
 		
-		var shopNo = $("#shopNo").val();
-		var memberId = $("input[name=memberId]").val();
-		var shopGoods = $("input[name=shopGoods]").val();
-		var shopPrice = $("input[name=shopPrice]").val();
-		var shopImgNo = $("input[name=shopImgNo]").val();
-		var cartCount = $("input[name=cartCount]").val()
+			var shopNo = $("#shopNo").val();
+			var memberId = $("input[name=memberId]").val();
+			var shopGoods = $("input[name=shopGoods]").val();
+			var shopPrice = $("input[name=shopPrice]").val();
+			var shopImgNo = $("input[name=shopImgNo]").val();
+			var cartCount = $("input[name=cartCount]").val()
+		
 		
 		// 수량 미선택시
-		if($("input[name=cartCount]").val() == ''){
+		if(cartCount == ''){
 			alert("수량을 입력해주세요");
 			return;
 		}
@@ -79,6 +88,7 @@ $(function(){
 			// 즉석 form
 			var form = $("<form>").attr("action", "${root}/member/detail/addcart").attr("method", "post").addClass("send-form");
 			$("body").append(form);
+			
 			
 			// form에 첨부할 값
 			$("<input type='hidden' name='shopNo'>").val(shopNo).appendTo(".send-form");

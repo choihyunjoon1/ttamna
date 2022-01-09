@@ -124,6 +124,7 @@ public class ShopPayController {
 										HttpSession session) throws URISyntaxException {
 			//기존의 장바구니에 있던 데이터들을 추출한다.
 			List<CartDto> beforeCart = (List<CartDto>)session.getAttribute("cart");
+			System.out.println("결제전 장바구니 = "+ beforeCart);
 			//들어올때 장바구니 세션을 모두 삭제한다.
 			session.removeAttribute("cart");
 			System.out.println("장바구니 삭제됨");
@@ -162,10 +163,6 @@ public class ShopPayController {
 			paymentDto.setTid(responseVo.getTid());
 			paymentDto.setItemName(responseVo.getItem_name());
 			paymentDto.setTotalAmount(responseVo.getAmount().getTotal());
-			System.out.println("거래번호"+Integer.parseInt(partner_order_id));
-			System.out.println("Tid"+responseVo.getTid());
-			System.out.println("상품이름"+responseVo.getItem_name());
-			System.out.println("토탈어마운트"+responseVo.getAmount().getTotal());
 			
 			paymentDao.insert(paymentDto);
 			
@@ -174,7 +171,7 @@ public class ShopPayController {
 				//상품 정보를 가져오고
 				ShopDto shopDto = shopDao.get(shopOrderDto.getShopNo());
 				
-				//상품 상세정보를 ㅌ테이블에 등록 (성공시점에서)
+				//상품 상세정보를 테이블에 등록 (성공시점에서)
 				PaymentDetailDto payDetailDto = new PaymentDetailDto();
 				payDetailDto.setPayNo(Integer.parseInt(partner_order_id));
 				payDetailDto.setShopNo(shopDto.getShopNo());
@@ -187,14 +184,18 @@ public class ShopPayController {
 				shopNoList.add(payDetailDto.getShopNo());
 			}
 			
-			int i = 0;
+			// 장바구니에 담겨있던 상품과 결제된 상품이 일치한다면 해당 상품을 지워라.
+			int i=0;
 			List<CartDto> afterCart = new CopyOnWriteArrayList<>();
-			for(CartDto cart : beforeCart) {
-				boolean isTrue = cart.getShopNo() == shopNoList.get(i) && cart.getMemberId().equals(partner_user_id);
-				if(!isTrue) {
-					afterCart.add(cart);
+				for(CartDto cart : beforeCart) {
+					boolean isTrue = cart.getShopNo() == shopNoList.get(i) && cart.getMemberId().equals(partner_user_id);
+			
+					if(!isTrue) {
+						afterCart.add(cart);
+					}
+					i++;
 				}
-			}
+
 			session.setAttribute("cart", afterCart);
 			
 			return "redirect:/shop/order/success_result";
