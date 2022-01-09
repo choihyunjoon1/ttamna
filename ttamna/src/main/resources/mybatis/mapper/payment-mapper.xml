@@ -302,7 +302,7 @@
 		    (select 
 		        to_char(add_months(to_date(sysdate, 'YY/MM/DD'), - (level-1)-1), 'month') mth 
 		      from dual
-		        connect by add_months(to_date(sysdate, 'YY/MM/DD'), - (level-1)-1) >= add_months(to_date(sysdate, 'YY/MM/DD'), -11) )d
+		       <![CDATA[ connect by add_months(to_date(sysdate, 'YY/MM/DD'), - (level-1)-1) >= add_months(to_date(sysdate, 'YY/MM/DD'), -11)]]>)d
 		left outer join
 		    (select 
 		        to_char(pay_time, 'month') mth,
@@ -314,7 +314,26 @@
 		order by lpad(d.mth, 2, '0')
 	</select>
 	
-	
+	<!-- 기부 / 구매 중 기간검색 -->
+	<select id="dateSearch" parameterType="map" resultType="SearchChartVO">
+	  select
+        d.dt "date",
+        nvl(p.daily, 0) "dailyAmount"
+   	 from
+   	 	(select 
+   	 		to_char(to_date(#{start}, 'YYYY/MM/DD') + level - 1, 'YYYY/MM/DD') dt
+          from dual 
+           <![CDATA[connect by level <= (to_date(#{end}, 'YYYY/MM/DD') - to_date(#{start},'YYYY/MM/DD') + 1)]]>)d
+        left outer join    
+        (select 
+		        to_char(pay_time, 'YYYY/MM/DD') dt, 
+                sum(total_amount) daily,
+                pay_type
+		    from payment 
+		    where pay_type=#{payType} and status='결제완료'
+		    group by to_char(pay_time, 'YYYY/MM/DD'), pay_type)p
+        on d.dt = p.dt order by d.dt asc
+	</select>
 	
 </mapper>
 

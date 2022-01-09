@@ -1,11 +1,12 @@
 package com.kh.ttamna.repository.payment;
 
 import java.util.List;
+import java.util.Map;
 
 import com.kh.ttamna.entity.payment.PaymentDto;
 import com.kh.ttamna.vo.chart.DonationChartVO;
+import com.kh.ttamna.vo.chart.SearchChartVO;
 import com.kh.ttamna.vo.chart.ShopChartVO;
-import com.kh.ttamna.vo.chart.VisitChartVO;
 
 public interface PaymentDao {
 	int seq();
@@ -58,6 +59,9 @@ public interface PaymentDao {
 
 	//최근 12개월 월별 누적 상품판매 금액
 	List<ShopChartVO> shopMoy();
+	
+	//기부 / 상품판매 금액 기간 검색
+	List<SearchChartVO> dateSearch(Map<String, Object> param);
 
 
 
