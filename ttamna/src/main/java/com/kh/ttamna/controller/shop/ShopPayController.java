@@ -68,6 +68,9 @@ public class ShopPayController {
 		
 		//결제 성공 시 수량을 등록하기 위해 세션에 데이터 저장
 		session.setAttribute("quantity", listVO.getList());
+		System.out.println("마법천자문 : " + listVO.getList());
+		System.out.println("마법천자문2 : " + listVO.getList().toString());
+		
 		
 		List<ShopDto> list = new ArrayList<>();
 		for(ShopOrderVO shopOrderVo : listVO.getList()) {

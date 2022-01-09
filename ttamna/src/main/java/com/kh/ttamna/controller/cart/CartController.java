@@ -48,11 +48,11 @@ public class CartController {
 			 List<CartDto> cart = new CopyOnWriteArrayList<CartDto>();		 
 			session.setAttribute("cart", cart); // 장바구니에 물품 추가해라
 			cart.add(cartDto);
-			cartDao.insert(cartDto);
+//			cartDao.insert(cartDto);
 		} else {
 			List<CartDto> cart = (List<CartDto>)session.getAttribute("cart");
 			cart.add(cartDto);
-			cartDao.add(cartDto);
+//			cartDao.add(cartDto);
 		}
 		return "redirect:/member/mypage/my_basket";
 	}	

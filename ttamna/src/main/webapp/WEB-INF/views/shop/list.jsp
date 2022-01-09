@@ -56,9 +56,9 @@ $(function(){
 					var divCol = "<div class='card border-primary text-dark bg-light bg-opacity-1 mb-5 ms-2 ' style='width: 18rem;'>"
 						 + image
 						 + "<div class='card-body'>"
-						  + "<h5 class='card-title'><strong>"+ resp[i].shopTitle +"</strong></h5>"
+						  + "<h5 class='card-title'><strong>"+ resp[i].shopGoods +"</strong></h5>"
 						  + "<div class='card-text'>"
-						  + "<small>상품명 : "+resp[i].shopGoods+"</small>"
+						  + "<small>"+resp[i].shopTitle+"</small>"
 						  + "</div>"
 						  + "<div class='card-text'>"
 						  + "<small>판매가 : "+resp[i].shopPrice+"원</small>"

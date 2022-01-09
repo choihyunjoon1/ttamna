@@ -19,7 +19,7 @@ import com.kh.ttamna.entity.shop.ShopReplyDto;
 import com.kh.ttamna.repository.shop.ShopReplyDao;
 
 @Controller
-@RequestMapping("/reply_shop")
+@RequestMapping("/shop_reply")
 public class ShopReplyController {
 
 	//데이터 등록 요청을 하기위해서는 PostMapping을 이용하고
