@@ -24,7 +24,7 @@ public class AdminInterceptor implements HandlerInterceptor{
 			return true;
 		}else {
 			System.out.println("[Admin Interceptor] "+ memberGrade + " 등급. 접속 차단. " );
-			response.sendError(401);
+			response.sendRedirect(request.getContextPath());
 			return false;
 		}
 	}
