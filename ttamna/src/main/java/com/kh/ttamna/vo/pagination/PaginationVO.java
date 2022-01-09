@@ -8,7 +8,11 @@ import com.kh.ttamna.entity.donation.DonationReplyDto;
 import com.kh.ttamna.entity.member.MemberDto;
 import com.kh.ttamna.entity.mybaby.MybabyReplyDto;
 import com.kh.ttamna.entity.payment.PaymentDto;
+
 import com.kh.ttamna.entity.shop.ShopReplyDto;
+
+import com.kh.ttamna.vo.board.BoardVO;
+
 
 import lombok.Data;
 
@@ -30,6 +34,7 @@ public class PaginationVO {
 	private List<ShopReplyDto> listOfShopReply = new ArrayList<>();
 	private List<MybabyReplyDto> listOfMybabyReply = new ArrayList<>();
 	private List<PaymentDto> listOfShortPay = new ArrayList<>();//mypage/shortDonation
+	private List<BoardVO> listOfMyBoard = new ArrayList<>();//mypage/myBoard
 	
 	public void calculator() throws Exception {
 		//rownum 계산

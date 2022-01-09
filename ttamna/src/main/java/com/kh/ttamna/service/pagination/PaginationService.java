@@ -22,5 +22,7 @@ public interface PaginationService {
 	//단건기부 목록
 	PaginationVO shortListPaging(PaginationVO paginationVO, String memberId) throws Exception;
 
+	PaginationVO myBoardPaging(PaginationVO paginationVO, String memberId) throws Exception;
+
 
 }

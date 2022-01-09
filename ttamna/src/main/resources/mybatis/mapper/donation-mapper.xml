@@ -98,7 +98,7 @@
 				donation_title = #{donationTitle},
 			</if>
 		</set>
-		where donation_writer = #{donationWriter}
+		where donation_no = #{donationNo}
 	</update>
 	
 	<!-- 더보기 페이지네이션 -->

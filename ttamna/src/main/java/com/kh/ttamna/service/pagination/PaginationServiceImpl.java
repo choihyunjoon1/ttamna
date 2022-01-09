@@ -16,7 +16,11 @@ import com.kh.ttamna.repository.donation.DonationReplyDao;
 import com.kh.ttamna.repository.member.MemberDao;
 import com.kh.ttamna.repository.mybaby.MybabyReplyDao;
 import com.kh.ttamna.repository.payment.PaymentDao;
+
 import com.kh.ttamna.repository.shop.ShopReplyDao;
+
+import com.kh.ttamna.vo.board.BoardVO;
+
 import com.kh.ttamna.vo.pagination.PaginationVO;
 
 @Service
@@ -99,6 +103,7 @@ public class PaginationServiceImpl implements PaginationService{
 		return paginationVO;
 		
 	}
+
 	//shop 댓글 페이지네이션
 	@Override
 	public PaginationVO shopReplyPaging(PaginationVO paginationVO, int shopNo) throws Exception {
@@ -118,8 +123,7 @@ public class PaginationServiceImpl implements PaginationService{
 	//내새끼 댓글 페이지네이션
 		@Override
 		public PaginationVO mybabyReplyPaging(PaginationVO paginationVO, int mybabyNo) throws Exception {
-
-			int count = mybabyReplyDao.count(mybabyNo);
+      	int count = mybabyReplyDao.count(mybabyNo);
 			paginationVO.setPageSize(1);
 			paginationVO.setBlockSize(10);
 			paginationVO.setCount(count);
@@ -130,4 +134,23 @@ public class PaginationServiceImpl implements PaginationService{
 			return paginationVO;
 			
 		}
+
+
+	//내게시글보기 내역 목록 + 페이지네이션
+	@Override
+	public PaginationVO myBoardPaging(PaginationVO paginationVO,String memberId) throws Exception {
+		int count = memberDao.countBoard(memberId);
+		
+		paginationVO.setPageSize(15);
+		paginationVO.setBlockSize(10);
+		paginationVO.setCount(count);
+		paginationVO.calculator();
+		List<BoardVO> list = memberDao.boardListPaging(memberId ,paginationVO.getStartRow(), paginationVO.getEndRow());
+		paginationVO.setListOfMyBoard(list);
+	
+		return paginationVO;
+	}
 }
+
+
+		

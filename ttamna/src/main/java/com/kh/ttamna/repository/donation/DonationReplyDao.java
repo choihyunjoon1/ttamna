@@ -19,7 +19,5 @@ public interface DonationReplyDao {
 	
 	List<DonationReplyDto> listByPage(int startRow, int endRow, int donationNo);//더보기 페이지네이션
 
-	List<DonationReplyDto> pagenation(int StartRow,int endRow,  int donationNo);
-	
 	public int count(int donationNo);
 }

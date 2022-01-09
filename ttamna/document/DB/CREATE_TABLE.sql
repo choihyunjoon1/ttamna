@@ -280,12 +280,14 @@ commit;
 create sequence payment_seq; -- 시퀀스
 create table payment(
 pay_no number primary key, -- 결제번호
-tid varchar2(20) not null unique, -- 고유번호
+tid varchar2(20) not null, -- 고유번호
 member_id varchar2(20) not null, -- 회원아이디
 item_name varchar2(300) not null, -- 거래명(상품명 외 몇건)
 total_amount number not null check(total_amount >= 0), -- 거래금액
 pay_time date default sysdate not null, -- 거래시각
 status varchar2(12) not null check(status in ('결제완료', '부분취소', '전체취소')) -- 거래상태
+pay_type char(6) not null, -- 결제분류
+donation_no references donation(donation_no) -- 기부번호 저장    
 );
 
 commit;

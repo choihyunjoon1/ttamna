@@ -4,6 +4,8 @@
 <c:set var="login" value="${uid != null}"></c:set>
 <c:set var="root" value="${pageContext.request.contextPath}"></c:set>
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+<!-- JavaScript 날짜 포맷 CDN -->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
 <script>
 $(function(){
 	var page = 1;
@@ -56,7 +58,7 @@ $(function(){
 						  + "<div class='card-body'>"
 						  + "<h5 class='card-title'>" + resp[i].mybabyTitle +"</h5>"
 						  + "<div class='card-text'>"
-						  +  resp[i].mybabyTime
+						  +  moment(resp[i].mybabyTime).format("YYYY-MM-DD")
 						  +"</div>"
 						  + "<div class='card-text'>"
 						  +  "작성자 : "+resp[i].mybabyWriter

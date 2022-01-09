@@ -45,6 +45,7 @@
 		<package name="com.kh.ttamna.vo.pagination"/>
 		<package name="com.kh.ttamna.vo.shop"/>
 		<package name="com.kh.ttamna.vo.adopt"/>
+		<package name="com.kh.ttamna.vo.board"/>
 	</typeAliases>
 
 </configuration>

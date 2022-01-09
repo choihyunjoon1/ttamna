@@ -53,9 +53,9 @@ $(function(){
 					//이미지 파일 없는 경우 undefined 꼴보기 시르미 
 					var imgLocation = "";
 					if(!resp[i].adoptImgNo){
-						imgLocation =  "<img src=${pageContext.request.contextPath}/resources/img/nonimage.png class=icon></a></span>";
+						imgLocation =  "<a href='readUp?adoptNo= "+resp[i].adoptNo+"'><img src=${pageContext.request.contextPath}/resources/img/nonimage.png class=icon></a>";
 					}else {
-						imgLocation =  "<img src='adoptImg?adoptImgNo="+ resp[i].adoptImgNo +"' class='card-img-top' alt=' "+resp[i].adoptImgUpload+"'>";
+						imgLocation =  "<a href='readUp?adoptNo= "+resp[i].adoptNo+"'><img src='adoptImg?adoptImgNo="+ resp[i].adoptImgNo +"'class='card-img-top' alt=' "+resp[i].adoptImgUpload+"' style='width:100%;height:15rem;'></a>";
 					}
 					
 					//탈퇴한 회원일 경우 null대신 탈퇴한 회원 표시해주기
@@ -63,21 +63,23 @@ $(function(){
 					if(adoptWriter == null){
 						adoptWriter = "탈퇴한 회원입니다";
 					}
-					var divCol = "<div class='card text-gray bg-light mb-5 ms-2 ' style='width: 18rem;'>"
+					var divCol = "<div class='card border-primary text-dark bg-primary bg-opacity-10 mb-5 ms-2 ' style='width: 18rem;'>"
 								  + imgLocation
 								  + "<div class='card-body'>"
-								  + "<h5 class='card-title'>"+ resp[i].adoptNo + resp[i].adoptTitle +"</h5>"
+								  + "<h5 class='card-title'><strong>"+ resp[i].adoptTitle +"</strong></h5>"
 								  + "<div class='card-text'>"
-								  + "공고 기간 : "
+								  + "<small>공고 기간</small> "
+								  + "</div>"
+								  + "<div class='card-text'><small>"
 								  + moment(resp[i].adoptStart).format("YYYY-MM-DD") 
 								  + " ~ " 
 								  + moment(resp[i].adoptEnd).format("YYYY-MM-DD") 
-								  +"</div>"
-								  + "<div class='card-text'>"
+								  +"</small></div>"
+								  + "<div class='card-text'><small>"
 								  + "입양 동물 : " + resp[i].adoptKind
-								  +"</div>"
-								  + "<div class='card-text d-grid gap-1 d-md-flex justify-content-md-end'>"
-								  + "<a href='readUp?adoptNo= "+resp[i].adoptNo+"' class='btn btn-outline-primary'>" + "보기"
+								  +"</small></div>"
+								  + "<div class='card-text d-grid gap-1 justify-content-md-end'>"
+								  + "<a href='readUp?adoptNo= "+resp[i].adoptNo+"' class='btn btn-primary px-2 mt-2 ms-2'>" + "Read"
 								  + "</a></div>"
 								  + "</div></div>";
 						
