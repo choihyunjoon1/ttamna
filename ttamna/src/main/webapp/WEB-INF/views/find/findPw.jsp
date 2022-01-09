@@ -26,6 +26,9 @@
 	<c:if test="${param.error != null }">
 		<div class="errorMsg">인증번호가 일치하지 않습니다</div>
 	</c:if>
+	<c:if test="${param.notfound != null }">
+		<div class="errorMsg">입력한 이메일 주소를 가진 회원은 존재하지 않습니다</div>
+	</c:if>
 		<div class="row mt-3">
 			<div class="d-grid gap-2 d-md-flex justify-content-md-end mb-5">
 				<button type="submit" class="btn btn-primary">인증번호 받기
