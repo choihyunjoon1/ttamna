@@ -108,9 +108,11 @@ $(function(){
 	<c:if test="${param.deleteSuccess != null}">
 		<div class=" mb-3"><h6>입양공고 삭제 완료</h6></div>
 	</c:if>
+	<c:if test="${session.uid} != null">
 	<div class="d-grid gap-1 d-md-flex justify-content-md-end">
 		<a href="${root}/adopt/write" class="btn btn-outline-primary">입양공고 등록</a>
 	</div>
+	</c:if>
 	</div>
 
 	
