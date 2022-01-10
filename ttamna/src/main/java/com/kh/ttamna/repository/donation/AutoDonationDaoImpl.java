@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.kh.ttamna.entity.donation.AutoPayMentDto;
+import com.kh.ttamna.vo.chart.RegularChartVO;
 
 @Repository
 public class AutoDonationDaoImpl implements AutoDonationDao{
@@ -59,6 +60,30 @@ public class AutoDonationDaoImpl implements AutoDonationDao{
 	@Override//sid로 정기결제 1개 정보를 가져오는 메소드
 	public AutoPayMentDto get(String sid) {
 		return sqlSession.selectOne("apm.get", sid);
+	}
+
+	//정기결제 이번달 일별 기부금액
+	@Override
+	public List<RegularChartVO> thisMonthDaily() {
+		return sqlSession.selectList("apm.thisMonthDaily");
+	}
+
+	//정기결제 이번달 누적 기부금액
+	@Override
+	public List<RegularChartVO> thisMonth() {
+		return sqlSession.selectList("apm.thisMonth");
+	}
+
+	//정기결제 12개월간 월별 기부금액
+	@Override
+	public List<RegularChartVO> moy() {
+		return sqlSession.selectList("apm.moy");
+	}
+
+	//정기결제 기간 검색
+	@Override
+	public List<RegularChartVO> searchDate(Map<String, Object> param) {
+		return sqlSession.selectList("apm.searchDate", param);
 	}
 	
 	

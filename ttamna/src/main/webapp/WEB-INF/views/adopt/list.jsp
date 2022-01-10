@@ -13,6 +13,7 @@
 <script>
 
 $(function(){
+	
 	var page = 1;	
 	var size = 9;
 	
@@ -57,6 +58,11 @@ $(function(){
 						imgLocation =  "<a href='readUp?adoptNo= "+resp[i].adoptNo+"'><img src='adoptImg?adoptImgNo="+ resp[i].adoptImgNo +"'class='card-img-top' alt=' "+resp[i].adoptImgUpload+"' style='width:100%;height:15rem;'></a>";
 					}
 					
+					//입양공고 종료일이 되면 제목옆에 공고기간 종료 표시하기
+					 if (new Date() > new Date(resp[i].adoptEnd)) {        
+				     	resp[i].adoptTitle = resp[i].adoptTitle + "[입양공고 종료]";
+				     }
+					
 					//탈퇴한 회원일 경우 null대신 탈퇴한 회원 표시해주기                                   
 					var adoptWriter = resp[i].adoptWriter;
 					if(adoptWriter == null){
@@ -65,7 +71,7 @@ $(function(){
 					var divCol = "<div class='card border-primary text-dark bg-primary bg-opacity-10 mb-5 ms-2 ' style='width: 18rem;'>"
 								  + imgLocation
 								  + "<div class='card-body'>"
-								  + "<h5 class='card-title'><strong>"+ resp[i].adoptTitle +"</strong></h5>"
+								  + "<h6 class='card-title'><strong class='title'>"+ resp[i].adoptTitle +"</strong></h6>"
 								  + "<div class='card-text'>"
 								  + "<small>공고 기간</small> "
 								  + "</div>"
@@ -102,9 +108,11 @@ $(function(){
 	<c:if test="${param.deleteSuccess != null}">
 		<div class=" mb-3"><h6>입양공고 삭제 완료</h6></div>
 	</c:if>
+	<c:if test="${session.uid} != null">
 	<div class="d-grid gap-1 d-md-flex justify-content-md-end">
 		<a href="${root}/adopt/write" class="btn btn-outline-primary">입양공고 등록</a>
 	</div>
+	</c:if>
 	</div>
 
 	
