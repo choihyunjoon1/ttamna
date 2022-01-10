@@ -202,6 +202,15 @@ public class AdoptController {
 		return "redirect: detail?adoptNo="+adoptNo;
 	}
 	
+	//입양완료 처리. 기존 Dto의 제목만 변경
+	@PostMapping("/edit_title")
+	public String editTitle(@RequestParam int adoptNo, @RequestParam String adoptTitle, Model m) {
+		Map<String, Object> param = new HashMap<>();
+		param.put("adoptNo", adoptNo);
+		param.put("adoptTitle", adoptTitle);
+		adoptDao.editTitle(param);
+		return "redirect: detail?adoptNo="+adoptNo;
+	}
 	
 
 }
