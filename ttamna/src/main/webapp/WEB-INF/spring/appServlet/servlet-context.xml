@@ -96,6 +96,13 @@
 	 		<bean class="com.kh.ttamna.interceptor.AdminInterceptor"></bean>
 	 	</mvc:interceptor>
 	 	
+	 	<!-- 기부게시판 등록, 수정, 삭제를 보호소or관리자 등급만 접근 가능하게 인터셉터 설정 -->
+	 	<mvc:interceptor>
+	 		<mvc:mapping path="/donation/insert"/>
+	 		<mvc:mapping path="/donation/edit"/>
+	 		<mvc:mapping path="/donation/delete"/>
+	 		<bean class="com.kh.ttamna.interceptor.DonationInterceptor"></bean>
+	 	</mvc:interceptor>
 	 </mvc:interceptors>
 	 
 	 
