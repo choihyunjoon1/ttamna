@@ -13,5 +13,6 @@ public class TotalChartVO {
 	private List<DonationChartVO> donationDataset;
 	private List<ShopChartVO> shopDataset;
 	private List<SearchChartVO> searchDataset;
+	private List<RegularChartVO> regularDataset;
 	
 }

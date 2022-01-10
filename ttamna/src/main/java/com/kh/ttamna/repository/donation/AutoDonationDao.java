@@ -1,8 +1,10 @@
 package com.kh.ttamna.repository.donation;
 
 import java.util.List;
+import java.util.Map;
 
 import com.kh.ttamna.entity.donation.AutoPayMentDto;
+import com.kh.ttamna.vo.chart.RegularChartVO;
 
 public interface AutoDonationDao {
 
@@ -26,4 +28,16 @@ public interface AutoDonationDao {
 	
 	//정기결제 정보 1개를 가져오는 메소드
 	AutoPayMentDto get(String sid);
+
+	//정기결제 이번달 일별 기부금액
+	List<RegularChartVO> thisMonthDaily();
+
+	//정기결제 이번달 누적 기부금액
+	List<RegularChartVO> thisMonth();
+
+	//정기결제 12개월간 월별 기부금액
+	List<RegularChartVO> moy();
+	
+	//정기결제 기간 검색
+	List<RegularChartVO> searchDate(Map<String, Object> param);
 }
