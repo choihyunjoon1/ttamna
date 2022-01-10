@@ -321,10 +321,10 @@ commit;
 
 -- 정기결제 테이블
 
-create sequence autopayment_seq;
+create sequence 	_seq;
 create table autopayment(
 auto_no number primary key,
-partner_user_id REFERENCES member(member_id),
+partner_user_id REFERENCES member(member_id) on delete set null,
 auto_sid varchar2(20) not null,
 auto_quantity number default 1 not null,
 auto_total_amount number not null,

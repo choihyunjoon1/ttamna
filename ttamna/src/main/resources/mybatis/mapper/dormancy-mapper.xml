@@ -16,7 +16,8 @@
 <mapper namespace="dormancy">
 	<!-- 휴면테이블 계정 데이터 입력 -->
 	<insert id="change" parameterType="DormancyDto">
-		insert into dormancy values(#{dorMemberId},#{dorMemberNick},#{dorMemberPhone},#{dorMemberEmail},#{dorMemberName},#{dorMemberGrade},#{dorMemberJoin},#{dorPostcode},#{dorAddress},#{dorDetailAddress})
+		insert into dormancy(dor_member_id,dor_member_nick,dor_member_phone,dor_member_email,dor_member_name,dor_member_grade,dor_member_join,dor_postcode,dor_address,dor_detail_address) 
+		values(#{dorMemberId},#{dorMemberNick},#{dorMemberPhone},#{dorMemberEmail},#{dorMemberName},#{dorMemberGrade},#{dorMemberJoin},#{dorPostcode},#{dorAddress},#{dorDetailAddress})
 	</insert>
 	<!-- 휴면테이블 계정 단일조회 -->
 	<select id="searchDor" parameterType="String" resultType="DormancyDto">
