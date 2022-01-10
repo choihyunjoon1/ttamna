@@ -50,7 +50,7 @@
 		  <a href="${root}/admin/statistics/search" class="list-group-item list-group-item-action p-3" aria-current="true">
 		    <div class="d-flex w-100 justify-content-between">
 		      <h5 class="mb-1">Search</h5>
-		      <small>일별 누적 기부금액과 후원상품 판매 금액 기간 검색</small>
+		      <small>일별 기부금액과 후원상품 판매 금액 기간 검색</small>
 		    </div>
 		  </a>
 	  </div>
