@@ -62,7 +62,9 @@
 			<if test="shopTitle != null">
 				shop_title = #{shopTitle},
 			</if>
+			shop_count = #{shopCount}
 		</set>
+		
 		where shop_no = #{shopNo}
 	</update>
 	
@@ -92,5 +94,9 @@
 		update shop set shop_read = shop_read + 1 where shop_no = #{shopNo}
 	</update>
 	
+	<!-- 구매시 재고 감소 -->
+	<update id="sell" parameterType="int">
+		update shop set shop_count = shop_count - 1 where shop_no = #{shopNo}
+	</update>
 </mapper>
 

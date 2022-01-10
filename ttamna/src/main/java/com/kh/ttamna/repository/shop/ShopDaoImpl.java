@@ -75,5 +75,10 @@ public class ShopDaoImpl implements ShopDao{
 	public boolean readUp(ShopDto shopDto) {
 		return sqlSession.update("shop.read", shopDto) > 0;
 	}
+	// 재고량  감소
+	@Override
+	public boolean sell(ShopDto shopDto) {
+		return sqlSession.update("shop.sell", shopDto) > 0;
+	}
 
 }

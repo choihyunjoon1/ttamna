@@ -83,6 +83,20 @@ function calculateTotalPrice() {
 <!-- 수량 검사 스크립트 -->
 <script type='text/javascript' src="${root}/resources/js/mybasket.js"></script>
 
+<script>
+$(function(){
+	$(".btn-outline-danger").click(function(){
+		var choice = window.confirm("장바구니를 비우시겠습니까?");
+		if(choice){
+			location.href="${root}/member/mypage/my_basket/deleteAll";
+			location.reload();
+		}else{
+			return;
+		}
+	});
+});
+	
+</script>
 
 
 <style>
@@ -99,7 +113,19 @@ function calculateTotalPrice() {
 	input#checkAll{
 		display: none;
 	}
-	
+	a:link{
+		text-decoration: none;
+	}
+	a:visited {
+	text-decoration: none;
+	}
+	a:hover {
+	text-decoration: none;
+	}
+	.btn-danger{
+		width: 58px;
+		height: 38px;
+	}
 </style>
 
 <script>
@@ -154,12 +180,12 @@ function calculateTotalPrice() {
 			<!-- 사이드바 자리 -->
 			<jsp:include page="/WEB-INF/views/member/mypage/sidebar.jsp"></jsp:include>
 			
-			<div class="col-9">
-			<c:choose>
-				<c:when test="${list eq null}">
-					<h4 align="center">장바구니에 담긴 상품이 없습니다</h4>
-				</c:when>
-				<c:otherwise>
+			<div class="col-10">
+				<c:choose>
+							<c:when test="${list eq null}">
+								<h4 align="center">장바구니에 담긴 상품이 없습니다</h4>
+							</c:when>
+						<c:otherwise>	
 						<table class="table">
 							<thead>
 								<tr>
@@ -172,33 +198,38 @@ function calculateTotalPrice() {
 									<th></th>
 								</tr>
 							</thead>
+							
+							
 							<tbody  id="cartBody">
 							<%-- 상품들의 금액을 합산해서 저장 --%>
 							<c:set var="totalAmount" value="0"/>
+							<c:if test="${list ne null}">
 							<c:forEach var="cartDto" items="${list}">
 								<tr class="basket">
 										<td><input type="checkbox" name="shopNo" value="${cartDto.shopNo}"></td>
-										<td><img src="${root}/shop/img?shopImgNo=${cartDto.shopImgNo}" width="100px;" height="70px;"></td>
+							  			<td><img src="${root}/shop/img?shopImgNo=${cartDto.shopImgNo}" width="100px;"></td>
 										<td><span><a href="${root}/shop/detail?shopNo=${cartDto.shopNo}">${cartDto.shopGoods}</a></span></td>
 										<td><span class="price">${cartDto.shopPrice}</span>원</td>
-										<td><input type="number" name="quantity"  value="${cartDto.cartCount}" onchange="calculateOrderPrice();" min="1" max="999">개</td>
+										<td style="width: 10%;"><input type="number" name="quantity"  value="${cartDto.cartCount}" onchange="calculateOrderPrice();" min="1" max="999">개</td>
 										<td>${cartDto.cartCount * cartDto.shopPrice}원</td>
 										<td><a href="${root}/member/mypage/my_basket/delete?cartNo=${cartDto.cartNo}"><button class="btn btn-danger">삭제</button></a>	</td>
 								</tr>
 								<c:set var="totalAmount" value="${totalAmount + (cartDto.cartCount * cartDto.shopPrice)}"></c:set>
-							</c:forEach>						
+							</c:forEach>	
+							</c:if>	
 							</tbody>
 						</table>
+							</c:otherwise>
+							</c:choose>
 						<div>
 							합계 : <span id="order-price"><c:out value="${totalAmount}"/></span>원
 						</div>
-				</c:otherwise>
 				
-			</c:choose>
+				
+			
 				<div>
 					<input type="checkbox" id="checkAll">
 					<label for="checkAll" class="btn btn-outline-info">모두선택</label>
-					<a href="${root}/member/mypage/my_basket/deleteAll" class="btn btn-outline-danger">장바구니 비우기</a>
 					<button class="btn btn-primary">구매하기</button>
 				</div>
 			</div>
