@@ -15,4 +15,8 @@ public interface EmailService {
 	
 	//휴면전환 메시지 전송 메소드
 	void processDormancy(String to,String lastTime) throws MessagingException, FileNotFoundException, IOException;
+	
+	//정기결제완료 확인 메세지 전송 메소드
+	void autopaymentConfirm(String to, String nickname, String donationTitle,
+			long price, int payTimes) throws MessagingException, FileNotFoundException, IOException;
 }

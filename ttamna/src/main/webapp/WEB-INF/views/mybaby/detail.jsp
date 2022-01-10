@@ -21,56 +21,78 @@
 </script>
 <script>
 	
-	//댓글script
 	$(function(){
 		
 		
-		$(".edit").hide();
-		$(".change-cancel").hide();
-		$(".content-change-real").hide();
-		$(".content-change").click(function(e){
-			e.preventDefault();
-			$(this).prev().show();
-			$(this).next().next().show();
-			$(this).prev().prev().hide();
-			$(this).next().show();
-			$(this).hide();
-		});
-		$(".change-cancel").click(function(e){
-			e.preventDefault();
-			$(".content-change").show();
-			$(".edit").hide();
-			$(".replyDto").show();
-			$(".change-cancel").hide();
-			$(".content-change-real").hide();
+		//댓글 목록 더보기 ajax
+		var uid = "${sessionScope.uid}";
+		var page = 1;	
+		var size = 12;
+		var mybabyNo = parseInt($("#mybabyNo").val());;
+		//더보기 버튼 클릭시 이벤트 발생
+		$(".more-btn").click(function(){
+			loadList(page, size, mybabyNo);
+			page++;
 		});
 		
-		$(".content-change-real").click(function(e){
-			e.preventDefault();
-			var number = $(this).attr("data-data")
-			
-			var replyNo = $("#replyNo"+number).val();
-			var replyContent = $("#replyContent"+number).val();
-			var mybabyNo = $("#mybabyNo"+number).val();
-			
+		//강제 1회 클릭
+		$(".more-btn").click();
+		
+		function loadList(pageValue, sizeValue){
 			$.ajax({
-				url : "${pageContext.request.contextPath}/mybaby/reply/edit", 
+				url : "${pageContext.request.contextPath}/mybaby_reply/more",	
 				type : "post",
 				data : {
-					replyNo : replyNo ,
-					replyContent : replyContent,
+					page : pageValue,
+					size : sizeValue,
 					mybabyNo : mybabyNo
 				},
+				dataType : "json",
 				success:function(resp){
-					$("#content"+replyNo).text("");
-					$("#content"+replyNo).text(resp[0]);
-					$(".change-cancel").click();
+					console.log("댓글 더보기 성공", resp);
+					
+					//데이터가 sizeValue보다 적은 개수가 왔다면 더보기 버튼을 삭제
+					if(resp.length < size){
+						$(".more-btn").remove();
+					}
+				
+					for(var i=0 ; i < resp.length ; i++){
+					
+					//삭제 버튼을 작성자만 볼 수 있도록 처리
+					var deleteBtn;
+					if(uid == resp[i].memberId){
+						deleteBtn = "<div class='right'>"+"<a href='${pageContext.request.contextPath}/mybaby_reply/delete?mybabyReplyNo="+resp[i].mybabyReplyNo+"&mybabyNo="+resp[i].mybabyNo+"' class='delete-button reply btn btn-secondary'>삭제하기</a>"+"</div>";
+					}else{
+						deleteBtn = "";	
+					}
+					//시간형식 포멧 
+					var date = new Date(resp[i].mybabyReplyTime);
+					
+					var divCol = "<div class='card border-primary mb-3' style='width: 966px; padding: 0px;'>" 
+						+"<div class='card-header id-font'>"+ resp[i].memberId
+						+"<div class='right' style='font-size:13px;'>"+date.getFullYear()+"년"+date.getMonth()+1+"월"+date.getDate()+"일"+date.getHours()+"시"+date.getMinutes()+"분" +"</div>"
+						+"</div>"
+						+"<div class='card-body'>"
+						+"<p class='card-text'>"+ resp[i].mybabyReplyContent+"</p>"
+						+ "</div>"
+						+deleteBtn
+						+ "</div>";
+							
+							
+						$(".result").append(divCol);
+						
+					}
+					
+					
+					
+					
+					
 				},
 				error:function(e){
-					console.log("실패했어용");
+					console.log("댓글 더보기 실패", e);
 				}
 			});
-		});
+		}
 	});
 	
 
@@ -81,8 +103,19 @@
 		margin-top:10px;
 		margin-bottom:5px;
 		}
+		
+		.id-font{
+		font-size: medium;
+		font-weight: bold;
+		}
+		
+		.delete-button{
+		margin:8px;
+		width: 92px;
+		}
+		
+		
 </style>
-<!-- 댓글 끝 -->
 
 
 <div class="container-700 container-center">
@@ -133,49 +166,34 @@
 
 </div>
 	
-	
 	<!-- 댓글 자리 -->
-	<div class="col-12">
-        <form action="reply/edit" method="post">
-            <c:forEach var="replyDto" items="${replyDto}">
-                <div class="replyDto"><h4>
-                ${replyDto.mybabyReplyNo}
-                    | ${replyDto.memberId} | <span id="content${replyDto.mybabyReplyNo}">${replyDto.mybabyReplyContent}</span>
-                   | ${replyDto.mybabyReplyTime}
-                </h4>
-                </div>
-                    <c:if test="${sessionScope.uid == replyDto.memberId}">
-					<div class="edit" style="margin-top:15px;">
-						<input type="hidden" value="${replyDto.mybabyNo}" id="mybabyNo${replyDto.mybabyReplyNo}">
-						<input type="hidden" value="${replyDto.mybabyReplyNo}" id="replyNo${replyDto.mybabyReplyNo}">
-						<textarea class="form-control"  row="3" name="mybabyReplyContent"id="replyContent${replyDto.mybabyReplyNo}">${replyDto.mybabyReplyContent}</textarea> 
-            
-					</div>
-                            <a href="#" class="reply content-change btn btn-primary">수정</a>
-                            <a href="#" class="reply content-change-real btn btn-primary" data-data="${replyDto.mybabyReplyNo}">수정하기</a>
-                            <a href="#" class="reply change-cancel btn btn-primary">취소</a> 
-                            <a href="reply/delete?mybabyReplyNo=${replyDto.mybabyReplyNo}&mybabyNo=${replyDto.mybabyNo}" class="reply btn btn-secondary">삭제하기</a>
+	
 
-                    </c:if>
-               
-            </c:forEach>
-        </form>
-    </div>
-    <div class="col-12">
-        <form action="${root}/reply_mybaby/insert" method="post">
-           <input type="hidden" name="mybabyNo" value="${mybaby.mybabyNo}">
+	<!-- 댓글 입력창 -->    
+    <div class="col-12 mx-auto" class="width:70%">
+        <form action="${pageContext.request.contextPath}/mybaby_reply/insert" method="post">
+           <input type="hidden"   id="mybabyNo"  name="mybabyNo"value="${mybabyNo}">
            <input type="hidden" name="memberId" value="${sessionScope.uid}">
+ 			<div class="mx-auto">
+	            <label>댓글 쓰기</label>
+	            <textarea class="form-control mx-auto" name="mybabyReplyContent" style="width:70%"></textarea>
+	            <div class="right">
+		        	<input type="submit" class="reply btn btn-primary" value="등록">
+		        </div>
+            </div> 
             
-            댓글 쓰기
-            <textarea class="form-control" row="3" name="mybabyReplyContent"></textarea> 
-            
-            <div class="right">
-            <input type="submit" class="reply btn btn-primary" value="등록">
-        </div>
-</form>
-</div>
+        
+	</form>
 
-
+	
+	<!-- 댓글목록 표시 위치 -->	
+	<div class="row mt-3 mb-5 result mx-auto" style="width:70%"></div>
+	
+		<div class="row mt-3 mb-5">
+		<div class="col mt-3">
+			<button type="button" class="justify-content-md btn btn-primary more-btn">더보기</button>
+		</div>
+	</div>
 
 </div>
 

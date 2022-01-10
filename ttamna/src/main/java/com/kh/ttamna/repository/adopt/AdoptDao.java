@@ -38,5 +38,8 @@ public interface AdoptDao {
 	
 	//조회수
 	boolean readUp(int adoptNo);
+
+	//입양완료 처리. 제목 변경
+	int editTitle(Map<String, Object> param);
 	
 }

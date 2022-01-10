@@ -23,6 +23,27 @@ $(function(){
 			location.reload();
 		}
 	});
+	
+	//입양공고 종료일이 되면
+	//1. 제목옆에 공고기간 종료 표시하기
+	//2. 수정 삭제 버튼을 비활성화 혹은 안보이도록 처리하고 조회만 가능하도록 설정
+	 if (new Date() > new Date('${adoptDto.adoptEnd}')) {        
+     	$(".title").append("[공고기간 종료]");
+     	$(".edit-btn").remove();
+     	$(".delete-btn").remove();
+     }
+	
+	$(".finish-btn").click(function(e){
+		e.preventDefault();
+		var choice = window.confirm("입양완료 처리 하시겠습니까?");
+		if(choice){
+			$(".edit-title-form").submit();
+		}else{
+			location.reload();
+		}
+	});
+
+	
 });
 </script>
 
@@ -41,7 +62,7 @@ $(function(){
 	<div class="container-500 container-center">
 		<div class="card mb-5">
 		  <div class="card-header d-grid gap-2 justify-content-center mt-2">	
-		    <h3> ${adoptDto.adoptTitle}</h3>
+		    <h3 class="title"> ${adoptDto.adoptTitle}</h3>
 		  </div>
 		  <div class="card-body d-grid gap-2 justify-content-md-end">
 		    <h6 class="card-subtitle text-muted">
@@ -64,13 +85,19 @@ $(function(){
 		    <p class="card-text">${adoptDto.adoptContent}</p>
 		  </div>
 		  <div class="card-footer text-muted">
-			<!-- 작성자 또는 관리자에게만 수정 삭제 버튼 보여주기 -->
-			<c:set var="valid" value="${grade == '관리자' or uid == adoptDto.adoptWriter}"></c:set>
 			<div class="d-grid gap-2 d-md-flex justify-content-md-end">
 			<a type="button" href="${root}/adopt/" class="btn btn-outline-primary">목록</a>
+			
+			<!-- 작성자 또는 관리자에게만 수정 삭제 버튼 보여주기 -->
+			<c:set var="valid" value="${grade == '관리자' or uid == adoptDto.adoptWriter}"></c:set>
 			<c:if test="${valid}">
-				<a href="${root}/adopt/edit?adoptNo=${adoptDto.adoptNo}" type="button" class="btn btn-outline-warning">수정</a>
+				<a href="${root}/adopt/edit?adoptNo=${adoptDto.adoptNo}" type="button" class="edit-btn btn btn-outline-warning">수정</a>
 				<button type="button" class="btn btn-outline-secondary delete-btn">삭제</button>
+				<form method="post" action="${root}/adopt/edit_title" class="edit-title-form">
+					<input type="hidden" name="adoptNo" value="${adoptDto.adoptNo}" class="adopt-no">
+					<input type="hidden" name="adoptTitle" value="${adoptDto.adoptTitle}[입양완료]">
+					<input type="submit" class="btn btn-outline-secondary finish-btn" value="입양완료">
+				</form>
 			</c:if>	
 			</div>
 		  </div>

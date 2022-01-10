@@ -137,4 +137,35 @@ public class EmailServiceImpl implements EmailService{
 		
 	}
 
+	@Override
+	public void autopaymentConfirm(String to, String nickname, String donationTitle,
+			long price, int payTimes)
+			throws MessagingException, FileNotFoundException, IOException {
+		MimeMessage message = sender.createMimeMessage();
+				
+		MimeMessageHelper helper = new MimeMessageHelper(message, true, "UTF-8");
+		helper.setTo(to); 
+		helper.setSubject("[Tierheim] 동물의 집에서 정기결제 진행 확인 메일을 발송했습니다.");
+		
+		ClassPathResource resource = new ClassPathResource("email/autopaymentTimes.html");
+		
+		StringBuffer buffer = new StringBuffer();
+		try(Scanner sc = new Scanner(resource.getFile());){
+			while(sc.hasNextLine()) {
+				buffer.append(sc.nextLine());
+				buffer.append('\n');
+			}
+		}
+		
+		String html = buffer.toString();
+		html = html.replace("{{nickName}}", nickname);
+		html = html.replace("{{donationTitle}}", donationTitle);
+		html = html.replace("{{price}}", String.valueOf(price));
+		html = html.replace("{{payTimes}}", String.valueOf(payTimes));
+		helper.setText(html, true);
+		
+		//전송(message)
+		sender.send(message);
+		System.out.println("정기기부 확인용 메일이 발송되었습니다.");
+	}
 }

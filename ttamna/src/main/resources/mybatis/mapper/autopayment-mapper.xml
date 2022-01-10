@@ -65,4 +65,87 @@
 			delete autopayment where auto_sid = #{sid}
 		</delete>
 		
+		<!-- 이번달 일별 정기 기부금액 -->
+		<select id="thisMonthDaily" resultType="RegularChartVO">
+		  select
+			 d.dt "thisMonthDate",
+			 nvl(p.daily, 0) "thisMonthDailyAmount"
+			from
+			    (select 
+			        to_char(trunc(sysdate, 'MM') + level - 1, 'YY/MM/DD') dt ,
+			        to_char(to_date(trunc(sysdate, 'MM'), 'YY/MM/DD') + rownum - 1, 'month')
+			    from dual <![CDATA[connect by level <= (last_day(sysdate) - trunc(sysdate, 'MM') +1 )]]>)d
+			left outer join 
+			    (select 
+			        to_char(first_payment_date, 'YY/MM/DD') dt, 
+			        to_char(first_payment_date, 'DAY') dow,
+	                sum(auto_total_amount * pay_times) daily
+			      from autopayment 
+			    group by to_char(first_payment_date, 'YY/MM/DD'), to_char(first_payment_date, 'DAY'))p
+			on p.dt = d.dt 
+	    order by d.dt asc
+		</select>
+		
+		<!-- 이번달 누적 정기 기부금액 -->
+		<select id="thisMonth" resultType="RegularChartVO">
+		select 
+      to_char((TO_DATE(sysdate,'YYYY-MM-DD')), 'month') "thisMonth", 
+      sum("sum") "thisMonthAmount" 
+      from (
+		select
+		 d.dt "date",
+		 nvl(p.daily, 0) "sum"
+		from
+		    (select 
+		        to_char(trunc(sysdate, 'MM') + level - 1, 'YY/MM/DD') dt ,
+		        to_char(to_date(trunc(sysdate, 'MM'), 'YY/MM/DD') + rownum - 1, 'month') mth
+		    from dual <![CDATA[connect by level <= (last_day(sysdate) - trunc(sysdate, 'MM') +1 )]]>)d
+		left outer join 
+		    (select 
+		        to_char(first_payment_date, 'YY/MM/DD') dt, 
+		        to_char(first_payment_date, 'DAY') dow,
+                sum(auto_total_amount * pay_times) daily
+		      from autopayment 
+		    group by to_char(first_payment_date, 'YY/MM/DD'), to_char(first_payment_date, 'DAY'))p
+		on p.dt = d.dt )
+		</select>
+
+		<!-- 12개월간 월별 누적 정기 기부금액 -->
+		<select id="moy" resultType="RegularChartVO">
+		 select
+			d.mth "moy",
+			nvl(p.monthly, 0) "moyAmount"
+		   from
+			    (select 
+			        to_char(add_months(to_date(sysdate, 'YY/MM/DD'), - (level-1)-1), 'month') mth 
+			      from dual
+			       <![CDATA[ connect by add_months(to_date(sysdate, 'YY/MM/DD'), - (level-1)-1) >= add_months(to_date(sysdate, 'YY/MM/DD'), -11)]]>)d
+			left outer join
+			    (select 
+			        to_char(first_payment_date, 'month') mth,
+			        sum(auto_total_amount) monthly
+			    from autopayment
+	            group by to_char(first_payment_date, 'month'))p
+			on p.mth = d.mth 
+			order by lpad(d.mth, 2, '0')
+		</select>
+		
+		<!-- 정기결제 기간 검색 -->
+		<select id="searchDate" resultType="RegularChartVO">
+		 select
+	        d.dt "date",
+	        nvl(p.daily, 0) "dailyAmount"
+	   	 from
+	   	 	(select 
+	   	 		to_char(to_date(#{start}, 'YYYY/MM/DD') + level - 1, 'YYYY/MM/DD') dt
+	          from dual 
+	           <![CDATA[connect by level <= (to_date(#{end}, 'YYYY/MM/DD') - to_date(#{start},'YYYY/MM/DD') + 1)]]>)d
+	     left outer join    
+	        (select 
+			        to_char(first_payment_date, 'YYYY/MM/DD') dt, 
+	                sum(auto_total_amount) daily
+			    from autopayment group by first_payment_date)p
+	     on d.dt = p.dt order by d.dt asc
+		</select>
+		
 </mapper>

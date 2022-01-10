@@ -119,5 +119,10 @@
 		select * from adopt inner join adopt_img on adopt.adopt_no = adopt_img.adopt_no
 	</select>
 	
+	<!-- 입양완료 처리. 제목 변경 -->
+	<select id="editTitle" parameterType="map">
+		update adopt set adopt_title = #{adoptTitle} where adopt_no = #{adoptNo}
+	</select>
+	
 </mapper>
 

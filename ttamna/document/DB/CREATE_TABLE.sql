@@ -1,6 +1,5 @@
 -- ttamna
 
--- member(회원) 테이블 생성 구문
 create table member(
     member_id varchar2(20) CONSTRAINT member_id_pk PRIMARY KEY
                                       CONSTRAINT member_id_check CHECK(
@@ -12,6 +11,7 @@ create table member(
     member_nick varchar2(45) CONSTRAINT member_nick_not_null NOT NULL
                                          CONSTRAINT member_nick_unique UNIQUE
                                           CONSTRAINT member_nick_check CHECK(REGEXP_LIKE(member_nick, '^[가-힣]{2,15}$')), 
+-- member(회원) 테이블 생성 구문
     member_name varchar2(21) CONSTRAINT member_name_not_null NOT NULL
                                              CONSTRAINT member_name_check CHECK(REGEXP_LIKE(member_name, '^[가-힣]{2,7}$')),
     member_phone char(13) CONSTRAINT member_phone_not_null NOT NULL
@@ -193,7 +193,7 @@ member_id references member(member_id) on delete set null, -- 아이디
 shop_title VARCHAR2(150 BYTE) NOT NULL, -- 글 제목
 shop_goods varchar2(150) not null, -- 상품이름
 shop_price number not null, -- 상품가격
-shop_count number not null, -- 상품 재고 수량
+shop_count number not null check(shop_count >= 0), -- 상품 재고 수량
 shop_content varchar2(3000) not null, -- 상품 설명
 shop_time date default sysdate not null, -- 작성일
 shop_read number default 0 not null -- 조회수
@@ -321,10 +321,10 @@ commit;
 
 -- 정기결제 테이블
 
-create sequence autopayment_seq;
+create sequence 	_seq;
 create table autopayment(
 auto_no number primary key,
-partner_user_id REFERENCES member(member_id),
+partner_user_id REFERENCES member(member_id) on delete set null,
 auto_sid varchar2(20) not null,
 auto_quantity number default 1 not null,
 auto_total_amount number not null,
@@ -361,3 +361,5 @@ create table visit(
 commit;
 
 -------------------------------------------------------------------------------------------------------------
+
+ALTER TABLE shop ADD CONSTRAINT shop_count CHECK(shop_count >= 0);
