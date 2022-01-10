@@ -33,6 +33,16 @@ $(function(){
      	$(".delete-btn").remove();
      }
 	
+	$(".finish-btn").click(function(e){
+		e.preventDefault();
+		var choice = window.confirm("입양완료 처리 하시겠습니까?");
+		if(choice){
+			$(".edit-title-form").submit();
+		}else{
+			location.reload();
+		}
+	});
+
 	
 });
 </script>

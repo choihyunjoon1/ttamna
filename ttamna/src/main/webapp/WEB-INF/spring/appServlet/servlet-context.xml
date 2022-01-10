@@ -75,6 +75,9 @@
 	 		<mvc:mapping path="/mybaby/detail"/>
 	 		<mvc:mapping path="/mybaby/edit"/>
 	 		<mvc:mapping path="/mybaby/delete"/>
+	 		<mvc:mapping path="/adopt/write"/>
+	 		<mvc:mapping path="/adopt/edit"/>
+	 		<mvc:mapping path="/adopt/delete"/>
 	  		<bean class="com.kh.ttamna.interceptor.LoginInterceptor"></bean>
 	 	</mvc:interceptor>
 	 	
