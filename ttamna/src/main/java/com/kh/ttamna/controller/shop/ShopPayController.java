@@ -7,6 +7,7 @@ import java.util.concurrent.CopyOnWriteArrayList;
 
 import javax.servlet.http.HttpSession;
 
+import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -45,6 +46,9 @@ public class ShopPayController {
 	@Autowired
 	private PaymentDetailDao payDetailDao;
 	
+	@Autowired
+	private SqlSession sqlSession;
+	
 	
 	@PostMapping("/buy")//단일결제 요청
 	public String confirm(@ModelAttribute KakaoPayReadyRequestVo requestVo
@@ -67,6 +71,8 @@ public class ShopPayController {
 		String memberId = (String)session.getAttribute("uid"); // partner_user_id에 첨부할 구매자의 정보가 필요함
 		System.out.println("리스트VO : " + listVO.getList());
 		System.out.println("리스트VO : " + listVO.toString());
+		
+		
 		
 		//결제 성공 시 수량을 등록하기 위해 세션에 데이터 저장
 		session.setAttribute("quantity", listVO.getList());
@@ -183,20 +189,31 @@ public class ShopPayController {
 				
 				shopNoList.add(payDetailDto.getShopNo());
 			}
+			// 재고감소
+			for(ShopOrderVO shopOrderDto : shopOrderVo) {
+				ShopDto shopDto = shopDao.get(shopOrderDto.getShopNo());
+				shopDao.sell(shopDto);
+			}
 			
 			// 장바구니에 담겨있던 상품과 결제된 상품이 일치한다면 해당 상품을 지워라.
-			int i=0;
-			List<CartDto> afterCart = new CopyOnWriteArrayList<>();
-				for(CartDto cart : beforeCart) {
-					boolean isTrue = cart.getShopNo() == shopNoList.get(i) && cart.getMemberId().equals(partner_user_id);
-			
-					if(!isTrue) {
-						afterCart.add(cart);
+			if(beforeCart == null) {
+				
+			}else {
+				int i=0;
+				List<CartDto> afterCart = new CopyOnWriteArrayList<>();
+					for(CartDto cart : beforeCart) {
+						boolean isTrue = cart.getShopNo() == shopNoList.get(i) && cart.getMemberId().equals(partner_user_id);
+				
+						if(!isTrue) {
+							afterCart.add(cart);
+						}
+						i++;
 					}
-					i++;
-				}
 
-			session.setAttribute("cart", afterCart);
+				session.setAttribute("cart", afterCart);
+			}
+
+			
 			
 			return "redirect:/shop/order/success_result";
 		}

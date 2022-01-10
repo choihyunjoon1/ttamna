@@ -20,12 +20,13 @@ pageEncoding="UTF-8"%>
 
 <script>
 $(function(){
+			
+	// 비회원일경우 기능 접근 차단
 	var login = $("input[name=memberId]").val();
 	if(login == ''){
-	$(".oneline").slideUp();		
+	$(".oneline").slideUp(); // 구매칸
+	$(".deny").slideUp();	// 댓글칸
 	}
-	
-	
 	
 	// 결제 관련
 	$("input[name=cartCount]").on("blur", function(){
@@ -34,7 +35,22 @@ $(function(){
         console.log($(this).attr("value"));
     });
 	
+	// 수량이 없다면?
+	var stock = $("input[name=shopCount]").val();
+	if(stock == 0){
+		$(".oneline").slideUp();
+	}
+	
+	
 	$("#buy").click(function(e){	
+		
+		var shopNo = $("#shopNo").val();
+		var memberId = $("input[name=memberId]").val();
+		var shopGoods = $("input[name=shopGoods]").val();
+		var shopPrice = $("input[name=shopPrice]").val();
+		var shopImgNo = $("input[name=shopImgNo]").val();
+		var cartCount = $("input[name=cartCount]").val()
+		
 		if($("input[name=cartCount]").val() == ''){
 			alert("수량을 입력해주세요");
 			return;
@@ -44,12 +60,6 @@ $(function(){
 				var form = $("<form>").attr("action", "order/multibuy").attr("method", "post").addClass("send-form");
 				$("body").append(form);
 	
-				var shopNo = $("#shopNo").val();
-				var memberId = $("input[name=memberId]").val();
-				var shopGoods = $("input[name=shopGoods]").val();
-				var shopPrice = $("input[name=shopPrice]").val();
-				var shopImgNo = $("input[name=shopImgNo]").val();
-				var cartCount = $("input[name=cartCount]").val()
 				
 				
 				$("<input type='hidden' name='list[0].shopNo'>").val(shopNo).appendTo(".send-form");
@@ -58,6 +68,27 @@ $(function(){
 				$("<input type='hidden' name='shopPrice'>").val(shopPrice).appendTo(".send-form");
 				$("<input type='hidden' name='shopImgNo'>").val(shopImgNo).appendTo(".send-form");
 				$("<input type='hidden' name='list[0].quantity'>").val(cartCount).appendTo(".send-form");
+				
+				
+				$.ajax({
+					url : "${root}/member/detail/addcart",
+					type : "post", 
+					data : {
+						shopNo : shopNo,
+						memberId : memberId,
+						shopGoods : shopGoods,
+						shopPrice : shopPrice,
+						shopImgNo : shopImgNo,
+						cartCount : cartCount
+					},
+					success:function(resp){
+						console.log("성공");
+					},
+					error:function(e){
+						console.log("실패");
+					}
+				});
+	
 				//전송
 				form.submit();
 				return true;
@@ -123,9 +154,81 @@ $(function(){
 				}
 			});
 			return false;
-		}
-		
+		}		
 	});
+	
+	//댓글 목록 더보기 ajax
+	var uid = "${sessionScope.uid}";
+	var page = 1;	
+	var size = 12;
+	var shopNo = parseInt($("#shopNo").val());
+	//더보기 버튼 클릭시 이벤트 발생
+	$(".more-btn").click(function(){
+		loadList(page, size);
+		page++;
+	});
+	
+	//강제 1회 클릭
+	$(".more-btn").click();
+	
+	function loadList(pageValue, sizeValue){
+		$.ajax({
+			url : "${pageContext.request.contextPath}/shop_reply/more",	
+			type : "post",
+			data : {
+				page : pageValue,
+				size : sizeValue,
+				shopNo : shopNo
+			},
+			dataType : "json",
+			success:function(resp){
+				console.log("댓글 더보기 성공", resp);
+				
+				//데이터가 sizeValue보다 적은 개수가 왔다면 더보기 버튼을 삭제
+				if(resp.length < size){
+					$(".more-btn").remove();
+				}
+			
+				for(var i=0 ; i < resp.length ; i++){
+				
+				//삭제 버튼을 작성자만 볼 수 있도록 처리
+				var deleteBtn;
+				if(uid == resp[i].memberId){
+					deleteBtn = "<div class='right'>"+"<a href='${pageContext.request.contextPath}/shop_reply/delete?shopReplyNo="+resp[i].shopReplyNo+"&shopNo="+resp[i].shopNo+"' class='delete-button reply btn btn-secondary'>삭제하기</a>"+"</div>";
+				}else{
+					deleteBtn = "";	
+				}
+				//시간형식 포멧 
+				var date = new Date(resp[i].shopReplyTime);
+				
+				
+				
+				var divCol = "<div class='card border-primary mb-3' style='width: 966px; padding: 0px;'>" 
+					+"<div class='card-header id-font'>"+ resp[i].memberId
+					+"<div class='right' style='font-size:13px;'>"+date.getFullYear()+"년"+date.getMonth()+1+"월"+date.getDate()+"일"+date.getHours()+"시"+date.getMinutes()+"분" +"</div>"
+					+"</div>"
+					+"<div class='card-body'>"
+					+"<p class='card-text'>"+ resp[i].shopReplyContent+"</p>"
+					+ "</div>"
+					+deleteBtn
+					+ "</div>";
+						
+						
+					$(".result").append(divCol);
+					
+				}
+				
+				
+				
+				
+				
+			},
+			error:function(e){
+				console.log("댓글 더보기 실패", e);
+			}
+		});
+	}
+	
 });
 </script>
 
@@ -182,6 +285,7 @@ $(function(){
 					<input type="hidden" name="shopGoods" value="${detail.shopGoods}">
 					<input type="hidden" name="shopPrice" value="${detail.shopPrice}">
 					<input type="hidden" name="shopImgNo" value="${shopImgDto.shopImgNo}">
+					<input type="hidden" name="shopCount" value="${detail.shopCount}">
 		  		</div>
 			  	<div class="oneline">
 				  	<button class="btn btn-primary" id="buy">구매하기</button>
@@ -217,7 +321,7 @@ $(function(){
 	<div class="row mt-3 mb-5 result"></div>
 
 	<!-- 댓글 입력창 -->    
-    <div class="col-12">
+    <div class="col-12 deny">
         <form action="${root}/shop_reply/insert" method="post">
            <input type="hidden" name="shopNo"value="${shopNo}">
            <input type="hidden" name="memberId" value="${sessionScope.uid}">

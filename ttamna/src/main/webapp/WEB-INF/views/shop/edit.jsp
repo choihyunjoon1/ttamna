@@ -5,7 +5,36 @@
 <!-- JQeury CDN -->
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 
+<style>
+	.editor{
+		box-sizing:border-box;
+		width:100%;
+		border:none;
+		min-height: 100px;
+	}
+	textarea[name=shopContent]{
+		width:1px;
+		height:1px;
+		resize:none;
+		
+		position:fixed;
+		top:0;
+		left:-5px;
+	}
+</style>
+
 <script>
+	$(function(){
+		function copyText(){
+			var origin = $(".editor").html();
+			$("textarea[name=shopContent]").val(origin);
+		}
+		
+		$(".editor").on("input", function(){
+			//copy
+			copyText();
+		});
+	});
 </script>
 
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
@@ -40,7 +69,8 @@
 		</div>
 		<div class="input-group mb-3">
 		  <span class="input-group-text">내용</span>
-		  <textarea name="shopContent" class="form-control" aria-label="With textarea" value="${update.shopContent}"></textarea>
+		  <div class="editor form-control" contenteditable="true">${update.shopContent}</div>
+		  <textarea name="shopContent"></textarea>
 		</div>
 		<div class="d-grid gap-2 d-md-flex justify-content-md-end mb-5">
 			<button type="submit" class="btn btn-primary">등록</button>
