@@ -200,7 +200,7 @@
 	
 	<!-- 기부금액 총 누적액 -->
 	<select id="totalAmount" resultType="long">
-		select sum(total_amount) from payment where pay_type='기부' and status='결제완료'
+		select nvl(sum(total_amount), 0) from payment where pay_type='기부' and status='결제완료'
 	</select>
 	
 	
