@@ -185,13 +185,6 @@ public class CheckAndChartAjaxController {
 		 return chartVO;
 	 }
 	 
-	 //현재까지 기부금액 총 누적액
-	 @GetMapping("/donation_total")
-	 public String totalAmount() {
-		long amount = paymentDao.totalAmount();
-		return String.valueOf(amount);
-	 }
-	 
 		///////////////////////////////정기 기부금액////////////////////////////////////////////////////// 
 	 
 	 @GetMapping("/regular_thisMonth_daily")
@@ -213,7 +206,7 @@ public class CheckAndChartAjaxController {
 		 return chartVO;
 	 }
 	 
-	 
+	 //최근 12개월 월별 누적 정기 기부금액
 	 @GetMapping("/regular_moy")
 	 public TotalChartVO regularMoy() {
 		 TotalChartVO chartVO = new TotalChartVO();
@@ -239,6 +232,16 @@ public class CheckAndChartAjaxController {
 		 return chartVO;
 	 }
 
+	 //현재까지 기부금액 총 누적액(일시기부 + 정기기부) header에 찍어줄거임
+	 @GetMapping("/donation_total")
+	 public String totalAmount() {
+		long amount = paymentDao.totalAmount();
+		long autoAmount = autoDonationDao.autoTotalAmount();
+		long donationTotalAmount = amount + autoAmount;
+		return String.valueOf(donationTotalAmount);
+	 }
+	 
+	 
 		///////////////////////////////상품판매 금액//////////////////////////////////////////////////////
 	 
 	 //상품판매 금액 최근 7일간 일별 통계
@@ -292,7 +295,7 @@ public class CheckAndChartAjaxController {
 	 }
 	 
 	 //상품판매금액 / 기부금액 구간검색 처리 및 차트 보내기
-	 @PostMapping("search")
+	 @PostMapping("/search")
 	 public TotalChartVO dateSearch(
 			 			@RequestParam String payType,
 			 			@RequestParam String start,

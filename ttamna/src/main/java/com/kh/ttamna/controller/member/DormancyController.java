@@ -50,11 +50,17 @@ public class DormancyController {
 		//= 2) 인증번호 입력이 완료되면 휴면 -> 멤버테이블로 이동(비번은 인증번호로 저장) , 휴면계정 테이블에선 삭제
 		//= 3) 아이디와 이메일로 조회해서 휴면계정에 있는 정보 꺼내오고
 		//= 4) 인증번호 입력을 다 하면 비밀번호 변경 페이지로 이동
-		//1)
-		service.sendCertification(certEmail);
-		
-		model.addAttribute("certEmail",certEmail);
-		return "dormancy/checkByEmail";
+		//1) 이메일로 인증번호를 보냄 / 입력한 이메일을 일단 dormancyDto에서 찾아서 존재할 때 보냄
+		DormancyDto findDorDto = dorDao.getByEmail(certEmail);
+		if(findDorDto != null) {
+			
+			service.sendCertification(certEmail);
+			
+			model.addAttribute("certEmail",certEmail);
+			return "dormancy/checkByEmail";
+		}else {
+			return "dormancy/login_dor?error";
+		}
 	}
 	@PostMapping("/checkByEmail")
 	public String checkByEmail(@ModelAttribute CertificationDto certDto,HttpSession session) {

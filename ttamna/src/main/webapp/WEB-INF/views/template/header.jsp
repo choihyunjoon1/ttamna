@@ -6,7 +6,6 @@
 <c:set var="login" value="${uid != null}"></c:set>
 <c:set var="admin" value="${grade == '관리자'}"></c:set>
 <c:set var="root" value="${pageContext.request.contextPath}"></c:set>
-
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -58,7 +57,7 @@
     </style>
     <script>
     window.addEventListener("load", function(){
-    	//현재 총 누적 기부금액
+    	//현재까지의 총 누적 기부금액(일시기부 금액 + 정기기부 금액)
 	   	 $.ajax({
 	   		 url : "${root}/ajax/donation_total",
 	   		 type : "get",
@@ -66,7 +65,7 @@
 	   		success:function(resp){
 	   			console.log("총 누적 기부금액 불러오기 성공");
 	   			
-	   			var amount = resp.toLocaleString('ko-KR');
+	   			var totalAmount = resp.toLocaleString('ko-KR');
 	   			var today = new Date();   
 
 	   			var year = today.getFullYear(); // 년도
@@ -74,7 +73,7 @@
 	   			var date = today.getDate();  // 날짜
 
 	   			$(".date").text( year +"년 "+ month +"월 "+ date +"일" );
-	   			$(".total").text( amount +"원");
+	   			$(".total").text( totalAmount +"원");
 	   		 },
 	   		 error:function(e){
 	   		 	console.log("총 누적 기부금액 불러오기 실패", e);
