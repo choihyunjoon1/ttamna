@@ -53,15 +53,15 @@ $(function(){
 					if(memberId == null){
 						memberId = "탈퇴한 회원";
 					}
-					var divCol = "<div class='card text-gray bg-light mb-5 ms-2 ' style='width: 18rem;'>"
+					var divCol = "<div class='card border-primary text-dark bg-primary bg-opacity-10 mb-5 ms-2 ' style='width: 18rem;'>"
 						  + imgLocation
 						  + "<div class='card-body'>"
-						  + "<h5 class='card-title'>" + resp[i].mybabyTitle +"</h5>"
+						  + "<h5 class='card-title'><strong class='title'>" + resp[i].mybabyTitle +"</strong></h5>"
 						  + "<div class='card-text'>"
 						  +  moment(resp[i].mybabyTime).format("YYYY-MM-DD")
 						  +"</div>"
 						  + "<div class='card-text'>"
-						  +  "작성자 : "+resp[i].mybabyWriter
+						  +  "작성자 : "+memberId
 						  +"</div>"
 						  + "<div class='card-text d-grid gap-1 d-md-flex justify-content-md-end'>"
 						  + "<a href='detail?mybabyNo= "+resp[i].mybabyNo+"' class='btn btn-outline-primary'>" + "보기"
