@@ -199,6 +199,9 @@ shop_time date default sysdate not null, -- 작성일
 shop_read number default 0 not null -- 조회수
 );
 
+
+--ALTER TABLE shop ADD CONSTRAINT shop_count CHECK(shop_count >= 0);
+
 commit;
 
 -------------------------------------------------------------------------------------------------------------
@@ -362,4 +365,3 @@ commit;
 
 -------------------------------------------------------------------------------------------------------------
 
-ALTER TABLE shop ADD CONSTRAINT shop_count CHECK(shop_count >= 0);
