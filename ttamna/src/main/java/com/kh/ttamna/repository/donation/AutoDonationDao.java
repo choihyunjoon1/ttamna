@@ -40,4 +40,7 @@ public interface AutoDonationDao {
 	
 	//정기결제 기간 검색
 	List<RegularChartVO> searchDate(Map<String, Object> param);
+	
+	//정기결제 총 누적 금액
+	long autoTotalAmount();
 }

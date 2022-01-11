@@ -85,6 +85,12 @@ public class AutoDonationDaoImpl implements AutoDonationDao{
 	public List<RegularChartVO> searchDate(Map<String, Object> param) {
 		return sqlSession.selectList("apm.searchDate", param);
 	}
+
+	//정기결제 총 누적금액
+	@Override
+	public long autoTotalAmount() {
+		return sqlSession.selectOne("apm.autoTotalAmount");
+	}
 	
 	
 	
