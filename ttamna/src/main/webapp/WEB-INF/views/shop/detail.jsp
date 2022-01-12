@@ -57,18 +57,18 @@ $(function(){
 		}
 		
 		if(window.confirm('해당 상품을 구매하시겠습니까?')){
-				var form = $("<form>").attr("action", "order/multibuy").attr("method", "post").addClass("send-form");
+				var form = $("<form>").attr("action", "order").attr("method", "post").addClass("send-form");
 				$("body").append(form);
 	
 				
 				
 				$("<input type='hidden' name='list[0].shopNo'>").val(shopNo).appendTo(".send-form");
-				$("<input type='hidden' name='memberId'>").val(memberId).appendTo(".send-form");
-				$("<input type='hidden' name='shopGoods'>").val(shopGoods).appendTo(".send-form");
-				$("<input type='hidden' name='shopPrice'>").val(shopPrice).appendTo(".send-form");
-				$("<input type='hidden' name='shopImgNo'>").val(shopImgNo).appendTo(".send-form");
+				$("<input type='hidden' name='list[0].memberId'>").val(memberId).appendTo(".send-form");
+				$("<input type='hidden' name='list[0].shopGoods'>").val(shopGoods).appendTo(".send-form");
+				$("<input type='hidden' name='list[0].shopPrice'>").val(shopPrice).appendTo(".send-form");
+				$("<input type='hidden' name='list[0].shopImgNo'>").val(shopImgNo).appendTo(".send-form");
 				$("<input type='hidden' name='list[0].quantity'>").val(cartCount).appendTo(".send-form");
-				
+			
 				
 				$.ajax({
 					url : "${root}/member/detail/addcart",

@@ -23,13 +23,17 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.kh.ttamna.entity.cart.CartDto;
+import com.kh.ttamna.entity.member.MemberDto;
 import com.kh.ttamna.entity.shop.ShopDto;
 import com.kh.ttamna.entity.shop.ShopImgDto;
 import com.kh.ttamna.repository.cart.CartDao;
+import com.kh.ttamna.repository.member.MemberDao;
 import com.kh.ttamna.repository.shop.ShopDao;
 import com.kh.ttamna.repository.shop.ShopImgDao;
 import com.kh.ttamna.service.shop.ShopService;
 import com.kh.ttamna.vo.shop.ShopImgVO;
+import com.kh.ttamna.vo.shop.ShopListVO;
+import com.kh.ttamna.vo.shop.ShopVO;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -40,6 +44,9 @@ public class ShopController {
 		
 	@Autowired
 	private ShopDao shopDao;
+	
+	@Autowired
+	private MemberDao memberDao;
 	
 	@Autowired
 	private ShopImgDao shopImgDao;
@@ -53,18 +60,6 @@ public class ShopController {
 	@Autowired
 	private CartDao cartDao;
 	
-	
-//	@RequestMapping("/")
-//	public String main(Model model) {
-//		model.addAttribute("list", shopDao.list());
-//		return "shop/list";
-//	}
-//	
-//	@RequestMapping("/list")
-//	public String shop(Model model) {
-//		model.addAttribute("list", shopDao.list());
-//		return "shop/list";
-//	}
 	
 	@RequestMapping("/")
 	public String main(Model model) {
@@ -90,13 +85,6 @@ public class ShopController {
 		
 		return "redirect:/shop/list";
 	}
-	
-//	@GetMapping("/detail")
-//	public String detail(@RequestParam int shopNo, Model model) {
-//		ShopDto shopDto = shopDao.get(shopNo);
-//		model.addAttribute("detail", shopDto);
-//		return"shop/detail";
-//	}
 	
 	@GetMapping("/detail")
 	public String detail(@RequestParam int shopNo, Model model) {
@@ -168,29 +156,33 @@ public class ShopController {
 				.body(resource);
 	}
 	
-	// 장바구니 추가
-//	@PostMapping("/detail/addcart")
-//	public String addCart(@ModelAttribute CartDto cartDto, HttpSession session) {
-//		System.out.println("장바구니컨트롤러들어옴");
-//		
-//		// 시퀀스 할당
-//		int seq = sqlSession.selectOne("cart.seq");		 
-//		 cartDto.setCartNo(seq);
-//		
-//		
-//		 if(session.getAttribute("cart") == null) {	// 장바구니가 비어있다면
-//			 List<CartDto> cart = new ArrayList<CartDto>();		 
-//			session.setAttribute("cart", cart); // 장바구니에 물품 추가해라
-//			cart.add(cartDto);
-//			cartDao.insert(cartDto);
-//		} else {
-//			List<CartDto> cart = (List<CartDto>)session.getAttribute("cart");
-//			cart.add(cartDto);
-//			cartDao.add(cartDto);
-//		}
-//
-//		return "redirect:/member/mypage/my_basket";
-//	}
+	// 구매 확인 페이지
+	@RequestMapping("/order")
+	public String order(@ModelAttribute ShopListVO listVO, HttpSession session, Model model) {
+		String memberId = (String)session.getAttribute("uid");
+		MemberDto memberDto = memberDao.get(memberId);
+		
+		System.out.println("리스트 브이오 : " +listVO.getList());
+		
+		List<CartDto> list = new ArrayList<>();
+		for(ShopVO shopVO : listVO.getList()) {
+			CartDto cartDto = new CartDto();
+			cartDto.setMemberId(shopVO.getMemberId());
+			cartDto.setShopNo(shopVO.getShopNo());
+			cartDto.setShopGoods(shopVO.getShopGoods());
+			cartDto.setShopImgNo(shopVO.getShopImgNo());
+			cartDto.setCartCount(shopVO.getQuantity());
+			cartDto.setShopPrice(shopVO.getShopPrice());
+			cartDto.setCartNo(shopVO.getCartNo());
+			list.add(cartDto);
+			System.out.println("카트디티오" + cartDto); // CartDto(cartNo=0, memberId=jammin, shopNo=79, shopGoods=아이유 조각집, shopImgNo=40, cartTime=null, cartCount=1, shopPrice=20000)
+			model.addAttribute("cartDto", cartDto);
+		}
+		model.addAttribute("list", list);
+		model.addAttribute("memberDto", memberDto);
+		
+		
+		return "shop/order";
+	}
 	
-
 }

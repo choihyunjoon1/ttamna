@@ -28,7 +28,16 @@
 					<li>거래상태 : ${payDto.status}</li>
 				</ul>
 				<hr>
-			
+			<h4>배송 정보</h4>
+			<c:forEach var="payDetailDto" items="${payDetailList}">
+			<ul>
+				<li>수취인 : ${payDetailDto.memberName}</li>
+				<li>연락처 : ${payDetailDto.memberPhone}</li>
+				<li>주소 :  (${payDetailDto.postcode}) ${payDetailDto.address}</li>
+				<li>상세주소 :  ${payDetailDto.detailAddress}</li>
+			</ul>
+			</c:forEach>
+			<hr>
 			<h4>구매목록</h4>
 			<table class="table">
 				<thead>
