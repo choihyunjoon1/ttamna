@@ -9,5 +9,9 @@ public class HomeController {
 	public String home() {
 		return "home";
 	}
+	@RequestMapping("/uprade")
+	public String upgrade() {
+		return "upgrade";
+	}
 
 }

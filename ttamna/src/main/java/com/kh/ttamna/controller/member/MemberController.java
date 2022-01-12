@@ -72,6 +72,11 @@ public class MemberController {
 	public String joinSuccess() {
 		return "member/join_success";
 	}
+	//회원가입 약관 페이지 -> 회원가입 페이지에 넣어서 사용안해도 됨
+//	@GetMapping("/join_terms")
+	public String joinTerms() {
+		return "member/join_terms";
+	}
 	//로그인
 	@GetMapping("/login")
 	public String login() {
