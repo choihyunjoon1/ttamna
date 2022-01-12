@@ -86,6 +86,10 @@
 					}else{
 						deleteBtn = "";	
 					}
+					
+					if(resp[i].memberId == null){
+						resp[i].memberId = "탈퇴한 회원입니다";
+					}
 							//시간형식 포멧 
 							var date = new Date(resp[i].donationReplyTime);
 					
