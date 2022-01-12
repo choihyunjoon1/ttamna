@@ -35,10 +35,6 @@ public class AdoptFileServiceImpl implements AdoptFileService{
 		int adoptNo = sqlSession.selectOne("adopt.sequence");
 		//adoptDto로 변환
 		AdoptDto adoptDto =  adoptFileVO.adoptDtoConverter(adoptNo);
-		String adoptWriter = adoptFileVO.adoptDtoConverter(adoptNo).getAdoptWriter();
-		String adoptTitle = adoptFileVO.adoptDtoConverter(adoptNo).getAdoptTitle();
-		System.out.println("adoptFileService 작성자 : " + adoptWriter);
-		System.out.println("adoptFileService 제목 : " + adoptTitle);
 		//게시글 등록 처리
 		sqlSession.insert("adopt.write", adoptDto);
 		

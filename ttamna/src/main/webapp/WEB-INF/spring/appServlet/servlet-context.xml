@@ -84,8 +84,6 @@
 	 		<mvc:mapping path="/donation_reply/delete"/>
 	 		<mvc:mapping path="/mybaby_reply/insert"/>
 	 		<mvc:mapping path="/mybaby_reply/delete"/>
-	 		<mvc:mapping path="/adopt_reply/insert"/>
-	 		<mvc:mapping path="/adopt_reply/delete"/>
 	  		<bean class="com.kh.ttamna.interceptor.LoginInterceptor"></bean>
 	 	</mvc:interceptor>
 	 	

@@ -37,7 +37,7 @@
 		  <input type="text" name="adoptPlace" class="form-control" required aria-describedby="basic-addon5">
 		</div>
 		<div class="input-group mb-3">
-		  <input type="file" name="attach" class="form-control" id="inputGroupFile04" aria-describedby="inputGroupFileAddon04" aria-label="Upload">
+		  <input type="file" multiple name="attach" class="form-control" id="inputGroupFile04" aria-describedby="inputGroupFileAddon04" aria-label="Upload">
 		</div>
 		<div class="input-group mb-3">
 		  <span class="input-group-text">내용</span>
