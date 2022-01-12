@@ -3,7 +3,37 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:set var="login" value="${uid != null}"></c:set>
 <c:set var="root" value="${pageContext.request.contextPath}"></c:set>
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 
+<style>
+	.editor{
+		box-sizing:border-box;
+		width:100%;
+		border:none;
+		min-height: 100px;
+	}
+	textarea[name=adoptContent]{
+		width:1px;
+		height:1px;
+		resize:none;
+		position:fixed;
+		top:0;
+		left:-5px;
+	}
+</style>
+<script>
+	$(function(){
+		function copyText(){
+			var origin = $(".editor").html();
+			$("textarea[name=adoptContent]").val(origin);
+		}
+		
+		$(".editor").on("input", function(){
+			//copy
+			copyText();
+		});
+	});
+</script>
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 
 <div class="container-700 container-center">
@@ -51,7 +81,8 @@
 		</div>
 		<div class="input-group mb-3">
 		  <span class="input-group-text">내용</span>
-		  <textarea name="adoptContent" required class="form-control" aria-label="With textarea">${adoptDto.adoptContent}</textarea>
+		  <div class="editor form-control" contenteditable="true">${adoptDto.adoptContent}</div>
+		  <textarea name="adoptContent">${adoptDto.adoptContent}</textarea>
 		</div>
 		<div class="d-grid gap-2 d-md-flex justify-content-md-end mb-5">
 			<button type="submit" class="btn btn-primary">수정</button>
