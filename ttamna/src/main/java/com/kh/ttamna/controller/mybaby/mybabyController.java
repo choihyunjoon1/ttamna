@@ -6,6 +6,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ByteArrayResource;
 import org.springframework.http.HttpHeaders;
@@ -61,12 +63,13 @@ public class mybabyController {
 	}
 	//상세페이지
 	@GetMapping("/detail")
-	public String detail(@RequestParam int mybabyNo,Model model) {
+	public String detail(@RequestParam int mybabyNo,Model model,HttpSession session) {
 //		Map<String,Object> param = new HashMap<>();
 //		param.put("mybabyNo",mybabyNo);
 //		model.addAttribute("mybaby",mybabyDao.detailOrSearch(param));
 		MybabyDto mybabyDto = mybabyDao.detail(mybabyNo);
 		model.addAttribute("mybaby",mybabyDto);
+		model.addAttribute("member",session.getAttribute("uid"));
 		List<MybabyImgDto> list = mybabyImgDao.getList(mybabyNo);
 		model.addAttribute("mybabyImgDtoList",list);
 		model.addAttribute("mybabyNo", mybabyNo);

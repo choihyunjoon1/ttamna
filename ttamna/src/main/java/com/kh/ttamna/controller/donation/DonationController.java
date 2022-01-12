@@ -91,9 +91,11 @@ public class DonationController {
 	}
 	
 	@GetMapping("/detail")//상세보기페이지로이동
-	public String detail(@RequestParam int donationNo, Model model) throws Exception {
+	public String detail(@RequestParam int donationNo, Model model,HttpSession session) throws Exception {
+		
 		Map<String, Object> data = new HashMap<>();
 		data.put("donationNo", donationNo);
+		model.addAttribute("member",session.getAttribute("uid"));
 		model.addAttribute("donationNo", donationNo);
 		model.addAttribute("donationDto", donationDao.detailOrSearch(data));
 		model.addAttribute("donationImgDtoList", donationImgDao.getList(donationNo));
