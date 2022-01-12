@@ -5,8 +5,34 @@
 <c:set var="root" value="${pageContext.request.contextPath}"></c:set>
 <!-- JQeury CDN -->
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
-
+<style>
+	.editor{
+		box-sizing:border-box;
+		width:100%;
+		border:none;
+		min-height: 100px;
+	}
+	textarea[name=adoptContent]{
+		width:1px;
+		height:1px;
+		resize:none;
+		position:fixed;
+		top:0;
+		left:-5px;
+	}
+</style>
 <script>
+	$(function(){
+		function copyText(){
+			var origin = $(".editor").html();
+			$("textarea[name=adoptContent]").val(origin);
+		}
+		
+		$(".editor").on("input", function(){
+			//copy
+			copyText();
+		});
+	});
 </script>
 
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
@@ -17,7 +43,7 @@
 	<form method="post" enctype="multipart/form-data">
 		<div class="input-group mb-3">
 		  <span class="input-group-text" id="basic-addon1">작성자</span>
-		  <input type="text" name="adoptWriter" value="${uid}" disabled aria-label="end" class="form-control">
+		  <input type="text" name="adoptWriter" value="${sessionScope.uid}" disabled aria-label="end" class="form-control">
 		</div>
 		  <div>입양공고 시작 날짜는 게시글 작성일자와 동일하게 설정됩니다</div>
 		<div class="input-group mb-3">
@@ -41,7 +67,8 @@
 		</div>
 		<div class="input-group mb-3">
 		  <span class="input-group-text">내용</span>
-		  <textarea name="adoptContent" required class="form-control" aria-label="With textarea" placeholder="임시보호자와 연락할 수 있는 방법을 꼭 기재해 주세요"></textarea>
+		  <div class="editor form-control" contenteditable="true" placeholder="임시보호자와 연락할 수 있는 방법을 꼭 기재해 주세요"></div>
+		  <textarea name="adoptContent" required></textarea>
 		</div>
 		<div class="d-grid gap-2 d-md-flex justify-content-md-end mb-5">
 			<button type="submit" class="btn btn-primary">등록</button>
