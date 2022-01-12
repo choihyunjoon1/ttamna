@@ -6,7 +6,7 @@
  <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <link ref="stylesheet" type="text/css" href="${root }/resources/css/commons.css">
 
-<div class="container-1000 container-center">
+<div class="container-900 container-center">
 	 
 	 <div class="mt-5 mb-5"><h3 align="center">STATISTICS MENU</h3></div>
 		
