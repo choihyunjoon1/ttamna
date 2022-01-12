@@ -53,7 +53,7 @@ $(function(){
 					if(memberId == null){
 						memberId = "탈퇴한 회원";
 					}
-					var divCol = "<div class='card border-primary text-dark bg-primary bg-opacity-10 mb-5 ms-2 ' style='width: 18rem;'>"
+					var divCol = "<div class='card border-primary text-dark bg-primary bg-opacity-10 mb-5 ms-2 ' style='width: 18rem;' onClick=location.href='${root}/mybaby/detail?mybabyNo="+resp[i].mybabyNo+"'>"
 						  + imgLocation
 						  + "<div class='card-body'>"
 						  + "<h5 class='card-title'><strong class='title'>" + resp[i].mybabyTitle +"</strong></h5>"
