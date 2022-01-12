@@ -15,7 +15,7 @@
 }
 </style>
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
-<div class="container-1000 container-center" style="height:700px;">
+<div class="container-800 container-center" style="height:700px;">
 	<div id="main-img mx-auto" class="mt-5 mb-5">
 		<div id="carouselExampleIndicators" class="carousel slide container-800 container-center" data-bs-ride="carousel">
 		  <div class="carousel-indicators">
@@ -26,7 +26,7 @@
 		  </div>
 		  <div class="carousel-inner">
 		    <div class="carousel-item active">
-		      <img src="${root}/resources/img/어바웃.png" class="d-block w-60 mx-auto">
+		      <img src="${root}/resources/img/메인소개.png" class="d-block w-60 mx-auto">
 			</div>		 
 		    <div class="carousel-item">
 		      <img src="${root }/resources/img/img1.jpg" class="d-block w-100 mx-auto" >
