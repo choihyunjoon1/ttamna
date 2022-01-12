@@ -46,6 +46,7 @@
 	
 		//댓글 목록 더보기 ajax
 		var uid = "${sessionScope.uid}";
+		var grade="${sessionScope.grade}";
 		var page = 1;	
 		var size = 12;
 		var donationNo = parseInt($(".donation-no").val());
@@ -80,7 +81,7 @@
 					
 					//삭제 버튼을 작성자만 볼 수 있도록 처리
 					var deleteBtn;
-					if(uid == resp[i].memberId){
+					if(uid == resp[i].memberId || grade=='관리자'){
 						deleteBtn = "<div class='right'>"+"<a href='${pageContext.request.contextPath}/donation_reply/delete?donationReplyNo="+resp[i].donationReplyNo+"&donationNo="+resp[i].donationNo+"' class='delete-button reply btn btn-secondary'>삭제하기</a>"+"</div>";
 					}else{
 						deleteBtn = "";	
