@@ -49,11 +49,10 @@
 		delete adopt_img where adopt_img_no = #{adoptImgNo}
 	</delete>
 
-	<!-- 게시글 삭제시 해당게시판의 모든 파일 삭제
-	<delete id="deleteImg" parameterType="int">
-		delete adopt where adopt_no = #{adoptNo}
-	</delete>
-	 -->
+	<!-- 게시판 번호로 조회한 모든 이미지파일의 번호 -->
+	<select id="getImgNoList" parameterType="int" resultType="int">
+		select adopt_img_no from adopt_img where adopt_no = #{adoptNo}
+	</select>
 	
 </mapper>
 

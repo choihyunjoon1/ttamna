@@ -18,5 +18,8 @@ public interface AdoptFileService {
 	//게시글 수정 처리
 	void updateWithFile(AdoptImgDto adoptImgDto, MultipartFile file) throws IllegalStateException, IOException;
 
+	//게시글 삭제+DB파일삭제+실제 경로에 저장된 이미지 삭제 처리
+	void deleteAll(int adoptNo);
+
 	
 }

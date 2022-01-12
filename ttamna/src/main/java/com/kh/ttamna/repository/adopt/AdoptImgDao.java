@@ -30,9 +30,7 @@ public interface AdoptImgDao {
 	//게시글 수정페이지에서 이미지 파일만 삭제 처리
 	void dropImg(int adoptImgNo);
 
-	//게시글 삭제시 이미지 파일 삭제 처리	
-//	void deleteImg(int adoptNo);
+	//게시판 번호로 조회한 모든 이미지파일의 번호
+	List<Integer> getImgNoList(int adoptNo);
 
-	
-	
 }

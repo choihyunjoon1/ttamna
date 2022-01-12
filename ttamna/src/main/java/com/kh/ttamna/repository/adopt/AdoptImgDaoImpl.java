@@ -68,8 +68,17 @@ public class AdoptImgDaoImpl implements AdoptImgDao {
 	@Override
 	public void dropImg(int adoptImgNo) {
 		sqlSession.delete("adoptImg.dropImg", adoptImgNo);
+		//실제 저장 경로에서도 삭제
+		File target = new File(FilePath.ADOPT_PATH, String.valueOf(adoptImgNo));
+		target.delete();
 	}
 
+	//게시판 번호로 조회한 모든 이미지파일의 번호
+	@Override
+	public List<Integer> getImgNoList(int adoptNo) {
+		return sqlSession.selectList("adoptImg.getImgNoList", adoptNo);
+	}
+	
 
 	//게시글 삭제시 이미지 파일 삭제 처리	
 //	@Override
