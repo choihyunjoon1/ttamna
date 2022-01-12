@@ -17,5 +17,12 @@
 	<div id="main-img">
 		<img class="img-fit" src="${root}/resources/img/img1.jpg">
 	</div>
+	
+	<div class="">
+		<!-- 보호소 등급 신청 주소란 -->
+		<div class="center">
+			<a href= "${root }/upgrade" id="upgrade-link">보호소 등급 신청하러가기</a>
+		</div>
+	</div>
 
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>
