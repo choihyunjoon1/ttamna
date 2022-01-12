@@ -72,7 +72,6 @@
 	 		<mvc:mapping path="/member/logout"/>
 	 		<mvc:mapping path="/member/mypage/**"/>
 	 		<mvc:mapping path="/mybaby/write"/>
-	 		<mvc:mapping path="/mybaby/detail"/>
 	 		<mvc:mapping path="/mybaby/edit"/>
 	 		<mvc:mapping path="/mybaby/delete"/>
 	 		<mvc:mapping path="/adopt/write"/>
