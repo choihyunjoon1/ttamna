@@ -7,6 +7,7 @@ import javax.mail.MessagingException;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -36,6 +37,9 @@ public class DormancyController {
 	private MemberDao memberDao;
 	
 	@Autowired
+	private PasswordEncoder encoder;
+	
+	@Autowired
 	private DormancyDao dorDao;
 	
 	//휴면풀기 페이지
@@ -51,7 +55,7 @@ public class DormancyController {
 		//= 3) 아이디와 이메일로 조회해서 휴면계정에 있는 정보 꺼내오고
 		//= 4) 인증번호 입력을 다 하면 비밀번호 변경 페이지로 이동
 		//1) 이메일로 인증번호를 보냄 / 입력한 이메일을 일단 dormancyDto에서 찾아서 존재할 때 보냄
-		DormancyDto findDorDto = dorDao.getByEmail(certEmail);
+		DormancyDto findDorDto = dorDao.getByEmail(certEmail,memberId);
 		if(findDorDto != null) {
 			
 			service.sendCertification(certEmail);
@@ -59,22 +63,22 @@ public class DormancyController {
 			model.addAttribute("certEmail",certEmail);
 			return "dormancy/checkByEmail";
 		}else {
-			return "dormancy/login_dor?error";
+			return "redirect:/dormancy/login_dor?error";
 		}
 	}
 	@PostMapping("/checkByEmail")
 	public String checkByEmail(@ModelAttribute CertificationDto certDto,HttpSession session) {
 		//이메일로 찾으려는 계정 조회
-		DormancyDto findDto = dorDao.getByEmail(certDto.getCertEmail());
-		
+		DormancyDto findDto = dorDao.getByEmailOne(certDto.getCertEmail());
 		boolean success = certDao.checkByCert(certDto);
 		if(success) {
 			//인증번호 성공 시
 			//2) 휴면계정 -> 멤버계정
-			String memberPw = certDto.getCertSerial();
+			String dorPw = certDto.getCertSerial();
+			String encryptPw = encoder.encode(dorPw);
 			MemberDto memberDto = new MemberDto();
 			memberDto.setMemberId(findDto.getDorMemberId());
-			memberDto.setMemberPw(memberPw);
+			memberDto.setMemberPw(encryptPw);
 			memberDto.setMemberEmail(findDto.getDorMemberEmail());
 			memberDto.setMemberPhone(findDto.getDorMemberPhone());
 			memberDto.setMemberName(findDto.getDorMemberName());

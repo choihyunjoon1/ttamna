@@ -31,7 +31,7 @@
 			</div>
 		</div>
 	<c:if test="${param.error != null }">
-		<div class="errorMsg">인증번호가 일치하지 않습니다</div>
+		<div class="errorMsg">이메일이 존재하지 않습니다</div>
 	</c:if>
 		<div class="row mt-3">
 			<div class="d-grid gap-2 d-md-flex justify-content-md-end mb-5">

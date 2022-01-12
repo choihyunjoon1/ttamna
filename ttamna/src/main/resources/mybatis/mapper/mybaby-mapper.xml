@@ -85,9 +85,15 @@
 	
 	<!-- 게시글 수정 -->
 	<update id="edit" parameterType="MybabyDto">
-		update mybaby set
-			mybaby_title=#{mybabyTitle},
-			mybaby_content=#{mybabyContent}
+		update mybaby
+			<set>
+				<if test="mybabyTitle != null">
+					mybaby_title = #{mybabyTitle},
+				</if>
+				<if test="mybabyContent != null">
+					mybaby_content = #{mybabyContent},
+				</if>
+			</set>
 		where mybaby_no=#{mybabyNo}
 	</update>
 	
