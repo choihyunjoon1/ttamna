@@ -148,4 +148,10 @@
 	     on d.dt = p.dt order by d.dt asc
 		</select>
 		
+		<!-- 총 누적 정기결제 금액 -->
+		<select id="autoTotalAmount" resultType="long">
+			select nvl(sum(auto_total_amount * pay_times), 0) from autopayment
+		</select>
+		
+		
 </mapper>

@@ -109,12 +109,6 @@ public class AdoptDaoImpl implements AdoptDao {
 		return result > 0;
 	}
 
-	//입양완료 처리. 제목 변경
-	@Override
-	public int editTitle(Map<String, Object> param) {
-		return sqlSession.update("adopt.editTitle", param);
-	}
-
 	
 	
 }
