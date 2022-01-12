@@ -9,6 +9,7 @@
 	width: 80%;
   	object-fit: cover;
 }
+
 #main-img{
 	text-align: center;
 }
