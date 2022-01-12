@@ -113,6 +113,13 @@
 
 	
 </script>
+<script>
+	$(function(){
+		var slideCard = $(".carousel-inner").children();
+		console.log(slideCard);
+		$(slideCard[0]).addClass("active");
+	});
+</script>
 <style>
 		.reply{
 		margin-top:10px;
@@ -149,9 +156,25 @@
 		</div>
 		<%-- 이미지가 찍히는 영역 --%>
 		<c:if test="${donationImgDtoList ne null}">
-			<c:forEach var="donationImgDto" items="${donationImgDtoList}">
-				<img src="donaimg?donationImgNo=${donationImgDto.donationImgNo}&donationNo=${donationDto.donationNo}" style="width:100%;">
+		
+		<div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+		  <div class="carousel-inner">
+		  	<c:forEach var="donationImgDto" items="${donationImgDtoList}" >
+		    <div class="carousel-item">
+				<img src="donaimg?donationImgNo=${donationImgDto.donationImgNo}&donationNo=${donationDto.donationNo}"  class="d-block w-100" alt="..." style="width:100%;">
+			</div>
 			</c:forEach>
+		  </div>
+		  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+		    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+		    <span class="visually-hidden">Previous</span>
+		  </button>
+		  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+		    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+		    <span class="visually-hidden">Next</span>
+		  </button>
+		</div>
+			
 		</c:if>
 		<%-- 글 내용이 찍히는 영역 --%>
 		<div class="card-body">
