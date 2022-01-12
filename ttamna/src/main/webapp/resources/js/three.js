@@ -45,10 +45,10 @@ class App {
     }
 
     _setupModel(){
-        var geometry = new THREE.BoxGeometry(1.5, 1.5, 1.5);
+        var geometry = new THREE.BoxGeometry(2.5, 2.5);
 
         var textureLoader = new THREE.TextureLoader();
-        var map = textureLoader.load("http://localhost:8080/ttamna/resources/img/wolf.png");
+        var map = textureLoader.load("http://localhost:8080/ttamna/resources/img/티어하임로고.png");
         var material = new THREE.MeshPhongMaterial({color: 0xffffff, map : map});
 
         var cube = new THREE.Mesh(geometry, material);
@@ -75,7 +75,7 @@ class App {
 
     update(time){
         time *= 0.001; //second convert
-        this._cube.rotation.x = time;
+        //this._cube.rotation.x = time;
         this._cube.rotation.y = time;
     }
 }

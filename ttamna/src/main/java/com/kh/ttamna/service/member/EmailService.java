@@ -19,4 +19,7 @@ public interface EmailService {
 	//정기결제완료 확인 메세지 전송 메소드
 	void autopaymentConfirm(String to, String nickname, String donationTitle,
 			long price, int payTimes) throws MessagingException, FileNotFoundException, IOException;
+
+	//목표금액 도달로 인해 정기결제 취소 확인 메세지 전송 메소드
+	void autopaymentInactive(String to, String nickname, String donationTitle) throws MessagingException, FileNotFoundException, IOException;
 }

@@ -6,15 +6,11 @@
 <script>
 	
 	$(function(){//목표금액에 도달하면 기부 버튼 비활성화
-		if($(".now-fund").text() == $(".total-fund").text()){
+		if(parseInt($(".now-fund").text()) >= parseInt($(".total-fund").text())){
 			console.log("목표치 도달")
 			$(".payment").attr("disabled", "disabled");
 			$(".autopayment").attr("disabled", "disabled");
 		}
-// 		if(){
-// 			$(".payment").attr("disabled");
-// 			$(".autopayment").attr("disabled");
-// 		}
 		
 		$(".delete-btn").click(function(e){
 			var choice = confirm("게시글을 정말 삭제하시겠습니까?");
