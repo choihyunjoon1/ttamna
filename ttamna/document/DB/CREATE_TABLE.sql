@@ -305,6 +305,11 @@ shop_goods varchar2(30) not null, -- 상품명
 quantity number default 1 not null check(quantity > 0), -- 수량
 price number not null check(price >= 0), -- 가격
 status varchar2(6) not null check(status in ('결제', '취소')) -- 상태
+member_name varchar2(21), -- 받을사람
+member_phone char(13), --받을사람 연락처
+postcode varchar2(7), --우편번호
+address varchar2(256), -- 기본주소
+detail_address varchar2(256) -- 상세주소
 );
 
 commit;
