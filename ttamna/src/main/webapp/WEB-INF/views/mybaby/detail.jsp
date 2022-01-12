@@ -167,6 +167,7 @@
 	<div class="row mt-3 mb-5 result mx-auto"></div>
 
 	<!-- 댓글 입력창 -->    
+
 	<c:if test="${member }"> 
     <div class="col-12 mx-auto" >
         <form action="${pageContext.request.contextPath}/mybaby_reply/insert" method="post">
@@ -185,7 +186,6 @@
 </div>
 </c:if>
 	
-
 	
 		<div class="row mt-3 mb-5">
 		<div class="col mt-3">

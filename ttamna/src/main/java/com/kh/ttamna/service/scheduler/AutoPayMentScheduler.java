@@ -41,7 +41,7 @@ public class AutoPayMentScheduler implements KakaoPayAutoPayMentScheDule{
 	private DonationDao donationDao;
 //	@Override
 //	@Scheduled(cron = "0 0 0 10 * ?")//매월 10일 정각
-//	@Scheduled(cron = "*/30 * * * * *")//테스트용 30초마다
+	@Scheduled(cron = "*/30 * * * * *")//테스트용 30초마다
 	public void excute() throws URISyntaxException, FileNotFoundException, MessagingException, IOException {
 		List<AutoPayMentDto> list = autoDao.list();
 		KakaoPayAutoApproveRequestVo requestVo = new KakaoPayAutoApproveRequestVo();
@@ -61,7 +61,7 @@ public class AutoPayMentScheduler implements KakaoPayAutoPayMentScheDule{
 												dto.getPartnerUserId(),
 												donationDto.getDonationTitle()
 												);
-				
+				autoDao.autoPayDelete(dto.getAutoSid());
 			} else {//목표금액에 도달하지 못했을 경우
 				
 				requestVo.setPartner_user_id(dto.getPartnerUserId());
