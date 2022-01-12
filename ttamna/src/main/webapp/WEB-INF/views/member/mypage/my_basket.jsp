@@ -126,6 +126,10 @@ $(function(){
 		width: 58px;
 		height: 38px;
 	}
+	.right{
+	text-align: right;
+	margin-right: 70px;
+	}
 </style>
 
 <script>
@@ -136,7 +140,7 @@ $(function(){
 			if($("input[name=shopNo]:checked").length == 0) return;
 			//form을 임시로 만들어서 body에 추가(전송용)
 			//<form action="test" method="post"></form>
-			var form = $("<form>").attr("action", "${root}/shop/order/multibuy").attr("method", "post").addClass("send-form");
+			var form = $("<form>").attr("action", "${root}/shop/order").attr("method", "post").addClass("send-form");
 			$("body").append(form);
 			
 			//모든 div를 돌면서 내부에 존재하는 checkbox와 수량을 조사한 뒤 체크된 항목에 대해서 번호와 수량을 별도의 form에 첨부
@@ -145,13 +149,26 @@ $(function(){
 				//this == 현재 반복중인 div
 				var checkbox = $(this).find("input[name=shopNo]");
 				var number = $(this).find("input[name=quantity]");
+				var uid = $(this).find("input[name=memberId]");
+				var name = $(this).find("input[name=shopGoods]");
+				var price =$(this).find("input[name=shopPrice]");
+				var imgNo = $(this).find("input[name=shopImgNo]");
 				console.log(checkbox);
 
 				if(checkbox.prop("checked")){//체크박스가 체크된 경우
 					//체크박스의 value가 상품번호이고 입력창의 숫자가 상품수량이므로 이 둘을 각각 별도의 form에 추가
 					var shopNo = checkbox.val();
 					var quantity = number.val();
+					var memberId = uid.val();
+					var shopGoods = name.val();
+					var shopPrice = price.val();
+					var shopImgNo = imgNo.val();
+					
 					$("<input type='hidden' name='list["+count+"].shopNo'>").val(shopNo).appendTo(".send-form");
+					$("<input type='hidden' name='list["+count+"].memberId'>").val(memberId).appendTo(".send-form");
+					$("<input type='hidden' name='list["+count+"].shopGoods'>").val(shopGoods).appendTo(".send-form");
+					$("<input type='hidden' name='list["+count+"].shopPrice'>").val(shopPrice).appendTo(".send-form");
+					$("<input type='hidden' name='list["+count+"].shopImgNo'>").val(shopImgNo).appendTo(".send-form");
 					$("<input type='hidden' name='list["+count+"].quantity'>").val(quantity).appendTo(".send-form");
 					count++;
 					console.log(shopNo);			
@@ -206,10 +223,10 @@ $(function(){
 							<c:if test="${list ne null}">
 							<c:forEach var="cartDto" items="${list}">
 								<tr class="basket">
-										<td><input type="checkbox" name="shopNo" value="${cartDto.shopNo}"></td>
-							  			<td><img src="${root}/shop/img?shopImgNo=${cartDto.shopImgNo}" width="100px;"></td>
-										<td><span><a href="${root}/shop/detail?shopNo=${cartDto.shopNo}">${cartDto.shopGoods}</a></span></td>
-										<td><span class="price">${cartDto.shopPrice}</span>원</td>
+										<td><input type="hidden" name="memberId" value="${sessionScope.uid}"><input type="checkbox" name="shopNo" value="${cartDto.shopNo}"></td>
+							  			<td><input type="hidden" name="shopImgNo" value="${cartDto.shopImgNo}"><img src="${root}/shop/img?shopImgNo=${cartDto.shopImgNo}" width="100px;"></td>
+										<td><input type="hidden" name="shopGoods" value="${cartDto.shopGoods}"><span><a href="${root}/shop/detail?shopNo=${cartDto.shopNo}">${cartDto.shopGoods}</a></span></td>
+										<td><input type="hidden" name="shopPrice" value="${cartDto.shopPrice}"><span class="price">${cartDto.shopPrice}</span>원</td>
 										<td style="width: 10%;"><input type="number" name="quantity"  value="${cartDto.cartCount}" onchange="calculateOrderPrice();" min="1" max="999">개</td>
 										<td>${cartDto.cartCount * cartDto.shopPrice}원</td>
 										<td><a href="${root}/member/mypage/my_basket/delete?cartNo=${cartDto.cartNo}"><button class="btn btn-danger">삭제</button></a>	</td>
@@ -221,10 +238,9 @@ $(function(){
 						</table>
 							</c:otherwise>
 							</c:choose>
-						<div>
+						<div class="right">
 							합계 : <span id="order-price"><c:out value="${totalAmount}"/></span>원
 						</div>
-				
 				
 			
 				<div>
