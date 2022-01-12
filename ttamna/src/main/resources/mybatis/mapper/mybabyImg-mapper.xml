@@ -21,8 +21,8 @@
 	<!-- insert -->
 	<insert id="insert" parameterType="MybabyImgDto">
 		insert into mybaby_img values(
-			${mybabyImgNo},${mybabyNo},#{mybabyImgUpload},
-			${mybabyImgSize},#{mybabyImgType}
+			#{mybabyImgNo},#{mybabyNo},#{mybabyImgUpload},
+			#{mybabyImgSize},#{mybabyImgType}
 		)
 	</insert>
 	<!-- 파일 가져오기(다중) -->
@@ -46,6 +46,10 @@
 	<!-- 게시글 번호로 이미지 디비 삭제 -->
 	<delete id="delete" parameterType="int">
 		delete mybaby_img where mybaby_no = #{mybabyNo}
+	</delete>
+	
+	<delete id="dropImg" parameterType="int">
+		delete mybaby_img where mybaby_img_no = #{mybabyImgNo}
 	</delete>
 	
 </mapper>

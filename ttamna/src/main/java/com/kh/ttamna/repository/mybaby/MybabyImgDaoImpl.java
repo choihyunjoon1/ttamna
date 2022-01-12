@@ -20,6 +20,7 @@ public class MybabyImgDaoImpl implements MybabyImgDao{
 	private SqlSession sqlSession;
 	
 	
+	
 	@Override
 	public void insert(MybabyImgDto mybabyImgDto) {
 		sqlSession.insert("mybabyImg.insert",mybabyImgDto);
@@ -60,11 +61,10 @@ public class MybabyImgDaoImpl implements MybabyImgDao{
 	}
 
 	@Override
-	public boolean deleteSave(int mybabyNo) throws IllegalStateException, IOException {
-		File target = new File(FilePath.MYBABY_PATH,String.valueOf(mybabyNo));
+	public void dropImg(int mybabyImgNo) {
+		sqlSession.delete("mybabyImg.dropImg",mybabyImgNo);
+		File target = new File(FilePath.MYBABY_PATH,String.valueOf(mybabyImgNo));
 		target.delete();
-		
-		return sqlSession.delete("mybabyImg",mybabyNo)>0;
 	}
 	
 

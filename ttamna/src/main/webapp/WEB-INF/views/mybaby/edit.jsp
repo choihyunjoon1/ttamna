@@ -28,6 +28,12 @@
       <label class="form-label mt-4">파일이 추가될 경우 이전 파일이 삭제됩니다.</label>
       <input class="form-control" type="file" id="attach" name="attach" multiple>
     </div>
+    <c:if test="${mybabyDtoList != null}">
+			<c:forEach var="mybabyImgList" items="${mybabyDtoList}">
+				<img src="mybabyImg?mybabyImgNo=${mybabyImgList.mybabyImgNo}&mybabyNo=${mybabyImgList.mybabyNo}" style="width:30%;">
+				<a href="dropImg?mybabyImgNo=${mybabyImgList.mybabyImgNo}&mybabyNo=${mybabyImgList.mybabyNo}" class="btn btn-outline-info" type="button">삭제</a>
+			</c:forEach>
+		 </c:if>
     <div class="form-group">
    		<br><br>
 	    <button type="submit" class="btn btn-outline-primary" value="수정하기">수정하기</button>

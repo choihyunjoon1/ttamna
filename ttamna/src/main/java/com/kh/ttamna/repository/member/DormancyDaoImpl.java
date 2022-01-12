@@ -1,5 +1,8 @@
 package com.kh.ttamna.repository.member;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -28,9 +31,11 @@ public class DormancyDaoImpl  implements DormancyDao{
 	}
 
 	@Override
-	public DormancyDto getByEmail(String dorEmail) {
-		
-		DormancyDto dorDto = sqlSession.selectOne("dormancy.getByEmail",dorEmail);
+	public DormancyDto getByEmail(String dorEmail,String memberId) {
+		Map<String , Object> param = new HashMap<>();
+		param.put("dorEmail", dorEmail);
+		param.put("memberId",memberId);
+		DormancyDto dorDto = sqlSession.selectOne("dormancy.getByEmail",param);
 		
 		return dorDto;
 	}
@@ -40,6 +45,14 @@ public class DormancyDaoImpl  implements DormancyDao{
 	public void delete(String dorMemberId) {
 		sqlSession.delete("dormancy.deleteDor",dorMemberId);
 		
+	}
+
+	@Override
+	public DormancyDto getByEmailOne(String certEmail) {
+		
+		DormancyDto dorDto = sqlSession.selectOne("dormancy.getByEmailOne",certEmail);
+		
+		return dorDto;
 	}
 	
 	
