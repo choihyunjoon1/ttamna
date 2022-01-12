@@ -68,6 +68,7 @@ $(function(){
 					if(adoptWriter == null){
 						adoptWriter = "탈퇴한 회원입니다";
 					}
+					
 					var divCol = "<div class='card border-primary text-dark bg-primary bg-opacity-10 mb-5 ms-2 ' style='width: 18rem;'>"
 								  + imgLocation
 								  + "<div class='card-body'>"
@@ -108,7 +109,7 @@ $(function(){
 	<c:if test="${param.deleteSuccess != null}">
 		<div class=" mb-3"><h6>입양공고 삭제 완료</h6></div>
 	</c:if>
-	<c:if test="${session.uid} != null">
+	<c:if test="${login}">
 	<div class="d-grid gap-1 d-md-flex justify-content-md-end">
 		<a href="${root}/adopt/write" class="btn btn-outline-primary">입양공고 등록</a>
 	</div>

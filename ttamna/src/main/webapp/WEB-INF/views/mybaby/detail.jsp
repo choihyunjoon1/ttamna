@@ -82,12 +82,7 @@
 						$(".result").append(divCol);
 						
 					}
-					
-					
-					
-					
-					
-				},
+			},
 				error:function(e){
 					console.log("댓글 더보기 실패", e);
 				}

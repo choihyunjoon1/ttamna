@@ -8,8 +8,10 @@
 
 <div class="container-700 container-center">
 
-	<div class="mt-5 mb-5"><h3>입양공고 등록</h3></div>
-	
+	<div class="mt-5 mb-3"><h3>입양공고 등록</h3></div>
+	<div class="mb-5">
+	아이의 입양이 완료되었을 경우에는 게시글의 제목을 [입양완료]로 수정해주시기 바랍니다
+	</div>
 	<form method="post" enctype="multipart/form-data">
 	<c:forEach var="adoptDto" items="${list}">
 	<input type="hidden" name="adoptNo" value="${adoptDto.adoptNo}">
