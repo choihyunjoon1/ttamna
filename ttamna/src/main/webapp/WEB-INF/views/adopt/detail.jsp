@@ -40,7 +40,7 @@ $(function(){
 
 <div class="container-700 container-center">
 
-	<div class="mt-5 mb-5"><h3>입양공고 상세</h3></div>
+	<div class="mt-5 mb-5"><h3>입양공고</h3></div>
 	<c:if test="${param.success != null}">
 		<div class=" mb-3"><h6>입양공고 수정 완료</h6></div>
 	</c:if>

@@ -7,7 +7,7 @@
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>	
 
 <div class="container-700 container-center mt-5 mb-5">
-	<div class="mt-5 mb-5">
+	<div class="mt-5 mb-5" align="center">
 		<h3><strong>정부지원 유기동물 입양비 지원 사업 안내</strong></h3>
 	</div>
 	<div class="mb-5">
@@ -49,7 +49,7 @@
 		      <h5 class="mb-2">유기동물 입양비 지원 내용</h5>
 		    </div>
 		    <div class="mb-5">
-		       	<div>내장형 동물등록비, 질병진단비, 예방접종비, 미용비, 치료비, 중성화 수술비를</div> 
+		       	<div>내장칩 동물등록비, 질병진단비, 예방접종비, 미용비, 치료비, 중성화 수술비를</div> 
 		       	<div>지원합니다.</div> 
 		    </div>
 		    

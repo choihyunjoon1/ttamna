@@ -22,4 +22,9 @@ public class HomeController {
 		return "support";
 	}
 
+	//정부지원 유기동물 입양비 지원 안내 페이지
+	@RequestMapping("/about_us")
+	public String aboutUs() {
+		return "about_us";
+	}
 }

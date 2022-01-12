@@ -102,7 +102,7 @@ $(function(){
 
 <div class="container-900 container-center mt-5 mb-5">
 
-	<div class="mt-5 mb-3"><h3>입양공고</h3>
+	<div class="mt-5 mb-5"><h3>입양공고</h3>
 	<c:if test="${param.deleteSuccess != null}">
 		<div class=" mb-3"><h6>입양공고 삭제 완료</h6></div>
 	</c:if>
