@@ -73,14 +73,11 @@ $(function(){
 								  + imgLocation
 								  + "<div class='card-body'>"
 								  + "<h6 class='card-title'><strong class='title'>"+ resp[i].adoptTitle +"</strong></h6>"
-								  + "<div class='card-text'>"
-								  + "<small>공고 기간</small> "
-								  + "</div>"
-								  + "<div class='card-text'><small>"
+								  + "<div class='card-text'><small>공고 기간<i class='bi bi-pencil'>"
 								  + moment(resp[i].adoptStart).format("YYYY-MM-DD") 
 								  + " ~ " 
 								  + moment(resp[i].adoptEnd).format("YYYY-MM-DD") 
-								  +"</small></div>"
+								  +"</i></small></div>"
 								  + "<div class='card-text'><small>"
 								  + "입양 동물 : " + resp[i].adoptKind
 								  +"</small></div>"
