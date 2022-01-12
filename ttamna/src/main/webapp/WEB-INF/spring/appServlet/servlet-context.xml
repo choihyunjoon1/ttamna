@@ -54,8 +54,8 @@
 	-->
 	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
 		<property name="defaultEncoding" value="UTF-8"></property>
-		<property name="maxUploadSizePerFile" value="1000000"></property>
-		<property name="maxUploadSize" value="10000000"></property>
+		<property name="maxUploadSizePerFile" value="10485760"></property>
+		<property name="maxUploadSize" value="104857600"></property>
 	</bean>
 	
 	<!-- 
@@ -77,6 +77,13 @@
 	 		<mvc:mapping path="/adopt/write"/>
 	 		<mvc:mapping path="/adopt/edit"/>
 	 		<mvc:mapping path="/adopt/delete"/>
+	 		<mvc:mapping path="/shop/order"/>
+	 		<mvc:mapping path="/shop_reply/insert"/>
+	 		<mvc:mapping path="/shop_reply/delete"/>
+	 		<mvc:mapping path="/donation_reply/insert"/>
+	 		<mvc:mapping path="/donation_reply/delete"/>
+	 		<mvc:mapping path="/mybaby_reply/insert"/>
+	 		<mvc:mapping path="/mybaby_reply/delete"/>
 	  		<bean class="com.kh.ttamna.interceptor.LoginInterceptor"></bean>
 	 	</mvc:interceptor>
 	 	
@@ -92,6 +99,9 @@
 	 	<!--  AdminInterceptor : '관리자' 등급만 접근 가능 -->
 	 	<mvc:interceptor>
 	 		<mvc:mapping path="/admin/**"/>
+	 		<mvc:mapping path="/shop/write"/>
+	 		<mvc:mapping path="/shop/edit"/>
+	 		<mvc:mapping path="/shop/delete"/>
 	 		<bean class="com.kh.ttamna.interceptor.AdminInterceptor"></bean>
 	 	</mvc:interceptor>
 	 	

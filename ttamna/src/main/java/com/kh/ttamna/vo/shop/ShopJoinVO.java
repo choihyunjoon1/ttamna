@@ -19,4 +19,5 @@ public class ShopJoinVO {
 	private String  shopImgUpload;
 	private String shopImgSave;
 	private String shopImgType;
+	private int quantity;
 }

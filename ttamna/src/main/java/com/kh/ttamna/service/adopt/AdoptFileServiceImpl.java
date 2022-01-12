@@ -1,5 +1,6 @@
 package com.kh.ttamna.service.adopt;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
@@ -12,6 +13,7 @@ import com.kh.ttamna.entity.adopt.AdoptDto;
 import com.kh.ttamna.entity.adopt.AdoptImgDto;
 import com.kh.ttamna.repository.adopt.AdoptDao;
 import com.kh.ttamna.repository.adopt.AdoptImgDao;
+import com.kh.ttamna.util.FilePath;
 import com.kh.ttamna.vo.adopt.AdoptFileVO;
 
 @Service
@@ -33,10 +35,6 @@ public class AdoptFileServiceImpl implements AdoptFileService{
 		int adoptNo = sqlSession.selectOne("adopt.sequence");
 		//adoptDto로 변환
 		AdoptDto adoptDto =  adoptFileVO.adoptDtoConverter(adoptNo);
-		String adoptWriter = adoptFileVO.adoptDtoConverter(adoptNo).getAdoptWriter();
-		String adoptTitle = adoptFileVO.adoptDtoConverter(adoptNo).getAdoptTitle();
-		System.out.println("adoptFileService 작성자 : " + adoptWriter);
-		System.out.println("adoptFileService 제목 : " + adoptTitle);
 		//게시글 등록 처리
 		sqlSession.insert("adopt.write", adoptDto);
 		
@@ -90,6 +88,20 @@ public class AdoptFileServiceImpl implements AdoptFileService{
 		adoptImgDto.setAdoptImgNo(adoptImgNo);
 		adoptImgDao.save(adoptImgDto, file);
 	}
+
+	//게시글 삭제+DB파일삭제+실제 경로에 저장된 이미지 삭제 처리
+	@Override
+	public void deleteAll(int adoptNo) {
+		//파일 실제 경로에서 삭제
+		List<Integer> imgNoList = adoptImgDao.getImgNoList(adoptNo);
+		for(int adoptImgNo : imgNoList) {
+			File target = new File(FilePath.ADOPT_PATH, String.valueOf(adoptImgNo));
+			target.delete();
+		}
+		//DB에서 게시글+이미지 저장내용 삭제
+		adoptDao.delete(adoptNo);
+	}
+	
 
 
 }

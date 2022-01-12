@@ -50,21 +50,6 @@ public class ShopPayController {
 	private SqlSession sqlSession;
 	
 	
-	@PostMapping("/buy")//단일결제 요청
-	public String confirm(@ModelAttribute KakaoPayReadyRequestVo requestVo
-					, HttpSession session) throws URISyntaxException {
-		KakaoPayReadyResponseVo responseVo = shopPayService.ready(requestVo);
-		session.setAttribute("tid", responseVo.getTid());
-		session.setAttribute("partner_user_id", requestVo.getPartner_user_id());
-		return "redirect:"+responseVo.getNext_redirect_pc_url();		
-	}
-	
-	@GetMapping("/cart/multibuy")
-	public String multibuy(@ModelAttribute ShopOrderListVO vo) {
-		return "redirect:/shop/order/cart/list";
-	}
-	
-	
 	// 묶음결제
 	@PostMapping("/multibuy")
 	public String multibuy(@ModelAttribute ShopOrderListVO listVO, HttpSession session) throws URISyntaxException {
@@ -184,6 +169,11 @@ public class ShopPayController {
 				payDetailDto.setShopGoods(shopDto.getShopGoods());
 				payDetailDto.setQuantity(shopOrderDto.getQuantity());
 				payDetailDto.setPrice(shopDto.getShopPrice() * payDetailDto.getQuantity());
+				payDetailDto.setMemberName(shopOrderDto.getMemberName());
+				payDetailDto.setMemberPhone(shopOrderDto.getMemberPhone());
+				payDetailDto.setPostcode(shopOrderDto.getPostcode());
+				payDetailDto.setAddress(shopOrderDto.getAddress());
+				payDetailDto.setDetailAddress(shopOrderDto.getDetailAddress());
 				
 				payDetailDao.insert(payDetailDto);
 				
