@@ -11,7 +11,7 @@
 
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 
-<div class="container-1000 bg-white container-center">
+<div class="container-900 bg-white container-center">
 	<div align="center">
 	<div class="mt-5 mb-4"><h3>Member List</h3></div>
 	<div class="mb-3"><h6>라인 클릭시 해당 회원의 정보 조회</h6></div>
