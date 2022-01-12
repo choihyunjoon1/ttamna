@@ -14,7 +14,6 @@
 <div class="container-700 container-center">
 
 	<div class="mt-5 mb-5"><h3>입양공고 등록</h3></div>
-
 	<form method="post" enctype="multipart/form-data">
 		<div class="input-group mb-3">
 		  <span class="input-group-text" id="basic-addon1">작성자</span>

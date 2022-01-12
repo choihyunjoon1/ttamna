@@ -31,19 +31,8 @@ $(function(){
      	$(".title").append("[공고기간 종료]");
      	$(".edit-btn").remove();
      	$(".delete-btn").remove();
+     	window.alert("공고기간이 종료되었습니다");
      }
-	
-	$(".finish-btn").click(function(e){
-		e.preventDefault();
-		var choice = window.confirm("입양완료 처리 하시겠습니까?");
-		if(choice){
-			$(".edit-title-form").submit();
-		}else{
-			location.reload();
-		}
-	});
-
-	
 });
 </script>
 
@@ -58,7 +47,11 @@ $(function(){
 	<c:if test="${param.invalid != null}">
 		<div class=" mb-3"><h6>수정 권한이 없습니다</h6></div>
 	</c:if>	
-	
+    <c:if test="${uid == adoptDto.adoptWriter}">
+	    <div class="mb-3">
+		아이의 입양이 완료되었을 경우에는 게시글의 제목을 [입양완료]로 수정해주시기 바랍니다
+		</div>
+	</c:if>
 	<div class="container-500 container-center">
 		<div class="card mb-5">
 		  <div class="card-header d-grid gap-2 justify-content-center mt-2">	
@@ -93,11 +86,6 @@ $(function(){
 			<c:if test="${valid}">
 				<a href="${root}/adopt/edit?adoptNo=${adoptDto.adoptNo}" type="button" class="edit-btn btn btn-outline-warning">수정</a>
 				<button type="button" class="btn btn-outline-secondary delete-btn">삭제</button>
-				<form method="post" action="${root}/adopt/edit_title" class="edit-title-form">
-					<input type="hidden" name="adoptNo" value="${adoptDto.adoptNo}" class="adopt-no">
-					<input type="hidden" name="adoptTitle" value="${adoptDto.adoptTitle}[입양완료]">
-					<input type="submit" class="btn btn-outline-secondary finish-btn" value="입양완료">
-				</form>
 			</c:if>	
 			</div>
 		  </div>
