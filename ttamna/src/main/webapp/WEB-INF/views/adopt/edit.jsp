@@ -38,7 +38,7 @@
 		  <input type="text" name="adoptPlace" value="${adoptDto.adoptPlace}" required class="form-control" aria-describedby="basic-addon5">
 		</div>
 		<div class="input-group mb-3">
-		  <input type="file" name="attach" accept="image/*" class="form-control" id="inputGroupFile04" aria-describedby="inputGroupFileAddon04" aria-label="Upload">
+		  <input type="file" multiple name="attach" accept="image/*" class="form-control" id="inputGroupFile04" aria-describedby="inputGroupFileAddon04" aria-label="Upload">
 		  <button class="btn btn-outline-info upload" type="button" id="inputGroupFileAddon04">업로드</button>
 		</div>
 		<div class="input-group mb-3">
