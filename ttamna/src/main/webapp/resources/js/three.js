@@ -1,7 +1,8 @@
 import * as THREE from '../three/build/three.module.js';
 
 class App {
-    constructor(){
+    constructor(contextPath){
+    	this.contextPath = contextPath;
         var divContainer = document.querySelector("#webgl-container");
         this._divContainer = divContainer;
 
@@ -45,10 +46,11 @@ class App {
     }
 
     _setupModel(){
-        var geometry = new THREE.BoxGeometry(2.5, 2.5);
+        var geometry = new THREE.BoxGeometry(1.7, 1.7, 1.7);
 
         var textureLoader = new THREE.TextureLoader();
-        var map = textureLoader.load("http://localhost:8080/ttamna/resources/img/티어하임로고.png");
+        var map = textureLoader.load(this.contextPath+"/resources/img/티어하임로고.png");
+        console.log("map", map, "context", contextPath);
         var material = new THREE.MeshPhongMaterial({color: 0xffffff, map : map});
 
         var cube = new THREE.Mesh(geometry, material);
@@ -81,5 +83,5 @@ class App {
 }
 
 window.onload = function(){
-    new App();
+    new App(window.contextPath);
 }

@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
+<c:set var="member" value="${member !=null }"></c:set>
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <script>
 	
@@ -220,22 +220,24 @@
 
 	<!-- 댓글목록 표시 위치 -->		
 	<div class="row mt-3 mb-5 result"></div>
-
-	<!-- 댓글 입력창 -->    
-    <div class="col-12">
-        <form action="${pageContext.request.contextPath}/donation_reply/insert" method="post">
-           <input type="hidden" name="donationNo"value="${donationNo}">
-           <input type="hidden" name="memberId" value="${sessionScope.uid}">
  
-            댓글 쓰기
-            <textarea class="form-control" name="donationReplyContent"></textarea> 
-            
-        <div class="right">
-            <input type="submit" class="reply btn btn-primary" value="등록">
-        </div>
-	</form>
-          
- </div>
+	<!-- 댓글 입력창 -->
+	<c:if test="${member }">    
+	    <div class="col-12">
+	        <form action="${pageContext.request.contextPath}/donation_reply/insert" method="post">
+	           <input type="hidden" name="donationNo"value="${donationNo}">
+	           <input type="hidden" name="memberId" value="${sessionScope.uid}">
+	 
+	            댓글 쓰기
+	            <textarea class="form-control" name="donationReplyContent"></textarea> 
+	            
+	        <div class="right">
+	            <input type="submit" class="reply btn btn-primary" value="등록">
+	        </div>
+		</form>
+	          
+	  </div>
+ </c:if>
 
 
 

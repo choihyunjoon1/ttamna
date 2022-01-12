@@ -25,10 +25,15 @@
     <!-- three.js -->
     <link rel="stylesheet" href="${root}/resources/css/three.css">
     
+    <!-- root context 정의 -->
+    <script>
+    	window.contextPath = "${pageContext.request.contextPath}";
+    </script>
+    
     <script type="module" src="${root}/resources/js/three.js" defer></script>
     
     <!-- JQeury CDN -->
-    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.js"></script> 
    
     <!-- Bootstrap JavaScript CDN 번들 -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
@@ -119,7 +124,7 @@
         <header>
             <div class="flex-container">
                 <div class="logo-wrapper">
-                    <div id="webgl-container" style="width:100px; height:100px"></div>
+                    <div id="webgl-container" style="width:180px; height:180px"></div>
                 
                 </div>
                 
@@ -145,57 +150,18 @@
         </header>
 <!-- 메뉴 영역 -->
 
-<!-- <nav class="navbar navbar-expand-lg navbar-dark bg-primary"> -->
-<!--   <div class="container-fluid"> -->
-<!--     <a class="navbar-brand" href="#">Navbar</a> -->
-<!--     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="true" aria-label="Toggle navigation"> -->
-<!--       <span class="navbar-toggler-icon"></span> -->
-<!--     </button> -->
-
-<!--     <div class="navbar-collapse collapse show" id="navbarColor01" style=""> -->
-<!--       <ul class="navbar-nav me-auto"> -->
-<!--         <li class="nav-item"> -->
-<!--           <a class="nav-link active" href="#">Home -->
-<!--             <span class="visually-hidden">(current)</span> -->
-<!--           </a> -->
-<!--         </li> -->
-<!--         <li class="nav-item"> -->
-<!--           <a class="nav-link" href="#">Features</a> -->
-<!--         </li> -->
-<!--         <li class="nav-item"> -->
-<!--           <a class="nav-link" href="#">Pricing</a> -->
-<!--         </li> -->
-<!--         <li class="nav-item"> -->
-<!--           <a class="nav-link" href="#">About</a> -->
-<!--         </li> -->
-<!--         <li class="nav-item dropdown"> -->
-<!--           <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Dropdown</a> -->
-<!--           <div class="dropdown-menu"> -->
-<!--             <a class="dropdown-item" href="#">Action</a> -->
-<!--             <a class="dropdown-item" href="#">Another action</a> -->
-<!--             <a class="dropdown-item" href="#">Something else here</a> -->
-<!--             <div class="dropdown-divider"></div> -->
-<!--             <a class="dropdown-item" href="#">Separated link</a> -->
-<!--           </div> -->
-<!--         </li> -->
-<!--       </ul> -->
-<!--       <form class="d-flex"> -->
-<!--         <input class="form-control me-sm-2" type="text" placeholder="Search"> -->
-<!--         <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button> -->
-<!--       </form> -->
-<!--     </div> -->
-<!--   </div> -->
-<!-- </nav> -->
-
 <div class="container-1000 centainer-center">
 <nav class="navbar navbar-expand-lg navbar-dark bg-primary fw-bold">
-  <div class="container">
+  <div class="container-fluid">
     <div class="collapse navbar-collapse" id="navbarColor01">
       <ul class="navbar-nav me-auto navbar-right">
-        <li class="nav-item">
-          <a class="nav-link docs-creator headHome" href="${root }">Home
-            <span class="visually-hidden">(current)</span>
-          </a>
+          <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle docs-creator headMember" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Info</a>
+          <div class="dropdown-menu">
+            <a class="dropdown-item docs-creator headMember" href="${root }">Home</a>
+            <a class="dropdown-item docs-creator headMember" href="${root}/upgrade">보호소 등급신청 방법</a>
+            <a class="dropdown-item docs-creator headMember" href="${root}/support">유기동물 입양 지원 안내</a>
+          </div>
         </li>
      </ul>
      <ul class="navbar-nav me-auto navbar-center fs-6" >
@@ -223,8 +189,6 @@
             <a class="dropdown-item docs-creator headMember" href="${root}/member/join">회원가입ฅ ̳͒•ˑ̫• ̳͒ฅ♡</a>
             <a class="dropdown-item docs-creator headMember" href="${root}/find/findId">아이디 찾기</a>
             <a class="dropdown-item docs-creator headMember" href="${root}/find/findPw">비밀번호 찾기</a>
-            <a class="dropdown-item docs-creator headMember" href="${root}/upgrade">보호소 등급신청 방법</a>
-            <a class="dropdown-item docs-creator headMember" href="${root}/support">유기동물 입양 지원 안내</a>
           </div>
         </li>
         </c:if>
