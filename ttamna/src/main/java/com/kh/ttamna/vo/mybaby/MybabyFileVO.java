@@ -3,10 +3,12 @@ package com.kh.ttamna.vo.mybaby;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.kh.ttamna.entity.mybaby.MybabyDto;
 import com.kh.ttamna.entity.mybaby.MybabyImgDto;
+import com.kh.ttamna.repository.mybaby.MybabyImgDao;
 
 import lombok.Data;
 
@@ -20,8 +22,9 @@ public class MybabyFileVO {
 	private String mybabyType;
 	private List<MultipartFile> attach;
 	
+	
 	//MybabyDto로 바꿔주는 메소드
-	public MybabyDto converToMybabyDto(int mybabyNo) {
+	public MybabyDto convertToMybabyDto(int mybabyNo) {
 		MybabyDto mybabyDto = new MybabyDto();
 		mybabyDto.setMybabyNo(mybabyNo);
 		mybabyDto.setMybabyWriter(mybabyWriter);
@@ -37,11 +40,13 @@ public class MybabyFileVO {
 		List<MybabyImgDto> list = new ArrayList<MybabyImgDto>();
 		
 		for(MultipartFile files : this.attach) {
+			
 			MybabyImgDto mybabyImgDto = new MybabyImgDto();
 			mybabyImgDto.setMybabyNo(mybabyNo);
 			mybabyImgDto.setMybabyImgUpload(files.getOriginalFilename());
 			mybabyImgDto.setMybabyImgSize(files.getSize());
 			mybabyImgDto.setMybabyImgType(files.getContentType());
+			
 			
 			list.add(mybabyImgDto);
 		}

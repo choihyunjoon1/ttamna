@@ -141,7 +141,15 @@ public class mybabyController {
 		mybabyService.update(mybabyFileVO);
 		return "redirect:/mybaby/detail?mybabyNo="+mybabyFileVO.getMybabyNo();
 	}
-	
+	@GetMapping("/dropImg")
+	public String deleteImg(
+							@RequestParam int mybabyImgNo,
+							@RequestParam int mybabyNo) {
+		//이미지파일 번호 전달해서 삭제
+		mybabyImgDao.dropImg(mybabyImgNo);
+		//삭제 완료후 adoptNo를 이용해서 수정페이지로 리다이렉트 처리
+		return "redirect: edit?mybabyNo=" + mybabyNo;
+	}
 	
 	
 	//더보기 페이지네이션 기능 처리

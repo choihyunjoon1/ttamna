@@ -8,9 +8,11 @@ public interface DormancyDao {
 	
 	DormancyDto get(String memberId);
 	
-	DormancyDto getByEmail(String dorEmail);
+	DormancyDto getByEmail(String dorEmail,String memberId);
 
 	void delete(String dorMemberId);
+
+	DormancyDto getByEmailOne(String certEmail);
 	
 
 }

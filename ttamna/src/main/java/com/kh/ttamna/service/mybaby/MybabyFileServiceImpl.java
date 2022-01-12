@@ -36,7 +36,7 @@ public class MybabyFileServiceImpl implements MybabyFileService{
 		int mybabyNo = sqlSession.selectOne("mybaby.seq");
 		
 		//게시글등록
-		sqlSession.insert("mybaby.write",mybabyFileVO.converToMybabyDto(mybabyNo));
+		sqlSession.insert("mybaby.write",mybabyFileVO.convertToMybabyDto(mybabyNo));
 		
 		//List뽑기
 		List<MybabyImgDto> list = mybabyFileVO.convertToMybabyImgDto(mybabyNo);
@@ -72,37 +72,21 @@ public class MybabyFileServiceImpl implements MybabyFileService{
 	public void update(MybabyFileVO mybabyFileVO) throws IllegalStateException, IOException {
 		List<MybabyImgDto> list = mybabyFileVO.convertToMybabyImgDto(mybabyFileVO.getMybabyNo());
 		
-		MybabyDto mybabyDto = new MybabyDto();
-		mybabyDto.setMybabyNo(mybabyFileVO.getMybabyNo());
+		MybabyDto mybabyDto = mybabyDao.detail(mybabyFileVO.getMybabyNo());
 		mybabyDto.setMybabyTitle(mybabyFileVO.getMybabyTitle());
 		mybabyDto.setMybabyContent(mybabyFileVO.getMybabyContent());
-		mybabyDto.setMybabyWriter(mybabyFileVO.getMybabyWriter());
 		mybabyDao.edit(mybabyDto);
-		
 		//파일이 추가되엇을 때
 		int i=0;
 		for(MultipartFile files : mybabyFileVO.getAttach()) {
 			if(!files.isEmpty()) {
-				//파일 먼저 삭제하기
-				List<MybabyImgDto> fileList = mybabyImgDao.getList(mybabyDto.getMybabyNo());
-				
-				for(MybabyImgDto dto : fileList) {
-					File target = new File(dir,String.valueOf(dto.getMybabyImgNo()));
-					target.delete();
-				}
-				//디비에서도 삭제
-				sqlSession.delete("mybabyImg.delete",mybabyDto.getMybabyNo());
-				
+				int mybabyImgNo = sqlSession.selectOne("mybabyImg.seq");
+				MybabyImgDto mybabyImgDto = list.get(i);
+				mybabyImgDto.setMybabyImgNo(mybabyImgNo);
+				mybabyImgDao.save(mybabyImgDto, files);
+				System.out.println("파일추가됨"+i);
+				i++;
 			}
-		}
-		//삭제 후 추가
-		for(MultipartFile newFiles : mybabyFileVO.getAttach()) {
-			int mybabyImgNo = sqlSession.selectOne("mybabyImg.seq");
-			MybabyImgDto mybabyImgDto = list.get(i);
-			mybabyImgDto.setMybabyImgNo(mybabyImgNo);
-			mybabyImgDao.save(mybabyImgDto, newFiles);
-			System.out.println("파일추가됨"+i);
-			i++;
 		}
 		
 	}
