@@ -165,13 +165,13 @@
 	
 
 	<!-- 댓글 입력창 -->    
-    <div class="col-12 mx-auto" class="width:70%">
+    <div class="col-12 mx-auto" >
         <form action="${pageContext.request.contextPath}/mybaby_reply/insert" method="post">
            <input type="hidden"   id="mybabyNo"  name="mybabyNo"value="${mybabyNo}">
            <input type="hidden" name="memberId" value="${sessionScope.uid}">
  			<div class="mx-auto">
 	            <label>댓글 쓰기</label>
-	            <textarea class="form-control mx-auto" name="mybabyReplyContent" style="width:70%"></textarea>
+	            <textarea class="form-control mx-auto" name="mybabyReplyContent"></textarea>
 	            <div class="right">
 		        	<input type="submit" class="reply btn btn-primary" value="등록">
 		        </div>
@@ -182,7 +182,7 @@
 
 	
 	<!-- 댓글목록 표시 위치 -->	
-	<div class="row mt-3 mb-5 result mx-auto" style="width:70%"></div>
+	<div class="row mt-3 mb-5 result mx-auto"></div>
 	
 		<div class="row mt-3 mb-5">
 		<div class="col mt-3">
