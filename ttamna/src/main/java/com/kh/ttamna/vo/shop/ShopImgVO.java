@@ -20,6 +20,6 @@ public class ShopImgVO {
 	private Date shopTime;
 	private int shopRead;
 	private String shopGoods;
-	private MultipartFile attach;
+	private MultipartFile[] attach;
 
 }

@@ -40,11 +40,9 @@ public class DonationFileServiceImpl implements DonationFileService{
 		List<DonationImgDto> donationList = donationUploadVo.convertToDonationImgDto(donationNo);
 		
 		int i = 0;
-		System.out.println("게시글 등록 중 파일이 없네요?");
 		
 		for(MultipartFile files : donationUploadVo.getAttach()) {
 			if(!files.isEmpty()){//파일이 있으면 실행
-			System.out.println("게시글 등록 중 파일이 있다네요?");
 			//[2] DonationImgNo를 뽑고
 			int donationImgNo = sqlSession.selectOne("donaImg.seq");
 			//[3] N번째 donationList를 Dto에 옮긴 뒤
@@ -56,7 +54,7 @@ public class DonationFileServiceImpl implements DonationFileService{
 					files);
 			//[6] 다했으면 i를 증감시킨다.
 			i++;
-		}
+		} else break;
 			
 		}
 		

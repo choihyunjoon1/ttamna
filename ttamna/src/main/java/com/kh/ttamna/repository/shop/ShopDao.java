@@ -3,6 +3,7 @@ package com.kh.ttamna.repository.shop;
 import java.util.List;
 
 import com.kh.ttamna.entity.shop.ShopDto;
+import com.kh.ttamna.vo.shop.ShopListByPageVo;
 
 public interface ShopDao {
 	
@@ -12,7 +13,7 @@ public interface ShopDao {
 	
 	List<ShopDto> list();
 	
-	List<ShopDto> listByPage(int startRow, int endRow);
+	List<ShopListByPageVo> listByPage(int startRow, int endRow);
 	
 	boolean delete(int shopNo);
 	

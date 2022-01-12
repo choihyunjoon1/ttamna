@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.kh.ttamna.entity.shop.ShopDto;
+import com.kh.ttamna.vo.shop.ShopListByPageVo;
 
 @Repository
 public class ShopDaoImpl implements ShopDao{
@@ -37,7 +38,7 @@ public class ShopDaoImpl implements ShopDao{
 
 	// 목록 더보기
 	@Override
-	public List<ShopDto> listByPage(int startRow, int endRow) {
+	public List<ShopListByPageVo> listByPage(int startRow, int endRow) {
 		Map<String, Object> map = new HashMap<>();
 		map.put("startRow", startRow);
 		map.put("endRow", endRow);

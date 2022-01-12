@@ -32,6 +32,7 @@ import com.kh.ttamna.repository.shop.ShopDao;
 import com.kh.ttamna.repository.shop.ShopImgDao;
 import com.kh.ttamna.service.shop.ShopService;
 import com.kh.ttamna.vo.shop.ShopImgVO;
+import com.kh.ttamna.vo.shop.ShopListByPageVo;
 import com.kh.ttamna.vo.shop.ShopListVO;
 import com.kh.ttamna.vo.shop.ShopVO;
 
@@ -89,7 +90,8 @@ public class ShopController {
 	@GetMapping("/detail")
 	public String detail(@RequestParam int shopNo, Model model) {
 		ShopDto shopDto = shopDao.get(shopNo);
-		ShopImgDto shopImgDto = shopImgDao.getBy(shopNo);
+//		ShopImgDto shopImgDto = shopImgDao.getBy(shopNo);
+		List<ShopImgDto> shopImgDto = shopImgDao.getBys(shopNo);
 		
 		shopDao.readUp(shopDto);
 		
@@ -101,7 +103,7 @@ public class ShopController {
 	
 	@GetMapping("/more")
 	@ResponseBody
-	public List<ShopDto> more(@RequestParam(required = false, defaultValue = "1") int page, 
+	public List<ShopListByPageVo> more(@RequestParam(required = false, defaultValue = "1") int page, 
 			@RequestParam(required = false, defaultValue = "12") int size){
 		int endRow = page * size;
 		int startRow = endRow - (size - 1);

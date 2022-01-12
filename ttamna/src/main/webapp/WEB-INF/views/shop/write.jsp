@@ -50,7 +50,7 @@
 		  <input type="text" name="shopTitle" class="form-control" required aria-describedby="basic-addon1">
 		</div>
 		<div class="input-group mb-3">
-		  <input type="file" name="attach"class="form-control" aria-describedby="inputGroupFileAddon04" aria-label="Upload">
+		  <input type="file" multiple name="attach"class="form-control" aria-describedby="inputGroupFileAddon04" aria-label="Upload">
 		</div>
 		<div class="input-group mb-3">
 		  <span class="input-group-text" id="basic-addon1">상품명</span>

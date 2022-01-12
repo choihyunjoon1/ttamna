@@ -46,19 +46,35 @@ public class ShopServiceImpl implements ShopService{
 
 		shopDao.insert(shopDto);
 		
-		// 파일 저장
-		MultipartFile multipartFile = shopImgVO.getAttach();
-		if(!multipartFile.isEmpty()) { // 파일이 있으면 = multipartFile이 비어있지 않다면
-			ShopImgDto shopImgDto = new ShopImgDto();
-			shopImgDto.setShopNo(seq);
-			System.out.println("게시글 번호 = "+seq);
-			shopImgDto.setShopImgUpload(multipartFile.getOriginalFilename());
-			System.out.println("파일 이름 = "+multipartFile.getOriginalFilename());
-			shopImgDto.setShopImgType(multipartFile.getContentType());
-			shopImgDto.setShopImgSize(multipartFile.getSize());
-			
-			shopImgDao.save(shopImgDto, multipartFile);	
-			
+//		// 파일 저장
+//		MultipartFile multipartFile = shopImgVO.getAttach();
+//		if(!multipartFile.isEmpty()) { // 파일이 있으면 = multipartFile이 비어있지 않다면
+//			ShopImgDto shopImgDto = new ShopImgDto();
+//			shopImgDto.setShopNo(seq);
+//			System.out.println("게시글 번호 = "+seq);
+//			shopImgDto.setShopImgUpload(multipartFile.getOriginalFilename());
+//			System.out.println("파일 이름 = "+multipartFile.getOriginalFilename());
+//			shopImgDto.setShopImgType(multipartFile.getContentType());
+//			shopImgDto.setShopImgSize(multipartFile.getSize());
+//			
+//			shopImgDao.save(shopImgDto, multipartFile);	
+//			
+//		}
+		
+		// 파일 저장(여러장)
+		int i = 0;
+		for(MultipartFile multipartFile : shopImgVO.getAttach()) {
+			if(multipartFile != null) {//파일이 있으면
+				ShopImgDto shopImgDto = new ShopImgDto();
+				shopImgDto.setShopNo(seq);
+				System.out.println("게시글 번호 = "+seq);
+				shopImgDto.setShopImgUpload(multipartFile.getOriginalFilename());
+				System.out.println("파일 이름 = "+multipartFile.getOriginalFilename());
+				shopImgDto.setShopImgType(multipartFile.getContentType());
+				shopImgDto.setShopImgSize(multipartFile.getSize());
+				
+				shopImgDao.save(shopImgDto, multipartFile);	
+			} else break;//없으면 종료
 		}
 	}
 }

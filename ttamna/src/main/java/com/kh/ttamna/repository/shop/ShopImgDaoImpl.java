@@ -2,6 +2,7 @@ package com.kh.ttamna.repository.shop;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.ibatis.session.SqlSession;
@@ -54,5 +55,9 @@ public class ShopImgDaoImpl implements ShopImgDao{
 			return sqlSession.selectOne("shopImg.getByNo", shopNo);
 		}
 
+		@Override
+		public List<ShopImgDto> getBys(int shopNo) {
+			return sqlSession.selectList("shopImg.getByNos", shopNo);
+		}
 				
 }
