@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
-<c:set var="member" value="${member !=null }"></c:set>
 <c:set var="root" value="${pageContext.request.contextPath}"></c:set>
 
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
@@ -24,14 +23,22 @@
 	
 	$(function(){
 		
+		// 비회원일경우 기능 접근 차단
+		var login = $("input[name=memberId]").val();
+		if(login == ''){
+		$(".deny").slideUp();	// 댓글칸
+		}
+
 		
 		//댓글 목록 더보기 ajax
 		var uid = "${sessionScope.uid}";
+		var grade="${sessionScope.grade}";
 		var page = 1;	
 		var size = 12;
-		var mybabyNo = parseInt($("#mybabyNo").val());;
+		var mybabyNo = $("#mybabyNo").val();
 		//더보기 버튼 클릭시 이벤트 발생
 		$(".more-btn").click(function(){
+			console.log("myBabyNo = ", mybabyNo);
 			loadList(page, size, mybabyNo);
 			page++;
 		});
@@ -58,10 +65,10 @@
 					}
 				
 					for(var i=0 ; i < resp.length ; i++){
-					
+											
 					//삭제 버튼을 작성자만 볼 수 있도록 처리
 					var deleteBtn;
-					if(uid == resp[i].memberId){
+					if(uid == resp[i].memberId || grade=='관리자'){
 						deleteBtn = "<div class='right'>"+"<a href='${pageContext.request.contextPath}/mybaby_reply/delete?mybabyReplyNo="+resp[i].mybabyReplyNo+"&mybabyNo="+resp[i].mybabyNo+"' class='delete-button reply btn btn-secondary'>삭제하기</a>"+"</div>";
 					}else{
 						deleteBtn = "";	
@@ -78,12 +85,12 @@
 						+ "</div>"
 						+deleteBtn
 						+ "</div>";
-							
-							
-						$(".result").append(divCol);
-						
-					}
-			},
+					
+					
+				$(".result").append(divCol);
+				
+			}
+		},
 				error:function(e){
 					console.log("댓글 더보기 실패", e);
 				}
@@ -127,6 +134,9 @@
 	<div class="container-500 container-center">
 		<div class="card mb-5">
 		  <div class="card-header d-grid gap-2 justify-content-center mt-2">	
+		  <form>
+			<input type="hidden" name="mybabyNo" value="${mybabyNo}">			  	
+		  </form>
 		    <h3> ${mybaby.mybabyTitle}</h3>
 		  </div>
 		  <div class="card-body d-grid gap-2 justify-content-md-end">
@@ -163,31 +173,30 @@
 </div>
 	
 	<!-- 댓글 자리 -->
-	<!-- 댓글목록 표시 위치 -->	
-	<div class="row mt-3 mb-5 result mx-auto"></div>
+	<!-- 댓글목록 표시 위치 -->
+	<div class="row mt-3 mb-5 result"></div>
 
 	<!-- 댓글 입력창 -->    
-
-	<c:if test="${member }"> 
-    <div class="col-12 mx-auto" >
+	<div class="col-12 deny">
+      <div class="col-12">
         <form action="${pageContext.request.contextPath}/mybaby_reply/insert" method="post">
            <input type="hidden"   id="mybabyNo"  name="mybabyNo"value="${mybabyNo}">
            <input type="hidden" name="memberId" value="${sessionScope.uid}">
- 			<div class="mx-auto">
-	            <label>댓글 쓰기</label>
-	            <textarea class="form-control mx-auto" name="mybabyReplyContent"></textarea>
+ 			
+	            댓글 쓰기
+	            <textarea class="form-control" name="mybabyReplyContent"></textarea>
+	            
 	            <div class="right">
 		        	<input type="submit" class="reply btn btn-primary" value="등록">
 		        </div>
-            </div> 
-            
-        
-	</form>
-</div>
-</c:if>
+	  </form>      
+	</div> 
+	 </div>
+
+
 	
 	
-		<div class="row mt-3 mb-5">
+	<div class="row mt-3 mb-5">
 		<div class="col mt-3">
 			<button type="button" class="justify-content-md btn btn-primary more-btn">더보기</button>
 		</div>

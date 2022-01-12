@@ -63,16 +63,16 @@ public class mybabyController {
 	}
 	//상세페이지
 	@GetMapping("/detail")
-	public String detail(@RequestParam int mybabyNo,Model model,HttpSession session) {
+	public String detail(@RequestParam int mybabyNo,Model model) {
 //		Map<String,Object> param = new HashMap<>();
 //		param.put("mybabyNo",mybabyNo);
 //		model.addAttribute("mybaby",mybabyDao.detailOrSearch(param));
 		MybabyDto mybabyDto = mybabyDao.detail(mybabyNo);
 		model.addAttribute("mybaby",mybabyDto);
-		model.addAttribute("member",session.getAttribute("uid"));
 		List<MybabyImgDto> list = mybabyImgDao.getList(mybabyNo);
 		model.addAttribute("mybabyImgDtoList",list);
 		model.addAttribute("mybabyNo", mybabyNo);
+		
 		
 		return "mybaby/detail";
 	}
