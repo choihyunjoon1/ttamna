@@ -17,6 +17,13 @@ pageEncoding="UTF-8"%>
 		padding: 5px;
 	}
 </style>
+<script>
+	$(function(){
+		var slideCard = $(".carousel-inner").children();
+		console.log(slideCard);
+		$(slideCard[0]).addClass("active");
+	});
+</script>
 
 <script>
 $(function(){
@@ -271,7 +278,29 @@ $(function(){
 		  </div>
 
 			<div class="card-body d-grid gap-2">
+			
+			<div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+			  <div class="carousel-inner">
+			  	<c:forEach var="shopImgDto" items="${shopImgDto}">
+				<div class="carousel-item">
 					<img class="mx-auto" src="img?shopImgNo=${shopImgDto.shopImgNo}" style="width:60%;">
+				</div>
+				</c:forEach>
+			  </div>
+			  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+			    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+			    <span class="visually-hidden">Previous</span>
+			  </button>
+			  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+			    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+			    <span class="visually-hidden">Next</span>
+			  </button>
+			</div>
+				<c:forEach var="shopImgDto" items="${shopImgDto}">
+				<div class="carousel-item">
+					<img class="mx-auto" src="img?shopImgNo=${shopImgDto.shopImgNo}" style="width:60%;">
+				</div>
+				</c:forEach>
 			</div>
 			
 			
@@ -284,7 +313,7 @@ $(function(){
 					<input type="hidden" name="memberId" value="${sessionScope.uid}">
 					<input type="hidden" name="shopGoods" value="${detail.shopGoods}">
 					<input type="hidden" name="shopPrice" value="${detail.shopPrice}">
-					<input type="hidden" name="shopImgNo" value="${shopImgDto.shopImgNo}">
+					<input type="hidden" name="shopImgNo" value="${shopImgDto[0].shopImgNo}">
 					<input type="hidden" name="shopCount" value="${detail.shopCount}">
 		  		</div>
 			  	<div class="oneline">
