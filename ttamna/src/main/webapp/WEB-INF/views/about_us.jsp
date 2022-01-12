@@ -12,7 +12,7 @@
 		<img src="${root}/resources/img/티어하임영어.png" style="width:200px;">
 	</div>
 	<div class="mb-5"  align="center">
-		<img src="${root}/resources/img/티어하임소개.png" style="width:70%;">
+		<img src="${root}/resources/img/티어하임소개.jpg" style="width:70%;">
 	</div>
 
 </div>

@@ -26,7 +26,7 @@
 		  </div>
 		  <div class="carousel-inner">
 		    <div class="carousel-item active">
-		      <img src="${root}/resources/img/어바웃.png" class="d-block w-60 mx-auto">
+		      <img src="${root}/resources/img/메인소개.png" class="d-block w-60 mx-auto">
 			</div>		 
 		    <div class="carousel-item">
 		      <img src="${root }/resources/img/img1.jpg" class="d-block w-100 mx-auto" >
