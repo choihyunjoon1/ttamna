@@ -225,7 +225,6 @@
 	<c:if test="${member }">    
 	    <div class="col-12">
 	        <form action="${pageContext.request.contextPath}/donation_reply/insert" method="post">
-	           <input type="hidden" name="donationNo"value="${donationNo}">
 	           <input type="hidden" name="memberId" value="${sessionScope.uid}">
 	 
 	            댓글 쓰기
