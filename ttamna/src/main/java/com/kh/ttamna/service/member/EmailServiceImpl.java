@@ -168,4 +168,32 @@ public class EmailServiceImpl implements EmailService{
 		sender.send(message);
 		System.out.println("정기기부 확인용 메일이 발송되었습니다.");
 	}
+	
+	@Override
+	public void autopaymentInactive(String to, String nickname, String donationTitle) throws MessagingException, FileNotFoundException, IOException {
+		MimeMessage message = sender.createMimeMessage();
+		
+		MimeMessageHelper helper = new MimeMessageHelper(message, true, "UTF-8");
+		helper.setTo(to); 
+		helper.setSubject("[Tierheim] 동물의 집에서 정기결제 취소 확인 메일을 발송했습니다.");
+		
+		ClassPathResource resource = new ClassPathResource("email/autopaymentInactive.html");
+		
+		StringBuffer buffer = new StringBuffer();
+		try(Scanner sc = new Scanner(resource.getFile());){
+			while(sc.hasNextLine()) {
+				buffer.append(sc.nextLine());
+				buffer.append('\n');
+			}
+		}
+		
+		String html = buffer.toString();
+		html = html.replace("{{nickName}}", nickname);
+		html = html.replace("{{donationTitle}}", donationTitle);
+		helper.setText(html, true);
+		
+		//전송(message)
+		sender.send(message);
+		System.out.println("정기기부 취소 확인용 메일이 발송되었습니다.");
+	}
 }
