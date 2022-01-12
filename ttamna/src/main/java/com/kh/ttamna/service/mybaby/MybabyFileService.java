@@ -12,6 +12,5 @@ public interface MybabyFileService {
 
 	void update(MybabyFileVO mybabyFileVO) throws IllegalStateException, IOException;
 	
-	
 
 }
