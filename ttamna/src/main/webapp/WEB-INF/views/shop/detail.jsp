@@ -17,6 +17,13 @@ pageEncoding="UTF-8"%>
 		padding: 5px;
 	}
 </style>
+<script>
+	$(function(){
+		var slideCard = $(".carousel-inner").children();
+		console.log(slideCard);
+		$(slideCard[0]).addClass("active");
+	});
+</script>
 
 <script>
 $(function(){
@@ -272,7 +279,29 @@ $(function(){
 		  </div>
 
 			<div class="card-body d-grid gap-2">
+			
+			<div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+			  <div class="carousel-inner">
+			  	<c:forEach var="shopImgDto" items="${shopImgDto}">
+				<div class="carousel-item">
 					<img class="mx-auto" src="img?shopImgNo=${shopImgDto.shopImgNo}" style="width:60%;">
+				</div>
+				</c:forEach>
+			  </div>
+			  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+			    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+			    <span class="visually-hidden">Previous</span>
+			  </button>
+			  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+			    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+			    <span class="visually-hidden">Next</span>
+			  </button>
+			</div>
+				<c:forEach var="shopImgDto" items="${shopImgDto}">
+				<div class="carousel-item">
+					<img class="mx-auto" src="img?shopImgNo=${shopImgDto.shopImgNo}" style="width:60%;">
+				</div>
+				</c:forEach>
 			</div>
 			
 			
@@ -285,7 +314,7 @@ $(function(){
 					<input type="hidden" name="memberId" value="${sessionScope.uid}">
 					<input type="hidden" name="shopGoods" value="${detail.shopGoods}">
 					<input type="hidden" name="shopPrice" value="${detail.shopPrice}">
-					<input type="hidden" name="shopImgNo" value="${shopImgDto.shopImgNo}">
+					<input type="hidden" name="shopImgNo" value="${shopImgDto[0].shopImgNo}">
 					<input type="hidden" name="shopCount" value="${detail.shopCount}">
 		  		</div>
 			  	<div class="oneline">
@@ -327,7 +356,13 @@ $(function(){
            <input type="hidden" name="shopNo"value="${shopNo}">
            <input type="hidden" name="memberId" value="${sessionScope.uid}">
  
-            댓글 쓰기
+            <i class="bi bi-chat-left-text"> 
+	 			댓글 쓰기
+		 		<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chat-left-text" viewBox="0 0 16 16">
+				  <path d="M14 1a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1H4.414A2 2 0 0 0 3 11.586l-2 2V2a1 1 0 0 1 1-1h12zM2 0a2 2 0 0 0-2 2v12.793a.5.5 0 0 0 .854.353l2.853-2.853A1 1 0 0 1 4.414 12H14a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z"/>
+				  <path d="M3 3.5a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zM3 6a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9A.5.5 0 0 1 3 6zm0 2.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5z"/>
+				</svg>
+	 		</i>
             <textarea class="form-control" name="shopReplyContent"></textarea> 
             
         <div class="right">

@@ -42,6 +42,11 @@
 		select * from shop_img where shop_no = #{shopNo}
 	</select>
 	
+	<!-- 게시글 번호에서 사진 추출(여러장) -->
+	<select id="getByNos" parameterType="int" resultType="ShopImgDto">
+		select * from shop_img where shop_no = #{shopNo}
+	</select>
+	
 	
 </mapper>
 

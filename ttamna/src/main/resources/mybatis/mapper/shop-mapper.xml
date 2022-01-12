@@ -38,6 +38,7 @@
 	</select>
 	
 	<!-- 더보기 -->
+	<!--
 	<select id="listByPage" parameterType="map" resultType="ShopJoinVO">
 		select * from (
 		    select rownum rn, TMP.* from (
@@ -45,6 +46,17 @@
 		        order by H.shop_no desc
 		    )TMP
 		) where rn between ${startRow} and ${endRow}
+	</select>
+	-->
+	
+	<!-- 더보기 -->
+	<select id="listByPage" parameterType="map" resultType="ShopListByPageVo">
+		select * from (
+		    select rownum rn2, TMP.* from (
+		        select S.*, SIF.shop_img_no from shop S left outer join shop_img_first SIF on S.shop_no = SIF.shop_no where rn = 1
+      			order by S.shop_no desc
+		    )TMP
+		) where rn2 between ${startRow} and ${endRow}
 	</select>
 	
 	<!-- 삭제 -->

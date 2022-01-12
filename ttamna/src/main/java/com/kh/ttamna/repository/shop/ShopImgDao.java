@@ -1,6 +1,7 @@
 package com.kh.ttamna.repository.shop;
 
 import java.io.IOException;
+import java.util.List;
 
 import org.springframework.web.multipart.MultipartFile;
 
@@ -15,5 +16,7 @@ public interface ShopImgDao {
 	ShopImgDto getBy(int shopNo);
 		
 	byte[] load(int shopImgNo) throws IOException;
+
+	List<ShopImgDto> getBys(int shopNo);//여러장 출력
 
 }
