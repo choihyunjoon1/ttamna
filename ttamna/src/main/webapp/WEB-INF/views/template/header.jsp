@@ -223,6 +223,8 @@
             <a class="dropdown-item docs-creator headMember" href="${root}/member/join">회원가입ฅ ̳͒•ˑ̫• ̳͒ฅ♡</a>
             <a class="dropdown-item docs-creator headMember" href="${root}/find/findId">아이디 찾기</a>
             <a class="dropdown-item docs-creator headMember" href="${root}/find/findPw">비밀번호 찾기</a>
+            <a class="dropdown-item docs-creator headMember" href="${root}/upgrade">보호소 등급신청 방법</a>
+            <a class="dropdown-item docs-creator headMember" href="#">유기동물 입양지 지원 안내</a>
           </div>
         </li>
         </c:if>

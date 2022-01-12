@@ -9,7 +9,7 @@ public class HomeController {
 	public String home() {
 		return "home";
 	}
-	@RequestMapping("/uprade")
+	@RequestMapping("/upgrade")
 	public String upgrade() {
 		return "upgrade";
 	}
