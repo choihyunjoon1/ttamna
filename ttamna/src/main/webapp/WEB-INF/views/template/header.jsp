@@ -128,21 +128,21 @@
                 
                 </div>
                 
-                <div class="center centerSize">
-						<div style="width:600px; float:left;">
+                <div class="container-center">
+					<div class="mx-auto mt-5">
                         <a href="${root}">
-                            <img src="${root}/resources/img/두줄로고.png" style="width:600px;">
+                            <img src="${root}/resources/img/두줄로고.png" style="width:400px;">
                         </a>
-                        </div>
+                    </div>
                     <!-- 세션,등급 알아내기 위함 나중에 삭제 -->
 <%--                     <h5>uid=${uid}</h5><h5>grade=${grade }</h5> --%>
                 </div>
             
             	<!-- 현재까지의 총 기부 누적액을 보여준다 -->
-				<div class="badge text-wrap p-2 bg-primary bg-opacity-75" style="width:10rem; height:3rem;">
-				   <div><small><strong class="date"></strong></small></div>
-				   <div><small>누적 기부 금액</small></div>
-				   <div><small><strong class="total"></strong></small></div>
+				<div class="badge text-wrap bg-primary bg-opacity-75 mt-5 pt-3" style="width:10rem; height:4rem;">
+				   <div><strong class="date"></strong></div>
+				   <div>누적 기부 금액</div>
+				   <div><strong class="total"></strong></div>
             	</div>
    
 			</div>

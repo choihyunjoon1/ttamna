@@ -15,7 +15,7 @@
 }
 </style>
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
-<div class="container-1000 container-center" style="height:700px;">
+<div class="container-800 container-center" style="height:700px;">
 	<div id="main-img mx-auto" class="mt-5 mb-5">
 		<div id="carouselExampleIndicators" class="carousel slide container-800 container-center" data-bs-ride="carousel">
 		  <div class="carousel-indicators">
