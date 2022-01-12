@@ -65,7 +65,7 @@ $(function(){
 		 <c:if test="${adoptImgList != null}">
 			<div class="card-body d-grid gap-2">
 				<c:forEach var="adoptImgDto" items="${adoptImgList}">
-					<img class="mx-auto" src="adoptImg?adoptImgNo=${adoptImgDto.adoptImgNo}&adoptNo=${adoptDto.adoptNo}" style="width:60%;">
+					<img class="mx-auto" src="adoptImg?adoptImgNo=${adoptImgDto.adoptImgNo}&adoptNo=${adoptDto.adoptNo}" style="width:80%;">
 				</c:forEach>
 			</div>
 		  </c:if>
