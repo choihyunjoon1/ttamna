@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%--시간 포맷 --%>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <c:set var="root" value="${pageContext.request.contextPath }"></c:set>
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 <link ref="stylesheet" type="text/css" href="${root}/resources/css/commons.css">
@@ -24,12 +26,13 @@
 					<li>주문번호 : ${payDto.tid}</li>
 					<li>상품명 : ${payDto.itemName}</li>
 					<li>총 결제금액 : ${payDto.totalAmount}원</li>
-					<li>구매일 : ${payDto.payTime}</li>
+					<li>구매일 : <fmt:formatDate value="${payDto.payTime}" pattern="yyyy-MM-dd HH:ss"></fmt:formatDate></li>
 					<li>거래상태 : ${payDto.status}</li>
 				</ul>
 				<hr>
 			<h4>배송 정보</h4>
-			<c:forEach var="payDetailDto" items="${payDetailList}">
+			<!-- 배송지는 한개면 될거같음 -->
+			<c:forEach var="payDetailDto" items="${payDetailList}" end="0">
 			<ul>
 				<li>수취인 : ${payDetailDto.memberName}</li>
 				<li>연락처 : ${payDetailDto.memberPhone}</li>
@@ -51,6 +54,14 @@
 				<tbody>
 					<c:forEach var="payDetailDto" items="${payDetailList}">
 					<tr>
+						<c:choose>
+							<c:when test="${cartDto.shopNo ne null}">
+								<td><a href="${pageContext.request.contextPath}/shop/detail?shopNo=${payDetailDto.shopNo}">${payDetailDto.shopGoods}</a></td>
+							</c:when>
+							<c:otherwise>
+								<td>${payDetailDto.shopGoods}</td>
+							</c:otherwise>
+							</c:choose>
 						<td><a href="${pageContext.request.contextPath}/shop/detail?shopNo=${payDetailDto.shopNo}">${payDetailDto.shopGoods}</a></td>
 						<td>${payDetailDto.quantity}개</td>
 						<td>${payDetailDto.price}원</td>

@@ -74,12 +74,12 @@
 	</update>
 	
 	<!-- 회원목록 + 검색 + 페이지네이션 -->
-	<select id="listPaging" parameterType="map" resultType="payMentDto">
+	<select id="listPaging" parameterType="map" resultType="PaymentDto">
 		select * from (
 			select rownum rn, TMP.* from (
 				select * from payment
 					where member_id=#{memberId}
-				order by pay_no asc
+				order by pay_no desc
 			)TMP
 		) where rn between #{startRow} and #{endRow}		
 	</select>

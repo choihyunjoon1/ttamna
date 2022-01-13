@@ -41,8 +41,6 @@ public class PaginationServiceImpl implements PaginationService{
 	@Autowired 
 	private MybabyReplyDao mybabyReplyDao;
 	
-	
-	
 	@Autowired
 	private PaymentDao payDao;
 	
@@ -147,6 +145,21 @@ public class PaginationServiceImpl implements PaginationService{
 		paginationVO.calculator();
 		List<BoardVO> list = memberDao.boardListPaging(memberId ,paginationVO.getStartRow(), paginationVO.getEndRow());
 		paginationVO.setListOfMyBoard(list);
+	
+		return paginationVO;
+	}
+
+	// 주문내역 페이지네이션
+	@Override
+	public PaginationVO myOrderPaging(PaginationVO paginationVO, String memberId) throws Exception {
+		int count = payDao.count(memberId);
+		
+		paginationVO.setPageSize(10);
+		paginationVO.setBlockSize(10);
+		paginationVO.setCount(count);
+		paginationVO.calculator();
+		List<PaymentDto> list = payDao.listPaging(memberId ,paginationVO.getStartRow(), paginationVO.getEndRow());
+		paginationVO.setListOfMyOrder(list);
 	
 		return paginationVO;
 	}

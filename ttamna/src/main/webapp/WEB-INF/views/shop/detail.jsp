@@ -16,6 +16,10 @@ pageEncoding="UTF-8"%>
 		float: left;
 		padding: 5px;
 	}
+	.carousel-item{
+		margin-left: 20%;
+		margin-bottom: 10%;
+	}
 </style>
 <script>
 	$(function(){
@@ -289,11 +293,11 @@ $(function(){
 				</c:forEach>
 			  </div>
 			  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
-			    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+			    <span class="carousel-control-prev-icon" aria-hidden="true"><img src="${root}/resources/img/prev.png" width="32px;" height="32px;"></span>
 			    <span class="visually-hidden">Previous</span>
 			  </button>
 			  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
-			    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+			    <span class="carousel-control-next-icon" aria-hidden="true"><img src="${root}/resources/img/next.png" width="32px;" height="32px;"></span>
 			    <span class="visually-hidden">Next</span>
 			  </button>
 			</div>

@@ -225,7 +225,14 @@ $(function(){
 								<tr class="basket">
 										<td><input type="hidden" name="memberId" value="${sessionScope.uid}"><input type="checkbox" name="shopNo" value="${cartDto.shopNo}"></td>
 							  			<td><input type="hidden" name="shopImgNo" value="${cartDto.shopImgNo}"><img src="${root}/shop/img?shopImgNo=${cartDto.shopImgNo}" width="100px;"></td>
-										<td><input type="hidden" name="shopGoods" value="${cartDto.shopGoods}"><span><a href="${root}/shop/detail?shopNo=${cartDto.shopNo}">${cartDto.shopGoods}</a></span></td>
+										<c:choose>
+											<c:when test="${cartDto.shopNo ne null}">
+												<td><input type="hidden" name="shopGoods" value="${cartDto.shopGoods}"><span><a href="${root}/shop/detail?shopNo=${cartDto.shopNo}">${cartDto.shopGoods}</a></span></td>
+											</c:when>
+											<c:otherwise>
+												<td><input type="hidden" name="shopGoods" value="${cartDto.shopGoods}"><span>${cartDto.shopGoods}</span></td>
+											</c:otherwise>
+										</c:choose>
 										<td><input type="hidden" name="shopPrice" value="${cartDto.shopPrice}"><span class="price">${cartDto.shopPrice}</span>원</td>
 										<td style="width: 10%;"><input type="number" name="quantity"  value="${cartDto.cartCount}" onchange="calculateOrderPrice();" min="1" max="999">개</td>
 										<td>${cartDto.cartCount * cartDto.shopPrice}원</td>
