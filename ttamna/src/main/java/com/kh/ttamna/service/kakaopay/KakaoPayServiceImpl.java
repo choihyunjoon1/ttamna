@@ -189,7 +189,7 @@ public class KakaoPayServiceImpl implements KakaoPayService{
 	public KakaoPayApproveResponseVo autoApprove(KakaoPayAutoApproveRequestVo requestVo) throws URISyntaxException {
 
 		RestTemplate template = new RestTemplate();
-				
+		
 		HttpHeaders headers = new HttpHeaders();
 		headers.add("Authorization",  "KakaoAK "+Auth);
 		headers.add("Content-type", ContentType);

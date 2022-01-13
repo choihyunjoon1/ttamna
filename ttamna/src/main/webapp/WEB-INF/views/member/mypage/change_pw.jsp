@@ -71,7 +71,7 @@ window.addEventListener("load", function(e){
 		<div class="row">
 			<!-- 사이드바 자리 -->
 			<jsp:include page="/WEB-INF/views/member/mypage/sidebar.jsp"></jsp:include>
-			<div class="col-3 center" style="width:25%;">
+			<div class="col-4 center" style="width:25%;">
 				<div class="p-4 border bg-light"><label>현재 비밀번호</label></div>
 				<div class="p-4 border bg-light"><label>새 비밀번호</label></div>
 				<div class="p-4 border bg-light"><label>새 비밀번호 확인</label></div>
