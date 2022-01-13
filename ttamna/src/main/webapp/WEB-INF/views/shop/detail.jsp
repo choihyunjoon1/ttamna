@@ -317,7 +317,7 @@ $(function(){
 		  <li class="list-group-item text-muted">
 		  	<!-- 결제시 필요한 데이터 -->
 		  		<div class="oneline">
-				  	<input type="number" name="cartCount" placeholder="수량을 입력해주세요" class="center form-control" required>
+				  	<input type="number" min="1" name="cartCount" placeholder="수량을 입력해주세요" class="center form-control" required>
 				  	<input type="hidden" name="shopNo" value="${detail.shopNo}" id="shopNo">
 					<input type="hidden" name="memberId" value="${sessionScope.uid}">
 					<input type="hidden" name="shopGoods" value="${detail.shopGoods}">
