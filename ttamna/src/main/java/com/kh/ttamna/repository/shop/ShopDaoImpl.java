@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 
 import com.kh.ttamna.entity.shop.ShopDto;
 import com.kh.ttamna.vo.shop.ShopListByPageVo;
+import com.kh.ttamna.vo.shop.ShopOrderVO;
 
 @Repository
 public class ShopDaoImpl implements ShopDao{

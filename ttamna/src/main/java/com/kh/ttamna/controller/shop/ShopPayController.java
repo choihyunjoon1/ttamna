@@ -129,6 +129,14 @@ public class ShopPayController {
 			List<ShopDto> list = (List<ShopDto>) session.getAttribute("list");
 			List<ShopOrderVO> shopOrderVo = (List<ShopOrderVO>)session.getAttribute("quantity");
 			
+			// 재고량 감소
+			for(ShopOrderVO orderVo : shopOrderVo) {
+				ShopDto shopDto = new ShopDto();
+				shopDto.setShopNo(orderVo.getShopNo());
+				shopDto.setShopCount(orderVo.getQuantity());
+				shopDao.sell(shopDto);
+			}
+									
 			System.out.println("tid = "+tid);
 			System.out.println("partner_order_id = "+partner_order_id);
 			System.out.println("partner_user_id = "+partner_user_id);
@@ -180,11 +188,6 @@ public class ShopPayController {
 				payDetailDao.insert(payDetailDto);
 				
 				shopNoList.add(payDetailDto.getShopNo());
-			}
-			// 재고감소
-			for(ShopOrderVO shopOrderDto : shopOrderVo) {
-				ShopDto shopDto = shopDao.get(shopOrderDto.getShopNo());
-				shopDao.sell(shopDto);
 			}
 			
 			// 장바구니에 담겨있던 상품과 결제된 상품이 일치한다면 해당 상품을 지워라.

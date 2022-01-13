@@ -26,7 +26,7 @@
 					<li>주문번호 : ${payDto.tid}</li>
 					<li>상품명 : ${payDto.itemName}</li>
 					<li>총 결제금액 : ${payDto.totalAmount}원</li>
-					<li>구매일 : <fmt:formatDate value="${payDto.payTime}" pattern="yyyy-MM-dd HH:ss"></fmt:formatDate></li>
+					<li>구매일 : <fmt:formatDate value="${payDto.payTime}" pattern="yyyy-MM-dd HH:mm:ss"></fmt:formatDate></li>
 					<li>거래상태 : ${payDto.status}</li>
 				</ul>
 				<hr>

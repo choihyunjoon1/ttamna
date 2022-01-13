@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.kh.ttamna.entity.shop.ShopDto;
 import com.kh.ttamna.vo.shop.ShopListByPageVo;
+import com.kh.ttamna.vo.shop.ShopOrderVO;
 
 public interface ShopDao {
 	

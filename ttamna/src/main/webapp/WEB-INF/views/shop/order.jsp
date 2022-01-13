@@ -87,7 +87,6 @@
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 
 <div class="container-700 container-center">
-	<span>${root}</span>
 	<div class="mt-5 mb-5"><h3>구매 확인</h3></div>
 
 		 <input type="hidden" name="memberId" value="${uid}">
