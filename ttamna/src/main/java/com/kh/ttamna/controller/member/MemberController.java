@@ -88,8 +88,6 @@ public class MemberController {
 		if(findDto != null) {
 			session.setAttribute("uid", findDto.getMemberId());
 			session.setAttribute("grade", findDto.getMemberGrade());
-			System.out.println("회원로그인 ID="+findDto.getMemberId());
-			System.out.println("세션아이디"+session.getAttribute("uid"));
 			//로그인 처리 후에 접속기록을 남기기 위해 객체를 생성하고 저장하는 구문을 불러옴
 			//시퀀스를 미리 받아서 visitDto의 visitIdx에 넣는다
 			int visitIdx = visitDao.sequence();
