@@ -53,7 +53,7 @@
 							<td>
 								<a class="new-browser">조회</a>
 								<c:if test="${paymentDto.status ne '전체취소'}">
-									<a href="${pageContext.request.contextPath}/donation/kakao/cancel?tid=${paymentDto.tid}&amount=${paymentDto.totalAmount}&payNo=${paymentDto.payNo}">취소</a>
+									<a href="${pageContext.request.contextPath}/donation/kakao/cancel_all?tid=${paymentDto.tid}&amount=${paymentDto.totalAmount}&payNo=${paymentDto.payNo}">취소</a>
 								</c:if>
 							</td>
 						</tr>
