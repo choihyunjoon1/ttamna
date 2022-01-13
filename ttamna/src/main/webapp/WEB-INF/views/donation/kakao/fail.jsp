@@ -7,7 +7,7 @@
 <div class="container">
 	<div class="row mt-3">
 	<div class="col">
-		<h2>결제가 취소되었습니다.</h2>
+		<h2>알수없는 이유로 결제에 실패했습니다.</h2>
 	</div>
 	</div>
 </div>

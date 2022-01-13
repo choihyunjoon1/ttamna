@@ -34,9 +34,7 @@ public class AdoptFileServiceImpl implements AdoptFileService{
 		//게시판 번호 조회
 		int adoptNo = sqlSession.selectOne("adopt.sequence");
 		//adoptDto로 변환
-		System.out.println("Wrtier = " + adoptFileVO.getAdoptWriter());
 		AdoptDto adoptDto =  adoptFileVO.adoptDtoConverter(adoptNo);
-		System.out.println("Wrtier = " + adoptDto.getAdoptWriter());
 		//게시글 등록 처리
 		sqlSession.insert("adopt.write", adoptDto);
 		

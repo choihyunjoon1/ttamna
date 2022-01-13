@@ -35,6 +35,7 @@ public class PaginationVO {
 	private List<MybabyReplyDto> listOfMybabyReply = new ArrayList<>();
 	private List<PaymentDto> listOfShortPay = new ArrayList<>();//mypage/shortDonation
 	private List<BoardVO> listOfMyBoard = new ArrayList<>();//mypage/myBoard
+	private List<PaymentDto> listOfMyOrder = new ArrayList<>(); // /mypage/my_order
 	
 	public void calculator() throws Exception {
 		//rownum 계산

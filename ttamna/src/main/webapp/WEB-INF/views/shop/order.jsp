@@ -112,7 +112,6 @@
 		  <span class="input-group-text" id="basic-addon1">상세주소</span>
 		  <input type="text" class="form-control" name="detailAddress"  value="${memberDto.detailAddress}">
 		</div>
-		<div>${list}</div>
 		<table class="table">
 							<thead>
 								<tr>

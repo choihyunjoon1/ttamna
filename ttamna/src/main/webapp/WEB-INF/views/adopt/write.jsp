@@ -43,7 +43,8 @@
 	<form method="post" enctype="multipart/form-data">
 		<div class="input-group mb-3">
 		  <span class="input-group-text" id="basic-addon1">작성자</span>
-		  <input type="text" name="adoptWriter" value="${sessionScope.uid}" disabled aria-label="end" class="form-control">
+		  <div class="form-control">${sessionScope.uid}</div>
+		  <input type="hidden" name="adoptWriter" value="${sessionScope.uid}">
 		</div>
 		  <div>입양공고 시작 날짜는 게시글 작성일자와 동일하게 설정됩니다</div>
 		<div class="input-group mb-3">
