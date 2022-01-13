@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.kh.ttamna.repository.payment.PaymentDao;
 import com.kh.ttamna.vo.kakaopay.KakaoPayApproveRequestVo;
@@ -56,10 +57,16 @@ public class ShopPayServiceImpl implements ShopPayService{
 		body.add("total_amount", requestVo.getTotal_amount_string());
 		body.add("tax_free_amount", "0");
 		
+		String baseURI = ServletUriComponentsBuilder.fromCurrentContextPath()
+//				.port(8080)
+				.path("/shop/order")
+				.toUriString();
+		System.out.println("baseURI = " + baseURI);
 		
-		body.add("approval_url", "http://localhost:8080/ttamna/shop/order/success");
-		body.add("cancel_url", "http://localhost:8080/ttamna/shop/order/cancel");
-		body.add("fail_url", "http://localhost:8080/ttamna/shop/order/fail");
+		
+		body.add("approval_url", baseURI+"/success");
+		body.add("cancel_url", baseURI+"/cancel");
+		body.add("fail_url", baseURI+"/fail");
 		
 		HttpEntity<MultiValueMap<String, String>> entity = new HttpEntity<>(body, headers);
 		

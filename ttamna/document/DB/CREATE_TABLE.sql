@@ -301,7 +301,7 @@ commit;
 create table pay_detail(
 pay_no REFERENCES payment(pay_no) on delete cascade, -- 고유번호
 shop_no number not null, -- 상품번호
-shop_goods varchar2(30) not null, -- 상품명
+shop_goods varchar2(150) not null, -- 상품명
 quantity number default 1 not null check(quantity > 0), -- 수량
 price number not null check(price >= 0), -- 가격
 status varchar2(6) not null check(status in ('결제', '취소')) -- 상태
