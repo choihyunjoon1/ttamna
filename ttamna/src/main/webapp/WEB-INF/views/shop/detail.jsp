@@ -62,8 +62,8 @@ $(function(){
 		var shopImgNo = $("input[name=shopImgNo]").val();
 		var cartCount = $("input[name=cartCount]").val()
 		
-		if($("input[name=cartCount]").val() == ''){
-			alert("수량을 입력해주세요");
+		if($("input[name=cartCount]").val() == '' || $("input[name=cartCount]").val() < 1){
+			alert("올바른 수량을 입력해주세요");
 			return;
 		}
 		
@@ -121,8 +121,8 @@ $(function(){
 		
 		
 		// 수량 미선택시
-		if(cartCount == ''){
-			alert("수량을 입력해주세요");
+		if(cartCount == '' || cartCount < 1){
+			alert("올바른 수량을 입력해주세요");
 			return;
 		}
 		
@@ -385,7 +385,7 @@ $(function(){
 
 	<!-- 댓글 더보기 버튼 -->
 	<div class="row mt-3 mb-5">
-		<div class="col mt-3">
+		<div class="col mt-3 deny">
 			<button type="button" class="justify-content-md btn btn-primary more-btn">더보기</button>
 		</div>
 	</div>
