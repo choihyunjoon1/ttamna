@@ -128,21 +128,21 @@
                 
                 </div>
                 
-                <div class="center centerSize">
-						<div style="width:600px; float:left;">
+                <div class="container-center">
+					<div class="mx-auto mt-5">
                         <a href="${root}">
-                            <img src="${root}/resources/img/두줄로고.png" style="width:600px;">
+                            <img src="${root}/resources/img/두줄로고.png" style="width:400px;">
                         </a>
-                        </div>
+                    </div>
                     <!-- 세션,등급 알아내기 위함 나중에 삭제 -->
 <%--                     <h5>uid=${uid}</h5><h5>grade=${grade }</h5> --%>
                 </div>
             
             	<!-- 현재까지의 총 기부 누적액을 보여준다 -->
-				<div class="badge text-wrap p-2 bg-primary bg-opacity-75" style="width:10rem; height:3rem;">
-				   <div><small><strong class="date"></strong></small></div>
-				   <div><small>누적 기부 금액</small></div>
-				   <div><small><strong class="total"></strong></small></div>
+				<div class="badge text-wrap bg-primary bg-opacity-75 mt-5 pt-3" style="width:10rem; height:4rem;">
+				   <div><strong class="date"></strong></div>
+				   <div>누적 기부 금액</div>
+				   <div><strong class="total"></strong></div>
             	</div>
    
 			</div>
@@ -158,7 +158,8 @@
           <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle docs-creator headMember" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Info</a>
           <div class="dropdown-menu">
-            <a class="dropdown-item docs-creator headMember" href="${root }">Home</a>
+            <a class="dropdown-item docs-creator headMember" href="${root}">Home</a>
+            <a class="dropdown-item docs-creator headMember" href="${root}/about_us">동물의 집 소개</a>
             <a class="dropdown-item docs-creator headMember" href="${root}/upgrade">보호소 등급신청 방법</a>
             <a class="dropdown-item docs-creator headMember" href="${root}/support">유기동물 입양 지원 안내</a>
           </div>

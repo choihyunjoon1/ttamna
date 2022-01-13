@@ -11,15 +11,17 @@
 
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 
-<div class="container-1000 bg-white container-center" align="center">
-	<div class="mt-4 mb-5"><h3>Member List</h3></div>
-	<div class="mt-4 mb-5"><h6>라인 클릭시 해당 회원의 정보 조회</h6></div>
+<div class="container-900 bg-white container-center">
+	<div align="center">
+	<div class="mt-5 mb-4"><h3>Member List</h3></div>
+	<div class="mb-3"><h6>라인 클릭시 해당 회원의 정보 조회</h6></div>
+	</div>
 	<div class="container">
 		<div class="row">
 		<!-- 사이드바 -->
 		<jsp:include page="/WEB-INF/views/admin/sidebar.jsp"></jsp:include>
 		<!-- 검색창 -->
-		<div class="col-9 ms-1 mb-5">
+		<div class="col-8 ms-1 mb-5">
 			<form method="get">
 				<div class="input-group justify-content-end">
 					<div class="col-2">
