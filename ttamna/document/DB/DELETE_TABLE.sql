@@ -158,7 +158,6 @@ DROP SEQUENCE donation_seq;
 
 COMMIT;
 
-
 ---------------- mybaby_reply --------------------------
 
 -- 테이블 데이터 삭제 ( mybaby_reply)

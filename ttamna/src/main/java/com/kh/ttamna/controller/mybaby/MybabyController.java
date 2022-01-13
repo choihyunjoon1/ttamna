@@ -6,6 +6,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ByteArrayResource;
 import org.springframework.http.HttpHeaders;
@@ -31,7 +33,7 @@ import com.kh.ttamna.vo.mybaby.MybabyFileVO;
 
 @Controller
 @RequestMapping("/mybaby")
-public class mybabyController {
+public class MybabyController {
 
 	
 	@Autowired
@@ -42,7 +44,7 @@ public class mybabyController {
 	
 	@Autowired
 	private MybabyFileService mybabyService;
-	
+
 	
 	//게시글 등록
 	@GetMapping("/write")
@@ -197,8 +199,6 @@ public class mybabyController {
 				
 				.body(resource);
 	}
-	
-
 	
 
 }
