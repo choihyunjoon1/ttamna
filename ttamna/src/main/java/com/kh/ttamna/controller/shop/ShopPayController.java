@@ -102,7 +102,7 @@ public class ShopPayController {
 		System.out.println("아이디 = "+ reqVO.getPartner_user_id());
 		System.out.println("거래아이디 = "+ respVO.getTid());
 		System.out.println("리스트 = "+ list);
-		
+		System.out.println("redirectUri" + respVO.getNext_redirect_pc_url());
 		return "redirect:"+respVO.getNext_redirect_pc_url();
 	}
 	
@@ -114,8 +114,10 @@ public class ShopPayController {
 		public String approve(@RequestParam String pg_token,
 										HttpSession session) throws URISyntaxException {
 			//기존의 장바구니에 있던 데이터들을 추출한다.
+			System.out.println("Success 들어옴 ");
 			List<CartDto> beforeCart = (List<CartDto>)session.getAttribute("cart");
 			System.out.println("결제전 장바구니 = "+ beforeCart);
+			
 			//들어올때 장바구니 세션을 모두 삭제한다.
 			session.removeAttribute("cart");
 			System.out.println("장바구니 삭제됨");
@@ -186,31 +188,35 @@ public class ShopPayController {
 			}
 			
 			// 장바구니에 담겨있던 상품과 결제된 상품이 일치한다면 해당 상품을 지워라.
-			if(beforeCart == null) {
-				
-			}else {
+			if(beforeCart != null) {
 				int i=0;
 				List<CartDto> afterCart = new CopyOnWriteArrayList<>();
-					for(CartDto cart : beforeCart) {
-						boolean isTrue = cart.getShopNo() == shopNoList.get(i) && cart.getMemberId().equals(partner_user_id);
-				
-						if(!isTrue) {
-							afterCart.add(cart);
-						}
-						i++;
+				for(CartDto cart : beforeCart) {
+					boolean isTrue = cart.getShopNo() == shopNoList.get(i) && cart.getMemberId().equals(partner_user_id);
+					
+					if(!isTrue) {
+						afterCart.add(cart);
 					}
-
+					i++;
+				}
 				session.setAttribute("cart", afterCart);
 			}
 
-			
-			
 			return "redirect:/shop/order/success_result";
 		}
 		
 		@GetMapping("/success_result")
 		public String success() {
 			return "shop/order/success_result";
+		}
+		
+		@GetMapping("/cancel_result")
+		public String cancel() {
+			return "shop/order/cancel_result";
+		}
+		@GetMapping("/fail_result")
+		public String fail() {
+			return "shop/order/fail_result";
 		}
 		
 //		@GetMapping("/mypage/cancel_all")
@@ -253,3 +259,4 @@ public class ShopPayController {
 		
 	
 }
+

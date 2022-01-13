@@ -235,18 +235,7 @@ commit;
 
 -------------------------------------------------------------------------------------------------------------
 
--- 상품재고
-create sequence inventory_seq;
-create table inventory(
-inventory_no number primary key, -- 재고번호
-shop_no references shop(shop_no) on delete set null, -- 상품이름
-inventory_time date default sysdate not null, -- 증감일시
-inventory_stock number check(inventory_stock>=0) --총 재고량 , 나중에 입고되면 + 숫자 입력, 출고되면 - 숫자 입력
-);
 
-commit;
-
--------------------------------------------------------------------------------------------------------------
 
 -- 장바구니
 create sequence cart_seq;
@@ -264,20 +253,7 @@ commit;
 
 -------------------------------------------------------------------------------------------------------------
 
--- 주문내역
-create sequence history_seq;
-create table history(
-history_no number primary key, -- 주문내역번호
-member_id CONSTRAINT member_id_fk references member(member_id) on delete cascade, -- 아이디
-cart_no CONSTRAINT cart_no_fk REFERENCES cart(cart_no) on delete cascade, -- 장바구니번호
-shop_no CONSTRAINT shop_no_fk REFERENCES shop(shop_no) on delete cascade, -- 상품번호
-history_time date default sysdate not null -- 주문일자
-);
 
-commit;
--- shop_img_no 참조 여부 확인해야함
-
--------------------------------------------------------------------------------------------------------------
 
 --결제 테이블
 create sequence payment_seq; -- 시퀀스
@@ -301,7 +277,7 @@ commit;
 create table pay_detail(
 pay_no REFERENCES payment(pay_no) on delete cascade, -- 고유번호
 shop_no number not null, -- 상품번호
-shop_goods varchar2(30) not null, -- 상품명
+shop_goods varchar2(150) not null, -- 상품명
 quantity number default 1 not null check(quantity > 0), -- 수량
 price number not null check(price >= 0), -- 가격
 status varchar2(6) not null check(status in ('결제', '취소')) -- 상태

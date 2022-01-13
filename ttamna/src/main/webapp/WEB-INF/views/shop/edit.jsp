@@ -13,7 +13,13 @@
 		min-height: 100px;
 	}
 	textarea[name=shopContent]{
-	
+		width:1px;
+		height:1px;
+		resize:none;
+		
+		position:fixed;
+		top:0;
+		left:-5px;
 	}
 </style>
 
@@ -59,7 +65,7 @@
 		</div>
 		<div class="input-group mb-3">
 		  <span class="input-group-text" id="basic-addon1">수량</span>
-		  <input type="number" name="shopCount" class="form-control" required aria-describedby="basic-addon1" min="0" value="${update.shopCount}">
+		  <input type="number" name="shopCount" class="form-control" required aria-describedby="basic-addon1" min="1" value="${update.shopCount}">
 		</div>
 		<div class="input-group mb-3">
 		  <span class="input-group-text">내용</span>

@@ -19,8 +19,8 @@
 
 <script>
 	$(function(){
-		$(".btn-primary").click(function(){
-			
+		$(".btn-primary").click(function(e){
+//	e.preventDefault();		
 			//form을 임시로 만들어서 body에 추가(전송용)
 			//<form action="test" method="post"></form>
 			var form = $("<form>").attr("action", "${root}/shop/order/multibuy").attr("method", "post").addClass("send-form");
@@ -87,7 +87,7 @@
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 
 <div class="container-700 container-center">
-
+	<span>${root}</span>
 	<div class="mt-5 mb-5"><h3>구매 확인</h3></div>
 
 		 <input type="hidden" name="memberId" value="${uid}">
