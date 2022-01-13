@@ -132,7 +132,6 @@ mybaby_reply_content varchar2(1500) not null, -- 댓글 내용
 mybaby_reply_time date default sysdate not null -- 댓글 작성 시간
 );
 
-
 commit;
 
 -------------------------------------------------------------------------------------------------------------
