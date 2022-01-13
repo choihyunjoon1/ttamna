@@ -37,7 +37,7 @@
 </script>
 
 
-<div class="col-2">
+<div class="col-3">
 	<div class="list-group">
 	<!-- 클릭할 때 해당 메뉴 class에 active 붙이기 -->
 		<a href = "${root }/admin/member/list" class="list-group-item list-group-item-action memberAdmin" >회원 목록</a>
@@ -45,7 +45,7 @@
 		<a href = "${root }/donation/" class="list-group-item list-group-item-action  donationAdmin">기부게시판 목록</a>
 		<a href = "${root }/mybaby/" class="list-group-item list-group-item-action  mybabyAdmin">내새끼자랑 목록</a>
 		<a href = "${root }/adopt/" class="list-group-item list-group-item-action  adoptAdmin">입양 공고 목록</a>
-		<a href = "${root}/admin/statistics/menu" class="list-group-item list-group-item-action  statisticsAdmin">방문자 통계</a>
+		<a href = "${root}/admin/statistics/menu" class="list-group-item list-group-item-action  statisticsAdmin">통계 메뉴</a>
 	</div>
 </div>
 	

@@ -106,7 +106,8 @@ public class AdoptController {
 	
 	//입양공고 게시글 등록 처리 + 파일 저장
 	@PostMapping("/write")
-	public String write(@ModelAttribute AdoptFileVO adoptFileVO, HttpSession session) throws IllegalStateException, IOException {
+	public String write(@ModelAttribute AdoptFileVO adoptFileVO) throws IllegalStateException, IOException {
+		System.out.println("컨트롤러 WRITER="+adoptFileVO.getAdoptWriter());
 		int adoptNo = adoptFileService.insert(adoptFileVO);
 		adoptDao.readUp(adoptNo);
 		//등록처리 완료 후 상세 페이지로 이동

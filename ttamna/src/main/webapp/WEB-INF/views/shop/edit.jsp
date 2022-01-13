@@ -70,7 +70,7 @@
 		<div class="input-group mb-3">
 		  <span class="input-group-text">내용</span>
 		  <div class="editor form-control" contenteditable="true">${update.shopContent}</div>
-		  <textarea name="shopContent"></textarea>
+		  <textarea name="shopContent">${update.shopContent}</textarea>
 		</div>
 		<div class="d-grid gap-2 d-md-flex justify-content-md-end mb-5">
 			<button type="submit" class="btn btn-primary">등록</button>
