@@ -48,6 +48,7 @@ public class DonationReplyController {
 	
 	@PostMapping("/insert")//등록요청
 	public String insert(@ModelAttribute DonationReplyDto donationReplyDto) {
+		System.out.println("donationNo = "+ donationReplyDto.getDonationNo());
 		donationReplyDao.insert(donationReplyDto);
 		return "redirect:/donation/detail?donationNo=" + donationReplyDto.getDonationNo();
 	}
