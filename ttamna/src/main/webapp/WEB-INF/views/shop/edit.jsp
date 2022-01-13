@@ -13,7 +13,13 @@
 		min-height: 100px;
 	}
 	textarea[name=shopContent]{
-	
+		width:1px;
+		height:1px;
+		resize:none;
+		
+		position:fixed;
+		top:0;
+		left:-5px;
 	}
 </style>
 
