@@ -16,7 +16,7 @@
 			<p class="card-text">(2) 동물 보호센터 지정일자</p>
 			<p class="card-text">(3) 동물 보호센터 주소</p>
 			<p class="card-text">(4) 동물 보호센터 전화번호</p>
-			<p class="card-text"><strong>위 내용을 이메일에 작성해 주시고 법인 등록증을 첨부해 주시기 바랍니다</strong></p>
+			<p class="card-text"><strong>위 내용을 이메일에 작성해 주시고 단체등록(허가)증 사본을 첨부해 주시기 바랍니다</strong></p>
 		</div>
 		<div class="card-footer text-muted">
 			<p><small>
