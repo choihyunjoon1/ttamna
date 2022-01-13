@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+
+<!-- mybatis mapper 파일
+	- DBMS에서 실행할 SQL구문을 저장하는 XML파일 
+	- namespace를 통해서 여러개의 매퍼를 구분한다
+	- 테이블 당 한 개씩 만드는 것이 일반적이면 따라서 namespace를 테이블명으로 작성하면 구분이 용이하다
+ 	- <insert>, <select>, <update>, <delete>를 이용해서 CRUD 구문을 작성한다
+ 	- 각 구문은 외부에서 호출이 가능하도록 반드시 ID를 겹치지 않게 부여해야 한다
+ 	- parameterType : 구문을 실행하기 위해 필요한 데이터의 형태 
+ 	- resultType : 구문을 실행한 결과를 어떤 형태로 변환해야 하는지를 말한다
+ -->
+
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="question">
+	<!-- 목록(더보기,검색없이) -->
+	<select id="list" resultType="QuestionDto">
+		select * from question order by question_no desc
+	</select>
+	
+	<!-- 게시글번호 시퀀스 미리 조회 -->
+	<select id="seq" resultType="int">
+		select question_seq.nextval from dual
+	</select>
+	
+	<!-- 게시글등록 -->
+	<insert id = "write" parameterType="QuestionDto">
+		insert into question
+		 values(#{questionNo},#{memberId},#{questionTitle},#{questionContent},'문의중',sysdate)
+	</insert>
+	
+	<!-- 상세조회 -->
+	<select id="search" parameterType="int" resultType="QuestionDto">
+		select * from question where question_no=#{questionNo}
+	</select>
+	
+	<!-- 더보기 페이지네이션 -->
+	<select id="listByPage" parameterType="map" resultType="QuestionDto">
+		select * from(
+		    select rownum rn, tmp.* from(
+		        select * from question
+		        order by question_no desc
+		        )tmp
+		)where rn between ${startRow} and ${endRow}
+	</select>
+	
+	<!-- 게시글 삭제 -->
+	<delete id="delete" parameterType="int">
+		delete question where question_no=#{questionNo}
+	</delete>
+	
+	<!-- 게시글 수정 -->
+	<update id="edit" parameterType="QuestionDto">
+		update question
+			<set>
+				<if test="questionTitle != null">
+					question_title = #{questionTitle},
+				</if>
+				<if test="questionContent != null">
+					question_content = #{questionContent},
+				</if>
+			</set>
+		where question_no=#{questionNo}
+	</update>
+	<!-- 문의내역 타입 수정 -->
+	<update id="editType" parameterType = "map">
+		update question set question_type=#{questionType} where question_no=#{questionNo}
+	</update>
+	
+	
+</mapper>
+

@@ -162,6 +162,7 @@
             <a class="dropdown-item docs-creator headMember" href="${root}/about_us">동물의 집 소개</a>
             <a class="dropdown-item docs-creator headMember" href="${root}/upgrade">보호소 등급신청 방법</a>
             <a class="dropdown-item docs-creator headMember" href="${root}/support">유기동물 입양 지원 안내</a>
+            <a class="dropdown-item docs-creator headMember" href="${root}/question/">1:1 문의하기</a>
           </div>
         </li>
      </ul>
