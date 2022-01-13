@@ -107,8 +107,8 @@
 	</update>
 	
 	<!-- 구매시 재고 감소 -->
-	<update id="sell" parameterType="int">
-		update shop set shop_count = shop_count - 1 where shop_no = #{shopNo}
+	<update id="sell" parameterType="map">
+		update shop set shop_count = shop_count - #{shopCount} where shop_no = #{shopNo}
 	</update>
 </mapper>
 
