@@ -39,6 +39,7 @@ public class ShopPayServiceImpl implements ShopPayService{
 	// 단건 결제 준비
 	@Override
 	public KakaoPayReadyResponseVo ready(KakaoPayReadyRequestVo requestVo) throws URISyntaxException {
+		System.out.println("페이서비스 준비");
 		RestTemplate template = new RestTemplate();
 		
 		HttpHeaders headers = new HttpHeaders();
@@ -81,6 +82,7 @@ public class ShopPayServiceImpl implements ShopPayService{
 	// 결제 승인
 	@Override
 	public KakaoPayApproveResponseVo approve(KakaoPayApproveRequestVo requestVo) throws URISyntaxException {
+		System.out.println("결제승인 들어옴");
 		RestTemplate template = new RestTemplate();
 		
 		HttpHeaders headers = new HttpHeaders();

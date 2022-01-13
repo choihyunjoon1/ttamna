@@ -62,8 +62,8 @@ $(function(){
 		var shopImgNo = $("input[name=shopImgNo]").val();
 		var cartCount = $("input[name=cartCount]").val()
 		
-		if($("input[name=cartCount]").val() == ''){
-			alert("수량을 입력해주세요");
+		if($("input[name=cartCount]").val() == '' || $("input[name=cartCount]").val() < 1){
+			alert("올바른 수량을 입력해주세요");
 			return;
 		}
 		
@@ -121,8 +121,8 @@ $(function(){
 		
 		
 		// 수량 미선택시
-		if(cartCount == ''){
-			alert("수량을 입력해주세요");
+		if(cartCount == '' || cartCount < 1){
+			alert("올바른 수량을 입력해주세요");
 			return;
 		}
 		
@@ -317,7 +317,7 @@ $(function(){
 		  <li class="list-group-item text-muted">
 		  	<!-- 결제시 필요한 데이터 -->
 		  		<div class="oneline">
-				  	<input type="number" name="cartCount" placeholder="수량을 입력해주세요" class="center form-control" required min="0">
+				  	<input type="number" name="cartCount" placeholder="수량을 입력해주세요" class="center form-control" required>
 				  	<input type="hidden" name="shopNo" value="${detail.shopNo}" id="shopNo">
 					<input type="hidden" name="memberId" value="${sessionScope.uid}">
 					<input type="hidden" name="shopGoods" value="${detail.shopGoods}">

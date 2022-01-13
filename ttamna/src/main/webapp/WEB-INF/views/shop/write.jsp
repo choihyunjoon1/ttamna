@@ -25,6 +25,7 @@
 
 <script>
 	$(function(){
+		// 에디터
 		function copyText(){
 			var origin = $(".editor").html();
 			$("textarea[name=shopContent]").val(origin);
@@ -34,6 +35,15 @@
 			//copy
 			copyText();
 		});
+		
+		// 수량체크
+		$("input[name=shopCount]").on("change", function(){
+			var goodsCount = $("input[name=shopCount]").val();
+			if(goodsCount == "" || goodsCount < 1){
+				alert("올바른 수량을 입력해주세요");
+			}
+		});
+		
 	});
 </script>
 
@@ -62,7 +72,7 @@
 		</div>
 		<div class="input-group mb-3">
 		  <span class="input-group-text" id="basic-addon1">수량</span>
-		  <input type="number" name="shopCount" class="form-control" required aria-describedby="basic-addon1" min="0">
+		  <input type="number" name="shopCount" class="form-control" required aria-describedby="basic-addon1" min="1">
 		</div>
 		<div class="input-group mb-3">
 		  <span class="input-group-text">내용</span>
