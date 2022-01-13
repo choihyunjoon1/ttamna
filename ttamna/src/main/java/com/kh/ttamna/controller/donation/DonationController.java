@@ -113,7 +113,7 @@ public class DonationController {
 	public String delete(@RequestParam int donationNo,
 							HttpSession session) {
 		donationService.delete(donationNo);
-		donationDao.delete((String)session.getAttribute("uid"));
+		donationDao.delete(donationNo);
 		
 		return "redirect:/donation/list";
 	}
