@@ -3,7 +3,7 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:set var="root" value="${pageContext.request.contextPath }"></c:set>
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
-<link ref="stylesheet" type="text/css" href="${root }/resources/css/commons.css">
+<link ref="stylesheet" type="text/css" href="${root}/resources/css/commons.css">
 
 
 

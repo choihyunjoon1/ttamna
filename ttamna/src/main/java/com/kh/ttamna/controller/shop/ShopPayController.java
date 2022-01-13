@@ -102,7 +102,7 @@ public class ShopPayController {
 		System.out.println("아이디 = "+ reqVO.getPartner_user_id());
 		System.out.println("거래아이디 = "+ respVO.getTid());
 		System.out.println("리스트 = "+ list);
-		
+		System.out.println("redirectUri" + respVO.getNext_redirect_pc_url());
 		return "redirect:"+respVO.getNext_redirect_pc_url();
 	}
 	
@@ -114,8 +114,10 @@ public class ShopPayController {
 		public String approve(@RequestParam String pg_token,
 										HttpSession session) throws URISyntaxException {
 			//기존의 장바구니에 있던 데이터들을 추출한다.
+			System.out.println("Success 들어옴 ");
 			List<CartDto> beforeCart = (List<CartDto>)session.getAttribute("cart");
 			System.out.println("결제전 장바구니 = "+ beforeCart);
+			
 			//들어올때 장바구니 세션을 모두 삭제한다.
 			session.removeAttribute("cart");
 			System.out.println("장바구니 삭제됨");
@@ -213,6 +215,15 @@ public class ShopPayController {
 			return "shop/order/success_result";
 		}
 		
+		@GetMapping("/cancel_result")
+		public String cancel() {
+			return "shop/order/cancel_result";
+		}
+		@GetMapping("/fail_result")
+		public String fail() {
+			return "shop/order/fail_result";
+		}
+		
 //		@GetMapping("/mypage/cancel_all")
 //		public String cancelAll(@RequestParam int shopNo, RedirectAttributes attr) throws URISyntaxException {
 //			PaymentDto payDto = paymentDao.get(shopNo);
@@ -253,3 +264,4 @@ public class ShopPayController {
 		
 	
 }
+
