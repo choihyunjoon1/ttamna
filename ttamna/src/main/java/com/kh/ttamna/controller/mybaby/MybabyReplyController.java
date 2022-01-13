@@ -13,12 +13,15 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.kh.ttamna.entity.mybaby.MybabyReplyDto;
+import com.kh.ttamna.repository.mybaby.MybabyDao;
 import com.kh.ttamna.repository.mybaby.MybabyReplyDao;
 import com.kh.ttamna.vo.pagination.PaginationVO;
 
 @Controller
 @RequestMapping("/mybaby_reply")
 public class MybabyReplyController {
+	@Autowired
+	private MybabyDao mybabyDao;
 
 	//데이터 등록 요청을 하기위해서는 PostMapping을 이용하고
 	//해당 페이지로 이동 요청을 하기 위해서는 GetMapping을 이용한다
@@ -52,6 +55,7 @@ public class MybabyReplyController {
 	@PostMapping("/insert")//등록요청
 	public String insert(@ModelAttribute MybabyReplyDto mybabyReplyDto) {
 		mybabyReplyDao.insert(mybabyReplyDto);
+		//댓글 등록 할 때 mybaby_reply 를 +1 시켜야한다.
 		return "redirect:/mybaby/detail?mybabyNo=" + mybabyReplyDto.getMybabyNo();
 	}
 	

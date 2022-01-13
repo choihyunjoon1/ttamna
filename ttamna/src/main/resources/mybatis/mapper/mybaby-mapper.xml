@@ -110,8 +110,14 @@
         </if>
         order by B.mybaby_no desc
 	</select>
-	
-	
+	<!-- 댓글수 증가 -->
+	<update id="replyUpdate" parameterType="int">
+		update mybaby set mybaby_reply = mybaby_reply+1 where mybaby_no = #{mybabyNo}
+	</update>
+	<!-- 댓글수 감소 -->
+	<update id="replyDelete" parameterType="int">
+		update mybaby set mybaby_reply = mybaby_reply-1 where mybaby_no=#{mybabyNo}
+	</update>
 	
 </mapper>
 
