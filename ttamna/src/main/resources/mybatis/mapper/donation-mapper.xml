@@ -46,8 +46,8 @@
 		select * from donation where donation_no = ${donationNo}
 	</select>
 	
-	<delete id="delete" parameterType="String">
-		delete donation where donation_writer = #{donationWriter}
+	<delete id="delete" parameterType="int">
+		delete donation where donation_no = #{donationNo}
 	</delete>
 	
 	<!-- 최종 = 단일조회와 검색이 모두 되는 -->
