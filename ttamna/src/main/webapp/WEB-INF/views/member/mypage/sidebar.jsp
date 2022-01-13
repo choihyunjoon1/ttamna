@@ -52,7 +52,7 @@
 		<a href = "${root }/member/mypage/my_info" class="list-group-item list-group-item-action myInfo" >내 정보</a>
 		<a href = "${root }/member/mypage/edit" class="list-group-item list-group-item-action edit">정보 수정</a>
 		<a href = "${root }/member/mypage/change_pw" class="list-group-item list-group-item-action  changePw">비밀번호 변경</a>
-		<a href = "${root }/member/mypage/my_board" class="list-group-item list-group-item-action  myBoard">내 게시글 보기</a>
+		<a href = "${root }/member/mypage/my_board" class="list-group-item list-group-item-action  myBoard">내 게시글</a>
 		<a href = "${root }/member/mypage/my_donation" class="list-group-item list-group-item-action  myDonation">정기기부 목록</a>
 		<a href = "${root }/member/mypage/short_donation" class="list-group-item list-group-item-action  myShortDonation">단건기부 목록</a>
 		<a href = "${root }/member/mypage/my_order" class="list-group-item list-group-item-action  myOrder">주문 내역</a>
