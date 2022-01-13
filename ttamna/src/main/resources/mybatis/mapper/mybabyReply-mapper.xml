@@ -73,6 +73,11 @@ MEMBER_ID
 		 select count(*) from mybaby_reply where mybaby_no=#{mybabyNo}
 	</select>
 	
+	<!-- 댓글번호로 테이블 조회 -->
+	<select id = "getByReply" parameterType = "int" resultType="MybabyReplyDto">
+		select * from mybaby_reply where mybaby_reply_no = #{mybabyReplyNo}
+	</select>
+	
 </mapper>
 
 
