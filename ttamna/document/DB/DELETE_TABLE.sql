@@ -239,3 +239,15 @@ COMMIT;
 drop table dormancy;
 
 commit;
+
+------------------------------------------------------
+
+--문의내역 테이블 삭제
+drop table question;
+commit;
+
+------------------------------------------------------
+
+--문의내역 댓글 테이블 삭제
+drop table question_reply;
+commit;
