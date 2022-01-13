@@ -91,7 +91,12 @@ $(function(){
 });
 
 </script>
-
+<style>
+	.card-img-top{
+		width:100%;
+		height:15rem;
+	}
+</style>
 
 <div class="container">
 	<div class="row mt-3">

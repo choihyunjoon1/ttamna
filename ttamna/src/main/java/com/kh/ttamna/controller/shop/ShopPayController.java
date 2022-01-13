@@ -186,25 +186,20 @@ public class ShopPayController {
 			}
 			
 			// 장바구니에 담겨있던 상품과 결제된 상품이 일치한다면 해당 상품을 지워라.
-			if(beforeCart == null) {
-				
-			}else {
+			if(beforeCart != null) {
 				int i=0;
 				List<CartDto> afterCart = new CopyOnWriteArrayList<>();
-					for(CartDto cart : beforeCart) {
-						boolean isTrue = cart.getShopNo() == shopNoList.get(i) && cart.getMemberId().equals(partner_user_id);
-				
-						if(!isTrue) {
-							afterCart.add(cart);
-						}
-						i++;
+				for(CartDto cart : beforeCart) {
+					boolean isTrue = cart.getShopNo() == shopNoList.get(i) && cart.getMemberId().equals(partner_user_id);
+					
+					if(!isTrue) {
+						afterCart.add(cart);
 					}
-
+					i++;
+				}
 				session.setAttribute("cart", afterCart);
 			}
 
-			
-			
 			return "redirect:/shop/order/success_result";
 		}
 		

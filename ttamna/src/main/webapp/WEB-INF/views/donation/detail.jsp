@@ -49,7 +49,8 @@
 		var grade="${sessionScope.grade}";
 		var page = 1;	
 		var size = 12;
-		var donationNo = parseInt($(".donation-no").val());
+		var donationNo = parseInt($("input[name=donationNo]").val());
+		console.log(donationNo, typeof(donationNo));
 		//더보기 버튼 클릭시 이벤트 발생
 		$(".more-btn").click(function(){
 			loadList(page, size);
@@ -146,7 +147,6 @@
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 
 <c:forEach var="donationDto" items="${donationDto}">
-<input type="hidden" class="donation-no" value="${donationDto.donationNo}">
 <div class="container-500 container-center">
 	<div class="card mb-5">
 		<%-- 제목 영역 --%>
@@ -246,7 +246,7 @@
 		</div>
 	</div>
 </div>
-</c:forEach>
+
 
 
 	<!-- 댓글목록 표시 위치 -->		
@@ -257,7 +257,7 @@
 	    <div class="col-12">
 	        <form action="${pageContext.request.contextPath}/donation_reply/insert" method="post">
 	           <input type="hidden" name="memberId" value="${sessionScope.uid}">
-	 		
+	 			<input type="hidden" name="donationNo" class="donation-no" value="${donationDto.donationNo}">
 	 		<i class="bi bi-chat-left-text"> 
 	 			댓글 쓰기
 		 		<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chat-left-text" viewBox="0 0 16 16">
@@ -275,6 +275,7 @@
 	  </div>
  </c:if>
 
+</c:forEach>
 
 
 

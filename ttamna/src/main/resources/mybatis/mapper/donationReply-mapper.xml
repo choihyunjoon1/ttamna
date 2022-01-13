@@ -25,9 +25,10 @@
 			donation_reply_superno, donation_reply_groupno, donation_reply_depth -->
 	<!-- 댓글 작성 -->
 	<insert id="insert" parameterType="DonationReplyDto">
-		insert into donation_reply values( donation_reply_seq.nextval,
-			#{memberId}, ${donationNo}, #{donationReplyContent},
-			sysdate
+		insert into donation_reply 
+		values( 
+		  #{donationReplyNo}, #{memberId}, 
+		  ${donationNo}, #{donationReplyContent},sysdate
 		)
 		
 	</insert>	
