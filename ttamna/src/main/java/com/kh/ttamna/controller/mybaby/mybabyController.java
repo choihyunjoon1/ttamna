@@ -6,8 +6,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.servlet.http.HttpSession;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ByteArrayResource;
 import org.springframework.http.HttpHeaders;
@@ -44,6 +42,8 @@ public class mybabyController {
 	
 	@Autowired
 	private MybabyFileService mybabyService;
+	
+	
 	//게시글 등록
 	@GetMapping("/write")
 	public String write() {
@@ -198,4 +198,16 @@ public class mybabyController {
 				.body(resource);
 	}
 	
+
+	
+
 }
+
+
+
+
+
+
+
+
+
