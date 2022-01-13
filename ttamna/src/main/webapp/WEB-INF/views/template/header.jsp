@@ -158,8 +158,7 @@
           <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle docs-creator headMember" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Info</a>
           <div class="dropdown-menu">
-            <a class="dropdown-item docs-creator headMember" href="${root}">Home</a>
-            <a class="dropdown-item docs-creator headMember" href="${root}/about_us">동물의 집 소개</a>
+            <a class="dropdown-item docs-creator headMember" href="${root }">Home</a>
             <a class="dropdown-item docs-creator headMember" href="${root}/upgrade">보호소 등급신청 방법</a>
             <a class="dropdown-item docs-creator headMember" href="${root}/support">유기동물 입양 지원 안내</a>
           </div>
