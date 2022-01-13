@@ -1,7 +1,9 @@
 package com.kh.ttamna.controller.donation;
 
 import java.io.IOException;
+import java.net.InetAddress;
 import java.net.URLEncoder;
+import java.net.UnknownHostException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -21,6 +23,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 
 import com.kh.ttamna.entity.donation.DonationDto;
 import com.kh.ttamna.entity.donation.DonationImgDto;
@@ -56,7 +60,7 @@ public class DonationController {
 	@RequestMapping("/")//목록페이지
 	public String defaultList(@RequestParam(required = false) String column,
 										@RequestParam(required = false) String keyword,
-			Model model) {
+			Model model) throws UnknownHostException {
 		
 		if(column != null && keyword != null) {
 			Map<String, Object> data = new HashMap<>();

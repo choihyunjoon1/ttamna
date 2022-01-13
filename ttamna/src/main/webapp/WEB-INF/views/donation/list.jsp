@@ -72,7 +72,6 @@ $(function(){
 						"<div class='card-body'>" +
 						"<h5 class='card-title'>"+resp[i].donationTitle+"</h5>" +
 						"<div class='card-text'>"+donationWriter+"</div>"+
-						"<div class='card-text'>"+resp[i].donationContent+"</div>"+
 						"<div class='card-text'><span>현재 기부 금액 : </span>"+resp[i].donationNowFund+"원</div>"+
 						"<div class='card-text'><span>목표 기부 금액 : </span>"+resp[i].donationTotalFund+"원</div>"+
 						"<div class='progress'>"+

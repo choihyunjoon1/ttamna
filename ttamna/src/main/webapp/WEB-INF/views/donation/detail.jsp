@@ -183,7 +183,10 @@
 		</c:if>
 		<%-- 글 내용이 찍히는 영역 --%>
 		<div class="card-body">
-			<p class="card-text">${donationDto.donationContent}</p>
+			<p class="card-text">
+			<textarea readonly class="form-control" aria-label="With textarea" 
+			 style="min-height:1100px; resize:none;">${donationDto.donationContent}</textarea>
+			</p>
 		</div>
 		<%-- 각종 정보가 줄 단위로 찍히는 영역 --%>
 		<ul class="list-group list-group-flush">
