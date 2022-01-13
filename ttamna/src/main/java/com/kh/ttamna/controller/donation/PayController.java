@@ -163,8 +163,8 @@ public class PayController {
 		return "donation/kakao/search";
 	}
 	
-	@GetMapping("/cancel")//결제 취소 요청
-	public String cancel(@RequestParam String tid, @RequestParam long amount,
+	@GetMapping("/cancel_all")//결제 취소 요청
+	public String cancelAll(@RequestParam String tid, @RequestParam long amount,
 								@RequestParam int payNo,Model model) throws URISyntaxException {
 		KakaoPayCancelResponseVo responseVo = kakaoService.cancel(tid, amount);
 		
@@ -172,6 +172,16 @@ public class PayController {
 		donationService.updatePrice(payNo);
 		model.addAttribute("cancelList", responseVo);
 		
+		return "donation/kakao/cancel_all";
+	}
+	
+	@GetMapping("/cancel")//결제 취소 클릭 시
+	public String cancel() {
 		return "donation/kakao/cancel";
+	}
+	
+	@GetMapping("/fail")//결제 실패 시
+	public String fail() {
+		return "donation/kakao/fail";
 	}
 }
