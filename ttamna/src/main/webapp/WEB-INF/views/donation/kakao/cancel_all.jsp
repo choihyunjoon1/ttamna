@@ -7,7 +7,7 @@
 <div class="container">
 	<div class="row mt-3">
 	<div class="col">
-		<h2>결제가 취소되었습니다.</h2>
+		<h2>${cancelList}</h2>
 	</div>
 	</div>
 </div>
