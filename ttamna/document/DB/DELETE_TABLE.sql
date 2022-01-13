@@ -67,19 +67,6 @@ DROP SEQUENCE payment_seq;
 
 COMMIT;
 
----------------- history --------------------------
-
--- 테이블 데이터 삭제 (history)
-TRUNCATE TABLE history;
-
--- 테이블 삭제 (history)
-DROP TABLE history CASCADE CONSTRAINTS;
-
--- 시퀀스 삭제 (history)
-DROP SEQUENCE history_seq;
-
-COMMIT;
-
 ---------------- cart --------------------------
 
 -- 테이블 데이터 삭제 (cart)
@@ -90,20 +77,6 @@ DROP TABLE cart CASCADE CONSTRAINTS;
 
 -- 시퀀스 삭제 (cart)
 DROP SEQUENCE cart_seq;
-
-COMMIT;
-
-
----------------- inventory --------------------------
-
--- 테이블 데이터 삭제 (inventory)
-TRUNCATE TABLE inventory;
-
--- 테이블 삭제 (inventory)
-DROP TABLE inventory CASCADE CONSTRAINTS;
-
--- 시퀀스 삭제 (inventory)
-DROP SEQUENCE inventory_seq;
 
 COMMIT;
 
