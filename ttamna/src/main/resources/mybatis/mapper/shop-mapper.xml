@@ -28,7 +28,7 @@
 	<!-- 게시물 등록 -->
 	<insert id="insert" parameterType="ShopDto">
 		insert into shop values(
-			#{shopNo}, #{memberId}, #{shopTitle}, #{shopGoods}, #{shopPrice}, #{shopCount}, #{shopContent}, sysdate, 0
+			#{shopNo}, #{memberId}, #{shopTitle}, #{shopPrice}, #{shopCount}, #{shopContent}, sysdate, 0, #{shopGoods}
 		)
 	</insert>
 	
