@@ -25,7 +25,6 @@ public class GradeInterceptor implements HandlerInterceptor{
 			return true;
 		}else {
 			System.out.println("[Grade Interceptor] " + memberGrade + " 등급. 접속 차단. " );
-			response.sendRedirect(request.getContextPath()+"/donation/");
 			return false;
 		}
 	}
