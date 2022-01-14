@@ -33,7 +33,8 @@ public class DonationFileServiceImpl implements DonationFileService{
 		
 		System.out.println("donationWriter = " + donationUploadVo.getDonationWriter());
 		//파일이 있던 없던 게시판 등록 과정을 진행 해 주고
-		sqlSession.insert("donation.insert", donationUploadVo.convertToDonationDto(donationNo));
+		donationDao.insert(donationUploadVo.convertToDonationDto(donationNo));
+//		sqlSession.insert("donation.insert", donationUploadVo.convertToDonationDto(donationNo));
 		
 		//여기서 파일이 있으면 파일을 등록해준다.
 		//[1] DonationImgDtoList를 여기서 뽑는다
@@ -93,7 +94,6 @@ public class DonationFileServiceImpl implements DonationFileService{
 		donationDao.edit(donationDto);
 		int i = 0;
 		
-		System.out.println("파일이있다네요?");
 		for(MultipartFile files : donationUploadVo.getAttach()) {
 			if(!files.isEmpty()) {//파일이 있으면 실행
 				//파일 추가과정

@@ -161,6 +161,7 @@
 				<a href="${root}/question/edit?questionNo=${question.questionNo}" type="button" class="btn btn-outline-warning">수정</a>
 				<button type="button" class="btn btn-outline-secondary delete-btn">삭제</button>
 				<!-- 답변 완료 상태로 바꿔주기 -->
+				<c:if test="${grade=='관리자' }">
 				<form method="post" action="${root }/question/edit_type">
 					<div class="input-group justify-content-end ms-5" style="width:13rem">
 					<input type="hidden" name="questionNo" value="${question.questionNo}">
@@ -174,6 +175,7 @@
 							</div>
 						</div>	
 				</form>
+				</c:if>
 			</c:if>	
 			</div>
 		  </div>
