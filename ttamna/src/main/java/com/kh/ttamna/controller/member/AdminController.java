@@ -30,10 +30,6 @@ public class AdminController {
 	@Autowired
 	private PaginationService paginationService;
 	
-	@Autowired
-	private PaymentDao paymentDao;
-	
-	
 	//관리자 메인페이지
 	@GetMapping("/main")
 	public String main() {
