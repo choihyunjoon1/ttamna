@@ -1,199 +1,238 @@
-<mxfile host="app.diagrams.net" modified="2022-01-14T07:43:10.805Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.71 Safari/537.36" etag="LsUjA_SQEC6Tz7OkOL6i" version="16.2.6" type="github">
+<mxfile host="app.diagrams.net" modified="2022-01-14T08:10:44.106Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.71 Safari/537.36" etag="TAgxxn5ZlaG7yneAFAVD" version="16.2.6" type="github">
   <diagram id="Bi_J7b9Yd5lxBIXmXcTw" name="Page-1">
     <mxGraphModel dx="1370" dy="717" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
-        <mxCell id="CLN-RXMXk3StLQkUaewG-1" value="게시판&lt;br&gt;donation/detail" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
-          <mxGeometry x="990" y="230" width="120" height="60" as="geometry" />
-        </mxCell>
-        <mxCell id="CLN-RXMXk3StLQkUaewG-22" value="댓글 목록&lt;br&gt;[POST]&lt;br&gt;/donation_reply/more" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;" parent="1" vertex="1">
-          <mxGeometry x="550" y="150" width="120" height="60" as="geometry" />
-        </mxCell>
-        <mxCell id="CLN-RXMXk3StLQkUaewG-30" value="댓글 쓰기(등록)&lt;br&gt;[POST]&lt;br&gt;/donation_reply/insert" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;" parent="1" vertex="1">
-          <mxGeometry x="550" y="220" width="120" height="60" as="geometry" />
-        </mxCell>
-        <mxCell id="CLN-RXMXk3StLQkUaewG-32" value="댓글 삭제&lt;br&gt;[GET]&lt;br&gt;/donation_reply/delete" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;" parent="1" vertex="1">
-          <mxGeometry x="550" y="360" width="120" height="60" as="geometry" />
-        </mxCell>
-        <mxCell id="CLN-RXMXk3StLQkUaewG-40" value="donationReplyNo" style="endArrow=classic;startArrow=classic;html=1;rounded=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0.25;entryY=1;entryDx=0;entryDy=0;" parent="1" source="CLN-RXMXk3StLQkUaewG-32" target="CLN-RXMXk3StLQkUaewG-1" edge="1">
-          <mxGeometry x="-0.2444" width="50" height="50" relative="1" as="geometry">
-            <mxPoint x="660" y="429" as="sourcePoint" />
-            <mxPoint x="840" y="279" as="targetPoint" />
-            <Array as="points">
-              <mxPoint x="720" y="390" />
-              <mxPoint x="1020" y="390" />
-            </Array>
-            <mxPoint as="offset" />
-          </mxGeometry>
-        </mxCell>
-        <mxCell id="CLN-RXMXk3StLQkUaewG-43" value="댓글 쓰기(입력)&lt;br&gt;[GET]&lt;br&gt;/donation_reply/insert" style="whiteSpace=wrap;html=1;rounded=1;fillColor=#ffe6cc;strokeColor=#d79b00;" parent="1" vertex="1">
-          <mxGeometry x="550" y="290" width="120" height="60" as="geometry" />
-        </mxCell>
-        <mxCell id="CLN-RXMXk3StLQkUaewG-48" value="" style="endArrow=classic;startArrow=classic;html=1;rounded=0;entryX=0.25;entryY=0;entryDx=0;entryDy=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;" parent="1" target="CLN-RXMXk3StLQkUaewG-1" edge="1">
-          <mxGeometry width="50" height="50" relative="1" as="geometry">
-            <mxPoint x="670" y="177" as="sourcePoint" />
-            <mxPoint x="759.9999999999999" y="245.00000000000006" as="targetPoint" />
-            <Array as="points">
-              <mxPoint x="710" y="177" />
-              <mxPoint x="1020" y="177" />
-            </Array>
-          </mxGeometry>
-        </mxCell>
-        <mxCell id="CLN-RXMXk3StLQkUaewG-54" value="page&lt;br&gt;size&lt;br&gt;donationNo" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" parent="CLN-RXMXk3StLQkUaewG-48" vertex="1" connectable="0">
-          <mxGeometry x="0.4325" y="1" relative="1" as="geometry">
-            <mxPoint x="-109" as="offset" />
-          </mxGeometry>
-        </mxCell>
-        <mxCell id="CLN-RXMXk3StLQkUaewG-53" value="" style="endArrow=classic;startArrow=classic;html=1;rounded=0;" parent="1" edge="1">
-          <mxGeometry width="50" height="50" relative="1" as="geometry">
-            <mxPoint x="670" y="249.76" as="sourcePoint" />
-            <mxPoint x="990" y="249.76" as="targetPoint" />
-            <Array as="points" />
-          </mxGeometry>
-        </mxCell>
-        <mxCell id="CLN-RXMXk3StLQkUaewG-55" value="DonationReplyDto" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" parent="CLN-RXMXk3StLQkUaewG-53" vertex="1" connectable="0">
-          <mxGeometry x="0.3565" relative="1" as="geometry">
-            <mxPoint x="-37" as="offset" />
-          </mxGeometry>
-        </mxCell>
-        <mxCell id="CLN-RXMXk3StLQkUaewG-58" value="게시판&lt;br&gt;shop/detail" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
-          <mxGeometry x="990" y="610" width="120" height="60" as="geometry" />
-        </mxCell>
-        <mxCell id="CLN-RXMXk3StLQkUaewG-59" value="댓글 목록&lt;br&gt;[POST]&lt;br&gt;shop_reply/more" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;" parent="1" vertex="1">
-          <mxGeometry x="550" y="530" width="120" height="60" as="geometry" />
-        </mxCell>
-        <mxCell id="CLN-RXMXk3StLQkUaewG-60" value="댓글 쓰기(등록)&lt;br&gt;[POST]&lt;br&gt;/shop_reply/insert" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;" parent="1" vertex="1">
-          <mxGeometry x="550" y="600" width="120" height="60" as="geometry" />
-        </mxCell>
-        <mxCell id="CLN-RXMXk3StLQkUaewG-61" value="댓글 삭제&lt;br&gt;[GET]&lt;br&gt;/shop_reply/delete" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;" parent="1" vertex="1">
-          <mxGeometry x="550" y="740" width="120" height="60" as="geometry" />
-        </mxCell>
-        <mxCell id="CLN-RXMXk3StLQkUaewG-62" value="shopReplyNo" style="endArrow=classic;startArrow=classic;html=1;rounded=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0.25;entryY=1;entryDx=0;entryDy=0;" parent="1" source="CLN-RXMXk3StLQkUaewG-61" target="CLN-RXMXk3StLQkUaewG-58" edge="1">
-          <mxGeometry x="-0.2444" width="50" height="50" relative="1" as="geometry">
-            <mxPoint x="660" y="809" as="sourcePoint" />
-            <mxPoint x="840" y="659" as="targetPoint" />
-            <Array as="points">
-              <mxPoint x="720" y="770" />
-              <mxPoint x="1020" y="770" />
-            </Array>
-            <mxPoint as="offset" />
-          </mxGeometry>
-        </mxCell>
-        <mxCell id="CLN-RXMXk3StLQkUaewG-63" value="댓글 쓰기(입력)&lt;br&gt;[GET]&lt;br&gt;/shop_reply/insert" style="whiteSpace=wrap;html=1;rounded=1;fillColor=#ffe6cc;strokeColor=#d79b00;" parent="1" vertex="1">
-          <mxGeometry x="550" y="670" width="120" height="60" as="geometry" />
-        </mxCell>
-        <mxCell id="CLN-RXMXk3StLQkUaewG-65" value="" style="endArrow=classic;startArrow=classic;html=1;rounded=0;entryX=0.25;entryY=0;entryDx=0;entryDy=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;" parent="1" target="CLN-RXMXk3StLQkUaewG-58" edge="1">
-          <mxGeometry width="50" height="50" relative="1" as="geometry">
-            <mxPoint x="670.0000000000002" y="557" as="sourcePoint" />
-            <mxPoint x="759.9999999999999" y="625" as="targetPoint" />
-            <Array as="points">
-              <mxPoint x="710" y="557" />
-              <mxPoint x="1020" y="557" />
-            </Array>
-          </mxGeometry>
-        </mxCell>
-        <mxCell id="CLN-RXMXk3StLQkUaewG-66" value="page&lt;br&gt;size&lt;br&gt;shopNo" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" parent="CLN-RXMXk3StLQkUaewG-65" vertex="1" connectable="0">
-          <mxGeometry x="0.4325" y="1" relative="1" as="geometry">
-            <mxPoint x="-109" as="offset" />
-          </mxGeometry>
-        </mxCell>
-        <mxCell id="CLN-RXMXk3StLQkUaewG-67" value="" style="endArrow=classic;startArrow=classic;html=1;rounded=0;" parent="1" edge="1">
-          <mxGeometry width="50" height="50" relative="1" as="geometry">
-            <mxPoint x="670.0000000000002" y="629.76" as="sourcePoint" />
-            <mxPoint x="990" y="629.76" as="targetPoint" />
-            <Array as="points" />
-          </mxGeometry>
-        </mxCell>
-        <mxCell id="CLN-RXMXk3StLQkUaewG-68" value="ShopReplyDto" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" parent="CLN-RXMXk3StLQkUaewG-67" vertex="1" connectable="0">
-          <mxGeometry x="0.3565" relative="1" as="geometry">
-            <mxPoint x="-37" as="offset" />
-          </mxGeometry>
-        </mxCell>
         <mxCell id="CLN-RXMXk3StLQkUaewG-69" value="게시판&lt;br&gt;mybaby/detail" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
           <mxGeometry x="990" y="1080" width="120" height="60" as="geometry" />
         </mxCell>
-        <mxCell id="CLN-RXMXk3StLQkUaewG-70" value="댓글 목록&lt;br&gt;[POST]&lt;br&gt;mybaby_reply/more" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;" parent="1" vertex="1">
-          <mxGeometry x="550" y="1000" width="120" height="60" as="geometry" />
+        <mxCell id="CLN-RXMXk3StLQkUaewG-70" value="댓글 목록&lt;br&gt;[POST]&lt;br&gt;/mybaby_reply/more" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;" parent="1" vertex="1">
+          <mxGeometry x="550" y="1240" width="120" height="60" as="geometry" />
         </mxCell>
-        <mxCell id="CLN-RXMXk3StLQkUaewG-71" value="댓글 쓰기(등록)&lt;br&gt;[POST]&lt;br&gt;/mybaby_reply/insert" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;" parent="1" vertex="1">
+        <mxCell id="CLN-RXMXk3StLQkUaewG-71" value="댓글 쓰기(등록)&lt;br&gt;[POST]&lt;br&gt;/mybaby_reply/insert" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;" parent="1" vertex="1">
           <mxGeometry x="550" y="1070" width="120" height="60" as="geometry" />
         </mxCell>
         <mxCell id="CLN-RXMXk3StLQkUaewG-72" value="댓글 삭제&lt;br&gt;[GET]&lt;br&gt;/mybaby_reply/delete" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;" parent="1" vertex="1">
-          <mxGeometry x="550" y="1210" width="120" height="60" as="geometry" />
+          <mxGeometry x="550" y="1000" width="120" height="60" as="geometry" />
         </mxCell>
-        <mxCell id="CLN-RXMXk3StLQkUaewG-73" value="mybabyReplyNo" style="endArrow=classic;startArrow=classic;html=1;rounded=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0.25;entryY=1;entryDx=0;entryDy=0;" parent="1" source="CLN-RXMXk3StLQkUaewG-72" target="CLN-RXMXk3StLQkUaewG-69" edge="1">
-          <mxGeometry x="-0.2444" width="50" height="50" relative="1" as="geometry">
+        <mxCell id="CLN-RXMXk3StLQkUaewG-73" value="mybabyReplyNo" style="endArrow=classic;startArrow=classic;html=1;rounded=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0.414;entryY=-0.036;entryDx=0;entryDy=0;entryPerimeter=0;" parent="1" source="CLN-RXMXk3StLQkUaewG-72" target="CLN-RXMXk3StLQkUaewG-69" edge="1">
+          <mxGeometry x="-0.2" width="50" height="50" relative="1" as="geometry">
             <mxPoint x="660" y="1279" as="sourcePoint" />
-            <mxPoint x="840" y="1129" as="targetPoint" />
+            <mxPoint x="1020" y="1080" as="targetPoint" />
             <Array as="points">
-              <mxPoint x="720" y="1240" />
-              <mxPoint x="1020" y="1240" />
+              <mxPoint x="890" y="1030" />
+              <mxPoint x="1040" y="1030" />
             </Array>
             <mxPoint as="offset" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="CLN-RXMXk3StLQkUaewG-74" value="댓글 쓰기(입력)&lt;br&gt;[GET]&lt;br&gt;/mybaby_reply/insert" style="whiteSpace=wrap;html=1;rounded=1;fillColor=#ffe6cc;strokeColor=#d79b00;" parent="1" vertex="1">
-          <mxGeometry x="550" y="1140" width="120" height="60" as="geometry" />
+        <mxCell id="CLN-RXMXk3StLQkUaewG-74" value="댓글 쓰기(입력)&lt;br&gt;[GET]&lt;br&gt;/mybaby_reply/insert" style="whiteSpace=wrap;html=1;rounded=1;fillColor=#e1d5e7;strokeColor=#9673a6;" parent="1" vertex="1">
+          <mxGeometry x="550" y="1169" width="120" height="60" as="geometry" />
         </mxCell>
         <mxCell id="CLN-RXMXk3StLQkUaewG-75" value="" style="endArrow=classic;startArrow=classic;html=1;rounded=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.628;entryDx=0;entryDy=0;entryPerimeter=0;" parent="1" source="CLN-RXMXk3StLQkUaewG-74" target="CLN-RXMXk3StLQkUaewG-69" edge="1">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
             <mxPoint x="670" y="1182" as="sourcePoint" />
             <mxPoint x="760" y="1117" as="targetPoint" />
             <Array as="points">
-              <mxPoint x="710" y="1170" />
-              <mxPoint x="960" y="1170" />
+              <mxPoint x="710" y="1199" />
+              <mxPoint x="960" y="1199" />
               <mxPoint x="960" y="1118" />
             </Array>
           </mxGeometry>
         </mxCell>
-        <mxCell id="CLN-RXMXk3StLQkUaewG-76" value="" style="endArrow=classic;startArrow=classic;html=1;rounded=0;entryX=0.25;entryY=0;entryDx=0;entryDy=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;" parent="1" target="CLN-RXMXk3StLQkUaewG-69" edge="1">
+        <mxCell id="CLN-RXMXk3StLQkUaewG-76" value="" style="endArrow=classic;startArrow=classic;html=1;rounded=0;entryX=0.392;entryY=1.05;entryDx=0;entryDy=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryPerimeter=0;" parent="1" source="CLN-RXMXk3StLQkUaewG-70" target="CLN-RXMXk3StLQkUaewG-69" edge="1">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
             <mxPoint x="670.0000000000002" y="1027" as="sourcePoint" />
             <mxPoint x="759.9999999999999" y="1095" as="targetPoint" />
             <Array as="points">
-              <mxPoint x="710" y="1027" />
-              <mxPoint x="1020" y="1027" />
+              <mxPoint x="1037" y="1270" />
             </Array>
           </mxGeometry>
         </mxCell>
         <mxCell id="CLN-RXMXk3StLQkUaewG-77" value="page&lt;br&gt;size&lt;br&gt;&lt;span style=&quot;font-size: 12px ; background-color: rgb(248 , 249 , 250)&quot;&gt;mybaby&lt;/span&gt;No" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" parent="CLN-RXMXk3StLQkUaewG-76" vertex="1" connectable="0">
           <mxGeometry x="0.4325" y="1" relative="1" as="geometry">
-            <mxPoint x="-109" as="offset" />
+            <mxPoint x="-184" y="1" as="offset" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="CLN-RXMXk3StLQkUaewG-78" value="" style="endArrow=classic;startArrow=classic;html=1;rounded=0;" parent="1" edge="1">
+        <mxCell id="GmiDtVmG27tgBGmX8ilm-1" value="" style="endArrow=classic;html=1;rounded=0;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="CLN-RXMXk3StLQkUaewG-74" target="CLN-RXMXk3StLQkUaewG-71" edge="1">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
-            <mxPoint x="670.0000000000002" y="1099.76" as="sourcePoint" />
-            <mxPoint x="990" y="1099.76" as="targetPoint" />
-            <Array as="points" />
-          </mxGeometry>
-        </mxCell>
-        <mxCell id="CLN-RXMXk3StLQkUaewG-79" value="&lt;span style=&quot;font-size: 12px ; background-color: rgb(248 , 249 , 250)&quot;&gt;Mybaby&lt;/span&gt;ReplyDto" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" parent="CLN-RXMXk3StLQkUaewG-78" vertex="1" connectable="0">
-          <mxGeometry x="0.3565" relative="1" as="geometry">
-            <mxPoint x="-37" as="offset" />
-          </mxGeometry>
-        </mxCell>
-        <mxCell id="CLN-RXMXk3StLQkUaewG-80" value="" style="endArrow=classic;startArrow=classic;html=1;rounded=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.628;entryDx=0;entryDy=0;entryPerimeter=0;" parent="1" edge="1">
-          <mxGeometry width="50" height="50" relative="1" as="geometry">
-            <mxPoint x="669.9999999999998" y="702.3199999999999" as="sourcePoint" />
-            <mxPoint x="990" y="649.9999999999998" as="targetPoint" />
+            <mxPoint x="490" y="1160" as="sourcePoint" />
+            <mxPoint x="540" y="1110" as="targetPoint" />
             <Array as="points">
-              <mxPoint x="710" y="702.3199999999999" />
-              <mxPoint x="960" y="702.3199999999999" />
-              <mxPoint x="960" y="650.3199999999999" />
+              <mxPoint x="520" y="1199" />
+              <mxPoint x="520" y="1100" />
             </Array>
           </mxGeometry>
         </mxCell>
-        <mxCell id="CLN-RXMXk3StLQkUaewG-81" value="" style="endArrow=classic;startArrow=classic;html=1;rounded=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.628;entryDx=0;entryDy=0;entryPerimeter=0;" parent="1" edge="1">
+        <mxCell id="GmiDtVmG27tgBGmX8ilm-3" value="&lt;span style=&quot;font-size: 12px ; background-color: rgb(248 , 249 , 250)&quot;&gt;Mybaby&lt;/span&gt;ReplyDto" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" parent="GmiDtVmG27tgBGmX8ilm-1" vertex="1" connectable="0">
+          <mxGeometry x="-0.1846" y="1" relative="1" as="geometry">
+            <mxPoint y="-14" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="GmiDtVmG27tgBGmX8ilm-2" value="" style="endArrow=classic;html=1;rounded=0;" parent="1" edge="1">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
-            <mxPoint x="669.9999999999998" y="322.31999999999994" as="sourcePoint" />
-            <mxPoint x="990" y="269.9999999999998" as="targetPoint" />
+            <mxPoint x="670" y="1100" as="sourcePoint" />
+            <mxPoint x="990" y="1100" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="AfNiGCgngfCELe7sNpv3-14" value="mybabyNo" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="GmiDtVmG27tgBGmX8ilm-2">
+          <mxGeometry x="-0.0812" y="-3" relative="1" as="geometry">
+            <mxPoint x="13" y="-3" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="AfNiGCgngfCELe7sNpv3-1" value="게시판&lt;br&gt;shop/detail" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="990" y="610" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="AfNiGCgngfCELe7sNpv3-2" value="댓글 목록&lt;br&gt;[POST]&lt;br&gt;/shop_reply/more" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;" vertex="1" parent="1">
+          <mxGeometry x="550" y="770" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="AfNiGCgngfCELe7sNpv3-3" value="댓글 쓰기(등록)&lt;br&gt;[POST]&lt;br&gt;/shop_reply/insert" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;" vertex="1" parent="1">
+          <mxGeometry x="550" y="600" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="AfNiGCgngfCELe7sNpv3-4" value="댓글 삭제&lt;br&gt;[GET]&lt;br&gt;/shop_reply/delete" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;" vertex="1" parent="1">
+          <mxGeometry x="550" y="530" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="AfNiGCgngfCELe7sNpv3-5" value="shopReplyNo" style="endArrow=classic;startArrow=classic;html=1;rounded=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0.414;entryY=-0.036;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="AfNiGCgngfCELe7sNpv3-4" target="AfNiGCgngfCELe7sNpv3-1">
+          <mxGeometry x="-0.2" width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="660" y="809" as="sourcePoint" />
+            <mxPoint x="1020" y="610" as="targetPoint" />
             <Array as="points">
-              <mxPoint x="710" y="322.31999999999994" />
-              <mxPoint x="960" y="322.31999999999994" />
-              <mxPoint x="960" y="270.31999999999994" />
+              <mxPoint x="890" y="560" />
+              <mxPoint x="1040" y="560" />
             </Array>
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="AfNiGCgngfCELe7sNpv3-6" value="댓글 쓰기(입력)&lt;br&gt;[GET]&lt;br&gt;/shop_reply/insert" style="whiteSpace=wrap;html=1;rounded=1;fillColor=#e1d5e7;strokeColor=#9673a6;" vertex="1" parent="1">
+          <mxGeometry x="550" y="699" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="AfNiGCgngfCELe7sNpv3-7" value="" style="endArrow=classic;startArrow=classic;html=1;rounded=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.628;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="AfNiGCgngfCELe7sNpv3-6" target="AfNiGCgngfCELe7sNpv3-1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="670" y="712" as="sourcePoint" />
+            <mxPoint x="760" y="647" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="710" y="729" />
+              <mxPoint x="960" y="729" />
+              <mxPoint x="960" y="648" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="AfNiGCgngfCELe7sNpv3-8" value="" style="endArrow=classic;startArrow=classic;html=1;rounded=0;entryX=0.392;entryY=1.05;entryDx=0;entryDy=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryPerimeter=0;" edge="1" parent="1" source="AfNiGCgngfCELe7sNpv3-2" target="AfNiGCgngfCELe7sNpv3-1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="670.0000000000002" y="557" as="sourcePoint" />
+            <mxPoint x="759.9999999999999" y="625" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="1037" y="800" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="AfNiGCgngfCELe7sNpv3-9" value="page&lt;br&gt;size&lt;br&gt;&lt;span style=&quot;font-size: 12px ; background-color: rgb(248 , 249 , 250)&quot;&gt;shop&lt;/span&gt;No" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="AfNiGCgngfCELe7sNpv3-8">
+          <mxGeometry x="0.4325" y="1" relative="1" as="geometry">
+            <mxPoint x="-184" y="1" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="AfNiGCgngfCELe7sNpv3-10" value="" style="endArrow=classic;html=1;rounded=0;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="AfNiGCgngfCELe7sNpv3-6" target="AfNiGCgngfCELe7sNpv3-3">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="490" y="690" as="sourcePoint" />
+            <mxPoint x="540" y="640" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="520" y="729" />
+              <mxPoint x="520" y="630" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="AfNiGCgngfCELe7sNpv3-11" value="&lt;span style=&quot;font-size: 12px ; background-color: rgb(248 , 249 , 250)&quot;&gt;shop&lt;/span&gt;ReplyDto" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="AfNiGCgngfCELe7sNpv3-10">
+          <mxGeometry x="-0.1846" y="1" relative="1" as="geometry">
+            <mxPoint y="-14" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="AfNiGCgngfCELe7sNpv3-12" value="" style="endArrow=classic;html=1;rounded=0;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="670" y="630" as="sourcePoint" />
+            <mxPoint x="990" y="630" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="AfNiGCgngfCELe7sNpv3-13" value="shopNo" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="AfNiGCgngfCELe7sNpv3-12">
+          <mxGeometry x="-0.0812" y="2" relative="1" as="geometry">
+            <mxPoint x="10" y="2" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="AfNiGCgngfCELe7sNpv3-15" value="게시판&lt;br&gt;donation/detail" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="1000" y="160" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="AfNiGCgngfCELe7sNpv3-16" value="댓글 목록&lt;br&gt;[POST]&lt;br&gt;/donation_reply/more" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;" vertex="1" parent="1">
+          <mxGeometry x="560" y="320" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="AfNiGCgngfCELe7sNpv3-17" value="댓글 쓰기(등록)&lt;br&gt;[POST]&lt;br&gt;/donation_reply/insert" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;" vertex="1" parent="1">
+          <mxGeometry x="560" y="150" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="AfNiGCgngfCELe7sNpv3-18" value="댓글 삭제&lt;br&gt;[GET]&lt;br&gt;/donation_reply/delete" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;" vertex="1" parent="1">
+          <mxGeometry x="560" y="80" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="AfNiGCgngfCELe7sNpv3-19" value="&lt;span style=&quot;font-size: 12px ; background-color: rgb(248 , 249 , 250)&quot;&gt;donation&lt;/span&gt;ReplyNo" style="endArrow=classic;startArrow=classic;html=1;rounded=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0.414;entryY=-0.036;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="AfNiGCgngfCELe7sNpv3-18" target="AfNiGCgngfCELe7sNpv3-15">
+          <mxGeometry x="-0.2" width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="670" y="359" as="sourcePoint" />
+            <mxPoint x="1030" y="160" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="900" y="110" />
+              <mxPoint x="1050" y="110" />
+            </Array>
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="AfNiGCgngfCELe7sNpv3-20" value="댓글 쓰기(입력)&lt;br&gt;[GET]&lt;br&gt;/donation_reply/insert" style="whiteSpace=wrap;html=1;rounded=1;fillColor=#e1d5e7;strokeColor=#9673a6;" vertex="1" parent="1">
+          <mxGeometry x="560" y="249" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="AfNiGCgngfCELe7sNpv3-21" value="" style="endArrow=classic;startArrow=classic;html=1;rounded=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.628;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="AfNiGCgngfCELe7sNpv3-20" target="AfNiGCgngfCELe7sNpv3-15">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="680" y="262" as="sourcePoint" />
+            <mxPoint x="770" y="197" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="720" y="279" />
+              <mxPoint x="970" y="279" />
+              <mxPoint x="970" y="198" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="AfNiGCgngfCELe7sNpv3-22" value="" style="endArrow=classic;startArrow=classic;html=1;rounded=0;entryX=0.392;entryY=1.05;entryDx=0;entryDy=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryPerimeter=0;" edge="1" parent="1" source="AfNiGCgngfCELe7sNpv3-16" target="AfNiGCgngfCELe7sNpv3-15">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="680.0000000000002" y="107" as="sourcePoint" />
+            <mxPoint x="769.9999999999999" y="175" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="1047" y="350" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="AfNiGCgngfCELe7sNpv3-23" value="page&lt;br&gt;size&lt;br&gt;&lt;span style=&quot;font-size: 12px ; background-color: rgb(248 , 249 , 250)&quot;&gt;donation&lt;/span&gt;No" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="AfNiGCgngfCELe7sNpv3-22">
+          <mxGeometry x="0.4325" y="1" relative="1" as="geometry">
+            <mxPoint x="-184" y="1" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="AfNiGCgngfCELe7sNpv3-24" value="" style="endArrow=classic;html=1;rounded=0;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="AfNiGCgngfCELe7sNpv3-20" target="AfNiGCgngfCELe7sNpv3-17">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="500" y="240" as="sourcePoint" />
+            <mxPoint x="550" y="190" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="530" y="279" />
+              <mxPoint x="530" y="180" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="AfNiGCgngfCELe7sNpv3-25" value="&lt;span style=&quot;font-size: 12px ; background-color: rgb(248 , 249 , 250)&quot;&gt;donation&lt;/span&gt;ReplyDto" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="AfNiGCgngfCELe7sNpv3-24">
+          <mxGeometry x="-0.1846" y="1" relative="1" as="geometry">
+            <mxPoint y="-14" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="AfNiGCgngfCELe7sNpv3-26" value="" style="endArrow=classic;html=1;rounded=0;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="680" y="180" as="sourcePoint" />
+            <mxPoint x="1000" y="180" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="AfNiGCgngfCELe7sNpv3-27" value="&lt;span style=&quot;font-size: 12px ; background-color: rgb(248 , 249 , 250)&quot;&gt;donation&lt;/span&gt;No" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="AfNiGCgngfCELe7sNpv3-26">
+          <mxGeometry x="-0.0812" y="2" relative="1" as="geometry">
+            <mxPoint x="10" y="2" as="offset" />
           </mxGeometry>
         </mxCell>
       </root>
