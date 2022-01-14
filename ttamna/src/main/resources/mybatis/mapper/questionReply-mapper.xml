@@ -14,68 +14,56 @@
 <!DOCTYPE mapper
  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="mybabyReply">
+<mapper namespace="questionReply">
 	
 	<!-- 시퀀스 -->
 	<select id="seq" resultType="int">
-		select mybaby_reply_seq.nextval from dual
+		select question_reply_seq.nextval from dual
 	</select>
 
-	<!-- mybaby_reply_no, member_id, mybaby_no, mybaby_reply_content, mybaby_reply_time,
-			mybaby_reply_superno, mybaby_reply_groupno, mybaby_reply_depth -->
 	<!-- 댓글 작성 -->
-	<insert id="insert" parameterType="MybabyReplyDto">
-		insert into mybaby_reply values( ${mybabyReplyNo},
-			 ${mybabyNo}, #{mybabyReplyContent},
-			sysdate, #{memberId}
+	<insert id="insert" parameterType="QuestionReplyDto">
+		insert into question_reply values( ${questionReplyNo},
+			 ${questionNo},#{memberId}, #{questionReplyContent},
+			sysdate
 		)
 		
 	</insert>	
-	<!-- 
-MYBABY_REPLY_NO
-MYBABY_NO
-MYBABY_REPLY_CONTENT
-MYBABY_REPLY_TIME
-MYBABY_REPLY_SUPERNO
-MYBABY_REPLY_GROUPNO
-MYBABY_REPLY_DEPTH
-MEMBER_ID
-	 -->
+
 	
-	
-	<select id="list" resultType="MybabyReplyDto">
-		select * from mybaby_reply
+	<select id="list" resultType="QuestionReplyDto">
+		select * from question_reply order by question_reply_no desc
 	</select>
 
 	
 	<!-- 댓글 삭제 -->	
 	<delete id="delete" parameterType="int">
-		delete from mybaby_reply where mybaby_reply_no = ${mybabyReplyNo}
+		delete from question_reply where question_reply_no = ${questionReplyNo}
 	</delete>
 		
 <!-- 특정 게시글의 댓글 내용만 조회 -->
-	<select id="listByDetail" parameterType="int" resultType="MybabyReplyDto">
-		select * from mybaby_reply where mybaby_no = ${mybabyNo}
+	<select id="listByDetail" parameterType="int" resultType="QuestionReplyDto">
+		select * from question_reply where question_no = ${questionNo}
 	</select>
 	
 	
 	<!-- 더보기 페이지네이션 -->
-	<select id="listByPage" parameterType="map" resultType="MybabyReplyDto">
+	<select id="listByPage" parameterType="map" resultType="QuestionReplyDto">
 		select * from(
 		    select rownum rn, tmp.* from(
-		        	select * from mybaby_reply where mybaby_no=#{mybabyNo}
-		        order by mybaby_reply_no desc
+		        	select * from question_reply where question_no=#{questionNo}
+		        order by question_reply_no desc
 		        )tmp
 		)where rn between ${startRow} and ${endRow}
 	</select>
 	
 	<select id="count"  parameterType="int" resultType="int">
-		 select count(*) from mybaby_reply where mybaby_no=#{mybabyNo}
+		 select count(*) from question_reply where question_no=#{questionNo}
 	</select>
 	
 	<!-- 댓글번호로 테이블 조회 -->
-	<select id = "getByReply" parameterType = "int" resultType="MybabyReplyDto">
-		select * from mybaby_reply where mybaby_reply_no = #{mybabyReplyNo}
+	<select id = "getByReply" parameterType = "int" resultType="QuestionReplyDto">
+		select * from question_reply where question_reply_no = #{questionReplyNo}
 	</select>
 	
 </mapper>

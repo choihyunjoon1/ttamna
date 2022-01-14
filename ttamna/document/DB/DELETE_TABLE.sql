@@ -158,7 +158,6 @@ DROP SEQUENCE donation_seq;
 
 COMMIT;
 
-
 ---------------- mybaby_reply --------------------------
 
 -- 테이블 데이터 삭제 ( mybaby_reply)
@@ -239,4 +238,16 @@ COMMIT;
 --휴면회원 테이블삭제
 drop table dormancy;
 
+commit;
+
+------------------------------------------------------
+
+--문의내역 테이블 삭제
+drop table question;
+commit;
+
+------------------------------------------------------
+
+--문의내역 댓글 테이블 삭제
+drop table question_reply;
 commit;

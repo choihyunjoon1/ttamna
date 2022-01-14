@@ -33,7 +33,7 @@ import com.kh.ttamna.vo.mybaby.MybabyFileVO;
 
 @Controller
 @RequestMapping("/mybaby")
-public class mybabyController {
+public class MybabyController {
 
 	
 	@Autowired
@@ -44,6 +44,8 @@ public class mybabyController {
 	
 	@Autowired
 	private MybabyFileService mybabyService;
+
+	
 	//게시글 등록
 	@GetMapping("/write")
 	public String write() {
@@ -198,4 +200,14 @@ public class mybabyController {
 				.body(resource);
 	}
 	
+
 }
+
+
+
+
+
+
+
+
+
