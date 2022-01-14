@@ -80,6 +80,9 @@
 	 		<mvc:mapping path="/shop/order"/>
 	 		<mvc:mapping path="/shop_reply/insert"/>
 	 		<mvc:mapping path="/shop_reply/delete"/>
+	 		<mvc:mapping path="/donation/insert"/>
+	 		<mvc:mapping path="/donation/edit"/>
+	 		<mvc:mapping path="/donation/delete"/>
 	 		<mvc:mapping path="/donation_reply/insert"/>
 	 		<mvc:mapping path="/donation_reply/delete"/>
 	 		<mvc:mapping path="/mybaby_reply/insert"/>
@@ -98,6 +101,9 @@
 	 		예: 기부 게시글 등록/수정/삭제....									-->
 	 	<mvc:interceptor>
 	 		<mvc:mapping path=""/>
+	 		<mvc:mapping path="/donation/insert"/>
+	 		<mvc:mapping path="/donation/edit"/>
+	 		<mvc:mapping path="/donation/delete"/>
 	 		<bean class="com.kh.ttamna.interceptor.GradeInterceptor"></bean>
 	 	</mvc:interceptor>
 	 	
@@ -111,13 +117,6 @@
 	 		<bean class="com.kh.ttamna.interceptor.AdminInterceptor"></bean>
 	 	</mvc:interceptor>
 	 	
-	 	<!-- 기부게시판 등록, 수정, 삭제를 보호소or관리자 등급만 접근 가능하게 인터셉터 설정 -->
-	 	<mvc:interceptor>
-	 		<mvc:mapping path="/donation/insert"/>
-	 		<mvc:mapping path="/donation/edit"/>
-	 		<mvc:mapping path="/donation/delete"/>
-	 		<bean class="com.kh.ttamna.interceptor.DonationInterceptor"></bean>
-	 	</mvc:interceptor>
 	 </mvc:interceptors>
 	 
 	 
