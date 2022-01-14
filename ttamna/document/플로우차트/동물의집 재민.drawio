@@ -1,14 +1,23 @@
-<mxfile host="app.diagrams.net" modified="2022-01-14T10:39:06.584Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.110 Whale/3.12.129.46 Safari/537.36" etag="_Ec1zMwyT5NOwUVffznp" version="16.2.6" type="github">
+<mxfile host="app.diagrams.net" modified="2022-01-14T10:43:18.609Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.110 Whale/3.12.129.46 Safari/537.36" etag="G7uNMnWATqn9hc2RITKT" version="16.2.6" type="github">
   <diagram id="kclBJDpzdwjqmtEo5kUz" name="Page-1">
-    <mxGraphModel dx="1287" dy="718" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" background="#F1FAEE" math="0" shadow="0">
+    <mxGraphModel dx="735" dy="410" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" background="#F1FAEE" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
+        <mxCell id="F9dp1itUwrXdnvn_JDtq-3" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="WK1I2I-N0BXQreemHK3c-6" target="F9dp1itUwrXdnvn_JDtq-1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="F9dp1itUwrXdnvn_JDtq-4" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="WK1I2I-N0BXQreemHK3c-6" target="F9dp1itUwrXdnvn_JDtq-2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
         <mxCell id="WK1I2I-N0BXQreemHK3c-6" value="ShopController&lt;br&gt;/shop" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
           <mxGeometry x="350" y="300" width="120" height="60" as="geometry" />
         </mxCell>
-        <mxCell id="F9dp1itUwrXdnvn_JDtq-1" value="ShopController&lt;br&gt;/shop" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
-          <mxGeometry x="130" y="380" width="120" height="60" as="geometry" />
+        <mxCell id="F9dp1itUwrXdnvn_JDtq-1" value="상품게시판&lt;br&gt;/shop/list&lt;br&gt;[REQ]" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="191" y="380" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="F9dp1itUwrXdnvn_JDtq-2" value="상품게시판 상세&lt;br&gt;/shop/detail&lt;br&gt;[GET]" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="45" y="380" width="120" height="60" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
