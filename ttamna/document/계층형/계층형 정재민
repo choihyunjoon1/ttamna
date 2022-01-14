@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2022-01-14T08:30:59.210Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.110 Whale/3.12.129.46 Safari/537.36" etag="eOegN1u6Ox4sVtR5XA0G" version="16.2.6" type="github">
+<mxfile host="app.diagrams.net" modified="2022-01-14T08:46:41.959Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.110 Whale/3.12.129.46 Safari/537.36" etag="FEn_I8Fu3pIIbE5flUpx" version="16.2.6" type="github">
   <diagram id="vR1YxzI2F26IYvWs4YDC" name="Page-1">
     <mxGraphModel dx="1355" dy="756" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
@@ -94,10 +94,10 @@
           <mxGeometry x="587" y="399" width="126" height="40" as="geometry" />
         </mxCell>
         <mxCell id="4wwZFiZvQc0Vmblnd0eP-51" value="" style="rounded=0;whiteSpace=wrap;html=1;sketch=1;fontSize=18;strokeWidth=1;" vertex="1" parent="1">
-          <mxGeometry x="320" y="580" width="980" height="240" as="geometry" />
+          <mxGeometry x="320" y="580" width="1010" height="240" as="geometry" />
         </mxCell>
-        <mxCell id="4wwZFiZvQc0Vmblnd0eP-52" value="&lt;div&gt;ShopController는 1개의 서비스와 2개의 Dao를 사용하며&lt;/div&gt;&lt;div&gt;ShopService에서는 ShopDao를 통해 상품 등록/수정/삭제를&lt;/div&gt;&lt;div&gt;ShopImgDao를 통해 이미지파일을 처리해줍니다&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;ShopPayController는 1개의 서비스와 3개의 Dao를 사용하며&lt;/div&gt;&lt;div&gt;ShopPayService에 결제정보를 건내주면 결제 준비 및 승인 작업을 합니다.&lt;/div&gt;&lt;div&gt;결제가 완료되면 ShopDao를통해 구매한 수량만큼 재고를 감소시키고&lt;/div&gt;&lt;div&gt;PaymentDao와 PaymentDetailDao를 이용해 결제 기록을 남깁니다.&lt;/div&gt;&lt;div&gt;또한 기록된 결제정보의 Tid로 결제취소 작업을 할 수 있습니다.&lt;/div&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;sketch=1;fontSize=18;fontColor=#666666;" vertex="1" parent="1">
-          <mxGeometry x="320.5" y="582" width="979.5" height="230" as="geometry" />
+        <mxCell id="4wwZFiZvQc0Vmblnd0eP-52" value="&lt;div&gt;ShopController는 1개의 서비스와 2개의 Dao를 가지며&lt;/div&gt;&lt;div&gt;ShopService를 통해 ShopImgDao에서는 상품 이미지 업로드를. ShopDao에선 상품 등록과 수정 및 삭제 작업이 이루어집니다.&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;CartController는 세션을 사용해서 장바구니에 상품을 넣어주는 작업을 합니다&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;ShopPayController는&amp;nbsp;&lt;/div&gt;&lt;div&gt;결제 요청과 승인을위해 ShopPayService를 가지고 있습니다.&lt;/div&gt;&lt;div&gt;결제승인까지 정상적으로 이루어지면&lt;/div&gt;&lt;div&gt;PaymentDao와 PaymentDetailDao에 결제정보를 담아주고 해당 정보를 통해 결제취소 요청을 보낼 수 있습니다.&lt;/div&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;sketch=1;fontSize=18;fontColor=#666666;" vertex="1" parent="1">
+          <mxGeometry x="320.5" y="582" width="1009.5" height="230" as="geometry" />
         </mxCell>
         <mxCell id="4wwZFiZvQc0Vmblnd0eP-145" style="edgeStyle=orthogonalEdgeStyle;rounded=0;sketch=1;orthogonalLoop=1;jettySize=auto;html=1;fontSize=18;fontColor=#666666;" edge="1" parent="1">
           <mxGeometry relative="1" as="geometry">
@@ -133,7 +133,7 @@
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="4wwZFiZvQc0Vmblnd0eP-121" value="&lt;font color=&quot;#666666&quot;&gt;PaymentDao&lt;/font&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=18;" vertex="1" parent="1">
-          <mxGeometry x="950.04" y="404" width="126" height="40" as="geometry" />
+          <mxGeometry x="950.04" y="399" width="126" height="40" as="geometry" />
         </mxCell>
         <mxCell id="4wwZFiZvQc0Vmblnd0eP-127" style="edgeStyle=orthogonalEdgeStyle;rounded=0;sketch=1;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;fontSize=18;fontColor=#666666;" edge="1" parent="1" source="4wwZFiZvQc0Vmblnd0eP-122" target="4wwZFiZvQc0Vmblnd0eP-125">
           <mxGeometry relative="1" as="geometry" />
@@ -178,7 +178,7 @@
           </mxGeometry>
         </mxCell>
         <mxCell id="4wwZFiZvQc0Vmblnd0eP-149" value="&lt;font color=&quot;#666666&quot;&gt;CartController&lt;/font&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=18;" vertex="1" parent="1">
-          <mxGeometry x="800" y="241.5" width="126" height="40" as="geometry" />
+          <mxGeometry x="790" y="241.5" width="126" height="40" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
