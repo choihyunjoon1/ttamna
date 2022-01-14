@@ -284,6 +284,7 @@ public class MemberController {
 		model.addAttribute("board", list);
 		return "member/mypage/my_board";
 	}
+	//내 문의글 + 페이징
 	@GetMapping("/mypage/my_question")
 	public String myQuestion(HttpSession session,Model model,@ModelAttribute PaginationVO paginationVO) throws Exception {
 		String memberId = (String)session.getAttribute("uid");
