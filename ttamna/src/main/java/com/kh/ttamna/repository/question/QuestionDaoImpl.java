@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.kh.ttamna.entity.question.QuestionDto;
+import com.kh.ttamna.vo.board.BoardVO;
 
 @Repository
 public class QuestionDaoImpl implements QuestionDao{
@@ -96,6 +97,16 @@ public class QuestionDaoImpl implements QuestionDao{
 		param.put("questionType",questionType);
 		int result = sqlSession.update("question.editType",param);
 		return result>0;
+	}
+
+	@Override
+	public List<QuestionDto> questionListPaging(String memberId, int startRow, int endRow) {
+		Map<String,Object> param = new HashMap<>();
+		param.put("memberId",memberId);
+		param.put("startRow", startRow);
+		param.put("endRow", endRow);
+		
+		return sqlSession.selectList("question.questionListPaging", param);
 	}
 
 	

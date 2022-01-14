@@ -221,6 +221,12 @@ public class MemberDaoImpl  implements MemberDao{
 	public int countBoard(String memberId) {
 		return sqlSession.selectOne("member.countBoard",memberId);
 	}
+
+	@Override
+	public int countQuestion(String memberId) {
+		return sqlSession.selectOne("question.countQuestion",memberId);
+	}
+	
 	
 
 }

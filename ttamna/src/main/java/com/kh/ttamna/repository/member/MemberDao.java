@@ -54,6 +54,8 @@ public interface MemberDao {
 
 	int countBoard(String memberId);
 
+	int countQuestion(String memberId);
+
 	
 	
 	
