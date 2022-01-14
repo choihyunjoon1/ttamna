@@ -1,17 +1,17 @@
-<mxfile host="app.diagrams.net" modified="2022-01-14T08:33:38.906Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.71 Safari/537.36" etag="A3TwQNrFGUer2y9Lub3C" version="16.0.0" type="github">
+<mxfile host="app.diagrams.net" modified="2022-01-14T08:35:46.037Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.71 Safari/537.36" etag="6yX6G_lu9s3IR6jn3JWo" version="16.0.0" type="github">
   <diagram id="p1VaJm9dE1Vxcm2Y2X1g" name="Page-1">
     <mxGraphModel dx="2863" dy="628" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" background="#F1FAEE" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
         <mxCell id="Rbth6d3jfj7hQg4L_n5u-322" value="" style="rounded=0;whiteSpace=wrap;html=1;fontSize=8;strokeColor=#0F8B8D;strokeWidth=1;" vertex="1" parent="1">
-          <mxGeometry x="333.65" y="800" width="1560" height="1430" as="geometry" />
+          <mxGeometry x="333.65" y="800" width="1560" height="1490" as="geometry" />
         </mxCell>
         <mxCell id="Rbth6d3jfj7hQg4L_n5u-330" value="" style="rounded=0;whiteSpace=wrap;html=1;sketch=0;fontSize=15;fontColor=#1D3557;strokeColor=#457B9D;strokeWidth=1;fillColor=#FFFAF0;" vertex="1" parent="1">
-          <mxGeometry x="990" y="1022.61" width="880" height="767.5" as="geometry" />
+          <mxGeometry x="990" y="1022.61" width="760" height="767.5" as="geometry" />
         </mxCell>
         <mxCell id="Rbth6d3jfj7hQg4L_n5u-325" value="" style="rounded=0;whiteSpace=wrap;html=1;sketch=0;fontSize=15;fontColor=#1D3557;strokeColor=#457B9D;strokeWidth=1;fillColor=#FFFAF0;" vertex="1" parent="1">
-          <mxGeometry x="340" y="1812.19" width="740" height="500" as="geometry" />
+          <mxGeometry x="360" y="1812.19" width="1390" height="467.81" as="geometry" />
         </mxCell>
         <mxCell id="Rbth6d3jfj7hQg4L_n5u-323" value="" style="rounded=0;whiteSpace=wrap;html=1;sketch=0;fontSize=15;fontColor=#1D3557;strokeColor=#457B9D;strokeWidth=1;fillColor=#FFFAF0;" vertex="1" parent="1">
           <mxGeometry x="510" y="1022.5" width="455" height="767.5" as="geometry" />
@@ -1365,7 +1365,7 @@
           <mxGeometry x="26.459999999999923" y="2020" width="167.07" height="40" as="geometry" />
         </mxCell>
         <mxCell id="Rbth6d3jfj7hQg4L_n5u-329" value="&lt;font style=&quot;font-size: 15px&quot;&gt;휴면 계정&lt;/font&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=8;" vertex="1" parent="1">
-          <mxGeometry x="1010" y="1812.19" width="70" height="30" as="geometry" />
+          <mxGeometry x="360" y="2250" width="70" height="30" as="geometry" />
         </mxCell>
         <mxCell id="Rbth6d3jfj7hQg4L_n5u-331" value="&lt;span style=&quot;font-size: 15px&quot;&gt;마이 페이지&lt;/span&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=8;" vertex="1" parent="1">
           <mxGeometry x="980" y="1760" width="130" height="30" as="geometry" />
@@ -1809,6 +1809,11 @@
               <mxPoint x="1710" y="1770" />
               <mxPoint x="1415" y="1770" />
             </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Rbth6d3jfj7hQg4L_n5u-432" value="PaginationVO" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=8;" vertex="1" connectable="0" parent="1">
+          <mxGeometry x="1544.9" y="1140" as="geometry">
+            <mxPoint x="-6" y="-70" as="offset" />
           </mxGeometry>
         </mxCell>
       </root>
