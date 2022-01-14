@@ -1,11 +1,11 @@
-<mxfile host="app.diagrams.net" modified="2022-01-14T12:29:29.161Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.110 Whale/3.12.129.46 Safari/537.36" etag="54I1_KLyR94xqhiy5mkx" version="16.2.6" type="github">
+<mxfile host="app.diagrams.net" modified="2022-01-14T12:30:15.342Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.110 Whale/3.12.129.46 Safari/537.36" etag="XKXjvUGEUSGtSw-s1Wx9" version="16.2.6" type="github">
   <diagram id="kclBJDpzdwjqmtEo5kUz" name="Page-1">
     <mxGraphModel dx="2666" dy="1026" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" background="#F1FAEE" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
-        <mxCell id="F9dp1itUwrXdnvn_JDtq-52" value="마이페이지" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
-          <mxGeometry x="-310" y="699" width="497" height="651" as="geometry" />
+        <mxCell id="F9dp1itUwrXdnvn_JDtq-52" value="&lt;font style=&quot;font-size: 18px&quot;&gt;마이페이지&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="-310" y="690" width="497" height="651" as="geometry" />
         </mxCell>
         <mxCell id="F9dp1itUwrXdnvn_JDtq-36" value="" style="rounded=0;whiteSpace=wrap;html=1;sketch=0;fontSize=12;" vertex="1" parent="1">
           <mxGeometry x="210" y="820" width="370" height="570" as="geometry" />
