@@ -284,6 +284,14 @@ public class MemberController {
 		model.addAttribute("board", list);
 		return "member/mypage/my_board";
 	}
+	@GetMapping("/mypage/my_question")
+	public String myQuestion(HttpSession session,Model model,@ModelAttribute PaginationVO paginationVO) throws Exception {
+		String memberId = (String)session.getAttribute("uid");
+		PaginationVO list = paginationService.myQuestionPaging(paginationVO, memberId);
+		model.addAttribute("question", list);
+		return "member/mypage/my_question";
+		
+	}
 
 	// 주문내역
 	@GetMapping("/mypage/my_order")

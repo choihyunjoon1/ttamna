@@ -60,7 +60,7 @@ $(function(){
 						  +  "작성자 : "+memberId
 						  +"</div>"
 						  + "<div class='card-text d-grid gap-1 d-md-flex justify-content-md-end'>"
-						  + "<a href='detail?questionNo= "+resp[i].questionNo+"' class='btn btn-outline-primary'>" + "보기"
+						  + "<a href='detail?questionNo="+resp[i].questionNo+"' class='btn btn-outline-primary'>" + "보기"
 						  + "</a></div>"
 						  + "</div></div>";
 					$(".result").append(divCol);

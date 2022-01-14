@@ -68,6 +68,17 @@
 		update question set question_type=#{questionType} where question_no=#{questionNo}
 	</update>
 	
+	<select id="countQuestion" parameterType="String" resultType="int">
+		select count(*) from question
+	</select>	
+	
+	<select id="questionListPaging" parameterType="map" resultType="QuestionDto">
+		select * from(
+			select rownum rn,TMP.* from(
+				select * from question where member_id=#{memberId} order by question_no desc)
+			TMP)
+		where rn between #{startRow} and #{endRow}
+	</select>
 	
 </mapper>
 

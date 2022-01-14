@@ -10,17 +10,16 @@ import com.kh.ttamna.entity.donation.DonationReplyDto;
 import com.kh.ttamna.entity.member.MemberDto;
 import com.kh.ttamna.entity.mybaby.MybabyReplyDto;
 import com.kh.ttamna.entity.payment.PaymentDto;
+import com.kh.ttamna.entity.question.QuestionDto;
 import com.kh.ttamna.entity.shop.ShopReplyDto;
 import com.kh.ttamna.repository.donation.AutoDonationDao;
 import com.kh.ttamna.repository.donation.DonationReplyDao;
 import com.kh.ttamna.repository.member.MemberDao;
 import com.kh.ttamna.repository.mybaby.MybabyReplyDao;
 import com.kh.ttamna.repository.payment.PaymentDao;
-
+import com.kh.ttamna.repository.question.QuestionDao;
 import com.kh.ttamna.repository.shop.ShopReplyDao;
-
 import com.kh.ttamna.vo.board.BoardVO;
-
 import com.kh.ttamna.vo.pagination.PaginationVO;
 
 @Service
@@ -40,6 +39,9 @@ public class PaginationServiceImpl implements PaginationService{
 	
 	@Autowired 
 	private MybabyReplyDao mybabyReplyDao;
+	
+	@Autowired
+	private QuestionDao questionDao;
 	
 	@Autowired
 	private PaymentDao payDao;
@@ -148,6 +150,20 @@ public class PaginationServiceImpl implements PaginationService{
 	
 		return paginationVO;
 	}
+	//내문의글보기 내역 목록 + 페이지네이션
+		@Override
+		public PaginationVO myQuestionPaging(PaginationVO paginationVO,String memberId) throws Exception {
+			int count = memberDao.countQuestion(memberId);
+			
+			paginationVO.setPageSize(15);
+			paginationVO.setBlockSize(10);
+			paginationVO.setCount(count);
+			paginationVO.calculator();
+			List<QuestionDto> list = questionDao.questionListPaging(memberId,paginationVO.getStartRow(),paginationVO.getEndRow());
+			paginationVO.setListOfQuestion(list);
+		
+			return paginationVO;
+		}
 
 	// 주문내역 페이지네이션
 	@Override

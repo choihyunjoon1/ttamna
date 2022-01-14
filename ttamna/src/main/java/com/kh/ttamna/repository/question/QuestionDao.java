@@ -19,4 +19,5 @@ public interface QuestionDao {
 	boolean delete(int questionNo);
 	boolean edit(QuestionDto questionDto);
 	boolean editType(int questionNo, String questionType);
+	List<QuestionDto> questionListPaging(String memberId, int startRow, int endRow);
 }
