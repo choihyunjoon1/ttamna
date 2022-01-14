@@ -146,7 +146,7 @@ public class MemberController {
 		}
 		
 	}
-	@RequestMapping("/mypage/edit_success")
+	@GetMapping("/mypage/edit_success")
 	public String editSuccess() {
 		return "member/mypage/edit_success";
 	}
@@ -165,7 +165,7 @@ public class MemberController {
 			return "redirect:/member/mypage/change_pw?error";
 		}
 	}
-	@RequestMapping("/mypage/change_pw_success")
+	@GetMapping("/mypage/change_pw_success")
 	public String changePwSuccess() {
 		return "member/mypage/change_pw_success";
 	}
