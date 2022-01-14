@@ -84,10 +84,16 @@
 	 		<mvc:mapping path="/donation_reply/delete"/>
 	 		<mvc:mapping path="/mybaby_reply/insert"/>
 	 		<mvc:mapping path="/mybaby_reply/delete"/>
+	 		<mvc:mapping path="/question/write"/>
+	 		<mvc:mapping path="/question/edit"/>
+	 		<mvc:mapping path="/question/detail"/>
 	  		<bean class="com.kh.ttamna.interceptor.LoginInterceptor"></bean>
 	 	</mvc:interceptor>
-	 	
-	 	
+	 	<!-- 문의내역 상세페이지 자기글 또는 관리자만 접근 가능 -->
+	 	<mvc:interceptor>
+	 		<mvc:mapping path="/question/detail"/>
+	 		<bean class="com.kh.ttamna.interceptor.QuestionInterceptor"></bean>
+	 	</mvc:interceptor>
 	 	<!--  GradeInterceptor : 등급이 '보호소' 또는 '관리자'만 접근 가능 
 	 		예: 기부 게시글 등록/수정/삭제....									-->
 	 	<mvc:interceptor>
