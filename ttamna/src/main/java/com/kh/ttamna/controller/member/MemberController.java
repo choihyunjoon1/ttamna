@@ -116,7 +116,7 @@ public class MemberController {
 		return "redirect:/";
 	}
 	//마이페이지
-	@RequestMapping("/mypage/my_info")
+	@GetMapping("/mypage/my_info")
 	public String mypage(HttpSession session, Model model) {
 		String memberId = (String)session.getAttribute("uid");
 		MemberDto memberDto = memberDao.get(memberId);
@@ -170,14 +170,18 @@ public class MemberController {
 		return "member/mypage/change_pw_success";
 	}
 
-	//주문내역
-	@RequestMapping("/mypage/my_order")
-	public String myOrder(Model model) {
-		model.addAttribute("list", paymentDao.list());
+	// 주문내역
+	@GetMapping("/mypage/my_order")
+	public String myOrder(HttpSession session, Model model, @ModelAttribute PaginationVO paginationVO) throws Exception {
+		String memberId = (String)session.getAttribute("uid");
+		PaginationVO list = paginationService.myOrderPaging(paginationVO, memberId);
+		model.addAttribute("paginationVO", list);
+		
 		return "member/mypage/my_order";
 	}
+	
 	//주문 상세보기
-	@RequestMapping("/mypage/order_detail")
+	@GetMapping("/mypage/order_detail")
 	public String orderDetail(@RequestParam int payNo, Model model) throws URISyntaxException {
 		PaymentDto payDto = paymentDao.get(payNo);
 		List<PaymentDetailDto> list = payDetailDao.list(payNo);
@@ -293,14 +297,5 @@ public class MemberController {
 		
 	}
 
-	// 주문내역
-	@GetMapping("/mypage/my_order")
-	public String myOrder(HttpSession session, Model model, @ModelAttribute PaginationVO paginationVO) throws Exception {
-		String memberId = (String)session.getAttribute("uid");
-		PaginationVO list = paginationService.myOrderPaging(paginationVO, memberId);
-		model.addAttribute("paginationVO", list);
-		
-		return "member/mypage/my_order";
-	}
 
 }
