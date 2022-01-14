@@ -345,4 +345,25 @@ create table visit(
 commit;
 
 -------------------------------------------------------------------------------------------------------------
-
+--문의내역 테이블 생성구문
+create table question(
+question_no number primary key,
+member_id references member(member_id) on delete set null,
+question_title varchar2(150) not null,
+question_content varchar2(1500) not null,
+question_type varchar2(30) default '문의중' check(question_type in('문의중','답변완료')),
+question_time date default sysdate
+);
+create sequence question_seq;
+commit;
+-------------------------------------------------------------------------------------------------------------
+--문의내역 댓글 테이블 생성 구문
+create table question_reply(
+question_reply_no number primary key,
+question_no references question(question_no) on delete set null,
+member_id references member(member_id) on delete set null,
+question_reply_content varchar2(1500) not null,
+question_reply_time date default sysdate
+);
+create sequence question_reply_seq;
+commit;

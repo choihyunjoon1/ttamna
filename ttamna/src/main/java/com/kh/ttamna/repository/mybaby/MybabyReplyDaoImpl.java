@@ -21,14 +21,23 @@ public class MybabyReplyDaoImpl implements MybabyReplyDao{
 		int mybabyReplyNo = sqlSession.selectOne("mybabyReply.seq");
 		mybabyReplyDto.setMybabyReplyNo(mybabyReplyNo);
 		sqlSession.insert("mybabyReply.insert", mybabyReplyDto);
-		
+		//댓글 등록 후 댓글수 증가
+		int mybabyNo = mybabyReplyDto.getMybabyNo();
+		sqlSession.update("mybaby.replyUpdate",mybabyNo);
 		return mybabyReplyNo;
 		
 	}
 
 	@Override
 	public void delete(int mybabyReplyNo) {
+		MybabyReplyDto findReplyDto = sqlSession.selectOne("mybabyReply.getByReply",mybabyReplyNo);
 		sqlSession.delete("mybabyReply.delete", mybabyReplyNo);
+		
+		//댓글삭제 시 mybaby_reply도 -1감소
+		System.out.println("findReplyDto = "+findReplyDto.toString());
+		int mybabyNo = findReplyDto.getMybabyNo();
+		System.out.println("mybabyNo = "+mybabyNo);
+		sqlSession.update("mybaby.replyDelete",mybabyNo);
 	}
 
 	@Override
