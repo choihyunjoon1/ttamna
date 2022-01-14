@@ -252,7 +252,7 @@ public class MemberController {
 		attr.addAttribute("payNo", payNo);
 		return "redirect:/member/mypage/order_detail?payNo="+payNo;
 	}
-	
+	// 결제 부분취소
 	@GetMapping("/mypage/cancel_part")
 	public String cancelPart(@RequestParam int payNo, @RequestParam int shopNo) throws URISyntaxException {
 		PaymentDetailDto payDetailDto = payDetailDao.get(payNo, shopNo);
