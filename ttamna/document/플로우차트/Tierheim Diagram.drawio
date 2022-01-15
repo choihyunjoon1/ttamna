@@ -1,6 +1,6 @@
-<mxfile host="app.diagrams.net" modified="2022-01-15T13:52:02.978Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.71 Safari/537.36" etag="tuMA7FVuMOeB4fRnlvGX" version="16.2.7" type="github">
+<mxfile host="app.diagrams.net" modified="2022-01-15T14:14:32.242Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.71 Safari/537.36" etag="C0LmwgIVXYY009Z5Yi6y" version="16.2.7" type="github">
   <diagram id="ckaHysib9P23ZmjdkfU4" name="Page-1">
-    <mxGraphModel dx="3076" dy="3063" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" background="#F1FAEE" math="0" shadow="0">
+    <mxGraphModel dx="3716" dy="3352" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" background="#F1FAEE" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -1922,7 +1922,7 @@
         <mxCell id="blKYCjcWy3y85h6CKOym-342" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#0F8B8D;strokeWidth=3;" vertex="1" parent="1">
           <mxGeometry x="430" y="-200" width="650" height="670" as="geometry" />
         </mxCell>
-        <mxCell id="blKYCjcWy3y85h6CKOym-343" value="&lt;font style=&quot;font-size: 40px&quot;&gt;home.jsp&lt;br&gt;/&lt;/font&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontColor=#0F8B8D;" vertex="1" parent="1">
+        <mxCell id="blKYCjcWy3y85h6CKOym-343" value="&lt;font style=&quot;font-size: 60px;&quot;&gt;home.jsp&lt;br style=&quot;font-size: 60px;&quot;&gt;/&lt;/font&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontColor=#0F8B8D;fontSize=60;" vertex="1" parent="1">
           <mxGeometry x="662.5" y="70" width="150" height="90" as="geometry" />
         </mxCell>
         <mxCell id="blKYCjcWy3y85h6CKOym-344" value="" style="endArrow=classic;html=1;rounded=0;strokeColor=#0F8B8D;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=1;entryDx=0;entryDy=0;" edge="1" parent="1" source="blKYCjcWy3y85h6CKOym-84" target="blKYCjcWy3y85h6CKOym-342">
@@ -2258,7 +2258,7 @@
           </mxGeometry>
         </mxCell>
         <mxCell id="blKYCjcWy3y85h6CKOym-571" value="입양공고 작성 처리&lt;br&gt;/adopt/write&lt;br&gt;[POST]" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=15;" vertex="1" parent="1">
-          <mxGeometry x="11.249999999999886" y="-105" width="167" height="80" as="geometry" />
+          <mxGeometry x="26.990000000000002" y="-97.5" width="138.75" height="65" as="geometry" />
         </mxCell>
         <mxCell id="blKYCjcWy3y85h6CKOym-572" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;fontSize=15;strokeColor=#7EA6E0;" edge="1" parent="1" source="blKYCjcWy3y85h6CKOym-573" target="blKYCjcWy3y85h6CKOym-597">
           <mxGeometry relative="1" as="geometry" />
@@ -3747,6 +3747,21 @@
         <mxCell id="blKYCjcWy3y85h6CKOym-1013" value="요청실패" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=12;fontColor=#1D3557;" vertex="1" connectable="0" parent="blKYCjcWy3y85h6CKOym-1012">
           <mxGeometry x="-0.1731" y="3" relative="1" as="geometry">
             <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="blKYCjcWy3y85h6CKOym-1014" value="&lt;span style=&quot;color: rgba(0 , 0 , 0 , 0) ; font-family: monospace ; font-size: 0px&quot;&gt;df&lt;/span&gt;" style="rounded=1;whiteSpace=wrap;html=1;sketch=0;fontSize=20;strokeColor=#d79b00;strokeWidth=2;fillColor=#FFE6CC;" vertex="1" parent="1">
+          <mxGeometry x="219.99999999999994" y="-20" width="184.13" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="blKYCjcWy3y85h6CKOym-1015" value="총 누적 기부금액&lt;br&gt;/ajax/donation_total&lt;br&gt;[GET]" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=15;" vertex="1" parent="1">
+          <mxGeometry x="230" y="-12.5" width="170" height="65" as="geometry" />
+        </mxCell>
+        <mxCell id="blKYCjcWy3y85h6CKOym-1016" value="" style="endArrow=classic;html=1;rounded=1;sketch=0;fontSize=60;fontColor=#1D3557;strokeColor=#006666;fillColor=#A8DADC;curved=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" edge="1" parent="1" source="blKYCjcWy3y85h6CKOym-1014">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="820" y="30" as="sourcePoint" />
+            <mxPoint x="430" y="150" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="312" y="150" />
+            </Array>
           </mxGeometry>
         </mxCell>
       </root>
