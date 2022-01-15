@@ -8,6 +8,6 @@ import com.kh.ttamna.vo.shop.ShopImgVO;
 
 
 public interface ShopService {
-	void insert(ShopImgVO shopImgVO) throws IllegalStateException, IOException;
-	
+	void insert(ShopImgVO shopImgVO) throws IllegalStateException, IOException; // 파일등록
+	void delete(int shopNo);// 파일삭제
 }

@@ -59,13 +59,10 @@ $(function(){
 						  + "<h5 class='card-title'><strong class='title'>" + resp[i].mybabyTitle +"</strong></h5>"
 						  + "<div class='card-text'>"
 						  +  moment(resp[i].mybabyTime).format("YYYY-MM-DD")
-						  +"</div>"
+						  + "</div>"
 						  + "<div class='card-text'>"
-						  +  "작성자 : "+memberId
-						  +"</div>"
-						  + "<div class='card-text d-grid gap-1 d-md-flex justify-content-md-end'>"
-						  + "<a href='detail?mybabyNo= "+resp[i].mybabyNo+"' class='btn btn-outline-primary'>" + "보기"
-						  + "</a></div>"
+						  + "작성자 : "+memberId
+						  +	 "</div>"
 						  + "</div></div>";
 					$(".result").append(divCol);
 					$(".page").addClass("col-3 mt-3");

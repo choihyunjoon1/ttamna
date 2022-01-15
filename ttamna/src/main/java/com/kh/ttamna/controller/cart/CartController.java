@@ -24,8 +24,6 @@ public class CartController {
 	@Autowired
 	private SqlSession sqlSession;
 	
-	@Autowired
-	private CartDao cartDao;
 	
 	//장바구니 진입
 	@RequestMapping("/mypage/my_basket")
@@ -48,7 +46,7 @@ public class CartController {
 			 List<CartDto> cart = new CopyOnWriteArrayList<CartDto>();		 
 			session.setAttribute("cart", cart); // 장바구니에 물품 추가해라
 			cart.add(cartDto);
-			cartDao.insert(cartDto); // 필수로 있어야함
+//			cartDao.insert(cartDto); // 필수로 있어야함
 		}  
 		 else {
 			List<CartDto> cart = (List<CartDto>)session.getAttribute("cart");
@@ -79,11 +77,11 @@ public class CartController {
 				return "redirect:/member/mypage/my_basket";
 			}
 			// 장바구니 비우기(세션 지워서 표시안되게함)
-			@RequestMapping("/mypage/my_basket/deleteAll")
-			public String deleteAll(HttpSession session) {
-				session.removeAttribute("cart");
-				return "redirect:/member/mypage/my_basket";
-			}
+//			@RequestMapping("/mypage/my_basket/deleteAll")
+//			public String deleteAll(HttpSession session) {
+//				session.removeAttribute("cart");
+//				return "redirect:/member/mypage/my_basket";
+//			}
 		
 		
 }

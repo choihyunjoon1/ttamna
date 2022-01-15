@@ -1,6 +1,8 @@
 package com.kh.ttamna.service.shop;
 
+import java.io.File;
 import java.io.IOException;
+import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +26,8 @@ public class ShopServiceImpl implements ShopService{
 	
 	@Autowired
 	private ShopImgDao shopImgDao;
+	
+	private File dir = new File("D:/dev/ttamna/shop");
 
 	@Override
 	public void insert(ShopImgVO shopImgVO) throws IllegalStateException, IOException {
@@ -77,4 +81,18 @@ public class ShopServiceImpl implements ShopService{
 			} else break;//없으면 종료
 		}
 	}
+		
+		//삭제
+	@Override
+	public void delete(int shopNo) {
+		List<ShopImgDto> list = shopImgDao.getBys(shopNo);
+		
+		for(ShopImgDto dto : list) {
+			File target = new File(dir,String.valueOf(dto.getShopImgNo()));
+			target.delete();
+		}
+		sqlSession.delete("shopImg.delete", shopNo);
+		
+	}
+		
 }

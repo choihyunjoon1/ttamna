@@ -59,5 +59,7 @@ public class ShopImgDaoImpl implements ShopImgDao{
 		public List<ShopImgDto> getBys(int shopNo) {
 			return sqlSession.selectList("shopImg.getByNos", shopNo);
 		}
+
+	
 				
 }

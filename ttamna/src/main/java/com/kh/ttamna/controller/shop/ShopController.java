@@ -3,7 +3,9 @@ package com.kh.ttamna.controller.shop;
 import java.io.IOException;
 import java.net.URLEncoder;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -24,6 +26,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.kh.ttamna.entity.cart.CartDto;
 import com.kh.ttamna.entity.member.MemberDto;
+import com.kh.ttamna.entity.mybaby.MybabyDto;
 import com.kh.ttamna.entity.shop.ShopDto;
 import com.kh.ttamna.entity.shop.ShopImgDto;
 import com.kh.ttamna.repository.cart.CartDao;
@@ -32,6 +35,7 @@ import com.kh.ttamna.repository.shop.ShopDao;
 import com.kh.ttamna.repository.shop.ShopImgDao;
 import com.kh.ttamna.service.shop.ShopService;
 import com.kh.ttamna.vo.shop.ShopImgVO;
+import com.kh.ttamna.vo.shop.ShopJoinVO;
 import com.kh.ttamna.vo.shop.ShopListByPageVo;
 import com.kh.ttamna.vo.shop.ShopListVO;
 import com.kh.ttamna.vo.shop.ShopVO;
@@ -57,10 +61,7 @@ public class ShopController {
 
 	@Autowired
 	private SqlSession sqlSession;
-	
-	@Autowired
-	private CartDao cartDao;
-	
+
 	
 	@RequestMapping("/")
 	public String main(Model model) {
@@ -114,6 +115,7 @@ public class ShopController {
 	@GetMapping("/delete")
 	public String delete(int shopNo) {
 		shopDao.delete(shopNo);
+		shopService.delete(shopNo);
 		return"redirect:/shop/";
 	}
 	

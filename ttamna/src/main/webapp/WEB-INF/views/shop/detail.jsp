@@ -20,6 +20,9 @@ pageEncoding="UTF-8"%>
 		margin-left: 20%;
 		margin-bottom: 10%;
 	}
+		img{
+		max-width: 450px;
+	}
 </style>
 <script>
 	$(function(){
@@ -35,8 +38,8 @@ $(function(){
 	// 비회원일경우 기능 접근 차단
 	var login = $("input[name=memberId]").val();
 	if(login == ''){
-	$(".oneline").slideUp(); // 구매칸
-	$(".deny").slideUp();	// 댓글칸
+	$(".oneline").hide(); // 구매칸
+	$(".deny").hide();	// 댓글칸
 	}
 	
 	// 결제 관련
@@ -49,7 +52,7 @@ $(function(){
 	// 수량이 없다면?
 	var stock = $("input[name=shopCount]").val();
 	if(stock == 0){
-		$(".oneline").slideUp();
+		$(".oneline").hide();
 	}
 	
 	
@@ -297,11 +300,11 @@ $(function(){
 				</c:forEach>
 			  </div>
 			  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
-			    <span class="carousel-control-prev-icon" aria-hidden="true"><img src="${root}/resources/img/prev.png" width="32px;" height="32px;"></span>
+			    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
 			    <span class="visually-hidden">Previous</span>
 			  </button>
 			  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
-			    <span class="carousel-control-next-icon" aria-hidden="true"><img src="${root}/resources/img/next.png" width="32px;" height="32px;"></span>
+			    <span class="carousel-control-next-icon" aria-hidden="true"></span>
 			    <span class="visually-hidden">Next</span>
 			  </button>
 			</div>

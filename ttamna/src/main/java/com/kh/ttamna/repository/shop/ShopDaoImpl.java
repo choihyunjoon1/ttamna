@@ -36,7 +36,7 @@ public class ShopDaoImpl implements ShopDao{
 	public List<ShopDto> list() {
 		return sqlSession.selectList("shop.listByImgNo");
 	}
-
+	
 	// 목록 더보기
 	@Override
 	public List<ShopListByPageVo> listByPage(int startRow, int endRow) {

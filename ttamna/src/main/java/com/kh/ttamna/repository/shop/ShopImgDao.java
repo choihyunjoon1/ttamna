@@ -19,4 +19,5 @@ public interface ShopImgDao {
 
 	List<ShopImgDto> getBys(int shopNo);//여러장 출력
 
+
 }
