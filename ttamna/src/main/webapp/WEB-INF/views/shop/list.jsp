@@ -56,9 +56,9 @@ $(function(){
 					var divCol = "<div class='card border-primary text-dark bg-light bg-opacity-1 mb-5 ms-2 ' style='width: 18rem;'>"
 						 + image
 						 + "<div class='card-body'>"
-						  + "<h5 class='card-title'><strong>"+ resp[i].shopGoods +"</strong></h5>"
+						  + "<h5 class='card-title'><strong>"+ resp[i].shopTitle +"</strong></h5>"
 						  + "<div class='card-text'>"
-						  + "<small>"+resp[i].shopTitle+"</small>"
+						  + "<small>"+resp[i].shopGoods+"</small>"
 						  + "</div>"
 						  + "<div class='card-text'>"
 						  + "<small>판매가 : "+resp[i].shopPrice+"원</small>"
@@ -93,6 +93,7 @@ $(function(){
 <div class="container-900 container-center mt-5 mb-5">
 
 	<div class="mt-5 mb-3"><h3>상품 게시판</h3>
+	<span>수익의 일부가 후원금으로 사용됩니다</span>
 	<!-- 상품등록은 관리자만 가능 -->
 	<c:if test="${sessionScope.grade eq '관리자'}">
 		<div class="d-grid gap-1 d-md-flex justify-content-md-end">
@@ -110,8 +111,6 @@ $(function(){
 			<button type="button" class="justify-content-md btn btn-primary more-btn">더보기</button>
 		</div>
 	</div>
-	
-	
 	
 </div>
     

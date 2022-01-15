@@ -54,14 +54,6 @@
 				<tbody>
 					<c:forEach var="payDetailDto" items="${payDetailList}">
 					<tr>
-						<c:choose>
-							<c:when test="${cartDto.shopNo ne null}">
-								<td><a href="${pageContext.request.contextPath}/shop/detail?shopNo=${payDetailDto.shopNo}">${payDetailDto.shopGoods}</a></td>
-							</c:when>
-							<c:otherwise>
-								<td>${payDetailDto.shopGoods}</td>
-							</c:otherwise>
-							</c:choose>
 						<td><a href="${pageContext.request.contextPath}/shop/detail?shopNo=${payDetailDto.shopNo}">${payDetailDto.shopGoods}</a></td>
 						<td>${payDetailDto.quantity}개</td>
 						<td>${payDetailDto.price}원</td>

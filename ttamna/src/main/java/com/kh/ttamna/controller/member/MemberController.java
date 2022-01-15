@@ -146,7 +146,7 @@ public class MemberController {
 		}
 		
 	}
-	@RequestMapping("/mypage/edit_success")
+	@GetMapping("/mypage/edit_success")
 	public String editSuccess() {
 		return "member/mypage/edit_success";
 	}
@@ -165,7 +165,7 @@ public class MemberController {
 			return "redirect:/member/mypage/change_pw?error";
 		}
 	}
-	@RequestMapping("/mypage/change_pw_success")
+	@GetMapping("/mypage/change_pw_success")
 	public String changePwSuccess() {
 		return "member/mypage/change_pw_success";
 	}
@@ -256,7 +256,7 @@ public class MemberController {
 		attr.addAttribute("payNo", payNo);
 		return "redirect:/member/mypage/order_detail?payNo="+payNo;
 	}
-	
+	// 결제 부분취소
 	@GetMapping("/mypage/cancel_part")
 	public String cancelPart(@RequestParam int payNo, @RequestParam int shopNo) throws URISyntaxException {
 		PaymentDetailDto payDetailDto = payDetailDao.get(payNo, shopNo);

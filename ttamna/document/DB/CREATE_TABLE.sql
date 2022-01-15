@@ -194,9 +194,9 @@ shop_title VARCHAR2(150 BYTE) NOT NULL, -- 글 제목
 shop_goods varchar2(150) not null, -- 상품이름
 shop_price number not null, -- 상품가격
 shop_count number not null check(shop_count >= 0), -- 상품 재고 수량
-shop_content varchar2(3000) not null, -- 상품 설명
 shop_time date default sysdate not null, -- 작성일
 shop_read number default 0 not null -- 조회수
+shop_content CLOB not null, -- 상품 설명
 );
 
 
@@ -229,24 +229,6 @@ member_id references member(member_id) on delete set null, -- 댓글 작성자
 shop_no references shop(shop_no) on delete cascade, -- 상품번호
 shop_reply_content varchar2(1500) not null, --댓글 내용
 shop_reply_time date default sysdate not null -- 댓글 작성일
-);
-
-commit;
-
--------------------------------------------------------------------------------------------------------------
-
-
-
--- 장바구니
-create sequence cart_seq;
-create table cart(
-cart_no number primary key, -- 장바구니 번호
-shop_no references shop(shop_no) on delete cascade, -- 상품번호
-member_id references member(member_id) on delete cascade, -- 아이디
-shop_img_no references shop_img(shop_img_no) on delete cascade,
-cart_time date default sysdate not null, -- 담은시간
-cart_count number default 0 check(cart_count >= 0) not null, --담은개수
-shop_goods varchar2(150)
 );
 
 commit;
