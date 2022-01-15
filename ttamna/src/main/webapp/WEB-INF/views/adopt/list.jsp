@@ -82,7 +82,7 @@ $(function(){
 								  + "입양 동물 : " + resp[i].adoptKind
 								  +"</small></div>"
 								  + "<div class='card-text d-grid gap-1 justify-content-md-end'>"
-								  + "<a href='readUp?adoptNo= "+resp[i].adoptNo+"' class='btn btn-primary px-2 mt-2 ms-2'>" + "Read"
+								  + "<a href='readUp?adoptNo= "+resp[i].adoptNo+"' class='btn btn-primary px-2 mt-2 ms-2'>" + "보기"
 								  + "</a></div>"
 								  + "</div></div>";
 						
