@@ -11,5 +11,15 @@
 #### * 깃허브 : https://github.com/choihyunjoon1/ttamna 
 #### * ERD : https://www.erdcloud.com/d/nJcKLpL8tNaPrRDSh
 #### * 참고 사이트 : 해피빈 https://happybean.naver.com/   포인핸드 http://pawinhand.kr/    
+
+
+
+<hr>
+
+ ### [ Tierheim ERD ]
+<br>
+<img src="https://user-images.githubusercontent.com/88869283/149625952-42df5556-55ad-49d3-bd84-4e679353b4de.png" width="80%">
+
+<hr>
      
    
