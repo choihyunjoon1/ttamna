@@ -12,6 +12,9 @@
 		border:none;
 		min-height: 100px;
 	}
+	.editor.img{
+		width: 30%;
+	}
 	textarea[name=shopContent]{
 		width:1px;
 		height:1px;
@@ -20,6 +23,9 @@
 		position:fixed;
 		top:0;
 		left:-5px;
+	}
+		img{
+		max-width: 600px;
 	}
 </style>
 

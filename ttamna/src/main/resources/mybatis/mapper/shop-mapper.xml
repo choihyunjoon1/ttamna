@@ -82,7 +82,7 @@
 	
 	<!-- 이미지번호와 같이 뽑기 위해서 inner 조인 -->
 	<select id="listByImgNo" resultType="ShopJoinVO">
-		select * from shop inner join shop_img on shop.shop_no = shop_img.shop_no
+		select * from shop left outer join shop_img on shop.shop_no = shop_img.shop_no
 	</select>
 	
 	<!-- 상품 리스트 -->

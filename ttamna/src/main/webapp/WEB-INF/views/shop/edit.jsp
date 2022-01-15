@@ -21,17 +21,21 @@
 		top:0;
 		left:-5px;
 	}
+	img{
+		max-width: 600px;
+	}
 </style>
 
 <script>
 	$(function(){
+		// 글자 복사
 		function copyText(){
-			var origin = $(".editor").html();
-			$("textarea[name=shopContent]").val(origin);
+			var origin = $(".editor").html(); // origin은 에디터에 적힌 글씨를 html형식으로 저장
+			$("textarea[name=shopContent]").val(origin); // textarea에 origin을 넣는다.
 		}
 		
 		$(".editor").on("input", function(){
-			//copy
+			//에디터에 글자가 적히면 즉시 카피
 			copyText();
 		});
 	});
@@ -51,7 +55,7 @@
 		</div>
 		<div>이미지는 변경할 수 없습니다.</div>
 		<div class="input-group mb-3">
-		  <input type="file" name="attach"class="form-control" aria-describedby="inputGroupFileAddon04" aria-label="Upload" disabled >
+		  <input type="file" name="attach"class="form-control" aria-describedby="inputGroupFileAddon04" aria-label="Upload" disabled>
 		</div>
 		<div>상품명은 변경할 수 없습니다.</div>
 		<div class="input-group mb-3">
