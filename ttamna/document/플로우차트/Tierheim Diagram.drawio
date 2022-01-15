@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2022-01-15T14:23:03.434Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.71 Safari/537.36" etag="QZgejcvdK_Olr_pR5vru" version="16.2.7" type="github">
+<mxfile host="app.diagrams.net" modified="2022-01-15T14:31:54.760Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.71 Safari/537.36" etag="Ubxd35oK5YQsJuGn730I" version="16.2.7" type="github">
   <diagram id="ckaHysib9P23ZmjdkfU4" name="Page-1">
     <mxGraphModel dx="3076" dy="3063" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" background="#F1FAEE" math="0" shadow="0">
       <root>
@@ -2262,7 +2262,7 @@
           <mxGeometry x="-389.9999999999999" y="-105" width="184.13" height="80" as="geometry" />
         </mxCell>
         <mxCell id="blKYCjcWy3y85h6CKOym-567" value="입양공고 작성 페이지&lt;br&gt;/adopt/write&lt;br&gt;[GET]" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=15;" vertex="1" parent="1">
-          <mxGeometry x="-379.9999999999999" y="-105" width="170" height="80" as="geometry" />
+          <mxGeometry x="-380" y="-100" width="170" height="65" as="geometry" />
         </mxCell>
         <mxCell id="blKYCjcWy3y85h6CKOym-568" value="&lt;span style=&quot;color: rgba(0 , 0 , 0 , 0) ; font-family: monospace ; font-size: 0px&quot;&gt;df&lt;/span&gt;" style="rounded=1;whiteSpace=wrap;html=1;sketch=0;fontSize=20;strokeColor=#d79b00;strokeWidth=2;fillColor=#FFE6CC;" vertex="1" parent="1">
           <mxGeometry x="2.689999999999941" y="-105" width="184.13" height="80" as="geometry" />
@@ -3772,17 +3772,58 @@
           </mxGeometry>
         </mxCell>
         <mxCell id="blKYCjcWy3y85h6CKOym-1014" value="&lt;span style=&quot;color: rgba(0 , 0 , 0 , 0) ; font-family: monospace ; font-size: 0px&quot;&gt;df&lt;/span&gt;" style="rounded=1;whiteSpace=wrap;html=1;sketch=0;fontSize=20;strokeColor=#d79b00;strokeWidth=2;fillColor=#FFE6CC;" vertex="1" parent="1">
-          <mxGeometry x="219.99999999999994" y="-20" width="184.13" height="80" as="geometry" />
+          <mxGeometry x="220" y="-80" width="150" height="80" as="geometry" />
         </mxCell>
         <mxCell id="blKYCjcWy3y85h6CKOym-1015" value="총 누적 기부금액&lt;br&gt;/ajax/donation_total&lt;br&gt;[GET]" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=15;" vertex="1" parent="1">
-          <mxGeometry x="230" y="-12.5" width="170" height="65" as="geometry" />
+          <mxGeometry x="217.93" y="-66.25" width="152.07" height="52.5" as="geometry" />
         </mxCell>
-        <mxCell id="blKYCjcWy3y85h6CKOym-1016" value="" style="endArrow=classic;html=1;rounded=1;sketch=0;fontSize=60;fontColor=#1D3557;strokeColor=#006666;fillColor=#A8DADC;curved=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" edge="1" parent="1" source="blKYCjcWy3y85h6CKOym-1014">
+        <mxCell id="blKYCjcWy3y85h6CKOym-1022" value="&lt;span style=&quot;color: rgba(0 , 0 , 0 , 0) ; font-family: monospace ; font-size: 0px&quot;&gt;df&lt;/span&gt;" style="rounded=1;whiteSpace=wrap;html=1;sketch=0;fontSize=20;fontColor=#1D3557;strokeColor=#457B9D;strokeWidth=2;fillColor=#E8F0FC;" vertex="1" parent="1">
+          <mxGeometry x="220" y="20" width="150" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="blKYCjcWy3y85h6CKOym-1023" value="보호소 등급신청 &lt;br&gt;안내 페이지&lt;br&gt;/upgrade [GET]" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=15;" vertex="1" parent="1">
+          <mxGeometry x="232.07" y="33.75" width="130" height="52.5" as="geometry" />
+        </mxCell>
+        <mxCell id="blKYCjcWy3y85h6CKOym-1024" value="&lt;span style=&quot;color: rgba(0 , 0 , 0 , 0) ; font-family: monospace ; font-size: 0px&quot;&gt;df&lt;/span&gt;" style="rounded=1;whiteSpace=wrap;html=1;sketch=0;fontSize=20;fontColor=#1D3557;strokeColor=#457B9D;strokeWidth=2;fillColor=#E8F0FC;" vertex="1" parent="1">
+          <mxGeometry x="222.07" y="123" width="147.93" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="blKYCjcWy3y85h6CKOym-1025" value="&lt;span style=&quot;color: rgba(0 , 0 , 0 , 0) ; font-family: monospace ; font-size: 0px&quot;&gt;df&lt;/span&gt;" style="rounded=1;whiteSpace=wrap;html=1;sketch=0;fontSize=20;fontColor=#1D3557;strokeColor=#457B9D;strokeWidth=2;fillColor=#E8F0FC;" vertex="1" parent="1">
+          <mxGeometry x="220" y="217.5" width="150" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="blKYCjcWy3y85h6CKOym-1026" value="유기동물 입양비 지원 안내 페이지&lt;br&gt;/support [GET]" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=15;" vertex="1" parent="1">
+          <mxGeometry x="230" y="133.75" width="130" height="52.5" as="geometry" />
+        </mxCell>
+        <mxCell id="blKYCjcWy3y85h6CKOym-1027" value="사이트 소개 &lt;br&gt;페이지&lt;br&gt;/about_us [GET]" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=15;" vertex="1" parent="1">
+          <mxGeometry x="230" y="231.25" width="130" height="52.5" as="geometry" />
+        </mxCell>
+        <mxCell id="blKYCjcWy3y85h6CKOym-1028" value="" style="endArrow=classic;html=1;rounded=1;sketch=0;fontSize=11;fontColor=#1D3557;strokeColor=#006666;fillColor=#A8DADC;curved=0;entryX=0.002;entryY=0.234;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" target="blKYCjcWy3y85h6CKOym-342">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
-            <mxPoint x="820" y="30" as="sourcePoint" />
-            <mxPoint x="430" y="150" as="targetPoint" />
+            <mxPoint x="370" y="-43" as="sourcePoint" />
+            <mxPoint x="40" y="30" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="blKYCjcWy3y85h6CKOym-1030" value="" style="endArrow=classic;html=1;rounded=1;sketch=0;fontSize=11;fontColor=#1D3557;strokeColor=#006666;fillColor=#A8DADC;curved=0;exitX=0.003;exitY=0.541;exitDx=0;exitDy=0;exitPerimeter=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="blKYCjcWy3y85h6CKOym-342" target="blKYCjcWy3y85h6CKOym-1024">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="-10" y="80" as="sourcePoint" />
+            <mxPoint x="40" y="30" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="blKYCjcWy3y85h6CKOym-1031" value="" style="endArrow=classic;html=1;rounded=1;sketch=0;fontSize=11;fontColor=#1D3557;strokeColor=#006666;fillColor=#A8DADC;curved=0;exitX=0.002;exitY=0.54;exitDx=0;exitDy=0;exitPerimeter=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="blKYCjcWy3y85h6CKOym-342" target="blKYCjcWy3y85h6CKOym-1025">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="-10" y="80" as="sourcePoint" />
+            <mxPoint x="40" y="30" as="targetPoint" />
             <Array as="points">
-              <mxPoint x="312" y="150" />
+              <mxPoint x="400" y="162" />
+              <mxPoint x="400" y="258" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="blKYCjcWy3y85h6CKOym-1032" value="" style="endArrow=classic;html=1;rounded=1;sketch=0;fontSize=11;fontColor=#1D3557;strokeColor=#006666;fillColor=#A8DADC;curved=0;exitX=0;exitY=0.544;exitDx=0;exitDy=0;exitPerimeter=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="blKYCjcWy3y85h6CKOym-342" target="blKYCjcWy3y85h6CKOym-1022">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="-10" y="80" as="sourcePoint" />
+            <mxPoint x="40" y="30" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="400" y="164" />
+              <mxPoint x="400" y="60" />
             </Array>
           </mxGeometry>
         </mxCell>
