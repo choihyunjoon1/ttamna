@@ -1,6 +1,6 @@
-<mxfile host="app.diagrams.net" modified="2022-01-15T14:36:57.874Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.71 Safari/537.36" etag="tVUlPCMg4z5dY6SdKOFv" version="16.2.7" type="github">
+<mxfile host="app.diagrams.net" modified="2022-01-15T14:38:37.044Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.71 Safari/537.36" etag="AlMNDXzt8VwKhQqS8h73" version="16.2.7" type="github">
   <diagram id="ckaHysib9P23ZmjdkfU4" name="Page-1">
-    <mxGraphModel dx="3076" dy="3063" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" background="#F1FAEE" math="0" shadow="0">
+    <mxGraphModel dx="3716" dy="3352" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" background="#F1FAEE" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -1909,6 +1909,9 @@
         </mxCell>
         <mxCell id="blKYCjcWy3y85h6CKOym-304" value="&lt;span style=&quot;font-weight: normal&quot;&gt;내 일시기부 목록 페이지&lt;br&gt;/member/mypage/short_donation&lt;br&gt;[GET]&lt;/span&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;sketch=0;fontSize=12;fontColor=#1D3557;fontStyle=1" vertex="1" parent="blKYCjcWy3y85h6CKOym-1">
           <mxGeometry x="2544.9" y="1606" width="140" height="55" as="geometry" />
+        </mxCell>
+        <mxCell id="blKYCjcWy3y85h6CKOym-1033" value="&lt;span style=&quot;font-size: 14px&quot;&gt;모든 게시글에 대한&lt;br&gt;등록, 수정, 삭제 가능&lt;br&gt;&lt;/span&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;sketch=0;fontSize=11;fontColor=#1D3557;" vertex="1" parent="blKYCjcWy3y85h6CKOym-1">
+          <mxGeometry x="1041.47" y="1689" width="168.53" height="51" as="geometry" />
         </mxCell>
         <mxCell id="blKYCjcWy3y85h6CKOym-338" value="" style="endArrow=classic;html=1;rounded=1;sketch=0;fontSize=15;fontColor=#1D3557;strokeColor=#457B9D;fillColor=#A8DADC;curved=0;exitX=-0.003;exitY=0.964;exitDx=0;exitDy=0;fontStyle=0;strokeWidth=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;exitPerimeter=0;" edge="1" parent="1" source="blKYCjcWy3y85h6CKOym-342" target="blKYCjcWy3y85h6CKOym-334">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
