@@ -15,7 +15,8 @@
 
 
 <hr>
-### Tierheim ERD 
+### Tierheim ERD
+<br>
 <img src="https://user-images.githubusercontent.com/88869283/149625952-42df5556-55ad-49d3-bd84-4e679353b4de.png" width="80%">
 
 <hr>
