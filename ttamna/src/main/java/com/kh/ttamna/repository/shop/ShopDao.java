@@ -28,5 +28,8 @@ public interface ShopDao {
 	boolean sell(ShopDto shopDto);
 	
 	ShopDto search(int shopNo);
+	
+	//메인페이지에 3개 띄우기
+	List<ShopListByPageVo> mainList();
 
 }

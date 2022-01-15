@@ -83,4 +83,9 @@ public class ShopDaoImpl implements ShopDao{
 		return sqlSession.update("shop.sell", shopDto) > 0;
 	}
 
+	//메인페이지에 3개 띄우기
+	@Override
+	public List<ShopListByPageVo> mainList() {
+		return sqlSession.selectList("shop.mainBoard");
+	}
 }

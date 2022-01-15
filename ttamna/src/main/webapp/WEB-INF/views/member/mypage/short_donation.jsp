@@ -12,10 +12,12 @@
 			console.log(tid);
 			open("${pageContext.request.contextPath}/donation/kakao/search?tid="+tid, '', 'toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=no,resizable=no,copyhistory=no,width=700, height=730');
 		});
-		$(".new-browser-auto").click(function(){
-			var sid = $(this).parent().siblings(".sid").text();
-			console.log(sid);
-			open("${pageContext.request.contextPath}/donation/kakao/auto/search?sid="+sid, '', 'toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=no,resizable=no,copyhistory=no,width=700, height=730');
+		$(".fund-cancel").click(function(){
+			if(confirm("기부를 취소하시겠습니까?")){
+				return true;
+			} else {
+				return false;
+			}
 		});
 	});
 </script>
@@ -53,7 +55,8 @@
 							<td>
 								<a class="new-browser">조회</a>
 								<c:if test="${paymentDto.status ne '전체취소'}">
-									<a href="${pageContext.request.contextPath}/donation/kakao/cancel_all?tid=${paymentDto.tid}&amount=${paymentDto.totalAmount}&payNo=${paymentDto.payNo}">취소</a>
+									<a class="fund-cancel"
+									href="${root}/donation/kakao/cancel_all?tid=${paymentDto.tid}&amount=${paymentDto.totalAmount}&payNo=${paymentDto.payNo}">취소</a>
 								</c:if>
 							</td>
 						</tr>

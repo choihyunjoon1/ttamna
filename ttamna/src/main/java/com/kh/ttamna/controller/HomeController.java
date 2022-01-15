@@ -1,12 +1,35 @@
 package com.kh.ttamna.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import com.kh.ttamna.repository.adopt.AdoptDao;
+import com.kh.ttamna.repository.donation.DonationDao;
+import com.kh.ttamna.repository.mybaby.MybabyDao;
+import com.kh.ttamna.repository.shop.ShopDao;
 
 @Controller
 public class HomeController {
+	@Autowired
+	private DonationDao donationDao;
+	
+	@Autowired
+	private AdoptDao adoptDao;
+	
+	@Autowired
+	private MybabyDao mybabyDao;
+	
+	@Autowired
+	private ShopDao shopDao;
+	
 	@RequestMapping("/")
-	public String home() {
+	public String home(Model model) {
+		model.addAttribute("donationList", donationDao.mainList());
+		model.addAttribute("adoptList", adoptDao.mainList());
+		model.addAttribute("mybabyList", mybabyDao.mainList());
+		model.addAttribute("shopList", shopDao.mainList());
 		return "home";
 	}
 	

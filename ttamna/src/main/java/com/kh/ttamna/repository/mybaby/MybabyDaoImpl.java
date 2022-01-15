@@ -105,7 +105,10 @@ public class MybabyDaoImpl implements MybabyDao{
 		return sqlSession.selectList("mybaby.searchList",data);
 	}
 	
-
+	@Override//메인페이지에 3개 띄우기
+	public List<MybabyDownVO> mainList() {
+		return sqlSession.selectList("mybaby.mainBoard");
+	}
 	
 	
 

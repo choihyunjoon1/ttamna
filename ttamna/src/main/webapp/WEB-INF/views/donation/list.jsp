@@ -59,9 +59,9 @@ $(function(){
 						graph = "danger";
 					}
 					if(!resp[i].donationImgNo){
-						imgLocation =  "<img src=${pageContext.request.contextPath}/resources/img/nonimage.png class=icon></a></span>";
+						imgLocation =  "<img src=${pageContext.request.contextPath}/resources/img/nonimage.png class=icon style='width:100%; height:15rem'></a></span>";
 					}else{
-						imgLocation =  "<img src='donaimg?donationImgNo="+ resp[i].donationImgNo +"' class='card-img-top'>";
+						imgLocation =  "<img src='donaimg?donationImgNo="+ resp[i].donationImgNo +"' style='width:100%; height:15rem' class='card-img-top'>";
 					}
 					
 					if(donationWriter == null){

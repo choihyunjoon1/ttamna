@@ -19,4 +19,5 @@ public interface MybabyDao {
 	boolean delete(int mybabyNo);
 	boolean edit(MybabyDto mybabyDto);
 	List<MybabyDownVO> searchPlusImg(Map<String, Object> param);
+	List<MybabyDownVO> mainList();
 }

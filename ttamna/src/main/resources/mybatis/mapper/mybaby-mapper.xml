@@ -119,5 +119,14 @@
 		update mybaby set mybaby_reply = mybaby_reply-1 where mybaby_no=#{mybabyNo}
 	</update>
 	
+	<select id="mainBoard" resultType="MybabyDownVO">
+		select * from(
+		    select rownum rn2, tmp.* from(
+		        select MY.*, MIF.mybaby_img_no from  mybaby MY left outer join mybaby_img_first MIF on MY.mybaby_no = MIF.mybaby_no where rn = 1
+		        order by MY.mybaby_no desc
+		    )tmp
+		)where rn2 between 1 and 3
+	</select>
+	
 </mapper>
 
