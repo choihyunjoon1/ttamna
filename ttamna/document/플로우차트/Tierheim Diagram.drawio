@@ -1,6 +1,6 @@
-<mxfile host="app.diagrams.net" modified="2022-01-15T14:14:32.242Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.71 Safari/537.36" etag="C0LmwgIVXYY009Z5Yi6y" version="16.2.7" type="github">
+<mxfile host="app.diagrams.net" modified="2022-01-15T14:21:56.244Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.71 Safari/537.36" etag="ezRzQh8_ruvNRWeCTblq" version="16.2.7" type="github">
   <diagram id="ckaHysib9P23ZmjdkfU4" name="Page-1">
-    <mxGraphModel dx="3716" dy="3352" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" background="#F1FAEE" math="0" shadow="0">
+    <mxGraphModel dx="3076" dy="3063" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" background="#F1FAEE" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -1793,9 +1793,6 @@
             </Array>
           </mxGeometry>
         </mxCell>
-        <mxCell id="blKYCjcWy3y85h6CKOym-304" value="&lt;span style=&quot;font-weight: normal&quot;&gt;내 일시기부 목록 페이지&lt;br&gt;/member/mypage/short_donation&lt;br&gt;[GET]&lt;/span&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;sketch=0;fontSize=12;fontColor=#1D3557;fontStyle=1" vertex="1" parent="blKYCjcWy3y85h6CKOym-1">
-          <mxGeometry x="2548" y="1609" width="140" height="55" as="geometry" />
-        </mxCell>
         <mxCell id="blKYCjcWy3y85h6CKOym-302" value="&lt;span style=&quot;font-weight: normal&quot;&gt;내 정기기부 목록 페이지&lt;br&gt;/member/mypage/my_donation&lt;br&gt;[GET]&lt;/span&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;sketch=0;fontSize=12;fontColor=#1D3557;fontStyle=1" vertex="1" parent="blKYCjcWy3y85h6CKOym-1">
           <mxGeometry x="2552.4" y="1427" width="140" height="55" as="geometry" />
         </mxCell>
@@ -1836,7 +1833,7 @@
         <mxCell id="blKYCjcWy3y85h6CKOym-999" value="단건 기부 취소 처리&lt;br&gt;(GET)&lt;br&gt;/donation/kakao/cancel_all" style="whiteSpace=wrap;html=1;rounded=0;fillColor=#ffe6cc;strokeColor=#d79b00;" vertex="1" parent="blKYCjcWy3y85h6CKOym-1">
           <mxGeometry x="2169.9" y="1419" width="170.1" height="71" as="geometry" />
         </mxCell>
-        <mxCell id="blKYCjcWy3y85h6CKOym-1000" value="" style="endArrow=classic;html=1;rounded=1;sketch=0;fontSize=12;fontColor=#1D3557;strokeColor=#006666;fillColor=#A8DADC;curved=0;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="blKYCjcWy3y85h6CKOym-1" source="blKYCjcWy3y85h6CKOym-291" target="blKYCjcWy3y85h6CKOym-999">
+        <mxCell id="blKYCjcWy3y85h6CKOym-1000" value="" style="endArrow=classic;html=1;rounded=1;sketch=0;fontSize=12;fontColor=#1D3557;strokeColor=#006666;fillColor=#A8DADC;curved=0;exitX=0;exitY=0.25;exitDx=0;exitDy=0;entryX=1;entryY=0.25;entryDx=0;entryDy=0;" edge="1" parent="blKYCjcWy3y85h6CKOym-1" source="blKYCjcWy3y85h6CKOym-291" target="blKYCjcWy3y85h6CKOym-999">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
             <mxPoint x="2390" y="1430" as="sourcePoint" />
             <mxPoint x="2440" y="1380" as="targetPoint" />
@@ -1850,7 +1847,7 @@
         <mxCell id="blKYCjcWy3y85h6CKOym-1002" value="정기 기부 비활성화(취소) 처리&lt;br&gt;(GET)&lt;br&gt;/donation/kakao/auto/inactive" style="whiteSpace=wrap;html=1;rounded=0;fillColor=#ffe6cc;strokeColor=#d79b00;" vertex="1" parent="blKYCjcWy3y85h6CKOym-1">
           <mxGeometry x="2169.9" y="1598" width="170.1" height="71" as="geometry" />
         </mxCell>
-        <mxCell id="blKYCjcWy3y85h6CKOym-1003" value="" style="endArrow=classic;html=1;rounded=1;sketch=0;fontSize=12;fontColor=#1D3557;strokeColor=#006666;fillColor=#A8DADC;curved=0;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="blKYCjcWy3y85h6CKOym-1" source="blKYCjcWy3y85h6CKOym-293" target="blKYCjcWy3y85h6CKOym-1002">
+        <mxCell id="blKYCjcWy3y85h6CKOym-1003" value="" style="endArrow=classic;html=1;rounded=1;sketch=0;fontSize=12;fontColor=#1D3557;strokeColor=#006666;fillColor=#A8DADC;curved=0;exitX=0;exitY=0.25;exitDx=0;exitDy=0;entryX=1;entryY=0.25;entryDx=0;entryDy=0;" edge="1" parent="blKYCjcWy3y85h6CKOym-1" source="blKYCjcWy3y85h6CKOym-293" target="blKYCjcWy3y85h6CKOym-1002">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
             <mxPoint x="2543" y="1464.5" as="sourcePoint" />
             <mxPoint x="2350" y="1464.5" as="targetPoint" />
@@ -1887,6 +1884,31 @@
               <mxPoint x="1300" y="1629" />
             </Array>
           </mxGeometry>
+        </mxCell>
+        <mxCell id="blKYCjcWy3y85h6CKOym-1017" value="" style="endArrow=classic;html=1;rounded=1;sketch=0;fontSize=60;fontColor=#1D3557;strokeColor=#006666;fillColor=#A8DADC;curved=0;entryX=0.006;entryY=0.655;entryDx=0;entryDy=0;entryPerimeter=0;exitX=1.006;exitY=0.655;exitDx=0;exitDy=0;exitPerimeter=0;" edge="1" parent="blKYCjcWy3y85h6CKOym-1" source="blKYCjcWy3y85h6CKOym-999" target="blKYCjcWy3y85h6CKOym-291">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="2330" y="1470" as="sourcePoint" />
+            <mxPoint x="2380" y="1420" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="blKYCjcWy3y85h6CKOym-1019" value="취소 완료(성공)" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=11;fontColor=#1D3557;" vertex="1" connectable="0" parent="blKYCjcWy3y85h6CKOym-1017">
+          <mxGeometry x="0.15" relative="1" as="geometry">
+            <mxPoint x="-12" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="blKYCjcWy3y85h6CKOym-1020" value="" style="endArrow=classic;html=1;rounded=1;sketch=0;fontSize=60;fontColor=#1D3557;strokeColor=#006666;fillColor=#A8DADC;curved=0;exitX=1;exitY=0.75;exitDx=0;exitDy=0;entryX=0;entryY=0.75;entryDx=0;entryDy=0;" edge="1" parent="blKYCjcWy3y85h6CKOym-1" source="blKYCjcWy3y85h6CKOym-1002" target="blKYCjcWy3y85h6CKOym-293">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="2351.0206" y="1475.505" as="sourcePoint" />
+            <mxPoint x="2544.0200000000004" y="1475.505" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="blKYCjcWy3y85h6CKOym-1021" value="취소 완료(성공)" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=11;fontColor=#1D3557;" vertex="1" connectable="0" parent="blKYCjcWy3y85h6CKOym-1020">
+          <mxGeometry x="0.15" relative="1" as="geometry">
+            <mxPoint x="-12" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="blKYCjcWy3y85h6CKOym-304" value="&lt;span style=&quot;font-weight: normal&quot;&gt;내 일시기부 목록 페이지&lt;br&gt;/member/mypage/short_donation&lt;br&gt;[GET]&lt;/span&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;sketch=0;fontSize=12;fontColor=#1D3557;fontStyle=1" vertex="1" parent="blKYCjcWy3y85h6CKOym-1">
+          <mxGeometry x="2544.9" y="1606" width="140" height="55" as="geometry" />
         </mxCell>
         <mxCell id="blKYCjcWy3y85h6CKOym-338" value="" style="endArrow=classic;html=1;rounded=1;sketch=0;fontSize=15;fontColor=#1D3557;strokeColor=#457B9D;fillColor=#A8DADC;curved=0;exitX=-0.003;exitY=0.964;exitDx=0;exitDy=0;fontStyle=0;strokeWidth=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;exitPerimeter=0;" edge="1" parent="1" source="blKYCjcWy3y85h6CKOym-342" target="blKYCjcWy3y85h6CKOym-334">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
