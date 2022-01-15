@@ -8,7 +8,7 @@
 <form method="post" enctype="multipart/form-data">
   <fieldset style="width:80%;" class="mx-auto">
   	 <!-- 위에 헤더 부분 -->
-    <legend>자랑글 쓰기</legend>
+    <legend>수정하기</legend>
     <div class="form-group row">
        <input type="hidden" name="mybabyWriter" value="${sessionScope.uid}">
     </div>
