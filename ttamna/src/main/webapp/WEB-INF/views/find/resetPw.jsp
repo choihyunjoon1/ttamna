@@ -61,7 +61,7 @@ window.addEventListener("load", function(){
 <div class="container-600 bg-white container-center container-height-700" >
 	<div class="card">
 		<div class="card-body">
-			<div class="mt-5 mb-5"><h5>${param.memberEmail} 님의 비밀번호를 재설정 합니다</h5></div>
+			<div class="mt-5 mb-5"><h5>회원 님의 비밀번호를 재설정 합니다</h5></div>
 			<form method="post" id="login-form" class="form-check">
 <%-- 			<input type="hidden" name=memberEmail value="${param.memberEmail}"> --%>
 				<div class="input-group mt-5 mb-3 col">
@@ -89,10 +89,6 @@ window.addEventListener("load", function(){
 					</c:if>
 				</div>
 				</div>
-					<div class="d-grid gap-2 d-md-flex justify-content-md-end mt-5 mb-5">
-						<a href="${root}" type="button" class="btn btn-outline-secondary me-md-1">취소</a>
-						<a type="button" href="${root}/find/findId" class="btn btn-outline-primary">아이디 찾기</a>
-					</div>
 			</form>
 		</div>
 	</div>
