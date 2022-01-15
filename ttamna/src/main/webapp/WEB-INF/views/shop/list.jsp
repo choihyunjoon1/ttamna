@@ -16,10 +16,7 @@ $(function(){
 	var size = 12;
 	
 	$(".more-btn").click(function(){
-		var keyword = $("input[name=keyword]").val();
-
-		
-		loadData(page, size, keyword);
+		loadData(page, size);
 		page++;
 	});
 	
@@ -28,9 +25,9 @@ $(function(){
 	$(".more-btn").click();
 	
 	//이렇게 캡슐화를 하는데 이걸 중첩클래스라고한다
-	function loadData(page, size, keyword){
+	function loadData(page, size){
 		$.ajax({
-			url : "${pageContext.request.contextPath}/shop/more?keyword"+keyword,
+			url : "${pageContext.request.contextPath}/shop/more",
 			type : "get",
 			data : {
 				page : page,
@@ -59,9 +56,9 @@ $(function(){
 					var divCol = "<div class='card border-primary text-dark bg-light bg-opacity-1 mb-5 ms-2 ' style='width: 18rem;'>"
 						 + image
 						 + "<div class='card-body'>"
-						  + "<h5 class='card-title'><strong>"+ resp[i].shopGoods +"</strong></h5>"
+						  + "<h5 class='card-title'><strong>"+ resp[i].shopTitle +"</strong></h5>"
 						  + "<div class='card-text'>"
-						  + "<small>"+resp[i].shopTitle+"</small>"
+						  + "<small>"+resp[i].shopGoods+"</small>"
 						  + "</div>"
 						  + "<div class='card-text'>"
 						  + "<small>판매가 : "+resp[i].shopPrice+"원</small>"
@@ -114,8 +111,6 @@ $(function(){
 			<button type="button" class="justify-content-md btn btn-primary more-btn">더보기</button>
 		</div>
 	</div>
-		
-	
 	
 </div>
     

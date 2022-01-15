@@ -1,10 +1,8 @@
 package com.kh.ttamna.repository.shop;
 
 import java.util.List;
-import java.util.Map;
 
 import com.kh.ttamna.entity.shop.ShopDto;
-import com.kh.ttamna.vo.shop.ShopJoinVO;
 import com.kh.ttamna.vo.shop.ShopListByPageVo;
 
 public interface ShopDao {
@@ -30,5 +28,4 @@ public interface ShopDao {
 	
 	ShopDto search(int shopNo);
 
-	List<ShopJoinVO> searchList(Map<String, Object> param);
 }

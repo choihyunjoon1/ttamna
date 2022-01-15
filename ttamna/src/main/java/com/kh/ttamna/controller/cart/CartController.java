@@ -24,8 +24,6 @@ public class CartController {
 	@Autowired
 	private SqlSession sqlSession;
 	
-	@Autowired
-	private CartDao cartDao;
 	
 	//장바구니 진입
 	@RequestMapping("/mypage/my_basket")

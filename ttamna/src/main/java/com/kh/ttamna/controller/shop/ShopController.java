@@ -61,19 +61,18 @@ public class ShopController {
 
 	@Autowired
 	private SqlSession sqlSession;
-	
-	@Autowired
-	private CartDao cartDao;
-	
+
 	
 	@RequestMapping("/")
 	public String main(Model model) {
-			model.addAttribute("list", sqlSession.selectList("shop.listByImgNo"));
+		model.addAttribute("list", sqlSession.selectList("shop.listByImgNo"));
+		
 		return "shop/list";
 	}
 	@RequestMapping("/list")
 	public String shop(Model model) {
-			model.addAttribute("list", sqlSession.selectList("shop.listByImgNo"));
+		model.addAttribute("list", sqlSession.selectList("shop.listByImgNo"));
+		
 		return "shop/list";
 	}
 	

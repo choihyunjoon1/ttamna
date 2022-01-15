@@ -9,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.kh.ttamna.entity.shop.ShopDto;
-import com.kh.ttamna.vo.shop.ShopJoinVO;
 import com.kh.ttamna.vo.shop.ShopListByPageVo;
 import com.kh.ttamna.vo.shop.ShopOrderVO;
 
@@ -82,14 +81,6 @@ public class ShopDaoImpl implements ShopDao{
 	@Override
 	public boolean sell(ShopDto shopDto) {
 		return sqlSession.update("shop.sell", shopDto) > 0;
-	}
-	// 검색목록
-	@Override
-	public List<ShopJoinVO> searchList(Map<String, Object> param) {
-		Map<String, Object> data = new HashMap<>();
-		data.put("keyword", param.get("keyword"));
-		
-		return sqlSession.selectList("shop.searchList",data);
 	}
 
 }

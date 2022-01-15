@@ -221,45 +221,6 @@ public class ShopPayController {
 		public String fail() {
 			return "shop/order/fail_result";
 		}
-		
-//		@GetMapping("/mypage/cancel_all")
-//		public String cancelAll(@RequestParam int shopNo, RedirectAttributes attr) throws URISyntaxException {
-//			PaymentDto payDto = paymentDao.get(shopNo);
-//			if(payDto.isAllCanceled()) {
-//				throw new IllegalArgumentException("취소가 불가능한 항목입니다.");
-//			}
-//			
-//			long amount = payDetailDao.getCancelAvailableAmount(shopNo);
-//			
-//			KakaoPayCancelResponseVo respVO = shopPayService.cancel(payDto.getTid(), amount);
-//			
-//			payDetailDao.cancelAll(shopNo);
-//			
-//			paymentDao.refresh(shopNo);
-//			
-//			attr.addAttribute("shopNo", shopNo);
-//			return "redirect:/"+"member/mypage/order_detail";
-//		}
-//		
-//		@GetMapping("/cancel_part")
-//		public String cancelPart(@RequestParam int payNo, @RequestParam int shopNo) throws URISyntaxException {
-//			PaymentDetailDto payDetailDto = payDetailDao.get(payNo, shopNo);
-//			if(!payDetailDto.isCancelAvailable()) {
-//				throw new IllegalArgumentException("취소가 불가능한 항목입니다.");
-//			}
-//			
-//			PaymentDto payDto = paymentDao.get(payNo);
-//			
-//			KakaoPayCancelResponseVo respVO = shopPayService.cancel(payDto.getTid(), payDetailDto.getPrice());
-//			
-//			payDetailDao.cancel(payNo, shopNo);
-//			
-//			paymentDao.refresh(payNo);
-//			
-//			return "redirect:/"+"member/mypage/order_detail?payNo="+payNo;
-//			
-//		}
-		
 	
 }
 
