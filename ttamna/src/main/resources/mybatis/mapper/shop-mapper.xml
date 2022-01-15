@@ -110,5 +110,14 @@
 	<update id="sell" parameterType="map">
 		update shop set shop_count = shop_count - #{shopCount} where shop_no = #{shopNo}
 	</update>
+	
+	<select id="mainBoard" resultType="ShopListByPageVo">
+		select * from(
+		    select rownum rn2, tmp.* from(
+		        select S.*, SIF.shop_img_no from shop S left outer join shop_img_first SIF on S.shop_no = SIF.shop_no where rn = 1
+		        order by S.shop_no desc
+		    )tmp
+		)where rn2 between 1 and 3
+	</select>
 </mapper>
 

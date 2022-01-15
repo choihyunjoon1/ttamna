@@ -1,18 +1,15 @@
 package com.kh.ttamna.repository.adopt;
 
-import java.io.File;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import javax.servlet.http.HttpSession;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.kh.ttamna.entity.adopt.AdoptDto;
-import com.kh.ttamna.util.FilePath;
+import com.kh.ttamna.vo.adopt.AdoptImgDtoVO;
 
 @Repository
 public class AdoptDaoImpl implements AdoptDao {
@@ -111,6 +108,10 @@ public class AdoptDaoImpl implements AdoptDao {
 		return result > 0;
 	}
 
-	
+	//메인페이지에 3개 띄우기
+	@Override
+	public List<AdoptImgDtoVO> mainList() {
+		return sqlSession.selectList("adopt.mainBoard");
+	}
 	
 }

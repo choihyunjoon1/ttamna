@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.kh.ttamna.entity.adopt.AdoptDto;
-import com.kh.ttamna.entity.donation.DonationDto;
+import com.kh.ttamna.vo.adopt.AdoptImgDtoVO;
 
 public interface AdoptDao {
 
@@ -39,6 +39,7 @@ public interface AdoptDao {
 	//조회수
 	boolean readUp(int adoptNo);
 
-
+	//메인페이지에 3개 띄우기
+	List<AdoptImgDtoVO> mainList();
 	
 }

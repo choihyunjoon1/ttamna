@@ -118,5 +118,14 @@
 	<update id="funding" parameterType="map">
 		update donation set donation_now_fund = ${price} + donation_now_fund where donation_no = ${donationNo}
 	</update>
+	
+	<select id="mainBoard" resultType="DonationDto">
+		select * from(
+		    select rownum rn2, tmp.* from(
+		        select D.*, DIF.donation_img_no from donation D left outer join donation_img_first DIF on D.donation_no = DIF.donation_no where rn = 1
+                order by D.donation_no desc
+		    )tmp
+		)where rn2 between 1 and 3
+	</select>
 </mapper>
 

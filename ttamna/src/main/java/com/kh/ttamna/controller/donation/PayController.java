@@ -172,7 +172,7 @@ public class PayController {
 		donationService.updatePrice(payNo);
 		model.addAttribute("cancelList", responseVo);
 		
-		return "donation/kakao/cancel_all";
+		return "redirect:/member/mypage/short_donation";
 	}
 	
 	@GetMapping("/cancel")//결제 취소 클릭 시
