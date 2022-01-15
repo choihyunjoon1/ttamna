@@ -70,7 +70,7 @@ $(function(){
 					}
 					
 					var divCol = "<div class='card border-primary text-dark bg-primary bg-opacity-10 mb-5 ms-2 ' style='width: 18rem;'>"
-								  + "<a href='readUp?adoptNo= "+resp[i].adoptNo+"'>"
+								  + "<a style='text-decoration-line:none;' href='readUp?adoptNo= "+resp[i].adoptNo+"'>"
 								  + imgLocation
 								  + "<div class='card-body'>"
 								  + "<h6 class='card-title'><strong class='title'>"+ resp[i].adoptTitle +"</strong></h6>"
