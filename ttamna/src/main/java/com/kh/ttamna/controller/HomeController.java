@@ -2,7 +2,11 @@ package com.kh.ttamna.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+
 import org.springframework.ui.Model;
+
+import org.springframework.web.bind.annotation.GetMapping;
+
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.kh.ttamna.repository.adopt.AdoptDao;
@@ -34,19 +38,19 @@ public class HomeController {
 	}
 	
 	//보호소 등급 신청 방법 안내 페이지
-	@RequestMapping("/upgrade")
+	@GetMapping("/upgrade")
 	public String upgrade() {
 		return "upgrade";
 	}
 	
 	//정부지원 유기동물 입양비 지원 안내 페이지
-	@RequestMapping("/support")
+	@GetMapping("/support")
 	public String support() {
 		return "support";
 	}
 
-	//정부지원 유기동물 입양비 지원 안내 페이지
-	@RequestMapping("/about_us")
+	//사이트 소개 페이지
+	@GetMapping("/about_us")
 	public String aboutUs() {
 		return "about_us";
 	}
