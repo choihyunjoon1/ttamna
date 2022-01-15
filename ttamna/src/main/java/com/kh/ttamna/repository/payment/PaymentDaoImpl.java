@@ -136,10 +136,16 @@ public class PaymentDaoImpl implements PaymentDao{
 		return sqlSession.selectList("pay.shopAmountMoy");
 	}
 
-	//기부 / 상품판매 금액 기간 검색
+	//단건기부 금액 기간 검색
 	@Override
 	public List<SearchChartVO> dateSearch(Map<String, Object> param) {
 		return sqlSession.selectList("pay.dateSearch", param);
+	}
+
+	//후원상품 판매금액 기간검색
+	@Override
+	public List<SearchChartVO> shopDateSearch(Map<String, Object> param) {
+		return sqlSession.selectList("pay.shopDateSearch", param);
 	}
 
 }
