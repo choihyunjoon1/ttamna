@@ -90,7 +90,7 @@ $(function(){
 		}
 		
 	    
-		var shopCount = parseInt(${detail.shopCount});
+		var shopCount = parseInt(${shopCount});
 		console.log("shopCount", shopCount);
 		if($("input[name=cartCount]").val() > shopCount){
 			alert("남아있는 수량보다 많습니다");
@@ -163,7 +163,7 @@ $(function(){
 // 			alert("남아있는 수량보다 많습니다");
 // 			return;
 // 		}	
-		var shopCount = parseInt(${detail.shopCount});
+		var shopCount = parseInt(${shopCount});
 		console.log("shopCount", shopCount);
 		if($("input[name=cartCount]").val() > shopCount){
 			alert("남아있는 수량보다 많습니다");
@@ -430,7 +430,7 @@ $(function(){
 
 	<!-- 댓글 더보기 버튼 -->
 	<div class="row mt-3 mb-5">
-		<div class="col mt-3">
+		<div class="col mt-3 deny">
 			<button type="button" class="justify-content-md btn btn-primary more-btn">더보기</button>
 		</div>
 	</div>
