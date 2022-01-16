@@ -15,4 +15,5 @@ public class CartDto {
 	private Date cartTime;
 	private int cartCount;
 	private int shopPrice;
+	private int shopCount;
 }
