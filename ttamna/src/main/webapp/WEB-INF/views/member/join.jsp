@@ -231,7 +231,7 @@
 <div class="container-500 container-center">
    	<div align="center" class="mt-5"><h1>JOIN</h1></div>
 	<form method="post" class="form-check">
-	<div class="">
+	<div >
 		<h3 class="center"><span>회원가입 이용약관 동의</span></h3>
 			<br><br>
 				<div class="app-agreement" style="overflow:scroll;height:18rem;width:100%">
@@ -575,12 +575,9 @@
 			  <input type="checkbox" value="Y" id="accept_agreement_2" class="app-input-checkbox" required>
 			  <label for="accept_agreement_2">위의 내용을 모두 읽었으며 동의합니다.</label>
 			</div>
-			<div class="">
-				
-			</div>
 	</div>
 	<br><br>
-	<div class="">
+	<div>
 		<h3 class="center"><span>회원가입 정보 입력</span></h3>
 	</div>
 	<div class='input-group mt-5 mb-2'>

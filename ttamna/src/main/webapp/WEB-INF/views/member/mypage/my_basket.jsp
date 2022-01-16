@@ -198,7 +198,7 @@ $(function(){
 
 <body onload="calculateOrderPrice();">
 <div class="container-1000 container-center">
-	<div class="container">
+	<div class="container-900">
 		<div class="align-self-center">
 			<h1 align="center">장바구니</h1>
 		</div>
@@ -260,12 +260,14 @@ $(function(){
 							합계 : <span id="order-price"><c:out value="${totalAmount}"/></span>원
 						</div>
 				
-			
+			<c:if test="${list != null}">
 				<div>
 					<input type="checkbox" id="checkAll">
 					<label for="checkAll" class="btn btn-outline-info">모두선택</label>
 					<button class="btn btn-primary">구매하기</button>
 				</div>
+			</c:if>
+			
 			</div>
 		</div>
 	</div>
