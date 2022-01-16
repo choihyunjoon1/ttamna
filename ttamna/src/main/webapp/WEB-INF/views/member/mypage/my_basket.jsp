@@ -134,6 +134,17 @@ $(function(){
 
 <script>
 	$(function(){
+		
+		$("input[name=quantity]").on("input", function(){
+			var shopCount = parsInt("${cartDto.shopCount}");
+			console.log(shopCount);
+			var inputCount = $("input[name=quantity]").val();
+			if(inputCount > shopCount){
+				alert("남아있는 수량보다 많습니다");
+				location.reload();
+			}
+		});
+		
 		$(".btn-primary").click(function(){
 //			e.preventdefault();
 			//하나도 체크되지 않은 경우는 중지
@@ -196,7 +207,7 @@ $(function(){
 		<div class="row">
 			<!-- 사이드바 자리 -->
 			<jsp:include page="/WEB-INF/views/member/mypage/sidebar.jsp"></jsp:include>
-			
+			<input type="hidden" name="shopCount" value="${cartDto.shopCount}">
 			<div class="col-10">
 				<c:choose>
 							<c:when test="${list eq null}">
@@ -210,6 +221,7 @@ $(function(){
 									<th></th>
 									<th>상품명</th>
 									<th>가격</th>
+									<th>재고</th>
 									<th>수량</th>
 									<th>합계</th>
 									<th></th>

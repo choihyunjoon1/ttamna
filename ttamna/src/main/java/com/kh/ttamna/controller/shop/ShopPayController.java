@@ -199,8 +199,9 @@ public class ShopPayController {
 					
 					if(!isTrue) {
 						afterCart.add(cart);
+					}else {
+						i++;
 					}
-					i++;
 				}
 				session.setAttribute("cart", afterCart);
 			}
