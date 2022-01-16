@@ -11,7 +11,7 @@
 <head>
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<link rel= "icon"  type= "image/png"  sizes= "32x32"  href= "${root}/resources/img/파비콘.png" > 
+<link rel= "icon"  type= "image/png"  sizes= "32x32"  href= "${root}/resources/img/티어하임로고.png" > 
 <title>Tierheim</title>
 <link rel="stylesheet" type="text/css"
 	href="${root }/resources/css/reset.css">
