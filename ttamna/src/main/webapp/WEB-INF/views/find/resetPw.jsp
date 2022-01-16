@@ -13,8 +13,7 @@
 </style>
 <!-- 비밀번호 토글 스크립트 -->
 <script type='text/javascript' src="${root}/resources/js/togglePw.js"></script>
-<!-- 비밀번호 일치여부 판별 스크립트 -->
-<script type='text/javascript' src="${root}/resources/js/pwEquals.js"></script>
+
 <script>
 window.addEventListener("load", function(){
     var form  = document.querySelector('.form-check');
@@ -35,6 +34,25 @@ window.addEventListener("load", function(){
 	            }
 	        }
    	 });
+		
+		//변경 비번 재입력값 일치여부 검사
+		 form.querySelector(".reInput-pw").addEventListener("blur", function(){
+				var inputPw = form.querySelector(".input-pw").value;
+				var reInputPw = form.querySelector(".reInput-pw").value;
+				var message = form.querySelector(".rePw-message");
+				 if(inputPw != "" && reInputPw != ""){
+					 if(inputPw == reInputPw){
+						 message.textContent = "비밀번호가 일치합니다";
+						 console.log("비번 & 재확인비번 일치");	
+						 $(".edit-btn").prop('disabled', false);
+					 }else if(inputPw != reInputPw){
+						 $(".edit-btn").prop('disabled', true);
+						 $(".reInput-pw").focus();
+						 message.textContent = "비밀번호가 일치하지 않습니다";
+						 console.log("비번 & 재확인비번 불일치");	
+					 }
+				 }
+		     });	
 });
 </script>
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
@@ -43,7 +61,7 @@ window.addEventListener("load", function(){
 <div class="container-600 bg-white container-center container-height-700" >
 	<div class="card">
 		<div class="card-body">
-			<div class="mt-5 mb-5"><h5>${param.memberEmail} 님의 비밀번호를 재설정 합니다</h5></div>
+			<div class="mt-5 mb-5"><h5>회원 님의 비밀번호를 재설정 합니다</h5></div>
 			<form method="post" id="login-form" class="form-check">
 <%-- 			<input type="hidden" name=memberEmail value="${param.memberEmail}"> --%>
 				<div class="input-group mt-5 mb-3 col">
@@ -63,7 +81,7 @@ window.addEventListener("load", function(){
 				<div class='row rePw-message'></div>
 				<div class="row mt-3 mb-5">
 					<div class="d-grid gap-2">
-						<button type="submit" class="btn btn-primary">재설정</button>
+						<button type="submit" class="btn btn-primary edit-btn">재설정</button>
 					</div>
 				<div class="row mt-2">
 					<c:if test="${param.error != null }">
@@ -71,10 +89,6 @@ window.addEventListener("load", function(){
 					</c:if>
 				</div>
 				</div>
-					<div class="d-grid gap-2 d-md-flex justify-content-md-end mt-5 mb-5">
-						<a href="${root}" type="button" class="btn btn-outline-secondary me-md-1">취소</a>
-						<a type="button" href="${root}/find/findId" class="btn btn-outline-primary">아이디 찾기</a>
-					</div>
 			</form>
 		</div>
 	</div>

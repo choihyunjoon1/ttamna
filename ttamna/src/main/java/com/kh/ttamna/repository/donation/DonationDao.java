@@ -17,4 +17,5 @@ public interface DonationDao {
 	List<DonationDto> listByPage(int startRow, int endRow);//더보기 페이지네이션
 	List<DonationDto> listBySearchPage(int startRow, int endRow, String column, String keyword);//페이지네이션 검색
 	boolean funding(int donationNo, long price);
+	List<DonationDto> mainList();
 }

@@ -53,9 +53,9 @@ $(function(){
 					//이미지 파일 없는 경우 undefined 꼴보기 시르미 
 					var imgLocation = "";
 					if(!resp[i].adoptImgNo){
-						imgLocation =  "<a href='readUp?adoptNo= "+resp[i].adoptNo+"'><img src=${pageContext.request.contextPath}/resources/img/nonimage.png class=icon></a>";
+						imgLocation =  "<img src=${pageContext.request.contextPath}/resources/img/nonimage.png class=icon>";
 					}else {
-						imgLocation =  "<a href='readUp?adoptNo= "+resp[i].adoptNo+"'><img src='adoptImg?adoptImgNo="+ resp[i].adoptImgNo +"'class='card-img-top' alt=' "+resp[i].adoptImgUpload+"' style='width:100%;height:15rem;'></a>";
+						imgLocation =  "<img src='adoptImg?adoptImgNo="+ resp[i].adoptImgNo +"'class='card-img-top' alt=' "+resp[i].adoptImgUpload+"' style='width:100%;height:15rem;'>";
 					}
 					
 					//입양공고 종료일이 되면 제목옆에 공고기간 종료 표시하기
@@ -70,6 +70,7 @@ $(function(){
 					}
 					
 					var divCol = "<div class='card border-primary text-dark bg-primary bg-opacity-10 mb-5 ms-2 ' style='width: 18rem;'>"
+								  + "<a style='text-decoration-line:none;' href='readUp?adoptNo= "+resp[i].adoptNo+"'>"
 								  + imgLocation
 								  + "<div class='card-body'>"
 								  + "<h6 class='card-title'><strong class='title'>"+ resp[i].adoptTitle +"</strong></h6>"
@@ -81,10 +82,7 @@ $(function(){
 								  + "<div class='card-text'><small>"
 								  + "입양 동물 : " + resp[i].adoptKind
 								  +"</small></div>"
-								  + "<div class='card-text d-grid gap-1 justify-content-md-end'>"
-								  + "<a href='readUp?adoptNo= "+resp[i].adoptNo+"' class='btn btn-primary px-2 mt-2 ms-2'>" + "보기"
-								  + "</a></div>"
-								  + "</div></div>";
+								  + "</div></a></div>";
 						
 					$(".result").append(divCol);
 				}
@@ -103,6 +101,10 @@ $(function(){
 <div class="container-900 container-center mt-5 mb-5">
 
 	<div class="mt-5 mb-5"><h3>입양공고</h3>
+	 <div class="d-grid gap-1 d-md-flex justify-content-center">
+	 	<img src="${root }/resources/img/입양독려.jpg" width="60%">
+	 </div>
+	
 	<c:if test="${param.deleteSuccess != null}">
 		<div class=" mb-3"><h6>입양공고 삭제 완료</h6></div>
 	</c:if>
@@ -119,8 +121,11 @@ $(function(){
 	</div>
 	
 	<div class="row mt-3 mb-5">
-		<div class="col mt-3">
+		<div class="col mt-3 mb-2">
 			<button type="button" class="justify-content-md btn btn-primary more-btn">더보기</button>
+		</div>
+		<div class="d-grid gap-1 d-md-flex justify-content-center">
+			<img src="${root }/resources/img/check.jpg" width="70%">
 		</div>
 	</div>
 	

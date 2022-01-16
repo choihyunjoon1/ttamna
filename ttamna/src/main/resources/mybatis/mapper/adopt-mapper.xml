@@ -119,5 +119,13 @@
 		select * from adopt inner join adopt_img on adopt.adopt_no = adopt_img.adopt_no
 	</select>
 
+	<select id="mainBoard" resultType="AdoptImgDtoVO">
+		select * from(
+		    select rownum rn2, tmp.* from(
+		        select A.*, AIF.adopt_img_no from  adopt A left outer join adopt_img_first AIF on A.adopt_no = AIF.adopt_no where rn = 1
+		        order by A.adopt_no desc
+		    )tmp
+		)where rn2 between 1 and 3
+	</select>
 </mapper>
 

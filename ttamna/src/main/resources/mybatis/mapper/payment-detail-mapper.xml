@@ -42,7 +42,13 @@
 		where pay_no = #{payNo}
 	</update>
 	
-	
+	<!-- 상품이름검색 -->
+	<select id="getName" parameterType="String" resultType="String">
+		select shop_goods from pay_detail 
+		 where 
+		  <![CDATA[instr(shop_goods, #{keyword}) > 0]]>
+		  and rownum =1
+	</select>
 	
 </mapper>
 

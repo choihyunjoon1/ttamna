@@ -314,7 +314,7 @@
 		order by lpad(d.mth, 2, '0')
 	</select>
 	
-	<!-- 기부 / 구매 중 기간검색 -->
+	<!-- 단건 기부 기간검색 -->
 	<select id="dateSearch" parameterType="map" resultType="SearchChartVO">
 	  select
         d.dt "date",
@@ -330,9 +330,32 @@
                 sum(total_amount) daily,
                 pay_type
 		    from payment 
-		    where pay_type=#{payType} and status='결제완료'
+		    where pay_type='기부' and status='결제완료'
 		    group by to_char(pay_time, 'YYYY/MM/DD'), pay_type)p
         on d.dt = p.dt order by d.dt asc
+	</select>
+	
+	<!-- 후원상품 판매 기간검색 -->
+	<select id="shopDateSearch" parameterType="map" resultType="SearchChartVO">
+	 select
+        d.dt "date",
+        nvl(s.daily, 0) "shopDaily",
+        s.item "itemName"
+   	 from
+   	 	(select 
+   	 		to_char(to_date(#{start}, 'YYYY/MM/DD') + level - 1, 'YYYY/MM/DD') dt
+          from dual 
+           <![CDATA[connect by level <= (to_date(#{end}, 'YYYY/MM/DD') - to_date(#{start},'YYYY/MM/DD') + 1)]]>)d
+        left outer join    
+        (select 
+		        to_char(p.pay_time, 'YYYY/MM/DD') dt, 
+                sum(pd.price) daily,
+                pd.shop_goods item
+		    from payment p
+		    inner join pay_detail pd on p.pay_no=pd.pay_no 
+            where pd.status='결제' and  <![CDATA[instr(pd.shop_goods, #{keyword})>0]]>
+            group by to_char(p.pay_time, 'YYYY/MM/DD'), pd.shop_goods)s
+        on d.dt = s.dt order by d.dt asc
 	</select>
 	
 </mapper>

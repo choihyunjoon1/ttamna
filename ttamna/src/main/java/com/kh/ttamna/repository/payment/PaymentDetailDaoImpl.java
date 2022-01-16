@@ -51,4 +51,10 @@ public class PaymentDetailDaoImpl implements PaymentDetailDao{
 	public void cancelAll(int payNo) {
 		sqlSession.update("payDetail.cancelAll", payNo);
 	}
+
+	//상품이름검색
+	@Override
+	public String getName(String keyword) {
+		return sqlSession.selectOne("payDetail.getName", keyword);
+	}
 }

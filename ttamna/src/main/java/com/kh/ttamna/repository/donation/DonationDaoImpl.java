@@ -88,5 +88,9 @@ public class DonationDaoImpl implements DonationDao{
 		map.put("price", price);
 		return sqlSession.update("donation.funding", map) > 0;
 	}
-	
+
+	@Override//메인페이지에 3개 띄우기
+	public List<DonationDto> mainList() {
+		return sqlSession.selectList("donation.mainBoard");
+	}
 }

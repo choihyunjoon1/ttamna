@@ -17,4 +17,7 @@ public interface PaymentDetailDao {
 	long getCancelAvailableAmount(int payNo);
 
 	void cancelAll(int payNo);
+	
+	//상품 이름 검색
+	String getName(String keyword);
 }

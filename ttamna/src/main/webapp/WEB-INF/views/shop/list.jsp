@@ -62,11 +62,7 @@ $(function(){
 						  + "</div>"
 						  + "<div class='card-text'>"
 						  + "<small>판매가 : "+resp[i].shopPrice+"원</small>"
-						  + "</div>"
-	
-						  +"<div class='card-text d-grid gap-1 justify-content-md-end'>"
-						  + "<a href='detail?shopNo= "+resp[i].shopNo+"' class='btn btn-primary px-2 mt-2 ms-2'>" + "보기"
-						  + "</a></div>"
+						  + "</div>"						  
 						  + "</div></div>";
 						
 						

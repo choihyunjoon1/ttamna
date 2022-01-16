@@ -7,15 +7,16 @@
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <script>
 	$(function(){
-		$(".new-browser").click(function(){
-			var tid = $(this).parent().siblings(".tid").text();
-			console.log(tid);
-			open("${pageContext.request.contextPath}/donation/kakao/search?tid="+tid, '', 'toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=no,resizable=no,copyhistory=no,width=700, height=730');
-		});
 		$(".new-browser-auto").click(function(){
 			var sid = $(this).parent().siblings(".sid").text();
-			console.log(sid);
 			open("${pageContext.request.contextPath}/donation/kakao/auto/search?sid="+sid, '', 'toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=no,resizable=no,copyhistory=no,width=700, height=730');
+		});
+		$(".auto-fund-inactive").click(function(){
+			if(confirm("정기기부를 중단하시겠습니까?")){
+				return true;
+			} else {
+				return false;
+			}
 		});
 	});
 </script>
@@ -53,8 +54,9 @@
 							<td>${autopayDto.firstPaymentDate}</td>
 							<td>${autopayDto.payTimes}회차</td>
 							<td>
-								<a class="new-browser-auto">조회</a>
-								<a href="${pageContext.request.contextPath}/donation/kakao/auto/inactive?sid=${autopayDto.autoSid}">중지</a>
+								<a class="new-browser-auto btn btn-success">조회</a>
+								<a class="auto-fund-inactive btn btn-danger"
+								href="${root}/donation/kakao/auto/inactive?sid=${autopayDto.autoSid}">중지</a>
 							</td>
 						</tr>
 						</c:forEach>
