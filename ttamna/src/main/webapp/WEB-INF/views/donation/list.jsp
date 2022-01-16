@@ -97,7 +97,7 @@ $(function(){
 		height:15rem;
 	}
 </style>
-
+<div class="mt-5 mb-3"><h3>기부 게시판</h3>
 <div class="container-900 container-center">
 	<div class="row mt-3">
 	<c:if test="${grade eq '관리자' or '보호소'}">
@@ -105,6 +105,7 @@ $(function(){
 			<a href="insert" class="btn btn-primary">기부신청</a>
 		</div>
 	</c:if>
+	</div>
 	</div>
 	<div class="row mt-3 result">
 			
