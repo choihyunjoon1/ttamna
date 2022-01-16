@@ -60,9 +60,11 @@ public interface PaymentDao {
 	//최근 12개월 월별 누적 상품판매 금액
 	List<ShopChartVO> shopMoy();
 	
-	//기부 / 상품판매 금액 기간 검색
+	//단건 기부 금액 기간 검색
 	List<SearchChartVO> dateSearch(Map<String, Object> param);
 
+	//후원상품 판매금액 기간검색
+	List<SearchChartVO> shopDateSearch(Map<String, Object> param);
 
 
 

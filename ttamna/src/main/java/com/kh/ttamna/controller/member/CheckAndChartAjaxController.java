@@ -15,6 +15,7 @@ import com.kh.ttamna.repository.donation.AutoDonationDao;
 import com.kh.ttamna.repository.member.MemberDao;
 import com.kh.ttamna.repository.member.VisitDao;
 import com.kh.ttamna.repository.payment.PaymentDao;
+import com.kh.ttamna.repository.payment.PaymentDetailDao;
 import com.kh.ttamna.vo.chart.TotalChartVO;
 
 @RestController
@@ -32,6 +33,9 @@ public class CheckAndChartAjaxController {
 	
 	@Autowired
 	private AutoDonationDao autoDonationDao;
+	
+	@Autowired
+	private PaymentDetailDao paymentDetailDao;
 	
 	//아이디 중복 검사 ajax
 	@GetMapping("/ajaxId")
@@ -294,23 +298,39 @@ public class CheckAndChartAjaxController {
 		 return chartVO;
 	 }
 	 
-	 //상품판매금액 / 기부금액 구간검색 처리 및 차트 보내기
+	 //단건 기부금액 구간검색 처리 및 차트 보내기
 	 @PostMapping("/search")
 	 public TotalChartVO dateSearch(
-			 			@RequestParam String payType,
 			 			@RequestParam String start,
 			 			@RequestParam String end) {
 		 Map<String, Object> param = new HashMap<>();
-		 param.put("payType", payType);
 		 param.put("start", start);
 		 param.put("end", end);
 		 
 		 TotalChartVO chartVO = new TotalChartVO();
-		 chartVO.setTitle("[ " + start + " ~ " + end + " 기간의 " +  payType + "일별 누적 금액" +" ]");
+		 chartVO.setTitle("[ " + start + " ~ " + end + " 기간의 단건기부 일별 누적 금액" +" ]");
 		 chartVO.setLabel("금액(원)");
 		 chartVO.setSearchDataset(paymentDao.dateSearch(param));
 		 return chartVO;
 	 }
+	 
+	//후원상품금액 구간검색 처리 및 차트 보내기
+	@PostMapping("/shop_search")
+	public TotalChartVO shopSearch(
+					@RequestParam String keyword,
+				 	@RequestParam String start,
+				 	@RequestParam String end) {
+		Map<String, Object> param = new HashMap<>();
+		param.put("keyword", keyword);
+		param.put("start", start);
+		param.put("end", end);
+		String item = paymentDetailDao.getName(keyword);	 
+		TotalChartVO chartVO = new TotalChartVO();
+		chartVO.setTitle("[ " + start + " ~ " + end + ". "+item+" 상품의 일별 누적 판매 금액" +" ]");
+		chartVO.setLabel("금액(원)");
+		chartVO.setSearchDataset(paymentDao.shopDateSearch(param));
+		return chartVO;
+	}
 	 
 }
 

@@ -23,7 +23,25 @@ pageEncoding="UTF-8"%>
 		img{
 		max-width: 450px;
 	}
+	
+		.reply{
+		margin-top:10px;
+		margin-bottom:5px;
+		}
+		
+		.id-font{
+		font-size: medium;
+		font-weight: bold;
+		}
+		
+		.delete-button{
+		margin:8px;
+		width: 92px;
+		}
+		
+		
 </style>
+
 <script>
 	$(function(){
 		var slideCard = $(".carousel-inner").children();
@@ -31,7 +49,7 @@ pageEncoding="UTF-8"%>
 		$(slideCard[0]).addClass("active");
 	});
 </script>
-
+<c:set var="shopCount" value="${detail.shopCount}"></c:set>
 <script>
 $(function(){
 			
@@ -65,8 +83,16 @@ $(function(){
 		var shopImgNo = $("input[name=shopImgNo]").val();
 		var cartCount = $("input[name=cartCount]").val()
 		
+		// 수량 공백 혹은 음수 입력
 		if($("input[name=cartCount]").val() == '' || $("input[name=cartCount]").val() < 1){
 			alert("올바른 수량을 입력해주세요");
+			return;
+		}
+		
+		var shopCount = $("input[name=shopCount]").val();
+		
+		if($("input[name=cartCount]").val() > shopCount){
+			alert("남아있는 수량보다 많습니다");
 			return;
 		}
 		
@@ -128,6 +154,12 @@ $(function(){
 			alert("올바른 수량을 입력해주세요");
 			return;
 		}
+		// 수량 오버
+		var shopCount = $("input[name=shopCount]").val();
+		if($("input[name=cartCount]").val() > shopCount){
+			alert("남아있는 수량보다 많습니다");
+			return;
+		}	
 		
 		if(window.confirm('장바구니로 이동하시겠습니까?')){
 			// 즉석 form
