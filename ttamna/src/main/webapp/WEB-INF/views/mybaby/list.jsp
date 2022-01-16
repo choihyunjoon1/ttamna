@@ -53,10 +53,17 @@ $(function(){
 					if(memberId == null){
 						memberId = "탈퇴한 회원";
 					}
+					var replyCount = "";
+					if(resp[i].mybabyReply < 1){
+						replyCount = "";
+					}else{
+						replyCount = "["+resp[i].mybabyReply+"]";
+					}
+		
 					var divCol = "<div class='card border-primary text-dark bg-primary bg-opacity-10 mb-5 ms-2 ' style='width: 18rem;' onClick=location.href='${root}/mybaby/detail?mybabyNo="+resp[i].mybabyNo+"'>"
 						  + imgLocation
 						  + "<div class='card-body'>"
-						  + "<h5 class='card-title'><strong class='title'>" + resp[i].mybabyTitle +"</strong></h5>"
+						  + "<h5 class='card-title'><strong class='title'>" + resp[i].mybabyTitle+replyCount +"</strong></h5>"
 						  + "<div class='card-text'>"
 						  +  moment(resp[i].mybabyTime).format("YYYY-MM-DD")
 						  + "</div>"
@@ -102,11 +109,11 @@ $(function(){
 		</div>
 	</div>
 	
-	<div class="container">
+	<div class="container-900">
 		<!-- 내새끼 등록버튼은 로그인 회원만 사용할 수 있다 -->
 				<!-- 검색창 -->
 				<form method="post">
-					<div class="input-group justify-content-end">
+					<div class="input-group justify-content-center">
 						<div class="col-2">
 							<select name="column" class="form-select form-select-sm" required id="column">
 							<c:choose>

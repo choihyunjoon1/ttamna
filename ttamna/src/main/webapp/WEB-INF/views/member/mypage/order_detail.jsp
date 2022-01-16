@@ -4,8 +4,8 @@
 <%--시간 포맷 --%>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <c:set var="root" value="${pageContext.request.contextPath }"></c:set>
-<jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 <link ref="stylesheet" type="text/css" href="${root}/resources/css/commons.css">
+<jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 
 
 
@@ -15,7 +15,7 @@
 			<h1 align="center">상세내역</h1>
 		</div>
 	</div>
-	<div class="container">
+	<div class="container" style="width:100%;">
 		<div class="row">
 			<!-- 사이드바 자리 -->
 			<jsp:include page="/WEB-INF/views/member/mypage/sidebar.jsp"></jsp:include>

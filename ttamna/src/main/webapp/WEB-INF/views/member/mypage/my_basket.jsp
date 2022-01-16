@@ -134,6 +134,17 @@ $(function(){
 
 <script>
 	$(function(){
+		
+		$("input[name=quantity]").on("input", function(){
+			var shopCount = parsInt("${cartDto.shopCount}");
+			console.log(shopCount);
+			var inputCount = $("input[name=quantity]").val();
+			if(inputCount > shopCount){
+				alert("남아있는 수량보다 많습니다");
+				location.reload();
+			}
+		});
+		
 		$(".btn-primary").click(function(){
 //			e.preventdefault();
 			//하나도 체크되지 않은 경우는 중지
@@ -187,16 +198,16 @@ $(function(){
 
 <body onload="calculateOrderPrice();">
 <div class="container-1000 container-center">
-	<div class="container">
+	<div class="container-900">
 		<div class="align-self-center">
 			<h1 align="center">장바구니</h1>
 		</div>
 	</div>
-	<div class="container">
+	<div class="container" style="width:100%;">
 		<div class="row">
 			<!-- 사이드바 자리 -->
 			<jsp:include page="/WEB-INF/views/member/mypage/sidebar.jsp"></jsp:include>
-			
+			<input type="hidden" name="shopCount" value="${cartDto.shopCount}">
 			<div class="col-10">
 				<c:choose>
 							<c:when test="${list eq null}">
@@ -249,12 +260,14 @@ $(function(){
 							합계 : <span id="order-price"><c:out value="${totalAmount}"/></span>원
 						</div>
 				
-			
+			<c:if test="${list != null}">
 				<div>
 					<input type="checkbox" id="checkAll">
 					<label for="checkAll" class="btn btn-outline-info">모두선택</label>
 					<button class="btn btn-primary">구매하기</button>
 				</div>
+			</c:if>
+			
 			</div>
 		</div>
 	</div>

@@ -4,7 +4,7 @@
 
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 
-<div class="container">
+<div class="container-900 container-center">
 	<div class="row mt-3">
 	<div class="col">
 		<h2>결제가 취소되었습니다.</h2>

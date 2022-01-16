@@ -225,8 +225,8 @@
 	</div>
 	
 	<div class="d-grid gap-2 d-md-flex mt-2 mb-5">
-		<div class="mt-5 container-300 container-center"><canvas id="this-month" style="width:40%; height:100%;"></canvas></div>
-		<div class="mt-5 container-400 container-center"><canvas id="monthly"></canvas></div>
+		<div class="mt-5 container-300 container-center"><canvas id="this-month" style="width:40%; height:150px;"></canvas></div>
+		<div class="mt-5 container-400 container-center"><canvas id="monthly" style="width:40%; height:150px;"></canvas></div>
 	</div>	
 	<div class="mt-5 mb-5 container-700 container-center"><canvas id="moy"></canvas></div>
 
