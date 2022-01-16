@@ -130,7 +130,7 @@ $(function(){
 	</div>
 	
 	<!-- 검색창 -->
-	<div class="container">
+	<div class="container-900">
 			<form method="post">
 				<div class="input-group justify-content-end">
 					<div class="col-2">

@@ -19,7 +19,7 @@
 			<h1 align="center">주문내역</h1>
 		</div>
 	</div>
-	<div class="container">
+	<div class="container" style="width:100%;">
 		<div class="row">
 			<!-- 사이드바 자리 -->
 			<jsp:include page="/WEB-INF/views/member/mypage/sidebar.jsp"></jsp:include>
