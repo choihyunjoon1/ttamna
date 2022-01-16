@@ -101,6 +101,10 @@ $(function(){
 <div class="container-900 container-center mt-5 mb-5">
 
 	<div class="mt-5 mb-5"><h3>입양공고</h3>
+	 <div class="d-grid gap-1 d-md-flex justify-content-center">
+	 	<img src="${root }/resources/img/입양독려.jpg" width="60%">
+	 </div>
+	
 	<c:if test="${param.deleteSuccess != null}">
 		<div class=" mb-3"><h6>입양공고 삭제 완료</h6></div>
 	</c:if>
@@ -117,8 +121,11 @@ $(function(){
 	</div>
 	
 	<div class="row mt-3 mb-5">
-		<div class="col mt-3">
+		<div class="col mt-3 mb-2">
 			<button type="button" class="justify-content-md btn btn-primary more-btn">더보기</button>
+		</div>
+		<div class="d-grid gap-1 d-md-flex justify-content-center">
+			<img src="${root }/resources/img/check.jpg" width="70%">
 		</div>
 	</div>
 	
