@@ -17,7 +17,7 @@ text-decoration : none;
 }
 </style>
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
-<div class="container-800 container-center mb-5" style="height: 700px;">
+<div class="container-800 container-center mb-5">
 	<div id="main-img mx-auto" class="mt-5 mb-5">
 		<div id="carouselExampleIndicators"
 			class="carousel slide container-800 container-center"
@@ -71,7 +71,7 @@ text-decoration : none;
 <h3 class="left">
 	<a class="no-line"  style="color: gray"href="${root}/donation/list"> 최근 기부 신청</a>
 </h3>
-<div class="container">
+<div class="container-900 container-center">
 	<div class="row">
 		<%-- 기부 게시글 자리 --%>
 		<c:forEach var="donationDto" items="${donationList}">
@@ -105,9 +105,9 @@ text-decoration : none;
 	</div>
 </div>
 <h3 class="left">
-	<a class="no-line"  style="color: gray"href="${root}/donation/list"> 최근 입양 요청</a>
+	<a class="no-line"  style="color: gray"href="${root}/adopt/list"> 최근 입양 요청</a>
 </h3>
-<div class="container">
+<div class="container-900 container-center">
 	<div class="row">
 		<%-- 입양 게시글 자리 --%>
 		<c:forEach var="adoptDto" items="${adoptList}">
@@ -135,9 +135,9 @@ text-decoration : none;
 	</div>
 </div>
 <h3 class="left">
-	<a class="no-line"  style="color: gray"href="${root}/donation/list"> 최근 후원상품 판매</a>
+	<a class="no-line"  style="color: gray"href="${root}/shop/list"> 최근 후원상품 판매</a>
 </h3>
-<div class="container">
+<div class="container-900 container-center">
 	<div class="row">
 		<%-- 상품 게시글 자리 --%>
 		<c:forEach var="shopDto" items="${shopList}">
@@ -165,9 +165,9 @@ text-decoration : none;
 	</div>
 </div>
 <h3 class="left">
-	<a class="no-line"  style="color: gray"href="${root}/donation/list"> 최근 내새끼 자랑</a>
+	<a class="no-line"  style="color: gray"href="${root}/mybaby/list"> 최근 내새끼 자랑</a>
 </h3>
-<div class="container">
+<div class="container-900 container-center">
 	<div class="row">
 		<%-- 자랑 게시글 자리 --%>
 		<c:forEach var="mybabyDto" items="${mybabyList}">

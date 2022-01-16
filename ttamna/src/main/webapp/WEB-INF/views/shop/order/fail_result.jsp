@@ -4,7 +4,7 @@
 
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 
-<div class="container">
+<div class="container-900 container-center">
 	<div class="row mt-3">
 	<div class="col">
 		<h2>알수없는 이유로 결제에 실패했습니다.</h2>

@@ -6,7 +6,7 @@
 	<div class="align-self-center">
 		<h3>EDIT SUCCESS!!</h3>
 	</div>
-	<div class='container'>
+	<div class='container-400'>
 		<div class="d-grid gap-2">
 			<a href="${pageContext.request.contextPath }"  class="btn btn-lg btn-primary" type="button">메인으로</a>
 			<a href="${pageContext.request.contextPath }/member/mypage/my_info"  class="btn btn-lg btn-primary" type="button">내정보보기</a>

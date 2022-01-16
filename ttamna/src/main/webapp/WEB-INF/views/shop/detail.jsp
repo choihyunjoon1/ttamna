@@ -90,7 +90,7 @@ $(function(){
 		}
 		
 	    
-		var shopCount = parseInt(${detail.shopCount});
+		var shopCount = parseInt(${shopCount});
 		console.log("shopCount", shopCount);
 		if($("input[name=cartCount]").val() > shopCount){
 			alert("남아있는 수량보다 많습니다");
@@ -163,7 +163,7 @@ $(function(){
 // 			alert("남아있는 수량보다 많습니다");
 // 			return;
 // 		}	
-		var shopCount = parseInt(${detail.shopCount});
+		var shopCount = parseInt(${shopCount});
 		console.log("shopCount", shopCount);
 		if($("input[name=cartCount]").val() > shopCount){
 			alert("남아있는 수량보다 많습니다");
@@ -312,7 +312,6 @@ $(function(){
 
 
 <script>
-
 </script>
 
 

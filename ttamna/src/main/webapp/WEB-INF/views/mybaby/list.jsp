@@ -109,7 +109,7 @@ $(function(){
 		</div>
 	</div>
 	
-	<div class="container">
+	<div class="container-900">
 		<!-- 내새끼 등록버튼은 로그인 회원만 사용할 수 있다 -->
 				<!-- 검색창 -->
 				<form method="post">
