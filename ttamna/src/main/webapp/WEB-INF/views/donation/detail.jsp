@@ -179,7 +179,7 @@
 		    <span class="visually-hidden">Next</span>
 		  </button>
 		</div>
-			
+			<input type="hidden" name="donationNo" value="${donationDto.donationNo}"  id="donationNo">
 		</c:if>
 		<%-- 글 내용이 찍히는 영역 --%>
 		<div class="card-body">
