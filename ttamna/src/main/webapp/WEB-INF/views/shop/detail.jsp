@@ -23,7 +23,25 @@ pageEncoding="UTF-8"%>
 		img{
 		max-width: 450px;
 	}
+	
+		.reply{
+		margin-top:10px;
+		margin-bottom:5px;
+		}
+		
+		.id-font{
+		font-size: medium;
+		font-weight: bold;
+		}
+		
+		.delete-button{
+		margin:8px;
+		width: 92px;
+		}
+		
+		
 </style>
+
 <script>
 	$(function(){
 		var slideCard = $(".carousel-inner").children();
