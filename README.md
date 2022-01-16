@@ -12,6 +12,10 @@
 #### * ERD : https://www.erdcloud.com/d/nJcKLpL8tNaPrRDSh
 #### * 참고 사이트 : 해피빈 https://happybean.naver.com/   포인핸드 http://pawinhand.kr/    
 
+<hr>
+ ### [ 개발환경 ]
+<br>
+<img src="https://user-images.githubusercontent.com/88869283/149664569-a29b5e9d-8d43-4d7f-8d79-16a691eb9cc9.png" width="80%">
 
 
 <hr>
