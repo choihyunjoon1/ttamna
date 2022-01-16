@@ -10,7 +10,7 @@
 	 
 	 <div class="mt-5 mb-5"><h3 align="center">STATISTICS MENU</h3></div>
 		
-	  <div class="container container-center">
+	  <div class="container-900 container-center">
 		<div class="row">
 		<!-- 사이드바 -->
 		<jsp:include page="/WEB-INF/views/admin/sidebar.jsp"></jsp:include>

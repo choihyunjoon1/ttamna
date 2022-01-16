@@ -108,6 +108,7 @@ $(function(){
 				$("<input type='hidden' name='list[0].shopPrice'>").val(shopPrice).appendTo(".send-form");
 				$("<input type='hidden' name='list[0].shopImgNo'>").val(shopImgNo).appendTo(".send-form");
 				$("<input type='hidden' name='list[0].quantity'>").val(cartCount).appendTo(".send-form");
+				$("<input type='hidden' name='list[0].shopCount'>").val(cartCount).appendTo(".send-form");
 			
 				
 				$.ajax({
@@ -119,7 +120,8 @@ $(function(){
 						shopGoods : shopGoods,
 						shopPrice : shopPrice,
 						shopImgNo : shopImgNo,
-						cartCount : cartCount
+						cartCount : cartCount,
+						shopCount : shopCount
 					},
 					success:function(resp){
 						console.log("성공");
@@ -146,8 +148,8 @@ $(function(){
 			var shopGoods = $("input[name=shopGoods]").val();
 			var shopPrice = $("input[name=shopPrice]").val();
 			var shopImgNo = $("input[name=shopImgNo]").val();
-			var cartCount = $("input[name=cartCount]").val()
-		
+			var cartCount = $("input[name=cartCount]").val();
+			var shopCount = $("input[name=shopCount]").val();
 		
 		// 수량 미선택시
 		if(cartCount == '' || cartCount < 1){
@@ -174,6 +176,7 @@ $(function(){
 			$("<input type='hidden' name='shopPrice'>").val(shopPrice).appendTo(".send-form");
 			$("<input type='hidden' name='shopImgNo'>").val(shopImgNo).appendTo(".send-form");
 			$("<input type='hidden' name='cartCount'>").val(cartCount).appendTo(".send-form");
+			$("<input type='hidden' name='shopCount'>").val(shopCount).appendTo(".send-form");
 			//전송
 			form.submit();
 			return true;
@@ -190,7 +193,8 @@ $(function(){
 					shopGoods : shopGoods,
 					shopPrice : shopPrice,
 					shopImgNo : shopImgNo,
-					cartCount : cartCount
+					cartCount : cartCount,
+					shopCount : shopCount
 				},
 				success:function(resp){
 					console.log("성공");

@@ -39,6 +39,10 @@ text-decoration : none;
 						style="height: 700px; width: 800px" class="d-block w-60 mx-auto">
 				</div>
 				<div class="carousel-item">
+					<img src="${root }/resources/img/입양독려.jpg"
+						style="height: 700px; width: 800px" class="d-block w-100 mx-auto">
+				</div>
+				<div class="carousel-item">
 					<img src="${root }/resources/img/img1.jpg"
 						style="height: 700px; width: 800px" class="d-block w-100 mx-auto">
 				</div>

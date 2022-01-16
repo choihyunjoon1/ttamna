@@ -68,17 +68,17 @@ $(function(){
 						donationWriter = "탈퇴한 회원입니다";
 					}
 					var divCol = "<div class='page card text-gray bg-light mb-5 ms-2' style='width:18rem;'><a href='./detail?donationNo="+resp[i].donationNo+"'>"+
-						imgLocation +"</a>"+ 
-						"<div class='card-body'>" +
-						"<h5 class='card-title'>"+resp[i].donationTitle+"</h5>" +
-						"<div class='card-text'>"+donationWriter+"</div>"+
-						"<div class='card-text'><span>현재 기부 금액 : </span>"+resp[i].donationNowFund+"원</div>"+
-						"<div class='card-text'><span>목표 기부 금액 : </span>"+resp[i].donationTotalFund+"원</div>"+
-						"<div class='progress'>"+
-						"<div class='progress-bar progress-bar-striped progress-bar-animated bg-"+graph+"' role='progressbar' aria-valuenow='"+resp[i].donationNowFund+"' aria-valuemin='1' aria-valuemax='"+resp[i].donationTotalFund+"' style='width:"+progress+"%;'></div></div>"+
-						"<div class='card-text'>"+number+"%</div>"
-					+"</div>"
-					+"</div>";
+										imgLocation +"</a>"+ 
+										"<div class='card-body'>" +
+											"<h5 class='card-title'>"+resp[i].donationTitle+"</h5>" +
+											"<div class='card-text'>"+donationWriter+"</div>"+
+											"<div class='card-text'><span>현재 기부 금액 : </span>"+resp[i].donationNowFund+"원</div>"+
+											"<div class='card-text'><span>목표 기부 금액 : </span>"+resp[i].donationTotalFund+"원</div>"+
+											"<div class='progress'>"+
+											"<div class='progress-bar progress-bar-striped progress-bar-animated bg-"+graph+"' role='progressbar' aria-valuenow='"+resp[i].donationNowFund+"' aria-valuemin='1' aria-valuemax='"+resp[i].donationTotalFund+"' style='width:"+progress+"%;'></div></div>"+
+											"<div class='card-text'>"+number+"%</div>"
+										+"</div>"
+										+"</div>";
 					$(".result").append(divCol);
 					$(".page").addClass("col-3 mt-3");
 				}
@@ -98,7 +98,7 @@ $(function(){
 	}
 </style>
 
-<div class="container">
+<div class="container-900 container-center">
 	<div class="row mt-3">
 	<c:if test="${grade eq '관리자' or '보호소'}">
 		<div class="col">
