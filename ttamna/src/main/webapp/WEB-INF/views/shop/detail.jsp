@@ -89,8 +89,9 @@ $(function(){
 			return;
 		}
 		
-		var shopCount = $("input[name=shopCount]").val();
-		
+	    
+		var shopCount = parseInt(${detail.shopCount});
+		console.log("shopCount", shopCount);
 		if($("input[name=cartCount]").val() > shopCount){
 			alert("남아있는 수량보다 많습니다");
 			return;
@@ -157,11 +158,17 @@ $(function(){
 			return;
 		}
 		// 수량 오버
-		var shopCount = $("input[name=shopCount]").val();
+// 		var shopCount = $("input[name=shopCount]").val();
+// 		if($("input[name=cartCount]").val() > shopCount){
+// 			alert("남아있는 수량보다 많습니다");
+// 			return;
+// 		}	
+		var shopCount = parseInt(${detail.shopCount});
+		console.log("shopCount", shopCount);
 		if($("input[name=cartCount]").val() > shopCount){
 			alert("남아있는 수량보다 많습니다");
 			return;
-		}	
+		}
 		
 		if(window.confirm('장바구니로 이동하시겠습니까?')){
 			// 즉석 form
@@ -305,7 +312,6 @@ $(function(){
 
 
 <script>
-
 </script>
 
 
