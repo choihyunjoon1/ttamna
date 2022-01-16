@@ -13,17 +13,25 @@
 #### * 참고 사이트 : 해피빈 https://happybean.naver.com/   포인핸드 http://pawinhand.kr/    
 
 <hr>
+
  ### [ 개발환경 ]
 <br>
 <img src="https://user-images.githubusercontent.com/88869283/149664569-a29b5e9d-8d43-4d7f-8d79-16a691eb9cc9.png" width="80%">
-
+<br>
 
 <hr>
 
  ### [ Tierheim ERD ]
 <br>
 <img src="https://user-images.githubusercontent.com/88869283/149625952-42df5556-55ad-49d3-bd84-4e679353b4de.png" width="80%">
-
+<br>
 <hr>
+
+ ### [ Tierheim Flow chart ]
+<br>
+<img src="https://user-images.githubusercontent.com/88869283/149664631-b7980ad1-6aba-4861-a70c-cde629ea2093.jpg" width="80%">
+<br>
+<hr>
+
      
    
