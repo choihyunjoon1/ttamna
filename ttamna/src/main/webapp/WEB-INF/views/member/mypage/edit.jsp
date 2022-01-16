@@ -128,13 +128,13 @@ window.addEventListener("load", function(e){
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 
 <div class="container-1000 container-center">
-	<div class="container">
+	<div class="container-900 container-center">
 		<div class="align-self-center">
 			<h1 align="center">EDIT</h1>
 		</div>
 	</div>
 <form method="post" class="form-check">
-	<div class="container">
+	<div class="container" style="width:100%;">
 		<div class="row">
 			<!-- 사이드바 자리 -->
 			<jsp:include page="/WEB-INF/views/member/mypage/sidebar.jsp"></jsp:include>
