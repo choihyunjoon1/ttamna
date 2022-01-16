@@ -101,7 +101,7 @@ text-decoration : none;
 	</div>
 </div>
 <h3 class="left">
-	<a class="no-line"  style="color: gray"href="${root}/donation/list"> 최근 입양 요청</a>
+	<a class="no-line"  style="color: gray"href="${root}/adopt/list"> 최근 입양 요청</a>
 </h3>
 <div class="container">
 	<div class="row">
@@ -131,7 +131,7 @@ text-decoration : none;
 	</div>
 </div>
 <h3 class="left">
-	<a class="no-line"  style="color: gray"href="${root}/donation/list"> 최근 후원상품 판매</a>
+	<a class="no-line"  style="color: gray"href="${root}/shop/list"> 최근 후원상품 판매</a>
 </h3>
 <div class="container">
 	<div class="row">
@@ -161,7 +161,7 @@ text-decoration : none;
 	</div>
 </div>
 <h3 class="left">
-	<a class="no-line"  style="color: gray"href="${root}/donation/list"> 최근 내새끼 자랑</a>
+	<a class="no-line"  style="color: gray"href="${root}/mybaby/list"> 최근 내새끼 자랑</a>
 </h3>
 <div class="container">
 	<div class="row">
