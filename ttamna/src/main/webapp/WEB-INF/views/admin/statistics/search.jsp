@@ -256,7 +256,7 @@
 
 	<!-- 검색창 -->
 	<!-- 셀렉트 : 단건 기부금액-->
-	<div class="container">
+	<div class="container-600">
 	<div class="mb-1"><h5><strong>단건 기부금액에 대한 일별 누적금액 기간 검색</strong></h5></div> 
 			<form action="${root}/ajax/search" method="post" class="temp">
 				<div class="input-group">
@@ -267,15 +267,15 @@
 					</div>
 				</div>			
 			</form>
-	</div>	
 	
 	<div class="mt-5 mb-5">
 		<canvas id="result" width="50%"></canvas>
 	</div>
+	</div>	
 	
 	
 	<!-- 정기 기부금액 검색창 -->
-	<div class="container">
+	<div class="container-600">
 	<div class="mb-1"><h5><strong>정기 기부금액에 대한 일별 누적금액 기간 검색</strong></h5></div> 
 			<form action="${root}/ajax/regular_search" method="post" class="regular">
 				<div class="input-group">
@@ -286,15 +286,15 @@
 					</div>
 				</div>			
 			</form>
-	</div>	
 	
 	<div class="mt-5 mb-5">
 		<canvas id="regular-result" width="50%"></canvas>
 	</div>
+	</div>	
 	
 	
 	<!-- 후원상품 판매금액 검색창 -->
-	<div class="container">
+	<div class="container-600">
 	<div class="mb-1"><h5><strong>후원상품 판매금액에 대한 일별 누적금액 기간 검색</strong></h5></div> 
 			<form action="${root}/ajax/shop_search" method="post" class="shop">
 				<div class="input-group">
@@ -308,11 +308,11 @@
 					</div>
 				</div>			
 			</form>
-	</div>	
 	
 	<div class="mt-5 mb-5">
 		<canvas id="shop-result" width="50%"></canvas>
 	</div>
+	</div>	
 	
 	<div class="d-grid gap-2 d-md-flex justify-content-md-end mt-2 mb-5">
 		 <button type="reset" class="btn btn-sm btn-outline-dark">reset</button>
