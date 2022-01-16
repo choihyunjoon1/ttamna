@@ -430,7 +430,7 @@ $(function(){
 
 	<!-- 댓글 더보기 버튼 -->
 	<div class="row mt-3 mb-5">
-		<div class="col mt-3 deny">
+		<div class="col mt-3">
 			<button type="button" class="justify-content-md btn btn-primary more-btn">더보기</button>
 		</div>
 	</div>
