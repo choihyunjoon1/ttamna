@@ -166,7 +166,7 @@
 		  <div class="carousel-inner">
 		  	<c:forEach var="donationImgDto" items="${donationImgDtoList}" >
 		    <div class="carousel-item">
-				<img src="donaimg?donationImgNo=${donationImgDto.donationImgNo}&donationNo=${donationDto.donationNo}"  class="d-block w-100" alt="..." style="width:100%;">
+				<img src="donaimg?donationImgNo=${donationImgDto.donationImgNo}&donationNo=${donationDto.donationNo}"  class="d-block w-100" alt="..." style="width:100%; height:15rem;">
 			</div>
 			</c:forEach>
 		  </div>

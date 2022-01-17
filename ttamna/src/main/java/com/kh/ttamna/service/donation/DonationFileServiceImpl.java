@@ -30,11 +30,9 @@ public class DonationFileServiceImpl implements DonationFileService{
 	public int insert(DonationUploadVo donationUploadVo) throws IllegalStateException, IOException {
 		//현재 게시판에 등록이 될 정보와 파일배열이 들어있다.
 		int donationNo = sqlSession.selectOne("donation.seq");
-		
-		System.out.println("donationWriter = " + donationUploadVo.getDonationWriter());
+		donationUploadVo.setDonationNo(donationNo);
 		//파일이 있던 없던 게시판 등록 과정을 진행 해 주고
-		donationDao.insert(donationUploadVo.convertToDonationDto(donationNo));
-//		sqlSession.insert("donation.insert", donationUploadVo.convertToDonationDto(donationNo));
+		sqlSession.insert("donation.insert", donationUploadVo.convertToDonationDto(donationNo));
 		
 		//여기서 파일이 있으면 파일을 등록해준다.
 		//[1] DonationImgDtoList를 여기서 뽑는다
@@ -45,11 +43,13 @@ public class DonationFileServiceImpl implements DonationFileService{
 		for(MultipartFile files : donationUploadVo.getAttach()) {
 			if(!files.isEmpty()){//파일이 있으면 실행
 			//[2] DonationImgNo를 뽑고
+				
 			int donationImgNo = sqlSession.selectOne("donaImg.seq");
 			//[3] N번째 donationList를 Dto에 옮긴 뒤
 			DonationImgDto donationImgDto = donationList.get(i);
 			//[4] 2번에서 뽑은 ImgNo를 저장시키고
 			donationImgDto.setDonationImgNo(donationImgNo);
+			donationImgDto.setDonationNo(donationNo);
 			//[5] 실제이미지를 저장하는 dao를 실행
 			donationImgDao.save(donationImgDto, 
 					files);
