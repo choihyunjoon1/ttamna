@@ -4,7 +4,7 @@
 <c:set var="root" value="${pageContext.request.contextPath}"></c:set>  
 <script src = "https://code.jquery.com/jquery-3.6.0.js"></script>
 <style>
-	.container-height-300{
+	.containSer-height-300{
 	 	height: 300px;
 	}
 </style>
@@ -24,7 +24,7 @@
 
 	<div class="d-grid gap-2 d-md-flex justify-content-md-end mt-5 mb-5">
   		<a type="button" href="${root}/member/login" class="btn btn-outline-primary me-md-1">로그인</a>
-  		<a type="button" href="#" class="btn btn-outline-primary">비밀번호 찾기</a>
+  		<a type="button" href="${root}/find/findPw" class="btn btn-outline-primary">비밀번호 찾기</a>
 	</div>
 </div>
 
