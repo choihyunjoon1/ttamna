@@ -327,6 +327,7 @@ create table visit(
 commit;
 
 -------------------------------------------------------------------------------------------------------------
+
 --문의내역 테이블 생성구문
 create table question(
 question_no number primary key,
@@ -338,7 +339,9 @@ question_time date default sysdate
 );
 create sequence question_seq;
 commit;
+
 -------------------------------------------------------------------------------------------------------------
+
 --문의내역 댓글 테이블 생성 구문
 create table question_reply(
 question_reply_no number primary key,
@@ -349,3 +352,33 @@ question_reply_time date default sysdate
 );
 create sequence question_reply_seq;
 commit;
+
+-------------------------------------------------------------------------------------------------------------
+
+-- notice(입양 전 필독) 테이블 생성 구문
+create sequence notice_seq;
+create table notice(
+    notice_no number CONSTRAINT notice_no_pk PRIMARY KEY,
+    notice_writer varchar2(20) CONSTRAINT notice_writer_fk REFERENCES member(member_id) ON DELETE SET NULL,
+    notice_title varchar2(150) CONSTRAINT notice_title_not_null NOT NULL,
+    notice_content varchar2(4000) CONSTRAINT notice_content_not_null NOT NULL,
+    notice_time date DEFAULT sysdate CONSTRAINT notice_time_not_null NOT NULL,
+    notice_read number DEFAULT 0 CONSTRAINT notice_read_not_null NOT NULL
+);
+
+COMMIT;
+
+-------------------------------------------------------------------------------------------------------------
+
+-- notice_img(입양 전 필독 이미지 파일) 테이블 생성 구문
+create sequence notice_img_seq;
+create table notice_img(
+    notice_img_no number CONSTRAINT notice_img_no_pk PRIMARY KEY,
+    notice_no number CONSTRAINT notice_no_fk REFERENCES notice(notice_no) ON DELETE CASCADE,
+    notice_img_upload varchar2(256) CONSTRAINT notice_img_upload_not_null NOT NULL,
+    notice_img_size number CONSTRAINT notice_img_size_not_null NOT NULL,
+    notice_img_type varchar2(256) CONSTRAINT notice_img_type_not_null NOT NULL
+);
+
+COMMIT;
+
