@@ -19,6 +19,9 @@
 				return false;
 			}
 		});
+		
+		var totalAmount = parseInt($(".total-amount").text());
+		$("#price-result").text(totalAmount+"원");
 	});
 </script>
 <div class="container-1000 container-center">
@@ -62,6 +65,11 @@
 						</tr>
 						</c:if>
 						</c:forEach>
+						<tr>
+							<td colspan="5">
+								지금까지 기부한 1회 기부 금액 : <span id="price-result"></span>
+							</td>
+						</tr>
 					</tbody>
 				</table>
 			

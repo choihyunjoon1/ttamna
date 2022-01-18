@@ -358,5 +358,17 @@
         on d.dt = s.dt order by d.dt asc
 	</select>
 	
+	<!-- 
+		단건기부 Top3
+	 -->
+	 <select id="paymentTopThree" resultType="PaymentTopThreeVo">
+	 	select * from (
+	 		select rownum rn, tmp.* from(
+	 			select member_id, sum(total_amount) price from payment where pay_type='기부' group by member_id
+	 			order by sum(total_amount) desc
+	 		)tmp
+	 	)where rn between 1 and 3
+	 </select>
+	
 </mapper>
 

@@ -5,6 +5,7 @@ import java.util.Map;
 
 import com.kh.ttamna.entity.donation.AutoPayMentDto;
 import com.kh.ttamna.vo.chart.RegularChartVO;
+import com.kh.ttamna.vo.donation.PaymentTopThreeVo;
 
 public interface AutoDonationDao {
 
@@ -43,4 +44,7 @@ public interface AutoDonationDao {
 	
 	//정기결제 총 누적 금액
 	long autoTotalAmount();
+	
+	//정기기부 랭킹top3
+	List<PaymentTopThreeVo> top3();
 }

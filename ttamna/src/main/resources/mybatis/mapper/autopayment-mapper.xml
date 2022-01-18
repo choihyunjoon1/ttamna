@@ -19,7 +19,7 @@
 		<insert id="insert" parameterType="AutoPayMentDto">
 			insert into autopayment values(
 				auto_payment_seq.nextval, #{partnerUserId}, #{autoSid}, 1, 
-				${autoTotalAmount}, sysdate, 1, ${donationNo}
+				${autoTotalAmount}, sysdate, 1, ${donationNo}, '결제'
 			)
 		</insert>
 		
@@ -60,10 +60,14 @@
 			select count(*) from autopayment where partner_user_id=#{memberId}
 		</select>
 	
-		<!-- 정기결제 해지 -->
-		<delete id="autoPayDelete" parameterType="String">
-			delete autopayment where auto_sid = #{sid}
-		</delete>
+		<!-- 
+			정기결제 해지
+			-> 기존의 삭제에서 삭제를 하지 않고 상태를 취소로 변경시키게 변경
+			
+		 -->
+		<update id="autoPayInactive" parameterType="String">
+			update autopayment set auto_status = '취소' where auto_sid = #{sid}
+		</update>
 		
 		<!-- 이번달 일별 정기 기부금액 -->
 		<select id="thisMonthDaily" resultType="RegularChartVO">
@@ -153,5 +157,16 @@
 			select nvl(sum(auto_total_amount * pay_times), 0) from autopayment
 		</select>
 		
+		<!-- 
+			정기기부 Top3
+		 -->
+		 <select id="autopaymentTopThree" resultType="PaymentTopThreeVo">
+		 	select * from (
+			    select rownum rn, tmp.* from(
+			        select partner_user_id member_id, sum(auto_total_amount * pay_times) price from autopayment group by partner_user_id
+			        order by sum(auto_total_amount) desc
+			    )tmp
+			)where rn between 1 and 3 
+		 </select>
 		
 </mapper>

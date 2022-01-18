@@ -18,6 +18,13 @@
 				return false;
 			}
 		});
+		
+		var price = parseInt($(".total-amount").text());
+		var payTimes = parseInt($(".pay-times").text());
+		console.log(price);
+		console.log(payTimes);
+		
+		$("#price-result").text(price * payTimes+"원");
 	});
 </script>
 <div class="container-1000 container-center">
@@ -41,6 +48,7 @@
 							<th>기부금액</th>
 							<th>최초기부일</th>
 							<th>기부회차</th>
+							<th>상태</th>
 							<th>비고</th>
 						</tr>
 					</thead>
@@ -50,16 +58,24 @@
 						<tr onClick="location.href='#'">
 							<td class="sid">${autopayDto.autoSid}</td>
 							<td>${autopayDto.donationNo}</td>
-							<td>${autopayDto.autoTotalAmount}원</td>
+							<td class="total-amount">${autopayDto.autoTotalAmount}원</td>
 							<td>${autopayDto.firstPaymentDate}</td>
-							<td>${autopayDto.payTimes}회차</td>
+							<td class="pay-times">${autopayDto.payTimes}회차</td>
+							<td>${autopayDto.autoStatus}</td>
 							<td>
 								<a class="new-browser-auto btn btn-success">조회</a>
-								<a class="auto-fund-inactive btn btn-danger"
-								href="${root}/donation/kakao/auto/inactive?sid=${autopayDto.autoSid}">중지</a>
+								<c:if test="${autopayDto.autoStatus eq '결제'}">
+									<a class="auto-fund-inactive btn btn-danger"
+									href="${root}/donation/kakao/auto/inactive?sid=${autopayDto.autoSid}">중지</a>
+								</c:if>
 							</td>
 						</tr>
 						</c:forEach>
+						<tr>
+							<td colspan="7">
+								지금까지 기부한 정기 기부 금액 : <span id="price-result"></span>
+							</td>
+						</tr>
 					</tbody>
 				</table>
 				<!-- 페이지네이션 내비게이션 -->

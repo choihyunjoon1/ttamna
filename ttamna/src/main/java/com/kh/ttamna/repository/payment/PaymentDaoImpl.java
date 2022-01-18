@@ -12,6 +12,7 @@ import com.kh.ttamna.entity.payment.PaymentDto;
 import com.kh.ttamna.vo.chart.DonationChartVO;
 import com.kh.ttamna.vo.chart.SearchChartVO;
 import com.kh.ttamna.vo.chart.ShopChartVO;
+import com.kh.ttamna.vo.donation.PaymentTopThreeVo;
 
 @Repository
 public class PaymentDaoImpl implements PaymentDao{
@@ -148,4 +149,8 @@ public class PaymentDaoImpl implements PaymentDao{
 		return sqlSession.selectList("pay.shopDateSearch", param);
 	}
 
+	@Override//단기기부 랭킹 top3
+	public List<PaymentTopThreeVo> top3() {
+		return sqlSession.selectList("pay.paymentTopThree");
+	}
 }
