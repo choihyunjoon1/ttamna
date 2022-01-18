@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2022-01-18T11:23:55.288Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.71 Safari/537.36" etag="1UdPXmgI0KHxa55V8r-2" version="16.2.7" type="github">
+<mxfile host="app.diagrams.net" modified="2022-01-18T11:41:06.197Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.71 Safari/537.36" etag="x0APAM3_KJpbN-_W40LC" version="16.2.7" type="github">
   <diagram id="kgpKYQtTHZ0yAKxKKP6v" name="Page-1">
     <mxGraphModel dx="-37" dy="435" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
       <root>
@@ -28,32 +28,32 @@
         <mxCell id="FkNuh9krQCzhWQGeolVR-28" value="매일 00시 실행" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=10;" vertex="1" parent="1">
           <mxGeometry x="1220" y="80" width="110" height="30" as="geometry" />
         </mxCell>
-        <mxCell id="FkNuh9krQCzhWQGeolVR-29" value="Controller" style="shape=umlLifeline;perimeter=lifelinePerimeter;container=1;collapsible=0;recursiveResize=0;rounded=0;shadow=0;strokeWidth=1;" vertex="1" parent="1">
-          <mxGeometry x="1120" y="640" width="100" height="300" as="geometry" />
+        <mxCell id="FkNuh9krQCzhWQGeolVR-29" value="Controller" style="shape=umlLifeline;perimeter=lifelinePerimeter;container=1;collapsible=0;recursiveResize=0;rounded=0;shadow=0;strokeWidth=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry x="1120" y="640" width="100" height="360" as="geometry" />
         </mxCell>
-        <mxCell id="FkNuh9krQCzhWQGeolVR-30" value="" style="points=[];perimeter=orthogonalPerimeter;rounded=0;shadow=0;strokeWidth=1;" vertex="1" parent="FkNuh9krQCzhWQGeolVR-29">
-          <mxGeometry x="45" y="80" width="10" height="200" as="geometry" />
+        <mxCell id="FkNuh9krQCzhWQGeolVR-30" value="" style="points=[];perimeter=orthogonalPerimeter;rounded=0;shadow=0;strokeWidth=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="FkNuh9krQCzhWQGeolVR-29">
+          <mxGeometry x="45" y="80" width="10" height="280" as="geometry" />
         </mxCell>
-        <mxCell id="FkNuh9krQCzhWQGeolVR-33" value="DataBase" style="shape=umlLifeline;perimeter=lifelinePerimeter;container=1;collapsible=0;recursiveResize=0;rounded=0;shadow=0;strokeWidth=1;" vertex="1" parent="1">
-          <mxGeometry x="1540" y="640" width="100" height="300" as="geometry" />
+        <mxCell id="FkNuh9krQCzhWQGeolVR-33" value="DataBase" style="shape=umlLifeline;perimeter=lifelinePerimeter;container=1;collapsible=0;recursiveResize=0;rounded=0;shadow=0;strokeWidth=1;fillColor=#ffe6cc;strokeColor=#d79b00;" vertex="1" parent="1">
+          <mxGeometry x="1540" y="640" width="100" height="360" as="geometry" />
         </mxCell>
-        <mxCell id="FkNuh9krQCzhWQGeolVR-34" value="" style="points=[];perimeter=orthogonalPerimeter;rounded=0;shadow=0;strokeWidth=1;" vertex="1" parent="FkNuh9krQCzhWQGeolVR-33">
-          <mxGeometry x="45" y="80" width="10" height="200" as="geometry" />
+        <mxCell id="FkNuh9krQCzhWQGeolVR-34" value="" style="points=[];perimeter=orthogonalPerimeter;rounded=0;shadow=0;strokeWidth=1;fillColor=#ffe6cc;strokeColor=#d79b00;" vertex="1" parent="FkNuh9krQCzhWQGeolVR-33">
+          <mxGeometry x="45" y="80" width="10" height="280" as="geometry" />
         </mxCell>
-        <mxCell id="FkNuh9krQCzhWQGeolVR-35" value="User" style="shape=umlLifeline;perimeter=lifelinePerimeter;container=1;collapsible=0;recursiveResize=0;rounded=0;shadow=0;strokeWidth=1;" vertex="1" parent="1">
-          <mxGeometry x="920" y="640" width="100" height="300" as="geometry" />
+        <mxCell id="FkNuh9krQCzhWQGeolVR-35" value="User" style="shape=umlLifeline;perimeter=lifelinePerimeter;container=1;collapsible=0;recursiveResize=0;rounded=0;shadow=0;strokeWidth=1;fillColor=#ffe6cc;strokeColor=#d79b00;" vertex="1" parent="1">
+          <mxGeometry x="920" y="640" width="100" height="360" as="geometry" />
         </mxCell>
-        <mxCell id="FkNuh9krQCzhWQGeolVR-36" value="" style="points=[];perimeter=orthogonalPerimeter;rounded=0;shadow=0;strokeWidth=1;" vertex="1" parent="FkNuh9krQCzhWQGeolVR-35">
-          <mxGeometry x="45" y="80" width="10" height="200" as="geometry" />
+        <mxCell id="FkNuh9krQCzhWQGeolVR-36" value="" style="points=[];perimeter=orthogonalPerimeter;rounded=0;shadow=0;strokeWidth=1;fillColor=#ffe6cc;strokeColor=#d79b00;" vertex="1" parent="FkNuh9krQCzhWQGeolVR-35">
+          <mxGeometry x="45" y="80" width="10" height="280" as="geometry" />
         </mxCell>
-        <mxCell id="FkNuh9krQCzhWQGeolVR-37" value="&lt;span style=&quot;font-size: 20px&quot;&gt;일반계정 전환 Sequence Diagram&lt;/span&gt;" style="rounded=0;whiteSpace=wrap;html=1;fontSize=10;" vertex="1" parent="1">
+        <mxCell id="FkNuh9krQCzhWQGeolVR-37" value="&lt;span style=&quot;font-size: 20px&quot;&gt;일반계정 전환 Sequence Diagram&lt;/span&gt;" style="rounded=0;whiteSpace=wrap;html=1;fontSize=10;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
           <mxGeometry x="910" y="540" width="730" height="60" as="geometry" />
         </mxCell>
-        <mxCell id="FkNuh9krQCzhWQGeolVR-39" value="Repository" style="shape=umlLifeline;perimeter=lifelinePerimeter;container=1;collapsible=0;recursiveResize=0;rounded=0;shadow=0;strokeWidth=1;" vertex="1" parent="1">
-          <mxGeometry x="1325" y="640" width="100" height="300" as="geometry" />
+        <mxCell id="FkNuh9krQCzhWQGeolVR-39" value="Repository" style="shape=umlLifeline;perimeter=lifelinePerimeter;container=1;collapsible=0;recursiveResize=0;rounded=0;shadow=0;strokeWidth=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry x="1325" y="640" width="100" height="360" as="geometry" />
         </mxCell>
-        <mxCell id="FkNuh9krQCzhWQGeolVR-40" value="" style="points=[];perimeter=orthogonalPerimeter;rounded=0;shadow=0;strokeWidth=1;" vertex="1" parent="FkNuh9krQCzhWQGeolVR-39">
-          <mxGeometry x="45" y="80" width="10" height="200" as="geometry" />
+        <mxCell id="FkNuh9krQCzhWQGeolVR-40" value="" style="points=[];perimeter=orthogonalPerimeter;rounded=0;shadow=0;strokeWidth=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="FkNuh9krQCzhWQGeolVR-39">
+          <mxGeometry x="45" y="80" width="10" height="280" as="geometry" />
         </mxCell>
         <mxCell id="FkNuh9krQCzhWQGeolVR-43" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontSize=10;exitX=1.003;exitY=0.079;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0.09;entryY=0.075;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="FkNuh9krQCzhWQGeolVR-4" target="FkNuh9krQCzhWQGeolVR-6">
           <mxGeometry relative="1" as="geometry">
@@ -114,7 +114,7 @@
         <mxCell id="FkNuh9krQCzhWQGeolVR-58" style="edgeStyle=orthogonalEdgeStyle;curved=0;rounded=1;sketch=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=-0.117;entryY=0.641;entryDx=0;entryDy=0;entryPerimeter=0;fontSize=10;exitX=1.21;exitY=0.637;exitDx=0;exitDy=0;exitPerimeter=0;" edge="1" parent="1" source="FkNuh9krQCzhWQGeolVR-4" target="FkNuh9krQCzhWQGeolVR-6">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="FkNuh9krQCzhWQGeolVR-59" value="해당회원 데이터를 휴면DB에 INSERT" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=10;" vertex="1" connectable="0" parent="FkNuh9krQCzhWQGeolVR-58">
+        <mxCell id="FkNuh9krQCzhWQGeolVR-59" value="해당회원 데이터를 휴면TAB에 INSERT" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=10;" vertex="1" connectable="0" parent="FkNuh9krQCzhWQGeolVR-58">
           <mxGeometry x="-0.6988" y="2" relative="1" as="geometry">
             <mxPoint x="63" y="-7" as="offset" />
           </mxGeometry>
@@ -122,9 +122,125 @@
         <mxCell id="FkNuh9krQCzhWQGeolVR-60" style="edgeStyle=orthogonalEdgeStyle;curved=0;rounded=1;sketch=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.038;entryY=0.825;entryDx=0;entryDy=0;entryPerimeter=0;fontSize=10;exitX=1.062;exitY=0.821;exitDx=0;exitDy=0;exitPerimeter=0;" edge="1" parent="1" source="FkNuh9krQCzhWQGeolVR-4" target="FkNuh9krQCzhWQGeolVR-6">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="FkNuh9krQCzhWQGeolVR-61" value="회원DB에서 해당회원 데이터 DELETE" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=10;" vertex="1" connectable="0" parent="FkNuh9krQCzhWQGeolVR-60">
+        <mxCell id="FkNuh9krQCzhWQGeolVR-61" value="회원TAB에서 해당회원 데이터 DELETE" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=10;" vertex="1" connectable="0" parent="FkNuh9krQCzhWQGeolVR-60">
           <mxGeometry x="-0.7419" y="1" relative="1" as="geometry">
             <mxPoint x="69" y="-7" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="FkNuh9krQCzhWQGeolVR-62" style="edgeStyle=orthogonalEdgeStyle;curved=0;rounded=1;sketch=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=-0.014;entryY=0.063;entryDx=0;entryDy=0;entryPerimeter=0;fontSize=10;exitX=0.96;exitY=0.065;exitDx=0;exitDy=0;exitPerimeter=0;" edge="1" parent="1" source="FkNuh9krQCzhWQGeolVR-36" target="FkNuh9krQCzhWQGeolVR-30">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="FkNuh9krQCzhWQGeolVR-63" value="휴면 회원 로그인 시도" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=10;" vertex="1" connectable="0" parent="FkNuh9krQCzhWQGeolVR-62">
+          <mxGeometry x="-0.4503" relative="1" as="geometry">
+            <mxPoint x="43" y="-8" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="FkNuh9krQCzhWQGeolVR-64" style="edgeStyle=orthogonalEdgeStyle;curved=0;rounded=1;sketch=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=-0.214;entryY=0.119;entryDx=0;entryDy=0;entryPerimeter=0;fontSize=10;exitX=0.914;exitY=0.122;exitDx=0;exitDy=0;exitPerimeter=0;" edge="1" parent="1" source="FkNuh9krQCzhWQGeolVR-30" target="FkNuh9krQCzhWQGeolVR-40">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="FkNuh9krQCzhWQGeolVR-65" value="회원TAB 에서 조회" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=10;" vertex="1" connectable="0" parent="FkNuh9krQCzhWQGeolVR-64">
+          <mxGeometry x="-0.3825" y="-1" relative="1" as="geometry">
+            <mxPoint x="32" y="-10" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="FkNuh9krQCzhWQGeolVR-66" style="edgeStyle=orthogonalEdgeStyle;curved=0;rounded=1;sketch=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.151;entryDx=0;entryDy=0;entryPerimeter=0;fontSize=10;exitX=1.157;exitY=0.151;exitDx=0;exitDy=0;exitPerimeter=0;" edge="1" parent="1" source="FkNuh9krQCzhWQGeolVR-40" target="FkNuh9krQCzhWQGeolVR-34">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="FkNuh9krQCzhWQGeolVR-67" value="입력한 정보 조회" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=10;" vertex="1" connectable="0" parent="FkNuh9krQCzhWQGeolVR-66">
+          <mxGeometry x="-0.4438" y="2" relative="1" as="geometry">
+            <mxPoint x="46" y="-6" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="FkNuh9krQCzhWQGeolVR-68" style="edgeStyle=orthogonalEdgeStyle;curved=0;rounded=1;sketch=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=1.1;entryY=0.242;entryDx=0;entryDy=0;entryPerimeter=0;fontSize=10;exitX=0;exitY=0.242;exitDx=0;exitDy=0;exitPerimeter=0;" edge="1" parent="1" source="FkNuh9krQCzhWQGeolVR-34" target="FkNuh9krQCzhWQGeolVR-40">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="FkNuh9krQCzhWQGeolVR-69" value="조회 실패" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=10;" vertex="1" connectable="0" parent="FkNuh9krQCzhWQGeolVR-68">
+          <mxGeometry x="0.2381" relative="1" as="geometry">
+            <mxPoint x="16" y="-8" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="FkNuh9krQCzhWQGeolVR-70" style="edgeStyle=orthogonalEdgeStyle;curved=0;rounded=1;sketch=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.971;entryY=0.305;entryDx=0;entryDy=0;entryPerimeter=0;fontSize=10;exitX=0;exitY=0.305;exitDx=0;exitDy=0;exitPerimeter=0;" edge="1" parent="1" source="FkNuh9krQCzhWQGeolVR-40" target="FkNuh9krQCzhWQGeolVR-30">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="FkNuh9krQCzhWQGeolVR-71" value="Null값 반환" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=10;" vertex="1" connectable="0" parent="FkNuh9krQCzhWQGeolVR-70">
+          <mxGeometry x="0.2684" y="-2" relative="1" as="geometry">
+            <mxPoint x="24" y="-9" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="FkNuh9krQCzhWQGeolVR-72" style="edgeStyle=orthogonalEdgeStyle;curved=0;rounded=1;sketch=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=-0.329;entryY=0.411;entryDx=0;entryDy=0;entryPerimeter=0;fontSize=10;exitX=0.971;exitY=0.408;exitDx=0;exitDy=0;exitPerimeter=0;" edge="1" parent="1" source="FkNuh9krQCzhWQGeolVR-30" target="FkNuh9krQCzhWQGeolVR-40">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="FkNuh9krQCzhWQGeolVR-73" value="휴면TAB 에서 조회" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=10;" vertex="1" connectable="0" parent="FkNuh9krQCzhWQGeolVR-72">
+          <mxGeometry x="-0.2643" y="-1" relative="1" as="geometry">
+            <mxPoint x="24" y="-9" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="FkNuh9krQCzhWQGeolVR-74" style="edgeStyle=orthogonalEdgeStyle;curved=0;rounded=1;sketch=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=-0.057;entryY=0.33;entryDx=0;entryDy=0;entryPerimeter=0;fontSize=10;" edge="1" parent="1" target="FkNuh9krQCzhWQGeolVR-34">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="1380" y="812" as="sourcePoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="FkNuh9krQCzhWQGeolVR-75" value="입력한 정보 조회" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=10;" vertex="1" connectable="0" parent="FkNuh9krQCzhWQGeolVR-74">
+          <mxGeometry x="-0.244" relative="1" as="geometry">
+            <mxPoint x="22" y="-9" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="FkNuh9krQCzhWQGeolVR-76" style="edgeStyle=orthogonalEdgeStyle;curved=0;rounded=1;sketch=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=1.386;entryY=0.455;entryDx=0;entryDy=0;entryPerimeter=0;fontSize=10;exitX=-0.171;exitY=0.455;exitDx=0;exitDy=0;exitPerimeter=0;" edge="1" parent="1" source="FkNuh9krQCzhWQGeolVR-34" target="FkNuh9krQCzhWQGeolVR-40">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="1580" y="827" as="sourcePoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="FkNuh9krQCzhWQGeolVR-77" value="조회 성공" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=10;" vertex="1" connectable="0" parent="FkNuh9krQCzhWQGeolVR-76">
+          <mxGeometry x="0.277" y="1" relative="1" as="geometry">
+            <mxPoint x="22" y="-10" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="FkNuh9krQCzhWQGeolVR-78" style="edgeStyle=orthogonalEdgeStyle;curved=0;rounded=1;sketch=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=1.143;entryY=0.497;entryDx=0;entryDy=0;entryPerimeter=0;fontSize=10;exitX=0.014;exitY=0.495;exitDx=0;exitDy=0;exitPerimeter=0;" edge="1" parent="1" source="FkNuh9krQCzhWQGeolVR-40" target="FkNuh9krQCzhWQGeolVR-30">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="FkNuh9krQCzhWQGeolVR-79" value="회원 정보 반환" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=10;" vertex="1" connectable="0" parent="FkNuh9krQCzhWQGeolVR-78">
+          <mxGeometry x="0.3314" y="-1" relative="1" as="geometry">
+            <mxPoint x="28" y="-9" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="FkNuh9krQCzhWQGeolVR-80" style="edgeStyle=orthogonalEdgeStyle;curved=0;rounded=1;sketch=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=1.029;entryY=0.544;entryDx=0;entryDy=0;entryPerimeter=0;fontSize=10;exitX=0;exitY=0.546;exitDx=0;exitDy=0;exitPerimeter=0;" edge="1" parent="1" source="FkNuh9krQCzhWQGeolVR-30" target="FkNuh9krQCzhWQGeolVR-36">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="FkNuh9krQCzhWQGeolVR-81" value="ID/EMAIL입력 페이지 이동" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=10;" vertex="1" connectable="0" parent="FkNuh9krQCzhWQGeolVR-80">
+          <mxGeometry x="0.3173" y="-1" relative="1" as="geometry">
+            <mxPoint x="30" y="-10" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="FkNuh9krQCzhWQGeolVR-82" style="edgeStyle=orthogonalEdgeStyle;curved=0;rounded=1;sketch=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.616;entryDx=0;entryDy=0;entryPerimeter=0;fontSize=10;exitX=1.029;exitY=0.614;exitDx=0;exitDy=0;exitPerimeter=0;" edge="1" parent="1" source="FkNuh9krQCzhWQGeolVR-36" target="FkNuh9krQCzhWQGeolVR-30">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="FkNuh9krQCzhWQGeolVR-83" value="ID/EMAIL 입력" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=10;" vertex="1" connectable="0" parent="FkNuh9krQCzhWQGeolVR-82">
+          <mxGeometry x="-0.3282" y="2" relative="1" as="geometry">
+            <mxPoint x="26" y="-6" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="FkNuh9krQCzhWQGeolVR-84" style="edgeStyle=orthogonalEdgeStyle;curved=0;rounded=1;sketch=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.914;entryY=0.679;entryDx=0;entryDy=0;entryPerimeter=0;fontSize=10;exitX=-0.057;exitY=0.681;exitDx=0;exitDy=0;exitPerimeter=0;" edge="1" parent="1" source="FkNuh9krQCzhWQGeolVR-30" target="FkNuh9krQCzhWQGeolVR-36">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="FkNuh9krQCzhWQGeolVR-85" value="해당 이메일로 인증번호 전송" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=10;" vertex="1" connectable="0" parent="FkNuh9krQCzhWQGeolVR-84">
+          <mxGeometry x="0.132" relative="1" as="geometry">
+            <mxPoint x="8" y="-8" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="FkNuh9krQCzhWQGeolVR-86" style="edgeStyle=orthogonalEdgeStyle;curved=0;rounded=1;sketch=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=-0.057;entryY=0.759;entryDx=0;entryDy=0;entryPerimeter=0;fontSize=10;exitX=1.086;exitY=0.757;exitDx=0;exitDy=0;exitPerimeter=0;" edge="1" parent="1" source="FkNuh9krQCzhWQGeolVR-36" target="FkNuh9krQCzhWQGeolVR-30">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="FkNuh9krQCzhWQGeolVR-87" value="입력 성공" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=10;" vertex="1" connectable="0" parent="FkNuh9krQCzhWQGeolVR-86">
+          <mxGeometry x="-0.341" y="-2" relative="1" as="geometry">
+            <mxPoint x="27" y="-10" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="FkNuh9krQCzhWQGeolVR-88" style="edgeStyle=orthogonalEdgeStyle;curved=0;rounded=1;sketch=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.821;entryDx=0;entryDy=0;entryPerimeter=0;fontSize=10;exitX=1.257;exitY=0.82;exitDx=0;exitDy=0;exitPerimeter=0;" edge="1" parent="1" source="FkNuh9krQCzhWQGeolVR-30" target="FkNuh9krQCzhWQGeolVR-40">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="FkNuh9krQCzhWQGeolVR-89" value="Text" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=10;" vertex="1" connectable="0" parent="FkNuh9krQCzhWQGeolVR-88">
+          <mxGeometry x="-0.3063" y="1" relative="1" as="geometry">
+            <mxPoint as="offset" />
           </mxGeometry>
         </mxCell>
       </root>
