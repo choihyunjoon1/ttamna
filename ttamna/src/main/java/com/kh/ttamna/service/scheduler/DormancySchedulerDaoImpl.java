@@ -25,7 +25,6 @@ import com.kh.ttamna.service.member.EmailService;
 import lombok.extern.slf4j.Slf4j;
 
 @Service
-@Slf4j
 public class DormancySchedulerDaoImpl implements DormancySchedulerDao{
 	
 	@Autowired
@@ -36,10 +35,9 @@ public class DormancySchedulerDaoImpl implements DormancySchedulerDao{
 	
 	@Override
 	//매일 정각에 멤버테이블에서 조회하여 마지막접속일 후 335일이 지났는지 확인
-//	@Scheduled(cron="0 0 0 * * *")//매일 자정
-	@Scheduled(cron = "0 * * * * *")//테스트용 1분 추기
+	@Scheduled(cron="0 0 0 * * *")//매일 자정
+//	@Scheduled(cron = "0 * * * * *")//테스트용 1분 추기
 	public void findDormancy() throws FileNotFoundException, MessagingException, IOException {
-		log.debug("휴면계정 회원 찾기 실행");
 		List<MemberDto> findDormancy = sqlSession.selectList("member.findDormancy");
 		
 		//있다면 for문으로 돌려서 이메일 전송하기.
@@ -65,10 +63,9 @@ public class DormancySchedulerDaoImpl implements DormancySchedulerDao{
 
 	@Override
 	//매일 정각에 멤버테이블에서 조회하여 마지막접속일 후 365일이 지났는지 확인
-//	@Scheduled(cron="0 0 0 * * *")//매일 자정
-	@Scheduled(cron = "0 * * * * *")//테스트용 1분 추기
+	@Scheduled(cron="0 0 0 * * *")//매일 자정
+//	@Scheduled(cron = "0 * * * * *")//테스트용 1분 추기
 	public void changeDormancy() throws FileNotFoundException, IOException, MessagingException {
-		log.debug("휴면계정 회원 찾기 실행");
 		List<MemberDto> findDormancy = sqlSession.selectList("member.processDormancy");
 		
 		//있다면 for문으로 돌려서 이메일 전송하기.
@@ -105,7 +102,6 @@ public class DormancySchedulerDaoImpl implements DormancySchedulerDao{
 				dorDto.setDorAddress(memberDto.getAddress());
 				dorDto.setDorDetailAddress(memberDto.getDetailAddress());
 				//dorDto에 데이터 입력
-				log.debug("dorDto = {}",dorDto);
 				sqlSession.insert("dormancy.change",dorDto);
 				System.out.println("휴면테이블 입력 완료");
 				//기본 멤버테이블에서 데이터 삭제
