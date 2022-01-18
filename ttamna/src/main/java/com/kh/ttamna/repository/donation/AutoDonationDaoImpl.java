@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 
 import com.kh.ttamna.entity.donation.AutoPayMentDto;
 import com.kh.ttamna.vo.chart.RegularChartVO;
+import com.kh.ttamna.vo.donation.PaymentTopThreeVo;
 
 @Repository
 public class AutoDonationDaoImpl implements AutoDonationDao{
@@ -54,7 +55,7 @@ public class AutoDonationDaoImpl implements AutoDonationDao{
 	
 	@Override//정기기부 해지
 	public void autoPayDelete(String sid) {
-		sqlSession.delete("apm.autoPayDelete", sid);
+		sqlSession.delete("apm.autoPayInactive", sid);
 	}
 	
 	@Override//sid로 정기결제 1개 정보를 가져오는 메소드
@@ -92,16 +93,9 @@ public class AutoDonationDaoImpl implements AutoDonationDao{
 		return sqlSession.selectOne("apm.autoTotalAmount");
 	}
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+	@Override//정기기부 랭킹 top 3
+	public List<PaymentTopThreeVo> top3() {
+		return sqlSession.selectList("apm.autopaymentTopThree");
+	}
 	
 }

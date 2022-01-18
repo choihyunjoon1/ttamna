@@ -97,8 +97,45 @@ $(function(){
 		height:15rem;
 	}
 </style>
-<div class="mt-5 mb-3"><h3>기부 게시판</h3>
+<div class="mt-5 mb-3">
 <div class="container-900 container-center">
+	<div class="row mt-3">
+		<h2>땀나 기부 랭킹</h2>
+		<div class="col-6">
+			<h4>단건 기부 랭킹(Top3)</h4>
+			<c:forEach var="paymentTopThree" items="${payTop3}">
+				<h5>
+					<c:if test="${paymentTopThree.rn eq 1}">
+						<img src="${pageContext.request.contextPath}/resources/img/gold.png" style="width:2rem; height:2rem">
+					</c:if>
+					<c:if test="${paymentTopThree.rn eq 2}">
+						<img src="${pageContext.request.contextPath}/resources/img/silver.png" style="width:2rem; height:2rem">
+					</c:if>
+					<c:if test="${paymentTopThree.rn eq 3}">
+						<img src="${pageContext.request.contextPath}/resources/img/bronze.png" style="width:2rem; height:2rem">
+					</c:if>
+					${paymentTopThree.memberId}님의 총 기부 금액 : ${paymentTopThree.price}원
+				</h5>
+			</c:forEach>
+		</div>
+		<div class="col-6">
+			<h4>정기 기부 랭킹(Top3)</h4>
+			<c:forEach var="autopaymentTopThree" items="${autopaymentTop3}">
+				<h5>
+					<c:if test="${autopaymentTopThree.rn eq 1}">
+						<img src="${pageContext.request.contextPath}/resources/img/gold.png" style="width:2rem; height:2rem">
+					</c:if>
+					<c:if test="${autopaymentTopThree.rn eq 2}">
+						<img src="${pageContext.request.contextPath}/resources/img/silver.png" style="width:2rem; height:2rem">
+					</c:if>
+					<c:if test="${autopaymentTopThree.rn eq 3}">
+						<img src="${pageContext.request.contextPath}/resources/img/bronze.png" style="width:2rem; height:2rem">
+					</c:if>
+				 	${autopaymentTopThree.memberId}님의 총 기부 금액 : ${autopaymentTopThree.price}원
+				 </h5>
+			</c:forEach>
+		</div>
+	</div>
 	<div class="row mt-3">
 	<c:if test="${grade eq '관리자' or '보호소'}">
 		<div class="col">
