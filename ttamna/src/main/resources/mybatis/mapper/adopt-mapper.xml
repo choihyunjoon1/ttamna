@@ -119,6 +119,7 @@
 		select * from adopt inner join adopt_img on adopt.adopt_no = adopt_img.adopt_no
 	</select>
 
+	<!-- 메인화면에서 보여줄 최신 입양공고글 3개 -->
 	<select id="mainBoard" resultType="AdoptImgDtoVO">
 		select * from(
 		    select rownum rn2, tmp.* from(

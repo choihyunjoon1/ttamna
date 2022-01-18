@@ -1,3 +1,30 @@
+---------------- notice_img --------------------------
+
+-- 테이블 데이터 삭제 (notice_img)
+TRUNCATE TABLE notice_img;
+
+-- 테이블 삭제 (notice_img)
+DROP TABLE notice_img CASCADE CONSTRAINTS;
+
+-- 시퀀스 삭제 (shop_img)
+DROP SEQUENCE notice_img_seq;
+
+COMMIT;
+
+---------------- notice --------------------------
+
+-- 테이블 데이터 삭제 (notice)
+TRUNCATE TABLE notice;
+
+-- 테이블 삭제 (notice)
+DROP TABLE notice CASCADE CONSTRAINTS;
+
+-- 시퀀스 삭제 (notice)
+DROP SEQUENCE notice_seq;
+
+COMMIT;
+
+
 ---------------- dormancy --------------------------
 
 -- 테이블 데이터 삭제 (dormancy)
