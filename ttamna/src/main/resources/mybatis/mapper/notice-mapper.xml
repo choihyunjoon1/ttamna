@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+
+<!-- mybatis mapper 파일
+	- DBMS에서 실행할 SQL구문을 저장하는 XML파일 
+	- namespace를 통해서 여러개의 매퍼를 구분한다
+	- 테이블 당 한 개씩 만드는 것이 일반적이면 따라서 namespace를 테이블명으로 작성하면 구분이 용이하다
+ 	- <insert>, <select>, <update>, <delete>를 이용해서 CRUD 구문을 작성한다
+ 	- 각 구문은 외부에서 호출이 가능하도록 반드시 ID를 겹치지 않게 부여해야 한다
+ 	- parameterType : 구문을 실행하기 위해 필요한 데이터의 형태 
+ 	- resultType : 구문을 실행한 결과를 어떤 형태로 변환해야 하는지를 말한다
+ -->
+
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="notice">
+
+	<!-- 시퀀스 번호 먼저 뽑기 -->
+	<select id="sequence" resultType="int">
+		select notice_seq.nextval from dual
+	</select>
+	
+	<!-- 입양전필독 등록 기능 -->
+	<insert id="write" parameterType="NoticeDto">
+		insert into 
+		 notice(notice_no, notice_writer, notice_title, notice_content)
+		 values(#{noticeNo}, #{noticeWriter}, #{noticeTitle}, #{noticeContent})
+	</insert>
+	
+	<!-- 게시글 상세조회 -->
+	<select id="detail" parameterType="int" resultType="NoticeDto">
+		select * from notice where notice_no = #{noticeNo}
+	</select>
+	
+	<!-- 게시글 목록조회 + 일반 페이지네이션 -->
+	
+	<!-- 게시글 수정 + 이미지 파일-->
+
+	<!-- 게시글 삭제 + 파일 -->
+	
+</mapper>
+
