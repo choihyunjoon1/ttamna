@@ -223,6 +223,16 @@ DROP TABLE  mybaby CASCADE CONSTRAINTS;
 DROP SEQUENCE  mybaby_seq;
 
 COMMIT;
+---------------- mybaby_like --------------------------
+
+-- 테이블 데이터 삭제 ( mybaby_like)
+TRUNCATE TABLE mybaby_like;
+
+-- 테이블 삭제 ( mybaby_like)
+DROP TABLE  mybaby_like;
+
+
+COMMIT;
 
 ---------------- adopt_img --------------------------
 
