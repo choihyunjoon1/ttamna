@@ -24,8 +24,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.kh.ttamna.entity.mybaby.MybabyDto;
 import com.kh.ttamna.entity.mybaby.MybabyImgDto;
+import com.kh.ttamna.entity.mybaby.MybabyLikeDto;
 import com.kh.ttamna.repository.mybaby.MybabyDao;
 import com.kh.ttamna.repository.mybaby.MybabyImgDao;
+import com.kh.ttamna.repository.mybaby.MybabyLikeDao;
 import com.kh.ttamna.service.mybaby.MybabyFileService;
 import com.kh.ttamna.vo.mybaby.MybabyDownVO;
 import com.kh.ttamna.vo.mybaby.MybabyFileVO;
@@ -45,19 +47,14 @@ public class MybabyController {
 	@Autowired
 	private MybabyFileService mybabyService;
 
+	@Autowired
+	private MybabyLikeDao mybabyLikeDao;
 	
 	//게시글 등록
 	@GetMapping("/write")
 	public String write() {
 		return "mybaby/write";
 	}
-//	@PostMapping("/write")
-//	public String write(@ModelAttribute MybabyDto mybabyDto,HttpSession session) {
-//		String memberId = (String)session.getAttribute("uid");
-//		mybabyDto.setMybabyWriter(memberId);
-//		int mybabyNo = mybabyDao.write(mybabyDto);
-//		return "redirect:/mybaby/detail?mybabyNo="+mybabyNo;
-//	}
 	@PostMapping("/write")
 	public String write(@ModelAttribute MybabyFileVO mybabyFileVO) throws IllegalStateException, IOException {
 		int mybabyNo = mybabyService.write(mybabyFileVO);
@@ -65,16 +62,16 @@ public class MybabyController {
 	}
 	//상세페이지
 	@GetMapping("/detail")
-	public String detail(@RequestParam int mybabyNo,Model model) {
-//		Map<String,Object> param = new HashMap<>();
-//		param.put("mybabyNo",mybabyNo);
-//		model.addAttribute("mybaby",mybabyDao.detailOrSearch(param));
+	public String detail(@RequestParam int mybabyNo,Model model,HttpSession session) {
 		MybabyDto mybabyDto = mybabyDao.detail(mybabyNo);
 		model.addAttribute("mybaby",mybabyDto);
 		List<MybabyImgDto> list = mybabyImgDao.getList(mybabyNo);
 		model.addAttribute("mybabyImgDtoList",list);
 		model.addAttribute("mybabyNo", mybabyNo);
-		
+		//좋아요 개수
+		String memberId = (String)session.getAttribute("uid");
+		MybabyLikeDto mybabyLikeDto = mybabyLikeDao.get(mybabyNo,memberId);
+		model.addAttribute("mybabyLikeDto", mybabyLikeDto);
 		
 		return "mybaby/detail";
 	}
@@ -112,8 +109,6 @@ public class MybabyController {
 			param.put("keyword",keyword);
 			
 			model.addAttribute("list", mybabyDao.searchPlusImg(param));
-//			model.addAttribute("column", column);
-//			model.addAttribute("keyword", keyword);
 		}else {
 			List<MybabyDto> list = mybabyDao.list();
 			model.addAttribute("list",list);
@@ -138,8 +133,6 @@ public class MybabyController {
 	}
 	@PostMapping("/edit")
 	public String edit(@ModelAttribute MybabyFileVO mybabyFileVO) throws IllegalStateException, IOException {
-//		mybabyDao.edit(mybabyDto);
-		
 		mybabyService.update(mybabyFileVO);
 		return "redirect:/mybaby/detail?mybabyNo="+mybabyFileVO.getMybabyNo();
 	}

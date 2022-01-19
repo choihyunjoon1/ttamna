@@ -34,49 +34,49 @@
 	<select id="search" parameterType="int" resultType="MybabyDto">
 		select * from mybaby where mybaby_no=#{mybabyNo}
 	</select>
-	
-	<!-- 더보기 페이지네이션 -->
-<!-- 	<select id="listByPage" parameterType="map" resultType="MybabyDownVO"> -->
-<!-- 		select * from( -->
-<!-- 		    select rownum rn, tmp.* from( -->
-<!-- 		        select * from mybaby B left outer join mybaby_img BI on B.mybaby_no = BI.mybaby_no -->
-<!-- 		        order by B.mybaby_no desc -->
-<!-- 		        )tmp -->
-<!-- 		)where rn between ${startRow} and ${endRow} -->
-<!-- 	</select> -->
+	<!-- 목록+더보기페이징 -->
 	<select id="listByPage" parameterType="map" resultType="MybabyDownVO">
-			select * from(
-			    select rownum rn2, tmp.* from(
-			        select * from (
-			        	select * from (
-			        		select BI.*, row_number() over(partition by mybaby_no order by mybaby_no asc) rn  from mybaby_img BI) where rn = 1) MBI 
-			        			left outer join mybaby B  on B.mybaby_no = MBI.mybaby_no
-			        order by B.mybaby_no desc
-			        )tmp
-			)where rn2 between ${startRow} and ${endRow}
+		select
+		    mybaby_img_no,mybaby_img_upload,mybaby_img_size,mybaby_img_type,
+		    mybaby_no,mybaby_writer,mybaby_title,mybaby_time,mybaby_reply,mybaby_type,
+		    mybaby_like
+		from(
+		    select rownum rn2, tmp.* from(
+		        select * from (
+		            select * from (
+		                select BI.*, row_number() over(partition by mybaby_no order by mybaby_no asc) rn  from mybaby_img BI) where rn = 1) MBI 
+		                    left outer join mybaby B  on B.mybaby_no = MBI.mybaby_no
+		                    left outer join (
+		                        select B.mybaby_no,nvl(LI,0)mybaby_like from mybaby B
+		                            left outer join (
+		                                select ML.mybaby_no,count(member_id)LI from mybaby_like  ML group by ML.mybaby_no
+		                                    )ML2 on ML2.mybaby_no = B.mybaby_no)
+		                    MLC on MBI.mybaby_no=MLC.mybaby_no
+		        )tmp
+		)where rn2 between ${startRow} and ${endRow}
 	</select>
 	<!-- 더보기 페이지네이션 -->
-<!-- 	<select id="listBySearchPage" parameterType="map" resultType="MybabyDownVO"> -->
-<!-- 		select * from( -->
-<!-- 		    select rownum rn, tmp.* from( -->
-<!-- 		        select * from mybaby B left outer join mybaby_img BI on B.mybaby_no = BI.mybaby_no -->
-<!-- 		        	where instr(${column}, #{keyword}) > 0 -->
-<!-- 		        order by B.mybaby_no desc -->
-<!-- 		        )tmp -->
-<!-- 		)where rn between ${startRow} and ${endRow} -->
-<!-- 	</select> -->
-		<select id="listBySearchPage" parameterType="map" resultType="MybabyDownVO">
-			select * from(
-			    select rownum rn2, tmp.* from(
-			        select * from (
-			        	select * from (
-			        		select BI.*, row_number() over(partition by mybaby_no order by mybaby_no asc) rn  from mybaby_img BI) where rn = 1) MBI 
-			        			left outer join mybaby B  on B.mybaby_no = MBI.mybaby_no
-			        			where instr(${column}, #{keyword}) > 0
-			        order by B.mybaby_no desc
-			        )tmp
-			)where rn2 between ${startRow} and ${endRow}
-		</select>
+	<select id="listBySearchPage" parameterType="map" resultType="MybabyDownVO">
+		select
+		    mybaby_img_no,mybaby_img_upload,mybaby_img_size,mybaby_img_type,
+		    mybaby_no,mybaby_writer,mybaby_title,mybaby_time,mybaby_reply,mybaby_type,
+		    mybaby_like
+		from(
+		    select rownum rn2, tmp.* from(
+		        select * from (
+		            select * from (
+		                select BI.*, row_number() over(partition by mybaby_no order by mybaby_no asc) rn  from mybaby_img BI) where rn = 1) MBI 
+		                    left outer join mybaby B  on B.mybaby_no = MBI.mybaby_no
+		                    left outer join (
+		                        select B.mybaby_no,nvl(LI,0)mybaby_like from mybaby B
+		                            left outer join (
+		                                select ML.mybaby_no,count(member_id)LI from mybaby_like  ML group by ML.mybaby_no
+		                                    )ML2 on ML2.mybaby_no = B.mybaby_no)
+		                    MLC on MBI.mybaby_no=MLC.mybaby_no
+		                    where instr(${column}, #{keyword}) > 0 
+		        )tmp
+		)where rn2 between ${startRow} and ${endRow}
+	</select>
 	
 	<!-- 게시글 삭제 -->
 	<delete id="delete" parameterType="int">
