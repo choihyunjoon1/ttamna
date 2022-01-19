@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2022-01-18T11:41:06.197Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.71 Safari/537.36" etag="x0APAM3_KJpbN-_W40LC" version="16.2.7" type="github">
+<mxfile host="app.diagrams.net" modified="2022-01-18T12:53:27.123Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.71 Safari/537.36" etag="2Nw_OzrkxO5ypR0fkCwJ" version="16.2.7" type="github">
   <diagram id="kgpKYQtTHZ0yAKxKKP6v" name="Page-1">
     <mxGraphModel dx="-37" dy="435" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
       <root>
@@ -167,7 +167,7 @@
             <mxPoint x="24" y="-9" as="offset" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="FkNuh9krQCzhWQGeolVR-72" style="edgeStyle=orthogonalEdgeStyle;curved=0;rounded=1;sketch=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=-0.329;entryY=0.411;entryDx=0;entryDy=0;entryPerimeter=0;fontSize=10;exitX=0.971;exitY=0.408;exitDx=0;exitDy=0;exitPerimeter=0;" edge="1" parent="1" source="FkNuh9krQCzhWQGeolVR-30" target="FkNuh9krQCzhWQGeolVR-40">
+        <mxCell id="FkNuh9krQCzhWQGeolVR-72" style="edgeStyle=orthogonalEdgeStyle;curved=0;rounded=1;sketch=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=-0.157;entryY=0.363;entryDx=0;entryDy=0;entryPerimeter=0;fontSize=10;exitX=0.914;exitY=0.365;exitDx=0;exitDy=0;exitPerimeter=0;" edge="1" parent="1" source="FkNuh9krQCzhWQGeolVR-30" target="FkNuh9krQCzhWQGeolVR-40">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="FkNuh9krQCzhWQGeolVR-73" value="휴면TAB 에서 조회" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=10;" vertex="1" connectable="0" parent="FkNuh9krQCzhWQGeolVR-72">
@@ -175,7 +175,7 @@
             <mxPoint x="24" y="-9" as="offset" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="FkNuh9krQCzhWQGeolVR-74" style="edgeStyle=orthogonalEdgeStyle;curved=0;rounded=1;sketch=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=-0.057;entryY=0.33;entryDx=0;entryDy=0;entryPerimeter=0;fontSize=10;" edge="1" parent="1" target="FkNuh9krQCzhWQGeolVR-34">
+        <mxCell id="FkNuh9krQCzhWQGeolVR-74" style="edgeStyle=orthogonalEdgeStyle;curved=0;rounded=1;sketch=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.393;entryDx=0;entryDy=0;entryPerimeter=0;fontSize=10;exitX=0.929;exitY=0.393;exitDx=0;exitDy=0;exitPerimeter=0;" edge="1" parent="1" source="FkNuh9krQCzhWQGeolVR-40" target="FkNuh9krQCzhWQGeolVR-34">
           <mxGeometry relative="1" as="geometry">
             <mxPoint x="1380" y="812" as="sourcePoint" />
           </mxGeometry>
@@ -188,6 +188,10 @@
         <mxCell id="FkNuh9krQCzhWQGeolVR-76" style="edgeStyle=orthogonalEdgeStyle;curved=0;rounded=1;sketch=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=1.386;entryY=0.455;entryDx=0;entryDy=0;entryPerimeter=0;fontSize=10;exitX=-0.171;exitY=0.455;exitDx=0;exitDy=0;exitPerimeter=0;" edge="1" parent="1" source="FkNuh9krQCzhWQGeolVR-34" target="FkNuh9krQCzhWQGeolVR-40">
           <mxGeometry relative="1" as="geometry">
             <mxPoint x="1580" y="827" as="sourcePoint" />
+            <Array as="points">
+              <mxPoint x="1500" y="847" />
+              <mxPoint x="1500" y="847" />
+            </Array>
           </mxGeometry>
         </mxCell>
         <mxCell id="FkNuh9krQCzhWQGeolVR-77" value="조회 성공" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=10;" vertex="1" connectable="0" parent="FkNuh9krQCzhWQGeolVR-76">
@@ -230,17 +234,38 @@
         <mxCell id="FkNuh9krQCzhWQGeolVR-86" style="edgeStyle=orthogonalEdgeStyle;curved=0;rounded=1;sketch=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=-0.057;entryY=0.759;entryDx=0;entryDy=0;entryPerimeter=0;fontSize=10;exitX=1.086;exitY=0.757;exitDx=0;exitDy=0;exitPerimeter=0;" edge="1" parent="1" source="FkNuh9krQCzhWQGeolVR-36" target="FkNuh9krQCzhWQGeolVR-30">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="FkNuh9krQCzhWQGeolVR-87" value="입력 성공" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=10;" vertex="1" connectable="0" parent="FkNuh9krQCzhWQGeolVR-86">
+        <mxCell id="FkNuh9krQCzhWQGeolVR-87" value="인증번호 입력" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=10;" vertex="1" connectable="0" parent="FkNuh9krQCzhWQGeolVR-86">
           <mxGeometry x="-0.341" y="-2" relative="1" as="geometry">
             <mxPoint x="27" y="-10" as="offset" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="FkNuh9krQCzhWQGeolVR-88" style="edgeStyle=orthogonalEdgeStyle;curved=0;rounded=1;sketch=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.821;entryDx=0;entryDy=0;entryPerimeter=0;fontSize=10;exitX=1.257;exitY=0.82;exitDx=0;exitDy=0;exitPerimeter=0;" edge="1" parent="1" source="FkNuh9krQCzhWQGeolVR-30" target="FkNuh9krQCzhWQGeolVR-40">
+        <mxCell id="FkNuh9krQCzhWQGeolVR-88" value="인증 성공" style="edgeStyle=orthogonalEdgeStyle;curved=0;rounded=1;sketch=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.821;entryDx=0;entryDy=0;entryPerimeter=0;fontSize=10;exitX=1.257;exitY=0.82;exitDx=0;exitDy=0;exitPerimeter=0;" edge="1" parent="1" source="FkNuh9krQCzhWQGeolVR-30" target="FkNuh9krQCzhWQGeolVR-40">
+          <mxGeometry x="-0.0153" y="-10" relative="1" as="geometry">
+            <mxPoint x="10" y="-10" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="FkNuh9krQCzhWQGeolVR-90" style="edgeStyle=orthogonalEdgeStyle;curved=0;rounded=1;sketch=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.171;entryY=0.891;entryDx=0;entryDy=0;entryPerimeter=0;fontSize=10;exitX=1.329;exitY=0.889;exitDx=0;exitDy=0;exitPerimeter=0;" edge="1" parent="1" source="FkNuh9krQCzhWQGeolVR-40" target="FkNuh9krQCzhWQGeolVR-34">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="FkNuh9krQCzhWQGeolVR-89" value="Text" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=10;" vertex="1" connectable="0" parent="FkNuh9krQCzhWQGeolVR-88">
-          <mxGeometry x="-0.3063" y="1" relative="1" as="geometry">
-            <mxPoint as="offset" />
+        <mxCell id="FkNuh9krQCzhWQGeolVR-92" value="해당 회원정보 회원TAB에 등록(PW=인증번호)" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=10;" vertex="1" connectable="0" parent="FkNuh9krQCzhWQGeolVR-90">
+          <mxGeometry x="0.2103" y="2" relative="1" as="geometry">
+            <mxPoint x="-26" y="-8" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="FkNuh9krQCzhWQGeolVR-93" style="edgeStyle=orthogonalEdgeStyle;curved=0;rounded=1;sketch=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.057;entryY=0.932;entryDx=0;entryDy=0;entryPerimeter=0;fontSize=10;exitX=1.329;exitY=0.93;exitDx=0;exitDy=0;exitPerimeter=0;" edge="1" parent="1" source="FkNuh9krQCzhWQGeolVR-40" target="FkNuh9krQCzhWQGeolVR-34">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="FkNuh9krQCzhWQGeolVR-94" value="휴면TAB에서 회원정보 삭제" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=10;" vertex="1" connectable="0" parent="FkNuh9krQCzhWQGeolVR-93">
+          <mxGeometry x="-0.3747" y="1" relative="1" as="geometry">
+            <mxPoint x="28" y="11" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="FkNuh9krQCzhWQGeolVR-95" style="edgeStyle=orthogonalEdgeStyle;curved=0;rounded=1;sketch=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=1.143;entryY=0.967;entryDx=0;entryDy=0;entryPerimeter=0;fontSize=10;exitX=0.057;exitY=0.969;exitDx=0;exitDy=0;exitPerimeter=0;" edge="1" parent="1" source="FkNuh9krQCzhWQGeolVR-30" target="FkNuh9krQCzhWQGeolVR-36">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="FkNuh9krQCzhWQGeolVR-96" value="비밀번호 재설정 페이지 이동" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=10;" vertex="1" connectable="0" parent="FkNuh9krQCzhWQGeolVR-95">
+          <mxGeometry x="0.3611" y="-1" relative="1" as="geometry">
+            <mxPoint x="33" y="-10" as="offset" />
           </mxGeometry>
         </mxCell>
       </root>

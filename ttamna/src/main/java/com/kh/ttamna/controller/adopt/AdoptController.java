@@ -62,7 +62,7 @@ public class AdoptController {
 		return "adopt/list";
 	}
 	
-	//입양공고 전체 목록
+	//입양공고 검색 목록
 	@RequestMapping("/list")
 	public String adopt(			
 			@RequestParam(required = false) String column,

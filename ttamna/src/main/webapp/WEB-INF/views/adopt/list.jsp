@@ -132,7 +132,7 @@ $(function(){
 	<!-- 검색창 -->
 	<div class="container-900">
 			<form method="post">
-				<div class="input-group justify-content-end">
+				<div class="input-group justify-content-md-center">
 					<div class="col-2">
 						<select name="column" class="form-select form-select-sm" required id="column">
 						<c:choose>

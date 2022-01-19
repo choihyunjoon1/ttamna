@@ -1,8 +1,6 @@
 package com.kh.ttamna.controller.member;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,9 +12,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.kh.ttamna.entity.member.MemberDto;
-import com.kh.ttamna.entity.payment.PaymentDto;
+import com.kh.ttamna.entity.shop.ShopDto;
 import com.kh.ttamna.repository.member.MemberDao;
-import com.kh.ttamna.repository.payment.PaymentDao;
+import com.kh.ttamna.repository.shop.ShopDao;
 import com.kh.ttamna.service.pagination.PaginationService;
 import com.kh.ttamna.vo.pagination.PaginationVO;
 
@@ -26,6 +24,9 @@ public class AdminController {
 
 	@Autowired
 	private MemberDao memberDao;
+	
+	@Autowired
+	private ShopDao shopDao;
 	
 	@Autowired
 	private PaginationService paginationService;
@@ -111,7 +112,9 @@ public class AdminController {
 	 
 	 //통계 검색 페이지
 	 @GetMapping("/statistics/search")
-	 public String search() {
+	 public String search(Model m) {
+		 List<String> list = shopDao.nameList();
+		 m.addAttribute("list", list);
 		 return "admin/statistics/search";
 	 }
 	 

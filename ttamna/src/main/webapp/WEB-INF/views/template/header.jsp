@@ -185,15 +185,15 @@
 						</ul>
 						<ul class="navbar-nav me-auto navbar-center fs-6">
 							<li class="nav-item ms-1">
-								<a class="nav-link docs-creator text-decoration-underline headNotice" href="#">[ 입양전 필독 ]</a></li>
-							<li class="nav-item ms-5">
+								<a class="nav-link docs-creator text-decoration-underline headNotice" href="${root}/notice/">[입양전 필독]</a></li>
+							<li class="nav-item ms-3">
 							 <a class="nav-link docs-creator headShop" href="${root}/shop/">후원상품🐾</a></li>
-							<li class="nav-item ms-5">
+							<li class="nav-item ms-3">
 								<a class="nav-link docs-creator headDonation" href="${root}/donation/">기부🐾</a></li>
-							<li class="nav-item ms-5">
+							<li class="nav-item ms-3">
 								<a class="nav-link docs-creator headAdopt" href="${root}/adopt/">입양공고🐾</a>
 							</li>
-							<li class="nav-item ms-5">
+							<li class="nav-item ms-3">
 								<a class="nav-link docs-creator headMybaby" href="${root }/mybaby/">내새끼자랑🐾</a>
 							</li>
 						</ul>

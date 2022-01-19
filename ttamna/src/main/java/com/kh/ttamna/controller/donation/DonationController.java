@@ -1,7 +1,6 @@
 package com.kh.ttamna.controller.donation;
 
 import java.io.IOException;
-import java.net.InetAddress;
 import java.net.URLEncoder;
 import java.net.UnknownHostException;
 import java.util.HashMap;
@@ -23,14 +22,14 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.context.request.RequestContextHolder;
-import org.springframework.web.context.request.ServletRequestAttributes;
 
 import com.kh.ttamna.entity.donation.DonationDto;
 import com.kh.ttamna.entity.donation.DonationImgDto;
+import com.kh.ttamna.repository.donation.AutoDonationDao;
 import com.kh.ttamna.repository.donation.DonationDao;
 import com.kh.ttamna.repository.donation.DonationImgDao;
 import com.kh.ttamna.repository.donation.DonationReplyDao;
+import com.kh.ttamna.repository.payment.PaymentDao;
 import com.kh.ttamna.service.donation.DonationFileService;
 import com.kh.ttamna.service.pagination.PaginationService;
 import com.kh.ttamna.vo.donation.DonationUploadVo;
@@ -55,7 +54,11 @@ public class DonationController {
 	@Autowired
 	private PaginationService paginationService;
 	
+	@Autowired
+	private PaymentDao paymentDao;
 	
+	@Autowired
+	private AutoDonationDao autoDonationDao;
 	
 	@RequestMapping("/")//목록페이지
 	public String defaultList(@RequestParam(required = false) String column,
@@ -73,7 +76,8 @@ public class DonationController {
 		} else {
 			model.addAttribute("list", donationDao.list());
 		}
-		
+		model.addAttribute("payTop3", paymentDao.top3());
+		model.addAttribute("autopaymentTop3", autoDonationDao.top3());
 		return "donation/list";
 	}
 	@RequestMapping("/list")//목록페이지
@@ -90,7 +94,8 @@ public class DonationController {
 		} else {
 			model.addAttribute("list", donationDao.list());
 		}
-		
+		model.addAttribute("payTop3", paymentDao.top3());
+		model.addAttribute("autopaymentTop3", autoDonationDao.top3());
 		return "donation/list";
 	}
 	

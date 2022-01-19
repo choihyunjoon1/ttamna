@@ -7,6 +7,7 @@ import com.kh.ttamna.entity.payment.PaymentDto;
 import com.kh.ttamna.vo.chart.DonationChartVO;
 import com.kh.ttamna.vo.chart.SearchChartVO;
 import com.kh.ttamna.vo.chart.ShopChartVO;
+import com.kh.ttamna.vo.donation.PaymentTopThreeVo;
 
 public interface PaymentDao {
 	int seq();
@@ -66,6 +67,7 @@ public interface PaymentDao {
 	//후원상품 판매금액 기간검색
 	List<SearchChartVO> shopDateSearch(Map<String, Object> param);
 
-
+	//단건기부 랭킹 top3
+	List<PaymentTopThreeVo> top3();
 
 }

@@ -15,4 +15,5 @@ public class AutoPayMentDto {
 	private long autoTotalAmount;
 	private Date firstPaymentDate;
 	private int payTimes;
+	private String autoStatus;
 }

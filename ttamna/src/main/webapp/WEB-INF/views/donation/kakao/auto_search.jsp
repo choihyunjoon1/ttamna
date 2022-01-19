@@ -12,6 +12,14 @@
 			<c:if test="${searchList.status eq 'ACTIVE'}">
 				진행중
 			</c:if>
+			<c:choose>
+				<c:when test="${searchList.status eq 'ACTIVE'}">
+					진행중
+				</c:when>
+				<c:otherwise>
+					중단됨
+				</c:otherwise>
+			</c:choose>
 		</h2>
 	</div>
 	</div>

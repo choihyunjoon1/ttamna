@@ -37,6 +37,7 @@
 		<package name="com.kh.ttamna.entity.payment"/>
 		<package name="com.kh.ttamna.entity.cart"/>
 		<package name="com.kh.ttamna.entity.adopt"/>
+		<package name="com.kh.ttamna.entity.notice"/>
 		<package name="com.kh.ttamna.vo"/>
 		<package name="com.kh.ttamna.vo.chart"/>
 		<package name="com.kh.ttamna.vo.donation"/>
@@ -46,6 +47,7 @@
 		<package name="com.kh.ttamna.vo.shop"/>
 		<package name="com.kh.ttamna.vo.adopt"/>
 		<package name="com.kh.ttamna.vo.board"/>
+		<package name="com.kh.ttamna.vo.notice"/>
 	</typeAliases>
 
 </configuration>

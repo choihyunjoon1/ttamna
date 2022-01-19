@@ -13,4 +13,7 @@ public class FilePath {
 	
 	//shop 이미지 파일 저장 경로
 	public static final String SHOP_PATH = "D:/upload/kh8c/shop";
+	
+	//notice 이미지 파일 저장 경로
+	public static final String NOTICE_PATH = "D:/upload/kh8c/notice";
 }

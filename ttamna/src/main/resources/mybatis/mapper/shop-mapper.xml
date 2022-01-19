@@ -119,5 +119,11 @@
 		    )tmp
 		)where rn2 between 1 and 3
 	</select>
+	
+	<!-- 상품 이름만 뽑기 -->
+	<select id="nameList" resultType="String">
+		select distinct(shop_goods) from shop
+	</select>
+	
 </mapper>
 
