@@ -122,6 +122,14 @@ mybaby_img_type varchar2(256) not null -- 이미지 유형
 commit;
 -------------------------------------------------------------------------------------------------------------
 
+--내새끼 좋아요 테이블 생성 구문
+create table mybaby_like(
+mybaby_no references mybaby(mybaby_no) on delete cascade,
+member_id references member(member_id) on delete cascade
+);
+
+-------------------------------------------------------------------------------------------------------------
+
 --내새끼 댓글 테이블 생성 구문
 create sequence mybaby_reply_seq;
 create table mybaby_reply(
