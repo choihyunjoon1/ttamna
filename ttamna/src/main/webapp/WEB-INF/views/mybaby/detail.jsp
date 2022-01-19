@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
 <c:set var="root" value="${pageContext.request.contextPath}"></c:set>
-
+<c:set var="login" value="${uid != null}"></c:set>
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 <!-- 댓글 -->
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
@@ -102,6 +102,57 @@
 			});
 		}
 	});
+
+	//좋아요 등록
+	function mybabyinsertlike(mybabyNo){
+		var mybabyNo = ${mybabyNo}
+		$.ajax({
+			url:"${pageContext.request.contextPath}/mybaby/ajax/insert",
+			type:"get",
+			data:{
+				mybabyNo:mybabyNo
+			},
+			success:function(resp){
+				console.log("좋아요누름",resp);
+				$(".like").css("color","red");
+			},
+			error:function(e){}
+			
+		});
+	};
+	//좋아요 삭제
+	function mybabydeletelike(mybabyNo){
+		var mybabyNo=${mybabyNo}
+		$.ajax({
+			url:"${pageContext.request.contextPath}/mybaby/ajax/delete?mybabyNo="+mybabyNo,
+			type:"delete",
+			data:{
+				mybabyNo:mybabyNo
+			},
+			success:function(resp){
+				console.log("좋아요 취소함",resp);
+				$(".like").css("color","black");
+			},
+			error:function(e){}
+		});
+	};
+	//좋아요 버튼 누를때
+	$(function(){
+		$(".likebtn").click(function(e){
+			if(!${login}){
+				e.preventDefault();
+			}
+			var mybabyNo = "${mybabyNo}";
+			
+			var stylecolor = $(".like").css("color");
+			console.log(stylecolor);
+			if(stylecolor=="rgb(0, 0, 0)"){
+				mybabyinsertlike(mybabyNo);
+			}else{
+				mybabydeletelike(mybabyNo);
+			}
+		});
+	});
 	
 
 	
@@ -160,6 +211,22 @@
 		    <p class="card-text">${mybaby.mybabyContent}</p>
 		  </div>
 		  <div class="card-footer text-muted">
+			<!-- 버튼 -->	
+			<button  id="liveToastBtn" type="button" class="likebtn btn btn-sm btn-outline-secondary">
+        	<!-- 좋아요 아이콘 -->
+   			<c:choose>
+			<c:when test="${mybabyLikeDto == null}">
+    			<svg xmlns="http://www.w3.org/2000/svg" style="color:black" width="16" height="16" fill="currentColor" class="like bi bi-heart-fill" viewBox="0 0 16 16">
+					<path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"/>
+				</svg>
+			</c:when>
+			<c:otherwise>
+				<svg xmlns="http://www.w3.org/2000/svg" style="color:red" width="16" height="16" fill="currentColor" class="like bi bi-heart-fill" viewBox="0 0 16 16">
+				  <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"/>
+				</svg>
+			</c:otherwise>
+		</c:choose>
+        			</button>
 			<!-- 작성자 또는 관리자에게만 수정 삭제 버튼 보여주기 -->
 			<c:set var="valid" value="${grade == '관리자' or uid == mybaby.mybabyWriter}"></c:set>
 			<div class="d-grid gap-2 d-md-flex justify-content-md-end">

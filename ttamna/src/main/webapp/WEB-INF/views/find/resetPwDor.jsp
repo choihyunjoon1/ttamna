@@ -45,7 +45,7 @@ window.addEventListener("load", function(){
 		<div class="card-body">
 			<div class="mt-5 mb-5"><h5>회원 님의 비밀번호를 재설정 합니다</h5></div>
 			<form method="post" id="login-form" class="form-check">
-<%-- 			<input type="hidden" name=memberEmail value="${param.memberEmail}"> --%>
+			<input type="hidden" name="memberId" value="${memberId}" disabled>
 				<div class='input-group mb-1'>
 					<input type="password" class="form-control input-pw" name="resetPw" required placeholder="비밀번호 입력" aria-label="비밀번호 입력" aria-describedby="button-addon-pw">
 			  		<button class="toggleInputPw btn btn-outline-primary" type="button" id="button-addon-pw">보기</button>

@@ -156,8 +156,8 @@ public class CertificationController {
 		return "find/resetPwDor";
 	}
 	@PostMapping("/resetPwDor")
-	public String resetPwDor(@RequestParam String resetPw,HttpSession session) {
-		String memberId = (String)session.getAttribute("uid");
+	public String resetPwDor(@RequestParam String resetPw,HttpSession session,@RequestParam String memberId) {
+		System.out.println("휴면 memberId = "+memberId);
 		memberDao.resetPw(memberId, resetPw);
 		return "redirect:/member/login?resetPw_complete";
 		

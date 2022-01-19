@@ -59,7 +59,7 @@ $(function(){
 					}else{
 						replyCount = "["+resp[i].mybabyReply+"]";
 					}
-							
+		
 					var divCol = "<div class='card border-primary text-dark bg-primary bg-opacity-10 mb-5 ms-2 ' style='width: 18rem;' onClick=location.href='${root}/mybaby/detail?mybabyNo="+resp[i].mybabyNo+"'>"
 						  + imgLocation
 						  + "<div class='card-body'>"
@@ -68,10 +68,7 @@ $(function(){
 						  +  moment(resp[i].mybabyTime).format("YYYY-MM-DD")
 						  + "</div>"
 						  + "<div class='card-text'>"
-						  + "좋아요 : "+resp[i].mybabyLike +"개"
-						  +	 "</div>"
-						  + "<div class='card-text'>"
-						  + "작성자 : "+memberId 
+						  + "작성자 : "+memberId
 						  +	 "</div>"
 						  + "</div></div>";
 					$(".result").append(divCol);
@@ -100,10 +97,7 @@ $(function(){
 	</c:if>
 	</div>
 	
-	<!-- 좋아요 순으로 표시된 게시글 -->
-<!-- 	<div class="row mt-3 mb-5"> -->
-
-<!-- 	</div> -->
+	
 	<!-- 게시물 표시 위치 -->		
 	<div class="row mt-3 mb-5 result">
 		

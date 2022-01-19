@@ -67,7 +67,7 @@ public class DormancyController {
 		}
 	}
 	@PostMapping("/checkByEmail")
-	public String checkByEmail(@ModelAttribute CertificationDto certDto,HttpSession session) {
+	public String checkByEmail(@ModelAttribute CertificationDto certDto,HttpSession session,Model model) {
 		//이메일로 찾으려는 계정 조회
 		DormancyDto findDto = dorDao.getByEmailOne(certDto.getCertEmail());
 		boolean success = certDao.checkByCert(certDto);
@@ -91,12 +91,9 @@ public class DormancyController {
 			memberDao.changeDor(memberDto);
 			//3)휴면계정에서 해당 데이터 삭제
 			dorDao.delete(findDto.getDorMemberId());
-			
-			//4)비밀번호 변경을 위해 로그인 처리
-			session.setAttribute("uid", memberDto.getMemberId());
-			session.setAttribute("grade", memberDto.getMemberGrade());
-			
-			
+			String memberId = memberDto.getMemberId();
+			model.addAttribute("memberId", memberId);
+			System.out.println("전달휴면 memberId = "+memberDto.getMemberId());
 			return "redirect:/find/resetPwDor";
 			
 		}else {
