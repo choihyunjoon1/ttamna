@@ -31,4 +31,6 @@ public interface ShopDao {
 	//메인페이지에 3개 띄우기
 	List<ShopListByPageVo> mainList();
 
+	//상품이름 중복제거로 뽑기
+	List<String> nameList();
 }

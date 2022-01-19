@@ -68,7 +68,7 @@
 	
 	 //후원상품 판매금액. 검색 버튼을 누르면 실행
 	 shop.querySelector("#shop-search").addEventListener("click",function(){
-		 var keyword = shop.querySelector("input[name=itemName]").value;
+		 var keyword = shop.querySelector("select[name=itemName]").value;
 		 var start = shop.querySelector("input[name=start]").value;
 		 var end = shop.querySelector("input[name=end]").value;
 			 
@@ -298,8 +298,17 @@
 	<div class="mb-1"><h5><strong>후원상품 판매금액에 대한 일별 누적금액 기간 검색</strong></h5></div> 
 			<form action="${root}/ajax/shop_search" method="post" class="shop">
 				<div class="input-group">
-					 <div class="input-group input-group-sm mb-3">
-						<input type="text" name="itemName" required class="form-control" placeholder="검색할 상품의 이름을 입력해 주세요">
+					<div class="input-group input-group-sm mb-3">
+						<select name="itemName" class="form-control">
+								<option value="">상품 선택</option>
+							<c:forEach var="item" items="${list}">
+								<option value="${item}"
+								 <c:if test="${seleted == item}">selected="${item}"</c:if>
+								>
+									${item}
+								</option>
+							</c:forEach>
+						</select>
 					</div>
 					<div class="input-group input-group-sm mb-3">
 						<input type="date" name="start" required class="form-control">

@@ -88,4 +88,10 @@ public class ShopDaoImpl implements ShopDao{
 	public List<ShopListByPageVo> mainList() {
 		return sqlSession.selectList("shop.mainBoard");
 	}
+
+	//상품 이름 중복제거로 뽑기
+	@Override
+	public List<String> nameList() {
+		return sqlSession.selectList("shop.nameList");
+	}
 }
