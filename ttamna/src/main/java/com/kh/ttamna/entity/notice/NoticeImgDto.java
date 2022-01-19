@@ -22,6 +22,6 @@ public class NoticeImgDto {
 	private int noticeNo;
 	private String noticeImgUpload;
 	private long noticeImgSize;
-	private String noticeImgtype;
+	private String noticeImgType;
 	
 }

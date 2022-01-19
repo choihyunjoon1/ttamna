@@ -7,6 +7,7 @@ import com.kh.ttamna.entity.donation.AutoPayMentDto;
 import com.kh.ttamna.entity.donation.DonationReplyDto;
 import com.kh.ttamna.entity.member.MemberDto;
 import com.kh.ttamna.entity.mybaby.MybabyReplyDto;
+import com.kh.ttamna.entity.notice.NoticeDto;
 import com.kh.ttamna.entity.payment.PaymentDto;
 import com.kh.ttamna.entity.question.QuestionDto;
 import com.kh.ttamna.entity.question.QuestionReplyDto;

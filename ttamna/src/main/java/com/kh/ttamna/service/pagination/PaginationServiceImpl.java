@@ -9,6 +9,7 @@ import com.kh.ttamna.entity.donation.AutoPayMentDto;
 import com.kh.ttamna.entity.donation.DonationReplyDto;
 import com.kh.ttamna.entity.member.MemberDto;
 import com.kh.ttamna.entity.mybaby.MybabyReplyDto;
+import com.kh.ttamna.entity.notice.NoticeDto;
 import com.kh.ttamna.entity.payment.PaymentDto;
 import com.kh.ttamna.entity.question.QuestionDto;
 import com.kh.ttamna.entity.shop.ShopReplyDto;
@@ -16,6 +17,7 @@ import com.kh.ttamna.repository.donation.AutoDonationDao;
 import com.kh.ttamna.repository.donation.DonationReplyDao;
 import com.kh.ttamna.repository.member.MemberDao;
 import com.kh.ttamna.repository.mybaby.MybabyReplyDao;
+import com.kh.ttamna.repository.notice.NoticeDao;
 import com.kh.ttamna.repository.payment.PaymentDao;
 import com.kh.ttamna.repository.question.QuestionDao;
 import com.kh.ttamna.repository.shop.ShopReplyDao;
@@ -45,6 +47,10 @@ public class PaginationServiceImpl implements PaginationService{
 	
 	@Autowired
 	private PaymentDao payDao;
+	
+	@Autowired
+	private NoticeDao noticeDao;
+	
 	
 	//전체 목록 + 검색 목록 + 페이지네이션 처리
 	@Override
@@ -179,6 +185,8 @@ public class PaginationServiceImpl implements PaginationService{
 	
 		return paginationVO;
 	}
+
+	
 }
 
 

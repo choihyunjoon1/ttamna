@@ -28,4 +28,5 @@ public interface PaginationService {
 	PaginationVO myOrderPaging(PaginationVO paginationVO, String memberId) throws Exception;
 
 	PaginationVO myQuestionPaging(PaginationVO paginationVO, String memberId) throws Exception;
+
 }

@@ -32,11 +32,77 @@
 		select * from notice where notice_no = #{noticeNo}
 	</select>
 	
-	<!-- 게시글 목록조회 + 일반 페이지네이션 -->
+	<!--전체 목록 조회 -->
+	<select id="list" resultType="NoticeDto">
+		select * from notice order by notice_no desc
+	</select>
 	
-	<!-- 게시글 수정 + 이미지 파일-->
+	<!-- 검색 목록 -->
+	<select id="searchList" parameterType="map" resultType="NoticeDto">
+		select * from notice where instr(${column}, #{keyword}) > 0
+	</select>
+	
+	<!-- 게시판 목록 + 검색 + 이미지 + 페이지네이션 -->
+	<select id="listByPage" parameterType="map" resultType="NoticeListFileVO">
+		  select * from(
+            select rownum rn2, tmp.* from(
+                select * from (
+                    select * from (
+                        select I.*, row_number() over(partition by notice_no order by notice_no asc
+                    ) rn  from notice_img I 	
+                ) where rn = 1
+             ) AI left outer join notice A  on A.notice_no = AI.notice_no
+             	<if test="column != null and keyword != null">
+				   where instr(${column}, #{keyword}) > 0
+			    </if>
+            order by A.notice_no desc
+          )tmp
+        )where rn2 between #{startRow} and #{endRow}
+	</select>
 
-	<!-- 게시글 삭제 + 파일 -->
+	
+	<!-- 단일조회 + 검색 -->
+	<select id="detailOrSearch" parameterType="map" resultType="NoticeDto">
+		select * from notice
+		<where>
+			<if test="noticeNo != null">
+				and notice_no = #{noticeNo}
+			</if>
+			<if test="column != null and keyword != null">
+				and instr(${column}, #{keyword}) > 0
+	        </if>
+        </where>
+		order by notice_no desc
+	</select>
+	
+	<!-- 조회수 -->
+	<update id="readUp" parameterType="map">
+		update notice set notice_read = notice_read +1 where notice_no = #{noticeNo}
+	</update>
+	
+	<!-- 목록에서 이미지파일을 보여주기 위한 구문 -->
+	<select id="imgList" resultType="NoticeListFileVO">
+		select * from notice inner join notice_img on notice.notice_no = notice_img.notice_no
+	</select>
+	
+	<!-- 게시글 수정 -->
+	<update id="edit" parameterType="NoticeDto" >
+		update notice
+			<set>
+				<if test="noticeTitle != null">
+					notice_title = #{noticeTitle},
+				</if>
+				<if test="noticeContent != null">
+					notice_content = #{noticeContent},
+				</if>
+			</set>
+		where notice_no = #{noticeNo}
+	</update>
+
+	<!-- 게시글 삭제 -->
+	<delete id="delete" parameterType="int">
+		delete notice where notice_no = #{noticeNo}
+	</delete>
 	
 </mapper>
 
