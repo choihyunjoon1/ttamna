@@ -15,6 +15,44 @@
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="noticeImg">
 
+	<!-- 파일 저장용 번호 시퀀스 -->
+	<select id="sequence" resultType="int">
+		select notice_img_seq.nextval from dual
+	</select>
+	
+	<!-- 파일 저장 : 먼저 조회하여 뽑은 시퀀스를 파일번호로 등록 -->
+	<insert id="save" parameterType="NoticeImgDto">
+		insert into notice_img values(
+			#{noticeImgNo}, #{noticeNo}, #{noticeImgUpload},
+			 #{noticeImgSize}, #{noticeImgType}
+		)
+	</insert>
+	
+	<!--  파일 정보 단일 조회 -->
+	<select id="get" parameterType="int" resultType="NoticeImgDto">
+		select * from notice_img where notice_no=#{noticeNo}
+	</select>
+	
+	<!-- 파일 정보 리스트 조회 -->
+	<select id="getList" parameterType="int" resultType="NoticeImgDto">
+		select * from notice_img where notice_no=#{noticeNo} 
+			order by notice_img_no asc
+	</select>	
+	
+	<!-- 파일 다운로드용 조회 -->
+	<select id="getFile" parameterType="int" resultType="NoticeImgDto">
+		select * from notice_img where notice_img_no=#{noticeImgNo}
+	</select>
+	
+	<!-- 게시글 수정시 파일만 삭제 -->
+	<delete id="dropImg" parameterType="int">
+		delete notice_img where notice_img_no = #{noticeImgNo}
+	</delete>
+
+	<!-- 게시판 번호로 조회한 모든 이미지파일의 번호 -->
+	<select id="getImgNoList" parameterType="int" resultType="int">
+		select notice_img_no from notice_img where notice_no = #{noticeNo}
+	</select>
 	
 </mapper>
 

@@ -185,7 +185,7 @@
 						</ul>
 						<ul class="navbar-nav me-auto navbar-center fs-6">
 							<li class="nav-item ms-1">
-								<a class="nav-link docs-creator text-decoration-underline headNotice" href="#">[입양전 필독]</a></li>
+								<a class="nav-link docs-creator text-decoration-underline headNotice" href="${root}/notice/">[입양전 필독]</a></li>
 							<li class="nav-item ms-3">
 							 <a class="nav-link docs-creator headShop" href="${root}/shop/">후원상품🐾</a></li>
 							<li class="nav-item ms-3">
