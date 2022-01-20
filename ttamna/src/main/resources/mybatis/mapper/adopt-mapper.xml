@@ -56,7 +56,7 @@
                         select I.*, row_number() over(partition by adopt_no order by adopt_no asc
                     ) rn  from adopt_img I 	
                 ) where rn = 1
-             ) AI left outer join adopt A  on A.adopt_no = AI.adopt_no
+             ) AI right outer join adopt A  on A.adopt_no = AI.adopt_no
              	<if test="column != null and keyword != null">
 				   where instr(${column}, #{keyword}) > 0
 			     </if>
