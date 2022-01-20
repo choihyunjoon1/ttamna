@@ -44,10 +44,10 @@ $(function(){
 				for(var i=0; i < resp.length; i++){
 					var memberId = resp[i].mybabyWriter;
 					var imglocation = "";
-					if(!resp[i].mybabyImgNo){
-						imgLocation = "<img src=${pageContext.request.contextPath}/resources/img/nonimage.png class=icon style='width:100%;height:15rem;'></a></span>";
+					if(resp[i].mybabyImgNo==0){
+						imgLocation = "<img src='${pageContext.request.contextPath}/resources/img/nonimage.png' class='icon' style='width:100%;height:15rem;'>";
 					}else{
-						imgLocation = "<img src=mybabyImg?mybabyImgNo="+resp[i].mybabyImgNo+" class=icon style='width:100%;height:15rem;'></a></span>";
+						imgLocation = "<img src=mybabyImg?mybabyImgNo="+resp[i].mybabyImgNo+" class=icon style='width:100%;height:15rem;'>";
 					}
 					
 					if(memberId == null){
@@ -59,41 +59,23 @@ $(function(){
 					}else{
 						replyCount = "["+resp[i].mybabyReply+"]";
 					}
-					if(i<3){
-						var divCol = "<div class='card border-primary text-dark bg-primary bg-opacity-10 mb-5 ms-2 ' style='width: 18rem;' onClick=location.href='${root}/mybaby/detail?mybabyNo="+resp[i].mybabyNo+"'>"
-						  + imgLocation
-						  + "<div class='card-body'>"
-						  + "<h5 class='card-title'><strong class='title'>" + resp[i].mybabyTitle+replyCount +"</strong></h5>"
-						  + "<div class='card-text'>"
-						  +  moment(resp[i].mybabyTime).format("YYYY-MM-DD")
-						  + "</div>"
-						  + "<div class='card-text'>"
-						  + "좋아요 : "+resp[i].mybabyLike +"개"
-						  +	 "</div>"
-						  + "<div class='card-text'>"
-						  + "작성자 : "+memberId 
-						  +	 "</div>"
-						  + "</div></div>";
-					$(".resultBest").append(divCol);
-					$(".page").addClass("col-3 mt-3");
-					}else{
-						var divCol = "<div class='card border-primary text-dark bg-primary bg-opacity-10 mb-5 ms-2 ' style='width: 18rem;' onClick=location.href='${root}/mybaby/detail?mybabyNo="+resp[i].mybabyNo+"'>"
-						  + imgLocation
-						  + "<div class='card-body'>"
-						  + "<h5 class='card-title'><strong class='title'>" + resp[i].mybabyTitle+replyCount +"</strong></h5>"
-						  + "<div class='card-text'>"
-						  +  moment(resp[i].mybabyTime).format("YYYY-MM-DD")
-						  + "</div>"
-						  + "<div class='card-text'>"
-						  + "좋아요 : "+resp[i].mybabyLike +"개"
-						  +	 "</div>"
-						  + "<div class='card-text'>"
-						  + "작성자 : "+memberId 
-						  +	 "</div>"
-						  + "</div></div>";
-					$(".result").append(divCol);
-					$(".page").addClass("col-3 mt-3");
-					}
+					
+					var divCol = "<div class='card border-primary text-dark bg-primary bg-opacity-10 mb-5 ms-2 ' style='width: 18rem;' onClick=location.href='${root}/mybaby/detail?mybabyNo="+resp[i].mybabyNo+"'>"
+					  + imgLocation
+					  + "<div class='card-body'>"
+					  + "<h5 class='card-title'><strong class='title'>" + resp[i].mybabyTitle+replyCount +"</strong></h5>"
+					  + "<div class='card-text'>"
+					  +  moment(resp[i].mybabyTime).format("YYYY-MM-DD")
+					  + "</div>"
+					  + "<div class='card-text'>"
+					  + "좋아요 : "+resp[i].mybabyLike +"개"
+					  +	 "</div>"
+					  + "<div class='card-text'>"
+					  + "작성자 : "+memberId 
+					  +	 "</div>"
+					  + "</div></div>";
+				$(".result").append(divCol);
+				$(".page").addClass("col-3 mt-3");
 					
 				}
 			},
@@ -121,6 +103,52 @@ $(function(){
 	
 	<!-- 좋아요 순으로 표시된 게시글 -->
 	<div class="row mt-3 mb-5 resultBest">
+		<c:forEach var="mybabyLikeDto" items="${likeBest }">
+			<div class="card border-primary text-dark bg-primary bg-opacity-10 mb-5 ms-2 " style="width: 18rem;" onClick="location.href='${root}/mybaby/detail?mybabyNo=${mybabyLikeDto.mybabyNo}' ">
+			<c:set var="imgLocation" >
+				<c:choose>
+					<c:when test="${mybabyLikeDto.mybabyImgNo == 0}">
+						<img src="${pageContext.request.contextPath }/resources/img/nonimage.png" class="icon"  style='width:100%;height:15rem;'>
+					</c:when>
+					<c:otherwise>
+						<img src="mybabyImg?mybabyImgNo=${mybabyLikeDto.mybabyImgNo}" class="icon"  style='width:100%;height:15rem;'>
+					</c:otherwise>
+				</c:choose>
+			</c:set>
+			${imgLocation}
+			<div class='card-body'>
+					<c:set var = "replyCount">
+						<c:choose>
+							<c:when test="${mybabyLikeDto.mybabyReply==null}">
+								""
+							</c:when>
+							<c:otherwise>
+								[${mybabyLikeDto.mybabyReply}]
+							</c:otherwise>
+						</c:choose>
+					</c:set>
+			<h5 class='card-title'><strong class='title'> ${mybabyLikeDto.mybabyTitle }  ${replyCount } </strong></h5>
+			<div class='card-text'>
+			작성일 : ${mybabyLikeDto.mybabyTime.substring(0,10)}
+			</div>
+			<div class='card-text'>
+			좋아요 : ${mybabyLikeDto.mybabyLike }개
+			</div>
+			<div class='card-text'>
+					<c:set var="memberId">
+						<c:choose>
+							<c:when test="${mybabyLikeDto.mybabyWriter==null }">
+								"탈퇴한회원입니다"
+							</c:when>
+							<c:otherwise>
+								${mybabyLikeDto.mybabyWriter }
+							</c:otherwise>
+						</c:choose>
+					</c:set>
+			작성자 : ${memberId }
+			</div>
+			</div></div>
+		</c:forEach>
 		
 	</div>
 	<!-- 게시물 표시 위치 -->		

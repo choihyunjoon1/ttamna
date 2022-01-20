@@ -102,6 +102,8 @@ public class MybabyController {
 			List<MybabyDto> list = mybabyDao.list();
 			model.addAttribute("list",list);
 		}
+		List<MybabyDownVO> likeBest = mybabyDao.listByLike();
+		model.addAttribute("likeBest", likeBest);
 		return "mybaby/list";
 	}
 	
@@ -119,6 +121,8 @@ public class MybabyController {
 			List<MybabyDto> list = mybabyDao.list();
 			model.addAttribute("list",list);
 		}
+		List<MybabyDownVO> likeBest = mybabyDao.listByLike();
+		model.addAttribute("likeBest", likeBest);
 		return "mybaby/list";
 	}
 	//게시글 삭제
