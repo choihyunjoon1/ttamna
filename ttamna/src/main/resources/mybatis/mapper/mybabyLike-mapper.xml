@@ -26,5 +26,9 @@
 	<delete id="likeDelete" parameterType="map">
 		delete mybaby_like where mybaby_no=#{mybabyNo} and member_id=#{memberId}
 	</delete>
+	<!-- 좋아요 개수(비회원용) -->
+	<select id="likeRead" parameterType="int" resultType="mybabyLikeDto">
+		select * from mybaby_like where mybaby_no=#{mybabyNo}
+	</select>
 </mapper>
 
