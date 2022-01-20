@@ -59,8 +59,25 @@ $(function(){
 					}else{
 						replyCount = "["+resp[i].mybabyReply+"]";
 					}
-							
-					var divCol = "<div class='card border-primary text-dark bg-primary bg-opacity-10 mb-5 ms-2 ' style='width: 18rem;' onClick=location.href='${root}/mybaby/detail?mybabyNo="+resp[i].mybabyNo+"'>"
+					if(i<3){
+						var divCol = "<div class='card border-primary text-dark bg-primary bg-opacity-10 mb-5 ms-2 ' style='width: 18rem;' onClick=location.href='${root}/mybaby/detail?mybabyNo="+resp[i].mybabyNo+"'>"
+						  + imgLocation
+						  + "<div class='card-body'>"
+						  + "<h5 class='card-title'><strong class='title'>" + resp[i].mybabyTitle+replyCount +"</strong></h5>"
+						  + "<div class='card-text'>"
+						  +  moment(resp[i].mybabyTime).format("YYYY-MM-DD")
+						  + "</div>"
+						  + "<div class='card-text'>"
+						  + "좋아요 : "+resp[i].mybabyLike +"개"
+						  +	 "</div>"
+						  + "<div class='card-text'>"
+						  + "작성자 : "+memberId 
+						  +	 "</div>"
+						  + "</div></div>";
+					$(".resultBest").append(divCol);
+					$(".page").addClass("col-3 mt-3");
+					}else{
+						var divCol = "<div class='card border-primary text-dark bg-primary bg-opacity-10 mb-5 ms-2 ' style='width: 18rem;' onClick=location.href='${root}/mybaby/detail?mybabyNo="+resp[i].mybabyNo+"'>"
 						  + imgLocation
 						  + "<div class='card-body'>"
 						  + "<h5 class='card-title'><strong class='title'>" + resp[i].mybabyTitle+replyCount +"</strong></h5>"
@@ -76,6 +93,8 @@ $(function(){
 						  + "</div></div>";
 					$(".result").append(divCol);
 					$(".page").addClass("col-3 mt-3");
+					}
+					
 				}
 			},
 			error:function(e){
@@ -92,7 +111,7 @@ $(function(){
 
 <div class="container-900 container-center mt-5 mb-5">
 	
-	<div class="mt-5 mb-3"><h3>내새끼 자랑</h3>
+	<div class="mt-5 mb-3"><h3>내새끼 자랑 좋아요 BEST!</h3>
 	<c:if test="${uid!=null }">
 		<div class="d-grid gap-1 d-md-flex justify-content-md-end">
 			<a href="${root}/mybaby/write" class="btn btn-outline-primary">자랑글 쓰기</a>
@@ -101,10 +120,11 @@ $(function(){
 	</div>
 	
 	<!-- 좋아요 순으로 표시된 게시글 -->
-<!-- 	<div class="row mt-3 mb-5"> -->
-
-<!-- 	</div> -->
+	<div class="row mt-3 mb-5 resultBest">
+		
+	</div>
 	<!-- 게시물 표시 위치 -->		
+	<div class="mt-5 mb-3"><h3>내새끼 자랑글</h3></div>
 	<div class="row mt-3 mb-5 result">
 		
 	</div>

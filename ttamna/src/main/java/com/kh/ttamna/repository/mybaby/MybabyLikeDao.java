@@ -11,5 +11,6 @@ public interface MybabyLikeDao {
 	void delete(int mybabyNo, String memberId);
 
 	MybabyLikeDto get(int mybabyNo,String memberId);
+
 	
 }

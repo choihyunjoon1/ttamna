@@ -42,5 +42,6 @@ public class MybabyLikeDaoImpl implements MybabyLikeDao{
 		param.put("memberId",memberId);
 		return sqlSession.selectOne("mybabyLike.likeFind",param);
 	}
+
 	
 }

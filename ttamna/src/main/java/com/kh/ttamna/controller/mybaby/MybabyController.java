@@ -70,7 +70,13 @@ public class MybabyController {
 		model.addAttribute("mybabyNo", mybabyNo);
 		//좋아요 개수
 		String memberId = (String)session.getAttribute("uid");
-		MybabyLikeDto mybabyLikeDto = mybabyLikeDao.get(mybabyNo,memberId);
+		MybabyLikeDto mybabyLikeDto = new MybabyLikeDto();
+		if(memberId==null) {
+			//비회원용 좋아요 표시하기
+			mybabyLikeDto=null;
+		}else {
+			 mybabyLikeDto = mybabyLikeDao.get(mybabyNo,memberId);
+		}
 		model.addAttribute("mybabyLikeDto", mybabyLikeDto);
 		
 		return "mybaby/detail";
