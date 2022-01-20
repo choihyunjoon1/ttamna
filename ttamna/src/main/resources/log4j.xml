@@ -78,7 +78,7 @@
 	<root>
 		<!-- 기본 출력 수준 정의 -->
 <!-- 		<priority value="info" /> -->
-		<priority value="debug" />
+		<priority value="info" />
 		<!-- 기본 출력 대상 정의 -->
 		<appender-ref ref="console" />
 		<appender-ref ref="daily" />

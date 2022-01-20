@@ -109,6 +109,14 @@ public class MybabyDaoImpl implements MybabyDao{
 	public List<MybabyDownVO> mainList() {
 		return sqlSession.selectList("mybaby.mainBoard");
 	}
+
+	@Override
+	public List<MybabyDownVO> listByLike() {
+		Map<String,Object> param=new HashMap<>();
+		param.put("startRow",1);
+		param.put("endRow",3);
+		return sqlSession.selectList("mybaby.likeBestBoard",param);
+	}
 	
 	
 

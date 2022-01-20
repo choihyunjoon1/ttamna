@@ -20,4 +20,5 @@ public interface MybabyDao {
 	boolean edit(MybabyDto mybabyDto);
 	List<MybabyDownVO> searchPlusImg(Map<String, Object> param);
 	List<MybabyDownVO> mainList();
+	List<MybabyDownVO> listByLike();
 }
