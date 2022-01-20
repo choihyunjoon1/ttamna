@@ -98,6 +98,8 @@
 	 	<!-- 문의내역 상세페이지 자기글 또는 관리자만 접근 가능 -->
 	 	<mvc:interceptor>
 	 		<mvc:mapping path="/question/detail"/>
+	 		<mvc:mapping path="/question_reply/insert"/>
+	 		<mvc:mapping path="/question_reply/delete"/>
 	 		<bean class="com.kh.ttamna.interceptor.QuestionInterceptor"></bean>
 	 	</mvc:interceptor>
 	 	
