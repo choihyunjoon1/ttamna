@@ -53,7 +53,7 @@ $(function(){
 					//이미지 파일 없는 경우 undefined 꼴보기 시르미 
 					var imgLocation = "";
 					if(!resp[i].noticeImgNo){
-						imgLocation =  "<img src='${root}/resources/img/nonimage.png' class='icon'>";
+						imgLocation =  "<img src='${root}/resources/img/nonimage.png' class='icon'  style='width:100%;height:9rem'>";
 					}else {
 						imgLocation =  "<img src='noticeImg?noticeImgNo="+ resp[i].noticeImgNo +"'class='rounded px-0 pt-1' alt=' "+resp[i].noticeImgUpload+"' style='width:100%;height:9rem'>";
 					}

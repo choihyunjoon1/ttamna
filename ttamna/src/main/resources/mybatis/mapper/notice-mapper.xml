@@ -51,7 +51,7 @@
                         select I.*, row_number() over(partition by notice_no order by notice_no asc
                     ) rn  from notice_img I 	
                 ) where rn = 1
-             ) AI left outer join notice A  on A.notice_no = AI.notice_no
+             ) AI right outer join notice A  on A.notice_no = AI.notice_no
              	<if test="column != null and keyword != null">
 				   where instr(${column}, #{keyword}) > 0
 			    </if>

@@ -53,7 +53,7 @@ $(function(){
 					//이미지 파일 없는 경우 undefined 꼴보기 시르미 
 					var imgLocation = "";
 					if(!resp[i].adoptImgNo){
-						imgLocation =  "<img src=${pageContext.request.contextPath}/resources/img/nonimage.png class=icon>";
+						imgLocation =  "<img src=${pageContext.request.contextPath}/resources/img/nonimage.png class=icon style='width:100%;height:15rem;'>";
 					}else {
 						imgLocation =  "<img src='adoptImg?adoptImgNo="+ resp[i].adoptImgNo +"'class='card-img-top' alt=' "+resp[i].adoptImgUpload+"' style='width:100%;height:15rem;'>";
 					}
