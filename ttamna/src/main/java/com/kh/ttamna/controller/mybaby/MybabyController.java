@@ -104,6 +104,7 @@ public class MybabyController {
 		}
 		List<MybabyDownVO> likeBest = mybabyDao.listByLike();
 		model.addAttribute("likeBest", likeBest);
+		System.out.println("likeBest = {}"+likeBest.toString());
 		return "mybaby/list";
 	}
 	

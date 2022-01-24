@@ -68,7 +68,7 @@ $(function(){
 					  +  moment(resp[i].mybabyTime).format("YYYY-MM-DD")
 					  + "</div>"
 					  + "<div class='card-text'>"
-					  + "좋아요 : "+resp[i].mybabyLike +"개"
+					  + "좋아요 : "+resp[i].mybabyLikeCount +"개"
 					  +	 "</div>"
 					  + "<div class='card-text'>"
 					  + "작성자 : "+memberId 
@@ -132,7 +132,7 @@ $(function(){
 			작성일 : ${mybabyLikeDto.mybabyTime.substring(0,10)}
 			</div>
 			<div class='card-text'>
-			좋아요 : ${mybabyLikeDto.mybabyLike }개
+			좋아요 : ${mybabyLikeDto.mybabyLikeCount }개
 			</div>
 			<div class='card-text'>
 					<c:set var="memberId">

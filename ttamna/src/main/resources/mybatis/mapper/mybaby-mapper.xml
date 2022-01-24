@@ -59,7 +59,7 @@
 		select
 		    mybaby_img_no,mybaby_img_upload,mybaby_img_size,mybaby_img_type,
 		    mybaby_no,mybaby_writer,mybaby_title,mybaby_time,mybaby_reply,mybaby_type,
-		    mybaby_like
+		    mybaby_like_count
 		from(
 		    select rownum rn2, tmp.* from(
 		        select * from mybaby B
@@ -67,7 +67,7 @@
 		                        select * from (
 		                            select BI.*, row_number() over(partition by mybaby_no order by mybaby_no asc) rn  from mybaby_img BI) where rn = 1) MBI   on B.mybaby_no = MBI.mybaby_no
 		                    left outer join (
-		                        select B.mybaby_no,nvl(LI,0)mybaby_like from mybaby B
+		                        select B.mybaby_no,nvl(LI,0)mybaby_like_count from mybaby B
 		                            left outer join (
 		                                select ML.mybaby_no,count(member_id)LI from mybaby_like  ML group by ML.mybaby_no
 		                                    )ML2 on ML2.mybaby_no = B.mybaby_no)
@@ -81,7 +81,7 @@
 		select
 		    mybaby_img_no,mybaby_img_upload,mybaby_img_size,mybaby_img_type,
 		    mybaby_no,mybaby_writer,mybaby_title,mybaby_time,mybaby_reply,mybaby_type,
-		    mybaby_like
+		    mybaby_like_count
 		from(
 		    select rownum rn2, tmp.* from(
 		        select * from mybaby B
@@ -89,7 +89,7 @@
 		                        select * from (
 		                            select BI.*, row_number() over(partition by mybaby_no order by mybaby_no asc) rn  from mybaby_img BI) where rn = 1) MBI   on B.mybaby_no = MBI.mybaby_no
 		                    left outer join (
-		                        select B.mybaby_no,nvl(LI,0)mybaby_like from mybaby B
+		                        select B.mybaby_no,nvl(LI,0)mybaby_like_count from mybaby B
 		                            left outer join (
 		                                select ML.mybaby_no,count(member_id)LI from mybaby_like  ML group by ML.mybaby_no
 		                                    )ML2 on ML2.mybaby_no = B.mybaby_no)
@@ -104,7 +104,7 @@
 		select 
 		    mybaby_img_no,mybaby_img_upload,mybaby_img_size,mybaby_img_type,
 		    mybaby_no,mybaby_writer,mybaby_title,mybaby_time,mybaby_reply,mybaby_type,
-		    mybaby_like
+		    mybaby_like_count
 		from(
 		    select rownum rn2, tmp.* from(
 		        select * from mybaby B
@@ -113,11 +113,11 @@
 		                                select BI.*, row_number() over(partition by mybaby_no order by mybaby_no asc) rn  from mybaby_img BI) where rn = 1) MBI   
 		                        on B.mybaby_no = MBI.mybaby_no
 		                    left outer join (
-		                        select B.mybaby_no,nvl(LI,0)mybaby_like from mybaby B
+		                        select B.mybaby_no,nvl(LI,0)mybaby_like_count from mybaby B
 		                            left outer join (
 		                                select ML.mybaby_no,count(member_id)LI from mybaby_like  ML group by ML.mybaby_no
 		                                    )ML2 on ML2.mybaby_no = B.mybaby_no)
-		                    MLC on B.mybaby_no=MLC.mybaby_no order by mybaby_like desc
+		                    MLC on B.mybaby_no=MLC.mybaby_no order by mybaby_like_count desc
 		        )tmp 
 		)where rn2 between ${startRow} and ${endRow}
 	</select>
