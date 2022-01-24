@@ -17,5 +17,5 @@ public class MybabyDownVO {
 	private String mybabyImgUpload;
 	private long mybabyImgSize;
 	private String mybabyImgType;
-	private int mybabyLike;
+	private int mybabyLikeCount;
 }
